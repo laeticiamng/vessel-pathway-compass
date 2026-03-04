@@ -11,11 +11,13 @@ import { useTranslation } from "@/i18n/context";
 // Clinical reference ranges for common vascular measurements
 const REFERENCE_RANGES: Record<string, { min: number; max: number; label: string; critical?: { below?: number; above?: number } }> = {
   ABI: { min: 0.9, max: 1.3, label: "Normal (0.9–1.3)", critical: { below: 0.5 } },
+  TBI: { min: 0.7, max: 1.0, label: "Normal (0.7–1.0)", critical: { below: 0.25 } },
   Diameter: { min: 1.5, max: 3.0, label: "Normal (1.5–3.0 cm)", critical: { above: 5.5 } },
+  Stenosis: { min: 0, max: 50, label: "Normal (<50%)", critical: { above: 70 } },
   PSV: { min: 60, max: 125, label: "Normal (60–125 cm/s)", critical: { above: 400 } },
+  "Walking Distance": { min: 200, max: 1000, label: "Normal (200–1000 m)", critical: { below: 50 } },
   "Blood Pressure": { min: 90, max: 140, label: "Normal (90–140 mmHg)", critical: { above: 180 } },
   "Heart Rate": { min: 60, max: 100, label: "Normal (60–100 bpm)" },
-  Stenosis: { min: 0, max: 50, label: "Normal (<50%)", critical: { above: 70 } },
 };
 
 interface Measurement {
