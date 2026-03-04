@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
@@ -49,7 +50,35 @@ export function NotificationBell() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+
+  const handleNotificationClick = useCallback((n: Notification) => {
+    // Mark as read
+    if (!n.is_read) {
+      markReadMutation.mutate(n.id);
+    }
+    setOpen(false);
+
+    // Navigate based on reference_type
+    if (n.reference_type === "forum_post" && n.reference_id) {
+      navigate("/app/network");
+    } else if (n.reference_type === "expert_request" && n.reference_id) {
+      navigate("/app/network");
+    } else if (n.reference_type === "case" && n.reference_id) {
+      // Find the patient for this case, navigate to patient detail
+      supabase
+        .from("cases")
+        .select("patient_id")
+        .eq("id", n.reference_id)
+        .single()
+        .then(({ data }) => {
+          if (data?.patient_id) {
+            navigate(`/app/patients/${data.patient_id}`);
+          }
+        });
+    }
+  }, [navigate]);
 
   const { data: notifications } = useQuery({
     queryKey: ["notifications", user?.id],
@@ -166,7 +195,8 @@ export function NotificationBell() {
                 return (
                   <div
                     key={n.id}
-                    className={`flex gap-3 px-4 py-3 transition-colors hover:bg-muted/50 ${
+                    onClick={() => handleNotificationClick(n)}
+                    className={`flex gap-3 px-4 py-3 transition-colors hover:bg-muted/50 cursor-pointer ${
                       !n.is_read ? "bg-primary/5" : ""
                     }`}
                   >
