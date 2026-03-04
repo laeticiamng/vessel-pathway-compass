@@ -334,6 +334,7 @@ export const de = {
     filters: {
       allCategories: "Alle Kategorien",
       allStatuses: "Alle Status",
+      clearAll: "Filter zurücksetzen",
     },
   },
 

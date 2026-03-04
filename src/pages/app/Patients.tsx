@@ -16,7 +16,7 @@ import {
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { HeartPulse, Plus, Search, Users } from "lucide-react";
+import { HeartPulse, Plus, Search, Users, X } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const CATEGORIES = ["PAD", "Aortic", "Venous", "Carotid", "DVT/PE"] as const;
@@ -206,6 +206,17 @@ export default function Patients() {
             ))}
           </SelectContent>
         </Select>
+        {(filterCategory !== "all" || filterStatus !== "all" || search) && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="shrink-0"
+            onClick={() => { setFilterCategory("all"); setFilterStatus("all"); setSearch(""); }}
+            aria-label={t("patients.filters.clearAll")}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+        )}
       </div>
 
       <Card>
