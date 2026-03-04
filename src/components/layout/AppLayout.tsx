@@ -3,13 +3,27 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { Button } from "@/components/ui/button";
-import { Bell, Search, Moon, Sun } from "lucide-react";
+import { Bell, Search, Moon, Sun, Globe } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "next-themes";
+import { useTranslation, Language } from "@/i18n/context";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const languages: { code: Language; label: string; flag: string }[] = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "fr", label: "Français", flag: "🇫🇷" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+];
 
 export function AppLayout() {
   const [commandOpen, setCommandOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { t, language, setLanguage } = useTranslation();
 
   return (
     <SidebarProvider>
@@ -26,13 +40,33 @@ export function AppLayout() {
                 onClick={() => setCommandOpen(true)}
               >
                 <Search className="h-3.5 w-3.5" />
-                <span className="text-sm">Search or command...</span>
+                <span className="text-sm">{t("topBar.searchPlaceholder")}</span>
                 <kbd className="ml-auto pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
                   ⌘K
                 </kbd>
               </Button>
             </div>
             <div className="flex items-center gap-2">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="sm" className="gap-1.5 text-xs font-medium">
+                    <Globe className="h-3.5 w-3.5" />
+                    {language.toUpperCase()}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  {languages.map((l) => (
+                    <DropdownMenuItem
+                      key={l.code}
+                      onClick={() => setLanguage(l.code)}
+                      className={language === l.code ? "bg-accent" : ""}
+                    >
+                      <span className="mr-2">{l.flag}</span>
+                      {l.label}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Button
                 variant="ghost"
                 size="icon"

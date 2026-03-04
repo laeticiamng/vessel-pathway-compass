@@ -22,6 +22,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/i18n/context";
 
 interface AiOutput {
   id: string;
@@ -41,6 +42,7 @@ export default function AIAssistant() {
   const [user, setUser] = useState<any>(null);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [formData, setFormData] = useState({
     symptoms: "",
@@ -91,7 +93,6 @@ export default function AIAssistant() {
       return null;
     }
 
-    // Audit log
     await supabase.from("audit_logs").insert({
       user_id: user.id,
       action: "ai_report_generated",
@@ -113,7 +114,7 @@ export default function AIAssistant() {
       .eq("id", currentOutputId);
 
     if (error) {
-      toast({ title: "Error", description: "Failed to sign off", variant: "destructive" });
+      toast({ title: t("auth.error"), description: "Failed to sign off", variant: "destructive" });
       return;
     }
 
@@ -125,13 +126,13 @@ export default function AIAssistant() {
       details: { signed_off_at: new Date().toISOString() },
     });
 
-    toast({ title: "Signed off", description: "Report confirmed and signed by clinician." });
+    toast({ title: t("aiAssistant.output.signedOff"), description: t("aiAssistant.output.signedOffDesc") });
     loadHistory();
   };
 
   const handleGenerate = async () => {
     if (!user) {
-      toast({ title: "Authentication required", description: "Please sign in to use the AI Assistant.", variant: "destructive" });
+      toast({ title: t("auth.authRequired"), description: t("auth.authRequiredDesc"), variant: "destructive" });
       navigate("/auth");
       return;
     }
@@ -192,12 +193,11 @@ export default function AIAssistant() {
         }
       }
 
-      // Save completed report to database
       if (fullText) {
         await saveOutput(fullText);
       }
     } catch (error: any) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: t("auth.error"), description: error.message, variant: "destructive" });
     } finally {
       setLoading(false);
     }
@@ -225,131 +225,93 @@ export default function AIAssistant() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
             <Brain className="h-8 w-8 text-primary" />
-            AI Clinical Assistant
+            {t("aiAssistant.title")}
           </h1>
-          <p className="text-muted-foreground mt-1">Generate structured clinical reports with AI-powered analysis</p>
+          <p className="text-muted-foreground mt-1">{t("aiAssistant.subtitle")}</p>
         </div>
         <Badge variant="outline" className="flex items-center gap-1.5">
           <Shield className="h-3 w-3" />
-          Clinician Confirmation Required
+          {t("aiAssistant.badge")}
         </Badge>
       </div>
 
-      {/* Disclaimer */}
       <div className="flex items-start gap-3 p-4 rounded-xl bg-warning/10 border border-warning/30">
         <AlertTriangle className="h-5 w-5 text-warning shrink-0 mt-0.5" />
         <div className="text-sm">
-          <p className="font-medium">AI-Generated Content — Not a Diagnosis</p>
-          <p className="text-muted-foreground mt-1">
-            All outputs require clinician review and confirmation. Citation fields use placeholders.
-            This tool does not provide medical advice or diagnoses.
-          </p>
+          <p className="font-medium">{t("aiAssistant.disclaimer.title")}</p>
+          <p className="text-muted-foreground mt-1">{t("aiAssistant.disclaimer.body")}</p>
         </div>
       </div>
 
       {!user && (
         <div className="p-4 rounded-xl bg-info/10 border border-info/30 text-center">
-          <p className="text-sm font-medium">Sign in to generate and save AI reports with full audit trail.</p>
-          <Button size="sm" className="mt-2" onClick={() => navigate("/auth")}>Sign In</Button>
+          <p className="text-sm font-medium">{t("aiAssistant.signInPrompt")}</p>
+          <Button size="sm" className="mt-2" onClick={() => navigate("/auth")}>{t("common.signIn")}</Button>
         </div>
       )}
 
       <div className="grid lg:grid-cols-3 gap-6">
-        {/* Intake Form */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle>Clinical Intake</CardTitle>
-            <CardDescription>Enter patient data for AI analysis</CardDescription>
+            <CardTitle>{t("aiAssistant.intake.title")}</CardTitle>
+            <CardDescription>{t("aiAssistant.intake.subtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label>Symptoms & Presentation</Label>
-              <Textarea
-                placeholder="e.g., Intermittent claudication, rest pain, walking distance 200m..."
-                value={formData.symptoms}
-                onChange={(e) => setFormData({ ...formData, symptoms: e.target.value })}
-                rows={3}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Risk Factors</Label>
-              <Textarea
-                placeholder="e.g., Diabetes, hypertension, smoking history 30 pack-years..."
-                value={formData.riskFactors}
-                onChange={(e) => setFormData({ ...formData, riskFactors: e.target.value })}
-                rows={2}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>ABI / IPS</Label>
-              <Input
-                placeholder="e.g., Right: 0.65, Left: 0.82"
-                value={formData.abi}
-                onChange={(e) => setFormData({ ...formData, abi: e.target.value })}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Doppler Summary</Label>
-              <Input
-                placeholder="e.g., Monophasic flow SFA right"
-                value={formData.doppler}
-                onChange={(e) => setFormData({ ...formData, doppler: e.target.value })}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>CTA/MRA Summary</Label>
-              <Textarea
-                placeholder="e.g., Occlusion of right SFA, patent popliteal..."
-                value={formData.imaging}
-                onChange={(e) => setFormData({ ...formData, imaging: e.target.value })}
-                rows={2}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Labs</Label>
-              <Input
-                placeholder="e.g., HbA1c 7.8%, LDL 160mg/dL"
-                value={formData.labs}
-                onChange={(e) => setFormData({ ...formData, labs: e.target.value })}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Current Medications</Label>
-              <Input
-                placeholder="e.g., Aspirin, Statin, Cilostazol"
-                value={formData.medications}
-                onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
-              />
-            </div>
+            {([
+              ["symptoms", "symptoms", "symptomsPlaceholder", true],
+              ["riskFactors", "riskFactors", "riskFactorsPlaceholder", true],
+              ["abi", "abi", "abiPlaceholder", false],
+              ["doppler", "doppler", "dopplerPlaceholder", false],
+              ["imaging", "imaging", "imagingPlaceholder", true],
+              ["labs", "labs", "labsPlaceholder", false],
+              ["medications", "medications", "medicationsPlaceholder", false],
+            ] as const).map(([field, labelKey, placeholderKey, isTextarea]) => (
+              <div key={field} className="space-y-2">
+                <Label>{t(`aiAssistant.intake.${labelKey}`)}</Label>
+                {isTextarea ? (
+                  <Textarea
+                    placeholder={t(`aiAssistant.intake.${placeholderKey}`)}
+                    value={(formData as any)[field]}
+                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                    rows={field === "symptoms" ? 3 : 2}
+                  />
+                ) : (
+                  <Input
+                    placeholder={t(`aiAssistant.intake.${placeholderKey}`)}
+                    value={(formData as any)[field]}
+                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                  />
+                )}
+              </div>
+            ))}
             <Button onClick={handleGenerate} disabled={loading} className="w-full">
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Generating...
+                  {t("aiAssistant.generating")}
                 </>
               ) : (
                 <>
                   <Brain className="h-4 w-4 mr-2" />
-                  Generate Report
+                  {t("aiAssistant.generate")}
                 </>
               )}
             </Button>
           </CardContent>
         </Card>
 
-        {/* Output */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle>AI-Generated Report</CardTitle>
-            <CardDescription>Review, confirm, and export</CardDescription>
+            <CardTitle>{t("aiAssistant.output.title")}</CardTitle>
+            <CardDescription>{t("aiAssistant.output.subtitle")}</CardDescription>
           </CardHeader>
           <CardContent>
             {result ? (
               <div className="space-y-4">
                 <Tabs defaultValue="report">
                   <TabsList className="w-full">
-                    <TabsTrigger value="report" className="flex-1">Report</TabsTrigger>
-                    <TabsTrigger value="evidence" className="flex-1">Evidence</TabsTrigger>
+                    <TabsTrigger value="report" className="flex-1">{t("aiAssistant.output.report")}</TabsTrigger>
+                    <TabsTrigger value="evidence" className="flex-1">{t("aiAssistant.output.evidence")}</TabsTrigger>
                   </TabsList>
                   <TabsContent value="report" className="mt-4">
                     <div className="prose prose-sm max-w-none dark:prose-invert whitespace-pre-wrap text-sm leading-relaxed bg-muted/50 p-4 rounded-lg max-h-[500px] overflow-auto">
@@ -361,23 +323,23 @@ export default function AIAssistant() {
                       <div className="p-3 rounded-lg bg-info/10 border border-info/20">
                         <div className="flex items-center gap-2 mb-1">
                           <Info className="h-4 w-4 text-info" />
-                          <span className="text-sm font-medium">Data Used</span>
+                          <span className="text-sm font-medium">{t("aiAssistant.output.dataUsed")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">Patient-provided clinical data from intake form.</p>
+                        <p className="text-xs text-muted-foreground">{t("aiAssistant.output.dataUsedDesc")}</p>
                       </div>
                       <div className="p-3 rounded-lg bg-warning/10 border border-warning/20">
                         <div className="flex items-center gap-2 mb-1">
                           <AlertTriangle className="h-4 w-4 text-warning" />
-                          <span className="text-sm font-medium">Uncertainty & Limits</span>
+                          <span className="text-sm font-medium">{t("aiAssistant.output.uncertainty")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">AI analysis is based on structured input only. Guidelines use placeholder citations.</p>
+                        <p className="text-xs text-muted-foreground">{t("aiAssistant.output.uncertaintyDesc")}</p>
                       </div>
                       <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
                         <div className="flex items-center gap-2 mb-1">
                           <Shield className="h-4 w-4 text-destructive" />
-                          <span className="text-sm font-medium">Clinician Confirmation Required</span>
+                          <span className="text-sm font-medium">{t("aiAssistant.output.clinicianRequired")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">This output must be reviewed by a qualified clinician before any clinical action.</p>
+                        <p className="text-xs text-muted-foreground">{t("aiAssistant.output.clinicianRequiredDesc")}</p>
                       </div>
                     </div>
                   </TabsContent>
@@ -389,20 +351,20 @@ export default function AIAssistant() {
                     size="sm"
                     onClick={() => {
                       navigator.clipboard.writeText(result);
-                      toast({ title: "Copied", description: "Report copied as plain text (EHR format)" });
+                      toast({ title: t("aiAssistant.output.copied"), description: t("aiAssistant.output.copiedDesc") });
                     }}
                   >
                     <Copy className="h-3.5 w-3.5 mr-1" />
-                    Copy to EHR
+                    {t("aiAssistant.output.copyEHR")}
                   </Button>
                   <Button variant="outline" size="sm">
                     <Download className="h-3.5 w-3.5 mr-1" />
-                    Export PDF
+                    {t("aiAssistant.output.exportPDF")}
                   </Button>
                   {user && (
                     <Button size="sm" className="ml-auto" onClick={handleSignOff}>
                       <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                      Confirm & Sign
+                      {t("aiAssistant.output.confirmSign")}
                     </Button>
                   )}
                 </div>
@@ -410,20 +372,19 @@ export default function AIAssistant() {
             ) : (
               <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
                 <Brain className="h-12 w-12 mb-4 opacity-20" />
-                <p className="text-sm">Enter clinical data and generate a report</p>
+                <p className="text-sm">{t("aiAssistant.output.empty")}</p>
               </div>
             )}
           </CardContent>
         </Card>
 
-        {/* History */}
         <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <History className="h-5 w-5" />
-              Report History
+              {t("aiAssistant.history.title")}
             </CardTitle>
-            <CardDescription>Previous AI-generated reports with audit trail</CardDescription>
+            <CardDescription>{t("aiAssistant.history.subtitle")}</CardDescription>
           </CardHeader>
           <CardContent>
             {history.length > 0 ? (
@@ -443,10 +404,10 @@ export default function AIAssistant() {
                       {output.user_signoff ? (
                         <Badge variant="default" className="text-[10px] h-5">
                           <CheckCircle2 className="h-3 w-3 mr-1" />
-                          Signed
+                          {t("aiAssistant.history.signed")}
                         </Badge>
                       ) : (
-                        <Badge variant="outline" className="text-[10px] h-5">Pending</Badge>
+                        <Badge variant="outline" className="text-[10px] h-5">{t("aiAssistant.history.pending")}</Badge>
                       )}
                     </div>
                     <p className="text-xs text-muted-foreground line-clamp-2">
@@ -460,9 +421,10 @@ export default function AIAssistant() {
                 ))}
               </div>
             ) : (
-              <div className="flex flex-col items-center justify-center h-48 text-muted-foreground">
-                <History className="h-10 w-10 mb-3 opacity-20" />
-                <p className="text-sm">{user ? "No reports yet" : "Sign in to view history"}</p>
+              <div className="flex flex-col items-center justify-center h-32 text-muted-foreground">
+                <FileText className="h-8 w-8 mb-2 opacity-20" />
+                <p className="text-sm font-medium">{t("aiAssistant.history.empty")}</p>
+                <p className="text-xs">{t("aiAssistant.history.emptyDesc")}</p>
               </div>
             )}
           </CardContent>

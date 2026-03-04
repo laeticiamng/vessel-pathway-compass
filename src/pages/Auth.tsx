@@ -8,6 +8,7 @@ import { HeartPulse } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "@/i18n/context";
 
 export default function Auth() {
   const [searchParams] = useSearchParams();
@@ -17,6 +18,7 @@ export default function Auth() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +33,8 @@ export default function Auth() {
         });
         if (error) throw error;
         toast({
-          title: "Check your email",
-          description: "We sent you a confirmation link to verify your account.",
+          title: t("auth.checkEmail"),
+          description: t("auth.checkEmailDesc"),
         });
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
@@ -41,7 +43,7 @@ export default function Auth() {
       }
     } catch (error: any) {
       toast({
-        title: "Error",
+        title: t("auth.error"),
         description: error.message,
         variant: "destructive",
       });
@@ -62,32 +64,30 @@ export default function Auth() {
 
         <Card>
           <CardHeader className="text-center">
-            <CardTitle>{isSignUp ? "Create Account" : "Welcome Back"}</CardTitle>
+            <CardTitle>{isSignUp ? t("auth.createAccount") : t("auth.welcomeBack")}</CardTitle>
             <CardDescription>
-              {isSignUp
-                ? "Join the global vascular medicine platform"
-                : "Sign in to your Vascular Atlas account"}
+              {isSignUp ? t("auth.signUpDesc") : t("auth.signInDesc")}
             </CardDescription>
           </CardHeader>
           <form onSubmit={handleSubmit}>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">{t("auth.email")}</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="you@hospital.org"
+                  placeholder={t("auth.emailPlaceholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{t("auth.password")}</Label>
                 <Input
                   id="password"
                   type="password"
-                  placeholder="••••••••"
+                  placeholder={t("auth.passwordPlaceholder")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -97,14 +97,14 @@ export default function Auth() {
             </CardContent>
             <CardFooter className="flex flex-col gap-4">
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? "Loading..." : isSignUp ? "Create Account" : "Sign In"}
+                {loading ? t("common.loading") : isSignUp ? t("auth.createBtn") : t("auth.signInBtn")}
               </Button>
               <button
                 type="button"
                 onClick={() => setIsSignUp(!isSignUp)}
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
-                {isSignUp ? "Already have an account? Sign in" : "Don't have an account? Sign up"}
+                {isSignUp ? t("auth.switchToSignIn") : t("auth.switchToSignUp")}
               </button>
             </CardFooter>
           </form>

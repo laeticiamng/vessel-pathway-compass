@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/i18n/context";
 import {
   Brain,
   Activity,
@@ -14,48 +15,6 @@ import {
   CheckCircle2,
 } from "lucide-react";
 
-const modules = [
-  {
-    icon: Brain,
-    title: "AI Clinical Assistant",
-    description: "Structured SOAP notes, differentials, care pathways — generated with full transparency and clinician confirmation.",
-  },
-  {
-    icon: Activity,
-    title: "Vascular Digital Twin",
-    description: "Longitudinal patient timelines with interactive vascular maps, lesion tracking, and scenario simulation.",
-  },
-  {
-    icon: LineChart,
-    title: "Global Outcomes Registry",
-    description: "Standardized outcomes for PAD, aortic, carotid, venous, and thromboembolic disease with privacy-first benchmarking.",
-  },
-  {
-    icon: BookOpen,
-    title: "Certification & CME",
-    description: "Five competency tracks with micro-lessons, supervised logbooks, OSCE checklists, and digital badges.",
-  },
-  {
-    icon: FlaskConical,
-    title: "Clinical Simulation Lab",
-    description: "Interactive branching cases with rubric-constrained AI feedback and skill heatmaps.",
-  },
-  {
-    icon: Globe,
-    title: "Global Expert Network",
-    description: "De-identified case discussions, structured tele-expertise, and mentorship matching across specialties.",
-  },
-];
-
-const trustSignals = [
-  "Compliance-ready audit infrastructure",
-  "Privacy-first: no re-identification in benchmarking",
-  "AI outputs always require clinician confirmation",
-  "Multi-tenant institution workspaces with RLS",
-  "Citation placeholders — never fabricated guidelines",
-  "Role-based access for physicians, trainees, admins",
-];
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -65,10 +24,22 @@ const fadeUp = {
   }),
 };
 
+const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
+const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
+
 export default function Landing() {
+  const { t } = useTranslation();
+
+  const modules = moduleKeys.map((key, i) => ({
+    icon: moduleIcons[i],
+    title: t(`landing.modules.${key}.title`),
+    description: t(`landing.modules.${key}.desc`),
+  }));
+
+  const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
+
   return (
     <div className="min-h-screen bg-background">
-      {/* Nav */}
       <nav className="fixed top-0 w-full z-50 glass">
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2.5">
@@ -79,19 +50,18 @@ export default function Landing() {
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Pricing
+              {t("landing.nav.pricing")}
             </Link>
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Sign In
+              {t("landing.nav.signIn")}
             </Link>
             <Button asChild size="sm">
-              <Link to="/auth?mode=signup">Get Started</Link>
+              <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
             </Button>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(220_70%_50%_/_0.15),_transparent_70%)]" />
@@ -104,43 +74,42 @@ export default function Landing() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8">
               <span className="h-2 w-2 rounded-full bg-primary animate-pulse-soft" />
               <span className="text-sm font-medium text-primary-foreground/80">
-                The Intelligence OS for Vascular Medicine
+                {t("landing.hero.badge")}
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.1] mb-6 max-w-4xl mx-auto">
-              Vascular Atlas
+              {t("landing.hero.title")}
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Unifying clinical workflow, AI assistance, outcomes registry, certification, research, and expert networking — across USA, EU & Switzerland.
+              {t("landing.hero.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12">
                 <Link to="/auth?mode=signup">
-                  Start Free Trial
+                  {t("landing.hero.cta")}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="text-base px-8 h-12 border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10">
-                <Link to="/pricing">View Plans</Link>
+                <Link to="/pricing">{t("landing.hero.secondary")}</Link>
               </Button>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Modules */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Six Core Modules</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("landing.modules.title")}</h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              A unified platform built for vascular medicine excellence.
+              {t("landing.modules.subtitle")}
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {modules.map((mod, i) => (
               <motion.div
-                key={mod.title}
+                key={i}
                 custom={i}
                 initial="hidden"
                 whileInView="visible"
@@ -159,20 +128,19 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Trust */}
       <section className="py-24 bg-muted/50">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto">
             <div className="text-center mb-12">
               <Shield className="h-10 w-10 text-primary mx-auto mb-4" />
-              <h2 className="text-3xl font-bold mb-4">Compliance-Ready by Design</h2>
+              <h2 className="text-3xl font-bold mb-4">{t("landing.trust.title")}</h2>
               <p className="text-muted-foreground text-lg">
-                Built with auditability, traceability, and safety as first principles.
+                {t("landing.trust.subtitle")}
               </p>
             </div>
             <div className="grid sm:grid-cols-2 gap-4">
-              {trustSignals.map((signal) => (
-                <div key={signal} className="flex items-start gap-3 p-4 rounded-xl bg-card border">
+              {Array.isArray(trustSignals) && trustSignals.map((signal, i) => (
+                <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-card border">
                   <CheckCircle2 className="h-5 w-5 text-success shrink-0 mt-0.5" />
                   <span className="text-sm">{signal}</span>
                 </div>
@@ -182,23 +150,21 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* CTA */}
       <section className="py-24">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Transform Vascular Care?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("landing.cta.title")}</h2>
           <p className="text-muted-foreground text-lg mb-8 max-w-lg mx-auto">
-            Join institutions worldwide using Vascular Atlas.
+            {t("landing.cta.subtitle")}
           </p>
           <Button asChild size="lg" className="text-base px-8 h-12">
             <Link to="/auth?mode=signup">
-              Get Started Free
+              {t("landing.cta.button")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="border-t py-12">
         <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
@@ -206,7 +172,7 @@ export default function Landing() {
             <span className="font-semibold">Vascular Atlas</span>
           </div>
           <p className="text-sm text-muted-foreground">
-            © 2026 Vascular Atlas. Compliance-ready platform. Not a medical device.
+            {t("landing.footer")}
           </p>
         </div>
       </footer>
