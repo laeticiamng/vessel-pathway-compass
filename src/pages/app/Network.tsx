@@ -1,124 +1,377 @@
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Globe, MessageSquare, Users, Search, Send, Star, Clock } from "lucide-react";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
+} from "@/components/ui/dialog";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
+import { Globe, MessageSquare, Users, Search, Send, Clock } from "lucide-react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { useTranslation } from "@/i18n/context";
+import { useToast } from "@/hooks/use-toast";
 
-const topics = ["PAD", "Aorta", "Venous", "Carotid", "Wounds", "Thrombosis"];
+const TOPICS = ["PAD", "Aorta", "Venous", "Carotid", "Wounds", "Thrombosis"] as const;
 
-const discussions = [
-  { title: "Complex iliac occlusion — hybrid approach?", author: "Anon Physician", replies: 12, topic: "PAD", time: "3h ago" },
-  { title: "EVAR vs open repair in young patients", author: "Vascular Surgeon", replies: 8, topic: "Aorta", time: "1d ago" },
-  { title: "Compression therapy adherence strategies", author: "Phlebologist", replies: 5, topic: "Venous", time: "2d ago" },
-];
-
-const experts = [
-  { name: "Expert A", specialty: "PAD / Limb Preservation", languages: ["EN", "FR"], rating: 4.9, cases: 156 },
-  { name: "Expert B", specialty: "Aortic Surgery", languages: ["EN", "DE"], rating: 4.8, cases: 89 },
-  { name: "Expert C", specialty: "Venous Disease", languages: ["FR", "DE"], rating: 4.7, cases: 112 },
-];
+function timeAgo(dateStr: string) {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  return `${Math.floor(hours / 24)}d ago`;
+}
 
 export default function Network() {
+  const { user } = useAuth();
+  const { t } = useTranslation();
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+
+  const [search, setSearch] = useState("");
+  const [postDialogOpen, setPostDialogOpen] = useState(false);
+  const [expertDialogOpen, setExpertDialogOpen] = useState(false);
+
+  // New discussion form
+  const [postTitle, setPostTitle] = useState("");
+  const [postTopic, setPostTopic] = useState("");
+  const [postContent, setPostContent] = useState("");
+
+  // Ask expert form
+  const [expertTitle, setExpertTitle] = useState("");
+  const [expertTopic, setExpertTopic] = useState("");
+  const [expertSummary, setExpertSummary] = useState("");
+
+  // Fetch forum posts (top-level only)
+  const { data: posts, isLoading: postsLoading } = useQuery({
+    queryKey: ["forum-posts"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("forum_posts")
+        .select("*")
+        .is("parent_id", null)
+        .order("created_at", { ascending: false })
+        .limit(50);
+      if (error) throw error;
+
+      // Get reply counts
+      const postIds = data.map((p) => p.id);
+      if (postIds.length === 0) return data.map((p) => ({ ...p, replyCount: 0 }));
+
+      const { data: replies } = await supabase
+        .from("forum_posts")
+        .select("parent_id")
+        .in("parent_id", postIds);
+
+      const countMap = new Map<string, number>();
+      for (const r of replies ?? []) {
+        if (r.parent_id) countMap.set(r.parent_id, (countMap.get(r.parent_id) ?? 0) + 1);
+      }
+
+      return data.map((p) => ({ ...p, replyCount: countMap.get(p.id) ?? 0 }));
+    },
+    enabled: !!user,
+  });
+
+  // Fetch expert requests
+  const { data: expertRequests, isLoading: expertLoading } = useQuery({
+    queryKey: ["expert-requests"],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("expert_requests")
+        .select("*")
+        .order("created_at", { ascending: false })
+        .limit(50);
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!user,
+  });
+
+  // Create discussion
+  const createPost = useMutation({
+    mutationFn: async () => {
+      if (!user) throw new Error("Not authenticated");
+      const { error } = await supabase.from("forum_posts").insert({
+        title: postTitle,
+        topic: postTopic || "General",
+        content: postContent,
+        user_id: user.id,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["forum-posts"] });
+      setPostDialogOpen(false);
+      setPostTitle(""); setPostTopic(""); setPostContent("");
+      toast({ title: t("common.create"), description: t("network.newDiscussion") });
+    },
+    onError: (err: Error) => {
+      toast({ title: "Error", description: err.message, variant: "destructive" });
+    },
+  });
+
+  // Create expert request
+  const createExpertReq = useMutation({
+    mutationFn: async () => {
+      if (!user) throw new Error("Not authenticated");
+      const { error } = await supabase.from("expert_requests").insert({
+        title: expertTitle,
+        topic: expertTopic || "General",
+        case_summary: expertSummary,
+        requester_id: user.id,
+      });
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["expert-requests"] });
+      setExpertDialogOpen(false);
+      setExpertTitle(""); setExpertTopic(""); setExpertSummary("");
+      toast({ title: t("common.create"), description: t("network.submitCase") });
+    },
+    onError: (err: Error) => {
+      toast({ title: "Error", description: err.message, variant: "destructive" });
+    },
+  });
+
+  const filteredPosts = posts?.filter((p) => {
+    if (!search) return true;
+    const q = search.toLowerCase();
+    return p.title.toLowerCase().includes(q) || p.topic.toLowerCase().includes(q);
+  });
+
   return (
     <div className="space-y-6 max-w-6xl">
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">
           <Globe className="h-8 w-8 text-primary" />
-          Global Expert Network
+          {t("network.title")}
         </h1>
-        <p className="text-muted-foreground mt-1">Case discussions, tele-expertise, and mentorship matching</p>
+        <p className="text-muted-foreground mt-1">{t("network.subtitle")}</p>
       </div>
 
       <Tabs defaultValue="discussions">
         <TabsList>
-          <TabsTrigger value="discussions">Discussions</TabsTrigger>
-          <TabsTrigger value="ask-expert">Ask an Expert</TabsTrigger>
-          <TabsTrigger value="mentorship">Mentorship</TabsTrigger>
+          <TabsTrigger value="discussions">{t("network.tabs.discussions")}</TabsTrigger>
+          <TabsTrigger value="ask-expert">{t("network.tabs.askExpert")}</TabsTrigger>
+          <TabsTrigger value="mentorship">{t("network.tabs.mentorship")}</TabsTrigger>
         </TabsList>
 
+        {/* Discussions Tab */}
         <TabsContent value="discussions" className="mt-6 space-y-4">
           <div className="flex gap-3">
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input placeholder="Search discussions..." className="pl-10" />
+              <Input
+                placeholder={t("network.searchDiscussions")}
+                className="pl-10"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
-            <Button>
+            <Button onClick={() => setPostDialogOpen(true)}>
               <MessageSquare className="h-4 w-4 mr-2" />
-              New Discussion
+              {t("network.newDiscussion")}
             </Button>
           </div>
           <div className="flex gap-2">
-            {topics.map((t) => (
-              <Badge key={t} variant="secondary" className="cursor-pointer hover:bg-primary/10">{t}</Badge>
+            {TOPICS.map((tp) => (
+              <Badge key={tp} variant="secondary" className="cursor-pointer hover:bg-primary/10">{tp}</Badge>
             ))}
           </div>
-          {discussions.map((d) => (
-            <Card key={d.title} className="hover:border-primary/30 transition-colors cursor-pointer">
+
+          {postsLoading &&
+            Array.from({ length: 3 }).map((_, i) => (
+              <Card key={i}>
+                <CardContent className="pt-6">
+                  <Skeleton className="h-5 w-3/4 mb-2" />
+                  <Skeleton className="h-3 w-1/2" />
+                </CardContent>
+              </Card>
+            ))}
+
+          {!postsLoading && filteredPosts?.map((d) => (
+            <Card key={d.id} className="hover:border-primary/30 transition-colors cursor-pointer">
               <CardContent className="pt-6 flex items-center justify-between">
                 <div>
                   <h3 className="font-semibold">{d.title}</h3>
                   <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
                     <Badge variant="outline" className="text-xs">{d.topic}</Badge>
-                    <span>{d.author}</span>
-                    <span className="flex items-center gap-1"><MessageSquare className="h-3 w-3" /> {d.replies}</span>
-                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {d.time}</span>
+                    <span className="flex items-center gap-1">
+                      <MessageSquare className="h-3 w-3" /> {d.replyCount}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {timeAgo(d.created_at)}
+                    </span>
                   </div>
                 </div>
               </CardContent>
             </Card>
           ))}
+
+          {!postsLoading && filteredPosts?.length === 0 && (
+            <Card>
+              <CardContent className="py-12 text-center">
+                <MessageSquare className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
+                <p className="text-muted-foreground">No discussions yet. Start the first one!</p>
+                <Button variant="outline" className="mt-4" onClick={() => setPostDialogOpen(true)}>
+                  {t("network.newDiscussion")}
+                </Button>
+              </CardContent>
+            </Card>
+          )}
         </TabsContent>
 
-        <TabsContent value="ask-expert" className="mt-6">
+        {/* Ask Expert Tab */}
+        <TabsContent value="ask-expert" className="mt-6 space-y-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h2 className="text-xl font-semibold">{t("network.tabs.askExpert")}</h2>
+              <p className="text-sm text-muted-foreground mt-1">{t("network.askExpertDesc")}</p>
+            </div>
+            <Button onClick={() => setExpertDialogOpen(true)}>
+              <Send className="h-4 w-4 mr-2" />
+              {t("network.submitCase")}
+            </Button>
+          </div>
+
+          {expertLoading &&
+            Array.from({ length: 2 }).map((_, i) => (
+              <Card key={i}>
+                <CardContent className="pt-6">
+                  <Skeleton className="h-5 w-2/3 mb-2" />
+                  <Skeleton className="h-3 w-1/3" />
+                </CardContent>
+              </Card>
+            ))}
+
+          {!expertLoading && expertRequests?.map((r) => (
+            <Card key={r.id}>
+              <CardContent className="pt-6 flex items-center justify-between">
+                <div>
+                  <h3 className="font-semibold">{r.title}</h3>
+                  <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                    <Badge variant="outline" className="text-xs">{r.topic}</Badge>
+                    <Badge variant={r.status === "pending" ? "secondary" : "default"} className="text-xs capitalize">{r.status}</Badge>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {timeAgo(r.created_at)}
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{r.case_summary}</p>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+
+          {!expertLoading && expertRequests?.length === 0 && (
+            <Card>
+              <CardContent className="py-12 text-center">
+                <Send className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
+                <p className="text-muted-foreground">No expert requests yet</p>
+              </CardContent>
+            </Card>
+          )}
+        </TabsContent>
+
+        {/* Mentorship Tab */}
+        <TabsContent value="mentorship" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Ask an Expert</CardTitle>
-              <CardDescription>Submit a de-identified case for structured expert review</CardDescription>
+              <CardTitle>{t("network.tabs.mentorship")}</CardTitle>
+              <CardDescription>Mentorship matching — coming soon</CardDescription>
             </CardHeader>
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center text-muted-foreground">
-                <Send className="h-12 w-12 mx-auto mb-4 opacity-30" />
-                <p>Submit de-identified case package</p>
-                <p className="text-sm mt-1">Routed to available experts with structured response template</p>
-                <Button className="mt-4">
-                  <Send className="h-3.5 w-3.5 mr-1" />
-                  Submit Case
-                </Button>
+                <Users className="h-12 w-12 mx-auto mb-4 opacity-30" />
+                <p>{t("network.requestMentorship")}</p>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
-
-        <TabsContent value="mentorship" className="mt-6 space-y-4">
-          <h2 className="text-xl font-semibold">Available Mentors</h2>
-          {experts.map((e) => (
-            <Card key={e.name}>
-              <CardContent className="pt-6 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <Users className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">{e.name}</h3>
-                    <p className="text-sm text-muted-foreground">{e.specialty}</p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className="text-xs flex items-center gap-1"><Star className="h-3 w-3 text-warning" /> {e.rating}</span>
-                      <span className="text-xs text-muted-foreground">{e.cases} cases reviewed</span>
-                      <div className="flex gap-1">
-                        {e.languages.map((l) => (
-                          <Badge key={l} variant="outline" className="text-[10px] px-1.5">{l}</Badge>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <Button variant="outline" size="sm">Request Mentorship</Button>
-              </CardContent>
-            </Card>
-          ))}
-        </TabsContent>
       </Tabs>
+
+      {/* New Discussion Dialog */}
+      <Dialog open={postDialogOpen} onOpenChange={setPostDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("network.newDiscussion")}</DialogTitle>
+            <DialogDescription>Start a de-identified case discussion</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <Label>Title</Label>
+              <Input placeholder="e.g. Complex iliac occlusion approach" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <Label>Topic</Label>
+              <Select value={postTopic} onValueChange={setPostTopic}>
+                <SelectTrigger><SelectValue placeholder="Select topic" /></SelectTrigger>
+                <SelectContent>
+                  {TOPICS.map((tp) => (
+                    <SelectItem key={tp} value={tp}>{tp}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label>Content</Label>
+              <Textarea placeholder="Describe the case or question..." value={postContent} onChange={(e) => setPostContent(e.target.value)} rows={4} />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setPostDialogOpen(false)}>{t("common.cancel")}</Button>
+            <Button onClick={() => createPost.mutate()} disabled={!postTitle || !postContent || createPost.isPending}>
+              {createPost.isPending ? t("common.loading") : t("common.create")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Submit Expert Request Dialog */}
+      <Dialog open={expertDialogOpen} onOpenChange={setExpertDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t("network.submitCase")}</DialogTitle>
+            <DialogDescription>{t("network.askExpertDesc")}</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 py-2">
+            <div className="space-y-2">
+              <Label>Title</Label>
+              <Input placeholder="e.g. Unusual aortic pathology" value={expertTitle} onChange={(e) => setExpertTitle(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <Label>Topic</Label>
+              <Select value={expertTopic} onValueChange={setExpertTopic}>
+                <SelectTrigger><SelectValue placeholder="Select topic" /></SelectTrigger>
+                <SelectContent>
+                  {TOPICS.map((tp) => (
+                    <SelectItem key={tp} value={tp}>{tp}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label>De-identified Case Summary</Label>
+              <Textarea placeholder="Present the de-identified clinical scenario..." value={expertSummary} onChange={(e) => setExpertSummary(e.target.value)} rows={5} />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setExpertDialogOpen(false)}>{t("common.cancel")}</Button>
+            <Button onClick={() => createExpertReq.mutate()} disabled={!expertTitle || !expertSummary || createExpertReq.isPending}>
+              {createExpertReq.isPending ? t("common.loading") : t("network.submitCase")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
