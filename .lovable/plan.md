@@ -1,45 +1,27 @@
 
 
-# Wire Compliance Center to Real Database Data
+# Route Protection for /app Routes
 
-## What Changes
+## Approach
 
-Replace all hardcoded mock data in `Compliance.tsx` with live queries to `audit_logs`, `ai_outputs`, and `consents` tables.
+Create an auth guard component that uses Supabase's `onAuthStateChange` listener to track session state. Wrap the `/app` route in this guard — unauthenticated users get redirected to `/auth`.
 
-## Implementation
+## Files to Create
 
-### 1. Compliance.tsx — Full Rewrite of Data Layer
+1. **`src/hooks/useAuth.tsx`** — Auth context provider + hook
+   - `AuthProvider` wraps the app, listens to `onAuthStateChange` (set up before `getSession()`)
+   - Exposes `{ user, session, loading }` via `useAuth()` hook
+   - Three states: loading, authenticated, unauthenticated
 
-- Import `supabase` client and `useQuery` from TanStack
-- **Audit Log tab**: Fetch from `audit_logs` table ordered by `created_at desc`, limit 50. Display `action`, `entity_type` as badge, `details` JSONB for status, and formatted timestamp.
-- **Stats cards**: 
-  - Audit Events count → `audit_logs` count
-  - AI Outputs Logged → `ai_outputs` count
-  - Pending Sign-offs → `ai_outputs` count where `user_signoff = false`
-  - Consent Records → `consents` count
-- **Consent tab**: Fetch from `consents` table joined through patient ownership. Group by `consent_type`, show granted/revoked status.
-- **AI Safety tab**: 
-  - Fetch latest `model_version` from `ai_outputs`
-  - Calculate sign-off rate: `count(user_signoff=true) / count(*)` from `ai_outputs`
-  - Count issues: `ai_outputs` where `user_signoff = false`
+2. **`src/components/ProtectedRoute.tsx`** — Guard component
+   - Uses `useAuth()` to check session
+   - Shows a centered spinner while loading
+   - Redirects to `/auth` if no session
+   - Renders `<Outlet />` if authenticated
 
-### 2. Empty States
+## Files to Modify
 
-When no data exists yet, show a friendly "No audit logs recorded yet" message with an icon, rather than an empty table.
+3. **`src/App.tsx`** — Wrap app with `<AuthProvider>`, change `/app` route element from `<AppLayout />` to `<ProtectedRoute />` which renders `<AppLayout />` inside it
 
-### 3. Pagination
-
-Add simple "Load More" button for audit logs (fetch in pages of 50).
-
-### 4. i18n
-
-The page currently uses hardcoded English strings. Will use `useTranslation()` hook with existing translation keys from `compliance.*` namespace.
-
-## Files Modified
-
-- `src/pages/app/Compliance.tsx` — replace mock data with Supabase queries, add loading/empty states, integrate i18n
-
-## No Schema Changes Needed
-
-All required tables (`audit_logs`, `ai_outputs`, `consents`) and RLS policies already exist.
+4. **`src/pages/Auth.tsx`** — If user is already logged in, redirect to `/app` (prevent accessing login when authenticated)
 
