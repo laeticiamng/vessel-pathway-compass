@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, type Language } from "@/i18n/context";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Brain,
   Activity,
@@ -14,6 +16,7 @@ import {
   ArrowRight,
   HeartPulse,
   CheckCircle2,
+  Menu,
 } from "lucide-react";
 
 const fadeUp = {
@@ -76,6 +79,43 @@ export default function Landing() {
               <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
             </Button>
           </div>
+          {/* Mobile menu */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-72">
+              <div className="flex flex-col gap-6 mt-8">
+                <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors">
+                  {t("landing.nav.pricing")}
+                </Link>
+                <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors">
+                  {t("landing.nav.signIn")}
+                </Link>
+                <div className="flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-muted-foreground" />
+                  <div className="flex gap-1">
+                    {(["en", "fr", "de"] as Language[]).map((lang) => (
+                      <Button
+                        key={lang}
+                        variant={language === lang ? "default" : "outline"}
+                        size="sm"
+                        className="px-3 text-xs"
+                        onClick={() => setLanguage(lang)}
+                      >
+                        {langLabels[lang]}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
+                <Button asChild className="mt-2">
+                  <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
+                </Button>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </nav>
 
