@@ -1,62 +1,44 @@
 
 
-## Plan: Aperçu gratuit à 35% + connexion obligatoire pour le contenu complet
+## Fix: "View Plans" button not visible in ContentGate overlay
 
-### Concept
+### Problem
 
-Actuellement, toutes les pages `/app/*` sont protégées par `ProtectedRoute` qui redirige vers `/auth` si non connecté. L'objectif est de rendre chaque page visible à 35% sans connexion, avec un overlay/blur qui bloque le reste et invite à se connecter/s'abonner.
+The ContentGate CTA overlay (with "Sign In" and "View Plans" buttons) is not clearly visible when a user is not logged in. The issue stems from the CSS layout:
 
-### Architecture
+1. The gradient overlay uses `absolute inset-0 top-[15vh]` which can cover the CTA buttons area
+2. The CTA section uses `relative -mt-16` which may not position correctly depending on content height
+3. On pages with short content, the 35vh cutoff may result in an awkward layout where the buttons are hidden or partially obscured
 
-1. **Créer un composant `<ContentGate>`** — wrapper réutilisable qui :
-   - Reçoit `children` (le contenu de la page)
-   - Vérifie l'état d'authentification via `useAuth()`
-   - Si connecté : affiche 100% du contenu sans restriction
-   - Si non connecté : affiche le contenu dans un conteneur avec `max-height: 35vh`, `overflow: hidden`, un gradient-mask CSS en bas, et un overlay CTA par-dessus invitant à se connecter ou s'abonner
+### Fix
 
-2. **Modifier le routing dans `App.tsx`** :
-   - Sortir les pages de contenu du `<ProtectedRoute>` et les rendre accessibles publiquement via un nouveau layout "semi-public" (`<AppLayout>` sans redirection)
-   - Garder `ProtectedRoute` uniquement pour les pages sensibles (Settings, Patients avec données personnelles)
-   - Pages en aperçu public : Dashboard, AI Assistant, Digital Twin, Registry, Education, Simulation, Network, Research, Compliance, Team, et les pages beta
+Restructure the ContentGate component to ensure the CTA section is always fully visible below the gradient:
 
-3. **Créer un `<PublicAppRoute>`** — variante de `ProtectedRoute` qui :
-   - Affiche `<AppLayout>` sans vérification de session
-   - Wrap chaque page enfant dans `<ContentGate>`
-
-4. **Composant overlay CTA** :
-   - Dégradé blanc/noir (selon le thème) masquant le bas du contenu
-   - Icône de cadenas + texte traduit ("Connectez-vous pour accéder à l'intégralité du contenu")
-   - Deux boutons : "Se connecter" → `/auth` et "Voir les plans" → `/pricing`
-   - Traduit en EN/FR/DE
-
-5. **Traductions** : Ajouter les clés `contentGate.title`, `contentGate.subtitle`, `contentGate.signIn`, `contentGate.viewPlans` dans les 3 fichiers i18n.
-
-### Fichiers à modifier/créer
-
-| Fichier | Action |
-|---|---|
-| `src/components/ContentGate.tsx` | Créer — composant wrapper avec logique 35%/100% |
-| `src/components/PublicAppRoute.tsx` | Créer — layout public avec sidebar visible |
-| `src/App.tsx` | Modifier — séparer routes publiques/protégées |
-| `src/i18n/en.ts` | Ajouter clés `contentGate.*` |
-| `src/i18n/fr.ts` | Ajouter clés `contentGate.*` |
-| `src/i18n/de.ts` | Ajouter clés `contentGate.*` |
-
-### Détail technique du ContentGate
+**`src/components/ContentGate.tsx`** -- Adjust layout:
+- Wrap the preview + gradient in a single container with `relative max-h-[35vh] overflow-hidden`
+- Place the gradient as an `absolute bottom-0` element inside that container
+- Move the CTA section completely outside the clipped container so it's never cut off
+- Remove the negative margin hack (`-mt-16`)
 
 ```text
-┌─────────────────────────────┐
-│  Page content (35% visible) │
-│  ...                        │
-│▓▓▓▓▓ gradient fade ▓▓▓▓▓▓▓▓│
-├─────────────────────────────┤
-│  🔒 Overlay CTA             │
-│  "Sign in for full access"  │
-│  [Sign In]  [View Plans]    │
-└─────────────────────────────┘
+┌──────────────────────────────────┐
+│  <div relative max-h-[35vh]     │  ← clipped container
+│    overflow-hidden>             │
+│    {children}                   │
+│    <gradient absolute bottom-0> │
+│  </div>                        │
+├──────────────────────────────────┤
+│  <div CTA section>              │  ← always visible, outside clip
+│    🔒 Lock icon                 │
+│    "Sign in for full access"    │
+│    [Sign In]  [View Plans]      │
+│  </div>                        │
+└──────────────────────────────────┘
 ```
 
-- CSS: `max-h-[50vh]` + `overflow-hidden` + pseudo-élément gradient
-- L'overlay est positionné en `sticky bottom-0` ou `absolute` en bas du conteneur
-- Pages sensibles (patients/:id, settings) restent 100% protégées via `ProtectedRoute`
+### Changes
+
+| File | Change |
+|---|---|
+| `src/components/ContentGate.tsx` | Fix CSS layout so CTA + "View Plans" button is always visible below the gradient |
 
