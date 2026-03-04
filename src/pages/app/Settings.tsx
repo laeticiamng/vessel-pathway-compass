@@ -4,10 +4,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { Settings as SettingsIcon, Building, Globe, Shield, Palette, CreditCard, ArrowRight } from "lucide-react";
+import { Settings as SettingsIcon, Building, Globe, Shield, Palette, CreditCard, ArrowRight, LogOut } from "lucide-react";
 import { useTranslation, Language } from "@/i18n/context";
 import { useTheme } from "next-themes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const langs: { lang: string; code: Language }[] = [
   { lang: "English", code: "en" },
@@ -18,6 +20,13 @@ const langs: { lang: string; code: Language }[] = [
 export default function Settings() {
   const { t, language, setLanguage } = useTranslation();
   const { theme, setTheme } = useTheme();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast.success(t("common.signOut"));
+    navigate("/");
+  };
 
   return (
     <div className="space-y-6 max-w-3xl">
@@ -105,6 +114,15 @@ export default function Settings() {
             <span className="text-sm">{t("settings.security.rateLimiting")}</span>
             <Button variant="outline" size="sm">{t("common.configure")}</Button>
           </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardContent className="pt-6">
+          <Button variant="destructive" className="w-full" onClick={handleSignOut}>
+            <LogOut className="h-4 w-4 mr-2" />
+            {t("common.signOut")}
+          </Button>
         </CardContent>
       </Card>
     </div>
