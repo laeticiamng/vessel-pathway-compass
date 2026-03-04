@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,13 +16,31 @@ import {
   Loader2,
   Shield,
   Info,
+  History,
+  Clock,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+
+interface AiOutput {
+  id: string;
+  input_summary: Record<string, string>;
+  output_text: string;
+  model_version: string;
+  user_signoff: boolean;
+  signed_off_at: string | null;
+  created_at: string;
+}
 
 export default function AIAssistant() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [currentOutputId, setCurrentOutputId] = useState<string | null>(null);
+  const [history, setHistory] = useState<AiOutput[]>([]);
+  const [user, setUser] = useState<any>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     symptoms: "",
@@ -34,8 +52,94 @@ export default function AIAssistant() {
     medications: "",
   });
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
+      if (session?.user) loadHistory();
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) loadHistory();
+    });
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const loadHistory = async () => {
+    const { data } = await supabase
+      .from("ai_outputs")
+      .select("*")
+      .order("created_at", { ascending: false })
+      .limit(20);
+    if (data) setHistory(data as AiOutput[]);
+  };
+
+  const saveOutput = async (outputText: string) => {
+    if (!user) return null;
+    const { data, error } = await supabase
+      .from("ai_outputs")
+      .insert({
+        user_id: user.id,
+        input_summary: formData as any,
+        output_text: outputText,
+        model_version: "google/gemini-3-flash-preview",
+      })
+      .select()
+      .single();
+
+    if (error) {
+      console.error("Failed to save AI output:", error);
+      return null;
+    }
+
+    // Audit log
+    await supabase.from("audit_logs").insert({
+      user_id: user.id,
+      action: "ai_report_generated",
+      entity_type: "ai_output",
+      entity_id: data.id,
+      details: { model: "google/gemini-3-flash-preview", input_fields: Object.keys(formData).filter(k => (formData as any)[k]) },
+    });
+
+    setCurrentOutputId(data.id);
+    loadHistory();
+    return data.id;
+  };
+
+  const handleSignOff = async () => {
+    if (!currentOutputId || !user) return;
+    const { error } = await supabase
+      .from("ai_outputs")
+      .update({ user_signoff: true, signed_off_at: new Date().toISOString() })
+      .eq("id", currentOutputId);
+
+    if (error) {
+      toast({ title: "Error", description: "Failed to sign off", variant: "destructive" });
+      return;
+    }
+
+    await supabase.from("audit_logs").insert({
+      user_id: user.id,
+      action: "ai_report_signed_off",
+      entity_type: "ai_output",
+      entity_id: currentOutputId,
+      details: { signed_off_at: new Date().toISOString() },
+    });
+
+    toast({ title: "Signed off", description: "Report confirmed and signed by clinician." });
+    loadHistory();
+  };
+
   const handleGenerate = async () => {
+    if (!user) {
+      toast({ title: "Authentication required", description: "Please sign in to use the AI Assistant.", variant: "destructive" });
+      navigate("/auth");
+      return;
+    }
+
     setLoading(true);
+    setResult(null);
+    setCurrentOutputId(null);
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ai-clinical-assistant`,
@@ -57,7 +161,6 @@ export default function AIAssistant() {
         toast({ title: "Credits required", description: "Please add credits to continue using AI features.", variant: "destructive" });
         return;
       }
-
       if (!response.ok || !response.body) throw new Error("Failed to generate report");
 
       const reader = response.body.getReader();
@@ -88,6 +191,11 @@ export default function AIAssistant() {
           } catch {}
         }
       }
+
+      // Save completed report to database
+      if (fullText) {
+        await saveOutput(fullText);
+      }
     } catch (error: any) {
       toast({ title: "Error", description: error.message, variant: "destructive" });
     } finally {
@@ -95,8 +203,24 @@ export default function AIAssistant() {
     }
   };
 
+  const loadPastReport = (output: AiOutput) => {
+    setResult(output.output_text);
+    setCurrentOutputId(output.id);
+    if (output.input_summary) {
+      setFormData({
+        symptoms: output.input_summary.symptoms || "",
+        riskFactors: output.input_summary.riskFactors || "",
+        abi: output.input_summary.abi || "",
+        doppler: output.input_summary.doppler || "",
+        imaging: output.input_summary.imaging || "",
+        labs: output.input_summary.labs || "",
+        medications: output.input_summary.medications || "",
+      });
+    }
+  };
+
   return (
-    <div className="space-y-6 max-w-6xl">
+    <div className="space-y-6 max-w-7xl">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
@@ -123,9 +247,16 @@ export default function AIAssistant() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      {!user && (
+        <div className="p-4 rounded-xl bg-info/10 border border-info/30 text-center">
+          <p className="text-sm font-medium">Sign in to generate and save AI reports with full audit trail.</p>
+          <Button size="sm" className="mt-2" onClick={() => navigate("/auth")}>Sign In</Button>
+        </div>
+      )}
+
+      <div className="grid lg:grid-cols-3 gap-6">
         {/* Intake Form */}
-        <Card>
+        <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle>Clinical Intake</CardTitle>
             <CardDescription>Enter patient data for AI analysis</CardDescription>
@@ -149,23 +280,21 @@ export default function AIAssistant() {
                 rows={2}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>ABI / IPS</Label>
-                <Input
-                  placeholder="e.g., Right: 0.65, Left: 0.82"
-                  value={formData.abi}
-                  onChange={(e) => setFormData({ ...formData, abi: e.target.value })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Doppler Summary</Label>
-                <Input
-                  placeholder="e.g., Monophasic flow SFA right"
-                  value={formData.doppler}
-                  onChange={(e) => setFormData({ ...formData, doppler: e.target.value })}
-                />
-              </div>
+            <div className="space-y-2">
+              <Label>ABI / IPS</Label>
+              <Input
+                placeholder="e.g., Right: 0.65, Left: 0.82"
+                value={formData.abi}
+                onChange={(e) => setFormData({ ...formData, abi: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Doppler Summary</Label>
+              <Input
+                placeholder="e.g., Monophasic flow SFA right"
+                value={formData.doppler}
+                onChange={(e) => setFormData({ ...formData, doppler: e.target.value })}
+              />
             </div>
             <div className="space-y-2">
               <Label>CTA/MRA Summary</Label>
@@ -176,34 +305,32 @@ export default function AIAssistant() {
                 rows={2}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label>Labs</Label>
-                <Input
-                  placeholder="e.g., HbA1c 7.8%, LDL 160mg/dL"
-                  value={formData.labs}
-                  onChange={(e) => setFormData({ ...formData, labs: e.target.value })}
-                />
-              </div>
-              <div className="space-y-2">
-                <Label>Current Medications</Label>
-                <Input
-                  placeholder="e.g., Aspirin, Statin, Cilostazol"
-                  value={formData.medications}
-                  onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
-                />
-              </div>
+            <div className="space-y-2">
+              <Label>Labs</Label>
+              <Input
+                placeholder="e.g., HbA1c 7.8%, LDL 160mg/dL"
+                value={formData.labs}
+                onChange={(e) => setFormData({ ...formData, labs: e.target.value })}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Current Medications</Label>
+              <Input
+                placeholder="e.g., Aspirin, Statin, Cilostazol"
+                value={formData.medications}
+                onChange={(e) => setFormData({ ...formData, medications: e.target.value })}
+              />
             </div>
             <Button onClick={handleGenerate} disabled={loading} className="w-full">
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  Generating Report...
+                  Generating...
                 </>
               ) : (
                 <>
                   <Brain className="h-4 w-4 mr-2" />
-                  Generate Clinical Report
+                  Generate Report
                 </>
               )}
             </Button>
@@ -211,7 +338,7 @@ export default function AIAssistant() {
         </Card>
 
         {/* Output */}
-        <Card>
+        <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle>AI-Generated Report</CardTitle>
             <CardDescription>Review, confirm, and export</CardDescription>
@@ -220,12 +347,12 @@ export default function AIAssistant() {
             {result ? (
               <div className="space-y-4">
                 <Tabs defaultValue="report">
-                  <TabsList>
-                    <TabsTrigger value="report">Report</TabsTrigger>
-                    <TabsTrigger value="evidence">Evidence & Rationale</TabsTrigger>
+                  <TabsList className="w-full">
+                    <TabsTrigger value="report" className="flex-1">Report</TabsTrigger>
+                    <TabsTrigger value="evidence" className="flex-1">Evidence</TabsTrigger>
                   </TabsList>
                   <TabsContent value="report" className="mt-4">
-                    <div className="prose prose-sm max-w-none dark:prose-invert whitespace-pre-wrap text-sm leading-relaxed bg-muted/50 p-4 rounded-lg max-h-96 overflow-auto">
+                    <div className="prose prose-sm max-w-none dark:prose-invert whitespace-pre-wrap text-sm leading-relaxed bg-muted/50 p-4 rounded-lg max-h-[500px] overflow-auto">
                       {result}
                     </div>
                   </TabsContent>
@@ -236,14 +363,14 @@ export default function AIAssistant() {
                           <Info className="h-4 w-4 text-info" />
                           <span className="text-sm font-medium">Data Used</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">Patient-provided clinical data from intake form above.</p>
+                        <p className="text-xs text-muted-foreground">Patient-provided clinical data from intake form.</p>
                       </div>
                       <div className="p-3 rounded-lg bg-warning/10 border border-warning/20">
                         <div className="flex items-center gap-2 mb-1">
                           <AlertTriangle className="h-4 w-4 text-warning" />
                           <span className="text-sm font-medium">Uncertainty & Limits</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">AI analysis is based on structured input only. Guidelines use placeholder citations. Clinical judgment is essential.</p>
+                        <p className="text-xs text-muted-foreground">AI analysis is based on structured input only. Guidelines use placeholder citations.</p>
                       </div>
                       <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
                         <div className="flex items-center gap-2 mb-1">
@@ -256,7 +383,7 @@ export default function AIAssistant() {
                   </TabsContent>
                 </Tabs>
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <Button
                     variant="outline"
                     size="sm"
@@ -272,16 +399,70 @@ export default function AIAssistant() {
                     <Download className="h-3.5 w-3.5 mr-1" />
                     Export PDF
                   </Button>
-                  <Button size="sm" className="ml-auto">
-                    <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                    Confirm & Sign
-                  </Button>
+                  {user && (
+                    <Button size="sm" className="ml-auto" onClick={handleSignOff}>
+                      <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
+                      Confirm & Sign
+                    </Button>
+                  )}
                 </div>
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
                 <Brain className="h-12 w-12 mb-4 opacity-20" />
                 <p className="text-sm">Enter clinical data and generate a report</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+
+        {/* History */}
+        <Card className="lg:col-span-1">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <History className="h-5 w-5" />
+              Report History
+            </CardTitle>
+            <CardDescription>Previous AI-generated reports with audit trail</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {history.length > 0 ? (
+              <div className="space-y-3 max-h-[550px] overflow-auto">
+                {history.map((output) => (
+                  <button
+                    key={output.id}
+                    onClick={() => loadPastReport(output)}
+                    className={`w-full text-left p-3 rounded-lg border hover:bg-muted/50 transition-colors ${
+                      currentOutputId === output.id ? "border-primary bg-primary/5" : ""
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-xs font-mono text-muted-foreground">
+                        {output.id.slice(0, 8)}
+                      </span>
+                      {output.user_signoff ? (
+                        <Badge variant="default" className="text-[10px] h-5">
+                          <CheckCircle2 className="h-3 w-3 mr-1" />
+                          Signed
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-[10px] h-5">Pending</Badge>
+                      )}
+                    </div>
+                    <p className="text-xs text-muted-foreground line-clamp-2">
+                      {output.output_text.slice(0, 120)}...
+                    </p>
+                    <div className="flex items-center gap-1 mt-2 text-[10px] text-muted-foreground">
+                      <Clock className="h-3 w-3" />
+                      {new Date(output.created_at).toLocaleString()}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center h-48 text-muted-foreground">
+                <History className="h-10 w-10 mb-3 opacity-20" />
+                <p className="text-sm">{user ? "No reports yet" : "Sign in to view history"}</p>
               </div>
             )}
           </CardContent>
