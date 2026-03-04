@@ -343,6 +343,10 @@ export const en = {
       category: "Category",
       caseTitle: "Case Title",
     },
+    filters: {
+      allCategories: "All Categories",
+      allStatuses: "All Statuses",
+    },
   },
 
   // Digital Twin

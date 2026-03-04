@@ -16,10 +16,11 @@ import {
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { HeartPulse, Plus, Search, Filter, Users } from "lucide-react";
+import { HeartPulse, Plus, Search, Users } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const CATEGORIES = ["PAD", "Aortic", "Venous", "Carotid", "DVT/PE"] as const;
+const STATUSES = ["active", "completed", "archived"] as const;
 const AGE_RANGES = ["18-30", "31-40", "41-50", "51-60", "61-70", "71-80", "80+"] as const;
 
 function riskFromFactors(factors: unknown): string {
@@ -45,6 +46,8 @@ export default function Patients() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
+  const [filterStatus, setFilterStatus] = useState("all");
   const [dialogOpen, setDialogOpen] = useState(false);
 
   // Form state
@@ -55,7 +58,7 @@ export default function Patients() {
   const [caseTitle, setCaseTitle] = useState("");
 
   const { data: patients, isLoading } = useQuery({
-    queryKey: ["patients"],
+    queryKey: ["patients", filterCategory, filterStatus],
     queryFn: async () => {
       const { data: patientsData, error: pErr } = await supabase
         .from("patients")
@@ -65,11 +68,20 @@ export default function Patients() {
       if (pErr) throw pErr;
 
       const patientIds = patientsData.map((p) => p.id);
-      const { data: casesData, error: cErr } = await supabase
+      let casesQuery = supabase
         .from("cases")
         .select("*")
         .in("patient_id", patientIds.length > 0 ? patientIds : ["00000000-0000-0000-0000-000000000000"])
         .order("updated_at", { ascending: false });
+
+      if (filterCategory && filterCategory !== "all") {
+        casesQuery = casesQuery.eq("category", filterCategory);
+      }
+      if (filterStatus && filterStatus !== "all") {
+        casesQuery = casesQuery.eq("status", filterStatus);
+      }
+
+      const { data: casesData, error: cErr } = await casesQuery;
       if (cErr) throw cErr;
 
       const casesByPatient = new Map<string, typeof casesData>();
@@ -79,16 +91,20 @@ export default function Patients() {
         casesByPatient.set(c.patient_id, arr);
       }
 
-      return patientsData.map((p) => {
-        const cases = casesByPatient.get(p.id) ?? [];
-        const latestCase = cases[0];
-        return {
-          ...p,
-          latestCase,
-          caseCount: cases.length,
-          risk: riskFromFactors(p.risk_factors),
-        };
-      });
+      const hasActiveFilters = (filterCategory && filterCategory !== "all") || (filterStatus && filterStatus !== "all");
+
+      return patientsData
+        .map((p) => {
+          const cases = casesByPatient.get(p.id) ?? [];
+          const latestCase = cases[0];
+          return {
+            ...p,
+            latestCase,
+            caseCount: cases.length,
+            risk: riskFromFactors(p.risk_factors),
+          };
+        })
+        .filter((p) => !hasActiveFilters || p.caseCount > 0);
     },
     enabled: !!user,
   });
@@ -168,10 +184,28 @@ export default function Patients() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <Button variant="outline">
-          <Filter className="h-4 w-4 mr-2" />
-          {t("common.filter")}
-        </Button>
+        <Select value={filterCategory} onValueChange={setFilterCategory}>
+          <SelectTrigger className="w-[160px]">
+            <SelectValue placeholder={t("patients.filters.allCategories")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t("patients.filters.allCategories")}</SelectItem>
+            {CATEGORIES.map((c) => (
+              <SelectItem key={c} value={c.toLowerCase()}>{c}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <Select value={filterStatus} onValueChange={setFilterStatus}>
+          <SelectTrigger className="w-[160px]">
+            <SelectValue placeholder={t("patients.filters.allStatuses")} />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">{t("patients.filters.allStatuses")}</SelectItem>
+            {STATUSES.map((s) => (
+              <SelectItem key={s} value={s} className="capitalize">{s}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <Card>
