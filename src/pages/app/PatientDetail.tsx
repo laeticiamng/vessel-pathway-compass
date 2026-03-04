@@ -50,6 +50,8 @@ export default function PatientDetail() {
   const [addEventOpen, setAddEventOpen] = useState(false);
   const [addMeasurementOpen, setAddMeasurementOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
+  const [deleteEventId, setDeleteEventId] = useState<string | null>(null);
+  const [deleteMeasId, setDeleteMeasId] = useState<string | null>(null);
 
   const [editPseudonym, setEditPseudonym] = useState("");
   const [editAgeRange, setEditAgeRange] = useState("");
@@ -148,6 +150,32 @@ export default function PatientDetail() {
       setAddMeasurementOpen(false);
       setMeasType(""); setMeasValue(""); setMeasUnit(""); setMeasSite("");
       toast({ title: t("patientDetail.toasts.added"), description: t("patientDetail.toasts.measAdded") });
+    },
+    onError: (err: Error) => { toast({ title: t("auth.error"), description: err.message, variant: "destructive" }); },
+  });
+
+  const deleteEventMutation = useMutation({
+    mutationFn: async (eventId: string) => {
+      const { error } = await supabase.from("case_events").delete().eq("id", eventId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["case-events", caseIds] });
+      setDeleteEventId(null);
+      toast({ title: t("patientDetail.toasts.eventDeleted"), description: t("patientDetail.toasts.eventDeletedDesc") });
+    },
+    onError: (err: Error) => { toast({ title: t("auth.error"), description: err.message, variant: "destructive" }); },
+  });
+
+  const deleteMeasMutation = useMutation({
+    mutationFn: async (measId: string) => {
+      const { error } = await supabase.from("measurements").delete().eq("id", measId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["measurements", caseIds] });
+      setDeleteMeasId(null);
+      toast({ title: t("patientDetail.toasts.measDeleted"), description: t("patientDetail.toasts.measDeletedDesc") });
     },
     onError: (err: Error) => { toast({ title: t("auth.error"), description: err.message, variant: "destructive" }); },
   });
@@ -262,13 +290,16 @@ export default function PatientDetail() {
               {events.map((ev) => {
                 const Icon = eventTypeIcon[ev.event_type] ?? Clock;
                 return (
-                  <div key={ev.id} className="flex gap-4 p-3 relative">
+                  <div key={ev.id} className="flex gap-4 p-3 relative group">
                     <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 z-10"><Icon className="h-4 w-4 text-primary" /></div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2"><p className="text-sm font-medium">{ev.title}</p><Badge variant="outline" className="text-[10px] capitalize">{ev.event_type}</Badge></div>
                       {ev.description && <p className="text-xs text-muted-foreground mt-0.5">{ev.description}</p>}
                       <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1"><Calendar className="h-3 w-3" />{new Date(ev.event_date).toLocaleDateString()}<span className="ml-2">{timeAgo(ev.event_date)}</span></p>
                     </div>
+                    <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 h-8 w-8 text-muted-foreground hover:text-destructive" onClick={() => setDeleteEventId(ev.id)}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
                   </div>
                 );
               })}
@@ -301,14 +332,20 @@ export default function PatientDetail() {
                   <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.unit")}</th>
                   <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.site")}</th>
                   <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.date")}</th>
+                  <th className="w-10"></th>
                 </tr></thead>
                 <tbody>{measurements.map((m) => (
-                  <tr key={m.id} className="border-b last:border-0">
+                  <tr key={m.id} className="border-b last:border-0 group">
                     <td className="p-3 font-medium capitalize">{m.measurement_type}</td>
                     <td className="p-3 font-mono">{m.value}</td>
                     <td className="p-3">{m.unit}</td>
                     <td className="p-3">{m.site ?? "—"}</td>
                     <td className="p-3 text-muted-foreground">{new Date(m.measured_at).toLocaleDateString()}</td>
+                    <td className="p-3">
+                      <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7 text-muted-foreground hover:text-destructive" onClick={() => setDeleteMeasId(m.id)}>
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </Button>
+                    </td>
                   </tr>
                 ))}</tbody>
               </table>
@@ -483,6 +520,46 @@ export default function PatientDetail() {
               className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
             >
               {deleteMutation.isPending ? t("patientDetail.deleteDialog.deleting") : t("patientDetail.deleteDialog.confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Delete Event Confirmation */}
+      <AlertDialog open={!!deleteEventId} onOpenChange={(open) => !open && setDeleteEventId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("patientDetail.deleteEventDialog.title")}</AlertDialogTitle>
+            <AlertDialogDescription>{t("patientDetail.deleteEventDialog.desc")}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deleteEventId && deleteEventMutation.mutate(deleteEventId)}
+              disabled={deleteEventMutation.isPending}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {deleteEventMutation.isPending ? t("common.loading") : t("patientDetail.deleteEventDialog.confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Delete Measurement Confirmation */}
+      <AlertDialog open={!!deleteMeasId} onOpenChange={(open) => !open && setDeleteMeasId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("patientDetail.deleteMeasDialog.title")}</AlertDialogTitle>
+            <AlertDialogDescription>{t("patientDetail.deleteMeasDialog.desc")}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deleteMeasId && deleteMeasMutation.mutate(deleteMeasId)}
+              disabled={deleteMeasMutation.isPending}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {deleteMeasMutation.isPending ? t("common.loading") : t("patientDetail.deleteMeasDialog.confirm")}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
