@@ -16,14 +16,12 @@ export function ContentGate({ children }: ContentGateProps) {
   if (session) return <>{children}</>;
 
   return (
-    <div className="relative">
-      <div className="max-h-[35vh] overflow-hidden" aria-hidden="true">
+    <div>
+      <div className="relative max-h-[35vh] overflow-hidden" aria-hidden="true">
         {children}
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
       </div>
-      {/* Gradient fade */}
-      <div className="absolute inset-0 top-[15vh] bg-gradient-to-b from-transparent via-background/80 to-background pointer-events-none" />
-      {/* CTA overlay */}
-      <div className="relative -mt-16 flex flex-col items-center justify-center py-16 px-4 text-center">
+      <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
         <div className="rounded-full bg-muted p-4 mb-4">
           <Lock className="h-8 w-8 text-muted-foreground" />
         </div>
