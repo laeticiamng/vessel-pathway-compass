@@ -181,12 +181,13 @@ export function AddMeasurementDialog({ open, onOpenChange, mutation }: AddMeasDi
             <Select value={measType} onValueChange={setMeasType}>
               <SelectTrigger><SelectValue placeholder={t("patientDetail.measDialog.selectType")} /></SelectTrigger>
               <SelectContent>
-                <SelectItem value="abi">{t("patientDetail.measDialog.abi")}</SelectItem>
-                <SelectItem value="tbi">{t("patientDetail.measDialog.tbi")}</SelectItem>
-                <SelectItem value="diameter">{t("patientDetail.measDialog.diameter")}</SelectItem>
-                <SelectItem value="stenosis">{t("patientDetail.measDialog.stenosis")}</SelectItem>
-                <SelectItem value="velocity">{t("patientDetail.measDialog.velocity")}</SelectItem>
-                <SelectItem value="walking_distance">{t("patientDetail.measDialog.walkingDistance")}</SelectItem>
+                <SelectItem value="ABI">{t("patientDetail.measDialog.abi")}</SelectItem>
+                <SelectItem value="TBI">{t("patientDetail.measDialog.tbi")}</SelectItem>
+                <SelectItem value="Diameter">{t("patientDetail.measDialog.diameter")}</SelectItem>
+                <SelectItem value="Stenosis">{t("patientDetail.measDialog.stenosis")}</SelectItem>
+                <SelectItem value="PSV">{t("patientDetail.measDialog.velocity")}</SelectItem>
+                <SelectItem value="Walking Distance">{t("patientDetail.measDialog.walkingDistance")}</SelectItem>
+                <SelectItem value="Blood Pressure">{t("patientDetail.measDialog.bloodPressure") ?? "Blood Pressure"}</SelectItem>
               </SelectContent>
             </Select>
           </div>
