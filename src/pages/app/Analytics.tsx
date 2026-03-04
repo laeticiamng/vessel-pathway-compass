@@ -42,6 +42,7 @@ import {
   Area,
 } from "recharts";
 import InstitutionComparison from "@/components/analytics/InstitutionComparison";
+import { Building2 } from "lucide-react";
 
 const CATEGORY_COLORS = [
   "hsl(200 70% 50%)",
@@ -66,6 +67,7 @@ export default function Analytics() {
   const { t } = useTranslation();
   const [period, setPeriod] = useState<PeriodKey>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [institutionFilter, setInstitutionFilter] = useState<string>("all");
   const dashboardRef = useRef<HTMLDivElement>(null);
   const [exporting, setExporting] = useState(false);
 
@@ -123,13 +125,26 @@ export default function Analytics() {
     }
   }, [t]);
 
+  // Fetch institutions the user has access to
+  const { data: institutions } = useQuery({
+    queryKey: ["analytics-user-institutions", user?.id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("institutions")
+        .select("id, name, city");
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!user,
+  });
+
   // Fetch all cases for category distribution
   const { data: cases, isLoading: casesLoading } = useQuery({
     queryKey: ["analytics-cases", user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
         .from("cases")
-        .select("id, category, status, created_at, updated_at")
+        .select("id, category, status, created_at, updated_at, institution_id")
         .order("created_at", { ascending: true });
       if (error) throw error;
       return data;
@@ -227,9 +242,16 @@ export default function Analytics() {
     return cases.filter((c) => {
       if (cutoff && new Date(c.created_at) < cutoff) return false;
       if (categoryFilter !== "all" && (c.category || "other") !== categoryFilter) return false;
+      if (institutionFilter !== "all") {
+        if (institutionFilter === "none") {
+          if (c.institution_id) return false;
+        } else {
+          if (c.institution_id !== institutionFilter) return false;
+        }
+      }
       return true;
     });
-  }, [cases, cutoff, categoryFilter]);
+  }, [cases, cutoff, categoryFilter, institutionFilter]);
 
   // Filtered measurements (by period + by case category if filter is set)
   const filteredCaseIds = useMemo(() => new Set(filteredCases.map((c) => c.id)), [filteredCases]);
@@ -370,6 +392,25 @@ export default function Analytics() {
               ))}
             </SelectContent>
           </Select>
+          {institutions && institutions.length > 0 && (
+            <Select value={institutionFilter} onValueChange={setInstitutionFilter}>
+              <SelectTrigger className="w-[200px] h-9">
+                <div className="flex items-center gap-2">
+                  <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
+                  <SelectValue />
+                </div>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">{t("analytics.allInstitutions")}</SelectItem>
+                <SelectItem value="none">{t("analytics.noInstitution")}</SelectItem>
+                {institutions.map((inst) => (
+                  <SelectItem key={inst.id} value={inst.id}>
+                    {inst.name}{inst.city ? ` (${inst.city})` : ""}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
           <Button variant="outline" size="sm" onClick={handleExportPDF} disabled={exporting}>
             {exporting ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Download className="h-4 w-4 mr-2" />}
             PDF

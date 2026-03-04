@@ -1104,6 +1104,8 @@ export const fr = {
     periodAll: "Tout",
     category: "Catégorie",
     allCategories: "Toutes les catégories",
+    allInstitutions: "Tous les établissements",
+    noInstitution: "Sans établissement",
     institutionComparison: "Comparaison inter-institutions",
     institutionComparisonDesc: "Métriques côte à côte entre vos institutions",
     noInstitutions: "Aucune institution trouvée. Rejoignez une institution pour voir les comparaisons.",

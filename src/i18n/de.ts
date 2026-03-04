@@ -1104,6 +1104,8 @@ export const de = {
     periodAll: "Gesamtzeit",
     category: "Kategorie",
     allCategories: "Alle Kategorien",
+    allInstitutions: "Alle Institutionen",
+    noInstitution: "Ohne Institution",
     institutionComparison: "Institutionsvergleich",
     institutionComparisonDesc: "Kennzahlen Ihrer Institutionen im Vergleich",
     noInstitutions: "Keine Institutionen gefunden. Treten Sie einer Institution bei, um Vergleiche zu sehen.",
