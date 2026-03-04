@@ -15,6 +15,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import Dashboard from "./pages/app/Dashboard";
 import AIAssistant from "./pages/app/AIAssistant";
 import Patients from "./pages/app/Patients";
+import PatientDetail from "./pages/app/PatientDetail";
 import DigitalTwin from "./pages/app/DigitalTwin";
 import Registry from "./pages/app/Registry";
 import Education from "./pages/app/Education";
@@ -52,6 +53,7 @@ const App = () => (
             <Route index element={<Dashboard />} />
             <Route path="ai-assistant" element={<AIAssistant />} />
             <Route path="patients" element={<Patients />} />
+            <Route path="patients/:id" element={<PatientDetail />} />
             <Route path="digital-twin" element={<DigitalTwin />} />
             <Route path="registry" element={<Registry />} />
             <Route path="education" element={<Education />} />
