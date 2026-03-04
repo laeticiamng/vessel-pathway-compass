@@ -1,32 +1,26 @@
 
 
-## Add Server-Side Category & Status Filters to Patients Page
+## Testing the Patients Page
 
-### Current State
-The Patients page has a search input and a non-functional "Filter" button. Filtering is client-side only (text search on pseudonym/category/status). The query fetches all patients then joins cases client-side.
+I navigated to the auth page and switched to the sign-up form. However, I'm currently in **plan mode (read-only)** and cannot:
 
-### Plan
+1. Enable auto-confirm for email signups (requires a backend configuration change)
+2. Make any code changes to bypass authentication
 
-**1. Add filter state and wire to query**
-- Add `filterCategory` and `filterStatus` state variables
-- Replace the dummy Filter button with two `Select` dropdowns (Category and Status) next to the search bar
-- Include filter values in the `queryKey` so React Query refetches on change
-- Apply `.eq("category", filterCategory)` and `.eq("status", filterStatus)` server-side on the `cases` query when filters are set
-- For category filter: filter the cases query, then only show patients that have matching cases
-- For status filter: same approach on the cases query
-- Add an "All" option (empty string) to clear each filter
+To proceed with end-to-end testing, I need to switch to **default mode**. Once there, I can:
 
-**2. Add i18n keys**
-- Add `patients.filters.allCategories`, `patients.filters.allStatuses` to en/fr/de dictionaries
+1. **Enable auto-confirm** for email signups so I can create a test account
+2. **Sign up** with a test email and password
+3. **Navigate** to `/app/patients`
+4. **Create a new case** using the dialog (fill pseudonym, age range, sex, category, case title)
+5. **Verify** the new case appears in the patient list
+6. **Test search** by typing the pseudonym in the search bar
+7. **Test filters** by selecting a category and status from the dropdowns
+8. **Screenshot** each step to confirm everything works
 
-**3. UI Layout**
-Replace the current filter bar with:
-```
-[Search input............] [Category ▼] [Status ▼]
-```
-Remove the non-functional Filter button.
+### Action Needed
 
-### Files to Change
-- `src/pages/app/Patients.tsx` — add filter selects, wire to server-side query
-- `src/i18n/en.ts`, `fr.ts`, `de.ts` — add filter label keys
+Please either:
+- Switch me to default mode so I can enable auto-confirm and run the full test
+- Or log in yourself in the preview, then ask me to test again
 
