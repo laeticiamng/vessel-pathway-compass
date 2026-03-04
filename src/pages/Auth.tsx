@@ -15,6 +15,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 export default function Auth() {
   const [searchParams] = useSearchParams();
   const [isSignUp, setIsSignUp] = useState(searchParams.get("mode") === "signup");
+  const [isForgot, setIsForgot] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -22,6 +23,30 @@ export default function Auth() {
   const navigate = useNavigate();
   const { t, language, setLanguage } = useTranslation();
   const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) throw error;
+      toast({
+        title: t("auth.checkEmail"),
+        description: t("auth.resetEmailSent"),
+      });
+      setIsForgot(false);
+    } catch (error: any) {
+      toast({
+        title: t("auth.error"),
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,50 +113,94 @@ export default function Auth() {
 
         <Card>
           <CardHeader className="text-center">
-            <CardTitle>{isSignUp ? t("auth.createAccount") : t("auth.welcomeBack")}</CardTitle>
+            <CardTitle>
+              {isForgot ? t("auth.forgotPassword") : isSignUp ? t("auth.createAccount") : t("auth.welcomeBack")}
+            </CardTitle>
             <CardDescription>
-              {isSignUp ? t("auth.signUpDesc") : t("auth.signInDesc")}
+              {isForgot ? t("auth.forgotPasswordDesc") : isSignUp ? t("auth.signUpDesc") : t("auth.signInDesc")}
             </CardDescription>
           </CardHeader>
-          <form onSubmit={handleSubmit}>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email">{t("auth.email")}</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder={t("auth.emailPlaceholder")}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password">{t("auth.password")}</Label>
-                <Input
-                  id="password"
-                  type="password"
-                  placeholder={t("auth.passwordPlaceholder")}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  minLength={6}
-                />
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-4">
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? t("common.loading") : isSignUp ? t("auth.createBtn") : t("auth.signInBtn")}
-              </Button>
-              <button
-                type="button"
-                onClick={() => setIsSignUp(!isSignUp)}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                {isSignUp ? t("auth.switchToSignIn") : t("auth.switchToSignUp")}
-              </button>
-            </CardFooter>
-          </form>
+
+          {isForgot ? (
+            <form onSubmit={handleForgotPassword}>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">{t("auth.email")}</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder={t("auth.emailPlaceholder")}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+              </CardContent>
+              <CardFooter className="flex flex-col gap-4">
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? t("common.loading") : t("auth.sendResetLink")}
+                </Button>
+                <button
+                  type="button"
+                  onClick={() => setIsForgot(false)}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {t("auth.backToSignIn")}
+                </button>
+              </CardFooter>
+            </form>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">{t("auth.email")}</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder={t("auth.emailPlaceholder")}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="password">{t("auth.password")}</Label>
+                    {!isSignUp && (
+                      <button
+                        type="button"
+                        onClick={() => setIsForgot(true)}
+                        className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+                      >
+                        {t("auth.forgotPassword")}
+                      </button>
+                    )}
+                  </div>
+                  <Input
+                    id="password"
+                    type="password"
+                    placeholder={t("auth.passwordPlaceholder")}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    minLength={6}
+                  />
+                </div>
+              </CardContent>
+              <CardFooter className="flex flex-col gap-4">
+                <Button type="submit" className="w-full" disabled={loading}>
+                  {loading ? t("common.loading") : isSignUp ? t("auth.createBtn") : t("auth.signInBtn")}
+                </Button>
+                <button
+                  type="button"
+                  onClick={() => setIsSignUp(!isSignUp)}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {isSignUp ? t("auth.switchToSignIn") : t("auth.switchToSignUp")}
+                </button>
+              </CardFooter>
+            </form>
+          )}
         </Card>
       </div>
     </div>
