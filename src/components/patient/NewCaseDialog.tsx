@@ -72,7 +72,7 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
       toast({ title: t("common.create"), description: t("patients.newCase") });
     },
     onError: (err: Error) => {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: t("auth.error"), description: err.message, variant: "destructive" });
     },
   });
 

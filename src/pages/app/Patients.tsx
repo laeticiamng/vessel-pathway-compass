@@ -11,12 +11,12 @@ import { PatientsTable } from "@/components/patient/PatientsTable";
 import { NewCaseDialog } from "@/components/patient/NewCaseDialog";
 
 function riskFromFactors(factors: unknown): string {
-  if (!Array.isArray(factors)) return "Low";
+  if (!Array.isArray(factors)) return "low";
   const count = factors.length;
-  if (count >= 4) return "Critical";
-  if (count >= 3) return "High";
-  if (count >= 1) return "Moderate";
-  return "Low";
+  if (count >= 4) return "critical";
+  if (count >= 3) return "high";
+  if (count >= 1) return "moderate";
+  return "low";
 }
 
 export default function Patients() {

@@ -56,7 +56,7 @@ export function PatientFilters({
         <SelectContent>
           <SelectItem value="all">{t("patients.filters.allStatuses")}</SelectItem>
           {STATUSES.map((s) => (
-            <SelectItem key={s} value={s} className="capitalize">{s}</SelectItem>
+            <SelectItem key={s} value={s}>{t(`patients.statuses.${s}`)}</SelectItem>
           ))}
         </SelectContent>
       </Select>

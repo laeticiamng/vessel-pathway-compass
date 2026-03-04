@@ -5,11 +5,11 @@ import { Users, Plus } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 
 const members = [
-  { name: "Dr. Smith", email: "smith@hospital.org", role: "Physician", status: "Active" },
-  { name: "Dr. Jones", email: "jones@hospital.org", role: "Hospital Admin", status: "Active" },
-  { name: "Dr. Brown", email: "brown@hospital.org", role: "Trainee", status: "Active" },
-  { name: "Prof. Wilson", email: "wilson@university.edu", role: "Expert Reviewer", status: "Active" },
-  { name: "Dr. Taylor", email: "taylor@hospital.org", role: "Research Lead", status: "Invited" },
+  { name: "Dr. Smith", email: "smith@hospital.org", roleKey: "physician", status: "active" },
+  { name: "Dr. Jones", email: "jones@hospital.org", roleKey: "hospitalAdmin", status: "active" },
+  { name: "Dr. Brown", email: "brown@hospital.org", roleKey: "trainee", status: "active" },
+  { name: "Prof. Wilson", email: "wilson@university.edu", roleKey: "expertReviewer", status: "active" },
+  { name: "Dr. Taylor", email: "taylor@hospital.org", roleKey: "researchLead", status: "invited" },
 ];
 
 export default function Team() {
@@ -48,9 +48,9 @@ export default function Team() {
                   <tr key={m.email} className="border-b last:border-0">
                     <td className="p-4 font-medium">{m.name}</td>
                     <td className="p-4 text-sm text-muted-foreground">{m.email}</td>
-                    <td className="p-4"><Badge variant="secondary">{m.role}</Badge></td>
+                    <td className="p-4"><Badge variant="secondary">{t(`team.roles.${m.roleKey}`)}</Badge></td>
                     <td className="p-4">
-                      <Badge variant={m.status === "Active" ? "default" : "outline"}>{t(`team.statuses.${m.status.toLowerCase()}`)}</Badge>
+                      <Badge variant={m.status === "active" ? "default" : "outline"}>{t(`team.statuses.${m.status}`)}</Badge>
                     </td>
                   </tr>
                 ))}
