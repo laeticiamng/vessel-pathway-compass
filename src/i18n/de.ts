@@ -307,6 +307,7 @@ export const de = {
     subtitle: "Pseudonymisierte vaskuläre Patientenakten verwalten",
     newCase: "Neuer Fall",
     searchPlaceholder: "Fälle suchen...",
+    empty: "Noch keine Patientenfälle",
     columns: {
       caseId: "Fall-ID",
       category: "Kategorie",
@@ -314,6 +315,16 @@ export const de = {
       abi: "ABI",
       risk: "Risiko",
       lastVisit: "Letzter Besuch",
+    },
+    form: {
+      description: "Neuen pseudonymisierten Patientenfall erstellen",
+      pseudonym: "Pseudonym",
+      ageRange: "Altersgruppe",
+      sex: "Geschlecht",
+      male: "Männlich",
+      female: "Weiblich",
+      category: "Kategorie",
+      caseTitle: "Falltitel",
     },
   },
 

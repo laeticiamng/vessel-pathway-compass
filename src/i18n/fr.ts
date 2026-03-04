@@ -307,6 +307,7 @@ export const fr = {
     subtitle: "Gérez les dossiers vasculaires pseudonymisés",
     newCase: "Nouveau dossier",
     searchPlaceholder: "Rechercher des dossiers...",
+    empty: "Aucun dossier patient",
     columns: {
       caseId: "ID dossier",
       category: "Catégorie",
@@ -314,6 +315,16 @@ export const fr = {
       abi: "IPS",
       risk: "Risque",
       lastVisit: "Dernière visite",
+    },
+    form: {
+      description: "Créer un nouveau dossier patient pseudonymisé",
+      pseudonym: "Pseudonyme",
+      ageRange: "Tranche d'âge",
+      sex: "Sexe",
+      male: "Masculin",
+      female: "Féminin",
+      category: "Catégorie",
+      caseTitle: "Titre du dossier",
     },
   },
 
