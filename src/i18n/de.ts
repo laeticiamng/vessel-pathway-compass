@@ -782,6 +782,14 @@ export const de = {
       eventAdded: "Zeitleisten-Ereignis erstellt",
       measAdded: "Messung erfasst",
     },
+    deleteDialog: {
+      title: "Patient löschen",
+      desc: "Dadurch werden dieser Patient und alle zugehörigen Fälle, Ereignisse und Messungen dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+      confirm: "Patient löschen",
+      deleting: "Lösche...",
+    },
+    toastsDeleted: "Patient gelöscht",
+    toastsDeletedDesc: "Patient und alle zugehörigen Daten entfernt",
     timeAgo: {
       today: "Heute",
       yesterday: "Gestern",

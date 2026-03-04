@@ -782,6 +782,14 @@ export const fr = {
       eventAdded: "Événement créé",
       measAdded: "Mesure enregistrée",
     },
+    deleteDialog: {
+      title: "Supprimer le patient",
+      desc: "Cela supprimera définitivement ce patient ainsi que tous les cas, événements et mesures associés. Cette action est irréversible.",
+      confirm: "Supprimer le patient",
+      deleting: "Suppression...",
+    },
+    toastsDeleted: "Patient supprimé",
+    toastsDeletedDesc: "Patient et toutes les données associées supprimés",
     timeAgo: {
       today: "Aujourd'hui",
       yesterday: "Hier",

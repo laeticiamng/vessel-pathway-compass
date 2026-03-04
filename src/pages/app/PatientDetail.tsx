@@ -16,10 +16,14 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter,
 } from "@/components/ui/dialog";
 import {
+  AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
+  AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import {
-  ArrowLeft, HeartPulse, Edit, Plus, Clock, Ruler, Activity, Calendar,
+  ArrowLeft, HeartPulse, Edit, Plus, Clock, Ruler, Activity, Calendar, Trash2,
 } from "lucide-react";
 
 const AGE_RANGES = ["18-30", "31-40", "41-50", "51-60", "61-70", "71-80", "80+"] as const;
@@ -44,6 +48,7 @@ export default function PatientDetail() {
   const [editOpen, setEditOpen] = useState(false);
   const [addEventOpen, setAddEventOpen] = useState(false);
   const [addMeasurementOpen, setAddMeasurementOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
 
   const [editPseudonym, setEditPseudonym] = useState("");
   const [editAgeRange, setEditAgeRange] = useState("");
@@ -146,6 +151,38 @@ export default function PatientDetail() {
     onError: (err: Error) => { toast({ title: t("auth.error"), description: err.message, variant: "destructive" }); },
   });
 
+  const deleteMutation = useMutation({
+    mutationFn: async () => {
+      if (!id) throw new Error("No patient id");
+      // Get all case IDs for this patient
+      const { data: patientCases } = await supabase.from("cases").select("id").eq("patient_id", id);
+      const ids = patientCases?.map((c) => c.id) ?? [];
+      if (ids.length > 0) {
+        // Delete case_events, measurements, imaging_summaries, outcomes, proms for these cases
+        await Promise.all([
+          supabase.from("case_events").delete().in("case_id", ids),
+          supabase.from("measurements").delete().in("case_id", ids),
+          supabase.from("imaging_summaries").delete().in("case_id", ids),
+          supabase.from("outcomes").delete().in("case_id", ids),
+          supabase.from("proms").delete().in("case_id", ids),
+        ]);
+        // Delete cases
+        await supabase.from("cases").delete().eq("patient_id", id);
+      }
+      // Delete consents
+      await supabase.from("consents").delete().eq("patient_id", id);
+      // Delete patient
+      const { error } = await supabase.from("patients").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["patients"] });
+      toast({ title: t("patientDetail.toastsDeleted"), description: t("patientDetail.toastsDeletedDesc") });
+      navigate("/app/patients");
+    },
+    onError: (err: Error) => { toast({ title: t("auth.error"), description: err.message, variant: "destructive" }); },
+  });
+
   function openEdit() {
     if (patient) { setEditPseudonym(patient.pseudonym); setEditAgeRange(patient.age_range ?? ""); setEditSex(patient.sex ?? ""); }
     setEditOpen(true);
@@ -192,6 +229,7 @@ export default function PatientDetail() {
           </p>
         </div>
         <Button variant="outline" onClick={openEdit}><Edit className="h-4 w-4 mr-2" />{t("common.edit")}</Button>
+        <Button variant="destructive" onClick={() => setDeleteOpen(true)}><Trash2 className="h-4 w-4 mr-2" />{t("common.delete")}</Button>
       </div>
 
       {/* Summary Cards */}
@@ -425,6 +463,26 @@ export default function PatientDetail() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Delete Patient Confirmation */}
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("patientDetail.deleteDialog.title")}</AlertDialogTitle>
+            <AlertDialogDescription>{t("patientDetail.deleteDialog.desc")}</AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => deleteMutation.mutate()}
+              disabled={deleteMutation.isPending}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+            >
+              {deleteMutation.isPending ? t("patientDetail.deleteDialog.deleting") : t("patientDetail.deleteDialog.confirm")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }
