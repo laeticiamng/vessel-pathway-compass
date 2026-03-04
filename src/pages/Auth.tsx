@@ -29,16 +29,20 @@ export default function Auth() {
 
     try {
       if (isSignUp) {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: { emailRedirectTo: window.location.origin },
         });
         if (error) throw error;
-        toast({
-          title: t("auth.checkEmail"),
-          description: t("auth.checkEmailDesc"),
-        });
+        if (data.session) {
+          navigate("/app");
+        } else {
+          toast({
+            title: t("auth.checkEmail"),
+            description: t("auth.checkEmailDesc"),
+          });
+        }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
