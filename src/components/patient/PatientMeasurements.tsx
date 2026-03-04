@@ -1,7 +1,8 @@
+import { useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Plus, Ruler, Trash2 } from "lucide-react";
+import { Plus, Ruler, Trash2, Download } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 import MeasurementTrendChart from "@/components/patient/MeasurementTrendChart";
 import type { Tables } from "@/integrations/supabase/types";
@@ -17,13 +18,40 @@ interface PatientMeasurementsProps {
 export default function PatientMeasurements({ measurements, measLoading, hasCases, onAddMeasurement, onDeleteMeasurement }: PatientMeasurementsProps) {
   const { t } = useTranslation();
 
+  const exportCSV = useCallback(() => {
+    if (!measurements || measurements.length === 0) return;
+    const headers = ["Type", "Value", "Unit", "Site", "Date"];
+    const rows = measurements.map((m) => [
+      m.measurement_type,
+      String(m.value),
+      m.unit,
+      m.site ?? "",
+      new Date(m.measured_at).toISOString(),
+    ]);
+    const csv = [headers, ...rows].map((r) => r.map((c) => `"${c.replace(/"/g, '""')}"`).join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `measurements-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [measurements]);
+
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold">{t("patientDetail.measurements")}</h2>
-        <Button size="sm" onClick={onAddMeasurement} disabled={!hasCases}>
-          <Plus className="h-4 w-4 mr-1" /> {t("patientDetail.addMeasurement")}
-        </Button>
+        <div className="flex gap-2">
+          {measurements && measurements.length > 0 && (
+            <Button size="sm" variant="outline" onClick={exportCSV}>
+              <Download className="h-4 w-4 mr-1" /> {t("patientDetail.exportCSV")}
+            </Button>
+          )}
+          <Button size="sm" onClick={onAddMeasurement} disabled={!hasCases}>
+            <Plus className="h-4 w-4 mr-1" /> {t("patientDetail.addMeasurement")}
+          </Button>
+        </div>
       </div>
 
       {measLoading && Array.from({ length: 3 }).map((_, i) => (

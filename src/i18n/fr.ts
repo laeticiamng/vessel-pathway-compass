@@ -780,6 +780,7 @@ export const fr = {
     noEvents: "Aucun événement dans la chronologie",
     measurements: "Mesures",
     addMeasurement: "Ajouter une mesure",
+    exportCSV: "Exporter CSV",
     addFirstMeasurement: "Ajouter la première mesure",
     noMeasurements: "Aucune mesure enregistrée",
     associatedCases: "Dossiers associés",
