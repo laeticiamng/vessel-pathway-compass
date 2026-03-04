@@ -1123,5 +1123,13 @@ export const en = {
     periodAll: "All time",
     category: "Category",
     allCategories: "All categories",
+    institutionComparison: "Institution Comparison",
+    institutionComparisonDesc: "Side-by-side metrics across your institutions",
+    noInstitutions: "No institutions found. Join an institution to see comparisons.",
+    instMetrics: {
+      cases: "Cases",
+      outcomes: "Outcomes",
+      measurements: "Measurements",
+    },
   },
 };

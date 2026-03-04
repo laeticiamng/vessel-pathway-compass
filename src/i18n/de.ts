@@ -1097,5 +1097,13 @@ export const de = {
     periodAll: "Gesamtzeit",
     category: "Kategorie",
     allCategories: "Alle Kategorien",
+    institutionComparison: "Institutionsvergleich",
+    institutionComparisonDesc: "Kennzahlen Ihrer Institutionen im Vergleich",
+    noInstitutions: "Keine Institutionen gefunden. Treten Sie einer Institution bei, um Vergleiche zu sehen.",
+    instMetrics: {
+      cases: "Fälle",
+      outcomes: "Ergebnisse",
+      measurements: "Messungen",
+    },
   },
 };
