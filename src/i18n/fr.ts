@@ -337,10 +337,39 @@ export const fr = {
       simulation: "Simulation",
       carePlan: "Plan de soins",
     },
-    vascularMapPlaceholder: "Carte vasculaire interactive — sélectionnez un patient pour visualiser l'anatomie artérielle et veineuse avec superposition des lésions",
-    simulationPlaceholder: "Moteur de comparaison de scénarios — modélisez les résultats de traitement par rapport à la situation de base avec les paramètres spécifiques au patient",
+    vascularMap: {
+      title: "Carte vasculaire",
+      placeholder: "Carte vasculaire interactive — sélectionnez un patient pour visualiser l'anatomie artérielle et veineuse avec superposition des lésions",
+    },
+    simulationEngine: {
+      title: "Moteur de comparaison de scénarios",
+      placeholder: "Modélisez les résultats de traitement par rapport à la situation de base avec les paramètres spécifiques au patient",
+    },
     carePlan: {
       title: "Objectifs du plan de soins actif",
+      goals: {
+        walking: "Distance de marche > 500m",
+        walkingDue: "Échéance : Mars 2026",
+        walkingStatus: "En cours",
+        abi: "IPS > 0,9",
+        abiDue: "Échéance : Avr. 2026",
+        abiStatus: "Planifié",
+        smoking: "Sevrage tabagique",
+        smokingDue: "En continu",
+        smokingStatus: "Atteint",
+      },
+    },
+    timeline: {
+      events: {
+        initialAssessment: "Évaluation initiale",
+        initialDetail: "IPS 0,65 droit, 0,82 gauche. Flux monophasique AFS.",
+        duplexUltrasound: "Écho-Doppler",
+        duplexDetail: "Occlusion AFS confirmée. Poplitée perméable.",
+        ctAngiography: "Angioscanner",
+        ctDetail: "Lésion TASC C AFS droite. Planification intervention.",
+        intervention: "Intervention endovasculaire",
+        interventionDetail: "Angioplastie AFS + stent. Bon résultat.",
+      },
     },
   },
 
@@ -372,7 +401,7 @@ export const fr = {
 
   education: {
     title: "Pôle formation",
-    subtitle: "Parcours de compétences, micro-cours et certification en médecine vasculaire",
+    subtitle: "Parcours de compétences, certification et crédits FMC",
     cmeCredits: "Crédits FMC",
     stats: {
       modulesCompleted: "Modules complétés",
@@ -380,23 +409,61 @@ export const fr = {
       tracksInProgress: "Parcours en cours",
     },
     tracks: "Parcours de compétences",
+    moduleDesc: "modules · Micro-cours, quiz, carnet de stage, ECOS",
     digitalBadges: "Badges numériques",
     badges: {
       verified: "Vérifié",
       inProgress: "En cours",
     },
+    trackNames: {
+      vascularUltrasound: "Échographie vasculaire",
+      padLimb: "AOMI / Sauvetage de membre",
+      aorta: "Aorte",
+      venous: "Maladie veineuse",
+      thrombosis: "Thrombose",
+    },
+    badgeDetails: {
+      ultrasoundLevel1: "Échographie vasculaire — Niveau 1",
+      completedDate: "Terminé : Jan 2026 · Validé par Dr. Expert",
+      padInProgress: "AOMI / Sauvetage de membre — En cours",
+      padProgress: "30% complété · 11 modules restants",
+    },
+    badgesDesc: "Attestations internes avec métadonnées vérifiables",
   },
 
   simulation: {
     title: "Labo de simulation clinique",
-    subtitle: "Cas interactifs à embranchements avec feedback IA contraint par rubrique",
+    subtitle: "Cas interactifs à embranchements avec feedback IA",
     tabs: {
       cases: "Bibliothèque de cas",
       heatmap: "Carte des compétences",
       authoring: "Création de cas",
     },
-    authoringPlaceholder: "Créez des scénarios de cas à embranchements avec points de décision, notation par rubrique et déclencheurs de feedback IA.",
+    heatmap: {
+      title: "Carte des compétences",
+      subtitle: "Performance dans les domaines clés de compétence",
+    },
+    authoring: {
+      title: "Outil de création de cas",
+      subtitle: "Créez des scénarios cliniques à embranchements avec rubriques et feedback",
+      placeholder: "Constructeur visuel de scénarios",
+      placeholderDesc: "Définissez les embranchements, les rubriques de notation et le feedback structuré",
+    },
     createCase: "Créer un nouveau cas",
+    cases: {
+      acuteLimb: "Ischémie aiguë de membre — Triage d'urgence",
+      chronicPAD: "AOMI chronique — Évaluation ambulatoire",
+      rupturedAAA: "AAA rompu — Prise de décision",
+      dvt: "TVP — Diagnostic et prise en charge",
+      carotid: "Sténose carotidienne — Bilan préopératoire",
+    },
+    difficulty: { hard: "Difficile", medium: "Moyen", easy: "Facile" },
+    skills: {
+      triageAccuracy: "Précision du triage",
+      safetySteps: "Étapes de sécurité",
+      documentation: "Documentation",
+      communication: "Communication",
+    },
   },
 
   network: {
@@ -418,12 +485,20 @@ export const fr = {
 
   research: {
     title: "Pôle recherche",
-    subtitle: "Concevez des études, gérez des cohortes et exportez des jeux de données dé-identifiés",
+    subtitle: "Constructeur d'études, analytiques et exports de données dé-identifiées",
     newStudy: "Nouvelle étude",
     stats: {
       activeStudies: "Études actives",
       eligiblePatients: "Patients éligibles",
       dataExports: "Exports de données",
+    },
+    members: "membres",
+    eligible: "éligibles",
+    pi: "IP",
+    statuses: {
+      recruiting: "Recrutement",
+      active: "Active",
+      draft: "Brouillon",
     },
   },
 
@@ -502,11 +577,14 @@ export const fr = {
 
   federated: {
     title: "Apprentissage fédéré",
-    subtitle: "Entraînement de modèles multi-établissements respectueux de la vie privée. Chaque nœud s'entraîne localement et partage uniquement les mises à jour du modèle — aucune donnée brute ne quitte l'établissement.",
+    subtitle: "Entraînement IA collaboratif respectueux de la vie privée — mises à jour du modèle partagées, données restent locales.",
     optIn: {
       title: "Participation de l'établissement",
-      desc: "Activez la participation fédérée. Votre établissement contribue des gradients de modèle — jamais de données brutes de patients.",
-      toggle: "Participer à l'entraînement fédéré",
+      desc: "Activez la participation de votre établissement à l'apprentissage fédéré",
+      toggle: "Participer à l'apprentissage fédéré",
+      toggleDesc: "L'entraînement se fait localement, seules les mises à jour du modèle sont partagées",
+      ethicsApproval: "Approbation éthique",
+      ethicsDesc: "Téléversez la documentation d'approbation du comité d'éthique",
     },
     status: {
       title: "Statut du nœud fédéré",
@@ -570,13 +648,110 @@ export const fr = {
 
   arTraining: {
     title: "Formation immersive (RA)",
-    subtitle: "Mode check-list en réalité augmentée et concepts de formation procédurale par stations.",
+    subtitle: "Mode check-list RA et formation échographique par stations.",
     checklist: {
       title: "Mode check-list RA",
+      subtitle: "Concept de superposition de check-list procédurale étape par étape",
+      steps: {
+        s1: "Identification du patient et consentement",
+        s2: "Préparation du matériel et sélection de la sonde",
+        s3: "Identification des repères anatomiques",
+        s4: "Protocole de balayage vasculaire systématique",
+        s5: "Acquisition des mesures et documentation",
+        s6: "Génération du rapport et validation",
+      },
     },
     station: {
       title: "Formation par stations",
-      placeholder: "Formation par stations guidée par échographie — bientôt disponible",
+      subtitle: "Stations de formation à l'acquisition échographique — concept UI",
+      placeholder: "Environnement de formation échographique par stations — bientôt disponible",
+    },
+  },
+
+  // Patient Detail
+  patientDetail: {
+    back: "Retour",
+    notFound: "Patient non trouvé.",
+    age: "Âge",
+    cases: "Dossiers",
+    timelineEvents: "Événements",
+    measurementsCount: "Mesures",
+    tabs: {
+      timeline: "Chronologie",
+      measurements: "Mesures",
+      cases: "Dossiers",
+    },
+    caseTimeline: "Chronologie du dossier",
+    addEvent: "Ajouter un événement",
+    addFirstEvent: "Ajouter le premier événement",
+    noEvents: "Aucun événement dans la chronologie",
+    measurements: "Mesures",
+    addMeasurement: "Ajouter une mesure",
+    addFirstMeasurement: "Ajouter la première mesure",
+    noMeasurements: "Aucune mesure enregistrée",
+    associatedCases: "Dossiers associés",
+    noCases: "Aucun dossier trouvé",
+    table: {
+      type: "Type",
+      value: "Valeur",
+      unit: "Unité",
+      site: "Site",
+      date: "Date",
+    },
+    editDialog: {
+      title: "Modifier le patient",
+      desc: "Mettre à jour les informations pseudonymisées du patient",
+      pseudonym: "Pseudonyme",
+      ageRange: "Tranche d'âge",
+      sex: "Sexe",
+      male: "Masculin",
+      female: "Féminin",
+      selectPlaceholder: "Sélectionner",
+    },
+    eventDialog: {
+      title: "Ajouter un événement",
+      desc: "Enregistrer un événement clinique pour ce patient",
+      titleLabel: "Titre",
+      titlePlaceholder: "ex. : Écho-Doppler",
+      eventType: "Type d'événement",
+      selectType: "Sélectionner le type",
+      procedure: "Procédure",
+      imaging: "Imagerie",
+      lab: "Résultat de laboratoire",
+      note: "Note clinique",
+      medication: "Changement de traitement",
+      description: "Description (optionnel)",
+      descPlaceholder: "Détails supplémentaires...",
+    },
+    measDialog: {
+      title: "Ajouter une mesure",
+      desc: "Enregistrer une mesure clinique",
+      type: "Type",
+      selectType: "Sélectionner le type",
+      abi: "IPS",
+      tbi: "ITO",
+      diameter: "Diamètre (mm)",
+      stenosis: "Sténose (%)",
+      velocity: "Vélocité max (cm/s)",
+      walkingDistance: "Distance de marche (m)",
+      value: "Valeur",
+      valuePlaceholder: "0,65",
+      unit: "Unité",
+      unitPlaceholder: "ex. : ratio, mm, %",
+      site: "Site (optionnel)",
+      sitePlaceholder: "ex. : AFS droite, ATA gauche",
+    },
+    toasts: {
+      updated: "Mis à jour",
+      updatedDesc: "Informations du patient enregistrées",
+      added: "Ajouté",
+      eventAdded: "Événement créé",
+      measAdded: "Mesure enregistrée",
+    },
+    timeAgo: {
+      today: "Aujourd'hui",
+      yesterday: "Hier",
+      daysAgo: "j",
     },
   },
 };

@@ -337,10 +337,39 @@ export const de = {
       simulation: "Simulation",
       carePlan: "Behandlungsplan",
     },
-    vascularMapPlaceholder: "Interaktive Gefäßkarte — wählen Sie einen Patienten, um die arterielle und venöse Anatomie mit Läsionsüberlagerung zu visualisieren",
-    simulationPlaceholder: "Szenario-Vergleichsmotor — modellieren Sie Behandlungsergebnisse gegen die Ausgangssituation mit patientenspezifischen Parametern",
+    vascularMap: {
+      title: "Gefäßkarte",
+      placeholder: "Interaktive Gefäßkarte — wählen Sie einen Patienten zur Visualisierung der arteriellen und venösen Anatomie mit Läsionsüberlagerung",
+    },
+    simulationEngine: {
+      title: "Szenario-Vergleichsmotor",
+      placeholder: "Modellieren Sie Behandlungsergebnisse gegen die Ausgangssituation mit patientenspezifischen Parametern",
+    },
     carePlan: {
       title: "Aktive Behandlungsplanziele",
+      goals: {
+        walking: "Gehstrecke > 500m",
+        walkingDue: "Fällig: März 2026",
+        walkingStatus: "In Bearbeitung",
+        abi: "ABI > 0,9",
+        abiDue: "Fällig: Apr. 2026",
+        abiStatus: "Geplant",
+        smoking: "Raucherentwöhnung",
+        smokingDue: "Laufend",
+        smokingStatus: "Erreicht",
+      },
+    },
+    timeline: {
+      events: {
+        initialAssessment: "Erstuntersuchung",
+        initialDetail: "ABI 0,65 rechts, 0,82 links. Monophasischer Fluss AFS.",
+        duplexUltrasound: "Duplexsonographie",
+        duplexDetail: "AFS-Verschluss bestätigt. Poplitea durchgängig.",
+        ctAngiography: "CT-Angiographie",
+        ctDetail: "TASC-C-Läsion rechte AFS. Interventionsplanung.",
+        intervention: "Endovaskuläre Intervention",
+        interventionDetail: "AFS-Angioplastie + Stent. Gutes Ergebnis.",
+      },
     },
   },
 
@@ -372,7 +401,7 @@ export const de = {
 
   education: {
     title: "Fortbildungszentrum",
-    subtitle: "Kompetenzpfade, Mikrolektionen und Zertifizierung in der Gefäßmedizin",
+    subtitle: "Kompetenzpfade, Zertifizierung und CME-Punkte",
     cmeCredits: "CME-Punkte",
     stats: {
       modulesCompleted: "Module abgeschlossen",
@@ -380,23 +409,61 @@ export const de = {
       tracksInProgress: "Pfade in Bearbeitung",
     },
     tracks: "Kompetenzpfade",
+    moduleDesc: "Module · Mikrolektionen, Quiz, Logbuch, OSCE",
     digitalBadges: "Digitale Abzeichen",
     badges: {
       verified: "Verifiziert",
       inProgress: "In Bearbeitung",
     },
+    trackNames: {
+      vascularUltrasound: "Gefäßultraschall",
+      padLimb: "pAVK / Extremitätenerhalt",
+      aorta: "Aorta",
+      venous: "Venenerkrankungen",
+      thrombosis: "Thrombose",
+    },
+    badgeDetails: {
+      ultrasoundLevel1: "Gefäßultraschall — Stufe 1",
+      completedDate: "Abgeschlossen: Jan 2026 · Validiert von Dr. Expert",
+      padInProgress: "pAVK / Extremitätenerhalt — In Bearbeitung",
+      padProgress: "30% abgeschlossen · 11 Module verbleibend",
+    },
+    badgesDesc: "Interne Nachweise mit verifizierbaren Metadaten",
   },
 
   simulation: {
     title: "Klinisches Simulationslabor",
-    subtitle: "Interaktive Verzweigungsfälle mit rubrikgesteuertem KI-Feedback",
+    subtitle: "Interaktive Verzweigungsfälle mit KI-Feedback",
     tabs: {
       cases: "Fallbibliothek",
       heatmap: "Kompetenz-Heatmap",
       authoring: "Fallerstellung",
     },
-    authoringPlaceholder: "Erstellen Sie Verzweigungsfälle mit Entscheidungspunkten, Rubrikbewertung und KI-Feedback-Auslösern.",
+    heatmap: {
+      title: "Kompetenz-Heatmap",
+      subtitle: "Leistung in den wichtigsten Kompetenzfeldern",
+    },
+    authoring: {
+      title: "Fallerstellungs-Tool",
+      subtitle: "Erstellen Sie klinische Verzweigungsszenarien mit Rubriken und Feedback",
+      placeholder: "Visueller Szenario-Builder",
+      placeholderDesc: "Definieren Sie Verzweigungen, Bewertungsrubriken und strukturiertes Feedback",
+    },
     createCase: "Neuen Fall erstellen",
+    cases: {
+      acuteLimb: "Akute Extremitätenischämie — Notfalltriage",
+      chronicPAD: "Chronische pAVK — Ambulante Beurteilung",
+      rupturedAAA: "Rupturiertes BAA — Entscheidungsfindung",
+      dvt: "TVT — Diagnose und Behandlung",
+      carotid: "Karotisstenose — Präoperative Abklärung",
+    },
+    difficulty: { hard: "Schwer", medium: "Mittel", easy: "Leicht" },
+    skills: {
+      triageAccuracy: "Triage-Genauigkeit",
+      safetySteps: "Sicherheitsschritte",
+      documentation: "Dokumentation",
+      communication: "Kommunikation",
+    },
   },
 
   network: {
@@ -418,12 +485,20 @@ export const de = {
 
   research: {
     title: "Forschungszentrum",
-    subtitle: "Studien entwerfen, Kohorten verwalten und de-identifizierte Datensätze exportieren",
+    subtitle: "Studienbuilder, Analysen und de-identifizierte Datenexporte",
     newStudy: "Neue Studie",
     stats: {
       activeStudies: "Aktive Studien",
       eligiblePatients: "Geeignete Patienten",
       dataExports: "Datenexporte",
+    },
+    members: "Mitglieder",
+    eligible: "geeignet",
+    pi: "PI",
+    statuses: {
+      recruiting: "Rekrutierung",
+      active: "Aktiv",
+      draft: "Entwurf",
     },
   },
 
@@ -502,11 +577,14 @@ export const de = {
 
   federated: {
     title: "Föderiertes Lernen",
-    subtitle: "Datenschutzfreundliches Multi-Einrichtungs-Modelltraining. Jeder Knoten trainiert lokal und teilt nur Modell-Updates — keine Rohdaten verlassen die Einrichtung.",
+    subtitle: "Datenschutzfreundliches kollaboratives KI-Training — Modell-Updates geteilt, Daten bleiben lokal.",
     optIn: {
       title: "Einrichtungs-Opt-in",
-      desc: "Aktivieren Sie die föderierte Teilnahme. Ihre Einrichtung trägt Modellgradienten bei — niemals rohe Patientendaten.",
-      toggle: "Am föderierten Training teilnehmen",
+      desc: "Aktivieren Sie die Teilnahme Ihrer Einrichtung am föderierten Lernen",
+      toggle: "Am föderierten Lernen teilnehmen",
+      toggleDesc: "Training findet lokal statt, nur Modell-Updates werden geteilt",
+      ethicsApproval: "Ethikgenehmigung",
+      ethicsDesc: "Laden Sie die Dokumentation der Ethikkommission hoch",
     },
     status: {
       title: "Föderierter Knotenstatus",
@@ -570,13 +648,110 @@ export const de = {
 
   arTraining: {
     title: "Immersives Training (AR)",
-    subtitle: "Augmented-Reality-Checklistenmodus und stationsbasierte prozedurale Trainingskonzepte.",
+    subtitle: "AR-Checklistenmodus und stationsbasierte Ultraschall-Trainingskonzepte.",
     checklist: {
       title: "AR-Checklistenmodus",
+      subtitle: "Schrittweises prozedurales Checklisten-Overlay-Konzept",
+      steps: {
+        s1: "Patientenidentifikation & Einwilligung",
+        s2: "Gerätevorbereitung & Sondenauswahl",
+        s3: "Anatomische Landmarken-Identifikation",
+        s4: "Systematisches Gefäßscan-Protokoll",
+        s5: "Messerfassung & Dokumentation",
+        s6: "Berichterstellung & Freigabe",
+      },
     },
     station: {
       title: "Stationsbasiertes Training",
-      placeholder: "Ultraschallgeführtes Stationstraining — demnächst verfügbar",
+      subtitle: "Ultraschall-Trainingsstationen — Mock-Konzept-UI",
+      placeholder: "Stationsbasierte Ultraschall-Trainingsumgebung — demnächst verfügbar",
+    },
+  },
+
+  // Patient Detail
+  patientDetail: {
+    back: "Zurück",
+    notFound: "Patient nicht gefunden.",
+    age: "Alter",
+    cases: "Fälle",
+    timelineEvents: "Zeitleisten-Ereignisse",
+    measurementsCount: "Messungen",
+    tabs: {
+      timeline: "Zeitleiste",
+      measurements: "Messungen",
+      cases: "Fälle",
+    },
+    caseTimeline: "Fall-Zeitleiste",
+    addEvent: "Ereignis hinzufügen",
+    addFirstEvent: "Erstes Ereignis hinzufügen",
+    noEvents: "Noch keine Zeitleisten-Ereignisse",
+    measurements: "Messungen",
+    addMeasurement: "Messung hinzufügen",
+    addFirstMeasurement: "Erste Messung hinzufügen",
+    noMeasurements: "Keine Messungen erfasst",
+    associatedCases: "Zugehörige Fälle",
+    noCases: "Keine Fälle gefunden",
+    table: {
+      type: "Typ",
+      value: "Wert",
+      unit: "Einheit",
+      site: "Stelle",
+      date: "Datum",
+    },
+    editDialog: {
+      title: "Patient bearbeiten",
+      desc: "Pseudonymisierte Patienteninformationen aktualisieren",
+      pseudonym: "Pseudonym",
+      ageRange: "Altersgruppe",
+      sex: "Geschlecht",
+      male: "Männlich",
+      female: "Weiblich",
+      selectPlaceholder: "Auswählen",
+    },
+    eventDialog: {
+      title: "Ereignis hinzufügen",
+      desc: "Ein klinisches Ereignis für diesen Patienten erfassen",
+      titleLabel: "Titel",
+      titlePlaceholder: "z.B. Duplexsonographie",
+      eventType: "Ereignistyp",
+      selectType: "Typ auswählen",
+      procedure: "Eingriff",
+      imaging: "Bildgebung",
+      lab: "Laborergebnis",
+      note: "Klinische Notiz",
+      medication: "Medikamentenänderung",
+      description: "Beschreibung (optional)",
+      descPlaceholder: "Weitere Details...",
+    },
+    measDialog: {
+      title: "Messung hinzufügen",
+      desc: "Eine klinische Messung erfassen",
+      type: "Typ",
+      selectType: "Typ auswählen",
+      abi: "ABI",
+      tbi: "TBI",
+      diameter: "Durchmesser (mm)",
+      stenosis: "Stenose (%)",
+      velocity: "Spitzengeschwindigkeit (cm/s)",
+      walkingDistance: "Gehstrecke (m)",
+      value: "Wert",
+      valuePlaceholder: "0,65",
+      unit: "Einheit",
+      unitPlaceholder: "z.B. Verhältnis, mm, %",
+      site: "Stelle (optional)",
+      sitePlaceholder: "z.B. Rechte AFS, Linke ATA",
+    },
+    toasts: {
+      updated: "Aktualisiert",
+      updatedDesc: "Patienteninformationen gespeichert",
+      added: "Hinzugefügt",
+      eventAdded: "Zeitleisten-Ereignis erstellt",
+      measAdded: "Messung erfasst",
+    },
+    timeAgo: {
+      today: "Heute",
+      yesterday: "Gestern",
+      daysAgo: "T",
     },
   },
 };
