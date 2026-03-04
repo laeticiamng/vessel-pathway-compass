@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -40,6 +41,7 @@ const riskColor: Record<string, string> = {
 export default function Patients() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const navigate = useNavigate();
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [search, setSearch] = useState("");
@@ -197,7 +199,7 @@ export default function Patients() {
                     </tr>
                   ))}
                 {!isLoading && filtered?.map((p) => (
-                  <tr key={p.id} className="border-b last:border-0 hover:bg-muted/50 cursor-pointer transition-colors">
+                  <tr key={p.id} className="border-b last:border-0 hover:bg-muted/50 cursor-pointer transition-colors" onClick={() => navigate(`/app/patients/${p.id}`)}>
                     <td className="p-4">
                       <div className="flex items-center gap-2">
                         <HeartPulse className="h-4 w-4 text-primary" />
