@@ -248,6 +248,13 @@ export const fr = {
       simulation: "Pratiquez la prise de décision clinique avec des scénarios interactifs à embranchements.",
       research: "Concevez des études, gérez des cohortes et exportez des jeux de données dé-identifiés.",
     },
+    riskDistribution: {
+      title: "Aperçu des risques patients",
+      desc: "Distribution des risques dans votre cohorte",
+      viewAll: "Voir tout",
+      noPatients: "Aucun patient enregistré",
+      totalPatients: "patients au total",
+    },
   },
 
   aiAssistant: {

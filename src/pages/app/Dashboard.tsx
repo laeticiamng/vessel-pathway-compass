@@ -1,5 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import PatientRiskDistribution from "@/components/dashboard/PatientRiskDistribution";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -187,6 +188,9 @@ export default function Dashboard() {
           </div>
         </CardContent>
       </Card>
+
+      {/* Patient Risk Distribution */}
+      <PatientRiskDistribution />
 
       {/* Module Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
