@@ -163,10 +163,41 @@ export function usePatientData(id: string | undefined) {
     onError,
   });
 
-  const deleteMutation = useMutation({
+  const softDeleteMutation = useMutation({
     mutationFn: async () => {
       if (!id) throw new Error("No patient id");
-      const { data: patientCases } = await supabase.from("cases").select("id").eq("patient_id", id);
+      const { error } = await supabase
+        .from("patients")
+        .update({ deleted_at: new Date().toISOString() } as any)
+        .eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["patients"] });
+      queryClient.invalidateQueries({ queryKey: ["patient", id] });
+      navigate("/app/patients");
+    },
+    onError,
+  });
+
+  const restorePatientMutation = useMutation({
+    mutationFn: async (patientId: string) => {
+      const { error } = await supabase
+        .from("patients")
+        .update({ deleted_at: null } as any)
+        .eq("id", patientId);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["patients"] });
+      toast({ title: t("patientDetail.toasts.restored"), description: t("patientDetail.toasts.restoredDesc") });
+    },
+    onError,
+  });
+
+  const permanentDeleteMutation = useMutation({
+    mutationFn: async (patientId: string) => {
+      const { data: patientCases } = await supabase.from("cases").select("id").eq("patient_id", patientId);
       const ids = patientCases?.map((c) => c.id) ?? [];
       if (ids.length > 0) {
         await Promise.all([
@@ -176,16 +207,15 @@ export function usePatientData(id: string | undefined) {
           supabase.from("outcomes").delete().in("case_id", ids),
           supabase.from("proms").delete().in("case_id", ids),
         ]);
-        await supabase.from("cases").delete().eq("patient_id", id);
+        await supabase.from("cases").delete().eq("patient_id", patientId);
       }
-      await supabase.from("consents").delete().eq("patient_id", id);
-      const { error } = await supabase.from("patients").delete().eq("id", id);
+      await supabase.from("consents").delete().eq("patient_id", patientId);
+      const { error } = await supabase.from("patients").delete().eq("id", patientId);
       if (error) throw error;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["patients"] });
-      toast({ title: t("patientDetail.toastsDeleted"), description: t("patientDetail.toastsDeletedDesc") });
-      navigate("/app/patients");
+      toast({ title: t("patientDetail.toasts.permanentlyDeleted"), description: t("patientDetail.toasts.permanentlyDeletedDesc") });
     },
     onError,
   });
@@ -206,6 +236,8 @@ export function usePatientData(id: string | undefined) {
     bulkDeleteEventsMutation,
     deleteMeasMutation,
     bulkDeleteMeasMutation,
-    deleteMutation,
+    softDeleteMutation,
+    restorePatientMutation,
+    permanentDeleteMutation,
   };
 }

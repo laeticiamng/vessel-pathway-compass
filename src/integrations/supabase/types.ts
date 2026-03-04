@@ -679,6 +679,7 @@ export type Database = {
           age_range: string | null
           created_at: string
           created_by: string
+          deleted_at: string | null
           id: string
           institution_id: string | null
           pseudonym: string
@@ -690,6 +691,7 @@ export type Database = {
           age_range?: string | null
           created_at?: string
           created_by: string
+          deleted_at?: string | null
           id?: string
           institution_id?: string | null
           pseudonym: string
@@ -701,6 +703,7 @@ export type Database = {
           age_range?: string | null
           created_at?: string
           created_by?: string
+          deleted_at?: string | null
           id?: string
           institution_id?: string | null
           pseudonym?: string

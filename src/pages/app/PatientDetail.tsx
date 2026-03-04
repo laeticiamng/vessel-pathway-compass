@@ -7,6 +7,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft } from "lucide-react";
 import { usePatientData } from "@/hooks/usePatientData";
+import { useToast } from "@/hooks/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 import PatientHeader from "@/components/patient/PatientHeader";
 import PatientTimeline from "@/components/patient/PatientTimeline";
 import PatientMeasurements from "@/components/patient/PatientMeasurements";
@@ -23,6 +25,7 @@ export default function PatientDetail() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   const {
     patient, patientLoading,
@@ -32,7 +35,7 @@ export default function PatientDetail() {
     editMutation, addEventMutation, addMeasMutation,
     deleteEventMutation, bulkDeleteEventsMutation,
     deleteMeasMutation, bulkDeleteMeasMutation,
-    deleteMutation,
+    softDeleteMutation, restorePatientMutation,
   } = usePatientData(id);
 
   const [editOpen, setEditOpen] = useState(false);
@@ -146,8 +149,28 @@ export default function PatientDetail() {
         title={t("patientDetail.deleteDialog.title")}
         description={t("patientDetail.deleteDialog.desc")}
         confirmLabel={t("patientDetail.deleteDialog.confirm")}
-        isPending={deleteMutation.isPending}
-        onConfirm={() => deleteMutation.mutate()}
+        isPending={softDeleteMutation.isPending}
+        onConfirm={() => {
+          const patientId = patient.id;
+          const patientName = patient.pseudonym;
+          softDeleteMutation.mutate(undefined, {
+            onSuccess: () => {
+              setDeleteOpen(false);
+              toast({
+                title: t("patientDetail.toasts.softDeleted"),
+                description: `${patientName} ${t("patientDetail.toasts.softDeletedDesc")}`,
+                action: (
+                  <ToastAction
+                    altText={t("patientDetail.toasts.undo")}
+                    onClick={() => restorePatientMutation.mutate(patientId)}
+                  >
+                    {t("patientDetail.toasts.undo")}
+                  </ToastAction>
+                ),
+              });
+            },
+          });
+        }}
       />
       <DeleteConfirmDialog
         open={!!deleteEventId}

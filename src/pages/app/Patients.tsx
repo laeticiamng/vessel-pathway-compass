@@ -5,10 +5,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import { PatientFilters } from "@/components/patient/PatientFilters";
 import { PatientsTable } from "@/components/patient/PatientsTable";
 import { NewCaseDialog } from "@/components/patient/NewCaseDialog";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import PatientTrash from "@/components/patient/PatientTrash";
 
 function riskFromFactors(factors: unknown): string {
   if (!Array.isArray(factors)) return "low";
@@ -27,6 +29,7 @@ export default function Patients() {
   const [filterCategory, setFilterCategory] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [trashOpen, setTrashOpen] = useState(false);
 
   const { data: patients, isLoading } = useQuery({
     queryKey: ["patients", filterCategory, filterStatus],
@@ -34,6 +37,7 @@ export default function Patients() {
       const { data: patientsData, error: pErr } = await supabase
         .from("patients")
         .select("*")
+        .is("deleted_at" as any, null)
         .order("updated_at", { ascending: false })
         .limit(50);
       if (pErr) throw pErr;
@@ -108,6 +112,18 @@ export default function Patients() {
       />
 
       <NewCaseDialog open={dialogOpen} onOpenChange={setDialogOpen} />
+
+      <Collapsible open={trashOpen} onOpenChange={setTrashOpen}>
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" size="sm" className="text-muted-foreground">
+            <Trash2 className="h-4 w-4 mr-2" />
+            {t("patientDetail.trash.showTrash")}
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="mt-4">
+          <PatientTrash />
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 }
