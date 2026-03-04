@@ -334,6 +334,7 @@ export const fr = {
     filters: {
       allCategories: "Toutes les catégories",
       allStatuses: "Tous les statuts",
+      clearAll: "Effacer les filtres",
     },
   },
 

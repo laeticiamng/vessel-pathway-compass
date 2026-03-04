@@ -346,6 +346,7 @@ export const en = {
     filters: {
       allCategories: "All Categories",
       allStatuses: "All Statuses",
+      clearAll: "Clear filters",
     },
   },
 
