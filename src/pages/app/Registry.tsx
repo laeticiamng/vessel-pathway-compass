@@ -1,91 +1,201 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { LineChart, BarChart3, TrendingUp, Shield, Users } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
+import { LineChart, BarChart3, TrendingUp, Shield } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { useTranslation } from "@/i18n/context";
 
-const categories = ["PAD/AOMI", "Aortic", "Carotid", "Venous", "DVT/PE", "Wound/Limb"];
+const CATEGORIES = ["PAD", "Aortic", "Carotid", "Venous", "DVT/PE"] as const;
 
-const mockOutcomes = [
-  { category: "PAD/AOMI", entries: 45, amputation: "4.4%", restenosis: "12%", mortality: "1.2%", complications: "8.5%" },
-  { category: "Aortic", entries: 23, amputation: "N/A", restenosis: "3%", mortality: "2.1%", complications: "11%" },
-  { category: "Carotid", entries: 31, amputation: "N/A", restenosis: "5%", mortality: "0.8%", complications: "4.2%" },
-  { category: "Venous", entries: 28, amputation: "N/A", restenosis: "15%", mortality: "0.1%", complications: "6%" },
-];
+interface OutcomeRow {
+  id: string;
+  outcome_type: string;
+  case_id: string;
+  details: Record<string, unknown> | null;
+  outcome_date: string;
+}
+
+interface CaseRow {
+  id: string;
+  category: string;
+}
+
+function computeCategoryStats(outcomes: OutcomeRow[], cases: CaseRow[]) {
+  const caseMap = new Map(cases.map((c) => [c.id, c.category]));
+
+  // Group outcomes by category
+  const grouped: Record<string, OutcomeRow[]> = {};
+  for (const o of outcomes) {
+    const cat = caseMap.get(o.case_id) ?? "unknown";
+    const normCat = cat.charAt(0).toUpperCase() + cat.slice(1).toLowerCase();
+    if (!grouped[normCat]) grouped[normCat] = [];
+    grouped[normCat].push(o);
+  }
+
+  return Object.entries(grouped).map(([category, items]) => {
+    const total = items.length;
+    const countType = (type: string) => items.filter((i) => i.outcome_type === type).length;
+
+    const amputation = countType("amputation");
+    const restenosis = countType("restenosis");
+    const mortality = countType("mortality");
+    const complication = countType("complication");
+
+    const pct = (n: number) => (total > 0 ? `${((n / total) * 100).toFixed(1)}%` : "0%");
+
+    return {
+      category,
+      entries: total,
+      amputation: pct(amputation),
+      restenosis: pct(restenosis),
+      mortality: pct(mortality),
+      complications: pct(complication),
+    };
+  });
+}
 
 export default function Registry() {
+  const { user } = useAuth();
+  const { t } = useTranslation();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["registry-outcomes", user?.id],
+    queryFn: async () => {
+      // Fetch user's outcomes and their associated cases
+      const [outcomesRes, casesRes, promsRes] = await Promise.all([
+        supabase.from("outcomes").select("id, outcome_type, case_id, details, outcome_date").eq("created_by", user!.id),
+        supabase.from("cases").select("id, category").eq("created_by", user!.id),
+        supabase.from("proms").select("id, case_id").limit(1000),
+      ]);
+
+      if (outcomesRes.error) throw outcomesRes.error;
+      if (casesRes.error) throw casesRes.error;
+
+      const outcomes = outcomesRes.data as OutcomeRow[];
+      const cases = casesRes.data as CaseRow[];
+      const totalCases = cases.length;
+      const totalOutcomes = outcomes.length;
+
+      const mortalityCount = outcomes.filter((o) => o.outcome_type === "mortality").length;
+      const complicationCount = outcomes.filter((o) => o.outcome_type === "complication").length;
+      const promsCount = promsRes.data?.length ?? 0;
+      const promsRate = totalCases > 0 ? `${Math.round((promsCount / totalCases) * 100)}%` : "0%";
+
+      const mortalityRate = totalOutcomes > 0 ? `${((mortalityCount / totalOutcomes) * 100).toFixed(1)}%` : "0%";
+      const complicationRate = totalOutcomes > 0 ? `${((complicationCount / totalOutcomes) * 100).toFixed(1)}%` : "0%";
+
+      const byCategory = computeCategoryStats(outcomes, cases);
+
+      return {
+        totalCases,
+        mortalityRate,
+        complicationRate,
+        promsRate,
+        byCategory,
+      };
+    },
+    enabled: !!user,
+  });
+
+  const summaryStats = [
+    { label: t("registry.stats.casesContributed"), value: data?.totalCases ?? 0 },
+    { label: "30-day Mortality", value: data?.mortalityRate ?? "—" },
+    { label: "Complication Rate", value: data?.complicationRate ?? "—" },
+    { label: "PROMs Collected", value: data?.promsRate ?? "—" },
+  ];
+
   return (
     <div className="space-y-6 max-w-6xl">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
             <LineChart className="h-8 w-8 text-primary" />
-            Outcomes Registry
+            {t("registry.title")}
           </h1>
-          <p className="text-muted-foreground mt-1">Global vascular outcomes registry with privacy-first benchmarking</p>
+          <p className="text-muted-foreground mt-1">{t("registry.subtitle")}</p>
         </div>
         <Badge variant="outline" className="flex items-center gap-1.5">
           <Shield className="h-3 w-3" />
-          Anonymized Data Only
+          {t("registry.badge")}
         </Badge>
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {categories.map((cat) => (
+        {CATEGORIES.map((cat) => (
           <Badge key={cat} variant="secondary" className="cursor-pointer hover:bg-primary/10">{cat}</Badge>
         ))}
       </div>
 
       <Tabs defaultValue="physician">
         <TabsList>
-          <TabsTrigger value="physician">My Outcomes</TabsTrigger>
-          <TabsTrigger value="institution">Institution</TabsTrigger>
-          <TabsTrigger value="benchmark">Benchmarking</TabsTrigger>
+          <TabsTrigger value="physician">{t("registry.tabs.physician")}</TabsTrigger>
+          <TabsTrigger value="institution">{t("registry.tabs.institution")}</TabsTrigger>
+          <TabsTrigger value="benchmark">{t("registry.tabs.benchmarking")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="physician" className="mt-6 space-y-4">
           <div className="grid sm:grid-cols-4 gap-4">
-            {[
-              { label: "Total Cases", value: "127" },
-              { label: "30-day Mortality", value: "1.2%" },
-              { label: "Complication Rate", value: "7.1%" },
-              { label: "PROMs Collected", value: "89%" },
-            ].map((s) => (
+            {summaryStats.map((s) => (
               <Card key={s.label}>
                 <CardContent className="pt-6">
                   <p className="text-sm text-muted-foreground">{s.label}</p>
-                  <p className="text-3xl font-bold mt-1">{s.value}</p>
+                  {isLoading ? (
+                    <Skeleton className="h-8 w-16 mt-1" />
+                  ) : (
+                    <p className="text-3xl font-bold mt-1">{s.value}</p>
+                  )}
                 </CardContent>
               </Card>
             ))}
           </div>
+
           <Card>
             <CardHeader>
-              <CardTitle>Outcomes by Category</CardTitle>
+              <CardTitle>{t("registry.table.category")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b">
-                      <th className="text-left p-3 font-medium text-muted-foreground">Category</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">Entries</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">Amputation</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">Restenosis</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">Mortality</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">Complications</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.category")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.entries")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.amputation")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.restenosis")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.mortality")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.complications")}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {mockOutcomes.map((o) => (
-                      <tr key={o.category} className="border-b last:border-0">
-                        <td className="p-3 font-medium">{o.category}</td>
-                        <td className="p-3">{o.entries}</td>
-                        <td className="p-3">{o.amputation}</td>
-                        <td className="p-3">{o.restenosis}</td>
-                        <td className="p-3">{o.mortality}</td>
-                        <td className="p-3">{o.complications}</td>
-                      </tr>
-                    ))}
+                    {isLoading &&
+                      Array.from({ length: 4 }).map((_, i) => (
+                        <tr key={i} className="border-b">
+                          {Array.from({ length: 6 }).map((_, j) => (
+                            <td key={j} className="p-3"><Skeleton className="h-4 w-14" /></td>
+                          ))}
+                        </tr>
+                      ))}
+                    {!isLoading && data?.byCategory && data.byCategory.length > 0
+                      ? data.byCategory.map((o) => (
+                          <tr key={o.category} className="border-b last:border-0">
+                            <td className="p-3 font-medium">{o.category}</td>
+                            <td className="p-3">{o.entries}</td>
+                            <td className="p-3">{o.amputation}</td>
+                            <td className="p-3">{o.restenosis}</td>
+                            <td className="p-3">{o.mortality}</td>
+                            <td className="p-3">{o.complications}</td>
+                          </tr>
+                        ))
+                      : !isLoading && (
+                          <tr>
+                            <td colSpan={6} className="p-8 text-center text-muted-foreground">
+                              No outcomes data yet. Add outcomes from patient cases to populate this registry.
+                            </td>
+                          </tr>
+                        )}
                   </tbody>
                 </table>
               </div>
@@ -97,12 +207,12 @@ export default function Registry() {
           <Card>
             <CardHeader>
               <CardTitle>Institution Aggregate</CardTitle>
-              <CardDescription>Aggregated outcomes for your institution</CardDescription>
+              <CardDescription>{t("registry.institutionPlaceholder")}</CardDescription>
             </CardHeader>
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center text-muted-foreground">
                 <BarChart3 className="h-12 w-12 mx-auto mb-4 opacity-30" />
-                <p>Institution dashboard with aggregate charts</p>
+                <p>{t("registry.institutionPlaceholder")}</p>
               </div>
             </CardContent>
           </Card>
@@ -114,7 +224,7 @@ export default function Registry() {
               <CardTitle>Network Benchmarking</CardTitle>
               <CardDescription>
                 <span className="flex items-center gap-2">
-                  Compare against anonymized network percentiles
+                  {t("registry.benchmarkPlaceholder")}
                   <Badge variant="outline" className="text-xs">Privacy-first</Badge>
                 </span>
               </CardDescription>
@@ -122,8 +232,7 @@ export default function Registry() {
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center text-muted-foreground">
                 <TrendingUp className="h-12 w-12 mx-auto mb-4 opacity-30" />
-                <p>Percentile comparison across anonymized network data</p>
-                <p className="text-xs mt-1">No re-identification possible</p>
+                <p>{t("registry.benchmarkPlaceholder")}</p>
               </div>
             </CardContent>
           </Card>
