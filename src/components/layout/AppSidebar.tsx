@@ -16,10 +16,14 @@ import {
   Watch,
   Glasses,
   FileText,
+  LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import {
   Sidebar,
   SidebarContent,
@@ -38,7 +42,15 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
+  const navigate = useNavigate();
   const { t } = useTranslation();
+  const { session } = useAuth();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    toast.success(t("common.signOut"));
+    navigate("/");
+  };
 
   const isActive = (path: string) =>
     path === "/app"
@@ -142,7 +154,16 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-3">
+      <SidebarFooter className="p-3 space-y-2">
+        {session && (
+          <button
+            onClick={handleSignOut}
+            className="flex items-center gap-2 w-full rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+          >
+            <LogOut className="h-4 w-4" />
+            {!collapsed && <span>{t("common.signOut")}</span>}
+          </button>
+        )}
         {!collapsed && (
           <p className="text-xs text-muted-foreground text-center">
             {t("common.version")}
