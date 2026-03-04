@@ -398,46 +398,32 @@ export const en = {
   // Digital Twin
   digitalTwin: {
     title: "Vascular Digital Twin",
-    subtitle: "Longitudinal patient model with timeline, vascular mapping, and scenario simulation",
+    subtitle: "Interactive vascular mapping with real patient measurements",
+    selectPatient: "Select a patient...",
+    selectPatientPrompt: "Select a patient to visualize their vascular anatomy with real measurement data",
+    selectSegment: "Click a vascular segment on the map to view measurements",
+    cases: "cases",
     tabs: {
       timeline: "Timeline",
       vascularMap: "Vascular Map",
-      simulation: "Simulation",
-      carePlan: "Care Plan",
+      carePlan: "Cases & Care Plan",
     },
     vascularMap: {
       title: "Vascular Map",
-      placeholder: "Interactive vascular map — select a patient to visualize arterial and venous anatomy with lesion overlay",
+      clickPrompt: "Click on a vessel segment to see measurements",
     },
-    simulationEngine: {
-      title: "Scenario Comparison Engine",
-      placeholder: "Scenario Comparison Engine — model treatment outcomes against baseline using patient-specific parameters",
+    legend: {
+      normal: "Normal",
+      warning: "Warning",
+      critical: "Critical",
     },
+    noMeasurements: "No measurements recorded for this segment",
+    noEvents: "No clinical events recorded for this patient",
+    noCases: "No cases for this patient",
+    readings: "readings",
+    riskFactors: "Risk Factors",
     carePlan: {
-      title: "Active Care Plan Goals",
-      goals: {
-        walking: "Walking Distance > 500m",
-        walkingDue: "Due: Mar 2026",
-        walkingStatus: "In Progress",
-        abi: "ABI > 0.9",
-        abiDue: "Due: Apr 2026",
-        abiStatus: "Planned",
-        smoking: "Smoking Cessation",
-        smokingDue: "Ongoing",
-        smokingStatus: "Achieved",
-      },
-    },
-    timeline: {
-      events: {
-        initialAssessment: "Initial Assessment",
-        initialDetail: "ABI 0.65 right, 0.82 left. Monophasic flow SFA.",
-        duplexUltrasound: "Duplex Ultrasound",
-        duplexDetail: "SFA occlusion confirmed. Popliteal patent.",
-        ctAngiography: "CT Angiography",
-        ctDetail: "TASC C lesion right SFA. Planning intervention.",
-        intervention: "Endovascular Intervention",
-        interventionDetail: "SFA angioplasty + stent. Good result.",
-      },
+      title: "Patient Cases",
     },
   },
 

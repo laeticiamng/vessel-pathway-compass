@@ -385,46 +385,32 @@ export const de = {
 
   digitalTwin: {
     title: "Vaskulärer digitaler Zwilling",
-    subtitle: "Longitudinales Patientenmodell mit Zeitleiste, Gefäßkartierung und Szenario-Simulation",
+    subtitle: "Interaktive Gefäßkartierung mit echten Patientenmessungen",
+    selectPatient: "Patient auswählen...",
+    selectPatientPrompt: "Wählen Sie einen Patienten, um seine Gefäßanatomie mit echten Messdaten zu visualisieren",
+    selectSegment: "Klicken Sie auf ein Gefäßsegment auf der Karte, um Messungen anzuzeigen",
+    cases: "Fälle",
     tabs: {
       timeline: "Zeitleiste",
       vascularMap: "Gefäßkarte",
-      simulation: "Simulation",
-      carePlan: "Behandlungsplan",
+      carePlan: "Fälle und Behandlungsplan",
     },
     vascularMap: {
       title: "Gefäßkarte",
-      placeholder: "Interaktive Gefäßkarte — wählen Sie einen Patienten zur Visualisierung der arteriellen und venösen Anatomie mit Läsionsüberlagerung",
+      clickPrompt: "Klicken Sie auf ein Segment, um Messungen zu sehen",
     },
-    simulationEngine: {
-      title: "Szenario-Vergleichsmotor",
-      placeholder: "Modellieren Sie Behandlungsergebnisse gegen die Ausgangssituation mit patientenspezifischen Parametern",
+    legend: {
+      normal: "Normal",
+      warning: "Warnung",
+      critical: "Kritisch",
     },
+    noMeasurements: "Keine Messungen für dieses Segment aufgezeichnet",
+    noEvents: "Keine klinischen Ereignisse aufgezeichnet",
+    noCases: "Keine Fälle für diesen Patienten",
+    readings: "Messungen",
+    riskFactors: "Risikofaktoren",
     carePlan: {
-      title: "Aktive Behandlungsplanziele",
-      goals: {
-        walking: "Gehstrecke > 500m",
-        walkingDue: "Fällig: März 2026",
-        walkingStatus: "In Bearbeitung",
-        abi: "ABI > 0,9",
-        abiDue: "Fällig: Apr. 2026",
-        abiStatus: "Geplant",
-        smoking: "Raucherentwöhnung",
-        smokingDue: "Laufend",
-        smokingStatus: "Erreicht",
-      },
-    },
-    timeline: {
-      events: {
-        initialAssessment: "Erstuntersuchung",
-        initialDetail: "ABI 0,65 rechts, 0,82 links. Monophasischer Fluss AFS.",
-        duplexUltrasound: "Duplexsonographie",
-        duplexDetail: "AFS-Verschluss bestätigt. Poplitea durchgängig.",
-        ctAngiography: "CT-Angiographie",
-        ctDetail: "TASC-C-Läsion rechte AFS. Interventionsplanung.",
-        intervention: "Endovaskuläre Intervention",
-        interventionDetail: "AFS-Angioplastie + Stent. Gutes Ergebnis.",
-      },
+      title: "Patientenfälle",
     },
   },
 

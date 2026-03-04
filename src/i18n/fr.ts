@@ -385,46 +385,32 @@ export const fr = {
 
   digitalTwin: {
     title: "Jumeau numérique vasculaire",
-    subtitle: "Modèle longitudinal du patient avec chronologie, cartographie vasculaire et simulation de scénarios",
+    subtitle: "Cartographie vasculaire interactive avec mesures réelles du patient",
+    selectPatient: "Sélectionner un patient...",
+    selectPatientPrompt: "Sélectionnez un patient pour visualiser son anatomie vasculaire avec ses mesures réelles",
+    selectSegment: "Cliquez sur un segment vasculaire sur la carte pour voir les mesures",
+    cases: "cas",
     tabs: {
       timeline: "Chronologie",
       vascularMap: "Carte vasculaire",
-      simulation: "Simulation",
-      carePlan: "Plan de soins",
+      carePlan: "Cas et plan de soins",
     },
     vascularMap: {
       title: "Carte vasculaire",
-      placeholder: "Carte vasculaire interactive — sélectionnez un patient pour visualiser l'anatomie artérielle et veineuse avec superposition des lésions",
+      clickPrompt: "Cliquez sur un segment pour voir les mesures",
     },
-    simulationEngine: {
-      title: "Moteur de comparaison de scénarios",
-      placeholder: "Modélisez les résultats de traitement par rapport à la situation de base avec les paramètres spécifiques au patient",
+    legend: {
+      normal: "Normal",
+      warning: "Attention",
+      critical: "Critique",
     },
+    noMeasurements: "Aucune mesure enregistrée pour ce segment",
+    noEvents: "Aucun événement clinique enregistré",
+    noCases: "Aucun cas pour ce patient",
+    readings: "mesures",
+    riskFactors: "Facteurs de risque",
     carePlan: {
-      title: "Objectifs du plan de soins actif",
-      goals: {
-        walking: "Distance de marche > 500m",
-        walkingDue: "Échéance : Mars 2026",
-        walkingStatus: "En cours",
-        abi: "IPS > 0,9",
-        abiDue: "Échéance : Avr. 2026",
-        abiStatus: "Planifié",
-        smoking: "Sevrage tabagique",
-        smokingDue: "En continu",
-        smokingStatus: "Atteint",
-      },
-    },
-    timeline: {
-      events: {
-        initialAssessment: "Évaluation initiale",
-        initialDetail: "IPS 0,65 droit, 0,82 gauche. Flux monophasique AFS.",
-        duplexUltrasound: "Écho-Doppler",
-        duplexDetail: "Occlusion AFS confirmée. Poplitée perméable.",
-        ctAngiography: "Angioscanner",
-        ctDetail: "Lésion TASC C AFS droite. Planification intervention.",
-        intervention: "Intervention endovasculaire",
-        interventionDetail: "Angioplastie AFS + stent. Bon résultat.",
-      },
+      title: "Cas du patient",
     },
   },
 
