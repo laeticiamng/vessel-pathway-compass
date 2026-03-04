@@ -806,6 +806,7 @@ export const en = {
     noEvents: "No timeline events yet",
     measurements: "Measurements",
     addMeasurement: "Add Measurement",
+    exportCSV: "Export CSV",
     addFirstMeasurement: "Add First Measurement",
     noMeasurements: "No measurements recorded",
     associatedCases: "Associated Cases",

@@ -780,6 +780,7 @@ export const de = {
     noEvents: "Noch keine Zeitleisten-Ereignisse",
     measurements: "Messungen",
     addMeasurement: "Messung hinzufügen",
+    exportCSV: "CSV exportieren",
     addFirstMeasurement: "Erste Messung hinzufügen",
     noMeasurements: "Keine Messungen erfasst",
     associatedCases: "Zugehörige Fälle",
