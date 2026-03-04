@@ -1079,5 +1079,13 @@ export const fr = {
     cumulative: "Cumulatif",
     newCases: "Nouveaux dossiers",
     cases: "Dossiers",
+    period: "Période",
+    period7d: "7 jours",
+    period30d: "30 jours",
+    period90d: "90 jours",
+    period1y: "1 an",
+    periodAll: "Tout",
+    category: "Catégorie",
+    allCategories: "Toutes les catégories",
   },
 };
