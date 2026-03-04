@@ -1105,5 +1105,13 @@ export const en = {
     cumulative: "Cumulative",
     newCases: "New cases",
     cases: "Cases",
+    period: "Period",
+    period7d: "7 days",
+    period30d: "30 days",
+    period90d: "90 days",
+    period1y: "1 year",
+    periodAll: "All time",
+    category: "Category",
+    allCategories: "All categories",
   },
 };

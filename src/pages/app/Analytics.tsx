@@ -1,3 +1,4 @@
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -5,6 +6,7 @@ import { useTranslation } from "@/i18n/context";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import {
   BarChart3,
   TrendingUp,
@@ -16,6 +18,7 @@ import {
   FlaskConical,
   Users,
   Stethoscope,
+  Filter,
 } from "lucide-react";
 import {
   LineChart,
@@ -44,9 +47,20 @@ const CATEGORY_COLORS = [
   "hsl(180 50% 45%)",
 ];
 
+type PeriodKey = "7d" | "30d" | "90d" | "1y" | "all";
+
+function getPeriodCutoff(period: PeriodKey): Date | null {
+  if (period === "all") return null;
+  const now = new Date();
+  const days = { "7d": 7, "30d": 30, "90d": 90, "1y": 365 }[period];
+  return new Date(now.getTime() - days * 86400000);
+}
+
 export default function Analytics() {
   const { user } = useAuth();
   const { t } = useTranslation();
+  const [period, setPeriod] = useState<PeriodKey>("all");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
 
   // Fetch all cases for category distribution
   const { data: cases, isLoading: casesLoading } = useQuery({
@@ -138,13 +152,39 @@ export default function Analytics() {
     enabled: !!user,
   });
 
-  // === Derived data ===
+  const cutoff = getPeriodCutoff(period);
+
+  // All unique categories for the filter dropdown
+  const allCategories = useMemo(() => {
+    if (!cases) return [];
+    return [...new Set(cases.map((c) => c.category || "other"))].sort();
+  }, [cases]);
+
+  // Filtered cases
+  const filteredCases = useMemo(() => {
+    if (!cases) return [];
+    return cases.filter((c) => {
+      if (cutoff && new Date(c.created_at) < cutoff) return false;
+      if (categoryFilter !== "all" && (c.category || "other") !== categoryFilter) return false;
+      return true;
+    });
+  }, [cases, cutoff, categoryFilter]);
+
+  // Filtered measurements (by period + by case category if filter is set)
+  const filteredCaseIds = useMemo(() => new Set(filteredCases.map((c) => c.id)), [filteredCases]);
+  const filteredMeasurements = useMemo(() => {
+    if (!measurements) return [];
+    return measurements.filter((m) => {
+      if (cutoff && new Date(m.measured_at) < cutoff) return false;
+      if (categoryFilter !== "all" && !filteredCaseIds.has(m.case_id)) return false;
+      return true;
+    });
+  }, [measurements, cutoff, categoryFilter, filteredCaseIds]);
 
   // Category distribution for pie chart
   const categoryDistribution = (() => {
-    if (!cases) return [];
     const counts: Record<string, number> = {};
-    for (const c of cases) {
+    for (const c of filteredCases) {
       const cat = (c.category || "other").toUpperCase();
       counts[cat] = (counts[cat] || 0) + 1;
     }
@@ -153,16 +193,16 @@ export default function Analytics() {
 
   // Measurement trends grouped by type, aggregated by month
   const measurementTrends = (() => {
-    if (!measurements || measurements.length === 0) return [];
+    if (filteredMeasurements.length === 0) return [];
     const byMonth: Record<string, Record<string, { sum: number; count: number }>> = {};
-    for (const m of measurements) {
-      const month = m.measured_at.slice(0, 7); // YYYY-MM
+    for (const m of filteredMeasurements) {
+      const month = m.measured_at.slice(0, 7);
       if (!byMonth[month]) byMonth[month] = {};
       if (!byMonth[month][m.measurement_type]) byMonth[month][m.measurement_type] = { sum: 0, count: 0 };
       byMonth[month][m.measurement_type].sum += m.value;
       byMonth[month][m.measurement_type].count += 1;
     }
-    const types = [...new Set(measurements.map((m) => m.measurement_type))];
+    const types = [...new Set(filteredMeasurements.map((m) => m.measurement_type))];
     return Object.entries(byMonth)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([month, data]) => {
@@ -174,15 +214,14 @@ export default function Analytics() {
       });
   })();
 
-  const measurementTypes = measurements
-    ? [...new Set(measurements.map((m) => m.measurement_type))]
+  const measurementTypes = filteredMeasurements.length > 0
+    ? [...new Set(filteredMeasurements.map((m) => m.measurement_type))]
     : [];
 
   // Cases over time (cumulative by month)
   const casesOverTime = (() => {
-    if (!cases) return [];
     const byMonth: Record<string, number> = {};
-    for (const c of cases) {
+    for (const c of filteredCases) {
       const month = c.created_at.slice(0, 7);
       byMonth[month] = (byMonth[month] || 0) + 1;
     }
@@ -197,9 +236,8 @@ export default function Analytics() {
 
   // Status distribution for bar chart
   const statusDistribution = (() => {
-    if (!cases) return [];
     const counts: Record<string, number> = {};
-    for (const c of cases) {
+    for (const c of filteredCases) {
       const status = c.status || "unknown";
       counts[status] = (counts[status] || 0) + 1;
     }
@@ -234,20 +272,52 @@ export default function Analytics() {
 
   return (
     <div className="space-y-6 max-w-7xl">
-      <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <BarChart3 className="h-8 w-8 text-primary" />
-          {t("analytics.title")}
-        </h1>
-        <p className="text-muted-foreground mt-1">{t("analytics.subtitle")}</p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold flex items-center gap-3">
+            <BarChart3 className="h-8 w-8 text-primary" />
+            {t("analytics.title")}
+          </h1>
+          <p className="text-muted-foreground mt-1">{t("analytics.subtitle")}</p>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            <Filter className="h-4 w-4 text-muted-foreground" />
+            <Select value={period} onValueChange={(v) => setPeriod(v as PeriodKey)}>
+              <SelectTrigger className="w-[130px] h-9">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="7d">{t("analytics.period7d")}</SelectItem>
+                <SelectItem value="30d">{t("analytics.period30d")}</SelectItem>
+                <SelectItem value="90d">{t("analytics.period90d")}</SelectItem>
+                <SelectItem value="1y">{t("analytics.period1y")}</SelectItem>
+                <SelectItem value="all">{t("analytics.periodAll")}</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+            <SelectTrigger className="w-[160px] h-9">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">{t("analytics.allCategories")}</SelectItem>
+              {allCategories.map((cat) => (
+                <SelectItem key={cat} value={cat} className="capitalize">
+                  {cat.toUpperCase()}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       {/* Summary KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { label: t("analytics.kpi.patients"), value: stats?.patients ?? 0, icon: Users, color: "text-blue-500" },
-          { label: t("analytics.kpi.cases"), value: stats?.cases ?? 0, icon: HeartPulse, color: "text-red-500" },
-          { label: t("analytics.kpi.measurements"), value: stats?.measurements ?? 0, icon: Activity, color: "text-green-500" },
+          { label: t("analytics.kpi.cases"), value: filteredCases.length, icon: HeartPulse, color: "text-red-500" },
+          { label: t("analytics.kpi.measurements"), value: filteredMeasurements.length, icon: Activity, color: "text-green-500" },
           { label: t("analytics.kpi.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, color: "text-purple-500" },
         ].map((kpi) => (
           <Card key={kpi.label}>
