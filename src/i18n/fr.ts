@@ -331,6 +331,10 @@ export const fr = {
       category: "Catégorie",
       caseTitle: "Titre du dossier",
     },
+    filters: {
+      allCategories: "Toutes les catégories",
+      allStatuses: "Tous les statuts",
+    },
   },
 
   digitalTwin: {

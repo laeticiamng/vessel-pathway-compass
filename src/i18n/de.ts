@@ -331,6 +331,10 @@ export const de = {
       category: "Kategorie",
       caseTitle: "Falltitel",
     },
+    filters: {
+      allCategories: "Alle Kategorien",
+      allStatuses: "Alle Status",
+    },
   },
 
   digitalTwin: {
