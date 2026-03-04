@@ -625,6 +625,16 @@ export const de = {
     emptyExperts: "Noch keine Expertenanfragen",
     mentorshipComingSoon: "Mentoring-Matching — demnächst verfügbar",
     newDiscussionDesc: "Starten Sie eine de-identifizierte Falldiskussion",
+    thread: {
+      backToDiscussions: "Zurück zu Diskussionen",
+      replies: "Antworten",
+      noReplies: "Noch keine Antworten. Seien Sie der Erste!",
+      writeReply: "Antwort schreiben",
+      replyPlaceholder: "Teilen Sie Ihre klinische Erfahrung...",
+      reply: "Antworten",
+      replyPosted: "Antwort erfolgreich veröffentlicht",
+      notFound: "Diskussion nicht gefunden",
+    },
   },
 
   research: {

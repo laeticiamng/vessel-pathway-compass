@@ -625,6 +625,16 @@ export const fr = {
     emptyExperts: "Aucune demande d'expert pour le moment",
     mentorshipComingSoon: "Mise en relation de mentorat — bientôt disponible",
     newDiscussionDesc: "Lancez une discussion de cas dé-identifié",
+    thread: {
+      backToDiscussions: "Retour aux discussions",
+      replies: "Réponses",
+      noReplies: "Aucune réponse pour le moment. Soyez le premier à répondre !",
+      writeReply: "Écrire une réponse",
+      replyPlaceholder: "Partagez votre expérience clinique...",
+      reply: "Répondre",
+      replyPosted: "Réponse publiée avec succès",
+      notFound: "Discussion introuvable",
+    },
   },
 
   research: {

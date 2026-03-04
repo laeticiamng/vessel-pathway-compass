@@ -14,6 +14,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { Globe, MessageSquare, Users, Search, Send, Clock } from "lucide-react";
+import ForumThreadDetail from "@/components/network/ForumThreadDetail";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -40,6 +41,7 @@ export default function Network() {
   const [search, setSearch] = useState("");
   const [postDialogOpen, setPostDialogOpen] = useState(false);
   const [expertDialogOpen, setExpertDialogOpen] = useState(false);
+  const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
 
   // New discussion form
   const [postTitle, setPostTitle] = useState("");
@@ -168,66 +170,72 @@ export default function Network() {
 
         {/* Discussions Tab */}
         <TabsContent value="discussions" className="mt-6 space-y-4">
-          <div className="flex gap-3">
-            <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                placeholder={t("network.searchDiscussions")}
-                className="pl-10"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-            <Button onClick={() => setPostDialogOpen(true)}>
-              <MessageSquare className="h-4 w-4 mr-2" />
-              {t("network.newDiscussion")}
-            </Button>
-          </div>
-          <div className="flex gap-2">
-            {TOPICS.map((tp) => (
-              <Badge key={tp} variant="secondary" className="cursor-pointer hover:bg-primary/10">{tp}</Badge>
-            ))}
-          </div>
-
-          {postsLoading &&
-            Array.from({ length: 3 }).map((_, i) => (
-              <Card key={i}>
-                <CardContent className="pt-6">
-                  <Skeleton className="h-5 w-3/4 mb-2" />
-                  <Skeleton className="h-3 w-1/2" />
-                </CardContent>
-              </Card>
-            ))}
-
-          {!postsLoading && filteredPosts?.map((d) => (
-            <Card key={d.id} className="hover:border-primary/30 transition-colors cursor-pointer">
-              <CardContent className="pt-6 flex items-center justify-between">
-                <div>
-                  <h3 className="font-semibold">{d.title}</h3>
-                  <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
-                    <Badge variant="outline" className="text-xs">{d.topic}</Badge>
-                    <span className="flex items-center gap-1">
-                      <MessageSquare className="h-3 w-3" /> {d.replyCount}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> {timeAgo(d.created_at)}
-                    </span>
-                  </div>
+          {selectedPostId ? (
+            <ForumThreadDetail postId={selectedPostId} onBack={() => setSelectedPostId(null)} />
+          ) : (
+            <>
+              <div className="flex gap-3">
+                <div className="relative flex-1">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder={t("network.searchDiscussions")}
+                    className="pl-10"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
                 </div>
-              </CardContent>
-            </Card>
-          ))}
-
-          {!postsLoading && filteredPosts?.length === 0 && (
-            <Card>
-              <CardContent className="py-12 text-center">
-                <MessageSquare className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
-                <p className="text-muted-foreground">{t("network.emptyDiscussions")}</p>
-                <Button variant="outline" className="mt-4" onClick={() => setPostDialogOpen(true)}>
+                <Button onClick={() => setPostDialogOpen(true)}>
+                  <MessageSquare className="h-4 w-4 mr-2" />
                   {t("network.newDiscussion")}
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+              <div className="flex gap-2">
+                {TOPICS.map((tp) => (
+                  <Badge key={tp} variant="secondary" className="cursor-pointer hover:bg-primary/10">{tp}</Badge>
+                ))}
+              </div>
+
+              {postsLoading &&
+                Array.from({ length: 3 }).map((_, i) => (
+                  <Card key={i}>
+                    <CardContent className="pt-6">
+                      <Skeleton className="h-5 w-3/4 mb-2" />
+                      <Skeleton className="h-3 w-1/2" />
+                    </CardContent>
+                  </Card>
+                ))}
+
+              {!postsLoading && filteredPosts?.map((d) => (
+                <Card key={d.id} className="hover:border-primary/30 transition-colors cursor-pointer" onClick={() => setSelectedPostId(d.id)}>
+                  <CardContent className="pt-6 flex items-center justify-between">
+                    <div>
+                      <h3 className="font-semibold">{d.title}</h3>
+                      <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                        <Badge variant="outline" className="text-xs">{d.topic}</Badge>
+                        <span className="flex items-center gap-1">
+                          <MessageSquare className="h-3 w-3" /> {d.replyCount}
+                        </span>
+                        <span className="flex items-center gap-1">
+                          <Clock className="h-3 w-3" /> {timeAgo(d.created_at)}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+
+              {!postsLoading && filteredPosts?.length === 0 && (
+                <Card>
+                  <CardContent className="py-12 text-center">
+                    <MessageSquare className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
+                    <p className="text-muted-foreground">{t("network.emptyDiscussions")}</p>
+                    <Button variant="outline" className="mt-4" onClick={() => setPostDialogOpen(true)}>
+                      {t("network.newDiscussion")}
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+            </>
           )}
         </TabsContent>
 
