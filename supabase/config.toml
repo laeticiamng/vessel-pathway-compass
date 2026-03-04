@@ -1,0 +1,4 @@
+project_id = "julrbfxpmrysodtnvizb"
+
+[functions.ai-clinical-assistant]
+verify_jwt = false
