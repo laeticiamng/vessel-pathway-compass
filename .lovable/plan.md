@@ -1,47 +1,47 @@
 
 
-# Wire Patients Page to Real Database Data
+## Full i18n Integration Plan
 
-## Overview
+### Problem
+Several pages still use hardcoded English strings instead of the `t()` translation function. The i18n dictionaries (en/fr/de) are also missing keys for the PatientDetail page. Pages with hardcoded strings:
 
-Replace mock data in `Patients.tsx` with live queries to `patients` and `cases` tables. Add a "New Case" dialog to create patient + case records. Include search, loading/empty states, and i18n.
+1. **Research.tsx** -- no `useTranslation`, all English hardcoded
+2. **Education.tsx** -- no `useTranslation`, all English hardcoded
+3. **Simulation.tsx** -- no `useTranslation`, all English hardcoded
+4. **DigitalTwin.tsx** -- no `useTranslation`, all English hardcoded
+5. **FederatedLearning.tsx** -- no `useTranslation`, all English hardcoded
+6. **ARTraining.tsx** -- no `useTranslation`, all English hardcoded
+7. **PatientDetail.tsx** -- uses `useTranslation` but has ~50 hardcoded strings (labels, dialogs, placeholders, empty states)
 
-## Database Tables Used
+Pages already fully translated: Landing, Pricing, Auth, Dashboard, AIAssistant, Patients, Registry, Network, Compliance, Settings, Team, AISafety, Imaging, Wearables.
 
-- **`patients`**: `id`, `pseudonym`, `age_range`, `sex`, `risk_factors` (jsonb), `created_by`, `institution_id`
-- **`cases`**: `id`, `patient_id`, `category`, `status`, `title`, `summary`, `created_by`, `institution_id`, `created_at`, `updated_at`
-- **`measurements`**: For ABI values — `case_id`, `measurement_type`, `value`, `site`
+### Plan
 
-No schema changes needed — all tables and RLS policies exist.
+#### Task 1: Add missing i18n keys to all three dictionaries
 
-## Implementation — `src/pages/app/Patients.tsx`
+Add keys to `en.ts`, `fr.ts`, and `de.ts` for:
 
-### Data Fetching
-- Use `useQuery` to fetch patients with their latest case info:
-  1. Query `patients` ordered by `updated_at desc`
-  2. For each patient, fetch related `cases` (category, status, updated_at)
-  3. Derive "risk" from `risk_factors` jsonb field
-- Paginate with limit 50 + "Load More"
-- Client-side search filtering on pseudonym and category
+- **patientDetail**: header labels (Cases, Timeline Events, Measurements), tab names (Timeline, Measurements, Cases), dialog titles/descriptions/labels/placeholders for Edit Patient, Add Event, Add Measurement, empty states, event type options, measurement type options
+- **research**: expand with `members`, `eligible`, `pi`, `analytics`, study statuses
+- **education**: expand with track names, module descriptions, badge details, track progress text
+- **simulation**: expand with case titles, difficulty levels, heatmap labels, authoring tool text
+- **digitalTwin**: expand with timeline event data labels, vascular map placeholder details, simulation engine text, care plan goal labels
+- **federated**: expand with ethics approval text, opt-in descriptions (already partially done but component not wired)
+- **arTraining**: expand with checklist step texts, station training placeholder (already partially done but component not wired)
 
-### New Case Dialog
-- Dialog form with fields: Pseudonym, Age Range (select), Sex (select), Category (select: PAD/Aortic/Venous/Carotid/DVT-PE), Case Title
-- On submit: insert into `patients` table, then insert into `cases` table with the new `patient_id`
-- Use `useMutation` with query invalidation
+#### Task 2: Wire 6 pages to use `useTranslation`
 
-### UI States
-- Loading: skeleton rows
-- Empty: friendly message with icon
-- Error: toast notification
+For each of **Research, Education, Simulation, DigitalTwin, FederatedLearning, ARTraining**:
+- Import `useTranslation`
+- Replace all hardcoded strings with `t("key")` calls
 
-### i18n
-- Use existing `patients.*` translation keys
-- Add missing keys for the new case form (pseudonym, ageRange, sex, caseTitle, create, cancel) to all 3 language files
+#### Task 3: Complete PatientDetail i18n
 
-## Files to Modify
+Replace ~50 remaining hardcoded strings in PatientDetail.tsx with `t()` calls using the new `patientDetail.*` keys.
 
-1. **`src/pages/app/Patients.tsx`** — Full rewrite: remove mock data, add Supabase queries, dialog form, search, loading/empty states, i18n
-2. **`src/i18n/en.ts`** — Add ~10 new keys under `patients.*` for form labels
-3. **`src/i18n/fr.ts`** — French translations for new keys
-4. **`src/i18n/de.ts`** — German translations for new keys
+### Scope
+- 3 dictionary files updated (en.ts, fr.ts, de.ts)
+- 7 page components updated
+- No database or routing changes
+- No new dependencies
 
