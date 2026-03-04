@@ -882,6 +882,8 @@ export const de = {
       restore: "Wiederherstellen",
       deletePermanently: "Endgültig löschen",
       deletedOn: "Gelöscht",
+      expiresOn: "Läuft ab",
+      daysLeft: "T übrig",
       permanentDeleteDialog: {
         title: "Patient endgültig löschen",
         desc: "Dadurch werden dieser Patient und alle zugehörigen Daten endgültig gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
