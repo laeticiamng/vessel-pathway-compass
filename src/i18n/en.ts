@@ -676,6 +676,13 @@ export const en = {
       sso: "SSO Integration",
       rateLimiting: "Rate Limiting",
     },
+    plan: {
+      title: "Plan & Billing",
+      desc: "Manage your subscription and billing details",
+      currentPlan: "Current plan",
+      free: "Free",
+      viewPlans: "View Plans",
+    },
   },
 
   // Beta: Federated Learning

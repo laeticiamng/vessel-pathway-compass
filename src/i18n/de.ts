@@ -655,6 +655,13 @@ export const de = {
       sso: "SSO-Integration",
       rateLimiting: "Ratenbegrenzung",
     },
+    plan: {
+      title: "Plan & Abrechnung",
+      desc: "Verwalten Sie Ihr Abonnement und Ihre Rechnungsdaten",
+      currentPlan: "Aktueller Plan",
+      free: "Kostenlos",
+      viewPlans: "Pläne ansehen",
+    },
   },
 
   federated: {

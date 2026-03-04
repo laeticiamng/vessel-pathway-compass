@@ -1,11 +1,13 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Settings as SettingsIcon, Building, Globe, Shield, Palette } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Settings as SettingsIcon, Building, Globe, Shield, Palette, CreditCard, ArrowRight } from "lucide-react";
 import { useTranslation, Language } from "@/i18n/context";
 import { useTheme } from "next-themes";
+import { Link } from "react-router-dom";
 
 const langs: { lang: string; code: Language }[] = [
   { lang: "English", code: "en" },
@@ -39,6 +41,27 @@ export default function Settings() {
           <div className="space-y-2">
             <Label>{t("settings.institution.country")}</Label>
             <Input placeholder={t("settings.institution.countryPlaceholder")} />
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2"><CreditCard className="h-5 w-5" /> {t("settings.plan.title")}</CardTitle>
+          <CardDescription>{t("settings.plan.desc")}</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-medium">{t("settings.plan.currentPlan")}</span>
+              <Badge variant="secondary">{t("settings.plan.free")}</Badge>
+            </div>
+            <Button asChild variant="default" size="sm">
+              <Link to="/pricing">
+                {t("settings.plan.viewPlans")}
+                <ArrowRight className="h-4 w-4 ml-1.5" />
+              </Link>
+            </Button>
           </div>
         </CardContent>
       </Card>
