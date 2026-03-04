@@ -1,127 +1,97 @@
 
 
-# Vascular Atlas — Implementation Plan
+# Internationalization (EN/FR/DE) + Complete Page Content
 
-## Overview
-A world-class web platform for vascular medicine unifying clinical workflow, outcomes registry, education, research, and expert networking. Built with Lovable Cloud (Supabase), real AI via Lovable AI gateway, and Apple-level UX.
+## Approach
 
-## Phase 1: Foundation & Layout
+Create a lightweight i18n system using React Context + JSON translation dictionaries. No external library needed — the app has ~20 pages with moderate text volume, and a custom hook `useTranslation()` keeps things simple and fast.
 
-### App Shell & Design System
-- Dark/light premium theme with clean typography, generous whitespace, and card-based layouts
-- Responsive sidebar navigation with module icons (collapsible on mobile)
-- Command Palette (⌘K) for power users: search patients, open AI assistant, create case, start simulation
-- Top bar with institution switcher, notifications, language selector (EN/FR/DE)
-- i18n infrastructure for English, French, German
+## Architecture
 
-### Authentication & Roles
-- Email/password auth with Lovable Cloud
-- Role-based access: Physician, Trainee, Expert Reviewer, Hospital Admin, Research Lead, Super Admin
-- Roles stored in separate `user_roles` table with RLS security definer functions
-- Institution workspaces with membership management
+```text
+src/
+├── i18n/
+│   ├── context.tsx         # LanguageProvider + useTranslation hook
+│   ├── en.ts               # English translations (~600 keys)
+│   ├── fr.ts               # French translations
+│   └── de.ts               # German translations
+```
 
-### Landing & Marketing Pages
-- Apple-style landing page with hero, feature modules showcase, trust signals
-- Pricing page (B2B institution plans + individual plans)
-- Auth pages (login, signup, password reset)
+- `LanguageProvider` wraps the app, stores language in localStorage
+- `useTranslation()` returns `{ t, language, setLanguage }` where `t("key")` returns the translated string
+- Language switcher added to the AppLayout top bar (dropdown with EN/FR/DE flags)
 
-## Phase 2: Core Modules
+## Translation Key Structure
 
-### Module A — AI Clinical Assistant
-- Structured intake forms (symptoms, risk factors, ABI, Doppler, CTA/MRA, labs, meds)
-- Real AI generates: SOAP note, differentials + red flags, care pathway suggestions (with citation placeholders), patient-friendly summary, follow-up plan
-- "Evidence & Rationale" panel showing data used, suggestions, uncertainty, clinician confirmation required
-- PDF export and "Copy to EHR" (plain text) buttons
-- Full audit trail of every AI output (inputs, output, model version, user sign-off)
+Organized by page/section for maintainability:
 
-### Module B — Vascular Digital Twin + Timeline
-- Patient longitudinal timeline: ABI trends, symptom evolution, imaging events, interventions, outcomes
-- Interactive vascular map (arterial/venous SVG) with lesion markers
-- Scenario simulation (labeled as hypothetical, non-medical-device)
-- Care Plan layer with goals, tasks, reminders
+```text
+landing.hero.title = "Vascular Atlas"
+landing.hero.subtitle = "Unifying clinical workflow..."
+dashboard.title = "Dashboard"
+dashboard.welcome = "Welcome back. Here's your clinical overview."
+dashboard.quickActions.newPatient = "New Patient Case"
+aiAssistant.title = "AI Clinical Assistant"
+aiAssistant.disclaimer.title = "AI-Generated Content — Not a Diagnosis"
+patients.title = "Patient Cases"
+patients.columns.caseId = "Case ID"
+...
+```
 
-### Module C — Global Outcomes Registry
-- Registry categories: PAD, aortic, carotid, venous, thromboembolic, wound/limb preservation
-- Standardized outcomes: amputations, restenosis, complications, mortality, PROMs
-- Dashboards: individual physician (private), institution aggregate, anonymized network benchmarking
-- Privacy-first: only aggregated data in benchmarking, no re-identification
+## Files to Create
 
-### Module D — Certification + Logbook + CME
-- 5 Competency Tracks: Vascular Ultrasound, PAD/Limb Preservation, Aorta, Venous, Thrombosis
-- Each track: micro-lessons, quizzes, supervised logbook, OSCE checklists, final assessment
-- Digital badges with verifiable metadata (completion date, modules, supervisor validation)
+1. **`src/i18n/en.ts`** — Complete English dictionary with all text from every page (~600+ keys covering Landing, Pricing, Auth, Dashboard, AI Assistant, Patients, Digital Twin, Registry, Education, Simulation, Network, Research, Compliance, Team, Settings, and all 5 Beta pages)
 
-### Module E — Clinical Simulation Lab
-- Interactive branching case player with timer (8-min OSCE mode + learning mode)
-- Case authoring tool for experts (scenario, branches, rubrics, feedback)
-- AI feedback constrained by rubrics (no hallucinated guidelines)
-- Skill Heatmap: triage accuracy, safety adherence, documentation quality, communication
+2. **`src/i18n/fr.ts`** — Full French translation of all keys (professional medical French)
 
-### Module F — Global Expert Network
-- Case discussion boards by topic (PAD, aorta, venous, carotid, wounds, thrombosis)
-- "Ask an Expert" workflow: de-identified case submission → expert routing → structured response
-- Mentorship matching (specialty, language, location)
-- Contribution-based reputation system
+3. **`src/i18n/de.ts`** — Full German translation of all keys (professional medical German)
 
-## Phase 3: Research & Compliance
+4. **`src/i18n/context.tsx`** — React context with:
+   - `LanguageProvider` component (wraps app, persists to localStorage)
+   - `useTranslation()` hook returning `{ t, language, setLanguage }`
+   - Type-safe language union: `"en" | "fr" | "de"`
 
-### Research Hub
-- Study builder: define eligibility, data points, team members
-- Analytics on eligible de-identified datasets
-- Export functionality with audit trail
+## Files to Modify
 
-### Compliance & Safety Center
-- Audit log viewer (clinical changes, AI outputs, data exports)
-- Consent management: patient de-identification workflow, opt-in for registry/research/federated learning
-- AI Safety dashboard (model versioning, confidence indicators, human override tracking)
+5. **`src/App.tsx`** — Wrap with `<LanguageProvider>`
 
-## Phase 4: Futuristic Beta Modules
+6. **`src/components/layout/AppLayout.tsx`** — Add language switcher dropdown (EN/FR/DE) in top bar
 
-### X1 — Federated Learning Beta
-- Concept page with institution opt-in, governance settings, ethics approval placeholders
-- UI for federated node status, training rounds, model version (architecture-ready, no actual ML)
+7. **`src/components/layout/AppSidebar.tsx`** — Translate all sidebar navigation labels
 
-### X2 — AI Safety Layer Beta
-- Model versioning dashboard, drift detection placeholders, error reporting
-- "Report issue" button on every AI output, audit trails
+8. **`src/components/CommandPalette.tsx`** — Translate command labels
 
-### X3 — Imaging Pipeline Beta
-- Upload imaging summaries, structured measurement forms (aneurysm diameters, stenosis grading)
-- Annotation tool mock with export
-- DICOM architecture placeholder
+9. **All 20 page files** — Replace hardcoded strings with `t("key")` calls:
+   - `Landing.tsx`, `Pricing.tsx`, `Auth.tsx`, `NotFound.tsx`
+   - `Dashboard.tsx`, `AIAssistant.tsx`, `Patients.tsx`, `DigitalTwin.tsx`
+   - `Registry.tsx`, `Education.tsx`, `Simulation.tsx`, `Network.tsx`
+   - `Research.tsx`, `Compliance.tsx`, `Team.tsx`, `Settings.tsx`
+   - `beta/FederatedLearning.tsx`, `beta/AISafety.tsx`, `beta/Imaging.tsx`, `beta/Wearables.tsx`, `beta/ARTraining.tsx`
 
-### X4 — Wearables & Home Monitoring Beta
-- Patient app concept: walking tests, symptom diary, wound photos, compression adherence
-- Consent & data sharing settings
+## Content Completion
 
-### X5 — Immersive Training (AR) Beta
-- AR checklist mode concept UI
-- Station-based ultrasound training mock
+While integrating translations, all pages will receive complete, rich content:
 
-## Phase 5: Database & Security
+- **Landing**: Full hero copy, detailed module descriptions, trust signals, CTA sections
+- **Pricing**: Complete feature lists per tier, comparison details
+- **Dashboard**: Full activity descriptions, module descriptions
+- **AI Assistant**: Complete disclaimer text, form labels, evidence panel content
+- **Patients**: Complete table headers, status labels, search placeholders
+- **Digital Twin**: Timeline descriptions, care plan goals, vascular map description
+- **Registry**: Complete outcome categories, benchmarking descriptions
+- **Education**: Track descriptions, badge metadata, CME details
+- **Simulation**: Case descriptions, skill heatmap labels, authoring tool description
+- **Network**: Discussion content, expert profiles, mentorship descriptions
+- **Research**: Study descriptions, analytics labels
+- **Compliance**: Audit log labels, consent items, AI safety metrics
+- **Team**: Role labels, status labels, invite workflow text
+- **Settings**: All form labels, section descriptions
+- **Beta pages**: Complete concept descriptions in all 3 languages
 
-### Database Schema (all tables with RLS)
-- Core: `institutions`, `memberships`, `user_roles`
-- Clinical: `patients` (de-identified), `cases`, `case_events`, `imaging_summaries`, `measurements`, `outcomes`, `proms`
-- AI: `ai_outputs` (input_summary, output_text, model_version, user_signoff)
-- Education: `courses`, `modules`, `quizzes`, `quiz_attempts`, `logbook_entries`, `validations`
-- Simulation: `simulations`, `simulation_runs`, `rubrics`
-- Network: `forum_posts`, `expert_requests`, `expert_responses`, `reputation_events`
-- Research: `studies`, `study_members`, `exports`
-- Compliance: `audit_logs`, `consents`
+## Language Switcher UI
 
-### Security
-- RLS policies scoped by role AND institution
-- Security definer functions for role checks
-- Rate limiting placeholders
-- Encrypted storage placeholders
-
-## Pages (~30+ routes)
-Landing, Pricing, Auth, Dashboard, Patient Workspace, AI Assistant, Digital Twin, Registry Dashboards, Education Hub, Simulation Lab, Expert Network, Research Hub, Compliance Center, Settings, all Beta module pages
-
-## Key Design Principles
-- Every AI output has "Clinician Confirmation Required" — never presented as definitive
-- Citation fields use placeholders — no fabricated guidelines
-- "Beta" modules clearly labeled as preview
-- No regulatory approval claims — "compliance-ready" with audit infrastructure
+A compact dropdown in the top bar next to the theme toggle:
+- Shows current language as 2-letter code (EN/FR/DE)
+- Dropdown with flag emoji + full language name
+- Persists selection to localStorage key `vascular-atlas-lang`
 
