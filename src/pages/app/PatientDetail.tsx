@@ -26,6 +26,7 @@ import {
   ArrowLeft, HeartPulse, Edit, Plus, Clock, Ruler, Activity, Calendar, Trash2,
 } from "lucide-react";
 import MeasurementTrendChart from "@/components/patient/MeasurementTrendChart";
+import RiskFactorsEditor from "@/components/patient/RiskFactorsEditor";
 
 const AGE_RANGES = ["18-30", "31-40", "41-50", "51-60", "61-70", "71-80", "80+"] as const;
 
@@ -267,6 +268,12 @@ export default function PatientDetail() {
         <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">{t("patientDetail.timelineEvents")}</p><p className="text-3xl font-bold mt-1">{events?.length ?? 0}</p></CardContent></Card>
         <Card><CardContent className="pt-6"><p className="text-sm text-muted-foreground">{t("patientDetail.measurementsCount")}</p><p className="text-3xl font-bold mt-1">{measurements?.length ?? 0}</p></CardContent></Card>
       </div>
+
+      {/* Risk Factors */}
+      <RiskFactorsEditor
+        patientId={patient.id}
+        riskFactors={Array.isArray(patient.risk_factors) ? (patient.risk_factors as string[]) : []}
+      />
 
       {/* Tabs */}
       <Tabs defaultValue="timeline">
