@@ -1097,5 +1097,13 @@ export const fr = {
     periodAll: "Tout",
     category: "Catégorie",
     allCategories: "Toutes les catégories",
+    institutionComparison: "Comparaison inter-institutions",
+    institutionComparisonDesc: "Métriques côte à côte entre vos institutions",
+    noInstitutions: "Aucune institution trouvée. Rejoignez une institution pour voir les comparaisons.",
+    instMetrics: {
+      cases: "Dossiers",
+      outcomes: "Résultats",
+      measurements: "Mesures",
+    },
   },
 };

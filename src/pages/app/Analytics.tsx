@@ -41,6 +41,7 @@ import {
   AreaChart,
   Area,
 } from "recharts";
+import InstitutionComparison from "@/components/analytics/InstitutionComparison";
 
 const CATEGORY_COLORS = [
   "hsl(200 70% 50%)",
@@ -649,6 +650,7 @@ export default function Analytics() {
             )}
           </CardContent>
         </Card>
+      <InstitutionComparison />
       </div>
       </div>
     </div>
