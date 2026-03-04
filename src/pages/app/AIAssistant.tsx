@@ -155,11 +155,11 @@ export default function AIAssistant() {
       );
 
       if (response.status === 429) {
-        toast({ title: "Rate limited", description: "Please try again in a moment.", variant: "destructive" });
+        toast({ title: t("aiAssistant.errors.rateLimited"), description: t("aiAssistant.errors.rateLimitedDesc"), variant: "destructive" });
         return;
       }
       if (response.status === 402) {
-        toast({ title: "Credits required", description: "Please add credits to continue using AI features.", variant: "destructive" });
+        toast({ title: t("aiAssistant.errors.creditsRequired"), description: t("aiAssistant.errors.creditsRequiredDesc"), variant: "destructive" });
         return;
       }
       if (!response.ok || !response.body) throw new Error("Failed to generate report");

@@ -180,7 +180,7 @@ export default function Compliance() {
               ) : !auditLogs || auditLogs.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                   <Inbox className="h-10 w-10 mb-3" />
-                  <p className="text-sm">No audit logs recorded yet</p>
+                   <p className="text-sm">{t("compliance.empty.audit")}</p>
                 </div>
               ) : (
                 <>
@@ -221,7 +221,7 @@ export default function Compliance() {
                   {hasMoreAudit && (
                     <div className="flex justify-center mt-4">
                       <Button variant="outline" size="sm" onClick={() => setAuditPage((p) => p + 1)}>
-                        Load More
+                        {t("compliance.loadMore")}
                       </Button>
                     </div>
                   )}
@@ -248,7 +248,7 @@ export default function Compliance() {
               ) : Object.keys(consentsByType).length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                   <Inbox className="h-10 w-10 mb-3" />
-                  <p className="text-sm">No consent records yet</p>
+                   <p className="text-sm">{t("compliance.empty.consent")}</p>
                 </div>
               ) : (
                 Object.entries(consentsByType).map(([type, counts]) => (
@@ -257,9 +257,9 @@ export default function Compliance() {
                       <CheckCircle2 className="h-4 w-4 text-primary" />
                       <div>
                         <span className="text-sm font-medium">{type}</span>
-                        <p className="text-xs text-muted-foreground">
-                          {counts.granted} granted · {counts.revoked} revoked
-                        </p>
+                         <p className="text-xs text-muted-foreground">
+                           {counts.granted} {t("compliance.consent.granted")} · {counts.revoked} {t("compliance.consent.revoked")}
+                         </p>
                       </div>
                     </div>
                     <Badge variant="secondary">{counts.total}</Badge>
@@ -287,7 +287,7 @@ export default function Compliance() {
               ) : !aiSafety || aiSafety.total === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
                   <Inbox className="h-10 w-10 mb-3" />
-                  <p className="text-sm">No AI outputs recorded yet</p>
+                  <p className="text-sm">{t("compliance.empty.aiOutputs")}</p>
                 </div>
               ) : (
                 <div className="grid sm:grid-cols-3 gap-4">

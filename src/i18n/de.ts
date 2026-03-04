@@ -74,6 +74,7 @@ export const de = {
 
   topBar: {
     searchPlaceholder: "Suchen oder Befehl...",
+    toggleTheme: "Thema wechseln",
   },
 
   landing: {
@@ -305,6 +306,12 @@ export const de = {
       empty: "Noch keine Berichte",
       emptyDesc: "Erstellte Berichte erscheinen hier mit vollständigem Audit-Protokoll.",
     },
+    errors: {
+      rateLimited: "Ratenbegrenzung erreicht",
+      rateLimitedDesc: "Bitte versuchen Sie es gleich erneut.",
+      creditsRequired: "Credits erforderlich",
+      creditsRequiredDesc: "Bitte fügen Sie Credits hinzu, um fortzufahren.",
+    },
   },
 
   patients: {
@@ -330,6 +337,9 @@ export const de = {
       female: "Weiblich",
       category: "Kategorie",
       caseTitle: "Falltitel",
+      pseudonymPlaceholder: "z.B. PAT-2026-001",
+      caseTitlePlaceholder: "z.B. AFS-Verschluss rechts",
+      selectPlaceholder: "Auswählen",
     },
     filters: {
       allCategories: "Alle Kategorien",
@@ -567,6 +577,16 @@ export const de = {
       modelVersion: "Modellversion",
       signOffRate: "Abzeichnungsrate",
       issuesReported: "Gemeldete Probleme",
+    },
+    empty: {
+      audit: "Noch keine Audit-Protokolle",
+      consent: "Noch keine Einwilligungen",
+      aiOutputs: "Noch keine KI-Ausgaben",
+    },
+    loadMore: "Mehr laden",
+    consent: {
+      granted: "erteilt",
+      revoked: "widerrufen",
     },
   },
 
