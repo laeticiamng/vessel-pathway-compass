@@ -1,38 +1,32 @@
 
 
-## i18n Completion Plan: Dashboard, Network, Registry
+## Add Server-Side Category & Status Filters to Patients Page
 
-### Analysis
+### Current State
+The Patients page has a search input and a non-functional "Filter" button. Filtering is client-side only (text search on pseudonym/category/status). The query fetches all patients then joins cases client-side.
 
-Research, Education, Simulation, and DigitalTwin were already fully wired to i18n in the previous round. The three pages with remaining hardcoded English strings are:
+### Plan
 
-**Dashboard.tsx** (5 hardcoded strings):
-- `"Outcomes"`, `"Registry entries"`, `"Completed"` in stat cards
-- `"Your latest actions across all modules"` activity subtitle
-- `"No recent activity yet"` empty state
+**1. Add filter state and wire to query**
+- Add `filterCategory` and `filterStatus` state variables
+- Replace the dummy Filter button with two `Select` dropdowns (Category and Status) next to the search bar
+- Include filter values in the `queryKey` so React Query refetches on change
+- Apply `.eq("category", filterCategory)` and `.eq("status", filterStatus)` server-side on the `cases` query when filters are set
+- For category filter: filter the cases query, then only show patients that have matching cases
+- For status filter: same approach on the cases query
+- Add an "All" option (empty string) to clear each filter
 
-**Network.tsx** (~15 hardcoded strings):
-- `"Error"` in toast titles
-- Dialog labels: `"Title"`, `"Topic"`, `"Content"`, `"Select topic"`, `"De-identified Case Summary"`
-- Dialog placeholders for post/expert forms
-- Empty states: `"No discussions yet..."`, `"No expert requests yet"`
-- `"Mentorship matching — coming soon"` description
-- `"Start a de-identified case discussion"` dialog description
+**2. Add i18n keys**
+- Add `patients.filters.allCategories`, `patients.filters.allStatuses` to en/fr/de dictionaries
 
-**Registry.tsx** (7 hardcoded strings):
-- `"30-day Mortality"`, `"Complication Rate"`, `"PROMs Collected"` stat labels
-- `"No outcomes data yet..."` empty table message
-- `"Institution Aggregate"`, `"Network Benchmarking"` card titles
-- `"Privacy-first"` badge
+**3. UI Layout**
+Replace the current filter bar with:
+```
+[Search input............] [Category ▼] [Status ▼]
+```
+Remove the non-functional Filter button.
 
-### Implementation
-
-**Step 1**: Add ~25 new keys to `en.ts`, `fr.ts`, `de.ts` under existing `dashboard`, `network`, and `registry` namespaces.
-
-**Step 2**: Replace all hardcoded strings in the three page components with `t()` calls.
-
-### Scope
-- 3 dictionary files updated
-- 3 page components updated
-- No new dependencies, routing, or database changes
+### Files to Change
+- `src/pages/app/Patients.tsx` — add filter selects, wire to server-side query
+- `src/i18n/en.ts`, `fr.ts`, `de.ts` — add filter label keys
 
