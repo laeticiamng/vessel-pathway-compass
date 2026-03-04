@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -19,7 +19,11 @@ import {
   Users,
   Stethoscope,
   Filter,
+  Download,
+  Loader2,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
   LineChart,
   Line,
@@ -61,6 +65,62 @@ export default function Analytics() {
   const { t } = useTranslation();
   const [period, setPeriod] = useState<PeriodKey>("all");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const dashboardRef = useRef<HTMLDivElement>(null);
+  const [exporting, setExporting] = useState(false);
+
+  const handleExportPDF = useCallback(async () => {
+    if (!dashboardRef.current) return;
+    setExporting(true);
+    try {
+      const html2canvas = (await import("html2canvas")).default;
+      const jsPDF = (await import("jspdf")).default;
+
+      const canvas = await html2canvas(dashboardRef.current, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor: null,
+        logging: false,
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = canvas.width;
+      const imgHeight = canvas.height;
+
+      // A4 landscape for wide dashboard
+      const pdf = new jsPDF("landscape", "mm", "a4");
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const pageHeight = pdf.internal.pageSize.getHeight();
+      const margin = 10;
+      const usableWidth = pageWidth - margin * 2;
+      const ratio = usableWidth / imgWidth;
+      const scaledHeight = imgHeight * ratio;
+
+      // Multi-page if needed
+      let yOffset = 0;
+      let page = 0;
+      while (yOffset < scaledHeight) {
+        if (page > 0) pdf.addPage();
+        pdf.addImage(
+          imgData,
+          "PNG",
+          margin,
+          margin - yOffset,
+          usableWidth,
+          scaledHeight
+        );
+        yOffset += pageHeight - margin * 2;
+        page++;
+      }
+
+      pdf.save(`analytics-${new Date().toISOString().slice(0, 10)}.pdf`);
+      toast.success(t("common.download") + " PDF ✓");
+    } catch (err) {
+      console.error("PDF export failed:", err);
+      toast.error("PDF export failed");
+    } finally {
+      setExporting(false);
+    }
+  }, [t]);
 
   // Fetch all cases for category distribution
   const { data: cases, isLoading: casesLoading } = useQuery({
@@ -280,7 +340,7 @@ export default function Analytics() {
           </h1>
           <p className="text-muted-foreground mt-1">{t("analytics.subtitle")}</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <div className="flex items-center gap-2">
             <Filter className="h-4 w-4 text-muted-foreground" />
             <Select value={period} onValueChange={(v) => setPeriod(v as PeriodKey)}>
@@ -309,9 +369,14 @@ export default function Analytics() {
               ))}
             </SelectContent>
           </Select>
+          <Button variant="outline" size="sm" onClick={handleExportPDF} disabled={exporting}>
+            {exporting ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Download className="h-4 w-4 mr-2" />}
+            PDF
+          </Button>
         </div>
       </div>
 
+      <div ref={dashboardRef} className="space-y-6">
       {/* Summary KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
@@ -584,6 +649,7 @@ export default function Analytics() {
             )}
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );
