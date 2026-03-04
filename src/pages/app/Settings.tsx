@@ -4,12 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { Settings as SettingsIcon, Building, Globe, Shield, Palette, CreditCard, ArrowRight, LogOut } from "lucide-react";
+import { Settings as SettingsIcon, Building, Globe, Shield, Palette, CreditCard, ArrowRight, LogOut, User, Loader2 } from "lucide-react";
 import { useTranslation, Language } from "@/i18n/context";
 import { useTheme } from "next-themes";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/useAuth";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 const langs: { lang: string; code: Language }[] = [
   { lang: "English", code: "en" },
@@ -21,12 +24,67 @@ export default function Settings() {
   const { t, language, setLanguage } = useTranslation();
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+
+  const { data: profile, isLoading } = useQuery({
+    queryKey: ["profile", user?.id],
+    queryFn: async () => {
+      if (!user) return null;
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!user,
+  });
+
+  const [displayName, setDisplayName] = useState("");
+  const [institution, setInstitution] = useState("");
+  const [role, setRole] = useState("");
+
+  useEffect(() => {
+    if (profile) {
+      setDisplayName(profile.display_name ?? "");
+      setInstitution(profile.institution ?? "");
+      setRole(profile.role ?? "");
+    }
+  }, [profile]);
+
+  const updateProfile = useMutation({
+    mutationFn: async () => {
+      if (!user) throw new Error("Not authenticated");
+      const { error } = await supabase
+        .from("profiles")
+        .update({
+          display_name: displayName,
+          institution,
+          role,
+        })
+        .eq("user_id", user.id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      toast.success(t("settings.profile.saved"));
+    },
+    onError: () => toast.error(t("auth.error")),
+  });
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
     toast.success(t("common.signOut"));
     navigate("/");
   };
+
+  const hasChanges =
+    profile &&
+    (displayName !== (profile.display_name ?? "") ||
+      institution !== (profile.institution ?? "") ||
+      role !== (profile.role ?? ""));
 
   return (
     <div className="space-y-6 max-w-3xl">
@@ -40,17 +98,32 @@ export default function Settings() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Building className="h-5 w-5" /> {t("settings.institution.title")}</CardTitle>
+          <CardTitle className="flex items-center gap-2"><User className="h-5 w-5" /> {t("settings.profile.title")}</CardTitle>
+          <CardDescription>{t("settings.profile.desc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <Label>{t("settings.institution.name")}</Label>
-            <Input placeholder={t("settings.institution.namePlaceholder")} />
-          </div>
-          <div className="space-y-2">
-            <Label>{t("settings.institution.country")}</Label>
-            <Input placeholder={t("settings.institution.countryPlaceholder")} />
-          </div>
+          {isLoading ? (
+            <div className="flex justify-center py-4"><Loader2 className="h-5 w-5 animate-spin text-muted-foreground" /></div>
+          ) : (
+            <>
+              <div className="space-y-2">
+                <Label>{t("settings.profile.displayName")}</Label>
+                <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder={t("settings.profile.displayNamePlaceholder")} />
+              </div>
+              <div className="space-y-2">
+                <Label>{t("settings.profile.role")}</Label>
+                <Input value={role} onChange={(e) => setRole(e.target.value)} placeholder={t("settings.profile.rolePlaceholder")} />
+              </div>
+              <div className="space-y-2">
+                <Label>{t("settings.profile.institution")}</Label>
+                <Input value={institution} onChange={(e) => setInstitution(e.target.value)} placeholder={t("settings.institution.namePlaceholder")} />
+              </div>
+              <Button onClick={() => updateProfile.mutate()} disabled={!hasChanges || updateProfile.isPending}>
+                {updateProfile.isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+                {t("common.save")}
+              </Button>
+            </>
+          )}
         </CardContent>
       </Card>
 

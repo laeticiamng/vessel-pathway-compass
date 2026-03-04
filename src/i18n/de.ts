@@ -580,6 +580,16 @@ export const de = {
       active: "Aktiv",
       draft: "Entwurf",
     },
+    empty: "Noch keine Studien. Erstellen Sie Ihre erste Studie.",
+    studyCreated: "Studie erfolgreich erstellt",
+    newStudyDesc: "Eine neue Forschungsstudie erstellen",
+    form: {
+      title: "Studientitel",
+      titlePlaceholder: "z.B. PAD-Ergebnisse Multicenterstudie",
+      description: "Beschreibung",
+      descPlaceholder: "Beschreiben Sie die Studienziele...",
+      status: "Status",
+    },
   },
 
   compliance: {
@@ -651,6 +661,16 @@ export const de = {
   settings: {
     title: "Einstellungen",
     subtitle: "Einrichtung, Integrationen und Präferenzen",
+    profile: {
+      title: "Profil",
+      desc: "Ihre persönlichen Informationen",
+      displayName: "Anzeigename",
+      displayNamePlaceholder: "Dr. Hans Müller",
+      role: "Rolle",
+      rolePlaceholder: "z.B. Gefäßchirurg",
+      institution: "Einrichtung",
+      saved: "Profil gespeichert",
+    },
     institution: {
       title: "Einrichtung",
       name: "Name der Einrichtung",

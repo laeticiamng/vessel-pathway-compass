@@ -580,6 +580,16 @@ export const fr = {
       active: "Active",
       draft: "Brouillon",
     },
+    empty: "Aucune étude pour le moment. Créez votre première étude.",
+    studyCreated: "Étude créée avec succès",
+    newStudyDesc: "Créer une nouvelle étude de recherche",
+    form: {
+      title: "Titre de l'étude",
+      titlePlaceholder: "ex. Étude multicentrique sur les résultats PAD",
+      description: "Description",
+      descPlaceholder: "Décrivez les objectifs de l'étude...",
+      status: "Statut",
+    },
   },
 
   compliance: {
@@ -651,6 +661,16 @@ export const fr = {
   settings: {
     title: "Paramètres",
     subtitle: "Établissement, intégrations et préférences",
+    profile: {
+      title: "Profil",
+      desc: "Vos informations personnelles",
+      displayName: "Nom d'affichage",
+      displayNamePlaceholder: "Dr. Jean Dupont",
+      role: "Rôle",
+      rolePlaceholder: "ex. Chirurgien vasculaire",
+      institution: "Établissement",
+      saved: "Profil enregistré",
+    },
     institution: {
       title: "Établissement",
       name: "Nom de l'établissement",

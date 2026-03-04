@@ -1,19 +1,79 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Users, Plus } from "lucide-react";
+import { Users, Plus, Loader2 } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
-
-const members = [
-  { name: "Dr. Smith", email: "smith@hospital.org", roleKey: "physician", status: "active" },
-  { name: "Dr. Jones", email: "jones@hospital.org", roleKey: "hospitalAdmin", status: "active" },
-  { name: "Dr. Brown", email: "brown@hospital.org", roleKey: "trainee", status: "active" },
-  { name: "Prof. Wilson", email: "wilson@university.edu", roleKey: "expertReviewer", status: "active" },
-  { name: "Dr. Taylor", email: "taylor@hospital.org", roleKey: "researchLead", status: "invited" },
-];
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Team() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+
+  // Get user's institution memberships, then fetch all members of those institutions
+  const { data: members = [], isLoading } = useQuery({
+    queryKey: ["team-members", user?.id],
+    queryFn: async () => {
+      if (!user) return [];
+      // Get user's institutions
+      const { data: myMemberships, error: mErr } = await supabase
+        .from("memberships")
+        .select("institution_id")
+        .eq("user_id", user.id);
+      if (mErr) throw mErr;
+      if (!myMemberships?.length) return [];
+
+      const instIds = myMemberships.map((m) => m.institution_id);
+
+      // Get all members of those institutions
+      const { data: allMemberships, error: aErr } = await supabase
+        .from("memberships")
+        .select("user_id, role, institution_id")
+        .in("institution_id", instIds);
+      if (aErr) throw aErr;
+      if (!allMemberships?.length) return [];
+
+      // Get profiles for those users
+      const userIds = [...new Set(allMemberships.map((m) => m.user_id))];
+      const { data: profiles, error: pErr } = await supabase
+        .from("profiles")
+        .select("user_id, display_name, role, institution")
+        .in("user_id", userIds);
+      if (pErr) throw pErr;
+
+      const profileMap = new Map((profiles ?? []).map((p) => [p.user_id, p]));
+
+      return allMemberships.map((m) => {
+        const p = profileMap.get(m.user_id);
+        return {
+          user_id: m.user_id,
+          display_name: p?.display_name ?? "—",
+          role: m.role || p?.role || "member",
+          institution: p?.institution ?? "",
+        };
+      });
+    },
+    enabled: !!user,
+  });
+
+  const { data: myProfile } = useQuery({
+    queryKey: ["profile", user?.id],
+    queryFn: async () => {
+      if (!user) return null;
+      const { data } = await supabase.from("profiles").select("*").eq("user_id", user.id).maybeSingle();
+      return data;
+    },
+    enabled: !!user,
+  });
+
+  // If no institution memberships, show current user as sole "team member"
+  const displayMembers = members.length > 0 ? members : myProfile ? [{
+    user_id: user?.id ?? "",
+    display_name: myProfile.display_name ?? user?.email ?? "—",
+    role: myProfile.role ?? "physician",
+    institution: myProfile.institution ?? "",
+  }] : [];
 
   return (
     <div className="space-y-6 max-w-4xl">
@@ -33,30 +93,32 @@ export default function Team() {
 
       <Card>
         <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b">
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.name")}</th>
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.email")}</th>
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.role")}</th>
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.status")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {members.map((m) => (
-                  <tr key={m.email} className="border-b last:border-0">
-                    <td className="p-4 font-medium">{m.name}</td>
-                    <td className="p-4 text-sm text-muted-foreground">{m.email}</td>
-                    <td className="p-4"><Badge variant="secondary">{t(`team.roles.${m.roleKey}`)}</Badge></td>
-                    <td className="p-4">
-                      <Badge variant={m.status === "active" ? "default" : "outline"}>{t(`team.statuses.${m.status}`)}</Badge>
-                    </td>
+          {isLoading ? (
+            <div className="flex justify-center py-8"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.name")}</th>
+                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.role")}</th>
+                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.status")}</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {displayMembers.map((m, i) => (
+                    <tr key={m.user_id + i} className="border-b last:border-0">
+                      <td className="p-4 font-medium">{m.display_name}</td>
+                      <td className="p-4"><Badge variant="secondary">{m.role}</Badge></td>
+                      <td className="p-4">
+                        <Badge variant="default">{t("team.statuses.active")}</Badge>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </CardContent>
       </Card>
     </div>
