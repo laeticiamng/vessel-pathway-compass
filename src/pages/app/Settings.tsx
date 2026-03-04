@@ -1,50 +1,57 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Settings as SettingsIcon, Building, Globe, Shield, Palette } from "lucide-react";
+import { useTranslation, Language } from "@/i18n/context";
+import { useTheme } from "next-themes";
+
+const langs: { lang: string; code: Language }[] = [
+  { lang: "English", code: "en" },
+  { lang: "Français", code: "fr" },
+  { lang: "Deutsch", code: "de" },
+];
 
 export default function Settings() {
+  const { t, language, setLanguage } = useTranslation();
+  const { theme, setTheme } = useTheme();
+
   return (
     <div className="space-y-6 max-w-3xl">
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">
           <SettingsIcon className="h-8 w-8 text-primary" />
-          Settings
+          {t("settings.title")}
         </h1>
-        <p className="text-muted-foreground mt-1">Institution, integrations, and preferences</p>
+        <p className="text-muted-foreground mt-1">{t("settings.subtitle")}</p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Building className="h-5 w-5" /> Institution</CardTitle>
+          <CardTitle className="flex items-center gap-2"><Building className="h-5 w-5" /> {t("settings.institution.title")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label>Institution Name</Label>
-            <Input placeholder="University Hospital" />
+            <Label>{t("settings.institution.name")}</Label>
+            <Input placeholder={t("settings.institution.namePlaceholder")} />
           </div>
           <div className="space-y-2">
-            <Label>Country</Label>
-            <Input placeholder="Switzerland" />
+            <Label>{t("settings.institution.country")}</Label>
+            <Input placeholder={t("settings.institution.countryPlaceholder")} />
           </div>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Globe className="h-5 w-5" /> Language</CardTitle>
+          <CardTitle className="flex items-center gap-2"><Globe className="h-5 w-5" /> {t("settings.language.title")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          {[
-            { lang: "English", code: "EN", active: true },
-            { lang: "Français", code: "FR", active: false },
-            { lang: "Deutsch", code: "DE", active: false },
-          ].map((l) => (
+          {langs.map((l) => (
             <div key={l.code} className="flex items-center justify-between">
-              <span className="text-sm">{l.lang} ({l.code})</span>
-              <Switch checked={l.active} />
+              <span className="text-sm">{l.lang} ({l.code.toUpperCase()})</span>
+              <Switch checked={language === l.code} onCheckedChange={() => setLanguage(l.code)} />
             </div>
           ))}
         </CardContent>
@@ -52,28 +59,28 @@ export default function Settings() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Palette className="h-5 w-5" /> Appearance</CardTitle>
+          <CardTitle className="flex items-center gap-2"><Palette className="h-5 w-5" /> {t("settings.appearance.title")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
-            <span className="text-sm">Dark Mode</span>
-            <Switch />
+            <span className="text-sm">{t("settings.appearance.darkMode")}</span>
+            <Switch checked={theme === "dark"} onCheckedChange={(c) => setTheme(c ? "dark" : "light")} />
           </div>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-2"><Shield className="h-5 w-5" /> Security</CardTitle>
+          <CardTitle className="flex items-center gap-2"><Shield className="h-5 w-5" /> {t("settings.security.title")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm">SSO Integration</span>
-            <Button variant="outline" size="sm">Configure</Button>
+            <span className="text-sm">{t("settings.security.sso")}</span>
+            <Button variant="outline" size="sm">{t("common.configure")}</Button>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-sm">Rate Limiting</span>
-            <Button variant="outline" size="sm">Configure</Button>
+            <span className="text-sm">{t("settings.security.rateLimiting")}</span>
+            <Button variant="outline" size="sm">{t("common.configure")}</Button>
           </div>
         </CardContent>
       </Card>

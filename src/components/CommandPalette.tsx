@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useTranslation } from "@/i18n/context";
 import {
   CommandDialog,
   CommandInput,
@@ -27,22 +28,23 @@ interface CommandPaletteProps {
   onOpenChange: (open: boolean) => void;
 }
 
-const commands = [
-  { label: "Dashboard", icon: LayoutDashboard, path: "/app" },
-  { label: "AI Clinical Assistant", icon: Brain, path: "/app/ai-assistant" },
-  { label: "Patient Cases", icon: HeartPulse, path: "/app/patients" },
-  { label: "Digital Twin", icon: Activity, path: "/app/digital-twin" },
-  { label: "Outcomes Registry", icon: LineChart, path: "/app/registry" },
-  { label: "Education Hub", icon: BookOpen, path: "/app/education" },
-  { label: "Simulation Lab", icon: FlaskConical, path: "/app/simulation" },
-  { label: "Expert Network", icon: Globe, path: "/app/network" },
-  { label: "Research Hub", icon: FileText, path: "/app/research" },
-  { label: "Compliance Center", icon: Shield, path: "/app/compliance" },
-  { label: "Settings", icon: Settings, path: "/app/settings" },
+const commandDefs = [
+  { key: "command.dashboard", icon: LayoutDashboard, path: "/app" },
+  { key: "command.aiAssistant", icon: Brain, path: "/app/ai-assistant" },
+  { key: "command.patients", icon: HeartPulse, path: "/app/patients" },
+  { key: "command.digitalTwin", icon: Activity, path: "/app/digital-twin" },
+  { key: "command.registry", icon: LineChart, path: "/app/registry" },
+  { key: "command.education", icon: BookOpen, path: "/app/education" },
+  { key: "command.simulation", icon: FlaskConical, path: "/app/simulation" },
+  { key: "command.network", icon: Globe, path: "/app/network" },
+  { key: "command.research", icon: FileText, path: "/app/research" },
+  { key: "command.compliance", icon: Shield, path: "/app/compliance" },
+  { key: "command.settings", icon: Settings, path: "/app/settings" },
 ];
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -57,11 +59,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
   return (
     <CommandDialog open={open} onOpenChange={onOpenChange}>
-      <CommandInput placeholder="Search modules, patients, or actions..." />
+      <CommandInput placeholder={t("command.placeholder")} />
       <CommandList>
-        <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Navigation">
-          {commands.map((cmd) => (
+        <CommandEmpty>{t("command.noResults")}</CommandEmpty>
+        <CommandGroup heading={t("command.navigation")}>
+          {commandDefs.map((cmd) => (
             <CommandItem
               key={cmd.path}
               onSelect={() => {
@@ -70,7 +72,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
               }}
             >
               <cmd.icon className="mr-2 h-4 w-4" />
-              {cmd.label}
+              {t(cmd.key)}
             </CommandItem>
           ))}
         </CommandGroup>

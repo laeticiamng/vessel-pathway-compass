@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
+import { LanguageProvider } from "./i18n/context";
 
 import Landing from "./pages/Landing";
 import Pricing from "./pages/Pricing";
@@ -31,6 +32,7 @@ import ARTraining from "./pages/app/beta/ARTraining";
 const queryClient = new QueryClient();
 
 const App = () => (
+  <LanguageProvider>
   <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="vascular-atlas-theme">
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -70,6 +72,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>
+  </LanguageProvider>
 );
 
 export default App;

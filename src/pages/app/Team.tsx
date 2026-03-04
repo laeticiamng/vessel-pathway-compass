@@ -1,7 +1,8 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Users, Plus, Mail } from "lucide-react";
+import { Users, Plus } from "lucide-react";
+import { useTranslation } from "@/i18n/context";
 
 const members = [
   { name: "Dr. Smith", email: "smith@hospital.org", role: "Physician", status: "Active" },
@@ -12,19 +13,21 @@ const members = [
 ];
 
 export default function Team() {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-6 max-w-4xl">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
             <Users className="h-8 w-8 text-primary" />
-            Team Management
+            {t("team.title")}
           </h1>
-          <p className="text-muted-foreground mt-1">Manage institution workspace members and roles</p>
+          <p className="text-muted-foreground mt-1">{t("team.subtitle")}</p>
         </div>
         <Button>
           <Plus className="h-4 w-4 mr-2" />
-          Invite Member
+          {t("team.inviteMember")}
         </Button>
       </div>
 
@@ -34,10 +37,10 @@ export default function Team() {
             <table className="w-full">
               <thead>
                 <tr className="border-b">
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">Name</th>
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">Email</th>
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">Role</th>
-                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">Status</th>
+                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.name")}</th>
+                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.email")}</th>
+                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.role")}</th>
+                  <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("team.columns.status")}</th>
                 </tr>
               </thead>
               <tbody>

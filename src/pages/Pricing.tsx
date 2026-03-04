@@ -2,60 +2,24 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, HeartPulse, ArrowLeft } from "lucide-react";
+import { useTranslation } from "@/i18n/context";
 
-const plans = [
-  {
-    name: "Individual",
-    price: "Free",
-    period: "forever",
-    description: "For individual physicians exploring the platform",
-    features: [
-      "AI Clinical Assistant (limited)",
-      "5 patient cases",
-      "Education hub access",
-      "Community forum access",
-    ],
-    cta: "Start Free",
-    popular: false,
-  },
-  {
-    name: "Professional",
-    price: "$99",
-    period: "/month",
-    description: "For practicing vascular physicians",
-    features: [
-      "Unlimited AI Assistant",
-      "Unlimited patient cases",
-      "Digital Twin + Timeline",
-      "Outcomes registry",
-      "Full education + certification",
-      "Simulation lab access",
-      "Expert consultations (5/mo)",
-    ],
-    cta: "Start Trial",
-    popular: true,
-  },
-  {
-    name: "Institution",
-    price: "Custom",
-    period: "per seat",
-    description: "For hospitals and vascular centers",
-    features: [
-      "Everything in Professional",
-      "Multi-tenant workspace",
-      "Aggregate dashboards",
-      "Benchmarking analytics",
-      "Research hub + study builder",
-      "Compliance center",
-      "SSO integration",
-      "Dedicated support",
-    ],
-    cta: "Contact Sales",
-    popular: false,
-  },
-];
+const planKeys = ["individual", "professional", "institution"] as const;
 
 export default function Pricing() {
+  const { t } = useTranslation();
+
+  const plans = planKeys.map((key) => ({
+    key,
+    name: t(`pricing.plans.${key}.name`),
+    price: t(`pricing.plans.${key}.price`),
+    period: t(`pricing.plans.${key}.period`),
+    description: t(`pricing.plans.${key}.desc`),
+    features: (t(`pricing.plans.${key}.features`) as any) as string[],
+    cta: t(`pricing.plans.${key}.cta`),
+    popular: key === "professional",
+  }));
+
   return (
     <div className="min-h-screen bg-background">
       <nav className="border-b">
@@ -70,21 +34,21 @@ export default function Pricing() {
 
       <div className="container mx-auto px-6 py-20">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold mb-4">Plans & Pricing</h1>
+          <h1 className="text-4xl font-bold mb-4">{t("pricing.title")}</h1>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-            From individual physicians to large institutions — find the right plan for your vascular practice.
+            {t("pricing.subtitle")}
           </p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {plans.map((plan) => (
             <Card
-              key={plan.name}
+              key={plan.key}
               className={`relative flex flex-col ${plan.popular ? "border-primary shadow-lg ring-1 ring-primary/20" : ""}`}
             >
               {plan.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                  Most Popular
+                  {t("pricing.mostPopular")}
                 </div>
               )}
               <CardHeader>
@@ -97,8 +61,8 @@ export default function Pricing() {
               </CardHeader>
               <CardContent className="flex-1">
                 <ul className="space-y-3">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
+                  {Array.isArray(plan.features) && plan.features.map((f, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm">
                       <CheckCircle2 className="h-4 w-4 text-success shrink-0 mt-0.5" />
                       {f}
                     </li>

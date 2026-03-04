@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
 import { useLocation } from "react-router-dom";
+import { useTranslation } from "@/i18n/context";
 import {
   Sidebar,
   SidebarContent,
@@ -33,40 +34,42 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-const coreItems = [
-  { title: "Dashboard", url: "/app", icon: LayoutDashboard },
-  { title: "AI Assistant", url: "/app/ai-assistant", icon: Brain },
-  { title: "Patients", url: "/app/patients", icon: HeartPulse },
-  { title: "Digital Twin", url: "/app/digital-twin", icon: Activity },
-  { title: "Registry", url: "/app/registry", icon: LineChart },
-  { title: "Education", url: "/app/education", icon: BookOpen },
-  { title: "Simulation Lab", url: "/app/simulation", icon: FlaskConical },
-  { title: "Expert Network", url: "/app/network", icon: Globe },
-  { title: "Research Hub", url: "/app/research", icon: FileText },
-];
-
-const betaItems = [
-  { title: "Federated Learning", url: "/app/beta/federated", icon: Cpu },
-  { title: "AI Safety", url: "/app/beta/ai-safety", icon: Eye },
-  { title: "Imaging Pipeline", url: "/app/beta/imaging", icon: Image },
-  { title: "Wearables", url: "/app/beta/wearables", icon: Watch },
-  { title: "AR Training", url: "/app/beta/ar-training", icon: Glasses },
-];
-
-const adminItems = [
-  { title: "Compliance", url: "/app/compliance", icon: Shield },
-  { title: "Team", url: "/app/team", icon: Users },
-  { title: "Settings", url: "/app/settings", icon: Settings },
-];
-
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const location = useLocation();
+  const { t } = useTranslation();
+
   const isActive = (path: string) =>
     path === "/app"
       ? location.pathname === "/app"
       : location.pathname.startsWith(path);
+
+  const coreItems = [
+    { title: t("sidebar.dashboard"), url: "/app", icon: LayoutDashboard },
+    { title: t("sidebar.aiAssistant"), url: "/app/ai-assistant", icon: Brain },
+    { title: t("sidebar.patients"), url: "/app/patients", icon: HeartPulse },
+    { title: t("sidebar.digitalTwin"), url: "/app/digital-twin", icon: Activity },
+    { title: t("sidebar.registry"), url: "/app/registry", icon: LineChart },
+    { title: t("sidebar.education"), url: "/app/education", icon: BookOpen },
+    { title: t("sidebar.simulationLab"), url: "/app/simulation", icon: FlaskConical },
+    { title: t("sidebar.expertNetwork"), url: "/app/network", icon: Globe },
+    { title: t("sidebar.researchHub"), url: "/app/research", icon: FileText },
+  ];
+
+  const betaItems = [
+    { title: t("sidebar.federatedLearning"), url: "/app/beta/federated", icon: Cpu },
+    { title: t("sidebar.aiSafety"), url: "/app/beta/ai-safety", icon: Eye },
+    { title: t("sidebar.imagingPipeline"), url: "/app/beta/imaging", icon: Image },
+    { title: t("sidebar.wearables"), url: "/app/beta/wearables", icon: Watch },
+    { title: t("sidebar.arTraining"), url: "/app/beta/ar-training", icon: Glasses },
+  ];
+
+  const adminItems = [
+    { title: t("sidebar.compliance"), url: "/app/compliance", icon: Shield },
+    { title: t("sidebar.team"), url: "/app/team", icon: Users },
+    { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
+  ];
 
   return (
     <Sidebar collapsible="icon">
@@ -85,11 +88,11 @@ export function AppSidebar() {
 
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Clinical</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("sidebar.clinical")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {coreItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url} end={item.url === "/app"}>
                       <item.icon className="h-4 w-4" />
@@ -103,13 +106,11 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>
-            Beta Preview
-          </SidebarGroupLabel>
+          <SidebarGroupLabel>{t("sidebar.betaPreview")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {betaItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url}>
                       <item.icon className="h-4 w-4" />
@@ -123,11 +124,11 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Administration</SidebarGroupLabel>
+          <SidebarGroupLabel>{t("sidebar.administration")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {adminItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url}>
                       <item.icon className="h-4 w-4" />
@@ -144,7 +145,7 @@ export function AppSidebar() {
       <SidebarFooter className="p-3">
         {!collapsed && (
           <p className="text-xs text-muted-foreground text-center">
-            v1.0 MVP · Compliance-Ready
+            {t("common.version")}
           </p>
         )}
       </SidebarFooter>
