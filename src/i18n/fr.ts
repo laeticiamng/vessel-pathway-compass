@@ -655,6 +655,13 @@ export const fr = {
       sso: "Intégration SSO",
       rateLimiting: "Limitation du débit",
     },
+    plan: {
+      title: "Plan & Facturation",
+      desc: "Gérez votre abonnement et vos informations de facturation",
+      currentPlan: "Plan actuel",
+      free: "Gratuit",
+      viewPlans: "Voir les plans",
+    },
   },
 
   federated: {
