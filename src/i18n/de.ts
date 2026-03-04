@@ -353,6 +353,7 @@ export const de = {
     filters: {
       allCategories: "Alle Kategorien",
       allStatuses: "Alle Status",
+      allRisks: "Alle Risiken",
       clearAll: "Filter zurücksetzen",
     },
     risk: {

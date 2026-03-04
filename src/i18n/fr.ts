@@ -353,6 +353,7 @@ export const fr = {
     filters: {
       allCategories: "Toutes les catégories",
       allStatuses: "Tous les statuts",
+      allRisks: "Tous les risques",
       clearAll: "Effacer les filtres",
     },
     risk: {

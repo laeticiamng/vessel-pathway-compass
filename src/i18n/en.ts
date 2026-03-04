@@ -365,6 +365,7 @@ export const en = {
     filters: {
       allCategories: "All Categories",
       allStatuses: "All Statuses",
+      allRisks: "All Risks",
       clearAll: "Clear filters",
     },
     risk: {
