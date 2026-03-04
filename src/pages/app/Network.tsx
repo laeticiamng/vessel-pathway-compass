@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/select";
 import { Globe, MessageSquare, Users, Search, Send, Clock } from "lucide-react";
 import ForumThreadDetail from "@/components/network/ForumThreadDetail";
+import VoteButtons from "@/components/network/VoteButtons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -208,16 +209,19 @@ export default function Network() {
               {!postsLoading && filteredPosts?.map((d) => (
                 <Card key={d.id} className="hover:border-primary/30 transition-colors cursor-pointer" onClick={() => setSelectedPostId(d.id)}>
                   <CardContent className="pt-6 flex items-center justify-between">
-                    <div>
-                      <h3 className="font-semibold">{d.title}</h3>
-                      <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
-                        <Badge variant="outline" className="text-xs">{d.topic}</Badge>
-                        <span className="flex items-center gap-1">
-                          <MessageSquare className="h-3 w-3" /> {d.replyCount}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="h-3 w-3" /> {timeAgo(d.created_at)}
-                        </span>
+                    <div className="flex items-center gap-3">
+                      <VoteButtons postId={d.id} />
+                      <div>
+                        <h3 className="font-semibold">{d.title}</h3>
+                        <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground">
+                          <Badge variant="outline" className="text-xs">{d.topic}</Badge>
+                          <span className="flex items-center gap-1">
+                            <MessageSquare className="h-3 w-3" /> {d.replyCount}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="h-3 w-3" /> {timeAgo(d.created_at)}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </CardContent>

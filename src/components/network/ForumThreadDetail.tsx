@@ -11,6 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import { ArrowLeft, MessageSquare, Clock, Send, User } from "lucide-react";
+import VoteButtons from "@/components/network/VoteButtons";
 import { formatDistanceToNow } from "date-fns";
 
 interface ForumThreadDetailProps {
@@ -134,17 +135,20 @@ export default function ForumThreadDetail({ postId, onBack }: ForumThreadDetailP
       <Card>
         <CardContent className="pt-6 space-y-4">
           <div className="flex items-start justify-between">
-            <div className="space-y-1">
-              <h2 className="text-xl font-bold">{post.title}</h2>
-              <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                <Badge variant="outline">{post.topic}</Badge>
-                <span className="flex items-center gap-1">
-                  <User className="h-3 w-3" /> {getName(post.user_id)}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
-                </span>
+            <div className="flex items-start gap-3">
+              <VoteButtons postId={post.id} className="mt-1" />
+              <div className="space-y-1">
+                <h2 className="text-xl font-bold">{post.title}</h2>
+                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <Badge variant="outline">{post.topic}</Badge>
+                  <span className="flex items-center gap-1">
+                    <User className="h-3 w-3" /> {getName(post.user_id)}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    {formatDistanceToNow(new Date(post.created_at), { addSuffix: true })}
+                  </span>
+                </div>
               </div>
             </div>
             <Badge variant="secondary" className="flex items-center gap-1">
@@ -181,16 +185,21 @@ export default function ForumThreadDetail({ postId, onBack }: ForumThreadDetailP
         {replies?.map((reply) => (
           <Card key={reply.id} className="border-l-2 border-l-primary/30">
             <CardContent className="pt-4 space-y-2">
-              <div className="flex items-center gap-3 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1 font-medium text-foreground">
-                  <User className="h-3 w-3" /> {getName(reply.user_id)}
-                </span>
-                <span className="flex items-center gap-1">
-                  <Clock className="h-3 w-3" />
-                  {formatDistanceToNow(new Date(reply.created_at), { addSuffix: true })}
-                </span>
+              <div className="flex items-start gap-3">
+                <VoteButtons postId={reply.id} className="mt-0.5" />
+                <div className="flex-1 space-y-2">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1 font-medium text-foreground">
+                      <User className="h-3 w-3" /> {getName(reply.user_id)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="h-3 w-3" />
+                      {formatDistanceToNow(new Date(reply.created_at), { addSuffix: true })}
+                    </span>
+                  </div>
+                  <p className="text-sm whitespace-pre-wrap">{reply.content}</p>
+                </div>
               </div>
-              <p className="text-sm whitespace-pre-wrap">{reply.content}</p>
             </CardContent>
           </Card>
         ))}
