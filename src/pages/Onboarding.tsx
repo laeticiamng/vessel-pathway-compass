@@ -131,7 +131,8 @@ export default function Onboarding() {
         }
       }
 
-      queryClient.invalidateQueries({ queryKey: ["profile"] });
+      await queryClient.invalidateQueries({ queryKey: ["profile-onboarding"] });
+      await queryClient.invalidateQueries({ queryKey: ["profile"] });
       toast.success(t("onboarding.complete"));
       navigate("/app");
     } catch {
