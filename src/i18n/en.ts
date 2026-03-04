@@ -598,6 +598,16 @@ export const en = {
       active: "Active",
       draft: "Draft",
     },
+    empty: "No studies yet. Create your first study to get started.",
+    studyCreated: "Study created successfully",
+    newStudyDesc: "Create a new research study",
+    form: {
+      title: "Study Title",
+      titlePlaceholder: "e.g. PAD Outcomes Multicenter Study",
+      description: "Description",
+      descPlaceholder: "Describe the study objectives...",
+      status: "Status",
+    },
   },
 
   // Compliance
@@ -672,6 +682,16 @@ export const en = {
   settings: {
     title: "Settings",
     subtitle: "Institution, integrations, and preferences",
+    profile: {
+      title: "Profile",
+      desc: "Your personal information",
+      displayName: "Display Name",
+      displayNamePlaceholder: "Dr. Jane Smith",
+      role: "Role",
+      rolePlaceholder: "e.g. Vascular Surgeon",
+      institution: "Institution",
+      saved: "Profile saved",
+    },
     institution: {
       title: "Institution",
       name: "Institution Name",
