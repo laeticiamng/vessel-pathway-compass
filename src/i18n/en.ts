@@ -349,10 +349,39 @@ export const en = {
       simulation: "Simulation",
       carePlan: "Care Plan",
     },
-    vascularMapPlaceholder: "Interactive vascular map — select a patient to visualize arterial and venous anatomy with lesion overlay",
-    simulationPlaceholder: "Scenario Comparison Engine — model treatment outcomes against baseline using patient-specific parameters",
+    vascularMap: {
+      title: "Vascular Map",
+      placeholder: "Interactive vascular map — select a patient to visualize arterial and venous anatomy with lesion overlay",
+    },
+    simulationEngine: {
+      title: "Scenario Comparison Engine",
+      placeholder: "Scenario Comparison Engine — model treatment outcomes against baseline using patient-specific parameters",
+    },
     carePlan: {
       title: "Active Care Plan Goals",
+      goals: {
+        walking: "Walking Distance > 500m",
+        walkingDue: "Due: Mar 2026",
+        walkingStatus: "In Progress",
+        abi: "ABI > 0.9",
+        abiDue: "Due: Apr 2026",
+        abiStatus: "Planned",
+        smoking: "Smoking Cessation",
+        smokingDue: "Ongoing",
+        smokingStatus: "Achieved",
+      },
+    },
+    timeline: {
+      events: {
+        initialAssessment: "Initial Assessment",
+        initialDetail: "ABI 0.65 right, 0.82 left. Monophasic flow SFA.",
+        duplexUltrasound: "Duplex Ultrasound",
+        duplexDetail: "SFA occlusion confirmed. Popliteal patent.",
+        ctAngiography: "CT Angiography",
+        ctDetail: "TASC C lesion right SFA. Planning intervention.",
+        intervention: "Endovascular Intervention",
+        interventionDetail: "SFA angioplasty + stent. Good result.",
+      },
     },
   },
 
@@ -386,7 +415,7 @@ export const en = {
   // Education
   education: {
     title: "Education Hub",
-    subtitle: "Competency tracks, micro-lessons, and certification for vascular medicine",
+    subtitle: "Competency tracks, certification, and CME credits",
     cmeCredits: "CME Credits",
     stats: {
       modulesCompleted: "Modules Completed",
@@ -394,24 +423,62 @@ export const en = {
       tracksInProgress: "Tracks in Progress",
     },
     tracks: "Competency Tracks",
+    moduleDesc: "modules · Micro-lessons, quizzes, logbook, OSCE",
     digitalBadges: "Digital Badges",
     badges: {
       verified: "Verified",
       inProgress: "In Progress",
     },
+    trackNames: {
+      vascularUltrasound: "Vascular Ultrasound",
+      padLimb: "PAD / Limb Preservation",
+      aorta: "Aorta",
+      venous: "Venous Disease",
+      thrombosis: "Thrombosis",
+    },
+    badgeDetails: {
+      ultrasoundLevel1: "Vascular Ultrasound — Level 1",
+      completedDate: "Completed: Jan 2026 · Validated by Dr. Expert",
+      padInProgress: "PAD / Limb Preservation — In Progress",
+      padProgress: "30% complete · 11 modules remaining",
+    },
+    badgesDesc: "Internal credentials with verifiable metadata",
   },
 
   // Simulation
   simulation: {
     title: "Clinical Simulation Lab",
-    subtitle: "Interactive branching cases with rubric-constrained AI feedback",
+    subtitle: "Interactive branching cases with AI-powered feedback",
     tabs: {
       cases: "Case Library",
       heatmap: "Skill Heatmap",
       authoring: "Case Authoring",
     },
-    authoringPlaceholder: "Create branching case scenarios with decision points, rubric scoring, and AI feedback triggers.",
+    heatmap: {
+      title: "Skill Heatmap",
+      subtitle: "Performance across key competency areas",
+    },
+    authoring: {
+      title: "Case Authoring Tool",
+      subtitle: "Create branching clinical scenarios with rubrics and feedback",
+      placeholder: "Visual case scenario builder",
+      placeholderDesc: "Define branches, scoring rubrics, and structured feedback",
+    },
     createCase: "Create New Case",
+    cases: {
+      acuteLimb: "Acute Limb Ischemia — Emergency Triage",
+      chronicPAD: "Chronic PAD — Outpatient Assessment",
+      rupturedAAA: "Ruptured AAA — Decision Making",
+      dvt: "DVT Diagnosis & Management",
+      carotid: "Carotid Stenosis — Pre-op Workup",
+    },
+    difficulty: { hard: "Hard", medium: "Medium", easy: "Easy" },
+    skills: {
+      triageAccuracy: "Triage Accuracy",
+      safetySteps: "Safety Steps",
+      documentation: "Documentation",
+      communication: "Communication",
+    },
   },
 
   // Network
@@ -435,12 +502,20 @@ export const en = {
   // Research
   research: {
     title: "Research Hub",
-    subtitle: "Design studies, manage cohorts, and export de-identified datasets",
+    subtitle: "Study builder, analytics, and de-identified data exports",
     newStudy: "New Study",
     stats: {
       activeStudies: "Active Studies",
       eligiblePatients: "Eligible Patients",
       dataExports: "Data Exports",
+    },
+    members: "members",
+    eligible: "eligible",
+    pi: "PI",
+    statuses: {
+      recruiting: "Recruiting",
+      active: "Active",
+      draft: "Draft",
     },
   },
 
@@ -523,11 +598,14 @@ export const en = {
   // Beta: Federated Learning
   federated: {
     title: "Federated Learning",
-    subtitle: "Privacy-preserving multi-institution model training. Each node trains locally and shares only model updates — no raw data leaves the institution.",
+    subtitle: "Privacy-preserving collaborative AI training — model updates shared, data stays local.",
     optIn: {
       title: "Institution Opt-in",
-      desc: "Enable federated participation. Your institution contributes model gradients — never raw patient data.",
-      toggle: "Participate in Federated Training",
+      desc: "Enable your institution to participate in federated learning",
+      toggle: "Participate in Federated Learning",
+      toggleDesc: "Training happens locally, only model updates are shared",
+      ethicsApproval: "Ethics Approval",
+      ethicsDesc: "Upload ethics committee approval documentation",
     },
     status: {
       title: "Federated Node Status",
@@ -595,13 +673,110 @@ export const en = {
   // Beta: AR Training
   arTraining: {
     title: "Immersive Training (AR)",
-    subtitle: "Augmented-reality checklist mode and station-based procedural training concepts.",
+    subtitle: "AR checklist mode and station-based ultrasound training concepts.",
     checklist: {
       title: "AR Checklist Mode",
+      subtitle: "Step-by-step procedural checklist overlay concept",
+      steps: {
+        s1: "Patient identification & consent",
+        s2: "Equipment preparation & probe selection",
+        s3: "Anatomical landmark identification",
+        s4: "Systematic vessel scanning protocol",
+        s5: "Measurement acquisition & documentation",
+        s6: "Report generation & sign-off",
+      },
     },
     station: {
       title: "Station-Based Training",
-      placeholder: "Ultrasound-guided station training — coming soon",
+      subtitle: "Ultrasound acquisition training stations — mock concept UI",
+      placeholder: "Station-based ultrasound training environment — coming soon",
+    },
+  },
+
+  // Patient Detail
+  patientDetail: {
+    back: "Back",
+    notFound: "Patient not found.",
+    age: "Age",
+    cases: "Cases",
+    timelineEvents: "Timeline Events",
+    measurementsCount: "Measurements",
+    tabs: {
+      timeline: "Timeline",
+      measurements: "Measurements",
+      cases: "Cases",
+    },
+    caseTimeline: "Case Timeline",
+    addEvent: "Add Event",
+    addFirstEvent: "Add First Event",
+    noEvents: "No timeline events yet",
+    measurements: "Measurements",
+    addMeasurement: "Add Measurement",
+    addFirstMeasurement: "Add First Measurement",
+    noMeasurements: "No measurements recorded",
+    associatedCases: "Associated Cases",
+    noCases: "No cases found",
+    table: {
+      type: "Type",
+      value: "Value",
+      unit: "Unit",
+      site: "Site",
+      date: "Date",
+    },
+    editDialog: {
+      title: "Edit Patient",
+      desc: "Update pseudonymized patient information",
+      pseudonym: "Pseudonym",
+      ageRange: "Age Range",
+      sex: "Sex",
+      male: "Male",
+      female: "Female",
+      selectPlaceholder: "Select",
+    },
+    eventDialog: {
+      title: "Add Timeline Event",
+      desc: "Record a clinical event for this patient",
+      titleLabel: "Title",
+      titlePlaceholder: "e.g. Duplex ultrasound",
+      eventType: "Event Type",
+      selectType: "Select type",
+      procedure: "Procedure",
+      imaging: "Imaging",
+      lab: "Lab Result",
+      note: "Clinical Note",
+      medication: "Medication Change",
+      description: "Description (optional)",
+      descPlaceholder: "Additional details...",
+    },
+    measDialog: {
+      title: "Add Measurement",
+      desc: "Record a clinical measurement",
+      type: "Type",
+      selectType: "Select type",
+      abi: "ABI",
+      tbi: "TBI",
+      diameter: "Diameter (mm)",
+      stenosis: "Stenosis (%)",
+      velocity: "Peak Velocity (cm/s)",
+      walkingDistance: "Walking Distance (m)",
+      value: "Value",
+      valuePlaceholder: "0.65",
+      unit: "Unit",
+      unitPlaceholder: "e.g. ratio, mm, %",
+      site: "Site (optional)",
+      sitePlaceholder: "e.g. Right SFA, Left ATA",
+    },
+    toasts: {
+      updated: "Updated",
+      updatedDesc: "Patient information saved",
+      added: "Added",
+      eventAdded: "Timeline event created",
+      measAdded: "Measurement recorded",
+    },
+    timeAgo: {
+      today: "Today",
+      yesterday: "Yesterday",
+      daysAgo: "d ago",
     },
   },
 };

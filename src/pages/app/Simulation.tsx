@@ -2,51 +2,54 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FlaskConical, Play, Timer, BarChart3, Pencil, Brain, Target, Shield, MessageSquare } from "lucide-react";
+import { FlaskConical, Play, Timer, Pencil } from "lucide-react";
+import { useTranslation } from "@/i18n/context";
 
 const cases = [
-  { title: "Acute Limb Ischemia — Emergency Triage", difficulty: "Hard", duration: "8 min", type: "OSCE" },
-  { title: "Chronic PAD — Outpatient Assessment", difficulty: "Medium", duration: "15 min", type: "Learning" },
-  { title: "Ruptured AAA — Decision Making", difficulty: "Hard", duration: "8 min", type: "OSCE" },
-  { title: "DVT Diagnosis & Management", difficulty: "Easy", duration: "12 min", type: "Learning" },
-  { title: "Carotid Stenosis — Pre-op Workup", difficulty: "Medium", duration: "10 min", type: "OSCE" },
+  { titleKey: "acuteLimb" as const, diffKey: "hard" as const, duration: "8 min", type: "OSCE" },
+  { titleKey: "chronicPAD" as const, diffKey: "medium" as const, duration: "15 min", type: "Learning" },
+  { titleKey: "rupturedAAA" as const, diffKey: "hard" as const, duration: "8 min", type: "OSCE" },
+  { titleKey: "dvt" as const, diffKey: "easy" as const, duration: "12 min", type: "Learning" },
+  { titleKey: "carotid" as const, diffKey: "medium" as const, duration: "10 min", type: "OSCE" },
 ];
 
-const heatmapData = [
-  { skill: "Triage Accuracy", score: 87, color: "bg-success" },
-  { skill: "Safety Steps", score: 92, color: "bg-success" },
-  { skill: "Documentation", score: 74, color: "bg-warning" },
-  { skill: "Communication", score: 68, color: "bg-destructive" },
+const heatmapKeys = [
+  { key: "triageAccuracy" as const, score: 87, color: "bg-success" },
+  { key: "safetySteps" as const, score: 92, color: "bg-success" },
+  { key: "documentation" as const, score: 74, color: "bg-warning" },
+  { key: "communication" as const, score: 68, color: "bg-destructive" },
 ];
 
 export default function Simulation() {
+  const { t } = useTranslation();
+
   return (
     <div className="space-y-6 max-w-6xl">
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">
           <FlaskConical className="h-8 w-8 text-primary" />
-          Clinical Simulation Lab
+          {t("simulation.title")}
         </h1>
-        <p className="text-muted-foreground mt-1">Interactive branching cases with AI-powered feedback</p>
+        <p className="text-muted-foreground mt-1">{t("simulation.subtitle")}</p>
       </div>
 
       <Tabs defaultValue="cases">
         <TabsList>
-          <TabsTrigger value="cases">Case Library</TabsTrigger>
-          <TabsTrigger value="heatmap">Skill Heatmap</TabsTrigger>
-          <TabsTrigger value="authoring">Case Authoring</TabsTrigger>
+          <TabsTrigger value="cases">{t("simulation.tabs.cases")}</TabsTrigger>
+          <TabsTrigger value="heatmap">{t("simulation.tabs.heatmap")}</TabsTrigger>
+          <TabsTrigger value="authoring">{t("simulation.tabs.authoring")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="cases" className="mt-6 space-y-4">
           {cases.map((c) => (
-            <Card key={c.title} className="hover:border-primary/30 transition-colors">
+            <Card key={c.titleKey} className="hover:border-primary/30 transition-colors">
               <CardContent className="pt-6 flex items-center justify-between">
                 <div className="flex items-center gap-4">
                   <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
                     <FlaskConical className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <h3 className="font-semibold">{c.title}</h3>
+                    <h3 className="font-semibold">{t(`simulation.cases.${c.titleKey}`)}</h3>
                     <div className="flex items-center gap-2 mt-1">
                       <Badge variant="secondary" className="text-xs">{c.type}</Badge>
                       <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -55,19 +58,19 @@ export default function Simulation() {
                       <Badge
                         variant="outline"
                         className={`text-xs ${
-                          c.difficulty === "Hard" ? "border-destructive/50 text-destructive" :
-                          c.difficulty === "Medium" ? "border-warning/50 text-warning" :
+                          c.diffKey === "hard" ? "border-destructive/50 text-destructive" :
+                          c.diffKey === "medium" ? "border-warning/50 text-warning" :
                           "border-success/50 text-success"
                         }`}
                       >
-                        {c.difficulty}
+                        {t(`simulation.difficulty.${c.diffKey}`)}
                       </Badge>
                     </div>
                   </div>
                 </div>
                 <Button size="sm">
                   <Play className="h-3.5 w-3.5 mr-1" />
-                  Start
+                  {t("common.start")}
                 </Button>
               </CardContent>
             </Card>
@@ -77,14 +80,14 @@ export default function Simulation() {
         <TabsContent value="heatmap" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Skill Heatmap</CardTitle>
-              <CardDescription>Performance across key competency areas</CardDescription>
+              <CardTitle>{t("simulation.heatmap.title")}</CardTitle>
+              <CardDescription>{t("simulation.heatmap.subtitle")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {heatmapData.map((skill) => (
-                <div key={skill.skill} className="space-y-2">
+              {heatmapKeys.map((skill) => (
+                <div key={skill.key} className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">{skill.skill}</span>
+                    <span className="text-sm font-medium">{t(`simulation.skills.${skill.key}`)}</span>
                     <span className="text-sm font-bold">{skill.score}%</span>
                   </div>
                   <div className="h-3 rounded-full bg-muted overflow-hidden">
@@ -101,18 +104,18 @@ export default function Simulation() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Pencil className="h-5 w-5" />
-                Case Authoring Tool
+                {t("simulation.authoring.title")}
               </CardTitle>
-              <CardDescription>Create branching clinical scenarios with rubrics and feedback</CardDescription>
+              <CardDescription>{t("simulation.authoring.subtitle")}</CardDescription>
             </CardHeader>
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center text-muted-foreground">
                 <Pencil className="h-12 w-12 mx-auto mb-4 opacity-30" />
-                <p>Visual case scenario builder</p>
-                <p className="text-sm mt-1">Define branches, scoring rubrics, and structured feedback</p>
+                <p>{t("simulation.authoring.placeholder")}</p>
+                <p className="text-sm mt-1">{t("simulation.authoring.placeholderDesc")}</p>
                 <Button variant="outline" className="mt-4">
                   <Pencil className="h-3.5 w-3.5 mr-1" />
-                  Create New Case
+                  {t("simulation.createCase")}
                 </Button>
               </div>
             </CardContent>
