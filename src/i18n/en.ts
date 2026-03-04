@@ -929,4 +929,11 @@ export const en = {
       daysAgo: "d ago",
     },
   },
+
+  contentGate: {
+    title: "Sign in to access the full content",
+    subtitle: "Create a free account or subscribe to unlock all features and data.",
+    signIn: "Sign In",
+    viewPlans: "View Plans",
+  },
 };

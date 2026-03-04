@@ -903,4 +903,11 @@ export const de = {
       daysAgo: "T",
     },
   },
+
+  contentGate: {
+    title: "Melden Sie sich an, um den vollständigen Inhalt zu sehen",
+    subtitle: "Erstellen Sie ein kostenloses Konto oder abonnieren Sie, um alle Funktionen und Daten freizuschalten.",
+    signIn: "Anmelden",
+    viewPlans: "Pläne ansehen",
+  },
 };

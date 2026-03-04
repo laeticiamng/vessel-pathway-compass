@@ -12,6 +12,8 @@ import Pricing from "./pages/Pricing";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { PublicAppRoute } from "./components/PublicAppRoute";
+import { ContentGate } from "./components/ContentGate";
 import Dashboard from "./pages/app/Dashboard";
 import AIAssistant from "./pages/app/AIAssistant";
 import Patients from "./pages/app/Patients";
@@ -48,26 +50,30 @@ const App = () => (
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/auth" element={<Auth />} />
 
-          {/* App (authenticated) */}
+          {/* Semi-public: visible at 35% without auth */}
+          <Route path="/app" element={<PublicAppRoute />}>
+            <Route index element={<ContentGate><Dashboard /></ContentGate>} />
+            <Route path="ai-assistant" element={<ContentGate><AIAssistant /></ContentGate>} />
+            <Route path="digital-twin" element={<ContentGate><DigitalTwin /></ContentGate>} />
+            <Route path="registry" element={<ContentGate><Registry /></ContentGate>} />
+            <Route path="education" element={<ContentGate><Education /></ContentGate>} />
+            <Route path="simulation" element={<ContentGate><Simulation /></ContentGate>} />
+            <Route path="network" element={<ContentGate><Network /></ContentGate>} />
+            <Route path="research" element={<ContentGate><Research /></ContentGate>} />
+            <Route path="compliance" element={<ContentGate><Compliance /></ContentGate>} />
+            <Route path="team" element={<ContentGate><Team /></ContentGate>} />
+            <Route path="beta/federated" element={<ContentGate><FederatedLearning /></ContentGate>} />
+            <Route path="beta/ai-safety" element={<ContentGate><AISafety /></ContentGate>} />
+            <Route path="beta/imaging" element={<ContentGate><Imaging /></ContentGate>} />
+            <Route path="beta/wearables" element={<ContentGate><Wearables /></ContentGate>} />
+            <Route path="beta/ar-training" element={<ContentGate><ARTraining /></ContentGate>} />
+          </Route>
+
+          {/* Fully protected: sensitive data */}
           <Route path="/app" element={<ProtectedRoute />}>
-            <Route index element={<Dashboard />} />
-            <Route path="ai-assistant" element={<AIAssistant />} />
             <Route path="patients" element={<Patients />} />
             <Route path="patients/:id" element={<PatientDetail />} />
-            <Route path="digital-twin" element={<DigitalTwin />} />
-            <Route path="registry" element={<Registry />} />
-            <Route path="education" element={<Education />} />
-            <Route path="simulation" element={<Simulation />} />
-            <Route path="network" element={<Network />} />
-            <Route path="research" element={<Research />} />
-            <Route path="compliance" element={<Compliance />} />
-            <Route path="team" element={<Team />} />
             <Route path="settings" element={<Settings />} />
-            <Route path="beta/federated" element={<FederatedLearning />} />
-            <Route path="beta/ai-safety" element={<AISafety />} />
-            <Route path="beta/imaging" element={<Imaging />} />
-            <Route path="beta/wearables" element={<Wearables />} />
-            <Route path="beta/ar-training" element={<ARTraining />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />
