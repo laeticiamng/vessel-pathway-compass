@@ -908,6 +908,8 @@ export const en = {
       restore: "Restore",
       deletePermanently: "Delete permanently",
       deletedOn: "Deleted",
+      expiresOn: "Expires",
+      daysLeft: "d left",
       permanentDeleteDialog: {
         title: "Permanently Delete Patient",
         desc: "This will permanently delete this patient and all associated cases, events, and measurements. This action cannot be undone.",

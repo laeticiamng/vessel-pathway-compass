@@ -87,24 +87,31 @@ export default function PatientTrash() {
     <div className="space-y-3">
       {deletedPatients.map((p) => {
         const deletedAt = (p as any).deleted_at ? new Date((p as any).deleted_at) : null;
-        const daysRemaining = deletedAt
-          ? Math.max(0, 30 - Math.floor((Date.now() - deletedAt.getTime()) / (1000 * 60 * 60 * 24)))
+        const expiresAt = deletedAt ? new Date(deletedAt.getTime() + 30 * 24 * 60 * 60 * 1000) : null;
+        const daysRemaining = expiresAt
+          ? Math.max(0, Math.ceil((expiresAt.getTime() - Date.now()) / (1000 * 60 * 60 * 24)))
           : 30;
+        const isUrgent = daysRemaining <= 7;
 
         return (
-          <Card key={p.id} className="border-dashed border-destructive/30">
+          <Card key={p.id} className={`border-dashed ${isUrgent ? "border-destructive/60" : "border-destructive/30"}`}>
             <CardContent className="pt-6 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <Trash2 className="h-4 w-4 text-destructive/60" />
+                <Trash2 className={`h-4 w-4 ${isUrgent ? "text-destructive" : "text-destructive/60"}`} />
                 <div>
                   <h3 className="font-semibold">{p.pseudonym}</h3>
-                  <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 mt-1 text-xs text-muted-foreground">
                     {deletedAt && (
-                      <span>{t("patientDetail.trash.deletedOn")} {deletedAt.toLocaleDateString()}</span>
+                      <span>{t("patientDetail.trash.deletedOn")} {deletedAt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}</span>
                     )}
-                    <Badge variant="outline" className="text-xs">
+                    {expiresAt && (
+                      <span className={isUrgent ? "text-destructive font-medium" : ""}>
+                        {t("patientDetail.trash.expiresOn")} {expiresAt.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                      </span>
+                    )}
+                    <Badge variant={isUrgent ? "destructive" : "outline"} className="text-xs w-fit">
                       <AlertTriangle className="h-3 w-3 mr-1" />
-                      {daysRemaining}d remaining
+                      {daysRemaining}{t("patientDetail.trash.daysLeft")}
                     </Badge>
                   </div>
                 </div>

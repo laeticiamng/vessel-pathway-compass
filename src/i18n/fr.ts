@@ -882,6 +882,8 @@ export const fr = {
       restore: "Restaurer",
       deletePermanently: "Supprimer définitivement",
       deletedOn: "Supprimé",
+      expiresOn: "Expire",
+      daysLeft: "j restants",
       permanentDeleteDialog: {
         title: "Supprimer définitivement le patient",
         desc: "Cela supprimera définitivement ce patient et toutes les données associées. Cette action est irréversible.",
