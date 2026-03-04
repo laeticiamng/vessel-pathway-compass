@@ -1,97 +1,45 @@
 
 
-# Internationalization (EN/FR/DE) + Complete Page Content
+# Wire Compliance Center to Real Database Data
 
-## Approach
+## What Changes
 
-Create a lightweight i18n system using React Context + JSON translation dictionaries. No external library needed — the app has ~20 pages with moderate text volume, and a custom hook `useTranslation()` keeps things simple and fast.
+Replace all hardcoded mock data in `Compliance.tsx` with live queries to `audit_logs`, `ai_outputs`, and `consents` tables.
 
-## Architecture
+## Implementation
 
-```text
-src/
-├── i18n/
-│   ├── context.tsx         # LanguageProvider + useTranslation hook
-│   ├── en.ts               # English translations (~600 keys)
-│   ├── fr.ts               # French translations
-│   └── de.ts               # German translations
-```
+### 1. Compliance.tsx — Full Rewrite of Data Layer
 
-- `LanguageProvider` wraps the app, stores language in localStorage
-- `useTranslation()` returns `{ t, language, setLanguage }` where `t("key")` returns the translated string
-- Language switcher added to the AppLayout top bar (dropdown with EN/FR/DE flags)
+- Import `supabase` client and `useQuery` from TanStack
+- **Audit Log tab**: Fetch from `audit_logs` table ordered by `created_at desc`, limit 50. Display `action`, `entity_type` as badge, `details` JSONB for status, and formatted timestamp.
+- **Stats cards**: 
+  - Audit Events count → `audit_logs` count
+  - AI Outputs Logged → `ai_outputs` count
+  - Pending Sign-offs → `ai_outputs` count where `user_signoff = false`
+  - Consent Records → `consents` count
+- **Consent tab**: Fetch from `consents` table joined through patient ownership. Group by `consent_type`, show granted/revoked status.
+- **AI Safety tab**: 
+  - Fetch latest `model_version` from `ai_outputs`
+  - Calculate sign-off rate: `count(user_signoff=true) / count(*)` from `ai_outputs`
+  - Count issues: `ai_outputs` where `user_signoff = false`
 
-## Translation Key Structure
+### 2. Empty States
 
-Organized by page/section for maintainability:
+When no data exists yet, show a friendly "No audit logs recorded yet" message with an icon, rather than an empty table.
 
-```text
-landing.hero.title = "Vascular Atlas"
-landing.hero.subtitle = "Unifying clinical workflow..."
-dashboard.title = "Dashboard"
-dashboard.welcome = "Welcome back. Here's your clinical overview."
-dashboard.quickActions.newPatient = "New Patient Case"
-aiAssistant.title = "AI Clinical Assistant"
-aiAssistant.disclaimer.title = "AI-Generated Content — Not a Diagnosis"
-patients.title = "Patient Cases"
-patients.columns.caseId = "Case ID"
-...
-```
+### 3. Pagination
 
-## Files to Create
+Add simple "Load More" button for audit logs (fetch in pages of 50).
 
-1. **`src/i18n/en.ts`** — Complete English dictionary with all text from every page (~600+ keys covering Landing, Pricing, Auth, Dashboard, AI Assistant, Patients, Digital Twin, Registry, Education, Simulation, Network, Research, Compliance, Team, Settings, and all 5 Beta pages)
+### 4. i18n
 
-2. **`src/i18n/fr.ts`** — Full French translation of all keys (professional medical French)
+The page currently uses hardcoded English strings. Will use `useTranslation()` hook with existing translation keys from `compliance.*` namespace.
 
-3. **`src/i18n/de.ts`** — Full German translation of all keys (professional medical German)
+## Files Modified
 
-4. **`src/i18n/context.tsx`** — React context with:
-   - `LanguageProvider` component (wraps app, persists to localStorage)
-   - `useTranslation()` hook returning `{ t, language, setLanguage }`
-   - Type-safe language union: `"en" | "fr" | "de"`
+- `src/pages/app/Compliance.tsx` — replace mock data with Supabase queries, add loading/empty states, integrate i18n
 
-## Files to Modify
+## No Schema Changes Needed
 
-5. **`src/App.tsx`** — Wrap with `<LanguageProvider>`
-
-6. **`src/components/layout/AppLayout.tsx`** — Add language switcher dropdown (EN/FR/DE) in top bar
-
-7. **`src/components/layout/AppSidebar.tsx`** — Translate all sidebar navigation labels
-
-8. **`src/components/CommandPalette.tsx`** — Translate command labels
-
-9. **All 20 page files** — Replace hardcoded strings with `t("key")` calls:
-   - `Landing.tsx`, `Pricing.tsx`, `Auth.tsx`, `NotFound.tsx`
-   - `Dashboard.tsx`, `AIAssistant.tsx`, `Patients.tsx`, `DigitalTwin.tsx`
-   - `Registry.tsx`, `Education.tsx`, `Simulation.tsx`, `Network.tsx`
-   - `Research.tsx`, `Compliance.tsx`, `Team.tsx`, `Settings.tsx`
-   - `beta/FederatedLearning.tsx`, `beta/AISafety.tsx`, `beta/Imaging.tsx`, `beta/Wearables.tsx`, `beta/ARTraining.tsx`
-
-## Content Completion
-
-While integrating translations, all pages will receive complete, rich content:
-
-- **Landing**: Full hero copy, detailed module descriptions, trust signals, CTA sections
-- **Pricing**: Complete feature lists per tier, comparison details
-- **Dashboard**: Full activity descriptions, module descriptions
-- **AI Assistant**: Complete disclaimer text, form labels, evidence panel content
-- **Patients**: Complete table headers, status labels, search placeholders
-- **Digital Twin**: Timeline descriptions, care plan goals, vascular map description
-- **Registry**: Complete outcome categories, benchmarking descriptions
-- **Education**: Track descriptions, badge metadata, CME details
-- **Simulation**: Case descriptions, skill heatmap labels, authoring tool description
-- **Network**: Discussion content, expert profiles, mentorship descriptions
-- **Research**: Study descriptions, analytics labels
-- **Compliance**: Audit log labels, consent items, AI safety metrics
-- **Team**: Role labels, status labels, invite workflow text
-- **Settings**: All form labels, section descriptions
-- **Beta pages**: Complete concept descriptions in all 3 languages
-
-## Language Switcher UI
-
-A compact dropdown in the top bar next to the theme toggle:
-- Shows current language as 2-letter code (EN/FR/DE)
-- Dropdown with flag emoji + full language name
-- Persists selection to localStorage key `vascular-atlas-lang`
+All required tables (`audit_logs`, `ai_outputs`, `consents`) and RLS policies already exist.
 
