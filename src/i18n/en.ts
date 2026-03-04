@@ -318,6 +318,7 @@ export const en = {
     subtitle: "Manage pseudonymized vascular patient records",
     newCase: "New Case",
     searchPlaceholder: "Search cases...",
+    empty: "No patient cases yet",
     columns: {
       caseId: "Case ID",
       category: "Category",
@@ -325,6 +326,16 @@ export const en = {
       abi: "ABI",
       risk: "Risk",
       lastVisit: "Last Visit",
+    },
+    form: {
+      description: "Create a new pseudonymized patient case",
+      pseudonym: "Pseudonym",
+      ageRange: "Age Range",
+      sex: "Sex",
+      male: "Male",
+      female: "Female",
+      category: "Category",
+      caseTitle: "Case Title",
     },
   },
 
