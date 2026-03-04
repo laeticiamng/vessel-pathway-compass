@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState, useCallback } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
@@ -17,7 +17,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import {
-  ArrowLeft, BookOpen, CheckCircle2, HelpCircle, Plus, Trash2, GripVertical,
+  ArrowLeft, BookOpen, CheckCircle2, HelpCircle, Plus, Trash2, GripVertical, Award, Download, Loader2,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -68,6 +68,115 @@ export default function CourseDetail({ course, modules, quizzes, attempts, onBac
   ]);
 
   const isAuthor = user?.id === course.created_by;
+  const [certGenerating, setCertGenerating] = useState(false);
+
+  // Fetch user profile for certificate
+  const { data: profile } = useQuery({
+    queryKey: ["profile", user?.id],
+    queryFn: async () => {
+      const { data } = await supabase
+        .from("profiles")
+        .select("display_name, specialty, institution")
+        .eq("user_id", user!.id)
+        .single();
+      return data;
+    },
+    enabled: !!user,
+  });
+
+  const handleDownloadCertificate = useCallback(async () => {
+    setCertGenerating(true);
+    try {
+      const jsPDF = (await import("jspdf")).default;
+      const pdf = new jsPDF("landscape", "mm", "a4");
+      const w = pdf.internal.pageSize.getWidth();
+      const h = pdf.internal.pageSize.getHeight();
+
+      // Background
+      pdf.setFillColor(15, 23, 42); // slate-900
+      pdf.rect(0, 0, w, h, "F");
+
+      // Border frame
+      pdf.setDrawColor(59, 130, 246); // blue-500
+      pdf.setLineWidth(1.5);
+      pdf.rect(12, 12, w - 24, h - 24);
+      pdf.setDrawColor(148, 163, 184); // slate-400
+      pdf.setLineWidth(0.3);
+      pdf.rect(16, 16, w - 32, h - 32);
+
+      // Header ornament
+      pdf.setFillColor(59, 130, 246);
+      pdf.circle(w / 2, 38, 14, "F");
+      pdf.setTextColor(255, 255, 255);
+      pdf.setFontSize(18);
+      pdf.text("✓", w / 2, 43, { align: "center" });
+
+      // Title
+      pdf.setTextColor(226, 232, 240); // slate-200
+      pdf.setFontSize(12);
+      pdf.text("CERTIFICATE OF COMPLETION", w / 2, 62, { align: "center" });
+
+      // Decorative line
+      pdf.setDrawColor(59, 130, 246);
+      pdf.setLineWidth(0.5);
+      pdf.line(w / 2 - 50, 67, w / 2 + 50, 67);
+
+      // Recipient name
+      const recipientName = profile?.display_name || user?.email || "Participant";
+      pdf.setTextColor(255, 255, 255);
+      pdf.setFontSize(28);
+      pdf.text(recipientName, w / 2, 85, { align: "center" });
+
+      // Body text
+      pdf.setTextColor(148, 163, 184);
+      pdf.setFontSize(11);
+      pdf.text("has successfully completed the course", w / 2, 98, { align: "center" });
+
+      // Course title
+      pdf.setTextColor(96, 165, 250); // blue-400
+      pdf.setFontSize(20);
+      const courseTitle = course.title.length > 50 ? course.title.slice(0, 48) + "…" : course.title;
+      pdf.text(courseTitle, w / 2, 112, { align: "center" });
+
+      // Track + difficulty
+      pdf.setTextColor(148, 163, 184);
+      pdf.setFontSize(10);
+      pdf.text(
+        `Track: ${course.track.replace("-", " ")}  •  Level: ${course.difficulty}  •  Duration: ${course.duration_hours ?? "N/A"}h`,
+        w / 2, 122, { align: "center" }
+      );
+
+      // Date
+      pdf.setFontSize(10);
+      pdf.text(
+        `Issued on ${new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}`,
+        w / 2, 135, { align: "center" }
+      );
+
+      // Institution
+      if (profile?.institution) {
+        pdf.setFontSize(9);
+        pdf.text(profile.institution, w / 2, 143, { align: "center" });
+      }
+
+      // Footer
+      pdf.setDrawColor(59, 130, 246);
+      pdf.setLineWidth(0.3);
+      pdf.line(40, 160, w - 40, 160);
+      pdf.setTextColor(100, 116, 139);
+      pdf.setFontSize(8);
+      pdf.text("Vascular Atlas — Continuing Medical Education Platform", w / 2, 168, { align: "center" });
+      pdf.text("This certificate verifies completion of all course modules and assessments.", w / 2, 174, { align: "center" });
+
+      pdf.save(`certificate-${course.track}-${new Date().toISOString().slice(0, 10)}.pdf`);
+      toast.success(t("education.certificate.downloaded"));
+    } catch (err) {
+      console.error("Certificate generation failed:", err);
+      toast.error(t("education.certificate.error"));
+    } finally {
+      setCertGenerating(false);
+    }
+  }, [course, profile, user, t]);
 
   const activeQuiz = quizzes.find((q) => q.id === activeQuizId);
   const questions: QuizQuestion[] =
@@ -292,9 +401,28 @@ export default function CourseDetail({ course, modules, quizzes, attempts, onBac
       </div>
 
       {quizzes.length > 0 && (
-        <div className="flex items-center gap-3">
-          <Progress value={progress} className="flex-1" />
-          <span className="text-sm font-medium">{progress}%</span>
+        <div className="space-y-3">
+          <div className="flex items-center gap-3">
+            <Progress value={progress} className="flex-1" />
+            <span className="text-sm font-medium">{progress}%</span>
+          </div>
+          {progress === 100 && (
+            <Card className="border-primary/30 bg-primary/5">
+              <CardContent className="pt-4 pb-4 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Award className="h-6 w-6 text-primary" />
+                  <div>
+                    <p className="font-semibold text-sm">{t("education.certificate.title")}</p>
+                    <p className="text-xs text-muted-foreground">{t("education.certificate.desc")}</p>
+                  </div>
+                </div>
+                <Button size="sm" onClick={handleDownloadCertificate} disabled={certGenerating}>
+                  {certGenerating ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <Download className="h-4 w-4 mr-2" />}
+                  {t("education.certificate.download")}
+                </Button>
+              </CardContent>
+            </Card>
+          )}
         </div>
       )}
 

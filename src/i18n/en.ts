@@ -480,6 +480,13 @@ export const en = {
       inProgress: "In Progress",
     },
     badgesDesc: "Internal credentials with verifiable metadata",
+    certificate: {
+      title: "Course Completed!",
+      desc: "Download your certificate of completion",
+      download: "Certificate PDF",
+      downloaded: "Certificate downloaded",
+      error: "Failed to generate certificate",
+    },
     emptyCourses: "No courses yet. Create the first one!",
     createCourse: "New Course",
     createCourseDesc: "Create a competency course with modules and quizzes",
