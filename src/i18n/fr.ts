@@ -312,6 +312,7 @@ export const fr = {
       rateLimitedDesc: "Veuillez réessayer dans un instant.",
       creditsRequired: "Crédits nécessaires",
       creditsRequiredDesc: "Veuillez ajouter des crédits pour continuer.",
+      signOffFailed: "Échec de la validation. Veuillez réessayer.",
     },
   },
 
@@ -346,6 +347,17 @@ export const fr = {
       allCategories: "Toutes les catégories",
       allStatuses: "Tous les statuts",
       clearAll: "Effacer les filtres",
+    },
+    risk: {
+      low: "Faible",
+      moderate: "Modéré",
+      high: "Élevé",
+      critical: "Critique",
+    },
+    statuses: {
+      active: "Actif",
+      completed: "Terminé",
+      archived: "Archivé",
     },
   },
 
@@ -604,6 +616,13 @@ export const fr = {
     statuses: {
       active: "Actif",
       invited: "Invité",
+    },
+    roles: {
+      physician: "Médecin",
+      hospitalAdmin: "Administrateur hospitalier",
+      trainee: "Stagiaire",
+      expertReviewer: "Expert évaluateur",
+      researchLead: "Responsable de recherche",
     },
   },
 

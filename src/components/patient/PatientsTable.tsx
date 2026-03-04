@@ -6,19 +6,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { HeartPulse, Plus, Users } from "lucide-react";
 
 function riskFromFactors(factors: unknown): string {
-  if (!Array.isArray(factors)) return "Low";
+  if (!Array.isArray(factors)) return "low";
   const count = factors.length;
-  if (count >= 4) return "Critical";
-  if (count >= 3) return "High";
-  if (count >= 1) return "Moderate";
-  return "Low";
+  if (count >= 4) return "critical";
+  if (count >= 3) return "high";
+  if (count >= 1) return "moderate";
+  return "low";
 }
 
 const riskColor: Record<string, string> = {
-  Low: "bg-success/10 text-success",
-  Moderate: "bg-warning/10 text-warning",
-  High: "bg-destructive/10 text-destructive",
-  Critical: "bg-destructive text-destructive-foreground",
+  low: "bg-success/10 text-success",
+  moderate: "bg-warning/10 text-warning",
+  high: "bg-destructive/10 text-destructive",
+  critical: "bg-destructive text-destructive-foreground",
 };
 
 export interface PatientRow {
@@ -83,7 +83,7 @@ export function PatientsTable({ patients, isLoading, onRowClick, onNewCase }: Pa
                   <td className="p-4 text-sm capitalize">{p.latestCase?.status ?? "—"}</td>
                   <td className="p-4">
                     <span className={`text-xs font-medium px-2 py-1 rounded-full ${riskColor[p.risk]}`}>
-                      {p.risk}
+                      {t(`patients.risk.${p.risk}`)}
                     </span>
                   </td>
                   <td className="p-4 text-sm text-muted-foreground">

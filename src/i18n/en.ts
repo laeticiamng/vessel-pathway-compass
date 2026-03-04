@@ -323,6 +323,7 @@ export const en = {
       rateLimitedDesc: "Please try again in a moment.",
       creditsRequired: "Credits required",
       creditsRequiredDesc: "Please add credits to continue using AI features.",
+      signOffFailed: "Failed to sign off. Please try again.",
     },
   },
 
@@ -358,6 +359,17 @@ export const en = {
       allCategories: "All Categories",
       allStatuses: "All Statuses",
       clearAll: "Clear filters",
+    },
+    risk: {
+      low: "Low",
+      moderate: "Moderate",
+      high: "High",
+      critical: "Critical",
+    },
+    statuses: {
+      active: "Active",
+      completed: "Completed",
+      archived: "Archived",
     },
   },
 
@@ -624,6 +636,13 @@ export const en = {
     statuses: {
       active: "Active",
       invited: "Invited",
+    },
+    roles: {
+      physician: "Physician",
+      hospitalAdmin: "Hospital Admin",
+      trainee: "Trainee",
+      expertReviewer: "Expert Reviewer",
+      researchLead: "Research Lead",
     },
   },
 

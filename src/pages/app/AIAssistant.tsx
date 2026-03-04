@@ -114,7 +114,7 @@ export default function AIAssistant() {
       .eq("id", currentOutputId);
 
     if (error) {
-      toast({ title: t("auth.error"), description: "Failed to sign off", variant: "destructive" });
+      toast({ title: t("auth.error"), description: t("aiAssistant.errors.signOffFailed"), variant: "destructive" });
       return;
     }
 

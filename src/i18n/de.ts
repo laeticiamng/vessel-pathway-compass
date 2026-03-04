@@ -312,6 +312,7 @@ export const de = {
       rateLimitedDesc: "Bitte versuchen Sie es gleich erneut.",
       creditsRequired: "Credits erforderlich",
       creditsRequiredDesc: "Bitte fügen Sie Credits hinzu, um fortzufahren.",
+      signOffFailed: "Bestätigung fehlgeschlagen. Bitte erneut versuchen.",
     },
   },
 
@@ -346,6 +347,17 @@ export const de = {
       allCategories: "Alle Kategorien",
       allStatuses: "Alle Status",
       clearAll: "Filter zurücksetzen",
+    },
+    risk: {
+      low: "Niedrig",
+      moderate: "Mittel",
+      high: "Hoch",
+      critical: "Kritisch",
+    },
+    statuses: {
+      active: "Aktiv",
+      completed: "Abgeschlossen",
+      archived: "Archiviert",
     },
   },
 
@@ -604,6 +616,13 @@ export const de = {
     statuses: {
       active: "Aktiv",
       invited: "Eingeladen",
+    },
+    roles: {
+      physician: "Arzt/Ärztin",
+      hospitalAdmin: "Klinikadministrator",
+      trainee: "Auszubildende/r",
+      expertReviewer: "Fachgutachter/in",
+      researchLead: "Forschungsleiter/in",
     },
   },
 
