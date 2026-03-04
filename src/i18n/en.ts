@@ -642,6 +642,16 @@ export const en = {
     emptyExperts: "No expert requests yet",
     mentorshipComingSoon: "Mentorship matching — coming soon",
     newDiscussionDesc: "Start a de-identified case discussion",
+    thread: {
+      backToDiscussions: "Back to discussions",
+      replies: "Replies",
+      noReplies: "No replies yet. Be the first to respond!",
+      writeReply: "Write a reply",
+      replyPlaceholder: "Share your thoughts or clinical experience...",
+      reply: "Reply",
+      replyPosted: "Reply posted successfully",
+      notFound: "Discussion not found",
+    },
   },
 
   // Research
