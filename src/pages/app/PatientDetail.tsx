@@ -30,7 +30,9 @@ export default function PatientDetail() {
     events, eventsLoading,
     measurements, measLoading,
     editMutation, addEventMutation, addMeasMutation,
-    deleteEventMutation, deleteMeasMutation, deleteMutation,
+    deleteEventMutation, bulkDeleteEventsMutation,
+    deleteMeasMutation, bulkDeleteMeasMutation,
+    deleteMutation,
   } = usePatientData(id);
 
   const [editOpen, setEditOpen] = useState(false);
@@ -99,6 +101,8 @@ export default function PatientDetail() {
             hasCases={caseIds.length > 0}
             onAddEvent={() => setAddEventOpen(true)}
             onDeleteEvent={(id) => setDeleteEventId(id)}
+            onBulkDeleteEvents={(ids) => bulkDeleteEventsMutation.mutate(ids)}
+            bulkDeletePending={bulkDeleteEventsMutation.isPending}
           />
         </TabsContent>
 
@@ -109,6 +113,8 @@ export default function PatientDetail() {
             hasCases={caseIds.length > 0}
             onAddMeasurement={() => setAddMeasurementOpen(true)}
             onDeleteMeasurement={(id) => setDeleteMeasId(id)}
+            onBulkDeleteMeasurements={(ids) => bulkDeleteMeasMutation.mutate(ids)}
+            bulkDeletePending={bulkDeleteMeasMutation.isPending}
           />
         </TabsContent>
 

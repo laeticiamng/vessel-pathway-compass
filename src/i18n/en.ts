@@ -802,6 +802,8 @@ export const en = {
     },
     caseTimeline: "Case Timeline",
     addEvent: "Add Event",
+    bulkDelete: "Delete selected",
+    selectAll: "Select all",
     addFirstEvent: "Add First Event",
     noEvents: "No timeline events yet",
     measurements: "Measurements",
@@ -871,6 +873,7 @@ export const en = {
       eventDeletedDesc: "Timeline event has been removed",
       measDeleted: "Measurement deleted",
       measDeletedDesc: "Measurement has been removed",
+      bulkDeletedDesc: "Selected items have been removed",
     },
     deleteDialog: {
       title: "Delete Patient",
