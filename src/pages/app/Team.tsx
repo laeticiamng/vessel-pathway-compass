@@ -50,7 +50,7 @@ export default function Team() {
                     <td className="p-4 text-sm text-muted-foreground">{m.email}</td>
                     <td className="p-4"><Badge variant="secondary">{m.role}</Badge></td>
                     <td className="p-4">
-                      <Badge variant={m.status === "Active" ? "default" : "outline"}>{m.status}</Badge>
+                      <Badge variant={m.status === "Active" ? "default" : "outline"}>{t(`team.statuses.${m.status.toLowerCase()}`)}</Badge>
                     </td>
                   </tr>
                 ))}

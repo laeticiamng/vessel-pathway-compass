@@ -78,6 +78,7 @@ export const en = {
   // Top bar
   topBar: {
     searchPlaceholder: "Search or command...",
+    toggleTheme: "Toggle theme",
   },
 
   // Landing
@@ -316,6 +317,12 @@ export const en = {
       empty: "No reports yet",
       emptyDesc: "Generated reports will appear here with full audit trail.",
     },
+    errors: {
+      rateLimited: "Rate limited",
+      rateLimitedDesc: "Please try again in a moment.",
+      creditsRequired: "Credits required",
+      creditsRequiredDesc: "Please add credits to continue using AI features.",
+    },
   },
 
   // Patients
@@ -336,12 +343,15 @@ export const en = {
     form: {
       description: "Create a new pseudonymized patient case",
       pseudonym: "Pseudonym",
+      pseudonymPlaceholder: "e.g. PAT-2026-001",
       ageRange: "Age Range",
       sex: "Sex",
       male: "Male",
       female: "Female",
       category: "Category",
       caseTitle: "Case Title",
+      caseTitlePlaceholder: "e.g. Right SFA occlusion",
+      selectPlaceholder: "Select",
     },
     filters: {
       allCategories: "All Categories",
@@ -586,6 +596,16 @@ export const en = {
       modelVersion: "Model Version",
       signOffRate: "Sign-off Rate",
       issuesReported: "Issues Reported",
+    },
+    empty: {
+      audit: "No audit logs recorded yet",
+      consent: "No consent records yet",
+      aiOutputs: "No AI outputs recorded yet",
+    },
+    loadMore: "Load More",
+    consent: {
+      granted: "granted",
+      revoked: "revoked",
     },
   },
 

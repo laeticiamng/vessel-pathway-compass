@@ -296,7 +296,7 @@ export default function Patients() {
             <div className="space-y-2">
               <Label>{t("patients.form.pseudonym")}</Label>
               <Input
-                placeholder="e.g. PAT-2026-001"
+                placeholder={t("patients.form.pseudonymPlaceholder")}
                 value={pseudonym}
                 onChange={(e) => setPseudonym(e.target.value)}
               />
@@ -305,7 +305,7 @@ export default function Patients() {
               <div className="space-y-2">
                 <Label>{t("patients.form.ageRange")}</Label>
                 <Select value={ageRange} onValueChange={setAgeRange}>
-                  <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                   <SelectTrigger><SelectValue placeholder={t("patients.form.selectPlaceholder")} /></SelectTrigger>
                   <SelectContent>
                     {AGE_RANGES.map((r) => (
                       <SelectItem key={r} value={r}>{r}</SelectItem>
@@ -316,7 +316,7 @@ export default function Patients() {
               <div className="space-y-2">
                 <Label>{t("patients.form.sex")}</Label>
                 <Select value={sex} onValueChange={setSex}>
-                  <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                   <SelectTrigger><SelectValue placeholder={t("patients.form.selectPlaceholder")} /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="male">{t("patients.form.male")}</SelectItem>
                     <SelectItem value="female">{t("patients.form.female")}</SelectItem>
@@ -327,7 +327,7 @@ export default function Patients() {
             <div className="space-y-2">
               <Label>{t("patients.form.category")}</Label>
               <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                <SelectTrigger><SelectValue placeholder={t("patients.form.selectPlaceholder")} /></SelectTrigger>
                 <SelectContent>
                   {CATEGORIES.map((c) => (
                     <SelectItem key={c} value={c.toLowerCase()}>{c}</SelectItem>
@@ -338,7 +338,7 @@ export default function Patients() {
             <div className="space-y-2">
               <Label>{t("patients.form.caseTitle")}</Label>
               <Input
-                placeholder="e.g. Right SFA occlusion"
+                placeholder={t("patients.form.caseTitlePlaceholder")}
                 value={caseTitle}
                 onChange={(e) => setCaseTitle(e.target.value)}
               />

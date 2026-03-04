@@ -74,6 +74,7 @@ export const fr = {
 
   topBar: {
     searchPlaceholder: "Rechercher ou commande...",
+    toggleTheme: "Changer le thème",
   },
 
   landing: {
@@ -305,6 +306,12 @@ export const fr = {
       empty: "Aucun rapport encore",
       emptyDesc: "Les rapports générés apparaîtront ici avec la traçabilité complète.",
     },
+    errors: {
+      rateLimited: "Limite de débit atteinte",
+      rateLimitedDesc: "Veuillez réessayer dans un instant.",
+      creditsRequired: "Crédits nécessaires",
+      creditsRequiredDesc: "Veuillez ajouter des crédits pour continuer.",
+    },
   },
 
   patients: {
@@ -330,6 +337,9 @@ export const fr = {
       female: "Féminin",
       category: "Catégorie",
       caseTitle: "Titre du dossier",
+      pseudonymPlaceholder: "ex. : PAT-2026-001",
+      caseTitlePlaceholder: "ex. : Occlusion AFS droite",
+      selectPlaceholder: "Sélectionner",
     },
     filters: {
       allCategories: "Toutes les catégories",
@@ -567,6 +577,16 @@ export const fr = {
       modelVersion: "Version du modèle",
       signOffRate: "Taux de validation",
       issuesReported: "Incidents signalés",
+    },
+    empty: {
+      audit: "Aucun journal d'audit enregistré",
+      consent: "Aucun enregistrement de consentement",
+      aiOutputs: "Aucune sortie IA enregistrée",
+    },
+    loadMore: "Charger plus",
+    consent: {
+      granted: "accordé(s)",
+      revoked: "révoqué(s)",
     },
   },
 
