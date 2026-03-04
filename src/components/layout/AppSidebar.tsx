@@ -1,5 +1,6 @@
 import {
   Activity,
+  BarChart3,
   Brain,
   BookOpen,
   FlaskConical,
@@ -67,6 +68,7 @@ export function AppSidebar() {
     { title: t("sidebar.simulationLab"), url: "/app/simulation", icon: FlaskConical },
     { title: t("sidebar.expertNetwork"), url: "/app/network", icon: Globe },
     { title: t("sidebar.researchHub"), url: "/app/research", icon: FileText },
+    { title: t("sidebar.analytics"), url: "/app/analytics", icon: BarChart3 },
   ];
 
   const betaItems = [

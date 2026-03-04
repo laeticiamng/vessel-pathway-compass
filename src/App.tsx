@@ -27,6 +27,7 @@ import Simulation from "./pages/app/Simulation";
 import Network from "./pages/app/Network";
 import Research from "./pages/app/Research";
 import Compliance from "./pages/app/Compliance";
+import Analytics from "./pages/app/Analytics";
 import Team from "./pages/app/Team";
 import Settings from "./pages/app/Settings";
 import FederatedLearning from "./pages/app/beta/FederatedLearning";
@@ -65,6 +66,7 @@ const App = () => (
             <Route path="network" element={<ContentGate><Network /></ContentGate>} />
             <Route path="research" element={<ContentGate><Research /></ContentGate>} />
             <Route path="compliance" element={<ContentGate><Compliance /></ContentGate>} />
+            <Route path="analytics" element={<ContentGate><Analytics /></ContentGate>} />
             <Route path="team" element={<ContentGate><Team /></ContentGate>} />
             <Route path="beta/federated" element={<ContentGate><FederatedLearning /></ContentGate>} />
             <Route path="beta/ai-safety" element={<ContentGate><AISafety /></ContentGate>} />
