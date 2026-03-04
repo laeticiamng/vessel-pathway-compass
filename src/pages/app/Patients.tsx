@@ -28,6 +28,7 @@ export default function Patients() {
   const [search, setSearch] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [filterRisk, setFilterRisk] = useState("all");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [trashOpen, setTrashOpen] = useState(false);
 
@@ -76,6 +77,7 @@ export default function Patients() {
   });
 
   const filtered = patients?.filter((p) => {
+    if (filterRisk !== "all" && p.risk !== filterRisk) return false;
     if (!search) return true;
     const q = search.toLowerCase();
     return (
@@ -102,6 +104,7 @@ export default function Patients() {
         search={search} onSearchChange={setSearch}
         filterCategory={filterCategory} onFilterCategoryChange={setFilterCategory}
         filterStatus={filterStatus} onFilterStatusChange={setFilterStatus}
+        filterRisk={filterRisk} onFilterRiskChange={setFilterRisk}
       />
 
       <PatientsTable

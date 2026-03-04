@@ -8,6 +8,7 @@ import { Search, X } from "lucide-react";
 
 const CATEGORIES = ["PAD", "Aortic", "Venous", "Carotid", "DVT/PE"] as const;
 const STATUSES = ["active", "completed", "archived"] as const;
+const RISKS = ["low", "moderate", "high", "critical"] as const;
 
 interface PatientFiltersProps {
   search: string;
@@ -16,16 +17,19 @@ interface PatientFiltersProps {
   onFilterCategoryChange: (value: string) => void;
   filterStatus: string;
   onFilterStatusChange: (value: string) => void;
+  filterRisk: string;
+  onFilterRiskChange: (value: string) => void;
 }
 
 export function PatientFilters({
   search, onSearchChange,
   filterCategory, onFilterCategoryChange,
   filterStatus, onFilterStatusChange,
+  filterRisk, onFilterRiskChange,
 }: PatientFiltersProps) {
   const { t } = useTranslation();
 
-  const hasFilters = filterCategory !== "all" || filterStatus !== "all" || search;
+  const hasFilters = filterCategory !== "all" || filterStatus !== "all" || filterRisk !== "all" || search;
 
   return (
     <div className="flex gap-3">
@@ -60,12 +64,23 @@ export function PatientFilters({
           ))}
         </SelectContent>
       </Select>
+      <Select value={filterRisk} onValueChange={onFilterRiskChange}>
+        <SelectTrigger className="w-[160px]">
+          <SelectValue placeholder={t("patients.filters.allRisks")} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">{t("patients.filters.allRisks")}</SelectItem>
+          {RISKS.map((r) => (
+            <SelectItem key={r} value={r}>{t(`patients.risk.${r}`)}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
       {hasFilters && (
         <Button
           variant="ghost"
           size="icon"
           className="shrink-0"
-          onClick={() => { onFilterCategoryChange("all"); onFilterStatusChange("all"); onSearchChange(""); }}
+          onClick={() => { onFilterCategoryChange("all"); onFilterStatusChange("all"); onFilterRiskChange("all"); onSearchChange(""); }}
           aria-label={t("patients.filters.clearAll")}
         >
           <X className="h-4 w-4" />
