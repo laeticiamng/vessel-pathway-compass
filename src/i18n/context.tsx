@@ -13,7 +13,17 @@ interface I18nContextType {
   t: (key: string) => string;
 }
 
-const I18nContext = createContext<I18nContextType | null>(null);
+const I18N_CONTEXT_KEY = "__vascular_atlas_i18n_context__";
+const globalI18n = globalThis as typeof globalThis & {
+  [I18N_CONTEXT_KEY]?: React.Context<I18nContextType | null>;
+};
+
+const I18nContext =
+  globalI18n[I18N_CONTEXT_KEY] ?? createContext<I18nContextType | null>(null);
+
+if (!globalI18n[I18N_CONTEXT_KEY]) {
+  globalI18n[I18N_CONTEXT_KEY] = I18nContext;
+}
 
 function getNestedValue(obj: any, path: string): any {
   const val = path.split(".").reduce((acc, part) => acc?.[part], obj);
