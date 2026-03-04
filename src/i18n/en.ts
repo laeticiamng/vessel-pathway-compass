@@ -808,6 +808,14 @@ export const en = {
       eventAdded: "Timeline event created",
       measAdded: "Measurement recorded",
     },
+    deleteDialog: {
+      title: "Delete Patient",
+      desc: "This will permanently delete this patient and all associated cases, events, and measurements. This action cannot be undone.",
+      confirm: "Delete Patient",
+      deleting: "Deleting...",
+    },
+    toastsDeleted: "Patient deleted",
+    toastsDeletedDesc: "Patient and all associated data removed",
     timeAgo: {
       today: "Today",
       yesterday: "Yesterday",
