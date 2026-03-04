@@ -975,4 +975,16 @@ export const de = {
     signIn: "Anmelden",
     viewPlans: "Pläne ansehen",
   },
+
+  notifications: {
+    title: "Benachrichtigungen",
+    empty: "Keine Benachrichtigungen",
+    markAllRead: "Alle als gelesen markieren",
+    types: {
+      forum_reply: "Neue Antwort auf Ihren Forumbeitrag",
+      expert_response: "Ein Experte hat auf Ihre Anfrage geantwortet",
+      follow_up_reminder: "Erinnerung an Patientennachsorge",
+      case_update: "Fallaktualisierung",
+    },
+  },
 };

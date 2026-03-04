@@ -3,7 +3,8 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "./AppSidebar";
 import { CommandPalette } from "@/components/CommandPalette";
 import { Button } from "@/components/ui/button";
-import { Bell, Search, Moon, Sun, Globe } from "lucide-react";
+import { Search, Moon, Sun, Globe } from "lucide-react";
+import { NotificationBell } from "@/components/notifications/NotificationBell";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { useTranslation, Language } from "@/i18n/context";
@@ -76,10 +77,7 @@ export function AppLayout() {
                 <Sun className="h-4 w-4 rotate-0 scale-100 transition-transform dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
               </Button>
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-4 w-4" />
-                <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-destructive" />
-              </Button>
+              <NotificationBell />
             </div>
           </header>
           <main className="flex-1 p-6 overflow-auto">
