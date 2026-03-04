@@ -15,9 +15,10 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | null>(null);
 
-function getNestedValue(obj: any, path: string): string {
+function getNestedValue(obj: any, path: string): any {
   const val = path.split(".").reduce((acc, part) => acc?.[part], obj);
-  return typeof val === "string" ? val : path;
+  if (typeof val === "string" || Array.isArray(val)) return val;
+  return path;
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
