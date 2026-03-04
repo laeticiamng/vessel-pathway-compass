@@ -10,6 +10,7 @@ import { AuthProvider } from "./hooks/useAuth";
 import Landing from "./pages/Landing";
 import Pricing from "./pages/Pricing";
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/" element={<Landing />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
 
           {/* Semi-public: visible at 35% without auth */}
           <Route path="/app" element={<PublicAppRoute />}>
