@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { useTranslation } from "@/i18n/context";
+import { useTranslation, type Language } from "@/i18n/context";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import {
   Brain,
   Activity,
@@ -28,7 +29,8 @@ const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
 const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
 
 export default function Landing() {
-  const { t } = useTranslation();
+  const { t, language, setLanguage } = useTranslation();
+  const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
 
   const modules = moduleKeys.map((key, i) => ({
     icon: moduleIcons[i],
@@ -55,6 +57,21 @@ export default function Landing() {
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.signIn")}
             </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="gap-1.5">
+                  <Globe className="h-4 w-4" />
+                  {langLabels[language]}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {(["en", "fr", "de"] as Language[]).map((lang) => (
+                  <DropdownMenuItem key={lang} onClick={() => setLanguage(lang)} className={language === lang ? "font-semibold" : ""}>
+                    {lang === "en" ? "English" : lang === "fr" ? "Français" : "Deutsch"}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Button asChild size="sm">
               <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
             </Button>
