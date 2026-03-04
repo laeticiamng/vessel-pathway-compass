@@ -736,6 +736,7 @@ export const en = {
     cases: "Cases",
     timelineEvents: "Timeline Events",
     measurementsCount: "Measurements",
+    measurementTrends: "Measurement Trends",
     tabs: {
       timeline: "Timeline",
       measurements: "Measurements",

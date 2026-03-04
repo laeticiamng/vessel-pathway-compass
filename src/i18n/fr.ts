@@ -710,6 +710,7 @@ export const fr = {
     cases: "Dossiers",
     timelineEvents: "Événements",
     measurementsCount: "Mesures",
+    measurementTrends: "Tendances des mesures",
     tabs: {
       timeline: "Chronologie",
       measurements: "Mesures",

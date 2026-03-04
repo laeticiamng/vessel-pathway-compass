@@ -25,6 +25,7 @@ import {
 import {
   ArrowLeft, HeartPulse, Edit, Plus, Clock, Ruler, Activity, Calendar, Trash2,
 } from "lucide-react";
+import MeasurementTrendChart from "@/components/patient/MeasurementTrendChart";
 
 const AGE_RANGES = ["18-30", "31-40", "41-50", "51-60", "61-70", "71-80", "80+"] as const;
 
@@ -290,6 +291,8 @@ export default function PatientDetail() {
             <div key={i} className="flex gap-4 p-3"><Skeleton className="h-4 w-20" /><Skeleton className="h-4 w-16" /><Skeleton className="h-4 w-12" /></div>
           ))}
           {!measLoading && measurements && measurements.length > 0 ? (
+            <>
+            <MeasurementTrendChart measurements={measurements} />
             <Card><CardContent className="p-0">
               <table className="w-full text-sm">
                 <thead><tr className="border-b">
@@ -310,6 +313,7 @@ export default function PatientDetail() {
                 ))}</tbody>
               </table>
             </CardContent></Card>
+            </>
           ) : !measLoading && (
             <Card><CardContent className="py-12 text-center">
               <Ruler className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
