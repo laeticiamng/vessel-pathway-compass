@@ -258,6 +258,13 @@ export const en = {
       simulation: "Practice clinical decision-making with interactive branching scenarios.",
       research: "Design studies, manage cohorts, and export de-identified datasets.",
     },
+    riskDistribution: {
+      title: "Patient Risk Overview",
+      desc: "Risk distribution across your patient cohort",
+      viewAll: "View all",
+      noPatients: "No patients registered yet",
+      totalPatients: "total patients",
+    },
   },
 
   // AI Assistant

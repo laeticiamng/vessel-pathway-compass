@@ -248,6 +248,13 @@ export const de = {
       simulation: "Üben Sie klinische Entscheidungsfindung mit interaktiven Verzweigungsszenarien.",
       research: "Entwerfen Sie Studien, verwalten Sie Kohorten und exportieren Sie de-identifizierte Datensätze.",
     },
+    riskDistribution: {
+      title: "Patienten-Risikoübersicht",
+      desc: "Risikoverteilung über Ihre Patientenkohorte",
+      viewAll: "Alle anzeigen",
+      noPatients: "Noch keine Patienten registriert",
+      totalPatients: "Patienten insgesamt",
+    },
   },
 
   aiAssistant: {
