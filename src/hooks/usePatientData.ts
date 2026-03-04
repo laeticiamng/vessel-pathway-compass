@@ -127,6 +127,18 @@ export function usePatientData(id: string | undefined) {
     onError,
   });
 
+  const bulkDeleteEventsMutation = useMutation({
+    mutationFn: async (eventIds: string[]) => {
+      const { error } = await supabase.from("case_events").delete().in("id", eventIds);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["case-events", caseIds] });
+      toast({ title: t("patientDetail.toasts.eventDeleted"), description: t("patientDetail.toasts.bulkDeletedDesc") });
+    },
+    onError,
+  });
+
   const deleteMeasMutation = useMutation({
     mutationFn: async (measId: string) => {
       const { error } = await supabase.from("measurements").delete().eq("id", measId);
@@ -135,6 +147,18 @@ export function usePatientData(id: string | undefined) {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["measurements", caseIds] });
       toast({ title: t("patientDetail.toasts.measDeleted"), description: t("patientDetail.toasts.measDeletedDesc") });
+    },
+    onError,
+  });
+
+  const bulkDeleteMeasMutation = useMutation({
+    mutationFn: async (measIds: string[]) => {
+      const { error } = await supabase.from("measurements").delete().in("id", measIds);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["measurements", caseIds] });
+      toast({ title: t("patientDetail.toasts.measDeleted"), description: t("patientDetail.toasts.bulkDeletedDesc") });
     },
     onError,
   });
@@ -179,7 +203,9 @@ export function usePatientData(id: string | undefined) {
     addEventMutation,
     addMeasMutation,
     deleteEventMutation,
+    bulkDeleteEventsMutation,
     deleteMeasMutation,
+    bulkDeleteMeasMutation,
     deleteMutation,
   };
 }

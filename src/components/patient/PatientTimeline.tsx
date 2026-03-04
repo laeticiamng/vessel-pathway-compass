@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Plus, Clock, HeartPulse, Activity, Ruler, Calendar, Trash2 } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
@@ -12,6 +14,8 @@ interface PatientTimelineProps {
   hasCases: boolean;
   onAddEvent: () => void;
   onDeleteEvent: (id: string) => void;
+  onBulkDeleteEvents?: (ids: string[]) => void;
+  bulkDeletePending?: boolean;
 }
 
 const eventTypeIcon: Record<string, typeof Activity> = {
@@ -21,8 +25,34 @@ const eventTypeIcon: Record<string, typeof Activity> = {
   lab: Ruler,
 };
 
-export default function PatientTimeline({ events, eventsLoading, hasCases, onAddEvent, onDeleteEvent }: PatientTimelineProps) {
+export default function PatientTimeline({
+  events, eventsLoading, hasCases, onAddEvent, onDeleteEvent,
+  onBulkDeleteEvents, bulkDeletePending,
+}: PatientTimelineProps) {
   const { t } = useTranslation();
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  const toggleOne = (id: string) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+
+  const toggleAll = () => {
+    if (!events) return;
+    setSelected((prev) =>
+      prev.size === events.length ? new Set() : new Set(events.map((e) => e.id))
+    );
+  };
+
+  const handleBulkDelete = () => {
+    if (onBulkDeleteEvents && selected.size > 0) {
+      onBulkDeleteEvents([...selected]);
+      setSelected(new Set());
+    }
+  };
 
   function timeAgo(dateStr: string) {
     const diff = Date.now() - new Date(dateStr).getTime();
@@ -36,10 +66,29 @@ export default function PatientTimeline({ events, eventsLoading, hasCases, onAdd
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold">{t("patientDetail.caseTimeline")}</h2>
-        <Button size="sm" onClick={onAddEvent} disabled={!hasCases}>
-          <Plus className="h-4 w-4 mr-1" /> {t("patientDetail.addEvent")}
-        </Button>
+        <div className="flex gap-2">
+          {selected.size > 0 && (
+            <Button size="sm" variant="destructive" onClick={handleBulkDelete} disabled={bulkDeletePending}>
+              <Trash2 className="h-4 w-4 mr-1" />
+              {bulkDeletePending ? t("common.loading") : `${t("patientDetail.bulkDelete")} (${selected.size})`}
+            </Button>
+          )}
+          <Button size="sm" onClick={onAddEvent} disabled={!hasCases}>
+            <Plus className="h-4 w-4 mr-1" /> {t("patientDetail.addEvent")}
+          </Button>
+        </div>
       </div>
+
+      {events && events.length > 0 && (
+        <div className="flex items-center gap-2 text-xs text-muted-foreground">
+          <Checkbox
+            checked={selected.size === events.length && events.length > 0}
+            onCheckedChange={toggleAll}
+            aria-label="Select all events"
+          />
+          <span>{t("patientDetail.selectAll")}</span>
+        </div>
+      )}
 
       {eventsLoading && Array.from({ length: 3 }).map((_, i) => (
         <div key={i} className="flex gap-4 p-4">
@@ -50,13 +99,21 @@ export default function PatientTimeline({ events, eventsLoading, hasCases, onAdd
 
       {!eventsLoading && events && events.length > 0 ? (
         <div className="relative">
-          <div className="absolute left-[18px] top-0 bottom-0 w-px bg-border" />
+          <div className="absolute left-[34px] top-0 bottom-0 w-px bg-border" />
           {events.map((ev) => {
             const Icon = eventTypeIcon[ev.event_type] ?? Clock;
             return (
-              <div key={ev.id} className="flex gap-4 p-3 relative group">
-                <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 z-10">
-                  <Icon className="h-4 w-4 text-primary" />
+              <div key={ev.id} className={`flex gap-3 p-3 relative group rounded-md ${selected.has(ev.id) ? "bg-primary/5" : ""}`}>
+                <div className="flex items-center shrink-0 z-10">
+                  <Checkbox
+                    checked={selected.has(ev.id)}
+                    onCheckedChange={() => toggleOne(ev.id)}
+                    aria-label={`Select ${ev.title}`}
+                    className="mr-2"
+                  />
+                  <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Icon className="h-4 w-4 text-primary" />
+                  </div>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">

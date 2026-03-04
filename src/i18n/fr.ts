@@ -776,6 +776,8 @@ export const fr = {
     },
     caseTimeline: "Chronologie du dossier",
     addEvent: "Ajouter un événement",
+    bulkDelete: "Supprimer la sélection",
+    selectAll: "Tout sélectionner",
     addFirstEvent: "Ajouter le premier événement",
     noEvents: "Aucun événement dans la chronologie",
     measurements: "Mesures",
@@ -845,6 +847,7 @@ export const fr = {
       eventDeletedDesc: "L'événement a été supprimé",
       measDeleted: "Mesure supprimée",
       measDeletedDesc: "La mesure a été supprimée",
+      bulkDeletedDesc: "Les éléments sélectionnés ont été supprimés",
     },
     deleteDialog: {
       title: "Supprimer le patient",

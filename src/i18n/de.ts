@@ -776,6 +776,8 @@ export const de = {
     },
     caseTimeline: "Fall-Zeitleiste",
     addEvent: "Ereignis hinzufügen",
+    bulkDelete: "Auswahl löschen",
+    selectAll: "Alle auswählen",
     addFirstEvent: "Erstes Ereignis hinzufügen",
     noEvents: "Noch keine Zeitleisten-Ereignisse",
     measurements: "Messungen",
@@ -845,6 +847,7 @@ export const de = {
       eventDeletedDesc: "Das Zeitleistenereignis wurde entfernt",
       measDeleted: "Messung gelöscht",
       measDeletedDesc: "Die Messung wurde entfernt",
+      bulkDeletedDesc: "Die ausgewählten Elemente wurden entfernt",
     },
     deleteDialog: {
       title: "Patient löschen",

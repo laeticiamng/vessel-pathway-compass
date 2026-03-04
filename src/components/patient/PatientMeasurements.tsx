@@ -1,6 +1,7 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Plus, Ruler, Trash2, Download } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
@@ -13,10 +14,38 @@ interface PatientMeasurementsProps {
   hasCases: boolean;
   onAddMeasurement: () => void;
   onDeleteMeasurement: (id: string) => void;
+  onBulkDeleteMeasurements?: (ids: string[]) => void;
+  bulkDeletePending?: boolean;
 }
 
-export default function PatientMeasurements({ measurements, measLoading, hasCases, onAddMeasurement, onDeleteMeasurement }: PatientMeasurementsProps) {
+export default function PatientMeasurements({
+  measurements, measLoading, hasCases, onAddMeasurement, onDeleteMeasurement,
+  onBulkDeleteMeasurements, bulkDeletePending,
+}: PatientMeasurementsProps) {
   const { t } = useTranslation();
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+
+  const toggleOne = (id: string) => {
+    setSelected((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  };
+
+  const toggleAll = () => {
+    if (!measurements) return;
+    setSelected((prev) =>
+      prev.size === measurements.length ? new Set() : new Set(measurements.map((m) => m.id))
+    );
+  };
+
+  const handleBulkDelete = () => {
+    if (onBulkDeleteMeasurements && selected.size > 0) {
+      onBulkDeleteMeasurements([...selected]);
+      setSelected(new Set());
+    }
+  };
 
   const exportCSV = useCallback(() => {
     if (!measurements || measurements.length === 0) return;
@@ -43,7 +72,13 @@ export default function PatientMeasurements({ measurements, measLoading, hasCase
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold">{t("patientDetail.measurements")}</h2>
         <div className="flex gap-2">
-          {measurements && measurements.length > 0 && (
+          {selected.size > 0 && (
+            <Button size="sm" variant="destructive" onClick={handleBulkDelete} disabled={bulkDeletePending}>
+              <Trash2 className="h-4 w-4 mr-1" />
+              {bulkDeletePending ? t("common.loading") : `${t("patientDetail.bulkDelete")} (${selected.size})`}
+            </Button>
+          )}
+          {measurements && measurements.length > 0 && selected.size === 0 && (
             <Button size="sm" variant="outline" onClick={exportCSV}>
               <Download className="h-4 w-4 mr-1" /> {t("patientDetail.exportCSV")}
             </Button>
@@ -68,6 +103,13 @@ export default function PatientMeasurements({ measurements, measLoading, hasCase
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
+                    <th className="p-3 w-10">
+                      <Checkbox
+                        checked={selected.size === measurements.length && measurements.length > 0}
+                        onCheckedChange={toggleAll}
+                        aria-label="Select all"
+                      />
+                    </th>
                     <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.type")}</th>
                     <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.value")}</th>
                     <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.unit")}</th>
@@ -78,7 +120,14 @@ export default function PatientMeasurements({ measurements, measLoading, hasCase
                 </thead>
                 <tbody>
                   {measurements.map((m) => (
-                    <tr key={m.id} className="border-b last:border-0 group">
+                    <tr key={m.id} className={`border-b last:border-0 group ${selected.has(m.id) ? "bg-primary/5" : ""}`}>
+                      <td className="p-3">
+                        <Checkbox
+                          checked={selected.has(m.id)}
+                          onCheckedChange={() => toggleOne(m.id)}
+                          aria-label={`Select ${m.measurement_type}`}
+                        />
+                      </td>
                       <td className="p-3 font-medium capitalize">{m.measurement_type}</td>
                       <td className="p-3 font-mono">{m.value}</td>
                       <td className="p-3">{m.unit}</td>
