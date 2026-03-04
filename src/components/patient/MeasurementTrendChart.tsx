@@ -1,12 +1,22 @@
 import { useMemo, useState } from "react";
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
-  AreaChart, Area,
+  AreaChart, Area, ReferenceArea, ReferenceLine,
 } from "recharts";
 import { ChartContainer, ChartTooltipContent, type ChartConfig } from "@/components/ui/chart";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslation } from "@/i18n/context";
+
+// Clinical reference ranges for common vascular measurements
+const REFERENCE_RANGES: Record<string, { min: number; max: number; label: string; critical?: { below?: number; above?: number } }> = {
+  ABI: { min: 0.9, max: 1.3, label: "Normal (0.9–1.3)", critical: { below: 0.5 } },
+  Diameter: { min: 1.5, max: 3.0, label: "Normal (1.5–3.0 cm)", critical: { above: 5.5 } },
+  PSV: { min: 60, max: 125, label: "Normal (60–125 cm/s)", critical: { above: 400 } },
+  "Blood Pressure": { min: 90, max: 140, label: "Normal (90–140 mmHg)", critical: { above: 180 } },
+  "Heart Rate": { min: 60, max: 100, label: "Normal (60–100 bpm)" },
+  Stenosis: { min: 0, max: 50, label: "Normal (<50%)", critical: { above: 70 } },
+};
 
 interface Measurement {
   id: string;
@@ -184,45 +194,121 @@ function SingleTypeChart({
     );
   }
 
+  const ref = REFERENCE_RANGES[typeName];
+
+  // Compute Y domain to include reference range
+  const values = data.map((d) => Number(d.value));
+  let yMin = Math.min(...values);
+  let yMax = Math.max(...values);
+  if (ref) {
+    yMin = Math.min(yMin, ref.min, ref.critical?.below ?? ref.min);
+    yMax = Math.max(yMax, ref.max, ref.critical?.above ?? ref.max);
+  }
+  const padding = (yMax - yMin) * 0.15 || 1;
+  const domainMin = Math.max(0, Math.floor(yMin - padding));
+  const domainMax = Math.ceil(yMax + padding);
+
   return (
-    <ChartContainer config={chartConfig} className="h-[280px] w-full">
-      <AreaChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-        <defs>
-          <linearGradient id={`gradient-${typeName}`} x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor={color} stopOpacity={0.3} />
-            <stop offset="95%" stopColor={color} stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
-        <XAxis dataKey="date" className="text-xs fill-muted-foreground" tick={{ fontSize: 12 }} />
-        <YAxis
-          className="text-xs fill-muted-foreground"
-          tick={{ fontSize: 12 }}
-          label={{ value: unit, angle: -90, position: "insideLeft", className: "fill-muted-foreground text-xs" }}
-        />
-        <Tooltip
-          content={({ active, payload }) => {
-            if (!active || !payload?.length) return null;
-            const p = payload[0].payload;
-            return (
-              <div className="rounded-lg border bg-background p-3 shadow-md">
-                <p className="text-sm font-medium">{String(p.date)}</p>
-                <p className="text-lg font-bold font-mono" style={{ color }}>{String(p.value)} {unit}</p>
-                {p.site && <p className="text-xs text-muted-foreground">{String(p.site)}</p>}
-              </div>
-            );
-          }}
-        />
-        <Area
-          type="monotone"
-          dataKey="value"
-          stroke={color}
-          strokeWidth={2}
-          fill={`url(#gradient-${typeName})`}
-          dot={{ r: 4, fill: color }}
-          activeDot={{ r: 6 }}
-        />
-      </AreaChart>
-    </ChartContainer>
+    <div className="relative">
+      {ref && (
+        <div className="flex items-center gap-4 mb-2 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: "hsl(var(--chart-3) / 0.15)", border: "1px solid hsl(var(--chart-3) / 0.4)" }} />
+            {ref.label}
+          </span>
+          {ref.critical && (
+            <span className="flex items-center gap-1.5">
+              <span className="inline-block w-3 h-3 rounded-sm" style={{ backgroundColor: "hsl(0 84% 60% / 0.1)", border: "1px solid hsl(0 84% 60% / 0.3)" }} />
+              Critical
+            </span>
+          )}
+        </div>
+      )}
+      <ChartContainer config={chartConfig} className="h-[280px] w-full">
+        <AreaChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+          <defs>
+            <linearGradient id={`gradient-${typeName}`} x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor={color} stopOpacity={0.3} />
+              <stop offset="95%" stopColor={color} stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
+          <XAxis dataKey="date" className="text-xs fill-muted-foreground" tick={{ fontSize: 12 }} />
+          <YAxis
+            className="text-xs fill-muted-foreground"
+            tick={{ fontSize: 12 }}
+            domain={[domainMin, domainMax]}
+            label={{ value: unit, angle: -90, position: "insideLeft", className: "fill-muted-foreground text-xs" }}
+          />
+          {/* Normal reference range shaded area */}
+          {ref && (
+            <ReferenceArea
+              y1={ref.min}
+              y2={ref.max}
+              fill="hsl(var(--chart-3))"
+              fillOpacity={0.1}
+              stroke="hsl(var(--chart-3))"
+              strokeOpacity={0.3}
+              strokeDasharray="4 4"
+            />
+          )}
+          {/* Critical threshold lines */}
+          {ref?.critical?.above && (
+            <ReferenceLine
+              y={ref.critical.above}
+              stroke="hsl(0 84% 60%)"
+              strokeDasharray="6 3"
+              strokeWidth={1.5}
+              strokeOpacity={0.6}
+              label={{ value: `Critical ≥${ref.critical.above}`, position: "right", className: "fill-destructive text-[10px]" }}
+            />
+          )}
+          {ref?.critical?.below && (
+            <ReferenceLine
+              y={ref.critical.below}
+              stroke="hsl(0 84% 60%)"
+              strokeDasharray="6 3"
+              strokeWidth={1.5}
+              strokeOpacity={0.6}
+              label={{ value: `Critical ≤${ref.critical.below}`, position: "right", className: "fill-destructive text-[10px]" }}
+            />
+          )}
+          <Tooltip
+            content={({ active, payload }) => {
+              if (!active || !payload?.length) return null;
+              const p = payload[0].payload;
+              const val = Number(p.value);
+              const inRange = ref ? val >= ref.min && val <= ref.max : true;
+              const isCritical = ref?.critical
+                ? (ref.critical.above && val >= ref.critical.above) || (ref.critical.below && val <= ref.critical.below)
+                : false;
+              return (
+                <div className="rounded-lg border bg-background p-3 shadow-md">
+                  <p className="text-sm font-medium">{String(p.date)}</p>
+                  <p className="text-lg font-bold font-mono" style={{ color: isCritical ? "hsl(0 84% 60%)" : color }}>
+                    {String(p.value)} {unit}
+                  </p>
+                  {ref && (
+                    <p className={`text-xs mt-1 ${isCritical ? "text-destructive font-semibold" : inRange ? "text-green-500" : "text-yellow-500"}`}>
+                      {isCritical ? "⚠ Critical" : inRange ? "✓ Normal range" : "↗ Outside normal"}
+                    </p>
+                  )}
+                  {p.site && <p className="text-xs text-muted-foreground">{String(p.site)}</p>}
+                </div>
+              );
+            }}
+          />
+          <Area
+            type="monotone"
+            dataKey="value"
+            stroke={color}
+            strokeWidth={2}
+            fill={`url(#gradient-${typeName})`}
+            dot={{ r: 4, fill: color }}
+            activeDot={{ r: 6 }}
+          />
+        </AreaChart>
+      </ChartContainer>
+    </div>
   );
 }
