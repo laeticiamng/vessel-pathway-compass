@@ -1,26 +1,26 @@
 
 
-## Testing the Patients Page
+## Patient Detail View — Already Implemented
 
-I navigated to the auth page and switched to the sign-up form. However, I'm currently in **plan mode (read-only)** and cannot:
+After reviewing `src/pages/app/PatientDetail.tsx` (430 lines), this page already has everything requested:
 
-1. Enable auto-confirm for email signups (requires a backend configuration change)
-2. Make any code changes to bypass authentication
+### Existing Features
+- **Case timeline** — vertical timeline with icons per event type (procedure, imaging, note, lab), relative timestamps, and an "Add Event" dialog
+- **Measurements tab** — table showing type, value, unit, site, date with an "Add Measurement" dialog
+- **Cases tab** — lists all associated cases with category, status, and summary
+- **Edit patient** — dialog to update pseudonym, age range, and sex
+- **Summary cards** — counts for cases, timeline events, and measurements
+- **Full i18n** — all strings use `t()` with keys in en/fr/de dictionaries
+- **Routing** — already wired at `/app/patients/:id` and linked from the Patients list via `navigate()`
 
-To proceed with end-to-end testing, I need to switch to **default mode**. Once there, I can:
+### No changes needed
 
-1. **Enable auto-confirm** for email signups so I can create a test account
-2. **Sign up** with a test email and password
-3. **Navigate** to `/app/patients`
-4. **Create a new case** using the dialog (fill pseudonym, age range, sex, category, case title)
-5. **Verify** the new case appears in the patient list
-6. **Test search** by typing the pseudonym in the search bar
-7. **Test filters** by selecting a category and status from the dropdowns
-8. **Screenshot** each step to confirm everything works
+The page is complete and functional. You can test it by clicking any patient row on the Patients page.
 
-### Action Needed
-
-Please either:
-- Switch me to default mode so I can enable auto-confirm and run the full test
-- Or log in yourself in the preview, then ask me to test again
+If you'd like to **enhance** it further, here are some ideas I could implement instead:
+- Add ability to delete events or measurements
+- Add inline editing for measurements
+- Add a risk factors editor
+- Add case summary editing
+- Add measurement trend charts (using recharts)
 
