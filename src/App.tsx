@@ -5,12 +5,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "./i18n/context";
+import { AuthProvider } from "./hooks/useAuth";
 
 import Landing from "./pages/Landing";
 import Pricing from "./pages/Pricing";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
-import { AppLayout } from "./components/layout/AppLayout";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Dashboard from "./pages/app/Dashboard";
 import AIAssistant from "./pages/app/AIAssistant";
 import Patients from "./pages/app/Patients";
@@ -36,6 +37,7 @@ const App = () => (
   <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="vascular-atlas-theme">
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <AuthProvider>
         <Toaster />
         <Sonner />
       <BrowserRouter>
@@ -46,7 +48,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
 
           {/* App (authenticated) */}
-          <Route path="/app" element={<AppLayout />}>
+          <Route path="/app" element={<ProtectedRoute />}>
             <Route index element={<Dashboard />} />
             <Route path="ai-assistant" element={<AIAssistant />} />
             <Route path="patients" element={<Patients />} />
@@ -69,6 +71,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>
