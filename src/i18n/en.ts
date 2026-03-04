@@ -1001,4 +1001,16 @@ export const en = {
     signIn: "Sign In",
     viewPlans: "View Plans",
   },
+
+  notifications: {
+    title: "Notifications",
+    empty: "No notifications yet",
+    markAllRead: "Mark all read",
+    types: {
+      forum_reply: "New reply to your forum post",
+      expert_response: "An expert responded to your request",
+      follow_up_reminder: "Patient follow-up reminder",
+      case_update: "Case update",
+    },
+  },
 };

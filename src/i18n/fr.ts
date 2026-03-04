@@ -975,4 +975,16 @@ export const fr = {
     signIn: "Se connecter",
     viewPlans: "Voir les plans",
   },
+
+  notifications: {
+    title: "Notifications",
+    empty: "Aucune notification",
+    markAllRead: "Tout marquer lu",
+    types: {
+      forum_reply: "Nouvelle réponse à votre post forum",
+      expert_response: "Un expert a répondu à votre demande",
+      follow_up_reminder: "Rappel de suivi patient",
+      case_update: "Mise à jour de dossier",
+    },
+  },
 };
