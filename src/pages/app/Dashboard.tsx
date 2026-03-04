@@ -66,8 +66,8 @@ export default function Dashboard() {
   const statCards = [
     { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, icon: HeartPulse, trend: `${stats?.totalCases ?? 0} total` },
     { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.aiReports") },
-    { label: "Outcomes", value: stats?.outcomes ?? 0, icon: LineChart, trend: "Registry entries" },
-    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: FlaskConical, trend: "Completed" },
+    { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, icon: LineChart, trend: t("dashboard.stats.registryEntries") },
+    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: FlaskConical, trend: t("dashboard.stats.completed") },
   ];
 
   const quickActions = [
@@ -146,7 +146,7 @@ export default function Dashboard() {
       <Card>
         <CardHeader>
           <CardTitle>{t("dashboard.recentActivity")}</CardTitle>
-          <CardDescription>Your latest actions across all modules</CardDescription>
+          <CardDescription>{t("dashboard.recentActivityDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
@@ -181,7 +181,7 @@ export default function Dashboard() {
               : !activityLoading && (
                   <div className="text-center py-8">
                     <Activity className="h-8 w-8 mx-auto text-muted-foreground/40 mb-2" />
-                    <p className="text-sm text-muted-foreground">No recent activity yet</p>
+                    <p className="text-sm text-muted-foreground">{t("dashboard.noActivity")}</p>
                   </div>
                 )}
           </div>

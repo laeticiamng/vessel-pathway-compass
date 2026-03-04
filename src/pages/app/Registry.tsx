@@ -102,9 +102,9 @@ export default function Registry() {
 
   const summaryStats = [
     { label: t("registry.stats.casesContributed"), value: data?.totalCases ?? 0 },
-    { label: "30-day Mortality", value: data?.mortalityRate ?? "—" },
-    { label: "Complication Rate", value: data?.complicationRate ?? "—" },
-    { label: "PROMs Collected", value: data?.promsRate ?? "—" },
+    { label: t("registry.stats.mortality30day"), value: data?.mortalityRate ?? "—" },
+    { label: t("registry.stats.complicationRate"), value: data?.complicationRate ?? "—" },
+    { label: t("registry.stats.promsCollected"), value: data?.promsRate ?? "—" },
   ];
 
   return (
@@ -190,9 +190,9 @@ export default function Registry() {
                           </tr>
                         ))
                       : !isLoading && (
-                          <tr>
-                            <td colSpan={6} className="p-8 text-center text-muted-foreground">
-                              No outcomes data yet. Add outcomes from patient cases to populate this registry.
+                           <tr>
+                             <td colSpan={6} className="p-8 text-center text-muted-foreground">
+                               {t("registry.emptyOutcomes")}
                             </td>
                           </tr>
                         )}
@@ -206,7 +206,7 @@ export default function Registry() {
         <TabsContent value="institution" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Institution Aggregate</CardTitle>
+              <CardTitle>{t("registry.institutionAggregate")}</CardTitle>
               <CardDescription>{t("registry.institutionPlaceholder")}</CardDescription>
             </CardHeader>
             <CardContent className="flex items-center justify-center h-64">
@@ -221,11 +221,11 @@ export default function Registry() {
         <TabsContent value="benchmark" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Network Benchmarking</CardTitle>
-              <CardDescription>
-                <span className="flex items-center gap-2">
-                  {t("registry.benchmarkPlaceholder")}
-                  <Badge variant="outline" className="text-xs">Privacy-first</Badge>
+               <CardTitle>{t("registry.networkBenchmarking")}</CardTitle>
+               <CardDescription>
+                 <span className="flex items-center gap-2">
+                   {t("registry.benchmarkPlaceholder")}
+                   <Badge variant="outline" className="text-xs">{t("registry.privacyFirst")}</Badge>
                 </span>
               </CardDescription>
             </CardHeader>

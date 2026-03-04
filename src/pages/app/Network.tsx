@@ -116,7 +116,7 @@ export default function Network() {
       toast({ title: t("common.create"), description: t("network.newDiscussion") });
     },
     onError: (err: Error) => {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: t("network.errorTitle"), description: err.message, variant: "destructive" });
     },
   });
 
@@ -139,7 +139,7 @@ export default function Network() {
       toast({ title: t("common.create"), description: t("network.submitCase") });
     },
     onError: (err: Error) => {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: t("network.errorTitle"), description: err.message, variant: "destructive" });
     },
   });
 
@@ -222,7 +222,7 @@ export default function Network() {
             <Card>
               <CardContent className="py-12 text-center">
                 <MessageSquare className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
-                <p className="text-muted-foreground">No discussions yet. Start the first one!</p>
+                <p className="text-muted-foreground">{t("network.emptyDiscussions")}</p>
                 <Button variant="outline" className="mt-4" onClick={() => setPostDialogOpen(true)}>
                   {t("network.newDiscussion")}
                 </Button>
@@ -276,7 +276,7 @@ export default function Network() {
             <Card>
               <CardContent className="py-12 text-center">
                 <Send className="h-10 w-10 mx-auto text-muted-foreground/40 mb-3" />
-                <p className="text-muted-foreground">No expert requests yet</p>
+                <p className="text-muted-foreground">{t("network.emptyExperts")}</p>
               </CardContent>
             </Card>
           )}
@@ -287,7 +287,7 @@ export default function Network() {
           <Card>
             <CardHeader>
               <CardTitle>{t("network.tabs.mentorship")}</CardTitle>
-              <CardDescription>Mentorship matching — coming soon</CardDescription>
+              <CardDescription>{t("network.mentorshipComingSoon")}</CardDescription>
             </CardHeader>
             <CardContent className="flex items-center justify-center h-64">
               <div className="text-center text-muted-foreground">
@@ -304,17 +304,17 @@ export default function Network() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{t("network.newDiscussion")}</DialogTitle>
-            <DialogDescription>Start a de-identified case discussion</DialogDescription>
+            <DialogDescription>{t("network.newDiscussionDesc")}</DialogDescription>
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label>Title</Label>
-              <Input placeholder="e.g. Complex iliac occlusion approach" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
+               <Label>{t("network.dialogLabels.title")}</Label>
+               <Input placeholder={t("network.placeholders.postTitle")} value={postTitle} onChange={(e) => setPostTitle(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label>Topic</Label>
-              <Select value={postTopic} onValueChange={setPostTopic}>
-                <SelectTrigger><SelectValue placeholder="Select topic" /></SelectTrigger>
+               <Label>{t("network.dialogLabels.topic")}</Label>
+               <Select value={postTopic} onValueChange={setPostTopic}>
+                 <SelectTrigger><SelectValue placeholder={t("network.dialogLabels.selectTopic")} /></SelectTrigger>
                 <SelectContent>
                   {TOPICS.map((tp) => (
                     <SelectItem key={tp} value={tp}>{tp}</SelectItem>
@@ -323,8 +323,8 @@ export default function Network() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Content</Label>
-              <Textarea placeholder="Describe the case or question..." value={postContent} onChange={(e) => setPostContent(e.target.value)} rows={4} />
+               <Label>{t("network.dialogLabels.content")}</Label>
+               <Textarea placeholder={t("network.placeholders.postContent")} value={postContent} onChange={(e) => setPostContent(e.target.value)} rows={4} />
             </div>
           </div>
           <DialogFooter>
@@ -345,13 +345,13 @@ export default function Network() {
           </DialogHeader>
           <div className="space-y-4 py-2">
             <div className="space-y-2">
-              <Label>Title</Label>
-              <Input placeholder="e.g. Unusual aortic pathology" value={expertTitle} onChange={(e) => setExpertTitle(e.target.value)} />
+               <Label>{t("network.dialogLabels.title")}</Label>
+               <Input placeholder={t("network.placeholders.expertTitle")} value={expertTitle} onChange={(e) => setExpertTitle(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label>Topic</Label>
-              <Select value={expertTopic} onValueChange={setExpertTopic}>
-                <SelectTrigger><SelectValue placeholder="Select topic" /></SelectTrigger>
+               <Label>{t("network.dialogLabels.topic")}</Label>
+               <Select value={expertTopic} onValueChange={setExpertTopic}>
+                 <SelectTrigger><SelectValue placeholder={t("network.dialogLabels.selectTopic")} /></SelectTrigger>
                 <SelectContent>
                   {TOPICS.map((tp) => (
                     <SelectItem key={tp} value={tp}>{tp}</SelectItem>
@@ -360,8 +360,8 @@ export default function Network() {
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>De-identified Case Summary</Label>
-              <Textarea placeholder="Present the de-identified clinical scenario..." value={expertSummary} onChange={(e) => setExpertSummary(e.target.value)} rows={5} />
+               <Label>{t("network.dialogLabels.caseSummary")}</Label>
+               <Textarea placeholder={t("network.placeholders.expertSummary")} value={expertSummary} onChange={(e) => setExpertSummary(e.target.value)} rows={5} />
             </div>
           </div>
           <DialogFooter>
