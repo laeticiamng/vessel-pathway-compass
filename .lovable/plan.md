@@ -1,47 +1,38 @@
 
 
-## Full i18n Integration Plan
+## i18n Completion Plan: Dashboard, Network, Registry
 
-### Problem
-Several pages still use hardcoded English strings instead of the `t()` translation function. The i18n dictionaries (en/fr/de) are also missing keys for the PatientDetail page. Pages with hardcoded strings:
+### Analysis
 
-1. **Research.tsx** -- no `useTranslation`, all English hardcoded
-2. **Education.tsx** -- no `useTranslation`, all English hardcoded
-3. **Simulation.tsx** -- no `useTranslation`, all English hardcoded
-4. **DigitalTwin.tsx** -- no `useTranslation`, all English hardcoded
-5. **FederatedLearning.tsx** -- no `useTranslation`, all English hardcoded
-6. **ARTraining.tsx** -- no `useTranslation`, all English hardcoded
-7. **PatientDetail.tsx** -- uses `useTranslation` but has ~50 hardcoded strings (labels, dialogs, placeholders, empty states)
+Research, Education, Simulation, and DigitalTwin were already fully wired to i18n in the previous round. The three pages with remaining hardcoded English strings are:
 
-Pages already fully translated: Landing, Pricing, Auth, Dashboard, AIAssistant, Patients, Registry, Network, Compliance, Settings, Team, AISafety, Imaging, Wearables.
+**Dashboard.tsx** (5 hardcoded strings):
+- `"Outcomes"`, `"Registry entries"`, `"Completed"` in stat cards
+- `"Your latest actions across all modules"` activity subtitle
+- `"No recent activity yet"` empty state
 
-### Plan
+**Network.tsx** (~15 hardcoded strings):
+- `"Error"` in toast titles
+- Dialog labels: `"Title"`, `"Topic"`, `"Content"`, `"Select topic"`, `"De-identified Case Summary"`
+- Dialog placeholders for post/expert forms
+- Empty states: `"No discussions yet..."`, `"No expert requests yet"`
+- `"Mentorship matching — coming soon"` description
+- `"Start a de-identified case discussion"` dialog description
 
-#### Task 1: Add missing i18n keys to all three dictionaries
+**Registry.tsx** (7 hardcoded strings):
+- `"30-day Mortality"`, `"Complication Rate"`, `"PROMs Collected"` stat labels
+- `"No outcomes data yet..."` empty table message
+- `"Institution Aggregate"`, `"Network Benchmarking"` card titles
+- `"Privacy-first"` badge
 
-Add keys to `en.ts`, `fr.ts`, and `de.ts` for:
+### Implementation
 
-- **patientDetail**: header labels (Cases, Timeline Events, Measurements), tab names (Timeline, Measurements, Cases), dialog titles/descriptions/labels/placeholders for Edit Patient, Add Event, Add Measurement, empty states, event type options, measurement type options
-- **research**: expand with `members`, `eligible`, `pi`, `analytics`, study statuses
-- **education**: expand with track names, module descriptions, badge details, track progress text
-- **simulation**: expand with case titles, difficulty levels, heatmap labels, authoring tool text
-- **digitalTwin**: expand with timeline event data labels, vascular map placeholder details, simulation engine text, care plan goal labels
-- **federated**: expand with ethics approval text, opt-in descriptions (already partially done but component not wired)
-- **arTraining**: expand with checklist step texts, station training placeholder (already partially done but component not wired)
+**Step 1**: Add ~25 new keys to `en.ts`, `fr.ts`, `de.ts` under existing `dashboard`, `network`, and `registry` namespaces.
 
-#### Task 2: Wire 6 pages to use `useTranslation`
-
-For each of **Research, Education, Simulation, DigitalTwin, FederatedLearning, ARTraining**:
-- Import `useTranslation`
-- Replace all hardcoded strings with `t("key")` calls
-
-#### Task 3: Complete PatientDetail i18n
-
-Replace ~50 remaining hardcoded strings in PatientDetail.tsx with `t()` calls using the new `patientDetail.*` keys.
+**Step 2**: Replace all hardcoded strings in the three page components with `t()` calls.
 
 ### Scope
-- 3 dictionary files updated (en.ts, fr.ts, de.ts)
-- 7 page components updated
-- No database or routing changes
-- No new dependencies
+- 3 dictionary files updated
+- 3 page components updated
+- No new dependencies, routing, or database changes
 
