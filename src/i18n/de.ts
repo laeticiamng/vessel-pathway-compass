@@ -465,6 +465,13 @@ export const de = {
       inProgress: "In Bearbeitung",
     },
     badgesDesc: "Interne Nachweise mit verifizierbaren Metadaten",
+    certificate: {
+      title: "Kurs abgeschlossen!",
+      desc: "Laden Sie Ihr Abschlusszertifikat herunter",
+      download: "Zertifikat PDF",
+      downloaded: "Zertifikat heruntergeladen",
+      error: "Zertifikatserstellung fehlgeschlagen",
+    },
     emptyCourses: "Noch keine Kurse. Erstellen Sie den ersten!",
     createCourse: "Neuer Kurs",
     createCourseDesc: "Erstellen Sie einen Kompetenzkurs mit Modulen und Quiz",

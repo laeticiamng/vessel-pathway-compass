@@ -465,6 +465,13 @@ export const fr = {
       inProgress: "En cours",
     },
     badgesDesc: "Attestations internes avec métadonnées vérifiables",
+    certificate: {
+      title: "Cours terminé !",
+      desc: "Téléchargez votre certificat de complétion",
+      download: "Certificat PDF",
+      downloaded: "Certificat téléchargé",
+      error: "Échec de la génération du certificat",
+    },
     emptyCourses: "Aucun cours. Créez le premier !",
     createCourse: "Nouveau cours",
     createCourseDesc: "Créez un cours de compétences avec modules et quiz",
