@@ -80,6 +80,644 @@ export type Database = {
         }
         Relationships: []
       }
+      case_events: {
+        Row: {
+          case_id: string
+          created_at: string
+          created_by: string
+          data: Json | null
+          description: string | null
+          event_date: string
+          event_type: string
+          id: string
+          title: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          created_by: string
+          data?: Json | null
+          description?: string | null
+          event_date?: string
+          event_type: string
+          id?: string
+          title: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          created_by?: string
+          data?: Json | null
+          description?: string | null
+          event_date?: string
+          event_type?: string
+          id?: string
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_events_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cases: {
+        Row: {
+          category: string
+          created_at: string
+          created_by: string
+          id: string
+          institution_id: string | null
+          patient_id: string
+          status: string
+          summary: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          created_by: string
+          id?: string
+          institution_id?: string | null
+          patient_id: string
+          status?: string
+          summary?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          institution_id?: string | null
+          patient_id?: string
+          status?: string
+          summary?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cases_institution_id_fkey"
+            columns: ["institution_id"]
+            isOneToOne: false
+            referencedRelation: "institutions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cases_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      consents: {
+        Row: {
+          consent_type: string
+          created_at: string
+          granted: boolean
+          granted_at: string | null
+          id: string
+          patient_id: string | null
+          revoked_at: string | null
+        }
+        Insert: {
+          consent_type: string
+          created_at?: string
+          granted?: boolean
+          granted_at?: string | null
+          id?: string
+          patient_id?: string | null
+          revoked_at?: string | null
+        }
+        Update: {
+          consent_type?: string
+          created_at?: string
+          granted?: boolean
+          granted_at?: string | null
+          id?: string
+          patient_id?: string | null
+          revoked_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consents_patient_id_fkey"
+            columns: ["patient_id"]
+            isOneToOne: false
+            referencedRelation: "patients"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          created_at: string
+          created_by: string
+          description: string | null
+          difficulty: string
+          duration_hours: number | null
+          id: string
+          is_published: boolean
+          title: string
+          track: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          description?: string | null
+          difficulty?: string
+          duration_hours?: number | null
+          id?: string
+          is_published?: boolean
+          title: string
+          track: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          difficulty?: string
+          duration_hours?: number | null
+          id?: string
+          is_published?: boolean
+          title?: string
+          track?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      expert_requests: {
+        Row: {
+          case_summary: string
+          created_at: string
+          id: string
+          requester_id: string
+          status: string
+          title: string
+          topic: string
+          updated_at: string
+        }
+        Insert: {
+          case_summary: string
+          created_at?: string
+          id?: string
+          requester_id: string
+          status?: string
+          title: string
+          topic: string
+          updated_at?: string
+        }
+        Update: {
+          case_summary?: string
+          created_at?: string
+          id?: string
+          requester_id?: string
+          status?: string
+          title?: string
+          topic?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      expert_responses: {
+        Row: {
+          created_at: string
+          expert_id: string
+          id: string
+          request_id: string
+          response_text: string
+        }
+        Insert: {
+          created_at?: string
+          expert_id: string
+          id?: string
+          request_id: string
+          response_text: string
+        }
+        Update: {
+          created_at?: string
+          expert_id?: string
+          id?: string
+          request_id?: string
+          response_text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expert_responses_request_id_fkey"
+            columns: ["request_id"]
+            isOneToOne: false
+            referencedRelation: "expert_requests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      exports: {
+        Row: {
+          created_at: string
+          export_type: string
+          file_url: string | null
+          id: string
+          row_count: number | null
+          study_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          export_type: string
+          file_url?: string | null
+          id?: string
+          row_count?: number | null
+          study_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          export_type?: string
+          file_url?: string | null
+          id?: string
+          row_count?: number | null
+          study_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "exports_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      forum_posts: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_pinned: boolean
+          parent_id: string | null
+          title: string
+          topic: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_pinned?: boolean
+          parent_id?: string | null
+          title: string
+          topic: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_pinned?: boolean
+          parent_id?: string | null
+          title?: string
+          topic?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "forum_posts_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "forum_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      imaging_summaries: {
+        Row: {
+          case_id: string
+          created_at: string
+          created_by: string
+          findings: string | null
+          id: string
+          measurements: Json | null
+          modality: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          created_by: string
+          findings?: string | null
+          id?: string
+          measurements?: Json | null
+          modality: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          created_by?: string
+          findings?: string | null
+          id?: string
+          measurements?: Json | null
+          modality?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "imaging_summaries_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      institutions: {
+        Row: {
+          city: string | null
+          country: string | null
+          created_at: string
+          id: string
+          logo_url: string | null
+          name: string
+          slug: string
+          updated_at: string
+        }
+        Insert: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          name: string
+          slug: string
+          updated_at?: string
+        }
+        Update: {
+          city?: string | null
+          country?: string | null
+          created_at?: string
+          id?: string
+          logo_url?: string | null
+          name?: string
+          slug?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      logbook_entries: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          performed_at: string
+          procedure_type: string
+          supervisor_id: string | null
+          supervisor_validated: boolean
+          track: string
+          user_id: string
+          validated_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          performed_at?: string
+          procedure_type: string
+          supervisor_id?: string | null
+          supervisor_validated?: boolean
+          track: string
+          user_id: string
+          validated_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          performed_at?: string
+          procedure_type?: string
+          supervisor_id?: string | null
+          supervisor_validated?: boolean
+          track?: string
+          user_id?: string
+          validated_at?: string | null
+        }
+        Relationships: []
+      }
+      measurements: {
+        Row: {
+          case_id: string
+          created_at: string
+          created_by: string
+          id: string
+          measured_at: string
+          measurement_type: string
+          site: string | null
+          unit: string
+          value: number
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          created_by: string
+          id?: string
+          measured_at?: string
+          measurement_type: string
+          site?: string | null
+          unit: string
+          value: number
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          created_by?: string
+          id?: string
+          measured_at?: string
+          measurement_type?: string
+          site?: string | null
+          unit?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "measurements_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      memberships: {
+        Row: {
+          created_at: string
+          id: string
+          institution_id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          institution_id: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          institution_id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "memberships_institution_id_fkey"
+            columns: ["institution_id"]
+            isOneToOne: false
+            referencedRelation: "institutions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      modules: {
+        Row: {
+          content: string | null
+          course_id: string
+          created_at: string
+          id: string
+          module_type: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          content?: string | null
+          course_id: string
+          created_at?: string
+          id?: string
+          module_type?: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          content?: string | null
+          course_id?: string
+          created_at?: string
+          id?: string
+          module_type?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "modules_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      outcomes: {
+        Row: {
+          case_id: string
+          created_at: string
+          created_by: string
+          details: Json | null
+          id: string
+          institution_id: string | null
+          outcome_date: string
+          outcome_type: string
+        }
+        Insert: {
+          case_id: string
+          created_at?: string
+          created_by: string
+          details?: Json | null
+          id?: string
+          institution_id?: string | null
+          outcome_date?: string
+          outcome_type: string
+        }
+        Update: {
+          case_id?: string
+          created_at?: string
+          created_by?: string
+          details?: Json | null
+          id?: string
+          institution_id?: string | null
+          outcome_date?: string
+          outcome_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "outcomes_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "outcomes_institution_id_fkey"
+            columns: ["institution_id"]
+            isOneToOne: false
+            referencedRelation: "institutions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      patients: {
+        Row: {
+          age_range: string | null
+          created_at: string
+          created_by: string
+          id: string
+          institution_id: string | null
+          pseudonym: string
+          risk_factors: Json | null
+          sex: string | null
+          updated_at: string
+        }
+        Insert: {
+          age_range?: string | null
+          created_at?: string
+          created_by: string
+          id?: string
+          institution_id?: string | null
+          pseudonym: string
+          risk_factors?: Json | null
+          sex?: string | null
+          updated_at?: string
+        }
+        Update: {
+          age_range?: string | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          institution_id?: string | null
+          pseudonym?: string
+          risk_factors?: Json | null
+          sex?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "patients_institution_id_fkey"
+            columns: ["institution_id"]
+            isOneToOne: false
+            referencedRelation: "institutions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -110,15 +748,421 @@ export type Database = {
         }
         Relationships: []
       }
+      proms: {
+        Row: {
+          case_id: string
+          completed_at: string
+          created_at: string
+          id: string
+          questionnaire_type: string
+          responses: Json | null
+          score: number | null
+        }
+        Insert: {
+          case_id: string
+          completed_at?: string
+          created_at?: string
+          id?: string
+          questionnaire_type: string
+          responses?: Json | null
+          score?: number | null
+        }
+        Update: {
+          case_id?: string
+          completed_at?: string
+          created_at?: string
+          id?: string
+          questionnaire_type?: string
+          responses?: Json | null
+          score?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "proms_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_attempts: {
+        Row: {
+          answers: Json | null
+          completed_at: string
+          id: string
+          passed: boolean
+          quiz_id: string
+          score: number
+          user_id: string
+        }
+        Insert: {
+          answers?: Json | null
+          completed_at?: string
+          id?: string
+          passed?: boolean
+          quiz_id: string
+          score: number
+          user_id: string
+        }
+        Update: {
+          answers?: Json | null
+          completed_at?: string
+          id?: string
+          passed?: boolean
+          quiz_id?: string
+          score?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_attempts_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quizzes: {
+        Row: {
+          created_at: string
+          id: string
+          module_id: string
+          passing_score: number
+          questions: Json
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          module_id: string
+          passing_score?: number
+          questions?: Json
+          title: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          module_id?: string
+          passing_score?: number
+          questions?: Json
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quizzes_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reputation_events: {
+        Row: {
+          created_at: string
+          event_type: string
+          id: string
+          points: number
+          reference_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_type: string
+          id?: string
+          points?: number
+          reference_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_type?: string
+          id?: string
+          points?: number
+          reference_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      rubrics: {
+        Row: {
+          created_at: string
+          criteria: string
+          id: string
+          max_score: number
+          simulation_id: string
+          weight: number
+        }
+        Insert: {
+          created_at?: string
+          criteria: string
+          id?: string
+          max_score?: number
+          simulation_id: string
+          weight?: number
+        }
+        Update: {
+          created_at?: string
+          criteria?: string
+          id?: string
+          max_score?: number
+          simulation_id?: string
+          weight?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rubrics_simulation_id_fkey"
+            columns: ["simulation_id"]
+            isOneToOne: false
+            referencedRelation: "simulations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      simulation_runs: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          decisions: Json | null
+          duration_seconds: number | null
+          feedback: Json | null
+          id: string
+          score: number | null
+          simulation_id: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          decisions?: Json | null
+          duration_seconds?: number | null
+          feedback?: Json | null
+          id?: string
+          score?: number | null
+          simulation_id: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          decisions?: Json | null
+          duration_seconds?: number | null
+          feedback?: Json | null
+          id?: string
+          score?: number | null
+          simulation_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "simulation_runs_simulation_id_fkey"
+            columns: ["simulation_id"]
+            isOneToOne: false
+            referencedRelation: "simulations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      simulations: {
+        Row: {
+          category: string
+          created_at: string
+          created_by: string
+          description: string | null
+          difficulty: string
+          id: string
+          is_published: boolean
+          scenario: Json
+          time_limit_seconds: number | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          created_by: string
+          description?: string | null
+          difficulty?: string
+          id?: string
+          is_published?: boolean
+          scenario?: Json
+          time_limit_seconds?: number | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          created_by?: string
+          description?: string | null
+          difficulty?: string
+          id?: string
+          is_published?: boolean
+          scenario?: Json
+          time_limit_seconds?: number | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      studies: {
+        Row: {
+          created_at: string
+          created_by: string
+          data_points: Json | null
+          description: string | null
+          eligibility_criteria: Json | null
+          id: string
+          institution_id: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by: string
+          data_points?: Json | null
+          description?: string | null
+          eligibility_criteria?: Json | null
+          id?: string
+          institution_id?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          data_points?: Json | null
+          description?: string | null
+          eligibility_criteria?: Json | null
+          id?: string
+          institution_id?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "studies_institution_id_fkey"
+            columns: ["institution_id"]
+            isOneToOne: false
+            referencedRelation: "institutions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      study_members: {
+        Row: {
+          created_at: string
+          id: string
+          role: string
+          study_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: string
+          study_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: string
+          study_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_members_study_id_fkey"
+            columns: ["study_id"]
+            isOneToOne: false
+            referencedRelation: "studies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
+      validations: {
+        Row: {
+          created_at: string
+          id: string
+          metadata: Json | null
+          status: string
+          track: string
+          updated_at: string
+          user_id: string
+          validation_type: string
+          validator_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          status?: string
+          track: string
+          updated_at?: string
+          user_id: string
+          validation_type: string
+          validator_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          status?: string
+          track?: string
+          updated_at?: string
+          user_id?: string
+          validation_type?: string
+          validator_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
     }
     Enums: {
-      [_ in never]: never
+      app_role:
+        | "admin"
+        | "physician"
+        | "trainee"
+        | "expert_reviewer"
+        | "hospital_admin"
+        | "research_lead"
+        | "super_admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -245,6 +1289,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: [
+        "admin",
+        "physician",
+        "trainee",
+        "expert_reviewer",
+        "hospital_admin",
+        "research_lead",
+        "super_admin",
+      ],
+    },
   },
 } as const
