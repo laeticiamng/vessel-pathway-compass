@@ -111,16 +111,14 @@ export function AppSidebar() {
           <SidebarGroupLabel>{t("sidebar.betaPreview")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {betaItems.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                    <NavLink to={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/app/beta")}>
+                  <NavLink to="/app/beta">
+                    <Rocket className="h-4 w-4" />
+                    {!collapsed && <span>{t("sidebar.innovationLab")}</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
