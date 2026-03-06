@@ -255,21 +255,36 @@ export default function Landing() {
 
       <footer className="border-t py-12">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-2">
-              <HeartPulse className="h-5 w-5 text-primary" />
-              <span className="font-semibold">Vascular Atlas</span>
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <HeartPulse className="h-5 w-5 text-primary" />
+                <span className="font-semibold">Vascular Atlas</span>
+              </div>
+              <p className="text-sm text-muted-foreground">{t("landing.footer.tagline")}</p>
             </div>
-            <div className="flex items-center gap-6 text-sm text-muted-foreground">
-              <Link to="/legal/terms" className="hover:text-foreground transition-colors">{t("legal.tabs.terms")}</Link>
-              <Link to="/legal/privacy" className="hover:text-foreground transition-colors">{t("legal.tabs.privacy")}</Link>
-              <Link to="/legal/notice" className="hover:text-foreground transition-colors">{t("legal.tabs.notice")}</Link>
-              <Link to="/support" className="hover:text-foreground transition-colors">{t("support.title")}</Link>
+            <div>
+              <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
+                <Link to="/auth?mode=signup" className="hover:text-foreground transition-colors">{t("common.getStarted")}</Link>
+                <Link to="/support" className="hover:text-foreground transition-colors">{t("support.title")}</Link>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-semibold text-sm mb-3">{t("landing.footer.legal")}</h4>
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link to="/legal/terms" className="hover:text-foreground transition-colors">{t("legal.tabs.terms")}</Link>
+                <Link to="/legal/privacy" className="hover:text-foreground transition-colors">{t("legal.tabs.privacy")}</Link>
+                <Link to="/legal/notice" className="hover:text-foreground transition-colors">{t("legal.tabs.notice")}</Link>
+              </div>
             </div>
           </div>
-          <p className="text-sm text-muted-foreground text-center mt-4">
-            {t("landing.footer")}
-          </p>
+          <div className="border-t pt-6">
+            <p className="text-sm text-muted-foreground text-center">
+              {t("landing.footer.copyright")}
+            </p>
+          </div>
         </div>
       </footer>
     </div>
