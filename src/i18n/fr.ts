@@ -250,6 +250,14 @@ export const fr = {
   dashboard: {
     title: "Tableau de bord clinique",
     welcome: "Bon retour. Voici votre aperçu clinique.",
+    checklist: {
+      title: "Premiers pas",
+      subtitle: "Complétez ces étapes pour configurer votre espace",
+      createPatient: "Créez votre premier patient",
+      generateAI: "Générez un rapport IA",
+      exploreEducation: "Explorez le pôle formation",
+      runSimulation: "Lancez une simulation clinique",
+    },
     quickActions: {
       newCase: "Nouveau dossier patient",
       aiAssistant: "Assistant IA",
