@@ -1211,4 +1211,23 @@ export const de = {
     hoursAgo: "vor {{count}}Std",
     daysAgo: "vor {{count}}T",
   },
+  cookies: {
+    message: "Wir verwenden ausschließlich streng notwendige Cookies für Authentifizierung und Sitzungsverwaltung. Keine Werbe-Cookies.",
+    learnMore: "Mehr über unsere Datenschutzrichtlinie",
+    accept: "Akzeptieren",
+    decline: "Ablehnen",
+  },
+  innovationLab: {
+    title: "Innovationslabor",
+    subtitle: "Kommende Funktionen und experimentelle Fähigkeiten in Entwicklung.",
+    feedback: "Eine Idee oder Feedback? Kontaktieren Sie uns: support@vascularatlas.com",
+    status: { planned: "Geplant", concept: "Konzept" },
+    features: {
+      federated: { title: "Föderiertes Lernen", desc: "Datenschutzfreundliches kollaboratives KI-Training — Modell-Updates geteilt, Daten bleiben lokal." },
+      aiSafety: { title: "KI-Sicherheitsebene", desc: "MLOps in medizinischer Qualität mit Modellversionierung und Driftdetektion." },
+      imaging: { title: "Bildgebungs-Pipeline", desc: "Bildgebungsberichte, strukturierte Messungen und Annotationswerkzeuge. DICOM-fähig." },
+      wearables: { title: "Wearables & Heimüberwachung", desc: "Patienten-App für Gehtests, Symptomtagebuch, Wundfotos und Kompressionsadhärenz." },
+      arTraining: { title: "Immersives AR-Training", desc: "AR-Checklistenmodus und stationsbasierte Ultraschall-Trainingskonzepte." },
+    },
+  },
 };

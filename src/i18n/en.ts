@@ -1263,4 +1263,3 @@ export const en = {
     },
   },
 };
-};
