@@ -1130,7 +1130,7 @@ export const de = {
         { heading: "5. KI-generierte Inhalte", body: "Alle KI-Ausgaben dienen nur der Entscheidungsunterstützung und erfordern die Überprüfung durch qualifiziertes medizinisches Fachpersonal." },
         { heading: "6. Daten und Datenschutz", body: "Patientendaten werden pseudonymisiert. Siehe unsere Datenschutzrichtlinie für Details." },
         { heading: "7. Geistiges Eigentum", body: "Alle Inhalte und Software der Plattform sind Eigentum von Vascular Atlas." },
-        { heading: "8. Haftungsbeschränkung", body: "Die Plattform wird „wie besehen" bereitgestellt, ohne Gewährleistungen jeglicher Art." },
+        { heading: "8. Haftungsbeschränkung", body: "Die Plattform wird 'wie besehen' bereitgestellt, ohne Gewährleistungen jeglicher Art." },
         { heading: "9. Kündigung", body: "Wir können Ihren Zugang jederzeit bei Verstoß gegen diese AGB sperren." },
         { heading: "10. Anwendbares Recht", body: "Diese AGB unterliegen dem Recht der Europäischen Union." },
       ],
