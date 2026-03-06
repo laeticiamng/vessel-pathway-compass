@@ -1081,6 +1081,7 @@ export const fr = {
     female: "Femme",
     category: "Catégorie",
     skip: "Passer",
+    optional: "optionnel",
     finish: "Terminer",
     complete: "Bienvenue ! Votre profil est configuré.",
     error: "Impossible de sauvegarder votre profil. Réessayez.",
