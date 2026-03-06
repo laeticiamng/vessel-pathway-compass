@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PatientRiskDistribution from "@/components/dashboard/PatientRiskDistribution";
+import { OnboardingChecklist } from "@/components/dashboard/OnboardingChecklist";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
