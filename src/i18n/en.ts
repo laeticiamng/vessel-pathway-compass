@@ -22,7 +22,7 @@ export const en = {
     comingSoon: "Coming soon",
     betaPreview: "Beta Preview",
     notAMedicalDevice: "Not a medical device",
-    version: "v1.0 MVP · Compliance-Ready",
+    version: "v1.0 Beta · Compliance-Ready",
     signIn: "Sign In",
     signUp: "Sign Up",
     signOut: "Sign Out",
