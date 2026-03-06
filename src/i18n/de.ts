@@ -742,6 +742,7 @@ export const de = {
     title: "Teamverwaltung",
     subtitle: "Mitglieder und Rollen des Einrichtungs-Arbeitsbereichs verwalten",
     inviteMember: "Mitglied einladen",
+    emptyState: "Treten Sie einer Einrichtung bei oder kontaktieren Sie Ihren Administrator. Richten Sie Ihre Einrichtung in den Einstellungen ein.",
     columns: {
       name: "Name",
       email: "E-Mail",
