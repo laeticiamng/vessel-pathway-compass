@@ -127,12 +127,26 @@ export const fr = {
         "Accès basé sur les rôles pour médecins, internes et administrateurs",
       ],
     },
+    socialProof: { title: "Reconnu par les centres vasculaires de référence" },
+    testimonials: {
+      title: "Ce que disent les cliniciens",
+      items: [
+        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Dr. Sarah Chen", role: "Chirurgienne vasculaire, Hôpital Universitaire de Zurich" },
+        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Prof. Marc Dubois", role: "Chef d'Angiologie, HEGP Paris" },
+        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+      ],
+    },
     cta: {
       title: "Prêt à transformer la prise en charge vasculaire ?",
       subtitle: "Rejoignez les établissements du monde entier qui utilisent Vascular Atlas.",
       button: "Commencer gratuitement",
     },
-    footer: "© 2026 Vascular Atlas. Plateforme prête pour la conformité. Non un dispositif médical.",
+    footer: {
+      tagline: "Plateforme conforme pour la médecine vasculaire. Non un dispositif médical.",
+      product: "Produit",
+      legal: "Juridique",
+      copyright: "© 2026 Vascular Atlas. Tous droits réservés.",
+    },
   },
 
   pricing: {
