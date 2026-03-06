@@ -108,7 +108,7 @@ export default function Education() {
         difficulty,
         duration_hours: parseFloat(durationHours) || 2,
         created_by: user!.id,
-        is_published: true,
+        is_published: false,
       });
       if (error) throw error;
     },
