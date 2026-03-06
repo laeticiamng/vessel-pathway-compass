@@ -246,6 +246,9 @@ export const en = {
     invalidLink: "Invalid or expired link",
     invalidLinkDesc: "This password reset link is no longer valid. Please request a new one.",
     acceptTerms: "I accept the",
+    passwordWeak: "Weak — add uppercase, numbers, or symbols",
+    passwordMedium: "Medium — add more variety",
+    passwordStrong: "Strong password",
   },
 
   // 404
