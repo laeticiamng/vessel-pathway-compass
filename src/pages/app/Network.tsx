@@ -149,6 +149,7 @@ export default function Network() {
   });
 
   const filteredPosts = posts?.filter((p) => {
+    if (selectedTopic && p.topic !== selectedTopic) return false;
     if (!search) return true;
     const q = search.toLowerCase();
     return p.title.toLowerCase().includes(q) || p.topic.toLowerCase().includes(q);
