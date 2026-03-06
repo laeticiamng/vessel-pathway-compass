@@ -249,6 +249,8 @@ export const en = {
     passwordWeak: "Weak — add uppercase, numbers, or symbols",
     passwordMedium: "Medium — add more variety",
     passwordStrong: "Strong password",
+    continueWithGoogle: "Continue with Google",
+    orContinueWith: "or continue with email",
   },
 
   // 404
