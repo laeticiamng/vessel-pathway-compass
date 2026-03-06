@@ -1109,6 +1109,7 @@ export const en = {
     female: "Female",
     category: "Category",
     skip: "Skip",
+    optional: "optional",
     finish: "Finish",
     complete: "Welcome aboard! Your profile is set up.",
     error: "Could not save your profile. Please try again.",
