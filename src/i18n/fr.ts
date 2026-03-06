@@ -520,6 +520,13 @@ export const fr = {
       intermediate: "Intermédiaire",
       advanced: "Avancé",
     },
+    trackNames: {
+      vascularUltrasound: "Échographie vasculaire",
+      padLimb: "AOMI / Membre",
+      aorta: "Aorte",
+      venous: "Veineux",
+      thrombosis: "Thrombose",
+    },
     quiz: {
       take: "Passer le quiz",
       retry: "Réessayer",
