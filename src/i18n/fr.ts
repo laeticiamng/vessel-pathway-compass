@@ -236,6 +236,9 @@ export const fr = {
     invalidLink: "Lien invalide ou expiré",
     invalidLinkDesc: "Ce lien de réinitialisation n'est plus valide. Veuillez en demander un nouveau.",
     acceptTerms: "J'accepte les",
+    passwordWeak: "Faible — ajoutez des majuscules, chiffres ou symboles",
+    passwordMedium: "Moyen — ajoutez plus de variété",
+    passwordStrong: "Mot de passe fort",
   },
 
   notFound: {
