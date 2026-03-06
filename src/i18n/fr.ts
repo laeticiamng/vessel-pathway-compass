@@ -615,6 +615,12 @@ export const fr = {
       description: "Décrivez le scénario clinique...",
     },
     difficulty: { beginner: "Débutant", intermediate: "Intermédiaire", advanced: "Avancé", hard: "Difficile", medium: "Moyen", easy: "Facile" },
+    categories: {
+      pad: "AOMI",
+      aortic: "Aortique",
+      venous: "Veineux",
+      carotid: "Carotidien",
+    },
     skills: {
       triageAccuracy: "Précision du triage",
       safetySteps: "Étapes de sécurité",

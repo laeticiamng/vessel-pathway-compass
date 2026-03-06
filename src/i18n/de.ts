@@ -615,6 +615,12 @@ export const de = {
       description: "Beschreiben Sie das klinische Szenario...",
     },
     difficulty: { beginner: "Anfänger", intermediate: "Fortgeschritten", advanced: "Experte", hard: "Schwer", medium: "Mittel", easy: "Leicht" },
+    categories: {
+      pad: "pAVK",
+      aortic: "Aortisch",
+      venous: "Venös",
+      carotid: "Karotis",
+    },
     skills: {
       triageAccuracy: "Triage-Genauigkeit",
       safetySteps: "Sicherheitsschritte",

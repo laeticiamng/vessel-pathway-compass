@@ -634,6 +634,12 @@ export const en = {
       description: "Describe the clinical scenario...",
     },
     difficulty: { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced", hard: "Hard", medium: "Medium", easy: "Easy" },
+    categories: {
+      pad: "PAD",
+      aortic: "Aortic",
+      venous: "Venous",
+      carotid: "Carotid",
+    },
     skills: {
       triageAccuracy: "Triage Accuracy",
       safetySteps: "Safety Steps",
