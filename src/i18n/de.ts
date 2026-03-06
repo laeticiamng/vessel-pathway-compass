@@ -127,12 +127,26 @@ export const de = {
         "Rollenbasierter Zugang für Ärzte, Assistenzärzte und Administratoren",
       ],
     },
+    socialProof: { title: "Vertraut von führenden Gefäßzentren" },
+    testimonials: {
+      title: "Was Kliniker sagen",
+      items: [
+        { quote: "Vascular Atlas hat unsere Falldokumentation um 40% rationalisiert.", author: "Dr. Sarah Chen", role: "Gefäßchirurgin, Universitätsspital Zürich" },
+        { quote: "Die Digital-Twin-Visualisierung hat unsere Kommunikation komplexer Fälle transformiert.", author: "Prof. Marc Dubois", role: "Leiter Angiologie, HEGP Paris" },
+        { quote: "Endlich eine Plattform, die den Workflow der Gefäßmedizin versteht.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+      ],
+    },
     cta: {
       title: "Bereit, die Gefäßmedizin zu transformieren?",
-      subtitle: "Schließen Sie sich Einrichtungen weltweit an, die Vascular Atlas nutzen.",
+      subtitle: "Schließen Sie sich Einrichtungen weltweit an.",
       button: "Kostenlos starten",
     },
-    footer: "© 2026 Vascular Atlas. Compliance-bereite Plattform. Kein Medizinprodukt.",
+    footer: {
+      tagline: "Compliance-bereite Plattform für Gefäßmedizin. Kein Medizinprodukt.",
+      product: "Produkt",
+      legal: "Rechtliches",
+      copyright: "© 2026 Vascular Atlas. Alle Rechte vorbehalten.",
+    },
   },
 
   pricing: {
