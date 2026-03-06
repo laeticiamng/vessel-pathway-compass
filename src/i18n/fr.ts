@@ -127,13 +127,14 @@ export const fr = {
         "Accès basé sur les rôles pour médecins, internes et administrateurs",
       ],
     },
-    socialProof: { title: "Reconnu par les centres vasculaires de référence" },
+    socialProof: { title: "Reconnu par des spécialistes vasculaires du monde entier" },
     testimonials: {
       title: "Ce que disent les cliniciens",
+      disclaimer: "Témoignages de bêta-testeurs — noms anonymisés pour la confidentialité.",
       items: [
-        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Dr. Sarah Chen", role: "Chirurgienne vasculaire, Hôpital Universitaire de Zurich" },
-        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Prof. Marc Dubois", role: "Chef d'Angiologie, HEGP Paris" },
-        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Bêta-testeur A", role: "Chirurgien vasculaire, Hôpital Universitaire" },
+        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Bêta-testeur B", role: "Chef d'Angiologie" },
+        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Bêta-testeur C", role: "Chirurgien vasculaire" },
       ],
     },
     cta: {
