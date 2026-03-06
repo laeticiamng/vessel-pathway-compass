@@ -742,6 +742,7 @@ export const fr = {
     title: "Gestion de l'équipe",
     subtitle: "Gérez les membres et les rôles de l'espace de travail institutionnel",
     inviteMember: "Inviter un membre",
+    emptyState: "Rejoignez une institution ou contactez votre administrateur pour accéder à votre équipe. Configurez votre institution dans les Paramètres.",
     columns: {
       name: "Nom",
       email: "E-mail",
