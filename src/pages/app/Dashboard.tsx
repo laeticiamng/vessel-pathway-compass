@@ -104,6 +104,9 @@ export default function Dashboard() {
         <p className="text-muted-foreground mt-1">{t("dashboard.welcome")}</p>
       </div>
 
+      {/* Onboarding Checklist for new users */}
+      {stats && <OnboardingChecklist stats={stats} />}
+
       {/* Quick Actions */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {quickActions.map((action) => (
