@@ -236,6 +236,9 @@ export const de = {
     invalidLink: "Ungültiger oder abgelaufener Link",
     invalidLinkDesc: "Dieser Link ist nicht mehr gültig. Bitte fordern Sie einen neuen an.",
     acceptTerms: "Ich akzeptiere die",
+    passwordWeak: "Schwach — Großbuchstaben, Zahlen oder Symbole hinzufügen",
+    passwordMedium: "Mittel — mehr Vielfalt hinzufügen",
+    passwordStrong: "Starkes Passwort",
   },
 
   notFound: {
