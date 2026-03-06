@@ -71,11 +71,7 @@ const App = () => (
             <Route path="compliance" element={<ContentGate><Compliance /></ContentGate>} />
             <Route path="analytics" element={<ContentGate><Analytics /></ContentGate>} />
             <Route path="team" element={<ContentGate><Team /></ContentGate>} />
-            <Route path="beta/federated" element={<ContentGate><FederatedLearning /></ContentGate>} />
-            <Route path="beta/ai-safety" element={<ContentGate><AISafety /></ContentGate>} />
-            <Route path="beta/imaging" element={<ContentGate><Imaging /></ContentGate>} />
-            <Route path="beta/wearables" element={<ContentGate><Wearables /></ContentGate>} />
-            <Route path="beta/ar-training" element={<ContentGate><ARTraining /></ContentGate>} />
+            <Route path="beta" element={<ContentGate><InnovationLab /></ContentGate>} />
           </Route>
 
           {/* Fully protected: sensitive data */}
