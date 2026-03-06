@@ -239,6 +239,8 @@ export const de = {
     passwordWeak: "Schwach — Großbuchstaben, Zahlen oder Symbole hinzufügen",
     passwordMedium: "Mittel — mehr Vielfalt hinzufügen",
     passwordStrong: "Starkes Passwort",
+    continueWithGoogle: "Weiter mit Google",
+    orContinueWith: "oder per E-Mail fortfahren",
   },
 
   notFound: {

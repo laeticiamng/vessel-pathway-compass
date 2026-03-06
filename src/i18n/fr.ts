@@ -239,6 +239,8 @@ export const fr = {
     passwordWeak: "Faible — ajoutez des majuscules, chiffres ou symboles",
     passwordMedium: "Moyen — ajoutez plus de variété",
     passwordStrong: "Mot de passe fort",
+    continueWithGoogle: "Continuer avec Google",
+    orContinueWith: "ou continuer par email",
   },
 
   notFound: {
