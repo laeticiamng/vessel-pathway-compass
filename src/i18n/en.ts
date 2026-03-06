@@ -133,14 +133,15 @@ export const en = {
       ],
     },
     socialProof: {
-      title: "Trusted by leading vascular centers",
+      title: "Trusted by vascular specialists worldwide",
     },
     testimonials: {
       title: "What Clinicians Say",
+      disclaimer: "Testimonials from beta testers — names anonymized for privacy.",
       items: [
-        { quote: "Vascular Atlas has streamlined our case documentation by 40%. The AI assistant is remarkably accurate for SOAP notes.", author: "Dr. Sarah Chen", role: "Vascular Surgeon, University Hospital Zurich" },
-        { quote: "The digital twin visualization transformed how we communicate complex cases to patients and trainees.", author: "Prof. Marc Dubois", role: "Head of Angiology, HEGP Paris" },
-        { quote: "Finally a platform that understands the workflow of vascular medicine. The simulation lab is excellent for resident training.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+        { quote: "Vascular Atlas has streamlined our case documentation by 40%. The AI assistant is remarkably accurate for SOAP notes.", author: "Beta Tester A", role: "Vascular Surgeon, University Hospital" },
+        { quote: "The digital twin visualization transformed how we communicate complex cases to patients and trainees.", author: "Beta Tester B", role: "Head of Angiology" },
+        { quote: "Finally a platform that understands the workflow of vascular medicine. The simulation lab is excellent for resident training.", author: "Beta Tester C", role: "Vascular Surgeon" },
       ],
     },
     cta: {
