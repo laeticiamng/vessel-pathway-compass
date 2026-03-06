@@ -232,6 +232,7 @@ export const en = {
     passwordUpdatedDesc: "Your password has been successfully updated.",
     invalidLink: "Invalid or expired link",
     invalidLinkDesc: "This password reset link is no longer valid. Please request a new one.",
+    acceptTerms: "I accept the",
   },
 
   // 404
