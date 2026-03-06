@@ -159,6 +159,7 @@ export const en = {
   // Pricing
   pricing: {
     title: "Plans & Pricing",
+    betaBadge: "🎉 Free during Beta — all features included",
     subtitle: "From individual physicians to large institutions — find the right plan for your vascular practice.",
     mostPopular: "Most Popular",
     plans: {
