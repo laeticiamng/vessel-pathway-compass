@@ -24,15 +24,6 @@ import { useToast } from "@/hooks/use-toast";
 
 const TOPICS = ["PAD", "Aorta", "Venous", "Carotid", "Wounds", "Thrombosis"] as const;
 
-function timeAgo(dateStr: string) {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 60) return `${mins}m ago`;
-  const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return `${Math.floor(hours / 24)}d ago`;
-}
-
 export default function Network() {
   const { user } = useAuth();
   const { t } = useTranslation();
@@ -40,6 +31,17 @@ export default function Network() {
   const queryClient = useQueryClient();
 
   const [search, setSearch] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+
+  function timeAgo(dateStr: string) {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 60) return (t("timeAgo.minutesAgo") as string).replace("{{count}}", String(mins));
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return (t("timeAgo.hoursAgo") as string).replace("{{count}}", String(hours));
+    const days = Math.floor(hours / 24);
+    return (t("timeAgo.daysAgo") as string).replace("{{count}}", String(days));
+  }
   const [postDialogOpen, setPostDialogOpen] = useState(false);
   const [expertDialogOpen, setExpertDialogOpen] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
