@@ -187,6 +187,31 @@ export default function Auth() {
                     required
                     minLength={8}
                   />
+                  {isSignUp && password.length > 0 && (
+                    <div className="space-y-1">
+                      <div className="flex gap-1">
+                        {[1, 2, 3, 4].map((i) => {
+                          const strength = (password.length >= 8 ? 1 : 0) + (/[A-Z]/.test(password) ? 1 : 0) + (/[0-9]/.test(password) ? 1 : 0) + (/[^A-Za-z0-9]/.test(password) ? 1 : 0);
+                          return (
+                            <div
+                              key={i}
+                              className={`h-1 flex-1 rounded-full transition-colors ${
+                                i <= strength
+                                  ? strength <= 1 ? "bg-destructive" : strength <= 2 ? "bg-warning" : "bg-success"
+                                  : "bg-muted"
+                              }`}
+                            />
+                          );
+                        })}
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        {(() => {
+                          const strength = (password.length >= 8 ? 1 : 0) + (/[A-Z]/.test(password) ? 1 : 0) + (/[0-9]/.test(password) ? 1 : 0) + (/[^A-Za-z0-9]/.test(password) ? 1 : 0);
+                          return strength <= 1 ? t("auth.passwordWeak") : strength <= 2 ? t("auth.passwordMedium") : t("auth.passwordStrong");
+                        })()}
+                      </p>
+                    </div>
+                  )}
                 </div>
                 {isSignUp && (
                   <div className="flex items-start gap-2">
