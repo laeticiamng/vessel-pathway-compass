@@ -21,7 +21,7 @@ export const de = {
     comingSoon: "Demnächst verfügbar",
     betaPreview: "Beta-Vorschau",
     notAMedicalDevice: "Kein Medizinprodukt",
-    version: "v1.0 MVP · Compliance-bereit",
+    version: "v1.0 Beta · Compliance-bereit",
     signIn: "Anmelden",
     signUp: "Registrieren",
     signOut: "Abmelden",
