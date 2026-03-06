@@ -151,7 +151,7 @@ export const de = {
 
   pricing: {
     title: "Pläne & Preise",
-    subtitle: "Von einzelnen Ärzten bis zu großen Einrichtungen — finden Sie den richtigen Plan für Ihre Gefäßpraxis.",
+    betaBadge: "🎉 Kostenlos während der Beta — alle Funktionen inklusive",
     mostPopular: "Am beliebtesten",
     plans: {
       individual: {
