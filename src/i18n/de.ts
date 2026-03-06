@@ -520,6 +520,13 @@ export const de = {
       intermediate: "Fortgeschritten",
       advanced: "Experte",
     },
+    trackNames: {
+      vascularUltrasound: "Gefäßultraschall",
+      padLimb: "pAVK / Extremität",
+      aorta: "Aorta",
+      venous: "Venös",
+      thrombosis: "Thrombose",
+    },
     quiz: {
       take: "Quiz starten",
       retry: "Wiederholen",
