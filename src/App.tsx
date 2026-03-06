@@ -45,6 +45,7 @@ const App = () => (
         <AuthProvider>
         <Toaster />
         <Sonner />
+        <CookieConsent />
       <BrowserRouter>
         <Routes>
           {/* Public */}
