@@ -250,6 +250,14 @@ export const de = {
   dashboard: {
     title: "Klinisches Dashboard",
     welcome: "Willkommen zurück. Hier ist Ihre klinische Übersicht.",
+    checklist: {
+      title: "Erste Schritte",
+      subtitle: "Führen Sie diese Schritte aus, um Ihren Arbeitsbereich einzurichten",
+      createPatient: "Ersten Patienten erstellen",
+      generateAI: "KI-Bericht erstellen",
+      exploreEducation: "Fortbildungszentrum erkunden",
+      runSimulation: "Klinische Simulation starten",
+    },
     quickActions: {
       newCase: "Neuer Patientenfall",
       aiAssistant: "KI-Assistent",
