@@ -765,6 +765,7 @@ export const en = {
     title: "Team Management",
     subtitle: "Manage institution workspace members and roles",
     inviteMember: "Invite Member",
+    emptyState: "Join an institution or contact your administrator to access your team. Set up your institution in Settings.",
     columns: {
       name: "Name",
       email: "Email",
