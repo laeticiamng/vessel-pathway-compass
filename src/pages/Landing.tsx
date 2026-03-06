@@ -207,6 +207,36 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Social Proof */}
+      <section className="py-16 bg-muted/30 border-t">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-sm text-muted-foreground mb-8 uppercase tracking-wider font-medium">{t("landing.socialProof.title")}</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 opacity-60">
+            {["University Hospital Zurich", "Hôpital Européen Georges-Pompidou", "Charité Berlin", "Cleveland Clinic"].map((name) => (
+              <span key={name} className="text-lg font-semibold text-muted-foreground">{name}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto px-6">
+          <h2 className="text-3xl font-bold text-center mb-12">{t("landing.testimonials.title")}</h2>
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {(t("landing.testimonials.items") as any as Array<{ quote: string; author: string; role: string }>)?.map((item, i) => (
+              <Card key={i} className="p-6">
+                <CardContent className="p-0">
+                  <p className="text-sm italic text-muted-foreground mb-4">"{item.quote}"</p>
+                  <p className="text-sm font-semibold">{item.author}</p>
+                  <p className="text-xs text-muted-foreground">{item.role}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-24">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("landing.cta.title")}</h2>
