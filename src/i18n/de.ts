@@ -1081,6 +1081,7 @@ export const de = {
     female: "Weiblich",
     category: "Kategorie",
     skip: "Überspringen",
+    optional: "optional",
     finish: "Abschließen",
     complete: "Willkommen! Ihr Profil ist eingerichtet.",
     error: "Profil konnte nicht gespeichert werden. Bitte erneut versuchen.",
