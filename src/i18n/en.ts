@@ -262,6 +262,14 @@ export const en = {
   dashboard: {
     title: "Clinical Dashboard",
     welcome: "Welcome back. Here's your clinical overview.",
+    checklist: {
+      title: "Getting Started",
+      subtitle: "Complete these steps to set up your workspace",
+      createPatient: "Create your first patient",
+      generateAI: "Generate an AI report",
+      exploreEducation: "Explore the Education Hub",
+      runSimulation: "Run a clinical simulation",
+    },
     quickActions: {
       newCase: "New Patient Case",
       aiAssistant: "AI Assistant",
