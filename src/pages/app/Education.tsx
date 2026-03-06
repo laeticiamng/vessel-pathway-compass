@@ -108,7 +108,7 @@ export default function Education() {
         difficulty,
         duration_hours: parseFloat(durationHours) || 2,
         created_by: user!.id,
-        is_published: true,
+        is_published: false,
       });
       if (error) throw error;
     },
@@ -346,11 +346,11 @@ export default function Education() {
                 <Select value={track} onValueChange={setTrack}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="vascular-ultrasound">Vascular Ultrasound</SelectItem>
-                    <SelectItem value="pad-limb">PAD / Limb</SelectItem>
-                    <SelectItem value="aorta">Aorta</SelectItem>
-                    <SelectItem value="venous">Venous</SelectItem>
-                    <SelectItem value="thrombosis">Thrombosis</SelectItem>
+                    <SelectItem value="vascular-ultrasound">{t("education.trackNames.vascularUltrasound")}</SelectItem>
+                    <SelectItem value="pad-limb">{t("education.trackNames.padLimb")}</SelectItem>
+                    <SelectItem value="aorta">{t("education.trackNames.aorta")}</SelectItem>
+                    <SelectItem value="venous">{t("education.trackNames.venous")}</SelectItem>
+                    <SelectItem value="thrombosis">{t("education.trackNames.thrombosis")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

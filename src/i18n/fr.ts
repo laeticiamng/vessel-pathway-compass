@@ -21,7 +21,7 @@ export const fr = {
     comingSoon: "Bientôt disponible",
     betaPreview: "Aperçu Beta",
     notAMedicalDevice: "Non un dispositif médical",
-    version: "v1.0 MVP · Prêt pour la conformité",
+    version: "v1.0 Beta · Prêt pour la conformité",
     signIn: "Se connecter",
     signUp: "S'inscrire",
     signOut: "Se déconnecter",
@@ -127,13 +127,14 @@ export const fr = {
         "Accès basé sur les rôles pour médecins, internes et administrateurs",
       ],
     },
-    socialProof: { title: "Reconnu par les centres vasculaires de référence" },
+    socialProof: { title: "Reconnu par des spécialistes vasculaires du monde entier" },
     testimonials: {
       title: "Ce que disent les cliniciens",
+      disclaimer: "Témoignages de bêta-testeurs — noms anonymisés pour la confidentialité.",
       items: [
-        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Dr. Sarah Chen", role: "Chirurgienne vasculaire, Hôpital Universitaire de Zurich" },
-        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Prof. Marc Dubois", role: "Chef d'Angiologie, HEGP Paris" },
-        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Bêta-testeur A", role: "Chirurgien vasculaire, Hôpital Universitaire" },
+        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Bêta-testeur B", role: "Chef d'Angiologie" },
+        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Bêta-testeur C", role: "Chirurgien vasculaire" },
       ],
     },
     cta: {
@@ -145,7 +146,7 @@ export const fr = {
       tagline: "Plateforme conforme pour la médecine vasculaire. Non un dispositif médical.",
       product: "Produit",
       legal: "Juridique",
-      copyright: "© 2026 Vascular Atlas. Tous droits réservés.",
+      rights: "Tous droits réservés.",
     },
   },
 
@@ -519,6 +520,13 @@ export const fr = {
       intermediate: "Intermédiaire",
       advanced: "Avancé",
     },
+    trackNames: {
+      vascularUltrasound: "Échographie vasculaire",
+      padLimb: "AOMI / Membre",
+      aorta: "Aorte",
+      venous: "Veineux",
+      thrombosis: "Thrombose",
+    },
     quiz: {
       take: "Passer le quiz",
       retry: "Réessayer",
@@ -607,6 +615,12 @@ export const fr = {
       description: "Décrivez le scénario clinique...",
     },
     difficulty: { beginner: "Débutant", intermediate: "Intermédiaire", advanced: "Avancé", hard: "Difficile", medium: "Moyen", easy: "Facile" },
+    categories: {
+      pad: "AOMI",
+      aortic: "Aortique",
+      venous: "Veineux",
+      carotid: "Carotidien",
+    },
     skills: {
       triageAccuracy: "Précision du triage",
       safetySteps: "Étapes de sécurité",

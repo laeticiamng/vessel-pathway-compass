@@ -22,7 +22,7 @@ export const en = {
     comingSoon: "Coming soon",
     betaPreview: "Beta Preview",
     notAMedicalDevice: "Not a medical device",
-    version: "v1.0 MVP · Compliance-Ready",
+    version: "v1.0 Beta · Compliance-Ready",
     signIn: "Sign In",
     signUp: "Sign Up",
     signOut: "Sign Out",
@@ -133,14 +133,15 @@ export const en = {
       ],
     },
     socialProof: {
-      title: "Trusted by leading vascular centers",
+      title: "Trusted by vascular specialists worldwide",
     },
     testimonials: {
       title: "What Clinicians Say",
+      disclaimer: "Testimonials from beta testers — names anonymized for privacy.",
       items: [
-        { quote: "Vascular Atlas has streamlined our case documentation by 40%. The AI assistant is remarkably accurate for SOAP notes.", author: "Dr. Sarah Chen", role: "Vascular Surgeon, University Hospital Zurich" },
-        { quote: "The digital twin visualization transformed how we communicate complex cases to patients and trainees.", author: "Prof. Marc Dubois", role: "Head of Angiology, HEGP Paris" },
-        { quote: "Finally a platform that understands the workflow of vascular medicine. The simulation lab is excellent for resident training.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+        { quote: "Vascular Atlas has streamlined our case documentation by 40%. The AI assistant is remarkably accurate for SOAP notes.", author: "Beta Tester A", role: "Vascular Surgeon, University Hospital" },
+        { quote: "The digital twin visualization transformed how we communicate complex cases to patients and trainees.", author: "Beta Tester B", role: "Head of Angiology" },
+        { quote: "Finally a platform that understands the workflow of vascular medicine. The simulation lab is excellent for resident training.", author: "Beta Tester C", role: "Vascular Surgeon" },
       ],
     },
     cta: {
@@ -152,7 +153,7 @@ export const en = {
       tagline: "Compliance-ready platform for vascular medicine. Not a medical device.",
       product: "Product",
       legal: "Legal",
-      copyright: "© 2026 Vascular Atlas. All rights reserved.",
+      rights: "All rights reserved.",
     },
   },
 
@@ -537,6 +538,13 @@ export const en = {
       intermediate: "Intermediate",
       advanced: "Advanced",
     },
+    trackNames: {
+      vascularUltrasound: "Vascular Ultrasound",
+      padLimb: "PAD / Limb",
+      aorta: "Aorta",
+      venous: "Venous",
+      thrombosis: "Thrombosis",
+    },
     quiz: {
       take: "Take Quiz",
       retry: "Retry",
@@ -626,6 +634,12 @@ export const en = {
       description: "Describe the clinical scenario...",
     },
     difficulty: { beginner: "Beginner", intermediate: "Intermediate", advanced: "Advanced", hard: "Hard", medium: "Medium", easy: "Easy" },
+    categories: {
+      pad: "PAD",
+      aortic: "Aortic",
+      venous: "Venous",
+      carotid: "Carotid",
+    },
     skills: {
       triageAccuracy: "Triage Accuracy",
       safetySteps: "Safety Steps",

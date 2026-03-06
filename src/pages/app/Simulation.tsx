@@ -362,10 +362,10 @@ export default function Simulation() {
                 <Select value={category} onValueChange={setCategory}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pad">PAD</SelectItem>
-                    <SelectItem value="aortic">Aortic</SelectItem>
-                    <SelectItem value="venous">Venous</SelectItem>
-                    <SelectItem value="carotid">Carotid</SelectItem>
+                    <SelectItem value="pad">{t("simulation.categories.pad")}</SelectItem>
+                    <SelectItem value="aortic">{t("simulation.categories.aortic")}</SelectItem>
+                    <SelectItem value="venous">{t("simulation.categories.venous")}</SelectItem>
+                    <SelectItem value="carotid">{t("simulation.categories.carotid")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

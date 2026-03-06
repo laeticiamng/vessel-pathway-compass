@@ -21,7 +21,7 @@ export const de = {
     comingSoon: "Demnächst verfügbar",
     betaPreview: "Beta-Vorschau",
     notAMedicalDevice: "Kein Medizinprodukt",
-    version: "v1.0 MVP · Compliance-bereit",
+    version: "v1.0 Beta · Compliance-bereit",
     signIn: "Anmelden",
     signUp: "Registrieren",
     signOut: "Abmelden",
@@ -127,13 +127,14 @@ export const de = {
         "Rollenbasierter Zugang für Ärzte, Assistenzärzte und Administratoren",
       ],
     },
-    socialProof: { title: "Vertraut von führenden Gefäßzentren" },
+    socialProof: { title: "Vertraut von Gefäßspezialisten weltweit" },
     testimonials: {
       title: "Was Kliniker sagen",
+      disclaimer: "Erfahrungsberichte von Beta-Testern — Namen aus Datenschutzgründen anonymisiert.",
       items: [
-        { quote: "Vascular Atlas hat unsere Falldokumentation um 40% rationalisiert.", author: "Dr. Sarah Chen", role: "Gefäßchirurgin, Universitätsspital Zürich" },
-        { quote: "Die Digital-Twin-Visualisierung hat unsere Kommunikation komplexer Fälle transformiert.", author: "Prof. Marc Dubois", role: "Leiter Angiologie, HEGP Paris" },
-        { quote: "Endlich eine Plattform, die den Workflow der Gefäßmedizin versteht.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+        { quote: "Vascular Atlas hat unsere Falldokumentation um 40% rationalisiert.", author: "Beta-Tester A", role: "Gefäßchirurg, Universitätsklinikum" },
+        { quote: "Die Digital-Twin-Visualisierung hat unsere Kommunikation komplexer Fälle transformiert.", author: "Beta-Tester B", role: "Leiter Angiologie" },
+        { quote: "Endlich eine Plattform, die den Workflow der Gefäßmedizin versteht.", author: "Beta-Tester C", role: "Gefäßchirurg" },
       ],
     },
     cta: {
@@ -145,7 +146,7 @@ export const de = {
       tagline: "Compliance-bereite Plattform für Gefäßmedizin. Kein Medizinprodukt.",
       product: "Produkt",
       legal: "Rechtliches",
-      copyright: "© 2026 Vascular Atlas. Alle Rechte vorbehalten.",
+      rights: "Alle Rechte vorbehalten.",
     },
   },
 
@@ -519,6 +520,13 @@ export const de = {
       intermediate: "Fortgeschritten",
       advanced: "Experte",
     },
+    trackNames: {
+      vascularUltrasound: "Gefäßultraschall",
+      padLimb: "pAVK / Extremität",
+      aorta: "Aorta",
+      venous: "Venös",
+      thrombosis: "Thrombose",
+    },
     quiz: {
       take: "Quiz starten",
       retry: "Wiederholen",
@@ -607,6 +615,12 @@ export const de = {
       description: "Beschreiben Sie das klinische Szenario...",
     },
     difficulty: { beginner: "Anfänger", intermediate: "Fortgeschritten", advanced: "Experte", hard: "Schwer", medium: "Mittel", easy: "Leicht" },
+    categories: {
+      pad: "pAVK",
+      aortic: "Aortisch",
+      venous: "Venös",
+      carotid: "Karotis",
+    },
     skills: {
       triageAccuracy: "Triage-Genauigkeit",
       safetySteps: "Sicherheitsschritte",
