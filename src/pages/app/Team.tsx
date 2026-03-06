@@ -1,7 +1,8 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Users, Plus, Loader2 } from "lucide-react";
+import { Users, Plus, Loader2, Settings, Info } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -67,8 +68,9 @@ export default function Team() {
     enabled: !!user,
   });
 
-  // If no institution memberships, show current user as sole "team member"
-  const displayMembers = members.length > 0 ? members : myProfile ? [{
+  // If no institution memberships, show empty state with guidance
+  const hasInstitution = members.length > 0;
+  const displayMembers = hasInstitution ? members : myProfile ? [{
     user_id: user?.id ?? "",
     display_name: myProfile.display_name ?? user?.email ?? "—",
     role: myProfile.role ?? "physician",
@@ -90,6 +92,21 @@ export default function Team() {
           {t("team.inviteMember")}
         </Button>
       </div>
+
+      {!hasInstitution && (
+        <Card className="border-dashed border-primary/20 bg-primary/5">
+          <CardContent className="py-8 flex flex-col items-center text-center gap-3">
+            <Info className="h-8 w-8 text-primary" />
+            <p className="text-sm text-muted-foreground max-w-md">{t("team.emptyState")}</p>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/app/settings">
+                <Settings className="h-4 w-4 mr-2" />
+                {t("sidebar.settings")}
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardContent className="p-0">

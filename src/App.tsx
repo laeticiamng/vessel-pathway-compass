@@ -18,6 +18,7 @@ import Support from "./pages/Support";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
+import { CookieConsent } from "./components/CookieConsent";
 import Dashboard from "./pages/app/Dashboard";
 import AIAssistant from "./pages/app/AIAssistant";
 import Patients from "./pages/app/Patients";
@@ -32,11 +33,7 @@ import Compliance from "./pages/app/Compliance";
 import Analytics from "./pages/app/Analytics";
 import Team from "./pages/app/Team";
 import Settings from "./pages/app/Settings";
-import FederatedLearning from "./pages/app/beta/FederatedLearning";
-import AISafety from "./pages/app/beta/AISafety";
-import Imaging from "./pages/app/beta/Imaging";
-import Wearables from "./pages/app/beta/Wearables";
-import ARTraining from "./pages/app/beta/ARTraining";
+import InnovationLab from "./pages/app/beta/InnovationLab";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +45,7 @@ const App = () => (
         <AuthProvider>
         <Toaster />
         <Sonner />
+        <CookieConsent />
       <BrowserRouter>
         <Routes>
           {/* Public */}
@@ -73,11 +71,7 @@ const App = () => (
             <Route path="compliance" element={<ContentGate><Compliance /></ContentGate>} />
             <Route path="analytics" element={<ContentGate><Analytics /></ContentGate>} />
             <Route path="team" element={<ContentGate><Team /></ContentGate>} />
-            <Route path="beta/federated" element={<ContentGate><FederatedLearning /></ContentGate>} />
-            <Route path="beta/ai-safety" element={<ContentGate><AISafety /></ContentGate>} />
-            <Route path="beta/imaging" element={<ContentGate><Imaging /></ContentGate>} />
-            <Route path="beta/wearables" element={<ContentGate><Wearables /></ContentGate>} />
-            <Route path="beta/ar-training" element={<ContentGate><ARTraining /></ContentGate>} />
+            <Route path="beta" element={<ContentGate><InnovationLab /></ContentGate>} />
           </Route>
 
           {/* Fully protected: sensitive data */}

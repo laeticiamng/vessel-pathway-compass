@@ -24,15 +24,6 @@ import { useToast } from "@/hooks/use-toast";
 
 const TOPICS = ["PAD", "Aorta", "Venous", "Carotid", "Wounds", "Thrombosis"] as const;
 
-function timeAgo(dateStr: string) {
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 60) return `${mins}m ago`;
-  const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return `${Math.floor(hours / 24)}d ago`;
-}
-
 export default function Network() {
   const { user } = useAuth();
   const { t } = useTranslation();
@@ -40,6 +31,17 @@ export default function Network() {
   const queryClient = useQueryClient();
 
   const [search, setSearch] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
+
+  function timeAgo(dateStr: string) {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const mins = Math.floor(diff / 60000);
+    if (mins < 60) return (t("timeAgo.minutesAgo") as string).replace("{{count}}", String(mins));
+    const hours = Math.floor(mins / 60);
+    if (hours < 24) return (t("timeAgo.hoursAgo") as string).replace("{{count}}", String(hours));
+    const days = Math.floor(hours / 24);
+    return (t("timeAgo.daysAgo") as string).replace("{{count}}", String(days));
+  }
   const [postDialogOpen, setPostDialogOpen] = useState(false);
   const [expertDialogOpen, setExpertDialogOpen] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState<string | null>(null);
@@ -147,6 +149,7 @@ export default function Network() {
   });
 
   const filteredPosts = posts?.filter((p) => {
+    if (selectedTopic && p.topic !== selectedTopic) return false;
     if (!search) return true;
     const q = search.toLowerCase();
     return p.title.toLowerCase().includes(q) || p.topic.toLowerCase().includes(q);
@@ -190,9 +193,23 @@ export default function Network() {
                   {t("network.newDiscussion")}
                 </Button>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
+                <Badge
+                  variant={selectedTopic === null ? "default" : "secondary"}
+                  className="cursor-pointer"
+                  onClick={() => setSelectedTopic(null)}
+                >
+                  {t("patients.filters.allCategories")}
+                </Badge>
                 {TOPICS.map((tp) => (
-                  <Badge key={tp} variant="secondary" className="cursor-pointer hover:bg-primary/10">{tp}</Badge>
+                  <Badge
+                    key={tp}
+                    variant={selectedTopic === tp ? "default" : "secondary"}
+                    className="cursor-pointer hover:bg-primary/10"
+                    onClick={() => setSelectedTopic(selectedTopic === tp ? null : tp)}
+                  >
+                    {tp}
+                  </Badge>
                 ))}
               </div>
 

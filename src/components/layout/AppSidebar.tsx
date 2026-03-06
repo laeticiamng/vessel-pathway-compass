@@ -11,11 +11,7 @@ import {
   Shield,
   Settings,
   Users,
-  Cpu,
-  Eye,
-  Image,
-  Watch,
-  Glasses,
+  Rocket,
   FileText,
   LogOut,
 } from "lucide-react";
@@ -71,14 +67,6 @@ export function AppSidebar() {
     { title: t("sidebar.analytics"), url: "/app/analytics", icon: BarChart3 },
   ];
 
-  const betaItems = [
-    { title: t("sidebar.federatedLearning"), url: "/app/beta/federated", icon: Cpu },
-    { title: t("sidebar.aiSafety"), url: "/app/beta/ai-safety", icon: Eye },
-    { title: t("sidebar.imagingPipeline"), url: "/app/beta/imaging", icon: Image },
-    { title: t("sidebar.wearables"), url: "/app/beta/wearables", icon: Watch },
-    { title: t("sidebar.arTraining"), url: "/app/beta/ar-training", icon: Glasses },
-  ];
-
   const adminItems = [
     { title: t("sidebar.compliance"), url: "/app/compliance", icon: Shield },
     { title: t("sidebar.team"), url: "/app/team", icon: Users },
@@ -123,16 +111,14 @@ export function AppSidebar() {
           <SidebarGroupLabel>{t("sidebar.betaPreview")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {betaItems.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                    <NavLink to={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive={isActive("/app/beta")}>
+                  <NavLink to="/app/beta">
+                    <Rocket className="h-4 w-4" />
+                    {!collapsed && <span>{t("sidebar.innovationLab")}</span>}
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

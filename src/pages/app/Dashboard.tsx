@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import PatientRiskDistribution from "@/components/dashboard/PatientRiskDistribution";
+import { OnboardingChecklist } from "@/components/dashboard/OnboardingChecklist";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -102,6 +103,9 @@ export default function Dashboard() {
         <h1 className="text-3xl font-bold">{t("dashboard.title")}</h1>
         <p className="text-muted-foreground mt-1">{t("dashboard.welcome")}</p>
       </div>
+
+      {/* Onboarding Checklist for new users */}
+      {stats && <OnboardingChecklist stats={stats} />}
 
       {/* Quick Actions */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

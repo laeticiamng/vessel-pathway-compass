@@ -46,11 +46,7 @@ export const fr = {
     researchHub: "Pôle recherche",
     analytics: "Analytique",
     betaPreview: "Aperçu Beta",
-    federatedLearning: "Apprentissage fédéré",
-    aiSafety: "Sécurité IA",
-    imagingPipeline: "Pipeline imagerie",
-    wearables: "Objets connectés",
-    arTraining: "Formation RA",
+    innovationLab: "Labo d'innovation",
     administration: "Administration",
     compliance: "Conformité",
     team: "Équipe",
@@ -85,7 +81,7 @@ export const fr = {
       signIn: "Se connecter",
     },
     hero: {
-      badge: "L'OS d'intelligence pour la médecine vasculaire",
+      badge: "Gérez vos cas vasculaires, générez des rapports IA, suivez les résultats — en un seul outil.",
       title: "Vascular Atlas",
       subtitle: "Unifiant workflow clinique, assistance IA, registre de résultats, certification, recherche et réseau d'experts — en Europe, USA et Suisse.",
       cta: "Essai gratuit",
@@ -131,17 +127,31 @@ export const fr = {
         "Accès basé sur les rôles pour médecins, internes et administrateurs",
       ],
     },
+    socialProof: { title: "Reconnu par les centres vasculaires de référence" },
+    testimonials: {
+      title: "Ce que disent les cliniciens",
+      items: [
+        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Dr. Sarah Chen", role: "Chirurgienne vasculaire, Hôpital Universitaire de Zurich" },
+        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Prof. Marc Dubois", role: "Chef d'Angiologie, HEGP Paris" },
+        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+      ],
+    },
     cta: {
       title: "Prêt à transformer la prise en charge vasculaire ?",
       subtitle: "Rejoignez les établissements du monde entier qui utilisent Vascular Atlas.",
       button: "Commencer gratuitement",
     },
-    footer: "© 2026 Vascular Atlas. Plateforme prête pour la conformité. Non un dispositif médical.",
+    footer: {
+      tagline: "Plateforme conforme pour la médecine vasculaire. Non un dispositif médical.",
+      product: "Produit",
+      legal: "Juridique",
+      copyright: "© 2026 Vascular Atlas. Tous droits réservés.",
+    },
   },
 
   pricing: {
     title: "Plans et tarifs",
-    subtitle: "Des médecins individuels aux grands établissements — trouvez le plan adapté à votre pratique vasculaire.",
+    betaBadge: "🎉 Gratuit pendant la Beta — toutes les fonctionnalités incluses",
     mostPopular: "Le plus populaire",
     plans: {
       individual: {
@@ -226,6 +236,9 @@ export const fr = {
     invalidLink: "Lien invalide ou expiré",
     invalidLinkDesc: "Ce lien de réinitialisation n'est plus valide. Veuillez en demander un nouveau.",
     acceptTerms: "J'accepte les",
+    passwordWeak: "Faible — ajoutez des majuscules, chiffres ou symboles",
+    passwordMedium: "Moyen — ajoutez plus de variété",
+    passwordStrong: "Mot de passe fort",
   },
 
   notFound: {
@@ -237,6 +250,14 @@ export const fr = {
   dashboard: {
     title: "Tableau de bord clinique",
     welcome: "Bon retour. Voici votre aperçu clinique.",
+    checklist: {
+      title: "Premiers pas",
+      subtitle: "Complétez ces étapes pour configurer votre espace",
+      createPatient: "Créez votre premier patient",
+      generateAI: "Générez un rapport IA",
+      exploreEducation: "Explorez le pôle formation",
+      runSimulation: "Lancez une simulation clinique",
+    },
     quickActions: {
       newCase: "Nouveau dossier patient",
       aiAssistant: "Assistant IA",
@@ -721,6 +742,7 @@ export const fr = {
     title: "Gestion de l'équipe",
     subtitle: "Gérez les membres et les rôles de l'espace de travail institutionnel",
     inviteMember: "Inviter un membre",
+    emptyState: "Rejoignez une institution ou contactez votre administrateur pour accéder à votre équipe. Configurez votre institution dans les Paramètres.",
     columns: {
       name: "Nom",
       email: "E-mail",
@@ -1059,6 +1081,7 @@ export const fr = {
     female: "Femme",
     category: "Catégorie",
     skip: "Passer",
+    optional: "optionnel",
     finish: "Terminer",
     complete: "Bienvenue ! Votre profil est configuré.",
     error: "Impossible de sauvegarder votre profil. Réessayez.",
@@ -1187,5 +1210,24 @@ export const fr = {
     minutesAgo: "il y a {{count}}min",
     hoursAgo: "il y a {{count}}h",
     daysAgo: "il y a {{count}}j",
+  },
+  cookies: {
+    message: "Nous utilisons uniquement des cookies strictement nécessaires pour l'authentification et la session. Aucun cookie publicitaire.",
+    learnMore: "En savoir plus sur notre politique de confidentialité",
+    accept: "Accepter",
+    decline: "Refuser",
+  },
+  innovationLab: {
+    title: "Labo d'innovation",
+    subtitle: "Fonctionnalités à venir et capacités expérimentales en développement.",
+    feedback: "Une idée ou un retour ? Contactez-nous à support@vascularatlas.com",
+    status: { planned: "Planifié", concept: "Concept" },
+    features: {
+      federated: { title: "Apprentissage fédéré", desc: "Entraînement IA collaboratif respectueux de la vie privée — mises à jour du modèle partagées, données restent locales." },
+      aiSafety: { title: "Couche de sécurité IA", desc: "MLOps de niveau médical avec versionnement des modèles, détection de dérive et suivi des corrections humaines." },
+      imaging: { title: "Pipeline d'imagerie", desc: "Résumés d'imagerie, mesures structurées et outils d'annotation. Architecture compatible DICOM." },
+      wearables: { title: "Objets connectés & Suivi", desc: "Application patient pour tests de marche, journal des symptômes, photos de plaies et observance de la compression." },
+      arTraining: { title: "Formation immersive RA", desc: "Mode check-list RA et formation échographique par stations." },
+    },
   },
 };

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, HeartPulse, ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 
@@ -34,6 +35,7 @@ export default function Pricing() {
 
       <div className="container mx-auto px-6 py-20">
         <div className="text-center mb-16">
+          <Badge className="mb-4 bg-success/10 text-success border-success/30">{t("pricing.betaBadge")}</Badge>
           <h1 className="text-4xl font-bold mb-4">{t("pricing.title")}</h1>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             {t("pricing.subtitle")}

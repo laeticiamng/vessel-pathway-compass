@@ -199,7 +199,7 @@ export default function Onboarding() {
             {step === 1 && (
               <div className="space-y-4">
                 <div className="space-y-2">
-                  <Label>{t("onboarding.institutionName")}</Label>
+                  <Label>{t("onboarding.institutionName")} <span className="text-xs text-muted-foreground">({t("onboarding.optional")})</span></Label>
                   <Input
                     value={institution}
                     onChange={(e) => setInstitution(e.target.value)}
@@ -207,7 +207,7 @@ export default function Onboarding() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>{t("onboarding.displayName")}</Label>
+                  <Label>{t("onboarding.displayName")} <span className="text-xs text-muted-foreground">({t("onboarding.optional")})</span></Label>
                   <Input
                     value={displayName}
                     onChange={(e) => setDisplayName(e.target.value)}
