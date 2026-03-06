@@ -225,6 +225,7 @@ export const de = {
     passwordUpdatedDesc: "Ihr Passwort wurde erfolgreich aktualisiert.",
     invalidLink: "Ungültiger oder abgelaufener Link",
     invalidLinkDesc: "Dieser Link ist nicht mehr gültig. Bitte fordern Sie einen neuen an.",
+    acceptTerms: "Ich akzeptiere die",
   },
 
   notFound: {

@@ -225,6 +225,7 @@ export const fr = {
     passwordUpdatedDesc: "Votre mot de passe a été mis à jour avec succès.",
     invalidLink: "Lien invalide ou expiré",
     invalidLinkDesc: "Ce lien de réinitialisation n'est plus valide. Veuillez en demander un nouveau.",
+    acceptTerms: "J'accepte les",
   },
 
   notFound: {

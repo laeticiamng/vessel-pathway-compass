@@ -12,6 +12,52 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Verify the request comes from an authenticated admin or a scheduled job
+    const authHeader = req.headers.get("Authorization");
+    const cronSecret = req.headers.get("x-cron-secret");
+    const expectedSecret = Deno.env.get("CRON_SECRET");
+
+    // Allow if valid cron secret is provided
+    const isCronJob = expectedSecret && cronSecret === expectedSecret;
+
+    if (!isCronJob) {
+      // Otherwise require authenticated admin user
+      if (!authHeader?.startsWith("Bearer ")) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      const authClient = createClient(
+        Deno.env.get("SUPABASE_URL")!,
+        Deno.env.get("SUPABASE_ANON_KEY")!,
+        { global: { headers: { Authorization: authHeader } } }
+      );
+
+      const token = authHeader.replace("Bearer ", "");
+      const { data: claimsData, error: claimsError } = await authClient.auth.getClaims(token);
+      if (claimsError || !claimsData?.claims) {
+        return new Response(JSON.stringify({ error: "Unauthorized" }), {
+          status: 401,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      // Check if user has admin role
+      const { data: hasAdmin } = await authClient.rpc("has_role", {
+        _user_id: claimsData.claims.sub,
+        _role: "super_admin",
+      });
+
+      if (!hasAdmin) {
+        return new Response(JSON.stringify({ error: "Forbidden" }), {
+          status: 403,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
+
     const supabase = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
