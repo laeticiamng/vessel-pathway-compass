@@ -152,13 +152,19 @@ export default function Settings() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2"><Globe className="h-5 w-5" /> {t("settings.language.title")}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
-          {langs.map((l) => (
-            <div key={l.code} className="flex items-center justify-between">
-              <span className="text-sm">{l.lang} ({l.code.toUpperCase()})</span>
-              <Switch checked={language === l.code} onCheckedChange={() => setLanguage(l.code)} />
-            </div>
-          ))}
+        <CardContent>
+          <Select value={language} onValueChange={(val) => setLanguage(val as Language)}>
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {langs.map((l) => (
+                <SelectItem key={l.code} value={l.code}>
+                  {l.lang} ({l.code.toUpperCase()})
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </CardContent>
       </Card>
 

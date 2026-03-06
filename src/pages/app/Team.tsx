@@ -87,9 +87,10 @@ export default function Team() {
           </h1>
           <p className="text-muted-foreground mt-1">{t("team.subtitle")}</p>
         </div>
-        <Button>
+        <Button disabled>
           <Plus className="h-4 w-4 mr-2" />
           {t("team.inviteMember")}
+          <Badge variant="secondary" className="ml-2 text-xs">{t("common.comingSoon")}</Badge>
         </Button>
       </div>
 

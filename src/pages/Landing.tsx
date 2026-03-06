@@ -278,7 +278,7 @@ export default function Landing() {
           </div>
           <div className="border-t pt-6">
             <p className="text-sm text-muted-foreground text-center">
-              {t("landing.footer.copyright")}
+              © {new Date().getFullYear()} Vascular Atlas. {t("landing.footer.rights")}
             </p>
           </div>
         </div>
