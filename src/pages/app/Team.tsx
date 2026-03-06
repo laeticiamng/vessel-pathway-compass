@@ -67,8 +67,9 @@ export default function Team() {
     enabled: !!user,
   });
 
-  // If no institution memberships, show current user as sole "team member"
-  const displayMembers = members.length > 0 ? members : myProfile ? [{
+  // If no institution memberships, show empty state with guidance
+  const hasInstitution = members.length > 0;
+  const displayMembers = hasInstitution ? members : myProfile ? [{
     user_id: user?.id ?? "",
     display_name: myProfile.display_name ?? user?.email ?? "—",
     role: myProfile.role ?? "physician",
