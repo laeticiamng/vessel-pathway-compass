@@ -225,6 +225,7 @@ export const de = {
     passwordUpdatedDesc: "Ihr Passwort wurde erfolgreich aktualisiert.",
     invalidLink: "Ungültiger oder abgelaufener Link",
     invalidLinkDesc: "Dieser Link ist nicht mehr gültig. Bitte fordern Sie einen neuen an.",
+    acceptTerms: "Ich akzeptiere die",
   },
 
   notFound: {
@@ -1114,5 +1115,77 @@ export const de = {
       outcomes: "Ergebnisse",
       measurements: "Messungen",
     },
+  },
+
+  legal: {
+    tabs: { terms: "AGB", privacy: "Datenschutz", notice: "Impressum" },
+    contact: "Bei Fragen kontaktieren Sie uns: legal@vascularatlas.com",
+    terms: {
+      title: "Allgemeine Geschäftsbedingungen",
+      lastUpdated: "Zuletzt aktualisiert: März 2026",
+      sections: [
+        { heading: "1. Annahme der Bedingungen", body: "Durch den Zugang zu Vascular Atlas (\"die Plattform\") erklären Sie sich mit diesen AGB einverstanden." },
+        { heading: "2. Beschreibung des Dienstes", body: "Vascular Atlas ist eine klinische Entscheidungsunterstützungsplattform. Die Plattform ist KEIN Medizinprodukt." },
+        { heading: "3. Benutzerkonten", body: "Sie müssen bei der Registrierung korrekte Angaben machen und sind für die Vertraulichkeit Ihrer Zugangsdaten verantwortlich." },
+        { heading: "4. Zulässige Nutzung", body: "Sie dürfen die Plattform nur für rechtmäßige Zwecke und gemäß den geltenden medizinischen Vorschriften nutzen." },
+        { heading: "5. KI-generierte Inhalte", body: "Alle KI-Ausgaben dienen nur der Entscheidungsunterstützung und erfordern die Überprüfung durch qualifiziertes medizinisches Fachpersonal." },
+        { heading: "6. Daten und Datenschutz", body: "Patientendaten werden pseudonymisiert. Siehe unsere Datenschutzrichtlinie für Details." },
+        { heading: "7. Geistiges Eigentum", body: "Alle Inhalte und Software der Plattform sind Eigentum von Vascular Atlas." },
+        { heading: "8. Haftungsbeschränkung", body: "Die Plattform wird 'wie besehen' bereitgestellt, ohne Gewährleistungen jeglicher Art." },
+        { heading: "9. Kündigung", body: "Wir können Ihren Zugang jederzeit bei Verstoß gegen diese AGB sperren." },
+        { heading: "10. Anwendbares Recht", body: "Diese AGB unterliegen dem Recht der Europäischen Union." },
+      ],
+    },
+    privacy: {
+      title: "Datenschutzrichtlinie",
+      lastUpdated: "Zuletzt aktualisiert: März 2026",
+      sections: [
+        { heading: "1. Verantwortlicher", body: "Vascular Atlas ist verantwortlich für die Datenverarbeitung. Kontakt: privacy@vascularatlas.com" },
+        { heading: "2. Erhobene Daten", body: "Kontodaten: E-Mail, Name, Institution.\nKlinische Daten: pseudonymisierte Patientendaten.\nNutzungsdaten: Interaktionen, Audit-Logs." },
+        { heading: "3. Rechtsgrundlage (DSGVO Art. 6)", body: "Einwilligung, berechtigtes Interesse, gesetzliche Verpflichtung." },
+        { heading: "4. Datennutzung", body: "Bereitstellung und Verbesserung der Dienste, anonymisierte Insights, Audit-Trails." },
+        { heading: "5. Datenweitergabe", body: "Wir verkaufen keine personenbezogenen Daten." },
+        { heading: "6. Speicherung", body: "Kontodaten: während der Kontoaktivität. Audit-Logs: mindestens 5 Jahre." },
+        { heading: "7. Ihre Rechte (DSGVO)", body: "Auskunft, Berichtigung, Löschung, Einschränkung, Datenübertragbarkeit, Widerspruch." },
+        { heading: "8. Sicherheit", body: "Verschlüsselung bei Übertragung und Speicherung, Row-Level Security." },
+        { heading: "9. Cookies", body: "Nur streng notwendige Cookies. Keine Werbe-Cookies." },
+        { heading: "10. Aktualisierungen", body: "Wesentliche Änderungen werden per E-Mail mitgeteilt." },
+      ],
+    },
+    notice: {
+      title: "Impressum",
+      lastUpdated: "Zuletzt aktualisiert: März 2026",
+      sections: [
+        { heading: "Herausgeber", body: "Vascular Atlas\nKontakt: contact@vascularatlas.com" },
+        { heading: "Hosting", body: "Die Plattform wird in der Europäischen Union gehostet." },
+        { heading: "Medizinischer Hinweis", body: "Vascular Atlas ist KEIN Medizinprodukt." },
+        { heading: "Geistiges Eigentum", body: "Alle Rechte vorbehalten." },
+        { heading: "Anwendbares Recht", body: "Recht der Europäischen Union." },
+      ],
+    },
+  },
+
+  support: {
+    title: "Hilfe & Support",
+    subtitle: "Hilfe zu Ihrem Vascular Atlas Konto und Funktionen.",
+    email: { title: "E-Mail-Support", desc: "Erhalten Sie innerhalb von 24 Stunden Hilfe." },
+    response: { title: "Antwortzeit", desc: "Wir antworten in der Regel innerhalb von 24 Geschäftsstunden." },
+    faq: {
+      title: "Häufig gestellte Fragen",
+      items: [
+        { q: "Ist Vascular Atlas ein Medizinprodukt?", a: "Nein. Es ist ein Entscheidungsunterstützungstool. Alle KI-Ausgaben erfordern eine ärztliche Überprüfung." },
+        { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
+        { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
+        { q: "Was passiert während der kostenlosen Testphase?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar." },
+        { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie support@vascularatlas.com. Löschung innerhalb von 30 Tagen." },
+      ],
+    },
+    links: { terms: "AGB", privacy: "Datenschutzrichtlinie" },
+  },
+
+  timeAgo: {
+    minutesAgo: "vor {{count}}Min",
+    hoursAgo: "vor {{count}}Std",
+    daysAgo: "vor {{count}}T",
   },
 };

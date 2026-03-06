@@ -3,6 +3,7 @@ import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { HeartPulse, Globe } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -19,6 +20,7 @@ export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t, language, setLanguage } = useTranslation();
@@ -183,12 +185,27 @@ export default function Auth() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    minLength={6}
+                    minLength={8}
                   />
                 </div>
+                {isSignUp && (
+                  <div className="flex items-start gap-2">
+                    <Checkbox
+                      id="terms"
+                      checked={acceptedTerms}
+                      onCheckedChange={(c) => setAcceptedTerms(c === true)}
+                    />
+                    <label htmlFor="terms" className="text-xs text-muted-foreground leading-tight cursor-pointer">
+                      {t("auth.acceptTerms")}{" "}
+                      <Link to="/legal/terms" className="text-primary hover:underline" target="_blank">{t("legal.tabs.terms")}</Link>
+                      {" & "}
+                      <Link to="/legal/privacy" className="text-primary hover:underline" target="_blank">{t("legal.tabs.privacy")}</Link>
+                    </label>
+                  </div>
+                )}
               </CardContent>
               <CardFooter className="flex flex-col gap-4">
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full" disabled={loading || (isSignUp && !acceptedTerms)}>
                   {loading ? t("common.loading") : isSignUp ? t("auth.createBtn") : t("auth.signInBtn")}
                 </Button>
                 <button

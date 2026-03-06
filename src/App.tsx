@@ -13,6 +13,8 @@ import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Onboarding from "./pages/Onboarding";
+import Legal from "./pages/Legal";
+import Support from "./pages/Support";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
@@ -54,6 +56,9 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/legal/:section" element={<Legal />} />
+          <Route path="/legal" element={<Legal />} />
+          <Route path="/support" element={<Support />} />
 
           {/* Semi-public: visible at 35% without auth */}
           <Route path="/app" element={<PublicAppRoute />}>

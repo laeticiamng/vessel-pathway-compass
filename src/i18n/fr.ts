@@ -225,6 +225,7 @@ export const fr = {
     passwordUpdatedDesc: "Votre mot de passe a été mis à jour avec succès.",
     invalidLink: "Lien invalide ou expiré",
     invalidLinkDesc: "Ce lien de réinitialisation n'est plus valide. Veuillez en demander un nouveau.",
+    acceptTerms: "J'accepte les",
   },
 
   notFound: {
@@ -1114,5 +1115,77 @@ export const fr = {
       outcomes: "Résultats",
       measurements: "Mesures",
     },
+  },
+
+  legal: {
+    tabs: { terms: "CGU", privacy: "Confidentialité", notice: "Mentions légales" },
+    contact: "Pour toute question, contactez-nous : legal@vascularatlas.com",
+    terms: {
+      title: "Conditions Générales d'Utilisation",
+      lastUpdated: "Dernière mise à jour : mars 2026",
+      sections: [
+        { heading: "1. Acceptation des conditions", body: "En accédant à Vascular Atlas (« la Plateforme »), vous acceptez d'être lié par les présentes CGU. Si vous n'acceptez pas, n'utilisez pas la Plateforme." },
+        { heading: "2. Description du service", body: "Vascular Atlas est une plateforme d'aide à la décision clinique pour les professionnels de la médecine vasculaire. La Plateforme N'EST PAS un dispositif médical et ne fournit pas de diagnostic." },
+        { heading: "3. Comptes utilisateurs", body: "Vous devez fournir des informations exactes lors de la création de votre compte. Vous êtes responsable de la confidentialité de vos identifiants." },
+        { heading: "4. Utilisation acceptable", body: "Vous acceptez d'utiliser la Plateforme uniquement à des fins licites et conformément aux réglementations médicales applicables." },
+        { heading: "5. Contenu généré par IA", body: "Toutes les sorties IA sont fournies à titre d'aide à la décision uniquement. Elles nécessitent la revue et la validation d'un professionnel de santé qualifié." },
+        { heading: "6. Données et confidentialité", body: "Les données patients sont pseudonymisées. Nous traitons les données conformément au RGPD. Voir notre Politique de Confidentialité pour les détails." },
+        { heading: "7. Propriété intellectuelle", body: "Tous les contenus et logiciels de la Plateforme sont la propriété de Vascular Atlas ou de ses concédants." },
+        { heading: "8. Limitation de responsabilité", body: "La Plateforme est fournie « en l'état ». Vascular Atlas ne saurait être tenu responsable des dommages indirects liés à votre utilisation." },
+        { heading: "9. Résiliation", body: "Nous pouvons suspendre ou résilier votre accès à tout moment en cas de violation des présentes CGU." },
+        { heading: "10. Droit applicable", body: "Les présentes CGU sont régies par le droit de l'Union Européenne." },
+      ],
+    },
+    privacy: {
+      title: "Politique de Confidentialité",
+      lastUpdated: "Dernière mise à jour : mars 2026",
+      sections: [
+        { heading: "1. Responsable du traitement", body: "Vascular Atlas est responsable du traitement des données collectées. Contact : privacy@vascularatlas.com" },
+        { heading: "2. Données collectées", body: "Données de compte : e-mail, nom, institution, spécialité.\nDonnées cliniques : dossiers patients pseudonymisés, mesures, résultats.\nDonnées d'utilisation : interactions, journaux d'audit.\nNous NE collectons PAS de données directement identifiantes." },
+        { heading: "3. Base juridique (RGPD Art. 6)", body: "Consentement : pour la création de compte.\nIntérêt légitime : pour l'amélioration et la sécurité.\nObligation légale : pour les journaux d'audit." },
+        { heading: "4. Utilisation des données", body: "Fournir et améliorer les services.\nGénérer des insights anonymisés.\nMaintenir les pistes d'audit.\nCommuniquer les mises à jour." },
+        { heading: "5. Partage des données", body: "Nous ne vendons pas de données personnelles. Les données peuvent être partagées avec des fournisseurs d'infrastructure, conformément à la loi, ou sous forme anonymisée pour la recherche." },
+        { heading: "6. Conservation", body: "Données de compte : conservées pendant la durée d'activité du compte.\nDonnées cliniques : selon la réglementation applicable.\nJournaux d'audit : minimum 5 ans." },
+        { heading: "7. Vos droits (RGPD)", body: "Vous avez le droit d'accéder, rectifier, effacer, limiter le traitement, à la portabilité et d'opposition. Contact : privacy@vascularatlas.com" },
+        { heading: "8. Sécurité", body: "Chiffrement en transit (TLS) et au repos. Sécurité au niveau des lignes (RLS). Tous les accès sont journalisés." },
+        { heading: "9. Cookies", body: "Nous utilisons uniquement des cookies strictement nécessaires. Aucun cookie publicitaire tiers." },
+        { heading: "10. Mises à jour", body: "Nous pouvons mettre à jour cette politique. Les changements significatifs seront communiqués par e-mail ou notification." },
+      ],
+    },
+    notice: {
+      title: "Mentions Légales",
+      lastUpdated: "Dernière mise à jour : mars 2026",
+      sections: [
+        { heading: "Éditeur", body: "Vascular Atlas\nContact : contact@vascularatlas.com" },
+        { heading: "Hébergement", body: "La Plateforme est hébergée sur une infrastructure cloud dans l'Union Européenne." },
+        { heading: "Avertissement médical", body: "Vascular Atlas N'EST PAS un dispositif médical. C'est un outil d'aide à la décision clinique destiné aux professionnels de santé qualifiés." },
+        { heading: "Propriété intellectuelle", body: "Tous droits réservés. Le nom, le logo et le design de Vascular Atlas sont protégés." },
+        { heading: "Droit applicable", body: "Les présentes mentions sont régies par le droit de l'Union Européenne." },
+      ],
+    },
+  },
+
+  support: {
+    title: "Aide et support",
+    subtitle: "Obtenez de l'aide sur votre compte et les fonctionnalités de Vascular Atlas.",
+    email: { title: "Support par e-mail", desc: "Obtenez une réponse de notre équipe sous 24 heures." },
+    response: { title: "Délai de réponse", desc: "Nous répondons généralement sous 24 heures ouvrées." },
+    faq: {
+      title: "Questions fréquentes",
+      items: [
+        { q: "Vascular Atlas est-il un dispositif médical ?", a: "Non. C'est un outil d'aide à la décision clinique. Toutes les sorties IA nécessitent la revue d'un clinicien qualifié." },
+        { q: "Comment les données patients sont-elles protégées ?", a: "Toutes les données sont pseudonymisées. Nous utilisons la sécurité au niveau des lignes, le chiffrement et des journaux d'audit complets." },
+        { q: "Puis-je exporter mes données ?", a: "Oui. Vous pouvez exporter les données patients, mesures et rapports en CSV et PDF." },
+        { q: "Que se passe-t-il pendant l'essai gratuit ?", a: "Pendant la période bêta, toutes les fonctionnalités sont disponibles gratuitement. Nous vous informerons avant toute facturation." },
+        { q: "Comment supprimer mon compte ?", a: "Contactez support@vascularatlas.com. Vos données seront supprimées sous 30 jours." },
+      ],
+    },
+    links: { terms: "Conditions générales", privacy: "Politique de confidentialité" },
+  },
+
+  timeAgo: {
+    minutesAgo: "il y a {{count}}min",
+    hoursAgo: "il y a {{count}}h",
+    daysAgo: "il y a {{count}}j",
   },
 };
