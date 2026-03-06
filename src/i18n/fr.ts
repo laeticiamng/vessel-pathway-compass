@@ -146,7 +146,7 @@ export const fr = {
       tagline: "Plateforme conforme pour la médecine vasculaire. Non un dispositif médical.",
       product: "Produit",
       legal: "Juridique",
-      copyright: "© 2026 Vascular Atlas. Tous droits réservés.",
+      rights: "Tous droits réservés.",
     },
   },
 

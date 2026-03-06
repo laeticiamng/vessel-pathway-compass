@@ -146,7 +146,7 @@ export const de = {
       tagline: "Compliance-bereite Plattform für Gefäßmedizin. Kein Medizinprodukt.",
       product: "Produkt",
       legal: "Rechtliches",
-      copyright: "© 2026 Vascular Atlas. Alle Rechte vorbehalten.",
+      rights: "Alle Rechte vorbehalten.",
     },
   },
 

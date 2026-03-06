@@ -153,7 +153,7 @@ export const en = {
       tagline: "Compliance-ready platform for vascular medicine. Not a medical device.",
       product: "Product",
       legal: "Legal",
-      copyright: "© 2026 Vascular Atlas. All rights reserved.",
+      rights: "All rights reserved.",
     },
   },
 
