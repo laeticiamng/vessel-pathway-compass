@@ -11,11 +11,7 @@ import {
   Shield,
   Settings,
   Users,
-  Cpu,
-  Eye,
-  Image,
-  Watch,
-  Glasses,
+  Rocket,
   FileText,
   LogOut,
 } from "lucide-react";
@@ -69,14 +65,6 @@ export function AppSidebar() {
     { title: t("sidebar.expertNetwork"), url: "/app/network", icon: Globe },
     { title: t("sidebar.researchHub"), url: "/app/research", icon: FileText },
     { title: t("sidebar.analytics"), url: "/app/analytics", icon: BarChart3 },
-  ];
-
-  const betaItems = [
-    { title: t("sidebar.federatedLearning"), url: "/app/beta/federated", icon: Cpu },
-    { title: t("sidebar.aiSafety"), url: "/app/beta/ai-safety", icon: Eye },
-    { title: t("sidebar.imagingPipeline"), url: "/app/beta/imaging", icon: Image },
-    { title: t("sidebar.wearables"), url: "/app/beta/wearables", icon: Watch },
-    { title: t("sidebar.arTraining"), url: "/app/beta/ar-training", icon: Glasses },
   ];
 
   const adminItems = [
