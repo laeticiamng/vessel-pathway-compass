@@ -86,7 +86,7 @@ export const en = {
       signIn: "Sign In",
     },
     hero: {
-      badge: "The Intelligence OS for Vascular Medicine",
+      badge: "Manage vascular cases, generate AI reports, track outcomes — in one tool.",
       title: "Vascular Atlas",
       subtitle: "Unifying clinical workflow, AI assistance, outcomes registry, certification, research, and expert networking — across USA, EU & Switzerland.",
       cta: "Start Free Trial",
