@@ -185,12 +185,27 @@ export default function Auth() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    minLength={6}
+                    minLength={8}
                   />
                 </div>
+                {isSignUp && (
+                  <div className="flex items-start gap-2">
+                    <Checkbox
+                      id="terms"
+                      checked={acceptedTerms}
+                      onCheckedChange={(c) => setAcceptedTerms(c === true)}
+                    />
+                    <label htmlFor="terms" className="text-xs text-muted-foreground leading-tight cursor-pointer">
+                      {t("auth.acceptTerms")}{" "}
+                      <Link to="/legal/terms" className="text-primary hover:underline" target="_blank">{t("legal.tabs.terms")}</Link>
+                      {" & "}
+                      <Link to="/legal/privacy" className="text-primary hover:underline" target="_blank">{t("legal.tabs.privacy")}</Link>
+                    </label>
+                  </div>
+                )}
               </CardContent>
               <CardFooter className="flex flex-col gap-4">
-                <Button type="submit" className="w-full" disabled={loading}>
+                <Button type="submit" className="w-full" disabled={loading || (isSignUp && !acceptedTerms)}>
                   {loading ? t("common.loading") : isSignUp ? t("auth.createBtn") : t("auth.signInBtn")}
                 </Button>
                 <button

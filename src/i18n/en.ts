@@ -1141,4 +1141,79 @@ export const en = {
       measurements: "Measurements",
     },
   },
+
+  // Legal
+  legal: {
+    tabs: { terms: "Terms of Service", privacy: "Privacy Policy", notice: "Legal Notice" },
+    contact: "For any questions, contact us at: legal@vascularatlas.com",
+    terms: {
+      title: "Terms of Service",
+      lastUpdated: "Last updated: March 2026",
+      sections: [
+        { heading: "1. Acceptance of Terms", body: "By accessing or using Vascular Atlas (\"the Platform\"), you agree to be bound by these Terms of Service. If you do not agree, do not use the Platform." },
+        { heading: "2. Description of Service", body: "Vascular Atlas is a clinical decision support platform for vascular medicine professionals. It provides AI-assisted reporting, patient management, educational tools, and outcome registries. The Platform is NOT a medical device and does not provide diagnoses." },
+        { heading: "3. User Accounts", body: "You must provide accurate information when creating an account. You are responsible for maintaining the confidentiality of your credentials. You must notify us immediately of any unauthorized use of your account." },
+        { heading: "4. Acceptable Use", body: "You agree to use the Platform only for lawful purposes and in accordance with applicable medical regulations. You must not attempt to reverse-engineer, decompile, or disassemble any part of the Platform." },
+        { heading: "5. AI-Generated Content", body: "All AI outputs are provided as decision support only. They require clinical review and validation by a qualified healthcare professional before any clinical action. Vascular Atlas is not liable for clinical decisions based on AI outputs." },
+        { heading: "6. Data & Privacy", body: "Patient data is pseudonymized. We process data in accordance with GDPR and applicable data protection regulations. See our Privacy Policy for full details." },
+        { heading: "7. Intellectual Property", body: "All content, software, and trademarks on the Platform are the property of Vascular Atlas or its licensors. You may not reproduce or distribute any part without prior written consent." },
+        { heading: "8. Limitation of Liability", body: "The Platform is provided \"as is\" without warranties of any kind. Vascular Atlas shall not be liable for any indirect, incidental, or consequential damages arising from your use of the Platform." },
+        { heading: "9. Termination", body: "We may suspend or terminate your access at any time for violation of these Terms. Upon termination, your right to use the Platform ceases immediately." },
+        { heading: "10. Governing Law", body: "These Terms are governed by the laws of the European Union. Any disputes shall be resolved in the courts of the applicable jurisdiction." },
+      ],
+    },
+    privacy: {
+      title: "Privacy Policy",
+      lastUpdated: "Last updated: March 2026",
+      sections: [
+        { heading: "1. Data Controller", body: "Vascular Atlas operates as the data controller for information collected through the Platform. For questions about data processing, contact: privacy@vascularatlas.com" },
+        { heading: "2. Data We Collect", body: "Account data: email, name, institution, specialty.\nClinical data: pseudonymized patient records, measurements, outcomes.\nUsage data: platform interactions, audit logs.\nWe do NOT collect directly identifiable patient data (no names, dates of birth, or social security numbers)." },
+        { heading: "3. Legal Basis (GDPR Art. 6)", body: "Consent: for account creation and data processing.\nLegitimate interest: for platform improvement and security.\nLegal obligation: for audit trail and compliance requirements." },
+        { heading: "4. How We Use Data", body: "To provide and improve the Platform services.\nTo generate anonymized benchmarking insights.\nTo maintain audit trails for compliance.\nTo communicate service updates." },
+        { heading: "5. Data Sharing", body: "We do not sell personal data. Data may be shared with: infrastructure providers (hosting), as required by law, or in anonymized/aggregated form for research purposes." },
+        { heading: "6. Data Retention", body: "Account data: retained while account is active, deleted within 30 days of account deletion.\nClinical data: retained per applicable medical record regulations.\nAudit logs: retained for a minimum of 5 years." },
+        { heading: "7. Your Rights (GDPR)", body: "You have the right to: access your data, rectify inaccuracies, request erasure, restrict processing, data portability, and object to processing. Contact privacy@vascularatlas.com to exercise these rights." },
+        { heading: "8. Security Measures", body: "Data is encrypted in transit (TLS) and at rest. Row-level security ensures data isolation between users and institutions. All access is logged for auditability." },
+        { heading: "9. Cookies", body: "We use strictly necessary cookies for authentication and session management. No third-party advertising cookies are used." },
+        { heading: "10. Updates", body: "We may update this policy from time to time. Significant changes will be communicated via email or in-app notification." },
+      ],
+    },
+    notice: {
+      title: "Legal Notice",
+      lastUpdated: "Last updated: March 2026",
+      sections: [
+        { heading: "Publisher", body: "Vascular Atlas\nContact: contact@vascularatlas.com" },
+        { heading: "Hosting", body: "The Platform is hosted on cloud infrastructure in the European Union." },
+        { heading: "Medical Disclaimer", body: "Vascular Atlas is NOT a medical device. It is a clinical decision support tool intended for use by qualified healthcare professionals only. All AI-generated content requires review by a licensed clinician." },
+        { heading: "Intellectual Property", body: "All rights reserved. The Vascular Atlas name, logo, and platform design are protected by intellectual property law." },
+        { heading: "Applicable Law", body: "This legal notice is governed by European Union law." },
+      ],
+    },
+  },
+
+  // Support
+  support: {
+    title: "Help & Support",
+    subtitle: "Get help with your Vascular Atlas account and features.",
+    email: { title: "Email Support", desc: "Get help from our team within 24 hours." },
+    response: { title: "Response Time", desc: "We typically respond within 24 hours on business days." },
+    faq: {
+      title: "Frequently Asked Questions",
+      items: [
+        { q: "Is Vascular Atlas a medical device?", a: "No. Vascular Atlas is a clinical decision support tool. All AI outputs require review by a qualified clinician before clinical action." },
+        { q: "How is patient data protected?", a: "All patient data is pseudonymized. We use row-level security, encryption at rest and in transit, and maintain comprehensive audit trails." },
+        { q: "Can I export my data?", a: "Yes. You can export patient data, measurements, and reports in CSV and PDF formats from the relevant sections." },
+        { q: "What happens during the free trial?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
+        { q: "How do I delete my account?", a: "Contact support@vascularatlas.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
+      ],
+    },
+    links: { terms: "Terms of Service", privacy: "Privacy Policy" },
+  },
+
+  // TimeAgo
+  timeAgo: {
+    minutesAgo: "{{count}}m ago",
+    hoursAgo: "{{count}}h ago",
+    daysAgo: "{{count}}d ago",
+  },
 };

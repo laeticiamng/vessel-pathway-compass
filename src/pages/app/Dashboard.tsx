@@ -81,11 +81,11 @@ export default function Dashboard() {
   function timeAgo(dateStr: string) {
     const diff = Date.now() - new Date(dateStr).getTime();
     const mins = Math.floor(diff / 60000);
-    if (mins < 60) return `${mins}m ago`;
+    if (mins < 60) return (t("timeAgo.minutesAgo") as string).replace("{{count}}", String(mins));
     const hours = Math.floor(mins / 60);
-    if (hours < 24) return `${hours}h ago`;
+    if (hours < 24) return (t("timeAgo.hoursAgo") as string).replace("{{count}}", String(hours));
     const days = Math.floor(hours / 24);
-    return `${days}d ago`;
+    return (t("timeAgo.daysAgo") as string).replace("{{count}}", String(days));
   }
 
   const activityIcon: Record<string, typeof Brain> = {

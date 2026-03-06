@@ -181,11 +181,11 @@ export default function Settings() {
         <CardContent className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm">{t("settings.security.sso")}</span>
-            <Button variant="outline" size="sm">{t("common.configure")}</Button>
+            <Badge variant="secondary" className="text-xs">{t("common.comingSoon")}</Badge>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-sm">{t("settings.security.rateLimiting")}</span>
-            <Button variant="outline" size="sm">{t("common.configure")}</Button>
+            <Badge variant="secondary" className="text-xs">{t("common.comingSoon")}</Badge>
           </div>
         </CardContent>
       </Card>
