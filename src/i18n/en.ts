@@ -132,12 +132,28 @@ export const en = {
         "Role-based access for physicians, trainees, admins",
       ],
     },
+    socialProof: {
+      title: "Trusted by leading vascular centers",
+    },
+    testimonials: {
+      title: "What Clinicians Say",
+      items: [
+        { quote: "Vascular Atlas has streamlined our case documentation by 40%. The AI assistant is remarkably accurate for SOAP notes.", author: "Dr. Sarah Chen", role: "Vascular Surgeon, University Hospital Zurich" },
+        { quote: "The digital twin visualization transformed how we communicate complex cases to patients and trainees.", author: "Prof. Marc Dubois", role: "Head of Angiology, HEGP Paris" },
+        { quote: "Finally a platform that understands the workflow of vascular medicine. The simulation lab is excellent for resident training.", author: "Dr. Klaus Weber", role: "Gefäßchirurg, Charité Berlin" },
+      ],
+    },
     cta: {
       title: "Ready to Transform Vascular Care?",
       subtitle: "Join institutions worldwide using Vascular Atlas.",
       button: "Get Started Free",
     },
-    footer: "© 2026 Vascular Atlas. Compliance-ready platform. Not a medical device.",
+    footer: {
+      tagline: "Compliance-ready platform for vascular medicine. Not a medical device.",
+      product: "Product",
+      legal: "Legal",
+      copyright: "© 2026 Vascular Atlas. All rights reserved.",
+    },
   },
 
   // Pricing
