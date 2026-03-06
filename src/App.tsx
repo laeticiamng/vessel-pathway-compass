@@ -18,6 +18,7 @@ import Support from "./pages/Support";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
+import { CookieConsent } from "./components/CookieConsent";
 import Dashboard from "./pages/app/Dashboard";
 import AIAssistant from "./pages/app/AIAssistant";
 import Patients from "./pages/app/Patients";
@@ -32,11 +33,7 @@ import Compliance from "./pages/app/Compliance";
 import Analytics from "./pages/app/Analytics";
 import Team from "./pages/app/Team";
 import Settings from "./pages/app/Settings";
-import FederatedLearning from "./pages/app/beta/FederatedLearning";
-import AISafety from "./pages/app/beta/AISafety";
-import Imaging from "./pages/app/beta/Imaging";
-import Wearables from "./pages/app/beta/Wearables";
-import ARTraining from "./pages/app/beta/ARTraining";
+import InnovationLab from "./pages/app/beta/InnovationLab";
 
 const queryClient = new QueryClient();
 
