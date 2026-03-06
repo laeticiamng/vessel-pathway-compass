@@ -193,9 +193,23 @@ export default function Network() {
                   {t("network.newDiscussion")}
                 </Button>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 flex-wrap">
+                <Badge
+                  variant={selectedTopic === null ? "default" : "secondary"}
+                  className="cursor-pointer"
+                  onClick={() => setSelectedTopic(null)}
+                >
+                  {t("patients.filters.allCategories")}
+                </Badge>
                 {TOPICS.map((tp) => (
-                  <Badge key={tp} variant="secondary" className="cursor-pointer hover:bg-primary/10">{tp}</Badge>
+                  <Badge
+                    key={tp}
+                    variant={selectedTopic === tp ? "default" : "secondary"}
+                    className="cursor-pointer hover:bg-primary/10"
+                    onClick={() => setSelectedTopic(selectedTopic === tp ? null : tp)}
+                  >
+                    {tp}
+                  </Badge>
                 ))}
               </div>
 
