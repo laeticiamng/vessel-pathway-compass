@@ -13,6 +13,8 @@ import Auth from "./pages/Auth";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Onboarding from "./pages/Onboarding";
+import Legal from "./pages/Legal";
+import Support from "./pages/Support";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
