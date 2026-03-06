@@ -93,6 +93,21 @@ export default function Team() {
         </Button>
       </div>
 
+      {!hasInstitution && (
+        <Card className="border-dashed border-primary/20 bg-primary/5">
+          <CardContent className="py-8 flex flex-col items-center text-center gap-3">
+            <Info className="h-8 w-8 text-primary" />
+            <p className="text-sm text-muted-foreground max-w-md">{t("team.emptyState")}</p>
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/app/settings">
+                <Settings className="h-4 w-4 mr-2" />
+                {t("sidebar.settings")}
+              </Link>
+            </Button>
+          </CardContent>
+        </Card>
+      )}
+
       <Card>
         <CardContent className="p-0">
           {isLoading ? (
