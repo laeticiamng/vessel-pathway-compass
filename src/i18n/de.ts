@@ -81,7 +81,7 @@ export const de = {
       signIn: "Anmelden",
     },
     hero: {
-      badge: "Das Intelligenz-OS für die Gefäßmedizin",
+      badge: "Gefäßfälle verwalten, KI-Berichte erstellen, Ergebnisse verfolgen — in einem Tool.",
       title: "Vascular Atlas",
       subtitle: "Klinische Arbeitsabläufe, KI-Unterstützung, Ergebnisregister, Zertifizierung, Forschung und Expertennetzwerk vereint — in den USA, der EU und der Schweiz.",
       cta: "Kostenlos testen",
