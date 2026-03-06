@@ -81,7 +81,7 @@ export const fr = {
       signIn: "Se connecter",
     },
     hero: {
-      badge: "L'OS d'intelligence pour la médecine vasculaire",
+      badge: "Gérez vos cas vasculaires, générez des rapports IA, suivez les résultats — en un seul outil.",
       title: "Vascular Atlas",
       subtitle: "Unifiant workflow clinique, assistance IA, registre de résultats, certification, recherche et réseau d'experts — en Europe, USA et Suisse.",
       cta: "Essai gratuit",
