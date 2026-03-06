@@ -538,6 +538,13 @@ export const en = {
       intermediate: "Intermediate",
       advanced: "Advanced",
     },
+    trackNames: {
+      vascularUltrasound: "Vascular Ultrasound",
+      padLimb: "PAD / Limb",
+      aorta: "Aorta",
+      venous: "Venous",
+      thrombosis: "Thrombosis",
+    },
     quiz: {
       take: "Take Quiz",
       retry: "Retry",
