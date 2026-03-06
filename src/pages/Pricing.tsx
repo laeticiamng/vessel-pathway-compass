@@ -71,7 +71,7 @@ export default function Pricing() {
               </CardContent>
               <CardFooter>
                 <Button asChild className="w-full" variant={plan.popular ? "default" : "outline"}>
-                  <Link to="/auth?mode=signup">{plan.cta}</Link>
+                  <Link to={plan.key === "institution" ? "/support" : "/auth?mode=signup"}>{plan.cta}</Link>
                 </Button>
               </CardFooter>
             </Card>
