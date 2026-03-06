@@ -1243,4 +1243,24 @@ export const en = {
     hoursAgo: "{{count}}h ago",
     daysAgo: "{{count}}d ago",
   },
+  cookies: {
+    message: "We use strictly necessary cookies for authentication and session management. No advertising cookies.",
+    learnMore: "Learn more about our privacy policy",
+    accept: "Accept",
+    decline: "Decline",
+  },
+  innovationLab: {
+    title: "Innovation Lab",
+    subtitle: "Upcoming features and experimental capabilities in development.",
+    feedback: "Have an idea or feedback? Contact us at support@vascularatlas.com",
+    status: { planned: "Planned", concept: "Concept" },
+    features: {
+      federated: { title: "Federated Learning", desc: "Privacy-preserving collaborative AI training — model updates shared, data stays local." },
+      aiSafety: { title: "AI Safety Layer", desc: "Medical-grade MLOps with model versioning, drift detection, and human override tracking." },
+      imaging: { title: "Imaging Pipeline", desc: "Upload imaging summaries, structured measurements, and annotation tools. DICOM-ready." },
+      wearables: { title: "Wearables & Home Monitoring", desc: "Patient app for walking tests, symptom diary, wound photos, and compression adherence." },
+      arTraining: { title: "Immersive AR Training", desc: "AR checklist mode and station-based ultrasound training concepts." },
+    },
+  },
+};
 };
