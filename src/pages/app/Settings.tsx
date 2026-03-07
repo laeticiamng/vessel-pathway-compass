@@ -129,8 +129,7 @@ export default function Settings() {
         </CardContent>
       </Card>
 
-      <SubscriptionCard />
-
+      <SubscriptionSettingsCard />
 
       <Card>
         <CardHeader>
