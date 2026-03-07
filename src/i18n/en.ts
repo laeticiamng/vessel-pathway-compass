@@ -254,6 +254,12 @@ export const en = {
     passwordStrong: "Strong password",
     continueWithGoogle: "Continue with Google",
     orContinueWith: "or continue with email",
+    confirmationTitle: "Check your inbox",
+    confirmationDesc: "We sent a confirmation link to",
+    confirmationNote: "Click the link in the email to activate your account. If you don't see it, check your spam folder.",
+    resendEmail: "Resend confirmation email",
+    resendSuccess: "Confirmation email resent successfully.",
+    backToLogin: "Back to login",
   },
 
   // 404

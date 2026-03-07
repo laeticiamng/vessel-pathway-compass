@@ -244,6 +244,12 @@ export const de = {
     passwordStrong: "Starkes Passwort",
     continueWithGoogle: "Weiter mit Google",
     orContinueWith: "oder per E-Mail fortfahren",
+    confirmationTitle: "Überprüfen Sie Ihren Posteingang",
+    confirmationDesc: "Wir haben einen Bestätigungslink gesendet an",
+    confirmationNote: "Klicken Sie auf den Link in der E-Mail, um Ihr Konto zu aktivieren. Wenn Sie ihn nicht sehen, prüfen Sie Ihren Spam-Ordner.",
+    resendEmail: "Bestätigungs-E-Mail erneut senden",
+    resendSuccess: "Bestätigungs-E-Mail erfolgreich erneut gesendet.",
+    backToLogin: "Zurück zur Anmeldung",
   },
 
   notFound: {

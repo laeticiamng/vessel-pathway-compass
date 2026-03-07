@@ -244,6 +244,12 @@ export const fr = {
     passwordStrong: "Mot de passe fort",
     continueWithGoogle: "Continuer avec Google",
     orContinueWith: "ou continuer par email",
+    confirmationTitle: "Vérifiez votre boîte de réception",
+    confirmationDesc: "Nous avons envoyé un lien de confirmation à",
+    confirmationNote: "Cliquez sur le lien dans l'e-mail pour activer votre compte. Si vous ne le voyez pas, vérifiez votre dossier spam.",
+    resendEmail: "Renvoyer l'e-mail de confirmation",
+    resendSuccess: "E-mail de confirmation renvoyé avec succès.",
+    backToLogin: "Retour à la connexion",
   },
 
   notFound: {
