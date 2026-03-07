@@ -173,7 +173,7 @@ export default function Landing() {
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.1] mb-6 max-w-4xl mx-auto">
-              {t("landing.hero.title")}
+              AI-Powered Clinical Platform for Vascular Medicine
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
               {t("landing.hero.subtitle")}
