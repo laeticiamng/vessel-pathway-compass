@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, HeartPulse } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
+import { SEOHead } from "@/components/SEOHead";
 
 const sections = ["terms", "privacy", "notice"] as const;
 type Section = typeof sections[number];
