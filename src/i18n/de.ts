@@ -127,19 +127,19 @@ export const de = {
         "Rollenbasierter Zugang für Ärzte, Assistenzärzte und Administratoren",
       ],
     },
-    socialProof: { title: "Vertraut von Gefäßspezialisten weltweit" },
+    socialProof: { title: "Entwickelt für Gefäßspezialisten — von Gefäßspezialisten" },
     testimonials: {
-      title: "Was Kliniker sagen",
-      disclaimer: "Erfahrungsberichte von Beta-Testern — Namen aus Datenschutzgründen anonymisiert.",
+      title: "Erste Rückmeldungen",
+      disclaimer: "Anonymisiertes Feedback aus der geschlossenen Beta-Phase. Namen und Zugehörigkeiten nicht offengelegt.",
       items: [
-        { quote: "Vascular Atlas hat unsere Falldokumentation um 40% rationalisiert.", author: "Beta-Tester A", role: "Gefäßchirurg, Universitätsklinikum" },
-        { quote: "Die Digital-Twin-Visualisierung hat unsere Kommunikation komplexer Fälle transformiert.", author: "Beta-Tester B", role: "Leiter Angiologie" },
-        { quote: "Endlich eine Plattform, die den Workflow der Gefäßmedizin versteht.", author: "Beta-Tester C", role: "Gefäßchirurg" },
+        { quote: "Die strukturierten KI-Berichte sparen mir erheblich Zeit bei der Falldokumentation. Ein vielversprechendes Tool für den klinischen Alltag.", author: "Beta-Teilnehmer #1", role: "Gefäßchirurg" },
+        { quote: "Die Digital-Twin-Visualisierung ist eine neuartige Methode, um komplexe Gefäßanatomie mit Assistenzärzten zu kommunizieren.", author: "Beta-Teilnehmer #2", role: "Angiologe" },
+        { quote: "Eine durchdacht gestaltete Plattform, die reale gefäßmedizinische Arbeitsabläufe widerspiegelt. Freue mich auf die Vollversion.", author: "Beta-Teilnehmer #3", role: "Gefäßchirurg" },
       ],
     },
     cta: {
       title: "Bereit, die Gefäßmedizin zu transformieren?",
-      subtitle: "Schließen Sie sich Einrichtungen weltweit an.",
+      subtitle: "Schließen Sie sich Gefäßspezialisten an, die Vascular Atlas erkunden.",
       button: "Kostenlos starten",
     },
     footer: {
@@ -244,6 +244,12 @@ export const de = {
     passwordStrong: "Starkes Passwort",
     continueWithGoogle: "Weiter mit Google",
     orContinueWith: "oder per E-Mail fortfahren",
+    confirmationTitle: "Überprüfen Sie Ihren Posteingang",
+    confirmationDesc: "Wir haben einen Bestätigungslink gesendet an",
+    confirmationNote: "Klicken Sie auf den Link in der E-Mail, um Ihr Konto zu aktivieren. Wenn Sie ihn nicht sehen, prüfen Sie Ihren Spam-Ordner.",
+    resendEmail: "Bestätigungs-E-Mail erneut senden",
+    resendSuccess: "Bestätigungs-E-Mail erfolgreich erneut gesendet.",
+    backToLogin: "Zurück zur Anmeldung",
   },
 
   notFound: {
@@ -1062,11 +1068,11 @@ export const de = {
   },
 
   contentGate: {
-    previewBanner: "Vorschaumodus — melden Sie sich an, um alle Funktionen zu nutzen",
-    title: "Melden Sie sich an, um den vollständigen Inhalt zu sehen",
-    subtitle: "Erstellen Sie ein kostenloses Konto oder abonnieren Sie, um alle Funktionen und Daten freizuschalten.",
-    signIn: "Anmelden",
-    viewPlans: "Pläne ansehen",
+    previewBanner: "🔒 Eingeschränkte Vorschau — melden Sie sich an oder abonnieren Sie für vollen Zugang",
+    title: "Sie sehen eine eingeschränkte Vorschau",
+    subtitle: "Dieser Inhalt ist eingeschränkt. Melden Sie sich mit Ihrem kostenlosen Konto an, oder upgraden Sie auf Professionell für unbegrenzten Zugang zu allen Modulen.",
+    signIn: "Anmelden und fortfahren",
+    viewPlans: "Pläne & Preise ansehen",
   },
 
   notifications: {

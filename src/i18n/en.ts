@@ -133,20 +133,20 @@ export const en = {
       ],
     },
     socialProof: {
-      title: "Trusted by vascular specialists worldwide",
+      title: "Built for vascular specialists — by vascular specialists",
     },
     testimonials: {
-      title: "What Clinicians Say",
-      disclaimer: "Testimonials from beta testers — names anonymized for privacy.",
+      title: "Early Feedback",
+      disclaimer: "Anonymized feedback collected during closed beta testing. Names and affiliations withheld.",
       items: [
-        { quote: "Vascular Atlas has streamlined our case documentation by 40%. The AI assistant is remarkably accurate for SOAP notes.", author: "Beta Tester A", role: "Vascular Surgeon, University Hospital" },
-        { quote: "The digital twin visualization transformed how we communicate complex cases to patients and trainees.", author: "Beta Tester B", role: "Head of Angiology" },
-        { quote: "Finally a platform that understands the workflow of vascular medicine. The simulation lab is excellent for resident training.", author: "Beta Tester C", role: "Vascular Surgeon" },
+        { quote: "The structured AI reports save me significant time on case documentation. A promising tool for daily clinical workflow.", author: "Beta Participant #1", role: "Vascular Surgeon" },
+        { quote: "The digital twin visualization is a novel way to communicate complex vascular anatomy with trainees.", author: "Beta Participant #2", role: "Angiologist" },
+        { quote: "A thoughtfully designed platform that reflects real vascular medicine workflows. Looking forward to the full release.", author: "Beta Participant #3", role: "Vascular Surgeon" },
       ],
     },
     cta: {
       title: "Ready to Transform Vascular Care?",
-      subtitle: "Join institutions worldwide using Vascular Atlas.",
+      subtitle: "Join vascular specialists exploring Vascular Atlas.",
       button: "Get Started Free",
     },
     footer: {
@@ -254,6 +254,12 @@ export const en = {
     passwordStrong: "Strong password",
     continueWithGoogle: "Continue with Google",
     orContinueWith: "or continue with email",
+    confirmationTitle: "Check your inbox",
+    confirmationDesc: "We sent a confirmation link to",
+    confirmationNote: "Click the link in the email to activate your account. If you don't see it, check your spam folder.",
+    resendEmail: "Resend confirmation email",
+    resendSuccess: "Confirmation email resent successfully.",
+    backToLogin: "Back to login",
   },
 
   // 404
@@ -1091,11 +1097,11 @@ export const en = {
   },
 
   contentGate: {
-    previewBanner: "Preview mode — sign in to access all features",
-    title: "Sign in to access the full content",
-    subtitle: "Create a free account or subscribe to unlock all features and data.",
-    signIn: "Sign In",
-    viewPlans: "View Plans",
+    previewBanner: "🔒 Limited preview — sign in or subscribe for full access",
+    title: "You're viewing a limited preview",
+    subtitle: "This content is restricted. Sign in to your free account to continue, or upgrade to Professional for unlimited access to all modules.",
+    signIn: "Sign In to Continue",
+    viewPlans: "See Plans & Pricing",
   },
 
   notifications: {

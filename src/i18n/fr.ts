@@ -127,19 +127,19 @@ export const fr = {
         "Accès basé sur les rôles pour médecins, internes et administrateurs",
       ],
     },
-    socialProof: { title: "Reconnu par des spécialistes vasculaires du monde entier" },
+    socialProof: { title: "Conçu pour les spécialistes vasculaires — par des spécialistes vasculaires" },
     testimonials: {
-      title: "Ce que disent les cliniciens",
-      disclaimer: "Témoignages de bêta-testeurs — noms anonymisés pour la confidentialité.",
+      title: "Retours préliminaires",
+      disclaimer: "Retours anonymisés recueillis pendant la bêta fermée. Noms et affiliations non divulgués.",
       items: [
-        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Bêta-testeur A", role: "Chirurgien vasculaire, Hôpital Universitaire" },
-        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Bêta-testeur B", role: "Chef d'Angiologie" },
-        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Bêta-testeur C", role: "Chirurgien vasculaire" },
+        { quote: "Les rapports IA structurés me font gagner un temps considérable sur la documentation des cas. Un outil prometteur pour le workflow clinique quotidien.", author: "Participant bêta #1", role: "Chirurgien vasculaire" },
+        { quote: "La visualisation du jumeau numérique est une manière innovante de communiquer l'anatomie vasculaire complexe aux internes.", author: "Participant bêta #2", role: "Angiologue" },
+        { quote: "Une plateforme conçue avec soin qui reflète les véritables workflows de la médecine vasculaire. Vivement la version complète.", author: "Participant bêta #3", role: "Chirurgien vasculaire" },
       ],
     },
     cta: {
       title: "Prêt à transformer la prise en charge vasculaire ?",
-      subtitle: "Rejoignez les établissements du monde entier qui utilisent Vascular Atlas.",
+      subtitle: "Rejoignez les spécialistes vasculaires qui explorent Vascular Atlas.",
       button: "Commencer gratuitement",
     },
     footer: {
@@ -244,6 +244,12 @@ export const fr = {
     passwordStrong: "Mot de passe fort",
     continueWithGoogle: "Continuer avec Google",
     orContinueWith: "ou continuer par email",
+    confirmationTitle: "Vérifiez votre boîte de réception",
+    confirmationDesc: "Nous avons envoyé un lien de confirmation à",
+    confirmationNote: "Cliquez sur le lien dans l'e-mail pour activer votre compte. Si vous ne le voyez pas, vérifiez votre dossier spam.",
+    resendEmail: "Renvoyer l'e-mail de confirmation",
+    resendSuccess: "E-mail de confirmation renvoyé avec succès.",
+    backToLogin: "Retour à la connexion",
   },
 
   notFound: {
@@ -1062,11 +1068,11 @@ export const fr = {
   },
 
   contentGate: {
-    previewBanner: "Mode aperçu — connectez-vous pour accéder à toutes les fonctionnalités",
-    title: "Connectez-vous pour accéder à l'intégralité du contenu",
-    subtitle: "Créez un compte gratuit ou abonnez-vous pour débloquer toutes les fonctionnalités et données.",
-    signIn: "Se connecter",
-    viewPlans: "Voir les plans",
+    previewBanner: "🔒 Aperçu limité — connectez-vous ou abonnez-vous pour un accès complet",
+    title: "Vous consultez un aperçu limité",
+    subtitle: "Ce contenu est restreint. Connectez-vous à votre compte gratuit pour continuer, ou passez au plan Professionnel pour un accès illimité à tous les modules.",
+    signIn: "Se connecter pour continuer",
+    viewPlans: "Voir les plans & tarifs",
   },
 
   notifications: {
