@@ -1089,6 +1089,7 @@ export const en = {
   },
 
   contentGate: {
+    previewBanner: "Preview mode — sign in to access all features",
     title: "Sign in to access the full content",
     subtitle: "Create a free account or subscribe to unlock all features and data.",
     signIn: "Sign In",
