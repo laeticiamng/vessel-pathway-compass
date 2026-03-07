@@ -28,6 +28,7 @@ function riskFromFactors(factors: unknown): string {
 export default function Patients() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { subscribed } = useSubscription();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
