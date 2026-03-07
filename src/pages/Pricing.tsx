@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, HeartPulse, ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
+import { SEOHead } from "@/components/SEOHead";
 
 const planKeys = ["individual", "professional", "institution"] as const;
 
