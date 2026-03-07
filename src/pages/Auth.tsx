@@ -326,6 +326,7 @@ export default function Auth() {
             </form>
           )}
         </Card>
+        )}
       </div>
     </div>
   );
