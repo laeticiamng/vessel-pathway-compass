@@ -127,19 +127,19 @@ export const fr = {
         "Accès basé sur les rôles pour médecins, internes et administrateurs",
       ],
     },
-    socialProof: { title: "Reconnu par des spécialistes vasculaires du monde entier" },
+    socialProof: { title: "Conçu pour les spécialistes vasculaires — par des spécialistes vasculaires" },
     testimonials: {
-      title: "Ce que disent les cliniciens",
-      disclaimer: "Témoignages de bêta-testeurs — noms anonymisés pour la confidentialité.",
+      title: "Retours préliminaires",
+      disclaimer: "Retours anonymisés recueillis pendant la bêta fermée. Noms et affiliations non divulgués.",
       items: [
-        { quote: "Vascular Atlas a rationalisé notre documentation de 40%. L'assistant IA est remarquablement précis pour les notes SOAP.", author: "Bêta-testeur A", role: "Chirurgien vasculaire, Hôpital Universitaire" },
-        { quote: "La visualisation du jumeau numérique a transformé notre communication des cas complexes.", author: "Bêta-testeur B", role: "Chef d'Angiologie" },
-        { quote: "Enfin une plateforme qui comprend le workflow de la médecine vasculaire.", author: "Bêta-testeur C", role: "Chirurgien vasculaire" },
+        { quote: "Les rapports IA structurés me font gagner un temps considérable sur la documentation des cas. Un outil prometteur pour le workflow clinique quotidien.", author: "Participant bêta #1", role: "Chirurgien vasculaire" },
+        { quote: "La visualisation du jumeau numérique est une manière innovante de communiquer l'anatomie vasculaire complexe aux internes.", author: "Participant bêta #2", role: "Angiologue" },
+        { quote: "Une plateforme conçue avec soin qui reflète les véritables workflows de la médecine vasculaire. Vivement la version complète.", author: "Participant bêta #3", role: "Chirurgien vasculaire" },
       ],
     },
     cta: {
       title: "Prêt à transformer la prise en charge vasculaire ?",
-      subtitle: "Rejoignez les établissements du monde entier qui utilisent Vascular Atlas.",
+      subtitle: "Rejoignez les spécialistes vasculaires qui explorent Vascular Atlas.",
       button: "Commencer gratuitement",
     },
     footer: {
