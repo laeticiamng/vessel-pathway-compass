@@ -129,26 +129,8 @@ export default function Settings() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2"><CreditCard className="h-5 w-5" /> {t("settings.plan.title")}</CardTitle>
-          <CardDescription>{t("settings.plan.desc")}</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-medium">{t("settings.plan.currentPlan")}</span>
-              <Badge variant="secondary">{t("settings.plan.free")}</Badge>
-            </div>
-            <Button asChild variant="default" size="sm">
-              <Link to="/pricing">
-                {t("settings.plan.viewPlans")}
-                <ArrowRight className="h-4 w-4 ml-1.5" />
-              </Link>
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+      <SubscriptionCard />
+
 
       <Card>
         <CardHeader>
