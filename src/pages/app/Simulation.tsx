@@ -112,7 +112,7 @@ export default function Simulation() {
         time_limit_seconds: parseInt(timeLimit) || 600,
         scenario,
         created_by: user!.id,
-        is_published: true,
+        is_published: false,
       });
       if (error) throw error;
     },

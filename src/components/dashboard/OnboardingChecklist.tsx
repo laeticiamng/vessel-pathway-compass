@@ -25,7 +25,7 @@ export function OnboardingChecklist({ stats }: Props) {
   ];
 
   const completedCount = steps.filter((s) => s.done).length;
-  if (completedCount >= 2) return null;
+  if (completedCount >= 3) return null;
 
   return (
     <Card className="border-primary/20 bg-primary/5">

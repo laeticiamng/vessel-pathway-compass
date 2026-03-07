@@ -17,6 +17,9 @@ export function ContentGate({ children }: ContentGateProps) {
 
   return (
     <div>
+      <div className="mb-2 px-4 py-2 rounded-lg bg-muted/60 border border-border text-center">
+        <p className="text-sm text-muted-foreground font-medium">{t("contentGate.previewBanner")}</p>
+      </div>
       <div className="relative max-h-[35vh] overflow-hidden" aria-hidden="true">
         {children}
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
