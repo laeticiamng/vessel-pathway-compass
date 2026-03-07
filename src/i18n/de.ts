@@ -154,6 +154,8 @@ export const de = {
     title: "Pläne & Preise",
     betaBadge: "🎉 Kostenlos während der Beta — alle Funktionen inklusive",
     mostPopular: "Am beliebtesten",
+    currentPlan: "Ihr Plan",
+    managePlan: "Abo verwalten",
     plans: {
       individual: {
         name: "Einzelperson",
