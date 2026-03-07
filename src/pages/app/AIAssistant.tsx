@@ -36,6 +36,8 @@ interface AiOutput {
   created_at: string;
 }
 
+const FREE_DAILY_AI_LIMIT = 3;
+
 export default function AIAssistant() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -45,6 +47,12 @@ export default function AIAssistant() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { subscribed } = useSubscription();
+
+  const todayCount = useMemo(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    return history.filter((h) => h.created_at.slice(0, 10) === today).length;
+  }, [history]);
 
   const [formData, setFormData] = useState({
     symptoms: "",
