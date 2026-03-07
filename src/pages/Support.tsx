@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, HeartPulse, Mail, MessageCircle, BookOpen, Shield } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
+import { SEOHead } from "@/components/SEOHead";
 
 export default function Support() {
   const { t } = useTranslation();
