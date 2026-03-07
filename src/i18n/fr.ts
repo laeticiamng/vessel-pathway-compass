@@ -1060,6 +1060,7 @@ export const fr = {
   },
 
   contentGate: {
+    previewBanner: "Mode aperçu — connectez-vous pour accéder à toutes les fonctionnalités",
     title: "Connectez-vous pour accéder à l'intégralité du contenu",
     subtitle: "Créez un compte gratuit ou abonnez-vous pour débloquer toutes les fonctionnalités et données.",
     signIn: "Se connecter",
