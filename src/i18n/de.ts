@@ -1060,6 +1060,7 @@ export const de = {
   },
 
   contentGate: {
+    previewBanner: "Vorschaumodus — melden Sie sich an, um alle Funktionen zu nutzen",
     title: "Melden Sie sich an, um den vollständigen Inhalt zu sehen",
     subtitle: "Erstellen Sie ein kostenloses Konto oder abonnieren Sie, um alle Funktionen und Daten freizuschalten.",
     signIn: "Anmelden",
