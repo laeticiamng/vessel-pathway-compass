@@ -1288,6 +1288,12 @@ export const en = {
     featureDesc: "{{feature}} requires a Professional subscription.",
     betaNote: "During beta, all features are available. Upgrade to keep access after beta.",
     upgrade: "Upgrade to Professional",
+    limitReached: "You've reached the free limit for {{feature}}. Upgrade to Professional for unlimited access.",
+    limitNear: "You've used {{current}} of {{limit}} free {{feature}}. Upgrade for unlimited access.",
+    features: {
+      aiReports: "AI reports",
+      patients: "patients",
+    },
   },
   innovationLab: {
     title: "Innovation Lab",
