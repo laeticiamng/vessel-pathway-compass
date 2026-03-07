@@ -123,6 +123,48 @@ export default function Auth() {
           <span className="text-2xl font-bold">Vascular Atlas</span>
         </Link>
 
+        {showConfirmation ? (
+          <Card>
+            <CardHeader className="text-center">
+              <div className="mx-auto rounded-full bg-primary/10 p-4 mb-2">
+                <MailCheck className="h-8 w-8 text-primary" />
+              </div>
+              <CardTitle>{t("auth.confirmationTitle")}</CardTitle>
+              <CardDescription>
+                {t("auth.confirmationDesc")} <strong>{confirmationEmail}</strong>
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground text-center">{t("auth.confirmationNote")}</p>
+            </CardContent>
+            <CardFooter className="flex flex-col gap-3">
+              <Button
+                variant="outline"
+                className="w-full"
+                disabled={loading}
+                onClick={async () => {
+                  setLoading(true);
+                  const { error } = await supabase.auth.resend({ type: "signup", email: confirmationEmail });
+                  if (error) {
+                    toast({ title: t("auth.error"), description: error.message, variant: "destructive" });
+                  } else {
+                    toast({ title: t("auth.checkEmail"), description: t("auth.resendSuccess") });
+                  }
+                  setLoading(false);
+                }}
+              >
+                {t("auth.resendEmail")}
+              </Button>
+              <button
+                type="button"
+                onClick={() => { setShowConfirmation(false); setIsSignUp(false); }}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {t("auth.backToLogin")}
+              </button>
+            </CardFooter>
+          </Card>
+        ) : (
         <Card>
           <CardHeader className="text-center">
             <CardTitle>
