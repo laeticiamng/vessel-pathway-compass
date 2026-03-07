@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
+import { useSubscription } from "@/hooks/useSubscription";
 import { Button } from "@/components/ui/button";
 import { Plus, Trash2 } from "lucide-react";
 import { PatientFilters } from "@/components/patient/PatientFilters";
@@ -11,6 +12,9 @@ import { PatientsTable } from "@/components/patient/PatientsTable";
 import { NewCaseDialog } from "@/components/patient/NewCaseDialog";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import PatientTrash from "@/components/patient/PatientTrash";
+import { UsageLimitBanner } from "@/components/UsageLimitBanner";
+
+const FREE_PATIENT_LIMIT = 5;
 
 function riskFromFactors(factors: unknown): string {
   if (!Array.isArray(factors)) return "low";
