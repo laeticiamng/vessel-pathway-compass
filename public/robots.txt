@@ -1,3 +1,5 @@
+# Vascular Atlas — robots.txt
+
 User-agent: Googlebot
 Allow: /
 
@@ -10,5 +12,29 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+# AI search crawlers
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 User-agent: *
 Allow: /
+
+# Protected app routes — no indexing needed
+Disallow: /app/patients
+Disallow: /app/settings
+Disallow: /onboarding
+Disallow: /reset-password
+
+Sitemap: https://vascular-atlas.com/sitemap.xml
