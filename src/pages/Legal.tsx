@@ -12,8 +12,20 @@ export default function Legal() {
   const { t } = useTranslation();
   const current = sections.includes(section as Section) ? (section as Section) : "terms";
 
+  const seoTitles: Record<Section, string> = { terms: "Terms of Service", privacy: "Privacy Policy", notice: "Legal Notice" };
+  const seoDescs: Record<Section, string> = {
+    terms: "Read Vascular Atlas Terms of Service — usage conditions for the clinical platform.",
+    privacy: "Vascular Atlas Privacy Policy — how we handle your data with GDPR compliance.",
+    notice: "Vascular Atlas Legal Notice — company information and disclaimers.",
+  };
+
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title={seoTitles[current]}
+        description={seoDescs[current]}
+        path={`/legal/${current}`}
+      />
       <nav className="border-b">
         <div className="container mx-auto flex items-center h-16 px-6">
           <Link to="/" className="flex items-center gap-2">

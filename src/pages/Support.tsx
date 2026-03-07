@@ -12,6 +12,11 @@ export default function Support() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Support & FAQ"
+        description="Get help with Vascular Atlas. Contact support, browse FAQs about AI clinical reports, patient management, certification and more."
+        path="/support"
+      />
       <nav className="border-b">
         <div className="container mx-auto flex items-center h-16 px-6">
           <Link to="/" className="flex items-center gap-2">
