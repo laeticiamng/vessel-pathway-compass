@@ -17,7 +17,13 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Auth() {
   const { session } = useAuth();
+  const navigate = useNavigate();
   
+  // Redirect if already authenticated
+  if (session) {
+    return <Navigate to="/app" replace />;
+  }
+
   const [searchParams] = useSearchParams();
   const [isSignUp, setIsSignUp] = useState(searchParams.get("mode") === "signup");
   const [isForgot, setIsForgot] = useState(false);
