@@ -163,6 +163,8 @@ export const en = {
     betaBadge: "🎉 Free during Beta — all features included",
     subtitle: "From individual physicians to large institutions — find the right plan for your vascular practice.",
     mostPopular: "Most Popular",
+    currentPlan: "Your Plan",
+    managePlan: "Manage Plan",
     plans: {
       individual: {
         name: "Individual",
