@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, HeartPulse, ArrowLeft } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
+import { SEOHead } from "@/components/SEOHead";
 
 const planKeys = ["individual", "professional", "institution"] as const;
 
@@ -23,6 +24,11 @@ export default function Pricing() {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Pricing — Vascular Atlas Plans"
+        description="Compare Vascular Atlas plans: Free Individual, $99/mo Professional, and custom Institution pricing. All features free during beta."
+        path="/pricing"
+      />
       <nav className="border-b">
         <div className="container mx-auto flex items-center h-16 px-6">
           <Link to="/" className="flex items-center gap-2">

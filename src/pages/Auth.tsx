@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEOHead } from "@/components/SEOHead";
 import { Link, Navigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -114,6 +115,7 @@ export default function Auth() {
         </DropdownMenu>
       </div>
       <div className="w-full max-w-md">
+        <SEOHead title="Sign In" description="Sign in or create a Vascular Atlas account." path="/auth" noindex />
         <Link to="/" className="flex items-center justify-center gap-2 mb-8">
           <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
             <HeartPulse className="h-5 w-5 text-primary-foreground" />

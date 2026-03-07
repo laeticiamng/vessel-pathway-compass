@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, type Language } from "@/i18n/context";
+import { SEOHead } from "@/components/SEOHead";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -44,9 +45,43 @@ export default function Landing() {
 
   const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Vascular Atlas?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Vascular Atlas is an AI-powered clinical platform for vascular medicine that unifies patient case management, AI-assisted reporting, outcomes registry, certification, clinical simulation, and expert networking." }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is Vascular Atlas for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Vascular Atlas is designed for vascular surgeons, angiologists, interventional radiologists, trainees, and hospital departments specializing in vascular medicine." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Vascular Atlas cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Vascular Atlas offers a free Individual plan, a Professional plan at $99/month, and custom Institution pricing. All features are currently free during the beta period." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Vascular Atlas a medical device?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Vascular Atlas is a clinical workflow and documentation platform. It is not a certified medical device. All AI outputs require clinician confirmation before use." }
+      }
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-background">
-      <nav className="fixed top-0 w-full z-50 glass">
+      <SEOHead
+        title="Vascular Atlas — AI-Powered Clinical Platform for Vascular Medicine"
+        description="Unify AI clinical reports, patient case management, outcomes registry, certification, simulation and expert networking for vascular surgeons and angiologists. Free during beta."
+        path="/"
+        jsonLd={faqJsonLd}
+      />
+      <header>
+      <nav className="fixed top-0 w-full z-50 glass" aria-label="Main navigation">
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2.5">
             <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center">
@@ -119,7 +154,9 @@ export default function Landing() {
           </Sheet>
         </div>
       </nav>
+      </header>
 
+      <main>
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(220_70%_50%_/_0.15),_transparent_70%)]" />
@@ -136,7 +173,7 @@ export default function Landing() {
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.1] mb-6 max-w-4xl mx-auto">
-              {t("landing.hero.title")}
+              AI-Powered Clinical Platform for Vascular Medicine
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
               {t("landing.hero.subtitle")}
@@ -248,6 +285,7 @@ export default function Landing() {
           </Button>
         </div>
       </section>
+      </main>
 
       <footer className="border-t py-12">
         <div className="container mx-auto px-6">
