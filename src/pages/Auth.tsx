@@ -17,13 +17,6 @@ import { Separator } from "@/components/ui/separator";
 
 export default function Auth() {
   const { session } = useAuth();
-  const navigate = useNavigate();
-  
-  // Redirect if already authenticated
-  if (session) {
-    return <Navigate to="/app" replace />;
-  }
-
   const [searchParams] = useSearchParams();
   const [isSignUp, setIsSignUp] = useState(searchParams.get("mode") === "signup");
   const [isForgot, setIsForgot] = useState(false);
@@ -35,6 +28,11 @@ export default function Auth() {
   const navigate = useNavigate();
   const { t, language, setLanguage } = useTranslation();
   const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
+
+  // Redirect if already authenticated
+  if (session) {
+    return <Navigate to="/app" replace />;
+  }
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
