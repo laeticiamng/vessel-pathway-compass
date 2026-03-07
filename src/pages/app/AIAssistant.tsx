@@ -147,6 +147,11 @@ export default function AIAssistant() {
       return;
     }
 
+    if (!subscribed && todayCount >= FREE_DAILY_AI_LIMIT) {
+      toast({ title: t("premiumGate.title"), description: (t("premiumGate.limitReached") as string).replace("{{feature}}", t("premiumGate.features.aiReports") as string), variant: "destructive" });
+      return;
+    }
+
     setLoading(true);
     setResult(null);
     setCurrentOutputId(null);
