@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -23,6 +23,8 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
+import { useSubscription } from "@/hooks/useSubscription";
+import { UsageLimitBanner } from "@/components/UsageLimitBanner";
 
 interface AiOutput {
   id: string;
@@ -34,6 +36,8 @@ interface AiOutput {
   created_at: string;
 }
 
+const FREE_DAILY_AI_LIMIT = 3;
+
 export default function AIAssistant() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
@@ -43,6 +47,12 @@ export default function AIAssistant() {
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { subscribed } = useSubscription();
+
+  const todayCount = useMemo(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    return history.filter((h) => h.created_at.slice(0, 10) === today).length;
+  }, [history]);
 
   const [formData, setFormData] = useState({
     symptoms: "",
@@ -137,6 +147,11 @@ export default function AIAssistant() {
       return;
     }
 
+    if (!subscribed && todayCount >= FREE_DAILY_AI_LIMIT) {
+      toast({ title: t("premiumGate.title"), description: (t("premiumGate.limitReached") as string).replace("{{feature}}", t("premiumGate.features.aiReports") as string), variant: "destructive" });
+      return;
+    }
+
     setLoading(true);
     setResult(null);
     setCurrentOutputId(null);
@@ -221,6 +236,7 @@ export default function AIAssistant() {
 
   return (
     <div className="space-y-6 max-w-7xl">
+      <UsageLimitBanner current={todayCount} limit={FREE_DAILY_AI_LIMIT} featureKey="aiReports" />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">

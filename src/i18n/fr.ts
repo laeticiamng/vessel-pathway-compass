@@ -1256,6 +1256,12 @@ export const fr = {
     featureDesc: "{{feature}} nécessite un abonnement Professional.",
     betaNote: "Pendant la bêta, toutes les fonctionnalités sont accessibles. Souscrivez pour garder l'accès après la bêta.",
     upgrade: "Passer au Professional",
+    limitReached: "Vous avez atteint la limite gratuite pour {{feature}}. Passez au Professional pour un accès illimité.",
+    limitNear: "Vous avez utilisé {{current}} sur {{limit}} {{feature}} gratuits. Passez au Professional pour un accès illimité.",
+    features: {
+      aiReports: "rapports IA",
+      patients: "patients",
+    },
   },
   innovationLab: {
     title: "Labo d'innovation",

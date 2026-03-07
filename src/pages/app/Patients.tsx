@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
+import { useSubscription } from "@/hooks/useSubscription";
 import { Button } from "@/components/ui/button";
 import { Plus, Trash2 } from "lucide-react";
 import { PatientFilters } from "@/components/patient/PatientFilters";
@@ -11,6 +12,9 @@ import { PatientsTable } from "@/components/patient/PatientsTable";
 import { NewCaseDialog } from "@/components/patient/NewCaseDialog";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import PatientTrash from "@/components/patient/PatientTrash";
+import { UsageLimitBanner } from "@/components/UsageLimitBanner";
+
+const FREE_PATIENT_LIMIT = 5;
 
 function riskFromFactors(factors: unknown): string {
   if (!Array.isArray(factors)) return "low";
@@ -24,6 +28,7 @@ function riskFromFactors(factors: unknown): string {
 export default function Patients() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { subscribed } = useSubscription();
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
@@ -89,12 +94,16 @@ export default function Patients() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <UsageLimitBanner current={patients?.length ?? 0} limit={FREE_PATIENT_LIMIT} featureKey="patients" />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">{t("patients.title")}</h1>
           <p className="text-muted-foreground mt-1">{t("patients.subtitle")}</p>
         </div>
-        <Button onClick={() => setDialogOpen(true)}>
+        <Button
+          onClick={() => setDialogOpen(true)}
+          disabled={!subscribed && (patients?.length ?? 0) >= FREE_PATIENT_LIMIT}
+        >
           <Plus className="h-4 w-4 mr-2" />
           {t("patients.newCase")}
         </Button>
