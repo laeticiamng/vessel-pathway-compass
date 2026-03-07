@@ -23,7 +23,7 @@ export default function Auth() {
   const [isForgot, setIsForgot] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationEmail, setConfirmationEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const { toast } = useToast();
