@@ -76,10 +76,8 @@ export default function Auth() {
         if (data.session) {
           navigate("/app");
         } else {
-          toast({
-            title: t("auth.checkEmail"),
-            description: t("auth.checkEmailDesc"),
-          });
+          setConfirmationEmail(email);
+          setShowConfirmation(true);
         }
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
