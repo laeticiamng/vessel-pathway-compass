@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.cleanup-deleted-patients]
 verify_jwt = false
+
+[functions.stripe-webhook]
+verify_jwt = false

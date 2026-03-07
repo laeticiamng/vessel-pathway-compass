@@ -51,8 +51,8 @@ serve(async (req) => {
       customer_email: customerId ? undefined : user.email,
       line_items: [{ price: priceId, quantity: 1 }],
       mode: "subscription",
-      success_url: `${origin}/app/settings?checkout=success`,
-      cancel_url: `${origin}/pricing?checkout=cancelled`,
+      success_url: `${origin}/checkout/success`,
+      cancel_url: `${origin}/checkout/cancel`,
     });
     logStep("Checkout session created", { sessionId: session.id });
 

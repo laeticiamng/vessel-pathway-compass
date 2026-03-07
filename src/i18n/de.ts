@@ -1236,6 +1236,27 @@ export const de = {
     accept: "Akzeptieren",
     decline: "Ablehnen",
   },
+  checkout: {
+    success: {
+      title: "Abonnement bestätigt!",
+      desc: "Ihr Professional-Plan ist jetzt aktiv. Genießen Sie unbegrenzten Zugang.",
+      goToDashboard: "Zum Dashboard",
+      viewSettings: "Abonnement-Einstellungen",
+    },
+    cancel: {
+      title: "Checkout abgebrochen",
+      desc: "Es wurden keine Gebühren erhoben. Sie können jederzeit upgraden.",
+      backToPricing: "Zurück zur Preisseite",
+      goToDashboard: "Zum Dashboard",
+    },
+  },
+  premiumGate: {
+    title: "Professional-Funktion",
+    desc: "Diese Funktion erfordert ein Professional-Abonnement.",
+    featureDesc: "{{feature}} erfordert ein Professional-Abonnement.",
+    betaNote: "Während der Beta sind alle Funktionen verfügbar. Upgraden Sie, um nach der Beta Zugang zu behalten.",
+    upgrade: "Auf Professional upgraden",
+  },
   innovationLab: {
     title: "Innovationslabor",
     subtitle: "Kommende Funktionen und experimentelle Fähigkeiten in Entwicklung.",

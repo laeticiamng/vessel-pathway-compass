@@ -59,6 +59,8 @@ const App = () => (
           <Route path="/legal/:section" element={<Legal />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+          <Route path="/checkout/cancel" element={<CheckoutCancel />} />
 
           {/* Semi-public: visible at 35% without auth */}
           <Route path="/app" element={<PublicAppRoute />}>
