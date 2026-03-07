@@ -236,6 +236,7 @@ export default function AIAssistant() {
 
   return (
     <div className="space-y-6 max-w-7xl">
+      <UsageLimitBanner current={todayCount} limit={FREE_DAILY_AI_LIMIT} featureKey="aiReports" />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">

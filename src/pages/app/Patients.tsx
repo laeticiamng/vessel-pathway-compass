@@ -94,12 +94,16 @@ export default function Patients() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <UsageLimitBanner current={patients?.length ?? 0} limit={FREE_PATIENT_LIMIT} featureKey="patients" />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">{t("patients.title")}</h1>
           <p className="text-muted-foreground mt-1">{t("patients.subtitle")}</p>
         </div>
-        <Button onClick={() => setDialogOpen(true)}>
+        <Button
+          onClick={() => setDialogOpen(true)}
+          disabled={!subscribed && (patients?.length ?? 0) >= FREE_PATIENT_LIMIT}
+        >
           <Plus className="h-4 w-4 mr-2" />
           {t("patients.newCase")}
         </Button>
