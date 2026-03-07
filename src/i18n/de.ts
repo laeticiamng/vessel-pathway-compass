@@ -1062,11 +1062,11 @@ export const de = {
   },
 
   contentGate: {
-    previewBanner: "Vorschaumodus — melden Sie sich an, um alle Funktionen zu nutzen",
-    title: "Melden Sie sich an, um den vollständigen Inhalt zu sehen",
-    subtitle: "Erstellen Sie ein kostenloses Konto oder abonnieren Sie, um alle Funktionen und Daten freizuschalten.",
-    signIn: "Anmelden",
-    viewPlans: "Pläne ansehen",
+    previewBanner: "🔒 Eingeschränkte Vorschau — melden Sie sich an oder abonnieren Sie für vollen Zugang",
+    title: "Sie sehen eine eingeschränkte Vorschau",
+    subtitle: "Dieser Inhalt ist eingeschränkt. Melden Sie sich mit Ihrem kostenlosen Konto an, oder upgraden Sie auf Professionell für unbegrenzten Zugang zu allen Modulen.",
+    signIn: "Anmelden und fortfahren",
+    viewPlans: "Pläne & Preise ansehen",
   },
 
   notifications: {

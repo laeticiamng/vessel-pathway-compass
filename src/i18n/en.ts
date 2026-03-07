@@ -1091,11 +1091,11 @@ export const en = {
   },
 
   contentGate: {
-    previewBanner: "Preview mode — sign in to access all features",
-    title: "Sign in to access the full content",
-    subtitle: "Create a free account or subscribe to unlock all features and data.",
-    signIn: "Sign In",
-    viewPlans: "View Plans",
+    previewBanner: "🔒 Limited preview — sign in or subscribe for full access",
+    title: "You're viewing a limited preview",
+    subtitle: "This content is restricted. Sign in to your free account to continue, or upgrade to Professional for unlimited access to all modules.",
+    signIn: "Sign In to Continue",
+    viewPlans: "See Plans & Pricing",
   },
 
   notifications: {

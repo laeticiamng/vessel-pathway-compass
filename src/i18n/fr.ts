@@ -1062,11 +1062,11 @@ export const fr = {
   },
 
   contentGate: {
-    previewBanner: "Mode aperçu — connectez-vous pour accéder à toutes les fonctionnalités",
-    title: "Connectez-vous pour accéder à l'intégralité du contenu",
-    subtitle: "Créez un compte gratuit ou abonnez-vous pour débloquer toutes les fonctionnalités et données.",
-    signIn: "Se connecter",
-    viewPlans: "Voir les plans",
+    previewBanner: "🔒 Aperçu limité — connectez-vous ou abonnez-vous pour un accès complet",
+    title: "Vous consultez un aperçu limité",
+    subtitle: "Ce contenu est restreint. Connectez-vous à votre compte gratuit pour continuer, ou passez au plan Professionnel pour un accès illimité à tous les modules.",
+    signIn: "Se connecter pour continuer",
+    viewPlans: "Voir les plans & tarifs",
   },
 
   notifications: {
