@@ -10,6 +10,8 @@ import { AuthProvider } from "./hooks/useAuth";
 import Landing from "./pages/Landing";
 import Pricing from "./pages/Pricing";
 import Auth from "./pages/Auth";
+import CheckoutSuccess from "./pages/CheckoutSuccess";
+import CheckoutCancel from "./pages/CheckoutCancel";
 import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
 import Onboarding from "./pages/Onboarding";
@@ -57,6 +59,8 @@ const App = () => (
           <Route path="/legal/:section" element={<Legal />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
+          <Route path="/checkout/cancel" element={<CheckoutCancel />} />
 
           {/* Semi-public: visible at 35% without auth */}
           <Route path="/app" element={<PublicAppRoute />}>

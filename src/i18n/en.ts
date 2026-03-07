@@ -1268,6 +1268,27 @@ export const en = {
     accept: "Accept",
     decline: "Decline",
   },
+  checkout: {
+    success: {
+      title: "Subscription Confirmed!",
+      desc: "Your Professional plan is now active. Enjoy unlimited access to all features.",
+      goToDashboard: "Go to Dashboard",
+      viewSettings: "View Subscription Settings",
+    },
+    cancel: {
+      title: "Checkout Cancelled",
+      desc: "No charges were made. You can upgrade anytime from the pricing page.",
+      backToPricing: "Back to Pricing",
+      goToDashboard: "Go to Dashboard",
+    },
+  },
+  premiumGate: {
+    title: "Professional Feature",
+    desc: "This feature requires a Professional subscription.",
+    featureDesc: "{{feature}} requires a Professional subscription.",
+    betaNote: "During beta, all features are available. Upgrade to keep access after beta.",
+    upgrade: "Upgrade to Professional",
+  },
   innovationLab: {
     title: "Innovation Lab",
     subtitle: "Upcoming features and experimental capabilities in development.",

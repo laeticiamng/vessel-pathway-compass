@@ -1236,6 +1236,27 @@ export const fr = {
     accept: "Accepter",
     decline: "Refuser",
   },
+  checkout: {
+    success: {
+      title: "Abonnement confirmé !",
+      desc: "Votre plan Professional est actif. Profitez d'un accès illimité à toutes les fonctionnalités.",
+      goToDashboard: "Aller au tableau de bord",
+      viewSettings: "Voir les paramètres d'abonnement",
+    },
+    cancel: {
+      title: "Paiement annulé",
+      desc: "Aucun frais n'a été appliqué. Vous pouvez souscrire à tout moment depuis la page tarifs.",
+      backToPricing: "Retour aux tarifs",
+      goToDashboard: "Aller au tableau de bord",
+    },
+  },
+  premiumGate: {
+    title: "Fonctionnalité Professional",
+    desc: "Cette fonctionnalité nécessite un abonnement Professional.",
+    featureDesc: "{{feature}} nécessite un abonnement Professional.",
+    betaNote: "Pendant la bêta, toutes les fonctionnalités sont accessibles. Souscrivez pour garder l'accès après la bêta.",
+    upgrade: "Passer au Professional",
+  },
   innovationLab: {
     title: "Labo d'innovation",
     subtitle: "Fonctionnalités à venir et capacités expérimentales en développement.",
