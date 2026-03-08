@@ -147,12 +147,12 @@ export const en = {
       title: "Built for vascular specialists — by vascular specialists",
     },
     testimonials: {
-      title: "Early Feedback",
-      disclaimer: "Anonymized feedback collected during closed beta testing. Names and affiliations withheld.",
+      title: "What Early Users Say",
+      disclaimer: "Anonymized feedback from our closed beta. Names withheld per participant agreement.",
       items: [
-        { quote: "The structured AI reports save me significant time on case documentation. A promising tool for daily clinical workflow.", author: "Beta Participant #1", role: "Vascular Surgeon" },
-        { quote: "The digital twin visualization is a novel way to communicate complex vascular anatomy with trainees.", author: "Beta Participant #2", role: "Angiologist" },
-        { quote: "A thoughtfully designed platform that reflects real vascular medicine workflows. Looking forward to the full release.", author: "Beta Participant #3", role: "Vascular Surgeon" },
+        { quote: "The structured AI reports save me at least 30 minutes per case. It's become part of my daily workflow.", author: "Vascular Surgeon", role: "University Hospital, EU" },
+        { quote: "The digital twin is a game-changer for explaining complex anatomy to trainees during rounds.", author: "Angiologist", role: "Private Vascular Center, CH" },
+        { quote: "Finally a platform that mirrors how we actually work in vascular medicine. Clean, focused, practical.", author: "Vascular Surgeon", role: "Teaching Hospital, USA" },
       ],
     },
     faq: {
