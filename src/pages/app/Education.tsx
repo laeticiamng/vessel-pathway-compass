@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { BookOpen, Award, Clock, ArrowRight, Plus, CheckCircle2 } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import { toast } from "sonner";
 import CourseDetail from "@/components/education/CourseDetail";
 
