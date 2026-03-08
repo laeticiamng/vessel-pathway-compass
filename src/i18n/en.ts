@@ -1146,7 +1146,7 @@ export const en = {
   },
 
   contentGate: {
-    previewBanner: "👀 You're browsing as a guest — sign in to unlock all features",
+    previewBanner: "You're browsing as a guest — sign in to unlock all features",
     title: "Want to use this module?",
     subtitle: "Create a free account in 30 seconds to access all features, save your data and track your progress.",
     createAccount: "Create Free Account",
