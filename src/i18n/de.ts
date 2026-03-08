@@ -99,6 +99,15 @@ export const de = {
       secondary: "Pläne & Preise",
       socialProof: "Genutzt von Gefäßspezialisten in über 12 Ländern",
     },
+    howItWorks: {
+      title: "So funktioniert's",
+      subtitle: "Starten Sie in wenigen Minuten — keine Installation, kein komplexes Setup.",
+      steps: [
+        { title: "Kostenloses Konto erstellen", desc: "Registrieren Sie sich in 30 Sekunden mit E-Mail oder Google. Keine Kreditkarte nötig." },
+        { title: "Ersten Patienten anlegen", desc: "Erstellen Sie einen pseudonymisierten Patientenfall und beginnen Sie mit KI-gestützten Berichten." },
+        { title: "Alle Module entdecken", desc: "Simulationen, Fortbildung, Ergebnisregister und Expertenkonsultationen — alles an einem Ort." },
+      ],
+    },
     modules: {
       title: "Alles, was Sie brauchen — in einer Plattform",
       subtitle: "Sechs integrierte Module für Ihren klinischen Alltag.",
