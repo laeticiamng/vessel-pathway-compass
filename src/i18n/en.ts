@@ -109,7 +109,7 @@ export const en = {
       subtitle: "Six integrated modules designed for your daily clinical workflow.",
       ai: {
         title: "AI Clinical Assistant",
-        desc: "Generate structured SOAP notes, differential diagnoses and care pathways — always reviewed and confirmed by you.",
+        desc: "Generate structured clinical reports, differential diagnoses and care pathways — always reviewed and confirmed by you.",
       },
       twin: {
         title: "Vascular Digital Twin",
