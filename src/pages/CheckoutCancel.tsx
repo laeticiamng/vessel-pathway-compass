@@ -10,7 +10,7 @@ export default function CheckoutCancel() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
-      <SEOHead title="Checkout Cancelled — Vascular Atlas" description="Your checkout was cancelled." path="/checkout/cancel" />
+      <SEOHead title={`${t("checkout.cancel.title")} — Vascular Atlas`} description={t("checkout.cancel.desc") as string} path="/checkout/cancel" />
       <Card className="max-w-md w-full text-center">
         <CardContent className="pt-10 pb-8 space-y-6">
           <div className="mx-auto w-16 h-16 rounded-full bg-muted flex items-center justify-center">

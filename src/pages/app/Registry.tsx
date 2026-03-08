@@ -125,7 +125,7 @@ export default function Registry() {
 
       <div className="flex flex-wrap gap-2">
         {CATEGORIES.map((cat) => (
-          <Badge key={cat} variant="secondary" className="cursor-pointer hover:bg-primary/10">{cat}</Badge>
+          <Badge key={cat} variant="secondary">{cat}</Badge>
         ))}
       </div>
 

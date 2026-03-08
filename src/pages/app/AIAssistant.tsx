@@ -373,7 +373,11 @@ export default function AIAssistant() {
                     <Copy className="h-3.5 w-3.5 mr-1" />
                     {t("aiAssistant.output.copyEHR")}
                   </Button>
-                  <Button variant="outline" size="sm">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => toast({ title: t("common.comingSoon"), description: t("aiAssistant.output.exportPDFSoon") })}
+                  >
                     <Download className="h-3.5 w-3.5 mr-1" />
                     {t("aiAssistant.output.exportPDF")}
                   </Button>
