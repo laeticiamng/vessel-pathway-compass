@@ -9,12 +9,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/i18n/context";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/useAuth";
 import { format } from "date-fns";
 
 const PAGE_SIZE = 50;
 
 export default function Compliance() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [auditPage, setAuditPage] = useState(0);
 
   // --- Audit logs with pagination ---
@@ -31,6 +33,7 @@ export default function Compliance() {
       if (error) throw error;
       return data;
     },
+    enabled: !!user,
   });
 
   // --- Stats: audit count ---
@@ -43,6 +46,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Stats: ai_outputs count ---
@@ -55,6 +59,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Stats: pending sign-offs ---
@@ -68,6 +73,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Stats: consents count ---
@@ -80,6 +86,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Consents list ---
@@ -93,6 +100,7 @@ export default function Compliance() {
       if (error) throw error;
       return data;
     },
+    enabled: !!user,
   });
 
   // --- AI Safety metrics ---
@@ -111,6 +119,7 @@ export default function Compliance() {
       const issues = total - signedOff;
       return { latestModel, signOffRate, issues, total };
     },
+    enabled: !!user,
   });
 
   // Group consents by type
