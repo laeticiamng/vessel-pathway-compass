@@ -77,7 +77,7 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="p-4">
-        <NavLink to="/app" className="flex items-center gap-2">
+        <NavLink to={session ? "/app" : "/"} className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
             <HeartPulse className="h-4 w-4 text-primary-foreground" />
           </div>

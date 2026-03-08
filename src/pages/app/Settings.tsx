@@ -118,7 +118,16 @@ export default function Settings() {
               </div>
               <div className="space-y-2">
                 <Label>{t("settings.profile.role")}</Label>
-                <Input value={role} onChange={(e) => setRole(e.target.value)} placeholder={t("settings.profile.rolePlaceholder")} />
+                <Select value={role} onValueChange={setRole}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={t("settings.profile.rolePlaceholder")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(["physician", "trainee", "expert_reviewer", "hospital_admin", "research_lead"] as const).map((r) => (
+                      <SelectItem key={r} value={r}>{t(`onboarding.roles.${r}`)}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label>{t("settings.profile.institution")}</Label>

@@ -106,6 +106,7 @@ export default function Dashboard() {
         title={t("seo.dashboard.title") as string}
         description={t("seo.dashboard.description") as string}
         path="/app"
+        noindex
       />
       <div>
         <h1 className="text-3xl font-bold">{t("dashboard.title")}</h1>
