@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import PatientRiskDistribution from "@/components/dashboard/PatientRiskDistribution";
 import { OnboardingChecklist } from "@/components/dashboard/OnboardingChecklist";
