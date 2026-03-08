@@ -85,7 +85,7 @@ export default function CheckoutSuccess() {
                 </Link>
               </Button>
               <Button asChild variant="outline">
-                <Link to="/support">{t("common.support") || "Contact Support"}</Link>
+                <Link to="/support">{t("support.title")}</Link>
               </Button>
             </div>
           </CardContent>
