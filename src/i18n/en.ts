@@ -132,15 +132,15 @@ export const en = {
       },
     },
     trust: {
-      title: "Compliance-Ready by Design",
-      subtitle: "Built with auditability, traceability, and safety as first principles.",
+      title: "Secure & Compliance-Ready",
+      subtitle: "Designed for clinical environments with strict data protection requirements.",
       signals: [
-        "Compliance-ready audit infrastructure",
-        "Privacy-first: no re-identification in benchmarking",
-        "AI outputs always require clinician confirmation",
-        "Multi-tenant institution workspaces with RLS",
-        "Citation placeholders — never fabricated guidelines",
-        "Role-based access for physicians, trainees, admins",
+        "Full audit trail on every action",
+        "Patient data is pseudonymized — no re-identification in benchmarking",
+        "AI outputs always require clinician confirmation before use",
+        "Separate institution workspaces with strict data isolation",
+        "Evidence-based references — never fabricated guidelines",
+        "Role-based access: physicians, trainees, administrators",
       ],
     },
     socialProof: {
