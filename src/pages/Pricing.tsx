@@ -14,7 +14,7 @@ import { useState } from "react";
 const planKeys = ["individual", "professional", "institution"] as const;
 
 export default function Pricing() {
-  const { t } = useTranslation();
+  const { t, language, setLanguage } = useTranslation();
   const { session } = useAuth();
   const navigate = useNavigate();
   const { currentPlan, subscribed, openPortal, createCheckout } = useSubscription();
