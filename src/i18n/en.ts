@@ -48,7 +48,7 @@ export const en = {
     dashboard: "Dashboard",
     aiAssistant: "AI Assistant",
     patients: "Patients",
-    digitalTwin: "Digital Twin",
+    digitalTwin: "Patient Vascular Map",
     registry: "Registry",
     education: "Education",
     simulationLab: "Simulation Lab",
@@ -71,7 +71,7 @@ export const en = {
     dashboard: "Dashboard",
     aiAssistant: "AI Clinical Assistant",
     patients: "Patient Cases",
-    digitalTwin: "Digital Twin",
+    digitalTwin: "Patient Vascular Map",
     registry: "Outcomes Registry",
     education: "Education Hub",
     simulation: "Simulation Lab",
@@ -104,6 +104,15 @@ export const en = {
       secondary: "See Plans & Pricing",
       socialProof: "Used by vascular specialists across 12+ countries",
     },
+    howItWorks: {
+      title: "How It Works",
+      subtitle: "Get started in minutes — no installation, no complex setup.",
+      steps: [
+        { title: "Create Your Free Account", desc: "Sign up in 30 seconds with your email or Google account. No credit card needed." },
+        { title: "Set Up Your First Patient", desc: "Add a pseudonymized patient case and start documenting with AI-assisted reports." },
+        { title: "Explore All Modules", desc: "Access simulations, education tracks, outcomes registry and expert consultations — all in one place." },
+      ],
+    },
     modules: {
       title: "Everything You Need in One Platform",
       subtitle: "Six integrated modules designed for your daily clinical workflow.",
@@ -112,7 +121,7 @@ export const en = {
         desc: "Generate structured clinical reports, differential diagnoses and care pathways — always reviewed and confirmed by you.",
       },
       twin: {
-        title: "Vascular Digital Twin",
+        title: "Patient Vascular Map",
         desc: "Visualize each patient's vascular anatomy over time with interactive maps, lesion tracking and scenario planning.",
       },
       registry: {
@@ -331,7 +340,7 @@ export const en = {
       simulations: "Simulations",
     },
     moduleDesc: {
-      ai: "Generate AI-powered clinical reports with structured SOAP notes and differential diagnoses.",
+      ai: "Generate AI-powered clinical reports with structured notes and differential diagnoses.",
       twin: "View longitudinal patient timelines, vascular maps, and run scenario simulations.",
       registry: "Contribute to and analyze vascular outcomes data with privacy-preserving benchmarking.",
       education: "Complete competency tracks, earn CME credits, and collect digital badges.",
@@ -473,7 +482,7 @@ export const en = {
 
   // Digital Twin
   digitalTwin: {
-    title: "Vascular Digital Twin",
+    title: "Patient Vascular Map",
     subtitle: "Interactive vascular mapping with real patient measurements",
     selectPatient: "Select a patient...",
     selectPatientPrompt: "Select a patient to visualize their vascular anatomy with real measurement data",
@@ -1137,7 +1146,7 @@ export const en = {
   },
 
   contentGate: {
-    previewBanner: "👀 You're browsing as a guest — sign in to unlock all features",
+    previewBanner: "You're browsing as a guest — sign in to unlock all features",
     title: "Want to use this module?",
     subtitle: "Create a free account in 30 seconds to access all features, save your data and track your progress.",
     createAccount: "Create Free Account",
@@ -1296,7 +1305,7 @@ export const en = {
         { q: "Is Vascular Atlas a medical device?", a: "No. Vascular Atlas is a clinical decision support tool. All AI outputs require review by a qualified clinician before clinical action." },
         { q: "How is patient data protected?", a: "All patient data is pseudonymized. We use row-level security, encryption at rest and in transit, and maintain comprehensive audit trails." },
         { q: "Can I export my data?", a: "Yes. You can export patient data, measurements, and reports in CSV and PDF formats from the relevant sections." },
-        { q: "What happens during the free trial?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
+        { q: "What happens during the free beta?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
         { q: "How do I delete my account?", a: "Contact support@vascularatlas.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
       ],
     },

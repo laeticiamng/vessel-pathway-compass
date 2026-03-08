@@ -46,7 +46,7 @@ export const fr = {
     dashboard: "Tableau de bord",
     aiAssistant: "Assistant IA",
     patients: "Patients",
-    digitalTwin: "Jumeau numérique",
+    digitalTwin: "Cartographie vasculaire",
     registry: "Registre",
     education: "Formation",
     simulationLab: "Labo de simulation",
@@ -68,7 +68,7 @@ export const fr = {
     dashboard: "Tableau de bord",
     aiAssistant: "Assistant clinique IA",
     patients: "Dossiers patients",
-    digitalTwin: "Jumeau numérique",
+    digitalTwin: "Cartographie vasculaire",
     registry: "Registre des résultats",
     education: "Pôle formation",
     simulation: "Labo de simulation",
@@ -99,6 +99,15 @@ export const fr = {
       secondary: "Voir les tarifs",
       socialProof: "Utilisé par des spécialistes vasculaires dans plus de 12 pays",
     },
+    howItWorks: {
+      title: "Comment ça marche",
+      subtitle: "Démarrez en quelques minutes — aucune installation, aucune configuration complexe.",
+      steps: [
+        { title: "Créez votre compte gratuit", desc: "Inscrivez-vous en 30 secondes avec votre e-mail ou Google. Sans carte bancaire." },
+        { title: "Ajoutez votre premier patient", desc: "Créez un dossier patient pseudonymisé et commencez à documenter avec les rapports assistés par IA." },
+        { title: "Explorez tous les modules", desc: "Simulations, formation, registre des résultats et consultations d'experts — tout au même endroit." },
+      ],
+    },
     modules: {
       title: "Tout ce dont vous avez besoin",
       subtitle: "Six modules intégrés conçus pour votre workflow clinique quotidien.",
@@ -107,7 +116,7 @@ export const fr = {
         desc: "Générez des comptes-rendus cliniques structurés, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
       },
       twin: {
-        title: "Jumeau numérique vasculaire",
+        title: "Cartographie vasculaire patient",
         desc: "Visualisez l'anatomie vasculaire de chaque patient au fil du temps avec des cartes interactives, le suivi des lésions et la planification de scénarios.",
       },
       registry: {
@@ -319,7 +328,7 @@ export const fr = {
       simulations: "Simulations",
     },
     moduleDesc: {
-      ai: "Générez des rapports cliniques assistés par IA avec notes SOAP structurées et diagnostics différentiels.",
+      ai: "Générez des rapports cliniques assistés par IA avec notes structurées et diagnostics différentiels.",
       twin: "Visualisez les chronologies patient, les cartes vasculaires et lancez des simulations de scénarios.",
       registry: "Contribuez et analysez les données de résultats vasculaires avec benchmarking respectueux de la vie privée.",
       education: "Complétez les parcours de compétences, obtenez des crédits FMC et collectez des badges numériques.",
@@ -458,7 +467,7 @@ export const fr = {
   },
 
   digitalTwin: {
-    title: "Jumeau numérique vasculaire",
+    title: "Cartographie vasculaire patient",
     subtitle: "Cartographie vasculaire interactive avec mesures réelles du patient",
     selectPatient: "Sélectionner un patient...",
     selectPatientPrompt: "Sélectionnez un patient pour visualiser son anatomie vasculaire avec ses mesures réelles",
@@ -1109,7 +1118,7 @@ export const fr = {
   },
 
   contentGate: {
-    previewBanner: "👀 Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
+    previewBanner: "Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
     title: "Envie d'utiliser ce module ?",
     subtitle: "Créez un compte gratuit en 30 secondes pour accéder à toutes les fonctionnalités, sauvegarder vos données et suivre votre progression.",
     createAccount: "Créer un compte gratuit",
@@ -1266,7 +1275,7 @@ export const fr = {
         { q: "Vascular Atlas est-il un dispositif médical ?", a: "Non. C'est un outil d'aide à la décision clinique. Toutes les sorties IA nécessitent la revue d'un clinicien qualifié." },
         { q: "Comment les données patients sont-elles protégées ?", a: "Toutes les données sont pseudonymisées. Nous utilisons la sécurité au niveau des lignes, le chiffrement et des journaux d'audit complets." },
         { q: "Puis-je exporter mes données ?", a: "Oui. Vous pouvez exporter les données patients, mesures et rapports en CSV et PDF." },
-        { q: "Que se passe-t-il pendant l'essai gratuit ?", a: "Pendant la période bêta, toutes les fonctionnalités sont disponibles gratuitement. Nous vous informerons avant toute facturation." },
+        { q: "Que se passe-t-il pendant la bêta gratuite ?", a: "Pendant la période bêta, toutes les fonctionnalités sont disponibles gratuitement. Nous vous informerons avant toute facturation." },
         { q: "Comment supprimer mon compte ?", a: "Contactez support@vascularatlas.com. Vos données seront supprimées sous 30 jours." },
       ],
     },

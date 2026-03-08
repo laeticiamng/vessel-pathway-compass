@@ -46,7 +46,7 @@ export const de = {
     dashboard: "Dashboard",
     aiAssistant: "KI-Assistent",
     patients: "Patienten",
-    digitalTwin: "Digitaler Zwilling",
+    digitalTwin: "Vaskuläre Patientenkarte",
     registry: "Register",
     education: "Fortbildung",
     simulationLab: "Simulationslabor",
@@ -68,7 +68,7 @@ export const de = {
     dashboard: "Dashboard",
     aiAssistant: "Klinischer KI-Assistent",
     patients: "Patientenfälle",
-    digitalTwin: "Digitaler Zwilling",
+    digitalTwin: "Vaskuläre Patientenkarte",
     registry: "Ergebnisregister",
     education: "Fortbildungszentrum",
     simulation: "Simulationslabor",
@@ -99,6 +99,15 @@ export const de = {
       secondary: "Pläne & Preise",
       socialProof: "Genutzt von Gefäßspezialisten in über 12 Ländern",
     },
+    howItWorks: {
+      title: "So funktioniert's",
+      subtitle: "Starten Sie in wenigen Minuten — keine Installation, kein komplexes Setup.",
+      steps: [
+        { title: "Kostenloses Konto erstellen", desc: "Registrieren Sie sich in 30 Sekunden mit E-Mail oder Google. Keine Kreditkarte nötig." },
+        { title: "Ersten Patienten anlegen", desc: "Erstellen Sie einen pseudonymisierten Patientenfall und beginnen Sie mit KI-gestützten Berichten." },
+        { title: "Alle Module entdecken", desc: "Simulationen, Fortbildung, Ergebnisregister und Expertenkonsultationen — alles an einem Ort." },
+      ],
+    },
     modules: {
       title: "Alles, was Sie brauchen — in einer Plattform",
       subtitle: "Sechs integrierte Module für Ihren klinischen Alltag.",
@@ -107,7 +116,7 @@ export const de = {
         desc: "Erstellen Sie strukturierte klinische Berichte, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
       },
       twin: {
-        title: "Vaskulärer digitaler Zwilling",
+        title: "Vaskuläre Patientenkarte",
         desc: "Visualisieren Sie die Gefäßanatomie jedes Patienten über die Zeit mit interaktiven Karten, Läsionsverfolgung und Szenarioplanung.",
       },
       registry: {
@@ -319,7 +328,7 @@ export const de = {
       simulations: "Simulationen",
     },
     moduleDesc: {
-      ai: "Erstellen Sie KI-gestützte klinische Berichte mit strukturierten SOAP-Notizen und Differentialdiagnosen.",
+      ai: "Erstellen Sie KI-gestützte klinische Berichte mit strukturierten Notizen und Differentialdiagnosen.",
       twin: "Sehen Sie longitudinale Patienten-Zeitleisten, Gefäßkarten und führen Sie Szenario-Simulationen durch.",
       registry: "Tragen Sie zu vaskulären Ergebnisdaten bei und analysieren Sie diese mit datenschutzfreundlichem Benchmarking.",
       education: "Absolvieren Sie Kompetenzpfade, sammeln Sie CME-Punkte und erhalten Sie digitale Abzeichen.",
@@ -458,7 +467,7 @@ export const de = {
   },
 
   digitalTwin: {
-    title: "Vaskulärer digitaler Zwilling",
+    title: "Vaskuläre Patientenkarte",
     subtitle: "Interaktive Gefäßkartierung mit echten Patientenmessungen",
     selectPatient: "Patient auswählen...",
     selectPatientPrompt: "Wählen Sie einen Patienten, um seine Gefäßanatomie mit echten Messdaten zu visualisieren",
@@ -1109,7 +1118,7 @@ export const de = {
   },
 
   contentGate: {
-    previewBanner: "👀 Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
+    previewBanner: "Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
     title: "Möchten Sie dieses Modul nutzen?",
     subtitle: "Erstellen Sie in 30 Sekunden ein kostenloses Konto, um alle Funktionen zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
     createAccount: "Kostenloses Konto erstellen",
@@ -1266,7 +1275,7 @@ export const de = {
         { q: "Ist Vascular Atlas ein Medizinprodukt?", a: "Nein. Es ist ein Entscheidungsunterstützungstool. Alle KI-Ausgaben erfordern eine ärztliche Überprüfung." },
         { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
         { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
-        { q: "Was passiert während der kostenlosen Testphase?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar." },
+        { q: "Was passiert während der kostenlosen Beta?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar. Wir informieren Sie bevor eine Abrechnung beginnt." },
         { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie support@vascularatlas.com. Löschung innerhalb von 30 Tagen." },
       ],
     },

@@ -24,6 +24,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { FAQSection } from "@/components/landing/FAQSection";
+import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -249,6 +250,9 @@ export default function Landing() {
           </motion.div>
         </div>
       </section>
+
+      {/* How It Works */}
+      <HowItWorksSection />
 
       {/* Modules */}
       <section id="modules" className="py-24 bg-background scroll-mt-20">
