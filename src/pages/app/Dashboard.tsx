@@ -29,11 +29,12 @@ export default function Dashboard() {
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ["dashboard-stats", user?.id],
     queryFn: async () => {
-      const [casesRes, aiRes, outcomesRes, simRes] = await Promise.all([
+      const [casesRes, aiRes, outcomesRes, simRes, eduRes] = await Promise.all([
         supabase.from("cases").select("id, status", { count: "exact", head: false }).eq("created_by", user!.id),
         supabase.from("ai_outputs").select("id", { count: "exact", head: true }).eq("user_id", user!.id),
         supabase.from("outcomes").select("id", { count: "exact", head: true }).eq("created_by", user!.id),
         supabase.from("simulation_runs").select("id", { count: "exact", head: true }).eq("user_id", user!.id),
+        supabase.from("quiz_attempts").select("id", { count: "exact", head: true }).eq("user_id", user!.id),
       ]);
 
       const activeCases = casesRes.data?.filter((c) => c.status === "active").length ?? 0;
@@ -45,6 +46,7 @@ export default function Dashboard() {
         aiReports: aiRes.count ?? 0,
         outcomes: outcomesRes.count ?? 0,
         simulations: simRes.count ?? 0,
+        educationExplored: (eduRes.count ?? 0) > 0,
       };
     },
     enabled: !!user,
