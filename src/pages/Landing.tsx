@@ -123,7 +123,7 @@ export default function Landing() {
               <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
             </Button>
           </div>
-          <Sheet>
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
@@ -131,10 +131,10 @@ export default function Landing() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 mt-8">
-                <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors">
+                <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.pricing")}
                 </Link>
-                <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors">
+                <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
                 </Link>
                 <div className="flex items-center gap-2">
