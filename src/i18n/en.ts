@@ -1146,6 +1146,7 @@ export const en = {
     displayName: "Display name",
     displayNamePlaceholder: "Dr. Jane Smith",
     pseudonym: "Patient pseudonym",
+    pseudonymPlaceholder: "e.g. PAT-001",
     ageRange: "Age range",
     sex: "Sex",
     male: "Male",
