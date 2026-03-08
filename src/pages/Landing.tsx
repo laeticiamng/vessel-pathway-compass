@@ -20,6 +20,7 @@ import {
   CheckCircle2,
   Menu,
   Sparkles,
+  ChevronUp,
 } from "lucide-react";
 import { FAQSection } from "@/components/landing/FAQSection";
 
