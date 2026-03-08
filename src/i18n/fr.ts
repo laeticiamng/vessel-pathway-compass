@@ -1298,4 +1298,19 @@ export const fr = {
       arTraining: { title: "Formation immersive RA", desc: "Mode check-list RA et formation échographique par stations." },
     },
   },
+
+  seo: {
+    landing: {
+      title: "Vascular Atlas — Plateforme clinique IA pour la médecine vasculaire",
+      description: "Unifiez comptes rendus IA, gestion de cas patients, registre des résultats, certification, simulation et réseau d'experts pour chirurgiens vasculaires et angiologues. Gratuit pendant la bêta.",
+    },
+    pricing: {
+      title: "Tarifs — Plans Vascular Atlas",
+      description: "Comparez les plans Vascular Atlas : Individuel gratuit, Professionnel à 99 €/mois et tarif Institution sur mesure. Toutes les fonctionnalités gratuites pendant la bêta.",
+    },
+    support: {
+      title: "Support & FAQ — Vascular Atlas",
+      description: "Obtenez de l'aide avec Vascular Atlas. Contactez le support, consultez la FAQ sur les rapports IA, la gestion des patients, la certification et plus.",
+    },
+  },
 };

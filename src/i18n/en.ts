@@ -1329,4 +1329,19 @@ export const en = {
       arTraining: { title: "Immersive AR Training", desc: "AR checklist mode and station-based ultrasound training concepts." },
     },
   },
+
+  seo: {
+    landing: {
+      title: "Vascular Atlas — AI-Powered Clinical Platform for Vascular Medicine",
+      description: "Unify AI clinical reports, patient case management, outcomes registry, certification, simulation and expert networking for vascular surgeons and angiologists. Free during beta.",
+    },
+    pricing: {
+      title: "Pricing — Vascular Atlas Plans",
+      description: "Compare Vascular Atlas plans: Free Individual, $99/mo Professional, and custom Institution pricing. All features free during beta.",
+    },
+    support: {
+      title: "Support & FAQ — Vascular Atlas",
+      description: "Get help with Vascular Atlas. Contact support, browse FAQs about AI clinical reports, patient management, certification and more.",
+    },
+  },
 };

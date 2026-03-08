@@ -1298,4 +1298,19 @@ export const de = {
       arTraining: { title: "Immersives AR-Training", desc: "AR-Checklistenmodus und stationsbasierte Ultraschall-Trainingskonzepte." },
     },
   },
+
+  seo: {
+    landing: {
+      title: "Vascular Atlas — KI-gestützte klinische Plattform für Gefäßmedizin",
+      description: "KI-Berichte, Patientenfallmanagement, Ergebnisregister, Zertifizierung, Simulation und Expertennetzwerk für Gefäßchirurgen und Angiologen vereint. Kostenlos während der Beta.",
+    },
+    pricing: {
+      title: "Preise — Vascular Atlas Pläne",
+      description: "Vergleichen Sie Vascular Atlas Pläne: Kostenloser Einzelplan, Professionell für 99 €/Monat und individuelle Institutionspreise. Alle Funktionen kostenlos während der Beta.",
+    },
+    support: {
+      title: "Support & FAQ — Vascular Atlas",
+      description: "Hilfe zu Vascular Atlas. Kontaktieren Sie den Support, durchsuchen Sie FAQ zu KI-Berichten, Patientenmanagement, Zertifizierung und mehr.",
+    },
+  },
 };
