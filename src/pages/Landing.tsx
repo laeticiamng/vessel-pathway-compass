@@ -44,7 +44,14 @@ const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "networ
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 600);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const modules = moduleKeys.map((key, i) => ({
     icon: moduleIcons[i],
