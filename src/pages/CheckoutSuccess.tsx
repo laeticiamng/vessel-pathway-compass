@@ -53,11 +53,11 @@ export default function CheckoutSuccess() {
   if (verifyState === "loading") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <SEOHead title="Verifying Payment — Vascular Atlas" description="Verifying your payment." path="/checkout/success" />
+        <SEOHead title={t("checkout.success.verifying") as string || "Verifying Payment — Vascular Atlas"} description={t("checkout.success.desc") as string} path="/checkout/success" />
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-10 pb-8 space-y-6">
             <Loader2 className="h-10 w-10 animate-spin text-primary mx-auto" />
-            <p className="text-muted-foreground">{t("checkout.success.verifying") || "Verifying your payment..."}</p>
+            <p className="text-muted-foreground">{t("checkout.success.verifying")}</p>
           </CardContent>
         </Card>
       </div>
@@ -67,15 +67,15 @@ export default function CheckoutSuccess() {
   if (verifyState === "failed") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <SEOHead title="Payment Verification Issue — Vascular Atlas" description="We could not verify your payment." path="/checkout/success" />
+        <SEOHead title={t("checkout.success.verifyFailed") as string || "Verification Issue — Vascular Atlas"} description={t("checkout.success.verifyFailedDesc") as string} path="/checkout/success" />
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-10 pb-8 space-y-6">
             <div className="mx-auto w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
               <AlertTriangle className="h-8 w-8 text-destructive" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold mb-2">{t("checkout.success.verifyFailed") || "Verification Issue"}</h1>
-              <p className="text-muted-foreground">{t("checkout.success.verifyFailedDesc") || "We couldn't verify your payment session. If you were charged, your subscription will be activated shortly. Contact support if the issue persists."}</p>
+              <h1 className="text-2xl font-bold mb-2">{t("checkout.success.verifyFailed")}</h1>
+              <p className="text-muted-foreground">{t("checkout.success.verifyFailedDesc")}</p>
             </div>
             <div className="flex flex-col gap-3">
               <Button asChild>
@@ -85,7 +85,7 @@ export default function CheckoutSuccess() {
                 </Link>
               </Button>
               <Button asChild variant="outline">
-                <Link to="/support">{t("common.support") || "Contact Support"}</Link>
+                <Link to="/support">{t("support.title")}</Link>
               </Button>
             </div>
           </CardContent>
@@ -96,7 +96,7 @@ export default function CheckoutSuccess() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
-      <SEOHead title="Subscription Confirmed — Vascular Atlas" description="Your subscription is now active." path="/checkout/success" />
+      <SEOHead title={`${t("checkout.success.title")} — Vascular Atlas`} description={t("checkout.success.desc") as string} path="/checkout/success" />
       <Card className="max-w-md w-full text-center">
         <CardContent className="pt-10 pb-8 space-y-6">
           <div className="mx-auto w-16 h-16 rounded-full bg-success/10 flex items-center justify-center">

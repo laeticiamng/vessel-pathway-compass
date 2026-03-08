@@ -366,6 +366,7 @@ export const fr = {
       copied: "Copié",
       copiedDesc: "Rapport copié en texte brut (format DPI)",
       exportPDF: "Exporter PDF",
+      exportPDFSoon: "L'export PDF arrive bientôt. Utilisez « Copier vers DPI » en attendant.",
       confirmSign: "Confirmer et signer",
       signedOff: "Signé",
       signedOffDesc: "Rapport confirmé et signé par le clinicien.",
@@ -1261,10 +1262,13 @@ export const fr = {
   },
   checkout: {
     success: {
-      title: "Abonnement confirmé !",
-      desc: "Votre plan Professional est actif. Profitez d'un accès illimité à toutes les fonctionnalités.",
+      title: "Abonnement confirme !",
+      desc: "Votre plan Professional est actif. Profitez d'un acces illimite a toutes les fonctionnalites.",
       goToDashboard: "Aller au tableau de bord",
-      viewSettings: "Voir les paramètres d'abonnement",
+      viewSettings: "Voir les parametres d'abonnement",
+      verifying: "Verification de votre paiement...",
+      verifyFailed: "Probleme de verification",
+      verifyFailedDesc: "Nous n'avons pas pu verifier votre session de paiement. Si vous avez ete debite, votre abonnement sera active sous peu. Contactez le support si le probleme persiste.",
     },
     cancel: {
       title: "Paiement annulé",

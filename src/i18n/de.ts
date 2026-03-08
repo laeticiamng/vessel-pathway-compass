@@ -366,6 +366,7 @@ export const de = {
       copied: "Kopiert",
       copiedDesc: "Bericht als Klartext kopiert (KIS-Format)",
       exportPDF: "PDF exportieren",
+      exportPDFSoon: "PDF-Export kommt bald. Nutzen Sie in der Zwischenzeit 'In KIS kopieren'.",
       confirmSign: "Bestätigen & Unterschreiben",
       signedOff: "Unterschrieben",
       signedOffDesc: "Bericht vom Arzt bestätigt und unterschrieben.",
@@ -1261,10 +1262,13 @@ export const de = {
   },
   checkout: {
     success: {
-      title: "Abonnement bestätigt!",
-      desc: "Ihr Professional-Plan ist jetzt aktiv. Genießen Sie unbegrenzten Zugang.",
+      title: "Abonnement bestatigt!",
+      desc: "Ihr Professional-Plan ist jetzt aktiv. Geniessen Sie unbegrenzten Zugang.",
       goToDashboard: "Zum Dashboard",
       viewSettings: "Abonnement-Einstellungen",
+      verifying: "Zahlung wird verifiziert...",
+      verifyFailed: "Verifizierungsproblem",
+      verifyFailedDesc: "Wir konnten Ihre Zahlungssitzung nicht verifizieren. Falls Sie belastet wurden, wird Ihr Abonnement in Kuerze aktiviert. Kontaktieren Sie den Support, falls das Problem bestehen bleibt.",
     },
     cancel: {
       title: "Checkout abgebrochen",

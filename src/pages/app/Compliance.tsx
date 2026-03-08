@@ -142,7 +142,7 @@ export default function Compliance() {
         <p className="text-muted-foreground mt-1">{t("compliance.subtitle")}</p>
       </div>
 
-      <div className="grid sm:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s) => (
           <Card key={s.label}>
             <CardContent className="pt-6 flex items-center gap-3">
