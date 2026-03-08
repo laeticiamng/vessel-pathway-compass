@@ -40,9 +40,19 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
             <h1 className="text-xl font-semibold">Something went wrong</h1>
             <p className="text-muted-foreground text-sm">
-              An unexpected error occurred. Please try refreshing the page.
+              An unexpected error occurred. Please try refreshing the page or return to the home page.
             </p>
-            <Button onClick={this.handleReset}>Back to Home</Button>
+            {process.env.NODE_ENV === "development" && this.state.error && (
+              <pre className="text-xs text-left bg-muted p-3 rounded-lg overflow-auto max-h-32 text-destructive">
+                {this.state.error.message}
+              </pre>
+            )}
+            <div className="flex gap-3 justify-center">
+              <Button variant="outline" onClick={() => window.location.reload()}>
+                Refresh Page
+              </Button>
+              <Button onClick={this.handleReset}>Back to Home</Button>
+            </div>
           </div>
         </div>
       );
