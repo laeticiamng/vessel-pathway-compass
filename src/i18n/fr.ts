@@ -83,6 +83,8 @@ export const fr = {
     hero: {
       badge: "Gérez vos cas vasculaires, générez des rapports IA, suivez les résultats — en un seul outil.",
       title: "Vascular Atlas",
+      headlinePre: "Plateforme clinique IA pour la",
+      headlineHighlight: "Médecine Vasculaire",
       subtitle: "Unifiant workflow clinique, assistance IA, registre de résultats, certification, recherche et réseau d'experts — en Europe, USA et Suisse.",
       cta: "Essai gratuit",
       secondary: "Voir les plans",

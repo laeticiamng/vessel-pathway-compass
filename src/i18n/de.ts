@@ -83,6 +83,8 @@ export const de = {
     hero: {
       badge: "Gefäßfälle verwalten, KI-Berichte erstellen, Ergebnisse verfolgen — in einem Tool.",
       title: "Vascular Atlas",
+      headlinePre: "KI-gestützte klinische Plattform für",
+      headlineHighlight: "Gefäßmedizin",
       subtitle: "Klinische Arbeitsabläufe, KI-Unterstützung, Ergebnisregister, Zertifizierung, Forschung und Expertennetzwerk vereint — in den USA, der EU und der Schweiz.",
       cta: "Kostenlos testen",
       secondary: "Pläne ansehen",
