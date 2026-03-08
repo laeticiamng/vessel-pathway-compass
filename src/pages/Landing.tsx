@@ -21,6 +21,7 @@ import {
   Menu,
   Sparkles,
 } from "lucide-react";
+import { FAQSection } from "@/components/landing/FAQSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
