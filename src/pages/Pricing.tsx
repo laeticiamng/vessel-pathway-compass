@@ -152,7 +152,7 @@ export default function Pricing() {
                       disabled={checkoutLoading === plan.key || (action as any).disabled}
                     >
                       {checkoutLoading === plan.key ? (
-                        <><Loader2 className="h-4 w-4 animate-spin mr-2" /> Loading...</>
+                        <><Loader2 className="h-4 w-4 animate-spin mr-2" /> {t("common.loading")}</>
                       ) : (
                         action.label
                       )}
