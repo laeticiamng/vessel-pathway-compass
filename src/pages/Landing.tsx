@@ -112,6 +112,9 @@ export default function Landing() {
             <span className="text-xl font-bold tracking-tight">Vascular Atlas</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
+            <a href="#modules" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {t("landing.nav.explore")}
+            </a>
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.pricing")}
             </Link>
