@@ -115,8 +115,8 @@ export const en = {
         desc: "Visualize each patient's vascular anatomy over time with interactive maps, lesion tracking and scenario planning.",
       },
       registry: {
-        title: "Global Outcomes Registry",
-        desc: "Standardized outcomes for PAD, aortic, carotid, venous, and thromboembolic disease with privacy-first benchmarking.",
+        title: "Outcomes Registry",
+        desc: "Record and compare patient outcomes across PAD, aortic, carotid, venous and thromboembolic cases — anonymized benchmarking included.",
       },
       education: {
         title: "Certification & CME",
