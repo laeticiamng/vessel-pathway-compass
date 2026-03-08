@@ -906,8 +906,7 @@ export const en = {
     },
     security: {
       title: "Security",
-      sso: "SSO Integration",
-      rateLimiting: "Rate Limiting",
+      desc: "Your account is protected with encrypted sessions, role-based access control, and full audit trail. Password changes can be initiated from the sign-in page.",
     },
     plan: {
       title: "Plan & Billing",
