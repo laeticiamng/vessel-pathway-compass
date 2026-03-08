@@ -39,6 +39,9 @@ const Analytics = lazy(() => import("./pages/app/Analytics"));
 const Team = lazy(() => import("./pages/app/Team"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const InnovationLab = lazy(() => import("./pages/app/beta/InnovationLab"));
+const PatientOutcomes = lazy(() => import("./pages/app/PatientOutcomes"));
+const ClinicalPerformance = lazy(() => import("./pages/app/ClinicalPerformance"));
+const RiskCalculator = lazy(() => import("./pages/app/RiskCalculator"));
 
 const queryClient = new QueryClient();
 
