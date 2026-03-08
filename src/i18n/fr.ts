@@ -883,8 +883,7 @@ export const fr = {
     },
     security: {
       title: "Sécurité",
-      sso: "Intégration SSO",
-      rateLimiting: "Limitation du débit",
+      desc: "Votre compte est protégé par des sessions chiffrées, un contrôle d'accès par rôle et une traçabilité complète. Le changement de mot de passe peut être initié depuis la page de connexion.",
     },
     plan: {
       title: "Plan & Facturation",

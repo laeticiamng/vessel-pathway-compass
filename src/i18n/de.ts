@@ -883,8 +883,7 @@ export const de = {
     },
     security: {
       title: "Sicherheit",
-      sso: "SSO-Integration",
-      rateLimiting: "Ratenbegrenzung",
+      desc: "Ihr Konto ist durch verschlüsselte Sitzungen, rollenbasierte Zugriffskontrolle und vollständige Audit-Trails geschützt. Passwortänderungen können über die Anmeldeseite initiiert werden.",
     },
     plan: {
       title: "Plan & Abrechnung",
