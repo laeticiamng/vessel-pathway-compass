@@ -175,7 +175,7 @@ export default function Landing() {
       </nav>
       </header>
 
-      <main>
+      <main id="main-content">
       {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
