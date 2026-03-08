@@ -63,12 +63,12 @@ export default function Pricing() {
     }
     if (planKey === "individual") {
       if (!session) return { href: "/auth?mode=signup", onClick: undefined, label: plans.find(p => p.key === planKey)!.cta };
-      if (currentPlan === "individual" && !subscribed) return { href: undefined, onClick: undefined, label: t("pricing.currentPlan") || "Current Plan", disabled: true };
+      if (currentPlan === "individual" && !subscribed) return { href: undefined, onClick: undefined, label: t("pricing.currentPlan"), disabled: true };
       return { href: "/auth?mode=signup", onClick: undefined, label: plans.find(p => p.key === planKey)!.cta };
     }
     // professional
     if (subscribed && currentPlan === "professional") {
-      return { href: undefined, onClick: handleManage, label: t("pricing.managePlan") || "Manage Plan" };
+      return { href: undefined, onClick: handleManage, label: t("pricing.managePlan") };
     }
     return { href: undefined, onClick: () => handleCheckout(planKey), label: plans.find(p => p.key === planKey)!.cta };
   };
