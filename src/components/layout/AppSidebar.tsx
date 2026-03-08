@@ -77,7 +77,7 @@ export function AppSidebar() {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="p-4">
-        <NavLink to="/app" className="flex items-center gap-2">
+        <NavLink to={session ? "/app" : "/"} className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
             <HeartPulse className="h-4 w-4 text-primary-foreground" />
           </div>
@@ -144,7 +144,7 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="p-3 space-y-2">
-        {session && (
+        {session ? (
           <button
             onClick={handleSignOut}
             className="flex items-center gap-2 w-full rounded-md px-2 py-1.5 text-sm text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
@@ -152,6 +152,14 @@ export function AppSidebar() {
             <LogOut className="h-4 w-4" />
             {!collapsed && <span>{t("common.signOut")}</span>}
           </button>
+        ) : (
+          <NavLink
+            to="/auth"
+            className="flex items-center gap-2 w-full rounded-md px-2 py-1.5 text-sm font-medium text-primary hover:bg-primary/10 transition-colors"
+          >
+            <LogOut className="h-4 w-4 rotate-180" />
+            {!collapsed && <span>{t("landing.nav.signIn")}</span>}
+          </NavLink>
         )}
         {!collapsed && (
           <p className="text-xs text-muted-foreground text-center">
