@@ -1297,6 +1297,9 @@ export const en = {
       desc: "Your Professional plan is now active. Enjoy unlimited access to all features.",
       goToDashboard: "Go to Dashboard",
       viewSettings: "View Subscription Settings",
+      verifying: "Verifying your payment...",
+      verifyFailed: "Verification Issue",
+      verifyFailedDesc: "We couldn't verify your payment session. If you were charged, your subscription will be activated shortly. Contact support if the issue persists.",
     },
     cancel: {
       title: "Checkout Cancelled",
