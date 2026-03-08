@@ -74,8 +74,8 @@ export default function CheckoutSuccess() {
               <AlertTriangle className="h-8 w-8 text-destructive" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold mb-2">{t("checkout.success.verifyFailed") || "Verification Issue"}</h1>
-              <p className="text-muted-foreground">{t("checkout.success.verifyFailedDesc") || "We couldn't verify your payment session. If you were charged, your subscription will be activated shortly. Contact support if the issue persists."}</p>
+              <h1 className="text-2xl font-bold mb-2">{t("checkout.success.verifyFailed")}</h1>
+              <p className="text-muted-foreground">{t("checkout.success.verifyFailedDesc")}</p>
             </div>
             <div className="flex flex-col gap-3">
               <Button asChild>
