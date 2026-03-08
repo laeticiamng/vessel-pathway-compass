@@ -14,6 +14,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { Globe, MessageSquare, Users, Search, Send, Clock } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import ForumThreadDetail from "@/components/network/ForumThreadDetail";
 import VoteButtons from "@/components/network/VoteButtons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -162,6 +163,7 @@ export default function Network() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <SEOHead title={t("seo.network.title") as string} description={t("seo.network.description") as string} path="/app/network" noindex />
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">
           <Globe className="h-8 w-8 text-primary" />

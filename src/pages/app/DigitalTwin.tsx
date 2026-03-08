@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { HeartPulse, MapPin, Calendar, Activity, Stethoscope, Scan, Target, User } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import VascularMap, { VASCULAR_SEGMENTS } from "@/components/digital-twin/VascularMap";
 import SegmentDetail from "@/components/digital-twin/SegmentDetail";
 
@@ -131,6 +132,7 @@ export default function DigitalTwin() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <SEOHead title={t("seo.digitalTwin.title") as string} description={t("seo.digitalTwin.description") as string} path="/app/digital-twin" noindex />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">

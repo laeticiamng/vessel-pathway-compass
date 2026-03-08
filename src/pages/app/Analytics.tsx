@@ -43,6 +43,7 @@ import {
 } from "recharts";
 import InstitutionComparison from "@/components/analytics/InstitutionComparison";
 import { Building2 } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 
 const CATEGORY_COLORS = [
   "hsl(200 70% 50%)",
@@ -356,6 +357,7 @@ export default function Analytics() {
 
   return (
     <div className="space-y-6 max-w-7xl">
+      <SEOHead title={t("seo.analytics.title") as string} description={t("seo.analytics.description") as string} path="/app/analytics" noindex />
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">

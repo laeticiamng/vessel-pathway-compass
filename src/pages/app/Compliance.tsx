@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, FileText, Brain, AlertTriangle, CheckCircle2, Inbox, Loader2 } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/i18n/context";
@@ -134,6 +135,7 @@ export default function Compliance() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <SEOHead title={t("seo.compliance.title") as string} description={t("seo.compliance.description") as string} path="/app/compliance" noindex />
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">
           <Shield className="h-8 w-8 text-primary" />

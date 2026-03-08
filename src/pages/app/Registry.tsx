@@ -3,6 +3,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LineChart, BarChart3, TrendingUp, Shield } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -109,6 +110,7 @@ export default function Registry() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <SEOHead title={t("seo.registry.title") as string} description={t("seo.registry.description") as string} path="/app/registry" noindex />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">

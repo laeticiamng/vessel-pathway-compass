@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Plus, Users, Database, Download, BarChart3, Loader2 } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -72,6 +73,7 @@ export default function Research() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <SEOHead title={t("seo.research.title") as string} description={t("seo.research.description") as string} path="/app/research" noindex />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
