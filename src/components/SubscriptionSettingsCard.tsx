@@ -54,7 +54,7 @@ export function SubscriptionSettingsCard() {
                   ) : (
                     <ExternalLink className="h-4 w-4 mr-1.5" />
                   )}
-                  {t("pricing.managePlan") || "Manage Plan"}
+                  {t("pricing.managePlan")}
                 </Button>
               ) : (
                 <Button asChild variant="default" size="sm">
