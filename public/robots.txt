@@ -2,9 +2,19 @@
 
 User-agent: Googlebot
 Allow: /
+Disallow: /app/patients
+Disallow: /app/settings
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /app/patients
+Disallow: /app/settings
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
 
 User-agent: Twitterbot
 Allow: /
@@ -30,11 +40,10 @@ Allow: /
 
 User-agent: *
 Allow: /
-
-# Protected app routes — no indexing needed
 Disallow: /app/patients
 Disallow: /app/settings
 Disallow: /onboarding
 Disallow: /reset-password
+Disallow: /checkout/
 
 Sitemap: https://vascular-atlas.com/sitemap.xml
