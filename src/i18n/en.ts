@@ -1305,7 +1305,7 @@ export const en = {
         { q: "Is Vascular Atlas a medical device?", a: "No. Vascular Atlas is a clinical decision support tool. All AI outputs require review by a qualified clinician before clinical action." },
         { q: "How is patient data protected?", a: "All patient data is pseudonymized. We use row-level security, encryption at rest and in transit, and maintain comprehensive audit trails." },
         { q: "Can I export my data?", a: "Yes. You can export patient data, measurements, and reports in CSV and PDF formats from the relevant sections." },
-        { q: "What happens during the free trial?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
+        { q: "What happens during the free beta?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
         { q: "How do I delete my account?", a: "Contact support@vascularatlas.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
       ],
     },
