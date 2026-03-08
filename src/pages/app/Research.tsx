@@ -83,10 +83,13 @@ export default function Research() {
           </h1>
           <p className="text-muted-foreground mt-1">{t("research.subtitle")}</p>
         </div>
-        <Button onClick={() => setDialogOpen(true)}>
-          <Plus className="h-4 w-4 mr-2" />
-          {t("research.newStudy")}
-        </Button>
+        <div className="flex gap-2">
+          <ResearchExportButton />
+          <Button onClick={() => setDialogOpen(true)}>
+            <Plus className="h-4 w-4 mr-2" />
+            {t("research.newStudy")}
+          </Button>
+        </div>
       </div>
 
       <div className="grid sm:grid-cols-3 gap-4">
