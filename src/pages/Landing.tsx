@@ -289,13 +289,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="py-16 bg-muted/20 border-t">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">{t("landing.socialProof.title")}</p>
-        </div>
-      </section>
-
       {/* Testimonials */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
