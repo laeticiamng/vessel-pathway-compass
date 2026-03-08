@@ -34,7 +34,7 @@ export default function Pricing() {
   const handleCheckout = async (planKey: string) => {
     if (planKey === "institution") return;
     if (!session) {
-      window.location.href = "/auth?mode=signup";
+      navigate("/auth?mode=signup");
       return;
     }
     if (planKey === "individual") return;

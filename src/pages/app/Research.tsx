@@ -137,11 +137,11 @@ export default function Research() {
                     </div>
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => toast.info(t("common.comingSoon"))}>
                       <BarChart3 className="h-3.5 w-3.5 mr-1" />
                       {t("common.analytics")}
                     </Button>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => toast.info(t("common.comingSoon"))}>
                       <Download className="h-3.5 w-3.5 mr-1" />
                       {t("common.export")}
                     </Button>
