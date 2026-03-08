@@ -120,7 +120,7 @@ export default function Pricing() {
                 )}
                 {isCurrentPlan && (
                   <div className="absolute -top-3 right-4 bg-success text-success-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    ✓ {t("pricing.currentPlan") || "Your Plan"}
+                    ✓ {t("pricing.currentPlan")}
                   </div>
                 )}
                 <CardHeader>
