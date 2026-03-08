@@ -124,7 +124,7 @@ export const en = {
       },
       simulation: {
         title: "Clinical Simulation Lab",
-        desc: "Interactive branching cases with rubric-constrained AI feedback and skill heatmaps.",
+        desc: "Practice decision-making with realistic branching cases and get AI-powered feedback on your performance.",
       },
       network: {
         title: "Global Expert Network",
