@@ -20,7 +20,7 @@ export const fr = {
     viewAll: "Tout voir",
     comingSoon: "Bientôt disponible",
     betaPreview: "Aperçu Beta",
-    notAMedicalDevice: "Non un dispositif médical",
+    notAMedicalDevice: "Ce n'est pas un dispositif médical",
     version: "v1.0 Beta · Prêt pour la conformité",
     signIn: "Se connecter",
     signUp: "S'inscrire",
