@@ -95,7 +95,7 @@ export default function Patients() {
 
   return (
     <>
-      <SEOHead title="Patients" description="Patient management" path="/app/patients" noindex />
+      <SEOHead title={t("seo.patients.title") as string} description={t("seo.patients.description") as string} path="/app/patients" noindex />
       <div className="space-y-6 max-w-6xl">
         <UsageLimitBanner current={patients?.length ?? 0} limit={FREE_PATIENT_LIMIT} featureKey="patients" />
         <div className="flex items-center justify-between">
