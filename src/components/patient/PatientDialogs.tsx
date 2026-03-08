@@ -117,7 +117,7 @@ export function AddEventDialog({ open, onOpenChange, mutation }: AddEventDialogP
         <div className="space-y-4 py-2">
           <div className="space-y-2">
             <Label>{t("patientDetail.eventDialog.titleLabel")}</Label>
-            <Input placeholder={t("patientDetail.eventDialog.titlePlaceholder")} value={title} onChange={(e) => setTitle(e.target.value)} />
+            <Input placeholder={t("patientDetail.eventDialog.titlePlaceholder")} value={title} onChange={(e) => setTitle(e.target.value)} maxLength={200} />
           </div>
           <div className="space-y-2">
             <Label>{t("patientDetail.eventDialog.eventType")}</Label>
