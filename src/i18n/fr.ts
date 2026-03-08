@@ -1084,11 +1084,11 @@ export const fr = {
   },
 
   contentGate: {
-    previewBanner: "🔒 Aperçu limité — connectez-vous ou abonnez-vous pour un accès complet",
+    previewBanner: "🔒 Aperçu limité — connectez-vous ou inscrivez-vous pour un accès complet",
     title: "Vous consultez un aperçu limité",
-    subtitle: "Ce contenu est restreint. Connectez-vous à votre compte gratuit pour continuer, ou passez au plan Professionnel pour un accès illimité à tous les modules.",
-    signIn: "Se connecter pour continuer",
-    viewPlans: "Voir les plans & tarifs",
+    subtitle: "Ce contenu est restreint. Créez un compte gratuit pour continuer, ou connectez-vous si vous en avez déjà un.",
+    createAccount: "Créer un compte gratuit",
+    signIn: "Se connecter",
   },
 
   notifications: {

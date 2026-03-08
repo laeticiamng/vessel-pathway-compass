@@ -1114,9 +1114,9 @@ export const en = {
   contentGate: {
     previewBanner: "🔒 Limited preview — sign in or subscribe for full access",
     title: "You're viewing a limited preview",
-    subtitle: "This content is restricted. Sign in to your free account to continue, or upgrade to Professional for unlimited access to all modules.",
-    signIn: "Sign In to Continue",
-    viewPlans: "See Plans & Pricing",
+    subtitle: "This content is restricted. Create a free account to continue, or sign in if you already have one.",
+    createAccount: "Create Free Account",
+    signIn: "Sign In",
   },
 
   notifications: {

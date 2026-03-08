@@ -1084,11 +1084,11 @@ export const de = {
   },
 
   contentGate: {
-    previewBanner: "🔒 Eingeschränkte Vorschau — melden Sie sich an oder abonnieren Sie für vollen Zugang",
+    previewBanner: "🔒 Eingeschränkte Vorschau — anmelden oder registrieren für vollen Zugang",
     title: "Sie sehen eine eingeschränkte Vorschau",
-    subtitle: "Dieser Inhalt ist eingeschränkt. Melden Sie sich mit Ihrem kostenlosen Konto an, oder upgraden Sie auf Professionell für unbegrenzten Zugang zu allen Modulen.",
-    signIn: "Anmelden und fortfahren",
-    viewPlans: "Pläne & Preise ansehen",
+    subtitle: "Dieser Inhalt ist eingeschränkt. Erstellen Sie ein kostenloses Konto, oder melden Sie sich an, wenn Sie bereits eines haben.",
+    createAccount: "Kostenloses Konto erstellen",
+    signIn: "Anmelden",
   },
 
   notifications: {

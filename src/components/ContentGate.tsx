@@ -34,13 +34,13 @@ export function ContentGate({ children }: ContentGateProps) {
         <p className="text-muted-foreground mb-7 max-w-md text-sm leading-relaxed">{t("contentGate.subtitle")}</p>
         <div className="flex gap-3">
           <Button asChild className="shadow-md shadow-primary/15">
-            <Link to="/auth">
-              {t("contentGate.signIn")}
+            <Link to="/auth?mode=signup">
+              {t("contentGate.createAccount")}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>
           <Button asChild variant="outline">
-            <Link to="/pricing">{t("contentGate.viewPlans")}</Link>
+            <Link to="/auth">{t("contentGate.signIn")}</Link>
           </Button>
         </div>
       </div>
