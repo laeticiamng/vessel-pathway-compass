@@ -53,7 +53,7 @@ export default function CheckoutSuccess() {
   if (verifyState === "loading") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <SEOHead title={t("checkout.success.verifying") as string || "Verifying Payment — Vascular Atlas"} description={t("checkout.success.desc") as string} path="/checkout/success" />
+        <SEOHead title={t("checkout.success.verifying") as string || "Verifying Payment — Vascular Atlas"} description={t("checkout.success.desc") as string} path="/checkout/success" noindex />
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-10 pb-8 space-y-6">
             <Loader2 className="h-10 w-10 animate-spin text-primary mx-auto" />
@@ -67,7 +67,7 @@ export default function CheckoutSuccess() {
   if (verifyState === "failed") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <SEOHead title={t("checkout.success.verifyFailed") as string || "Verification Issue — Vascular Atlas"} description={t("checkout.success.verifyFailedDesc") as string} path="/checkout/success" />
+        <SEOHead title={t("checkout.success.verifyFailed") as string || "Verification Issue — Vascular Atlas"} description={t("checkout.success.verifyFailedDesc") as string} path="/checkout/success" noindex />
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-10 pb-8 space-y-6">
             <div className="mx-auto w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
@@ -96,7 +96,7 @@ export default function CheckoutSuccess() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
-      <SEOHead title={`${t("checkout.success.title")} — Vascular Atlas`} description={t("checkout.success.desc") as string} path="/checkout/success" />
+      <SEOHead title={`${t("checkout.success.title")} — Vascular Atlas`} description={t("checkout.success.desc") as string} path="/checkout/success" noindex />
       <Card className="max-w-md w-full text-center">
         <CardContent className="pt-10 pb-8 space-y-6">
           <div className="mx-auto w-16 h-16 rounded-full bg-success/10 flex items-center justify-center">
