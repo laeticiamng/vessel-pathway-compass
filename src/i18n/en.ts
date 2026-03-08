@@ -174,8 +174,8 @@ export const en = {
   // Pricing
   pricing: {
     title: "Plans & Pricing",
-    betaBadge: "🎉 Free during Beta — all features included",
-    subtitle: "From individual physicians to large institutions — find the right plan for your vascular practice.",
+    betaBadge: "🎉 Beta ongoing — free access to all features",
+    betaNote: "During beta, paid features are available without billing; listed prices apply when public launch starts.",
     mostPopular: "Most Popular",
     currentPlan: "Your Plan",
     managePlan: "Manage Plan",
@@ -207,7 +207,7 @@ export const en = {
           "Simulation lab access",
           "Expert consultations (5/mo)",
         ],
-        cta: "Start Trial",
+        cta: "Free beta access",
       },
       institution: {
         name: "Institution",

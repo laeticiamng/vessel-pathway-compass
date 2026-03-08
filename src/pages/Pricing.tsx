@@ -63,12 +63,12 @@ export default function Pricing() {
     }
     if (planKey === "individual") {
       if (!session) return { href: "/auth?mode=signup", onClick: undefined, label: plans.find(p => p.key === planKey)!.cta };
-      if (currentPlan === "individual" && !subscribed) return { href: undefined, onClick: undefined, label: t("pricing.currentPlan") || "Current Plan", disabled: true };
+      if (currentPlan === "individual" && !subscribed) return { href: undefined, onClick: undefined, label: t("pricing.currentPlan"), disabled: true };
       return { href: "/auth?mode=signup", onClick: undefined, label: plans.find(p => p.key === planKey)!.cta };
     }
     // professional
     if (subscribed && currentPlan === "professional") {
-      return { href: undefined, onClick: handleManage, label: t("pricing.managePlan") || "Manage Plan" };
+      return { href: undefined, onClick: handleManage, label: t("pricing.managePlan") };
     }
     return { href: undefined, onClick: () => handleCheckout(planKey), label: plans.find(p => p.key === planKey)!.cta };
   };
@@ -97,6 +97,7 @@ export default function Pricing() {
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             {t("pricing.subtitle")}
           </p>
+          <p className="text-sm text-muted-foreground/90 mt-3 max-w-xl mx-auto">{t("pricing.betaNote")}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -119,7 +120,7 @@ export default function Pricing() {
                 )}
                 {isCurrentPlan && (
                   <div className="absolute -top-3 right-4 bg-success text-success-foreground text-xs font-semibold px-3 py-1 rounded-full">
-                    ✓ {t("pricing.currentPlan") || "Your Plan"}
+                    ✓ {t("pricing.currentPlan")}
                   </div>
                 )}
                 <CardHeader>

@@ -166,8 +166,8 @@ export const de = {
 
   pricing: {
     title: "Pläne & Preise",
-    betaBadge: "🎉 Kostenlos während der Beta — alle Funktionen inklusive",
-    subtitle: "Vom einzelnen Arzt bis zur großen Einrichtung — finden Sie den passenden Plan für Ihre Gefäßpraxis.",
+    betaBadge: "🎉 Beta läuft — kostenloser Zugriff auf alle Funktionen",
+    betaNote: "Während der Beta sind kostenpflichtige Funktionen ohne Abrechnung nutzbar; die angezeigten Preise gelten zum offiziellen Start.",
     mostPopular: "Am beliebtesten",
     currentPlan: "Ihr Plan",
     managePlan: "Abo verwalten",
@@ -199,7 +199,7 @@ export const de = {
           "Zugang zum Simulationslabor",
           "Expertenkonsultationen (5/Monat)",
         ],
-        cta: "Testversion starten",
+        cta: "Kostenloser Beta-Zugang",
       },
       institution: {
         name: "Einrichtung",
