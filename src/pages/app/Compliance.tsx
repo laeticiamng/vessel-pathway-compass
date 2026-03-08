@@ -33,6 +33,7 @@ export default function Compliance() {
       if (error) throw error;
       return data;
     },
+    enabled: !!user,
   });
 
   // --- Stats: audit count ---
