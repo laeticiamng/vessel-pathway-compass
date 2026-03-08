@@ -1106,11 +1106,11 @@ export const fr = {
   },
 
   contentGate: {
-    previewBanner: "🔒 Aperçu limité — connectez-vous ou inscrivez-vous pour un accès complet",
-    title: "Vous consultez un aperçu limité",
-    subtitle: "Ce contenu est restreint. Créez un compte gratuit pour continuer, ou connectez-vous si vous en avez déjà un.",
+    previewBanner: "👀 Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
+    title: "Envie d'utiliser ce module ?",
+    subtitle: "Créez un compte gratuit en 30 secondes pour accéder à toutes les fonctionnalités, sauvegarder vos données et suivre votre progression.",
     createAccount: "Créer un compte gratuit",
-    signIn: "Se connecter",
+    signIn: "J'ai déjà un compte",
   },
 
   notifications: {

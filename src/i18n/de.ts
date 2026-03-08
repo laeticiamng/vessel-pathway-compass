@@ -1106,11 +1106,11 @@ export const de = {
   },
 
   contentGate: {
-    previewBanner: "🔒 Eingeschränkte Vorschau — anmelden oder registrieren für vollen Zugang",
-    title: "Sie sehen eine eingeschränkte Vorschau",
-    subtitle: "Dieser Inhalt ist eingeschränkt. Erstellen Sie ein kostenloses Konto, oder melden Sie sich an, wenn Sie bereits eines haben.",
+    previewBanner: "👀 Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
+    title: "Möchten Sie dieses Modul nutzen?",
+    subtitle: "Erstellen Sie in 30 Sekunden ein kostenloses Konto, um alle Funktionen zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
     createAccount: "Kostenloses Konto erstellen",
-    signIn: "Anmelden",
+    signIn: "Ich habe bereits ein Konto",
   },
 
   notifications: {
