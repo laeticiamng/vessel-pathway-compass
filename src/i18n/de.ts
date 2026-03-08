@@ -104,7 +104,7 @@ export const de = {
       subtitle: "Sechs integrierte Module für Ihren klinischen Alltag.",
       ai: {
         title: "Klinischer KI-Assistent",
-        desc: "Erstellen Sie strukturierte SOAP-Notizen, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
+        desc: "Erstellen Sie strukturierte klinische Berichte, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
       },
       twin: {
         title: "Vaskulärer digitaler Zwilling",
