@@ -65,6 +65,11 @@ export default function Onboarding() {
   const [patientSex, setPatientSex] = useState("");
   const [patientCategory, setPatientCategory] = useState("");
 
+  // Redirect unauthenticated users
+  if (!authLoading && !user) {
+    return <Navigate to="/auth" replace />;
+  }
+
   const progress = ((step + 1) / STEP_COUNT) * 100;
 
   const stepIcons = [
