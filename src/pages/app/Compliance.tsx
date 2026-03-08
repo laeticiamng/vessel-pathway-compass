@@ -46,6 +46,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Stats: ai_outputs count ---
@@ -58,6 +59,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Stats: pending sign-offs ---
@@ -71,6 +73,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Stats: consents count ---
@@ -83,6 +86,7 @@ export default function Compliance() {
       if (error) throw error;
       return count ?? 0;
     },
+    enabled: !!user,
   });
 
   // --- Consents list ---
@@ -96,6 +100,7 @@ export default function Compliance() {
       if (error) throw error;
       return data;
     },
+    enabled: !!user,
   });
 
   // --- AI Safety metrics ---
@@ -114,6 +119,7 @@ export default function Compliance() {
       const issues = total - signedOff;
       return { latestModel, signOffRate, issues, total };
     },
+    enabled: !!user,
   });
 
   // Group consents by type
