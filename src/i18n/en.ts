@@ -127,8 +127,8 @@ export const en = {
         desc: "Practice decision-making with realistic branching cases and get AI-powered feedback on your performance.",
       },
       network: {
-        title: "Global Expert Network",
-        desc: "De-identified case discussions, structured tele-expertise, and mentorship matching across specialties.",
+        title: "Expert Network",
+        desc: "Discuss anonymized cases with peers, request expert opinions and find mentors across specialties.",
       },
     },
     trust: {
