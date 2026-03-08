@@ -374,6 +374,7 @@ export default function Landing() {
                 <span className="font-semibold">Vascular Atlas</span>
               </div>
               <p className="text-sm text-muted-foreground">{t("landing.footer.tagline")}</p>
+              <p className="text-xs text-muted-foreground/70 mt-1">{t("landing.footer.notMedicalDevice")}</p>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
