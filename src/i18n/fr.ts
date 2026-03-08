@@ -59,6 +59,7 @@ export const fr = {
     compliance: "Conformité",
     team: "Équipe",
     settings: "Paramètres",
+    moreTools: "Plus d'outils",
   },
 
   command: {
