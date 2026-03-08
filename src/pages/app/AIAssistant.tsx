@@ -25,6 +25,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UsageLimitBanner } from "@/components/UsageLimitBanner";
+import { SEOHead } from "@/components/SEOHead";
 
 interface AiOutput {
   id: string;
