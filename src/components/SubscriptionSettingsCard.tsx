@@ -44,7 +44,7 @@ export function SubscriptionSettingsCard() {
               <div className="flex items-center gap-3">
                 <span className="text-sm font-medium">{t("settings.plan.currentPlan")}</span>
                 <Badge variant={subscribed ? "default" : "secondary"}>
-                  {subscribed ? "Professional" : t("settings.plan.free")}
+                  {subscribed ? t("pricing.plans.professional.name") : t("settings.plan.free")}
                 </Badge>
               </div>
               {subscribed ? (
@@ -67,7 +67,7 @@ export function SubscriptionSettingsCard() {
             </div>
             {subscribed && subscriptionEnd && (
               <p className="text-xs text-muted-foreground">
-                Renews on {new Date(subscriptionEnd).toLocaleDateString()}
+                {t("settings.plan.renewsOn") || "Renews on"} {new Date(subscriptionEnd).toLocaleDateString()}
               </p>
             )}
           </>

@@ -8,7 +8,7 @@ interface SEOHeadProps {
   jsonLd?: Record<string, unknown>;
 }
 
-const BASE_URL = "https://vascular-atlas.com";
+const BASE_URL = "https://vessel-pathway-compass.lovable.app";
 
 export function SEOHead({ title, description, path = "/", noindex = false, jsonLd }: SEOHeadProps) {
   const fullTitle = path === "/" ? title : `${title} | Vascular Atlas`;

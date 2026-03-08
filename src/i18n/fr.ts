@@ -824,6 +824,7 @@ export const fr = {
       currentPlan: "Plan actuel",
       free: "Gratuit",
       viewPlans: "Voir les plans",
+      renewsOn: "Renouvellement le",
     },
   },
 

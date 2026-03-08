@@ -15,10 +15,9 @@ const planKeys = ["individual", "professional", "institution"] as const;
 export default function Pricing() {
   const { t } = useTranslation();
   const { session } = useAuth();
-  const { currentPlan, subscribed, openPortal } = useSubscription();
+  const { currentPlan, subscribed, openPortal, createCheckout } = useSubscription();
   const { toast } = useToast();
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
-  const { createCheckout } = useSubscription();
 
   const plans = planKeys.map((key) => ({
     key,
