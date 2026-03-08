@@ -422,10 +422,10 @@ export default function Analytics() {
       {/* Summary KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: t("analytics.kpi.patients"), value: stats?.patients ?? 0, icon: Users, color: "text-blue-500" },
-          { label: t("analytics.kpi.cases"), value: filteredCases.length, icon: HeartPulse, color: "text-red-500" },
-          { label: t("analytics.kpi.measurements"), value: filteredMeasurements.length, icon: Activity, color: "text-green-500" },
-          { label: t("analytics.kpi.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, color: "text-purple-500" },
+          { label: t("analytics.kpi.patients"), value: stats?.patients ?? 0, icon: Users, color: "text-info" },
+          { label: t("analytics.kpi.cases"), value: filteredCases.length, icon: HeartPulse, color: "text-destructive" },
+          { label: t("analytics.kpi.measurements"), value: filteredMeasurements.length, icon: Activity, color: "text-success" },
+          { label: t("analytics.kpi.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, color: "text-primary" },
         ].map((kpi) => (
           <Card key={kpi.label}>
             <CardContent className="pt-6">
