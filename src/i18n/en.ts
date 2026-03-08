@@ -92,6 +92,7 @@ export const en = {
     nav: {
       pricing: "Pricing",
       signIn: "Sign In",
+      explore: "Features",
     },
     hero: {
       badge: "Manage vascular cases, generate AI reports, track outcomes — in one tool.",
