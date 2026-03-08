@@ -71,7 +71,7 @@ export const en = {
     dashboard: "Dashboard",
     aiAssistant: "AI Clinical Assistant",
     patients: "Patient Cases",
-    digitalTwin: "Digital Twin",
+    digitalTwin: "Patient Vascular Map",
     registry: "Outcomes Registry",
     education: "Education Hub",
     simulation: "Simulation Lab",
