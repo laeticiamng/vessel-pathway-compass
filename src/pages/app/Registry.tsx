@@ -137,7 +137,7 @@ export default function Registry() {
         </TabsList>
 
         <TabsContent value="physician" className="mt-6 space-y-4">
-          <div className="grid sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {summaryStats.map((s) => (
               <Card key={s.label}>
                 <CardContent className="pt-6">

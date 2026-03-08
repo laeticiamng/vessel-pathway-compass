@@ -184,10 +184,8 @@ export default function Dashboard() {
                         <Icon className="h-4 w-4 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium">{item.action}</p>
-                        <p className="text-xs text-muted-foreground truncate">
-                          {item.entity_type}{item.entity_id ? ` · ${item.entity_id.slice(0, 8)}` : ""}
-                        </p>
+                        <p className="text-sm font-medium">{(t(`dashboard.activityLabels.${item.action}`) as string) || item.action.replace(/_/g, " ")}</p>
+                        <p className="text-xs text-muted-foreground truncate">{item.entity_type}{item.entity_id ? ` · ${item.entity_id.slice(0, 8)}` : ""}</p>
                       </div>
                       <span className="text-xs text-muted-foreground shrink-0">{timeAgo(item.created_at)}</span>
                     </div>
