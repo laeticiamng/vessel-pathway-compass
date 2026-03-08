@@ -121,7 +121,7 @@ export const en = {
         desc: "Generate structured clinical reports, differential diagnoses and care pathways — always reviewed and confirmed by you.",
       },
       twin: {
-        title: "Vascular Digital Twin",
+        title: "Patient Vascular Map",
         desc: "Visualize each patient's vascular anatomy over time with interactive maps, lesion tracking and scenario planning.",
       },
       registry: {
