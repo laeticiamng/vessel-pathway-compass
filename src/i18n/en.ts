@@ -48,7 +48,7 @@ export const en = {
     dashboard: "Dashboard",
     aiAssistant: "AI Assistant",
     patients: "Patients",
-    digitalTwin: "Digital Twin",
+    digitalTwin: "Patient Vascular Map",
     registry: "Registry",
     education: "Education",
     simulationLab: "Simulation Lab",

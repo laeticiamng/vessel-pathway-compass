@@ -46,7 +46,7 @@ export const de = {
     dashboard: "Dashboard",
     aiAssistant: "KI-Assistent",
     patients: "Patienten",
-    digitalTwin: "Digitaler Zwilling",
+    digitalTwin: "Vaskuläre Patientenkarte",
     registry: "Register",
     education: "Fortbildung",
     simulationLab: "Simulationslabor",

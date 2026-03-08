@@ -251,6 +251,9 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* How It Works */}
+      <HowItWorksSection />
+
       {/* Modules */}
       <section id="modules" className="py-24 bg-background scroll-mt-20">
         <div className="container mx-auto px-6">
