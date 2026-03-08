@@ -110,6 +110,7 @@ export default function Registry() {
 
   return (
     <div className="space-y-6 max-w-6xl">
+      <SEOHead title={t("seo.registry.title") as string} description={t("seo.registry.description") as string} path="/app/registry" noindex />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">

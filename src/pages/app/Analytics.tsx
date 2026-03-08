@@ -357,6 +357,7 @@ export default function Analytics() {
 
   return (
     <div className="space-y-6 max-w-7xl">
+      <SEOHead title={t("seo.analytics") ? (t("seo.analytics.title") as string) : "Analytics — Vascular Atlas"} description="Clinical analytics dashboard for vascular medicine." path="/app/analytics" noindex />
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">

@@ -237,6 +237,7 @@ export default function AIAssistant() {
 
   return (
     <div className="space-y-6 max-w-7xl">
+      <SEOHead title={t("seo.aiAssistant.title") as string} description={t("seo.aiAssistant.description") as string} path="/app/ai-assistant" noindex />
       <UsageLimitBanner current={todayCount} limit={FREE_DAILY_AI_LIMIT} featureKey="aiReports" />
       <div className="flex items-center justify-between">
         <div>

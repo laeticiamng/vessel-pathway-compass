@@ -80,6 +80,7 @@ export default function Team() {
 
   return (
     <div className="space-y-6 max-w-4xl">
+      <SEOHead title={t("seo.team.title") as string} description={t("seo.team.description") as string} path="/app/team" noindex />
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
