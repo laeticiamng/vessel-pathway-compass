@@ -167,6 +167,7 @@ export const de = {
   pricing: {
     title: "Pläne & Preise",
     betaBadge: "🎉 Kostenlos während der Beta — alle Funktionen inklusive",
+    subtitle: "Vom einzelnen Arzt bis zur großen Einrichtung — finden Sie den passenden Plan für Ihre Gefäßpraxis.",
     mostPopular: "Am beliebtesten",
     currentPlan: "Ihr Plan",
     managePlan: "Abo verwalten",

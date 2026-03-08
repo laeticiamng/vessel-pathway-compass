@@ -42,6 +42,7 @@ const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "networ
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
 
   const modules = moduleKeys.map((key, i) => ({
@@ -122,7 +123,7 @@ export default function Landing() {
               <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
             </Button>
           </div>
-          <Sheet>
+          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
                 <Menu className="h-5 w-5" />
@@ -130,10 +131,10 @@ export default function Landing() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 mt-8">
-                <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors">
+                <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.pricing")}
                 </Link>
-                <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors">
+                <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
                 </Link>
                 <div className="flex items-center gap-2">
@@ -152,7 +153,7 @@ export default function Landing() {
                     ))}
                   </div>
                 </div>
-                <Button asChild className="mt-2">
+                <Button asChild className="mt-2" onClick={() => setMobileOpen(false)}>
                   <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
                 </Button>
               </div>
@@ -285,13 +286,6 @@ export default function Landing() {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Social Proof */}
-      <section className="py-16 bg-muted/20 border-t">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">{t("landing.socialProof.title")}</p>
         </div>
       </section>
 

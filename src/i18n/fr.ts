@@ -167,6 +167,7 @@ export const fr = {
   pricing: {
     title: "Plans et tarifs",
     betaBadge: "🎉 Gratuit pendant la Beta — toutes les fonctionnalités incluses",
+    subtitle: "Du médecin individuel aux grandes institutions — trouvez le plan adapté à votre pratique vasculaire.",
     mostPopular: "Le plus populaire",
     currentPlan: "Votre plan",
     managePlan: "Gérer l'abonnement",
