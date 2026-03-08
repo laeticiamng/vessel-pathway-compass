@@ -57,7 +57,7 @@ export default function CheckoutSuccess() {
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-10 pb-8 space-y-6">
             <Loader2 className="h-10 w-10 animate-spin text-primary mx-auto" />
-            <p className="text-muted-foreground">{t("checkout.success.verifying") || "Verifying your payment..."}</p>
+            <p className="text-muted-foreground">{t("checkout.success.verifying")}</p>
           </CardContent>
         </Card>
       </div>
