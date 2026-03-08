@@ -59,6 +59,7 @@ export const de = {
     compliance: "Compliance",
     team: "Team",
     settings: "Einstellungen",
+    moreTools: "Weitere Tools",
   },
 
   command: {
@@ -169,6 +170,24 @@ export const de = {
         { q: "Sind meine Daten sicher?", a: "Ja. Alle Daten werden verschlüsselt, pseudonymisiert und mit vollständigen Audit-Trails gespeichert. Die Plattform ist auf DSGVO, HIPAA und Schweizer nDSG ausgelegt." },
         { q: "Kann mein Team es nutzen?", a: "Auf jeden Fall. Der Institutionsplan unterstützt Teams mit gemeinsamen Registern, Analysen und rollenbasierten Berechtigungen." },
       ],
+    },
+    about: {
+      title: "Wer wir sind",
+      description: "Vascular Atlas wird von einem Team aus Gefäßmedizinern, klinischen Forschern und Software-Ingenieuren entwickelt, die davon überzeugt sind, dass die moderne Gefäßmedizin eine dedizierte digitale Plattform verdient. Unsere Mission: klinische Workflows schneller, sicherer und kollaborativer machen — ohne Kompromisse beim Datenschutz.",
+      highlights: {
+        clinical: {
+          title: "Von Klinikern entwickelt",
+          desc: "Jede Funktion ist für reale klinische Workflows konzipiert und von praktizierenden Gefäßspezialisten validiert.",
+        },
+        privacy: {
+          title: "Datenschutz zuerst",
+          desc: "Pseudonymisierte Daten, vollständige Audit-Trails und DSGVO-, HIPAA- und nDSG-Konformität von Tag eins.",
+        },
+        community: {
+          title: "Wachsende Gemeinschaft",
+          desc: "Treten Sie einem Netzwerk von Gefäßprofis bei, die Wissen, Benchmarks und Best Practices über Einrichtungsgrenzen hinweg teilen.",
+        },
+      },
     },
     cta: {
       title: "Bereit, Ihre Gefäßpraxis zu vereinfachen?",
@@ -1291,6 +1310,7 @@ export const de = {
       messagePlaceholder: "Beschreiben Sie Ihre Frage oder Ihr Anliegen...",
       send: "Nachricht senden",
       sent: "Nachricht gesendet! Wir antworten innerhalb von 24 Stunden.",
+      error: "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.",
     },
   },
 

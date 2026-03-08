@@ -1,8 +1,10 @@
+import { useState } from "react";
 import {
   Activity,
   BarChart3,
   Brain,
   BookOpen,
+  ChevronDown,
   FlaskConical,
   Globe,
   HeartPulse,
@@ -34,6 +36,11 @@ import {
   SidebarFooter,
   useSidebar,
 } from "@/components/ui/sidebar";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -54,12 +61,16 @@ export function AppSidebar() {
       ? location.pathname === "/app"
       : location.pathname.startsWith(path);
 
-  // Items visible to everyone (semi-public with ContentGate)
-  const coreItems = [
+  // Primary items — always visible
+  const primaryItems = [
     { title: t("sidebar.dashboard"), url: "/app", icon: LayoutDashboard },
     { title: t("sidebar.aiAssistant"), url: "/app/ai-assistant", icon: Brain },
     ...(session ? [{ title: t("sidebar.patients"), url: "/app/patients", icon: HeartPulse }] : []),
     { title: t("sidebar.digitalTwin"), url: "/app/digital-twin", icon: Activity },
+  ];
+
+  // Secondary items — collapsed by default under "More tools"
+  const moreToolsItems = [
     { title: t("sidebar.registry"), url: "/app/registry", icon: LineChart },
     { title: t("sidebar.education"), url: "/app/education", icon: BookOpen },
     { title: t("sidebar.simulationLab"), url: "/app/simulation", icon: FlaskConical },
@@ -73,6 +84,10 @@ export function AppSidebar() {
     { title: t("sidebar.team"), url: "/app/team", icon: Users },
     ...(session ? [{ title: t("sidebar.settings"), url: "/app/settings", icon: Settings }] : []),
   ];
+
+  // Auto-open "More tools" if user is currently on one of those pages
+  const isOnMoreTool = moreToolsItems.some((item) => isActive(item.url));
+  const [moreOpen, setMoreOpen] = useState(isOnMoreTool);
 
   return (
     <Sidebar collapsible="icon">
@@ -90,11 +105,12 @@ export function AppSidebar() {
       </SidebarHeader>
 
       <SidebarContent>
+        {/* Primary clinical tools */}
         <SidebarGroup>
           <SidebarGroupLabel>{t("sidebar.clinical")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {coreItems.map((item) => (
+              {primaryItems.map((item) => (
                 <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url} end={item.url === "/app"}>
@@ -108,6 +124,51 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        {/* Secondary tools — collapsible */}
+        {!collapsed ? (
+          <Collapsible open={moreOpen} onOpenChange={setMoreOpen}>
+            <SidebarGroup>
+              <CollapsibleTrigger className="flex items-center justify-between w-full px-3 py-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors">
+                {t("sidebar.moreTools")}
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`} />
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <SidebarGroupContent>
+                  <SidebarMenu>
+                    {moreToolsItems.map((item) => (
+                      <SidebarMenuItem key={item.url}>
+                        <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                          <NavLink to={item.url}>
+                            <item.icon className="h-4 w-4" />
+                            <span>{item.title}</span>
+                          </NavLink>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    ))}
+                  </SidebarMenu>
+                </SidebarGroupContent>
+              </CollapsibleContent>
+            </SidebarGroup>
+          </Collapsible>
+        ) : (
+          <SidebarGroup>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {moreToolsItems.map((item) => (
+                  <SidebarMenuItem key={item.url}>
+                    <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                      <NavLink to={item.url}>
+                        <item.icon className="h-4 w-4" />
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
+
+        {/* Beta */}
         <SidebarGroup>
           <SidebarGroupLabel>{t("sidebar.betaPreview")}</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -124,6 +185,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
+        {/* Administration */}
         <SidebarGroup>
           <SidebarGroupLabel>{t("sidebar.administration")}</SidebarGroupLabel>
           <SidebarGroupContent>

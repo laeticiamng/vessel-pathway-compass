@@ -61,6 +61,7 @@ export const en = {
     compliance: "Compliance",
     team: "Team",
     settings: "Settings",
+    moreTools: "More Tools",
   },
 
   // Command palette
@@ -176,6 +177,24 @@ export const en = {
         { q: "Is my data secure?", a: "Yes. All data is encrypted at rest and in transit. The platform is designed with GDPR, HIPAA, and Swiss nFADP compliance in mind, with full audit trails and role-based access control." },
         { q: "Can I use it with my team?", a: "Absolutely. The Institution plan supports multi-user teams with shared patient registries, team analytics, and role-based permissions." },
       ],
+    },
+    about: {
+      title: "Who We Are",
+      description: "Vascular Atlas is built by a team of vascular physicians, clinical researchers and software engineers who believe that modern vascular medicine deserves a dedicated, purpose-built digital platform. Our mission: make clinical workflows faster, safer and more collaborative — without compromising on data privacy.",
+      highlights: {
+        clinical: {
+          title: "Built by Clinicians",
+          desc: "Every feature is designed with real clinical workflows in mind, validated by practicing vascular specialists.",
+        },
+        privacy: {
+          title: "Privacy First",
+          desc: "Pseudonymized data, full audit trails, and compliance with GDPR, HIPAA and Swiss nFADP from day one.",
+        },
+        community: {
+          title: "Growing Community",
+          desc: "Join a network of vascular professionals sharing knowledge, benchmarks and best practices across institutions.",
+        },
+      },
     },
     cta: {
       title: "Ready to Streamline Your Vascular Practice?",
@@ -1321,6 +1340,7 @@ export const en = {
       messagePlaceholder: "Describe your question or issue...",
       send: "Send Message",
       sent: "Message sent! We'll respond within 24 hours.",
+      error: "Could not send message. Please try again or email us directly.",
     },
   },
 

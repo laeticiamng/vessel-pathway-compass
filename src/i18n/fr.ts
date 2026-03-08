@@ -59,6 +59,7 @@ export const fr = {
     compliance: "Conformité",
     team: "Équipe",
     settings: "Paramètres",
+    moreTools: "Plus d'outils",
   },
 
   command: {
@@ -169,6 +170,24 @@ export const fr = {
         { q: "Mes données sont-elles sécurisées ?", a: "Oui. Toutes les données sont chiffrées, pseudonymisées et stockées avec des journaux d'audit complets. La plateforme est conçue en conformité RGPD, HIPAA et nLPD suisse." },
         { q: "Mon équipe peut-elle l'utiliser ?", a: "Absolument. Le plan Institution prend en charge les équipes avec registres partagés, analyses et permissions par rôle." },
       ],
+    },
+    about: {
+      title: "Qui sommes-nous",
+      description: "Vascular Atlas est conçu par une équipe de médecins vasculaires, chercheurs cliniques et ingénieurs logiciels convaincus que la médecine vasculaire mérite une plateforme numérique dédiée. Notre mission : rendre les workflows cliniques plus rapides, plus sûrs et plus collaboratifs — sans compromis sur la confidentialité des données.",
+      highlights: {
+        clinical: {
+          title: "Conçu par des cliniciens",
+          desc: "Chaque fonctionnalité est pensée pour les workflows cliniques réels, validée par des spécialistes vasculaires en exercice.",
+        },
+        privacy: {
+          title: "Confidentialité d'abord",
+          desc: "Données pseudonymisées, traçabilité complète et conformité RGPD, HIPAA et nLPD suisse dès le premier jour.",
+        },
+        community: {
+          title: "Communauté en croissance",
+          desc: "Rejoignez un réseau de professionnels vasculaires partageant connaissances, benchmarks et bonnes pratiques entre institutions.",
+        },
+      },
     },
     cta: {
       title: "Prêt à simplifier votre pratique vasculaire ?",
@@ -1291,6 +1310,7 @@ export const fr = {
       messagePlaceholder: "Décrivez votre question ou problème...",
       send: "Envoyer le message",
       sent: "Message envoyé ! Nous vous répondrons sous 24h.",
+      error: "Impossible d'envoyer le message. Veuillez réessayer ou nous écrire directement par email.",
     },
   },
 

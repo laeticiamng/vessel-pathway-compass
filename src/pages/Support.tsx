@@ -16,6 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 export default function Support() {
   const { t, language, setLanguage } = useTranslation();
@@ -29,13 +30,21 @@ export default function Support() {
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSending(true);
-    // Simulate send — in production, connect to an edge function or email API
-    await new Promise((r) => setTimeout(r, 1200));
-    toast.success(t("support.contact.sent") as string);
-    setContactName("");
-    setContactEmail("");
-    setContactMessage("");
-    setSending(false);
+    try {
+      const { data, error } = await supabase.functions.invoke("contact-form", {
+        body: { name: contactName.trim(), email: contactEmail.trim(), message: contactMessage.trim() },
+      });
+      if (error) throw error;
+      toast.success(t("support.contact.sent") as string);
+      setContactName("");
+      setContactEmail("");
+      setContactMessage("");
+    } catch (err) {
+      console.error("Contact form error:", err);
+      toast.error(t("support.contact.error") as string);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
