@@ -312,6 +312,7 @@ export const en = {
       outcomes: "Outcomes",
       registryEntries: "Registry entries",
       completed: "Completed",
+      generated: "Generated",
       cmeCredits: "CME Credits",
       simulations: "Simulations",
     },

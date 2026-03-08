@@ -300,6 +300,7 @@ export const fr = {
       outcomes: "Résultats",
       registryEntries: "Entrées du registre",
       completed: "Terminées",
+      generated: "Générés",
       cmeCredits: "Crédits FMC",
       simulations: "Simulations",
     },
