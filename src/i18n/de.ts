@@ -1310,6 +1310,7 @@ export const de = {
       messagePlaceholder: "Beschreiben Sie Ihre Frage oder Ihr Anliegen...",
       send: "Nachricht senden",
       sent: "Nachricht gesendet! Wir antworten innerhalb von 24 Stunden.",
+      error: "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.",
     },
   },
 

@@ -1310,6 +1310,7 @@ export const fr = {
       messagePlaceholder: "Décrivez votre question ou problème...",
       send: "Envoyer le message",
       sent: "Message envoyé ! Nous vous répondrons sous 24h.",
+      error: "Impossible d'envoyer le message. Veuillez réessayer ou nous écrire directement par email.",
     },
   },
 
