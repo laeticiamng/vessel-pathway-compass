@@ -191,7 +191,7 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm max-w-[90vw]">
               <Sparkles className="h-3.5 w-3.5 text-primary-foreground/80" />
               <span className="text-sm font-medium text-primary-foreground/80">
                 {t("landing.hero.badge")}
