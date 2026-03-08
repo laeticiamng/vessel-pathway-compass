@@ -125,7 +125,7 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
               <SelectTrigger><SelectValue placeholder={t("patients.form.selectPlaceholder")} /></SelectTrigger>
               <SelectContent>
                 {CATEGORIES.map((c) => (
-                  <SelectItem key={c} value={c.toLowerCase()}>{c}</SelectItem>
+                  <SelectItem key={c} value={c.toLowerCase()}>{t(`medicalCategories.${c.toLowerCase()}`) as string || c}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

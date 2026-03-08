@@ -49,7 +49,7 @@ export function PatientFilters({
         <SelectContent>
           <SelectItem value="all">{t("patients.filters.allCategories")}</SelectItem>
           {CATEGORIES.map((c) => (
-            <SelectItem key={c} value={c.toLowerCase()}>{c}</SelectItem>
+            <SelectItem key={c} value={c.toLowerCase()}>{t(`medicalCategories.${c.toLowerCase()}`) as string || c}</SelectItem>
           ))}
         </SelectContent>
       </Select>
