@@ -67,7 +67,7 @@ export default function Dashboard() {
 
   const statCards = [
     { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, icon: HeartPulse, trend: `${stats?.totalCases ?? 0} total`, color: "bg-primary/10 text-primary" },
-    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.aiReports"), color: "bg-info/10 text-info" },
+    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.generated"), color: "bg-info/10 text-info" },
     { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, icon: LineChart, trend: t("dashboard.stats.registryEntries"), color: "bg-success/10 text-success" },
     { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: FlaskConical, trend: t("dashboard.stats.completed"), color: "bg-warning/10 text-warning" },
   ];
