@@ -142,7 +142,7 @@ export const fr = {
     socialProof: { title: "Conçu pour les spécialistes vasculaires — par des spécialistes vasculaires" },
     testimonials: {
       title: "Ce qu'en disent les premiers utilisateurs",
-      disclaimer: "Retours anonymisés de notre bêta fermée. Noms non divulgués par accord des participants.",
+      disclaimer: "Retours issus de notre programme bêta. Identités confidentielles à la demande des participants.",
       items: [
         { quote: "Les rapports IA structurés me font gagner au moins 30 minutes par cas. C'est devenu partie intégrante de mon workflow.", author: "Chirurgien vasculaire", role: "Hôpital universitaire, UE" },
         { quote: "Le jumeau numérique change la donne pour expliquer l'anatomie complexe aux internes pendant les visites.", author: "Angiologue", role: "Centre vasculaire privé, CH" },
