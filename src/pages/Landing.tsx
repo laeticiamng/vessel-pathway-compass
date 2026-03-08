@@ -405,7 +405,7 @@ export default function Landing() {
               <div className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
                 <Link to="/auth?mode=signup" className="hover:text-foreground transition-colors">{t("common.getStarted")}</Link>
-                <Link to="/support" className="hover:text-foreground transition-colors">{t("support.title")}</Link>
+                <Link to="/support" className="hover:text-foreground transition-colors">{t("landing.footer.contact")}</Link>
               </div>
             </div>
             <div>
