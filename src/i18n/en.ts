@@ -120,7 +120,7 @@ export const en = {
       },
       education: {
         title: "Certification & CME",
-        desc: "Five competency tracks with micro-lessons, supervised logbooks, OSCE checklists, and digital badges.",
+        desc: "Progress through competency tracks with lessons, quizzes, supervised logbooks and digital badges.",
       },
       simulation: {
         title: "Clinical Simulation Lab",
