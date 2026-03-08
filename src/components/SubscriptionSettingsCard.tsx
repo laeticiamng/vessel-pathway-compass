@@ -19,7 +19,7 @@ export function SubscriptionSettingsCard() {
     try {
       await openPortal();
     } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: t("auth.error"), description: err.message, variant: "destructive" });
     } finally {
       setPortalLoading(false);
     }
