@@ -340,7 +340,7 @@ export const en = {
       simulations: "Simulations",
     },
     moduleDesc: {
-      ai: "Generate AI-powered clinical reports with structured SOAP notes and differential diagnoses.",
+      ai: "Generate AI-powered clinical reports with structured notes and differential diagnoses.",
       twin: "View longitudinal patient timelines, vascular maps, and run scenario simulations.",
       registry: "Contribute to and analyze vascular outcomes data with privacy-preserving benchmarking.",
       education: "Complete competency tracks, earn CME credits, and collect digital badges.",
