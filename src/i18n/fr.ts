@@ -467,7 +467,7 @@ export const fr = {
   },
 
   digitalTwin: {
-    title: "Jumeau numérique vasculaire",
+    title: "Cartographie vasculaire patient",
     subtitle: "Cartographie vasculaire interactive avec mesures réelles du patient",
     selectPatient: "Sélectionner un patient...",
     selectPatientPrompt: "Sélectionnez un patient pour visualiser son anatomie vasculaire avec ses mesures réelles",

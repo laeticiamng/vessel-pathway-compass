@@ -467,7 +467,7 @@ export const de = {
   },
 
   digitalTwin: {
-    title: "Vaskulärer digitaler Zwilling",
+    title: "Vaskuläre Patientenkarte",
     subtitle: "Interaktive Gefäßkartierung mit echten Patientenmessungen",
     selectPatient: "Patient auswählen...",
     selectPatientPrompt: "Wählen Sie einen Patienten, um seine Gefäßanatomie mit echten Messdaten zu visualisieren",
