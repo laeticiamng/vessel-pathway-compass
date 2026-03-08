@@ -848,6 +848,7 @@ export const en = {
       currentPlan: "Current plan",
       free: "Free",
       viewPlans: "View Plans",
+      renewsOn: "Renews on",
     },
   },
 
