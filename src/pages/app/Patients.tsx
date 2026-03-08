@@ -13,6 +13,7 @@ import { NewCaseDialog } from "@/components/patient/NewCaseDialog";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import PatientTrash from "@/components/patient/PatientTrash";
 import { UsageLimitBanner } from "@/components/UsageLimitBanner";
+import { SEOHead } from "@/components/SEOHead";
 
 const FREE_PATIENT_LIMIT = 5;
 
