@@ -1275,7 +1275,7 @@ export const de = {
         { q: "Ist Vascular Atlas ein Medizinprodukt?", a: "Nein. Es ist ein Entscheidungsunterstützungstool. Alle KI-Ausgaben erfordern eine ärztliche Überprüfung." },
         { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
         { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
-        { q: "Was passiert während der kostenlosen Testphase?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar." },
+        { q: "Was passiert während der kostenlosen Beta?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar. Wir informieren Sie bevor eine Abrechnung beginnt." },
         { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie support@vascularatlas.com. Löschung innerhalb von 30 Tagen." },
       ],
     },

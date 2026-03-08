@@ -1275,7 +1275,7 @@ export const fr = {
         { q: "Vascular Atlas est-il un dispositif médical ?", a: "Non. C'est un outil d'aide à la décision clinique. Toutes les sorties IA nécessitent la revue d'un clinicien qualifié." },
         { q: "Comment les données patients sont-elles protégées ?", a: "Toutes les données sont pseudonymisées. Nous utilisons la sécurité au niveau des lignes, le chiffrement et des journaux d'audit complets." },
         { q: "Puis-je exporter mes données ?", a: "Oui. Vous pouvez exporter les données patients, mesures et rapports en CSV et PDF." },
-        { q: "Que se passe-t-il pendant l'essai gratuit ?", a: "Pendant la période bêta, toutes les fonctionnalités sont disponibles gratuitement. Nous vous informerons avant toute facturation." },
+        { q: "Que se passe-t-il pendant la bêta gratuite ?", a: "Pendant la période bêta, toutes les fonctionnalités sont disponibles gratuitement. Nous vous informerons avant toute facturation." },
         { q: "Comment supprimer mon compte ?", a: "Contactez support@vascularatlas.com. Vos données seront supprimées sous 30 jours." },
       ],
     },
