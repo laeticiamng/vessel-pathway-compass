@@ -58,6 +58,7 @@ export default function Landing() {
     icon: moduleIcons[i],
     title: t(`landing.modules.${key}.title`),
     description: t(`landing.modules.${key}.desc`),
+    path: modulePaths[i],
   }));
 
   const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
