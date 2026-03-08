@@ -15,6 +15,7 @@ import PatientTimeline from "@/components/patient/PatientTimeline";
 import PatientMeasurements from "@/components/patient/PatientMeasurements";
 import PatientCases from "@/components/patient/PatientCases";
 import RiskFactorsEditor from "@/components/patient/RiskFactorsEditor";
+import FHIRBadge from "@/components/patient/FHIRBadge";
 import {
   EditPatientDialog,
   AddEventDialog,
