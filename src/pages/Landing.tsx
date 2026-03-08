@@ -42,6 +42,7 @@ const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "networ
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
 
   const modules = moduleKeys.map((key, i) => ({
