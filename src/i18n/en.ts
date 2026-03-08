@@ -61,6 +61,7 @@ export const en = {
     compliance: "Compliance",
     team: "Team",
     settings: "Settings",
+    moreTools: "More Tools",
   },
 
   // Command palette
