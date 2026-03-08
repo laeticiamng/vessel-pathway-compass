@@ -20,7 +20,7 @@ export const fr = {
     viewAll: "Tout voir",
     comingSoon: "Bientôt disponible",
     betaPreview: "Aperçu Beta",
-    notAMedicalDevice: "Non un dispositif médical",
+    notAMedicalDevice: "Ce n'est pas un dispositif médical",
     version: "v1.0 Beta · Prêt pour la conformité",
     signIn: "Se connecter",
     signUp: "S'inscrire",
@@ -104,7 +104,7 @@ export const fr = {
       subtitle: "Six modules intégrés conçus pour votre workflow clinique quotidien.",
       ai: {
         title: "Assistant clinique IA",
-        desc: "Générez des notes SOAP structurées, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
+        desc: "Générez des comptes-rendus cliniques structurés, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
       },
       twin: {
         title: "Jumeau numérique vasculaire",
@@ -142,7 +142,7 @@ export const fr = {
     socialProof: { title: "Conçu pour les spécialistes vasculaires — par des spécialistes vasculaires" },
     testimonials: {
       title: "Ce qu'en disent les premiers utilisateurs",
-      disclaimer: "Retours anonymisés de notre bêta fermée. Noms non divulgués par accord des participants.",
+      disclaimer: "Retours issus de notre programme bêta. Identités confidentielles à la demande des participants.",
       items: [
         { quote: "Les rapports IA structurés me font gagner au moins 30 minutes par cas. C'est devenu partie intégrante de mon workflow.", author: "Chirurgien vasculaire", role: "Hôpital universitaire, UE" },
         { quote: "Le jumeau numérique change la donne pour expliquer l'anatomie complexe aux internes pendant les visites.", author: "Angiologue", role: "Centre vasculaire privé, CH" },
@@ -168,10 +168,12 @@ export const fr = {
     },
     footer: {
       tagline: "La plateforme clinique conçue pour les professionnels de la médecine vasculaire.",
-      notMedicalDevice: "Aide à la décision clinique — pas un dispositif médical.",
+      notMedicalDevice: "Aide à la décision clinique — ce n'est pas un dispositif médical.",
       product: "Produit",
       legal: "Juridique",
+      contact: "Contact & Support",
       rights: "Tous droits réservés.",
+      skipToContent: "Aller au contenu",
     },
   },
 

@@ -104,7 +104,7 @@ export const de = {
       subtitle: "Sechs integrierte Module für Ihren klinischen Alltag.",
       ai: {
         title: "Klinischer KI-Assistent",
-        desc: "Erstellen Sie strukturierte SOAP-Notizen, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
+        desc: "Erstellen Sie strukturierte klinische Berichte, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
       },
       twin: {
         title: "Vaskulärer digitaler Zwilling",
@@ -142,7 +142,7 @@ export const de = {
     socialProof: { title: "Entwickelt für Gefäßspezialisten — von Gefäßspezialisten" },
     testimonials: {
       title: "Was frühe Nutzer sagen",
-      disclaimer: "Anonymisiertes Feedback aus unserer geschlossenen Beta. Namen gemäß Teilnehmervereinbarung nicht offengelegt.",
+      disclaimer: "Feedback aus unserem Beta-Programm. Identitäten auf Wunsch der Teilnehmer vertraulich.",
       items: [
         { quote: "Die strukturierten KI-Berichte sparen mir mindestens 30 Minuten pro Fall. Sie sind Teil meines täglichen Workflows geworden.", author: "Gefäßchirurg", role: "Universitätsklinik, EU" },
         { quote: "Der digitale Zwilling ist ein Gamechanger, um komplexe Anatomie bei der Visite mit Assistenzärzten zu erklären.", author: "Angiologe", role: "Privates Gefäßzentrum, CH" },
@@ -171,7 +171,9 @@ export const de = {
       notMedicalDevice: "Klinische Entscheidungsunterstützung — kein Medizinprodukt.",
       product: "Produkt",
       legal: "Rechtliches",
+      contact: "Kontakt & Support",
       rights: "Alle Rechte vorbehalten.",
+      skipToContent: "Zum Inhalt springen",
     },
   },
 

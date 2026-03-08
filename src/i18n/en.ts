@@ -109,7 +109,7 @@ export const en = {
       subtitle: "Six integrated modules designed for your daily clinical workflow.",
       ai: {
         title: "AI Clinical Assistant",
-        desc: "Generate structured SOAP notes, differential diagnoses and care pathways — always reviewed and confirmed by you.",
+        desc: "Generate structured clinical reports, differential diagnoses and care pathways — always reviewed and confirmed by you.",
       },
       twin: {
         title: "Vascular Digital Twin",
@@ -149,7 +149,7 @@ export const en = {
     },
     testimonials: {
       title: "What Early Users Say",
-      disclaimer: "Anonymized feedback from our closed beta. Names withheld per participant agreement.",
+      disclaimer: "Feedback from our beta program. Identities kept confidential at participants' request.",
       items: [
         { quote: "The structured AI reports save me at least 30 minutes per case. It's become part of my daily workflow.", author: "Vascular Surgeon", role: "University Hospital, EU" },
         { quote: "The digital twin is a game-changer for explaining complex anatomy to trainees during rounds.", author: "Angiologist", role: "Private Vascular Center, CH" },
@@ -178,7 +178,9 @@ export const en = {
       notMedicalDevice: "Clinical decision support — not a medical device.",
       product: "Product",
       legal: "Legal",
+      contact: "Contact & Support",
       rights: "All rights reserved.",
+      skipToContent: "Skip to content",
     },
   },
 

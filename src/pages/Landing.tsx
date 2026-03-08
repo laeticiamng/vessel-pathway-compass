@@ -95,7 +95,7 @@ export default function Landing() {
     <div className="min-h-screen bg-background">
       {/* Skip to content – accessibility */}
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg">
-        Skip to content
+        {t("landing.footer.skipToContent")}
       </a>
       <SEOHead
         title={t("seo.landing.title") as string}
@@ -405,7 +405,7 @@ export default function Landing() {
               <div className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
                 <Link to="/auth?mode=signup" className="hover:text-foreground transition-colors">{t("common.getStarted")}</Link>
-                <Link to="/support" className="hover:text-foreground transition-colors">{t("support.title")}</Link>
+                <Link to="/support" className="hover:text-foreground transition-colors">{t("landing.footer.contact")}</Link>
               </div>
             </div>
             <div>
