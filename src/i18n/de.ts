@@ -59,6 +59,7 @@ export const de = {
     compliance: "Compliance",
     team: "Team",
     settings: "Einstellungen",
+    moreTools: "Weitere Tools",
   },
 
   command: {
