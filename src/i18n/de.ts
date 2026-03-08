@@ -366,6 +366,7 @@ export const de = {
       copied: "Kopiert",
       copiedDesc: "Bericht als Klartext kopiert (KIS-Format)",
       exportPDF: "PDF exportieren",
+      exportPDFSoon: "PDF-Export kommt bald. Nutzen Sie in der Zwischenzeit „In KIS kopieren".",
       confirmSign: "Bestätigen & Unterschreiben",
       signedOff: "Unterschrieben",
       signedOffDesc: "Bericht vom Arzt bestätigt und unterschrieben.",
