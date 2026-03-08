@@ -49,8 +49,49 @@ serve(async (req) => {
     // ── Rate limit ───────────────────────────────────────────────────
     if (isRateLimited(userId)) {
       return new Response(JSON.stringify({ error: "Too many requests. Please wait before trying again." }), {
-        status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        status: 429, headers: { ...corsHeaders, "Content-Type": "application/json", "Retry-After": "60" },
       });
+    }
+
+    // ── P1: Server-side entitlement check ────────────────────────────
+    const svcClient = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      { auth: { persistSession: false } }
+    );
+
+    const { data: subData } = await svcClient
+      .from("subscriptions")
+      .select("status, current_period_end")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    // Allow free tier with daily limit (checked client-side already),
+    // but for premium AI features, verify active subscription
+    const hasActiveSubscription = subData?.status === "active"
+      && subData?.current_period_end
+      && new Date(subData.current_period_end) > new Date();
+
+    // Count today's AI outputs for free-tier limiting (server-side enforcement)
+    if (!hasActiveSubscription) {
+      const todayStart = new Date();
+      todayStart.setHours(0, 0, 0, 0);
+
+      const { count } = await svcClient
+        .from("ai_outputs")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", userId)
+        .gte("created_at", todayStart.toISOString());
+
+      const FREE_DAILY_LIMIT = 3;
+      if ((count ?? 0) >= FREE_DAILY_LIMIT) {
+        return new Response(JSON.stringify({
+          error: "Daily free AI limit reached. Upgrade to Professional for unlimited access.",
+          code: "FREE_LIMIT_REACHED",
+        }), {
+          status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
     }
 
     const { clinicalData } = await req.json();
@@ -120,16 +161,11 @@ Generate the structured clinical report.`;
     }
 
     // ── Audit log (fire & forget) ────────────────────────────────────
-    const svcClient = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-      { auth: { persistSession: false } }
-    );
     svcClient.from("audit_logs").insert({
       user_id: userId,
       action: "ai_query",
       entity_type: "ai_output",
-      details: { model: "google/gemini-3-flash-preview", timestamp: new Date().toISOString() },
+      details: { model: "google/gemini-3-flash-preview", premium: hasActiveSubscription, timestamp: new Date().toISOString() },
     }).then(() => {});
 
     return new Response(response.body, {
