@@ -104,8 +104,8 @@ export const en = {
       secondary: "See Plans & Pricing",
     },
     modules: {
-      title: "Six Core Modules",
-      subtitle: "A unified platform built for vascular medicine excellence.",
+      title: "Everything You Need in One Platform",
+      subtitle: "Six integrated modules designed for your daily clinical workflow.",
       ai: {
         title: "AI Clinical Assistant",
         desc: "Structured SOAP notes, differentials, care pathways — generated with full transparency and clinician confirmation.",
