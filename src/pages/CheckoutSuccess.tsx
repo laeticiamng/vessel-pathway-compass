@@ -67,7 +67,7 @@ export default function CheckoutSuccess() {
   if (verifyState === "failed") {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-6">
-        <SEOHead title={t("checkout.success.verifyFailed") as string || "Verification Issue — Vascular Atlas"} description={t("checkout.success.verifyFailedDesc") as string} path="/checkout/success" />
+        <SEOHead title={t("checkout.success.verifyFailed") as string || "Verification Issue — Vascular Atlas"} description={t("checkout.success.verifyFailedDesc") as string} path="/checkout/success" noindex />
         <Card className="max-w-md w-full text-center">
           <CardContent className="pt-10 pb-8 space-y-6">
             <div className="mx-auto w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
