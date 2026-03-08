@@ -104,6 +104,15 @@ export const en = {
       secondary: "See Plans & Pricing",
       socialProof: "Used by vascular specialists across 12+ countries",
     },
+    howItWorks: {
+      title: "How It Works",
+      subtitle: "Get started in minutes — no installation, no complex setup.",
+      steps: [
+        { title: "Create Your Free Account", desc: "Sign up in 30 seconds with your email or Google account. No credit card needed." },
+        { title: "Set Up Your First Patient", desc: "Add a pseudonymized patient case and start documenting with AI-assisted reports." },
+        { title: "Explore All Modules", desc: "Access simulations, education tracks, outcomes registry and expert consultations — all in one place." },
+      ],
+    },
     modules: {
       title: "Everything You Need in One Platform",
       subtitle: "Six integrated modules designed for your daily clinical workflow.",
