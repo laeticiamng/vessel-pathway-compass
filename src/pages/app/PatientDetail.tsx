@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEOHead } from "@/components/SEOHead";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
 import { Button } from "@/components/ui/button";

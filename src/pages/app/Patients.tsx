@@ -34,6 +34,10 @@ export default function Patients() {
   const [search, setSearch] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
+
+  return (
+    <>
+      <SEOHead title="Patients" description="Patient management" path="/app/patients" noindex />
   const [filterRisk, setFilterRisk] = useState("all");
   const [dialogOpen, setDialogOpen] = useState(false);
   const [trashOpen, setTrashOpen] = useState(false);
