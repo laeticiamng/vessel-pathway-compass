@@ -89,6 +89,9 @@ const App = () => (
             <Route path="research" element={<ContentGate><Research /></ContentGate>} />
             <Route path="compliance" element={<ContentGate><Compliance /></ContentGate>} />
             <Route path="analytics" element={<ContentGate><Analytics /></ContentGate>} />
+            <Route path="outcomes" element={<ContentGate><PatientOutcomes /></ContentGate>} />
+            <Route path="performance" element={<ContentGate><ClinicalPerformance /></ContentGate>} />
+            <Route path="risk-calculator" element={<ContentGate><RiskCalculator /></ContentGate>} />
             <Route path="team" element={<ContentGate><Team /></ContentGate>} />
             <Route path="beta" element={<ContentGate><InnovationLab /></ContentGate>} />
           </Route>

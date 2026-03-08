@@ -77,13 +77,16 @@ export default function PatientDetail() {
     <>
       <SEOHead title={t("seo.patients.title") as string} description={t("seo.patients.description") as string} path={`/app/patients/${id}`} noindex />
       <div className="space-y-6 max-w-5xl">
-      <PatientHeader
-        patient={patient}
-        latestCase={cases?.[0]}
-        casesCount={cases?.length ?? 0}
-        onEdit={() => setEditOpen(true)}
-        onDelete={() => setDeleteOpen(true)}
-      />
+      <div className="flex items-center justify-between">
+        <PatientHeader
+          patient={patient}
+          latestCase={cases?.[0]}
+          casesCount={cases?.length ?? 0}
+          onEdit={() => setEditOpen(true)}
+          onDelete={() => setDeleteOpen(true)}
+        />
+        <FHIRBadge hasCase={(cases?.length ?? 0) > 0} hasMeasurements={(measurements?.length ?? 0) > 0} />
+      </div>
 
       {/* Summary Cards */}
       <div className="grid sm:grid-cols-3 gap-4">
