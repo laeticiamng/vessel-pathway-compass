@@ -40,6 +40,7 @@ const staggerContainer = {
 
 const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
 const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
+const modulePaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network"];
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
