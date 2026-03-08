@@ -134,7 +134,7 @@ export function AddEventDialog({ open, onOpenChange, mutation }: AddEventDialogP
           </div>
           <div className="space-y-2">
             <Label>{t("patientDetail.eventDialog.description")}</Label>
-            <Input placeholder={t("patientDetail.eventDialog.descPlaceholder")} value={desc} onChange={(e) => setDesc(e.target.value)} />
+            <Input placeholder={t("patientDetail.eventDialog.descPlaceholder")} value={desc} onChange={(e) => setDesc(e.target.value)} maxLength={1000} />
           </div>
         </div>
         <DialogFooter>
