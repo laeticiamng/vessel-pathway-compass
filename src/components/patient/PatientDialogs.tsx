@@ -55,7 +55,7 @@ export function EditPatientDialog({ open, onOpenChange, patient, mutation }: Edi
         <div className="space-y-4 py-2">
           <div className="space-y-2">
             <Label>{t("patientDetail.editDialog.pseudonym")}</Label>
-            <Input value={pseudonym} onChange={(e) => setPseudonym(e.target.value)} />
+            <Input value={pseudonym} onChange={(e) => setPseudonym(e.target.value)} maxLength={100} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
