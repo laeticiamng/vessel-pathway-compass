@@ -102,6 +102,7 @@ export const en = {
       subtitle: "Manage patient cases, generate AI clinical reports, track outcomes, earn certifications and collaborate with experts — all in one secure tool.",
       cta: "Try Free — No Credit Card",
       secondary: "See Plans & Pricing",
+      socialProof: "Used by vascular specialists across 12+ countries",
     },
     modules: {
       title: "Everything You Need in One Platform",
