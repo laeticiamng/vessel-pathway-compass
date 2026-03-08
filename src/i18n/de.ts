@@ -171,7 +171,9 @@ export const de = {
       notMedicalDevice: "Klinische Entscheidungsunterstützung — kein Medizinprodukt.",
       product: "Produkt",
       legal: "Rechtliches",
+      contact: "Kontakt & Support",
       rights: "Alle Rechte vorbehalten.",
+      skipToContent: "Zum Inhalt springen",
     },
   },
 

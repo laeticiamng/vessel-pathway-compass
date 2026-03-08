@@ -168,10 +168,12 @@ export const fr = {
     },
     footer: {
       tagline: "La plateforme clinique conçue pour les professionnels de la médecine vasculaire.",
-      notMedicalDevice: "Aide à la décision clinique — pas un dispositif médical.",
+      notMedicalDevice: "Aide à la décision clinique — ce n'est pas un dispositif médical.",
       product: "Produit",
       legal: "Juridique",
+      contact: "Contact & Support",
       rights: "Tous droits réservés.",
+      skipToContent: "Aller au contenu",
     },
   },
 
