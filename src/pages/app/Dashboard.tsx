@@ -66,10 +66,10 @@ export default function Dashboard() {
   });
 
   const statCards = [
-    { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, icon: HeartPulse, trend: `${stats?.totalCases ?? 0} total` },
-    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.aiReports") },
-    { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, icon: LineChart, trend: t("dashboard.stats.registryEntries") },
-    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: FlaskConical, trend: t("dashboard.stats.completed") },
+    { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, icon: HeartPulse, trend: `${stats?.totalCases ?? 0} total`, color: "bg-primary/10 text-primary" },
+    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.aiReports"), color: "bg-info/10 text-info" },
+    { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, icon: LineChart, trend: t("dashboard.stats.registryEntries"), color: "bg-success/10 text-success" },
+    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: FlaskConical, trend: t("dashboard.stats.completed"), color: "bg-warning/10 text-warning" },
   ];
 
   const quickActions = [
@@ -104,20 +104,21 @@ export default function Dashboard() {
         <p className="text-muted-foreground mt-1">{t("dashboard.welcome")}</p>
       </div>
 
-      {/* Onboarding Checklist for new users */}
       {stats && <OnboardingChecklist stats={stats} />}
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 stagger-in">
         {quickActions.map((action) => (
           <Button
             key={action.label}
             variant="outline"
             asChild
-            className="h-auto py-4 flex flex-col items-center gap-2 hover:border-primary/50"
+            className="h-auto py-4 flex flex-col items-center gap-2 hover:border-primary/40 hover:bg-primary/5 transition-all duration-200"
           >
             <Link to={action.path}>
-              <action.icon className="h-5 w-5 text-primary" />
+              <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                <action.icon className="h-4 w-4 text-primary" />
+              </div>
               <span className="text-sm font-medium">{action.label}</span>
             </Link>
           </Button>
@@ -125,20 +126,22 @@ export default function Dashboard() {
       </div>
 
       {/* Stats */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-in">
         {statCards.map((stat) => (
-          <Card key={stat.label}>
+          <Card key={stat.label} className="card-hover">
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">{stat.label}</CardTitle>
-              <stat.icon className="h-4 w-4 text-muted-foreground" />
+              <div className={`h-8 w-8 rounded-lg ${stat.color} flex items-center justify-center`}>
+                <stat.icon className="h-4 w-4" />
+              </div>
             </CardHeader>
             <CardContent>
               {statsLoading ? (
                 <Skeleton className="h-8 w-16" />
               ) : (
-                <div className="text-3xl font-bold">{stat.value}</div>
+                <div className="text-3xl font-bold tracking-tight">{stat.value}</div>
               )}
-              <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+              <p className="text-xs text-muted-foreground mt-1.5 flex items-center gap-1">
                 <TrendingUp className="h-3 w-3 text-success" />
                 {stat.trend}
               </p>
@@ -154,7 +157,7 @@ export default function Dashboard() {
           <CardDescription>{t("dashboard.recentActivityDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-1">
             {activityLoading &&
               Array.from({ length: 4 }).map((_, i) => (
                 <div key={i} className="flex items-center gap-4 p-3">
@@ -169,7 +172,7 @@ export default function Dashboard() {
               ? recentActivity.map((item) => {
                   const Icon = activityIcon[item.entity_type] ?? FileText;
                   return (
-                    <div key={item.id} className="flex items-center gap-4 p-3 rounded-lg hover:bg-muted/50 transition-colors">
+                    <div key={item.id} className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors duration-150">
                       <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                         <Icon className="h-4 w-4 text-primary" />
                       </div>
@@ -184,8 +187,10 @@ export default function Dashboard() {
                   );
                 })
               : !activityLoading && (
-                  <div className="text-center py-8">
-                    <Activity className="h-8 w-8 mx-auto text-muted-foreground/40 mb-2" />
+                  <div className="text-center py-10">
+                    <div className="h-12 w-12 rounded-2xl bg-muted flex items-center justify-center mx-auto mb-3">
+                      <Activity className="h-5 w-5 text-muted-foreground/50" />
+                    </div>
                     <p className="text-sm text-muted-foreground">{t("dashboard.noActivity")}</p>
                   </div>
                 )}
@@ -193,11 +198,10 @@ export default function Dashboard() {
         </CardContent>
       </Card>
 
-      {/* Patient Risk Distribution */}
       <PatientRiskDistribution />
 
       {/* Module Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-in">
         {[
           { title: t("sidebar.aiAssistant"), desc: t("dashboard.moduleDesc.ai"), icon: Brain, path: "/app/ai-assistant" },
           { title: t("sidebar.digitalTwin"), desc: t("dashboard.moduleDesc.twin"), icon: Activity, path: "/app/digital-twin" },
@@ -207,16 +211,16 @@ export default function Dashboard() {
           { title: t("sidebar.researchHub"), desc: t("dashboard.moduleDesc.research"), icon: FileText, path: "/app/research" },
         ].map((mod) => (
           <Link key={mod.title} to={mod.path}>
-            <Card className="hover:border-primary/30 hover:shadow-md transition-all cursor-pointer h-full">
+            <Card className="card-hover shine-hover cursor-pointer h-full group">
               <CardHeader className="flex flex-row items-center gap-3">
-                <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors duration-200">
                   <mod.icon className="h-5 w-5 text-primary" />
                 </div>
-                <div>
+                <div className="relative z-10 flex-1 min-w-0">
                   <CardTitle className="text-base">{mod.title}</CardTitle>
                   <CardDescription className="text-xs">{mod.desc}</CardDescription>
                 </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground ml-auto" />
+                <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 transition-all duration-200 shrink-0" />
               </CardHeader>
             </Card>
           </Link>

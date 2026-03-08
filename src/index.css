@@ -31,7 +31,7 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 90%;
+    --border: 220 15% 91%;
     --input: 220 15% 90%;
     --ring: 220 70% 50%;
 
@@ -57,10 +57,13 @@
     --gradient-accent: linear-gradient(135deg, hsl(165 60% 40%), hsl(180 60% 45%));
     --gradient-hero: linear-gradient(160deg, hsl(220 25% 10%) 0%, hsl(220 40% 18%) 50%, hsl(220 70% 25%) 100%);
 
-    --shadow-sm: 0 1px 2px 0 hsl(220 25% 10% / 0.05);
+    --shadow-xs: 0 1px 2px 0 hsl(220 25% 10% / 0.04);
+    --shadow-sm: 0 1px 3px 0 hsl(220 25% 10% / 0.06), 0 1px 2px -1px hsl(220 25% 10% / 0.04);
     --shadow-md: 0 4px 6px -1px hsl(220 25% 10% / 0.07), 0 2px 4px -2px hsl(220 25% 10% / 0.05);
     --shadow-lg: 0 10px 25px -5px hsl(220 25% 10% / 0.08), 0 8px 10px -6px hsl(220 25% 10% / 0.04);
+    --shadow-xl: 0 20px 40px -8px hsl(220 25% 10% / 0.12), 0 8px 16px -8px hsl(220 25% 10% / 0.06);
     --shadow-glow: 0 0 30px hsl(220 70% 50% / 0.15);
+    --shadow-card-hover: 0 8px 30px -6px hsl(220 25% 10% / 0.1), 0 4px 10px -4px hsl(220 25% 10% / 0.06);
   }
 
   .dark {
@@ -113,10 +116,13 @@
     --gradient-accent: linear-gradient(135deg, hsl(165 55% 45%), hsl(180 55% 50%));
     --gradient-hero: linear-gradient(160deg, hsl(222 25% 4%) 0%, hsl(222 30% 8%) 50%, hsl(220 40% 15%) 100%);
 
-    --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.2);
+    --shadow-xs: 0 1px 2px 0 hsl(0 0% 0% / 0.15);
+    --shadow-sm: 0 1px 3px 0 hsl(0 0% 0% / 0.2), 0 1px 2px -1px hsl(0 0% 0% / 0.15);
     --shadow-md: 0 4px 6px -1px hsl(0 0% 0% / 0.3), 0 2px 4px -2px hsl(0 0% 0% / 0.2);
     --shadow-lg: 0 10px 25px -5px hsl(0 0% 0% / 0.35), 0 8px 10px -6px hsl(0 0% 0% / 0.2);
+    --shadow-xl: 0 20px 40px -8px hsl(0 0% 0% / 0.4), 0 8px 16px -8px hsl(0 0% 0% / 0.25);
     --shadow-glow: 0 0 30px hsl(220 70% 55% / 0.2);
+    --shadow-card-hover: 0 8px 30px -6px hsl(0 0% 0% / 0.35), 0 4px 10px -4px hsl(0 0% 0% / 0.2);
   }
 }
 
@@ -128,10 +134,14 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply tracking-tight;
+    text-wrap: balance;
   }
 
   code, pre {
@@ -144,9 +154,55 @@
     @apply bg-card/80 backdrop-blur-xl border border-border/50;
   }
 
+  .glass-strong {
+    @apply bg-card/90 backdrop-blur-2xl border border-border/60 shadow-sm;
+  }
+
   .gradient-text {
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-primary);
+  }
+
+  /* 21st.dev-inspired card hover effect */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: hsl(var(--primary) / 0.2);
+  }
+
+  /* Subtle shine effect on hover */
+  .shine-hover {
+    position: relative;
+    overflow: hidden;
+  }
+  .shine-hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      hsl(var(--primary) / 0.03) 45%,
+      hsl(var(--primary) / 0.06) 50%,
+      hsl(var(--primary) / 0.03) 55%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .shine-hover:hover::before {
+    transform: translateX(100%);
+  }
+
+  /* Dot grid background pattern */
+  .dot-pattern {
+    background-image: radial-gradient(circle, hsl(var(--border)) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
 
   .animate-float {
@@ -165,5 +221,21 @@
   @keyframes pulse-soft {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.7; }
+  }
+
+  /* Stagger animation for lists */
+  .stagger-in > * {
+    animation: stagger-fade-in 0.4s ease-out both;
+  }
+  .stagger-in > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-in > *:nth-child(2) { animation-delay: 60ms; }
+  .stagger-in > *:nth-child(3) { animation-delay: 120ms; }
+  .stagger-in > *:nth-child(4) { animation-delay: 180ms; }
+  .stagger-in > *:nth-child(5) { animation-delay: 240ms; }
+  .stagger-in > *:nth-child(6) { animation-delay: 300ms; }
+
+  @keyframes stagger-fade-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 }

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
-import { Lock } from "lucide-react";
+import { Lock, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface ContentGateProps {
@@ -17,22 +17,27 @@ export function ContentGate({ children }: ContentGateProps) {
 
   return (
     <div>
-      <div className="mb-2 px-4 py-2 rounded-lg bg-muted/60 border border-border text-center">
-        <p className="text-sm text-muted-foreground font-medium">{t("contentGate.previewBanner")}</p>
+      <div className="mb-3 px-4 py-2.5 rounded-xl bg-primary/5 border border-primary/15 text-center">
+        <p className="text-sm text-primary font-medium">{t("contentGate.previewBanner")}</p>
       </div>
-      <div className="relative max-h-[35vh] overflow-hidden" aria-hidden="true">
+      <div className="relative max-h-[38vh] overflow-hidden rounded-xl" aria-hidden="true">
         {children}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 backdrop-blur-[2px]" style={{
+          background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 20%, hsl(var(--background) / 0.6) 50%, transparent 100%)"
+        }} />
       </div>
-      <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-        <div className="rounded-full bg-muted p-4 mb-4">
-          <Lock className="h-8 w-8 text-muted-foreground" />
+      <div className="flex flex-col items-center justify-center py-14 px-4 text-center">
+        <div className="rounded-2xl bg-muted/80 p-5 mb-5 border border-border/50">
+          <Lock className="h-7 w-7 text-muted-foreground" />
         </div>
         <h2 className="text-xl font-semibold mb-2">{t("contentGate.title")}</h2>
-        <p className="text-muted-foreground mb-6 max-w-md">{t("contentGate.subtitle")}</p>
+        <p className="text-muted-foreground mb-7 max-w-md text-sm leading-relaxed">{t("contentGate.subtitle")}</p>
         <div className="flex gap-3">
-          <Button asChild>
-            <Link to="/auth">{t("contentGate.signIn")}</Link>
+          <Button asChild className="shadow-md shadow-primary/15">
+            <Link to="/auth">
+              {t("contentGate.signIn")}
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
           <Button asChild variant="outline">
             <Link to="/pricing">{t("contentGate.viewPlans")}</Link>

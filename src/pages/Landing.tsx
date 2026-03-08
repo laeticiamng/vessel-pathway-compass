@@ -19,15 +19,21 @@ import {
   HeartPulse,
   CheckCircle2,
   Menu,
+  Sparkles,
 } from "lucide-react";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.1, duration: 0.5, ease: "easeOut" as const },
+    transition: { delay: i * 0.08, duration: 0.5, ease: "easeOut" as const },
   }),
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
@@ -81,10 +87,10 @@ export default function Landing() {
         jsonLd={faqJsonLd}
       />
       <header>
-      <nav className="fixed top-0 w-full z-50 glass" aria-label="Main navigation">
+      <nav className="fixed top-0 w-full z-50 glass-strong" aria-label="Main navigation">
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center">
+            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-md">
               <HeartPulse className="h-5 w-5 text-primary-foreground" />
             </div>
             <span className="text-xl font-bold tracking-tight">Vascular Atlas</span>
@@ -111,11 +117,10 @@ export default function Landing() {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="shadow-md">
               <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
             </Button>
           </div>
-          {/* Mobile menu */}
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="md:hidden">
@@ -157,29 +162,38 @@ export default function Landing() {
       </header>
 
       <main>
+      {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(220_70%_50%_/_0.15),_transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(220_70%_50%_/_0.18),_transparent_60%)]" />
+        {/* Dot grid overlay for depth */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: "radial-gradient(circle, hsl(0 0% 100%) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+        }} />
         <div className="container mx-auto px-6 relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8">
-              <span className="h-2 w-2 rounded-full bg-primary animate-pulse-soft" />
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm">
+              <Sparkles className="h-3.5 w-3.5 text-primary-foreground/80" />
               <span className="text-sm font-medium text-primary-foreground/80">
                 {t("landing.hero.badge")}
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.1] mb-6 max-w-4xl mx-auto">
-              AI-Powered Clinical Platform for Vascular Medicine
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.08] mb-6 max-w-4xl mx-auto">
+              AI-Powered Clinical Platform for{" "}
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, hsl(220 80% 70%), hsl(165 60% 60%))" }}>
+                Vascular Medicine
+              </span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-primary-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed">
               {t("landing.hero.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button asChild size="lg" className="text-base px-8 h-12">
+              <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
                 <Link to="/auth?mode=signup">
                   {t("landing.hero.cta")}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -193,52 +207,80 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Modules */}
       <section className="py-24 bg-background">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-16"
+          >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("landing.modules.title")}</h2>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto">
               {t("landing.modules.subtitle")}
             </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          </motion.div>
+          <motion.div
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+          >
             {modules.map((mod, i) => (
               <motion.div
                 key={i}
                 custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
                 variants={fadeUp}
-                className="group relative rounded-2xl border bg-card p-8 hover:shadow-lg transition-all duration-300"
+                className="group relative rounded-2xl border bg-card p-7 card-hover shine-hover"
               >
-                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                  <mod.icon className="h-6 w-6 text-primary" />
+                <div className="relative z-10">
+                  <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors duration-300">
+                    <mod.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2.5">{mod.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{mod.description}</p>
                 </div>
-                <h3 className="text-xl font-semibold mb-3">{mod.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{mod.description}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-24 bg-muted/50">
+      {/* Trust */}
+      <section className="py-24 bg-muted/40">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-12">
-              <Shield className="h-10 w-10 text-primary mx-auto mb-4" />
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center mb-12"
+            >
+              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                <Shield className="h-6 w-6 text-primary" />
+              </div>
               <h2 className="text-3xl font-bold mb-4">{t("landing.trust.title")}</h2>
               <p className="text-muted-foreground text-lg">
                 {t("landing.trust.subtitle")}
               </p>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
+            </motion.div>
+            <div className="grid sm:grid-cols-2 gap-3">
               {Array.isArray(trustSignals) && trustSignals.map((signal, i) => (
-                <div key={i} className="flex items-start gap-3 p-4 rounded-xl bg-card border">
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06, duration: 0.4 }}
+                  className="flex items-start gap-3 p-4 rounded-xl bg-card border card-hover"
+                >
                   <CheckCircle2 className="h-5 w-5 text-success shrink-0 mt-0.5" />
                   <span className="text-sm">{signal}</span>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -246,7 +288,7 @@ export default function Landing() {
       </section>
 
       {/* Social Proof */}
-      <section className="py-16 bg-muted/30 border-t">
+      <section className="py-16 bg-muted/20 border-t">
         <div className="container mx-auto px-6 text-center">
           <p className="text-sm text-muted-foreground uppercase tracking-wider font-medium">{t("landing.socialProof.title")}</p>
         </div>
@@ -257,37 +299,54 @@ export default function Landing() {
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-4">{t("landing.testimonials.title")}</h2>
           <p className="text-sm text-muted-foreground text-center mb-12">{t("landing.testimonials.disclaimer")}</p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
             {(t("landing.testimonials.items") as any as Array<{ quote: string; author: string; role: string }>)?.map((item, i) => (
-              <Card key={i} className="p-6">
-                <CardContent className="p-0">
-                  <p className="text-sm italic text-muted-foreground mb-4">"{item.quote}"</p>
-                  <p className="text-sm font-semibold">{item.author}</p>
-                  <p className="text-xs text-muted-foreground">{item.role}</p>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+              >
+                <Card className="p-6 h-full card-hover">
+                  <CardContent className="p-0">
+                    <p className="text-sm italic text-muted-foreground mb-4 leading-relaxed">"{item.quote}"</p>
+                    <p className="text-sm font-semibold">{item.author}</p>
+                    <p className="text-xs text-muted-foreground">{item.role}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-24">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("landing.cta.title")}</h2>
-          <p className="text-muted-foreground text-lg mb-8 max-w-lg mx-auto">
-            {t("landing.cta.subtitle")}
-          </p>
-          <Button asChild size="lg" className="text-base px-8 h-12">
-            <Link to="/auth?mode=signup">
-              {t("landing.cta.button")}
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+      {/* CTA */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="absolute inset-0 dot-pattern opacity-30" />
+        <div className="container mx-auto px-6 text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("landing.cta.title")}</h2>
+            <p className="text-muted-foreground text-lg mb-8 max-w-lg mx-auto">
+              {t("landing.cta.subtitle")}
+            </p>
+            <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/20">
+              <Link to="/auth?mode=signup">
+                {t("landing.cta.button")}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
       </main>
 
-      <footer className="border-t py-12">
+      <footer className="border-t py-12 bg-card/50">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
