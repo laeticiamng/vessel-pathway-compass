@@ -112,6 +112,9 @@ export default function Landing() {
             <span className="text-xl font-bold tracking-tight">Vascular Atlas</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
+            <a href="#modules" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {t("landing.nav.explore")}
+            </a>
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.pricing")}
             </Link>
@@ -145,6 +148,9 @@ export default function Landing() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 mt-8">
+                <a href="#modules" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("landing.nav.explore")}
+                </a>
                 <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.pricing")}
                 </Link>
@@ -224,7 +230,7 @@ export default function Landing() {
       </section>
 
       {/* Modules */}
-      <section className="py-24 bg-background">
+      <section id="modules" className="py-24 bg-background scroll-mt-20">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 16 }}
@@ -371,6 +377,7 @@ export default function Landing() {
                 <span className="font-semibold">Vascular Atlas</span>
               </div>
               <p className="text-sm text-muted-foreground">{t("landing.footer.tagline")}</p>
+              <p className="text-xs text-muted-foreground/70 mt-1">{t("landing.footer.notMedicalDevice")}</p>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
