@@ -366,6 +366,7 @@ export const fr = {
       copied: "Copié",
       copiedDesc: "Rapport copié en texte brut (format DPI)",
       exportPDF: "Exporter PDF",
+      exportPDFSoon: "L'export PDF arrive bientôt. Utilisez « Copier vers DPI » en attendant.",
       confirmSign: "Confirmer et signer",
       signedOff: "Signé",
       signedOffDesc: "Rapport confirmé et signé par le clinicien.",

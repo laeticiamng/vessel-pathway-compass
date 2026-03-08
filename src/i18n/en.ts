@@ -379,6 +379,7 @@ export const en = {
       copied: "Copied",
       copiedDesc: "Report copied as plain text (EHR format)",
       exportPDF: "Export PDF",
+      exportPDFSoon: "PDF export is coming soon. Use 'Copy to EHR' in the meantime.",
       confirmSign: "Confirm & Sign",
       signedOff: "Signed off",
       signedOffDesc: "Report confirmed and signed by clinician.",
