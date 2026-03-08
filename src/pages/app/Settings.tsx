@@ -181,14 +181,7 @@ export default function Settings() {
           <CardTitle className="flex items-center gap-2"><Shield className="h-5 w-5" /> {t("settings.security.title")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
-          <div className="flex items-center justify-between">
-            <span className="text-sm">{t("settings.security.sso")}</span>
-            <Badge variant="secondary" className="text-xs">{t("common.comingSoon")}</Badge>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-sm">{t("settings.security.rateLimiting")}</span>
-            <Badge variant="secondary" className="text-xs">{t("common.comingSoon")}</Badge>
-          </div>
+          <p className="text-sm text-muted-foreground">{t("settings.security.desc")}</p>
         </CardContent>
       </Card>
 
