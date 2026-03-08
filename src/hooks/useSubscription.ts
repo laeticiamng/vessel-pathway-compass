@@ -54,7 +54,7 @@ export function useSubscription() {
 
   useEffect(() => {
     checkSubscription();
-    const interval = setInterval(checkSubscription, 60000);
+    const interval = setInterval(checkSubscription, 300000); // 5 min
     return () => clearInterval(interval);
   }, [checkSubscription]);
 

@@ -30,21 +30,22 @@ serve(async (req) => {
       });
     }
 
-    const supabase = createClient(
+    // Use service role client for auth verification
+    const svcClient = createClient(
       Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_ANON_KEY")!,
-      { global: { headers: { Authorization: authHeader } } }
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+      { auth: { persistSession: false } }
     );
 
     const token = authHeader.replace("Bearer ", "");
-    const { data: claimsData, error: claimsError } = await supabase.auth.getClaims(token);
-    if (claimsError || !claimsData?.claims) {
+    const { data: userData, error: userError } = await svcClient.auth.getUser(token);
+    if (userError || !userData?.user) {
       return new Response(JSON.stringify({ error: "Unauthorized" }), {
         status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const userId = claimsData.claims.sub as string;
+    const userId = userData.user.id;
 
     // ── Rate limit ───────────────────────────────────────────────────
     if (isRateLimited(userId)) {
@@ -53,26 +54,18 @@ serve(async (req) => {
       });
     }
 
-    // ── P1: Server-side entitlement check ────────────────────────────
-    const svcClient = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-      { auth: { persistSession: false } }
-    );
-
+    // ── Server-side entitlement check ────────────────────────────
     const { data: subData } = await svcClient
       .from("subscriptions")
       .select("status, current_period_end")
       .eq("user_id", userId)
       .maybeSingle();
 
-    // Allow free tier with daily limit (checked client-side already),
-    // but for premium AI features, verify active subscription
     const hasActiveSubscription = subData?.status === "active"
       && subData?.current_period_end
       && new Date(subData.current_period_end) > new Date();
 
-    // Count today's AI outputs for free-tier limiting (server-side enforcement)
+    // Count today's AI outputs for free-tier limiting
     if (!hasActiveSubscription) {
       const todayStart = new Date();
       todayStart.setHours(0, 0, 0, 0);
@@ -107,7 +100,7 @@ IMPORTANT RULES:
 - Label all suggestions as "Suggested" not "Recommended".
 
 Generate the following sections:
-1. SOAP Note (Subjective, Objective, Assessment, Plan)
+1. Structured Note (Subjective, Objective, Assessment, Plan)
 2. Differential Diagnosis + Red Flags
 3. Suggested Care Pathway (with citation placeholders)
 4. Patient-Friendly Summary

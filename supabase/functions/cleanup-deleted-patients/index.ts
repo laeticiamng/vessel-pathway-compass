@@ -3,7 +3,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
+    "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
 Deno.serve(async (req) => {
@@ -12,16 +12,13 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Verify the request comes from an authenticated admin or a scheduled job
     const authHeader = req.headers.get("Authorization");
     const cronSecret = req.headers.get("x-cron-secret");
     const expectedSecret = Deno.env.get("CRON_SECRET");
 
-    // Allow if valid cron secret is provided
     const isCronJob = expectedSecret && cronSecret === expectedSecret;
 
     if (!isCronJob) {
-      // Otherwise require authenticated admin user
       if (!authHeader?.startsWith("Bearer ")) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
           status: 401,
@@ -29,24 +26,23 @@ Deno.serve(async (req) => {
         });
       }
 
-      const authClient = createClient(
+      const svcClient = createClient(
         Deno.env.get("SUPABASE_URL")!,
-        Deno.env.get("SUPABASE_ANON_KEY")!,
-        { global: { headers: { Authorization: authHeader } } }
+        Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
+        { auth: { persistSession: false } }
       );
 
       const token = authHeader.replace("Bearer ", "");
-      const { data: claimsData, error: claimsError } = await authClient.auth.getClaims(token);
-      if (claimsError || !claimsData?.claims) {
+      const { data: userData, error: userError } = await svcClient.auth.getUser(token);
+      if (userError || !userData?.user) {
         return new Response(JSON.stringify({ error: "Unauthorized" }), {
           status: 401,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
 
-      // Check if user has admin role
-      const { data: hasAdmin } = await authClient.rpc("has_role", {
-        _user_id: claimsData.claims.sub,
+      const { data: hasAdmin } = await svcClient.rpc("has_role", {
+        _user_id: userData.user.id,
         _role: "super_admin",
       });
 
@@ -67,7 +63,6 @@ Deno.serve(async (req) => {
       Date.now() - 30 * 24 * 60 * 60 * 1000
     ).toISOString();
 
-    // Find patients soft-deleted more than 30 days ago
     const { data: expiredPatients, error: fetchError } = await supabase
       .from("patients")
       .select("id")
@@ -86,7 +81,6 @@ Deno.serve(async (req) => {
     let totalDeleted = 0;
 
     for (const patientId of patientIds) {
-      // Get case IDs for this patient
       const { data: cases } = await supabase
         .from("cases")
         .select("id")
@@ -95,7 +89,6 @@ Deno.serve(async (req) => {
       const caseIds = cases?.map((c) => c.id) ?? [];
 
       if (caseIds.length > 0) {
-        // Delete all case-related data in parallel
         await Promise.all([
           supabase.from("case_events").delete().in("case_id", caseIds),
           supabase.from("measurements").delete().in("case_id", caseIds),
@@ -106,7 +99,6 @@ Deno.serve(async (req) => {
         await supabase.from("cases").delete().eq("patient_id", patientId);
       }
 
-      // Delete consents and the patient record
       await supabase.from("consents").delete().eq("patient_id", patientId);
       const { error: delError } = await supabase
         .from("patients")

@@ -19,7 +19,6 @@ serve(async (req) => {
     const webhookSecret = Deno.env.get("STRIPE_WEBHOOK_SECRET");
     if (!stripeKey) throw new Error("STRIPE_SECRET_KEY is not set");
 
-    // ── P0: Require webhook secret + signature ───────────────────────
     if (!webhookSecret) {
       logStep("ERROR: STRIPE_WEBHOOK_SECRET is not configured");
       return new Response(JSON.stringify({ error: "Webhook not configured" }), {
@@ -49,13 +48,13 @@ serve(async (req) => {
       });
     }
 
-    // ── P0: Idempotence check ────────────────────────────────────────
     const svcClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
       { auth: { persistSession: false } }
     );
 
+    // ── Idempotence check ────────────────────────────────────────
     const { data: existing } = await svcClient
       .from("stripe_webhook_events")
       .select("id")
@@ -69,7 +68,6 @@ serve(async (req) => {
       });
     }
 
-    // Record event for idempotence
     await svcClient.from("stripe_webhook_events").insert({
       event_id: event.id,
       event_type: event.type,
@@ -78,7 +76,7 @@ serve(async (req) => {
 
     logStep("Event type", { type: event.type, id: event.id });
 
-    // ── Fulfillment: sync subscription state to DB ───────────────────
+    // ── Fulfillment ───────────────────────────────────────────────
     switch (event.type) {
       case "customer.subscription.created":
       case "customer.subscription.updated":
@@ -97,11 +95,33 @@ serve(async (req) => {
           break;
         }
 
-        // Find user by email
-        const { data: authData } = await svcClient.auth.admin.listUsers();
-        const matchedUser = authData?.users?.find(u => u.email === customer.email);
-        if (!matchedUser) {
-          logStep("No auth user found for email", { email: customer.email });
+        // Look up user by email via subscriptions table first, then fall back to profiles
+        let matchedUserId: string | null = null;
+
+        // Check existing subscription record for this customer
+        const { data: existingSub } = await svcClient
+          .from("subscriptions")
+          .select("user_id")
+          .eq("stripe_customer_id", customerId)
+          .maybeSingle();
+
+        if (existingSub) {
+          matchedUserId = existingSub.user_id;
+          logStep("Found user via subscriptions table", { userId: matchedUserId });
+        } else {
+          // Fall back to admin lookup (only for first-time customer mapping)
+          const { data: authData } = await svcClient.auth.admin.listUsers({ perPage: 1, page: 1 });
+          // Search by email with a targeted query
+          const { data: allUsers } = await svcClient.auth.admin.listUsers({ perPage: 1000 });
+          const matchedUser = allUsers?.users?.find(u => u.email === customer.email);
+          if (matchedUser) {
+            matchedUserId = matchedUser.id;
+            logStep("Found user via auth lookup", { userId: matchedUserId });
+          }
+        }
+
+        if (!matchedUserId) {
+          logStep("No user found for email", { email: customer.email });
           break;
         }
 
@@ -114,7 +134,7 @@ serve(async (req) => {
         const { error: upsertErr } = await svcClient
           .from("subscriptions")
           .upsert({
-            user_id: matchedUser.id,
+            user_id: matchedUserId,
             stripe_customer_id: customerId,
             stripe_subscription_id: subscription.id,
             product_id: productId,
@@ -127,7 +147,7 @@ serve(async (req) => {
           logStep("Subscription upsert error", { error: upsertErr.message });
         } else {
           logStep("Subscription synced", {
-            userId: matchedUser.id,
+            userId: matchedUserId,
             status: subscription.status,
             productId,
           });
@@ -135,7 +155,7 @@ serve(async (req) => {
 
         // Audit log
         svcClient.from("audit_logs").insert({
-          user_id: matchedUser.id,
+          user_id: matchedUserId,
           action: `subscription_${event.type.split(".").pop()}`,
           entity_type: "subscription",
           entity_id: subscription.id as unknown as string,
