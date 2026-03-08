@@ -116,7 +116,7 @@ export const fr = {
         desc: "Générez des comptes-rendus cliniques structurés, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
       },
       twin: {
-        title: "Jumeau numérique vasculaire",
+        title: "Cartographie vasculaire patient",
         desc: "Visualisez l'anatomie vasculaire de chaque patient au fil du temps avec des cartes interactives, le suivi des lésions et la planification de scénarios.",
       },
       registry: {
