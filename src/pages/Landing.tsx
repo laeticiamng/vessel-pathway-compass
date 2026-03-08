@@ -153,7 +153,7 @@ export default function Landing() {
                     ))}
                   </div>
                 </div>
-                <Button asChild className="mt-2">
+                <Button asChild className="mt-2" onClick={() => setMobileOpen(false)}>
                   <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
                 </Button>
               </div>
