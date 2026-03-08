@@ -14,6 +14,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { Globe, MessageSquare, Users, Search, Send, Clock } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import ForumThreadDetail from "@/components/network/ForumThreadDetail";
 import VoteButtons from "@/components/network/VoteButtons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
