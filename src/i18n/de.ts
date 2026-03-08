@@ -116,7 +116,7 @@ export const de = {
         desc: "Erstellen Sie strukturierte klinische Berichte, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
       },
       twin: {
-        title: "Vaskulärer digitaler Zwilling",
+        title: "Vaskuläre Patientenkarte",
         desc: "Visualisieren Sie die Gefäßanatomie jedes Patienten über die Zeit mit interaktiven Karten, Läsionsverfolgung und Szenarioplanung.",
       },
       registry: {
