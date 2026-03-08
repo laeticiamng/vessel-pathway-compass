@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Navigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "@/i18n/context";
@@ -44,7 +44,7 @@ const CATEGORIES = ["PAD", "Aortic", "Venous", "Carotid", "DVT/PE"] as const;
 const STEP_COUNT = 4;
 
 export default function Onboarding() {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -64,6 +64,11 @@ export default function Onboarding() {
   const [patientAge, setPatientAge] = useState("");
   const [patientSex, setPatientSex] = useState("");
   const [patientCategory, setPatientCategory] = useState("");
+
+  // Redirect unauthenticated users
+  if (!authLoading && !user) {
+    return <Navigate to="/auth" replace />;
+  }
 
   const progress = ((step + 1) / STEP_COUNT) * 100;
 
@@ -281,7 +286,7 @@ export default function Onboarding() {
                     <SelectTrigger><SelectValue placeholder="—" /></SelectTrigger>
                     <SelectContent>
                       {CATEGORIES.map((c) => (
-                        <SelectItem key={c} value={c}>{c}</SelectItem>
+                        <SelectItem key={c} value={c}>{t(`medicalCategories.${c.toLowerCase()}`) as string || c}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>

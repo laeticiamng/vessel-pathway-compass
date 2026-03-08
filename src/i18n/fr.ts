@@ -33,6 +33,14 @@ export const fr = {
     continue: "Continuer",
   },
 
+  medicalCategories: {
+    pad: "AOMI",
+    aortic: "Aortique",
+    venous: "Veineux",
+    carotid: "Carotidien",
+    "dvt/pe": "TVP / EP",
+  },
+
   sidebar: {
     clinical: "Clinique",
     dashboard: "Tableau de bord",

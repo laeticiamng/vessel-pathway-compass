@@ -2,8 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, HeartPulse, ArrowLeft, Loader2 } from "lucide-react";
-import { useTranslation } from "@/i18n/context";
+import { CheckCircle2, HeartPulse, ArrowLeft, Loader2, Globe } from "lucide-react";
+import { useTranslation, type Language } from "@/i18n/context";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SEOHead } from "@/components/SEOHead";
 import { useSubscription, STRIPE_PLANS } from "@/hooks/useSubscription";
 import { useAuth } from "@/hooks/useAuth";
@@ -13,7 +14,7 @@ import { useState } from "react";
 const planKeys = ["individual", "professional", "institution"] as const;
 
 export default function Pricing() {
-  const { t } = useTranslation();
+  const { t, language, setLanguage } = useTranslation();
   const { session } = useAuth();
   const navigate = useNavigate();
   const { currentPlan, subscribed, openPortal, createCheckout } = useSubscription();
@@ -81,12 +82,27 @@ export default function Pricing() {
         path="/pricing"
       />
       <nav className="border-b">
-        <div className="container mx-auto flex items-center h-16 px-6">
+        <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
             <HeartPulse className="h-5 w-5 text-primary" />
             <span className="font-bold">Vascular Atlas</span>
           </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="gap-1.5">
+                <Globe className="h-4 w-4" />
+                {language.toUpperCase()}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {(["en", "fr", "de"] as const).map((lang) => (
+                <DropdownMenuItem key={lang} onClick={() => setLanguage(lang)} className={language === lang ? "font-semibold" : ""}>
+                  {lang === "en" ? "English" : lang === "fr" ? "Français" : "Deutsch"}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </nav>
 

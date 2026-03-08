@@ -127,7 +127,7 @@ export default function Registry() {
 
       <div className="flex flex-wrap gap-2">
         {CATEGORIES.map((cat) => (
-          <Badge key={cat} variant="secondary">{cat}</Badge>
+          <Badge key={cat} variant="secondary">{t(`medicalCategories.${cat.toLowerCase()}`) as string || cat}</Badge>
         ))}
       </div>
 
