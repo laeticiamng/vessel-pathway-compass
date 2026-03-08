@@ -49,11 +49,6 @@ export default function Onboarding() {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
 
-  // Redirect unauthenticated users
-  if (!authLoading && !user) {
-    return <Navigate to="/auth" replace />;
-  }
-
   const [step, setStep] = useState(0);
   const [saving, setSaving] = useState(false);
 
