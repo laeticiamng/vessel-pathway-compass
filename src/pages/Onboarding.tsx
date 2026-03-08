@@ -249,7 +249,7 @@ export default function Onboarding() {
                   <Input
                     value={pseudonym}
                     onChange={(e) => setPseudonym(e.target.value)}
-                    placeholder="PAT-001"
+                    placeholder={t("onboarding.pseudonymPlaceholder") as string || "PAT-001"}
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-4">

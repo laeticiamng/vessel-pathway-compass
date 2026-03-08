@@ -19,7 +19,7 @@ export function SubscriptionSettingsCard() {
     try {
       await openPortal();
     } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: t("auth.error"), description: err.message, variant: "destructive" });
     } finally {
       setPortalLoading(false);
     }
@@ -54,7 +54,7 @@ export function SubscriptionSettingsCard() {
                   ) : (
                     <ExternalLink className="h-4 w-4 mr-1.5" />
                   )}
-                  {t("pricing.managePlan") || "Manage Plan"}
+                  {t("pricing.managePlan")}
                 </Button>
               ) : (
                 <Button asChild variant="default" size="sm">
@@ -67,7 +67,7 @@ export function SubscriptionSettingsCard() {
             </div>
             {subscribed && subscriptionEnd && (
               <p className="text-xs text-muted-foreground">
-                {t("settings.plan.renewsOn") || "Renews on"} {new Date(subscriptionEnd).toLocaleDateString()}
+                {t("settings.plan.renewsOn")} {new Date(subscriptionEnd).toLocaleDateString()}
               </p>
             )}
           </>

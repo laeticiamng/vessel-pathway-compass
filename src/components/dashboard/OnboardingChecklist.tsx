@@ -11,6 +11,7 @@ interface Props {
     aiReports: number;
     outcomes: number;
     simulations: number;
+    educationExplored?: boolean;
   };
 }
 
@@ -20,7 +21,7 @@ export function OnboardingChecklist({ stats }: Props) {
   const steps = [
     { done: stats.totalCases > 0, label: t("dashboard.checklist.createPatient"), icon: HeartPulse, path: "/app/patients" },
     { done: stats.aiReports > 0, label: t("dashboard.checklist.generateAI"), icon: Brain, path: "/app/ai-assistant" },
-    { done: false, label: t("dashboard.checklist.exploreEducation"), icon: BookOpen, path: "/app/education" },
+    { done: !!stats.educationExplored, label: t("dashboard.checklist.exploreEducation"), icon: BookOpen, path: "/app/education" },
     { done: stats.simulations > 0, label: t("dashboard.checklist.runSimulation"), icon: FlaskConical, path: "/app/simulation" },
   ];
 

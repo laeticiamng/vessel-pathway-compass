@@ -1118,6 +1118,7 @@ export const de = {
     displayName: "Anzeigename",
     displayNamePlaceholder: "Dr. Max Müller",
     pseudonym: "Patienten-Pseudonym",
+    pseudonymPlaceholder: "z.B. PAT-001",
     ageRange: "Altersgruppe",
     sex: "Geschlecht",
     male: "Männlich",

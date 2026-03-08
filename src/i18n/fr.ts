@@ -1118,6 +1118,7 @@ export const fr = {
     displayName: "Nom affiché",
     displayNamePlaceholder: "Dr. Marie Dupont",
     pseudonym: "Pseudonyme du patient",
+    pseudonymPlaceholder: "ex. PAT-001",
     ageRange: "Tranche d'âge",
     sex: "Sexe",
     male: "Homme",
