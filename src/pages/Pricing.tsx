@@ -97,6 +97,7 @@ export default function Pricing() {
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             {t("pricing.subtitle")}
           </p>
+          <p className="text-sm text-muted-foreground/90 mt-3 max-w-xl mx-auto">{t("pricing.betaNote")}</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
