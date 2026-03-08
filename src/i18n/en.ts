@@ -482,7 +482,7 @@ export const en = {
 
   // Digital Twin
   digitalTwin: {
-    title: "Vascular Digital Twin",
+    title: "Patient Vascular Map",
     subtitle: "Interactive vascular mapping with real patient measurements",
     selectPatient: "Select a patient...",
     selectPatientPrompt: "Select a patient to visualize their vascular anatomy with real measurement data",
