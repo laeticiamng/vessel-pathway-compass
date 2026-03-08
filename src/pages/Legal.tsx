@@ -24,12 +24,27 @@ export default function Legal() {
         path={`/legal/${current}`}
       />
       <nav className="border-b">
-        <div className="container mx-auto flex items-center h-16 px-6">
+        <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
             <HeartPulse className="h-5 w-5 text-primary" />
             <span className="font-bold">Vascular Atlas</span>
           </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" size="sm" className="gap-1.5">
+                <Globe className="h-4 w-4" />
+                {language.toUpperCase()}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {(["en", "fr", "de"] as Language[]).map((lang) => (
+                <DropdownMenuItem key={lang} onClick={() => setLanguage(lang)} className={language === lang ? "font-semibold" : ""}>
+                  {lang === "en" ? "English" : lang === "fr" ? "Français" : "Deutsch"}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </nav>
 
