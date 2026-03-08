@@ -73,7 +73,9 @@ export default function PatientDetail() {
   }
 
   return (
-    <div className="space-y-6 max-w-5xl">
+    <>
+      <SEOHead title="Patient" description="Patient detail" path={`/app/patients/${id}`} noindex />
+      <div className="space-y-6 max-w-5xl">
       <PatientHeader
         patient={patient}
         latestCase={cases?.[0]}
