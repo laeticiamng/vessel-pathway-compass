@@ -1132,11 +1132,11 @@ export const en = {
   },
 
   contentGate: {
-    previewBanner: "🔒 Limited preview — sign in or subscribe for full access",
-    title: "You're viewing a limited preview",
-    subtitle: "This content is restricted. Create a free account to continue, or sign in if you already have one.",
+    previewBanner: "👀 You're browsing as a guest — sign in to unlock all features",
+    title: "Want to use this module?",
+    subtitle: "Create a free account in 30 seconds to access all features, save your data and track your progress.",
     createAccount: "Create Free Account",
-    signIn: "Sign In",
+    signIn: "I Already Have an Account",
   },
 
   notifications: {
