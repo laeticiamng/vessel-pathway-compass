@@ -34,6 +34,14 @@ export const en = {
     continue: "Continue",
   },
 
+  medicalCategories: {
+    pad: "PAD",
+    aortic: "Aortic",
+    venous: "Venous",
+    carotid: "Carotid",
+    "dvt/pe": "DVT / PE",
+  },
+
   // Sidebar
   sidebar: {
     clinical: "Clinical",
