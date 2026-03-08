@@ -199,7 +199,7 @@ export const fr = {
           "Accès au labo de simulation",
           "Consultations d'experts (5/mois)",
         ],
-        cta: "Essai gratuit",
+        cta: "Accès bêta gratuit",
       },
       institution: {
         name: "Établissement",

@@ -207,7 +207,7 @@ export const en = {
           "Simulation lab access",
           "Expert consultations (5/mo)",
         ],
-        cta: "Start Trial",
+        cta: "Free beta access",
       },
       institution: {
         name: "Institution",
