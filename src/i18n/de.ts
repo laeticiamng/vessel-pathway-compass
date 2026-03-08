@@ -1268,6 +1268,18 @@ export const de = {
       ],
     },
     links: { terms: "AGB", privacy: "Datenschutzrichtlinie" },
+    contact: {
+      title: "Schreiben Sie uns",
+      desc: "Haben Sie eine Frage, einen Vorschlag oder brauchen Hilfe? Füllen Sie das Formular aus und wir melden uns bei Ihnen.",
+      name: "Ihr Name",
+      namePlaceholder: "Dr. Hans Müller",
+      email: "Ihre E-Mail",
+      emailPlaceholder: "sie@krankenhaus.de",
+      message: "Nachricht",
+      messagePlaceholder: "Beschreiben Sie Ihre Frage oder Ihr Anliegen...",
+      send: "Nachricht senden",
+      sent: "Nachricht gesendet! Wir antworten innerhalb von 24 Stunden.",
+    },
   },
 
   timeAgo: {

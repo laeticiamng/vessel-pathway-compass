@@ -1268,6 +1268,18 @@ export const fr = {
       ],
     },
     links: { terms: "Conditions générales", privacy: "Politique de confidentialité" },
+    contact: {
+      title: "Envoyez-nous un message",
+      desc: "Une question, une suggestion ou besoin d'aide ? Remplissez le formulaire et nous vous répondrons.",
+      name: "Votre nom",
+      namePlaceholder: "Dr. Marie Dupont",
+      email: "Votre email",
+      emailPlaceholder: "vous@hopital.fr",
+      message: "Message",
+      messagePlaceholder: "Décrivez votre question ou problème...",
+      send: "Envoyer le message",
+      sent: "Message envoyé ! Nous vous répondrons sous 24h.",
+    },
   },
 
   timeAgo: {
