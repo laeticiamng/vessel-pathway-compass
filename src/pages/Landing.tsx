@@ -95,8 +95,8 @@ export default function Landing() {
         Skip to content
       </a>
       <SEOHead
-        title="Vascular Atlas — AI-Powered Clinical Platform for Vascular Medicine"
-        description="Unify AI clinical reports, patient case management, outcomes registry, certification, simulation and expert networking for vascular surgeons and angiologists. Free during beta."
+        title={t("seo.landing.title") as string}
+        description={t("seo.landing.description") as string}
         path="/"
         jsonLd={faqJsonLd}
       />
