@@ -9,12 +9,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/i18n/context";
 import { supabase } from "@/integrations/supabase/client";
 import { useQuery } from "@tanstack/react-query";
+import { useAuth } from "@/hooks/useAuth";
 import { format } from "date-fns";
 
 const PAGE_SIZE = 50;
 
 export default function Compliance() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [auditPage, setAuditPage] = useState(0);
 
   // --- Audit logs with pagination ---
