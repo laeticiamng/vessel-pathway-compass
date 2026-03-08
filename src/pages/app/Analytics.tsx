@@ -43,6 +43,7 @@ import {
 } from "recharts";
 import InstitutionComparison from "@/components/analytics/InstitutionComparison";
 import { Building2 } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 
 const CATEGORY_COLORS = [
   "hsl(200 70% 50%)",
