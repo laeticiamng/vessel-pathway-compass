@@ -319,6 +319,15 @@ export const fr = {
       noPatients: "Aucun patient enregistré",
       totalPatients: "patients au total",
     },
+    activityLabels: {
+      ai_report_generated: "Rapport IA généré",
+      ai_report_signed_off: "Rapport IA validé",
+      patient_created: "Patient créé",
+      case_created: "Cas créé",
+      measurement_added: "Mesure ajoutée",
+      event_added: "Événement ajouté",
+      outcome_recorded: "Résultat enregistré",
+    },
   },
 
   aiAssistant: {
