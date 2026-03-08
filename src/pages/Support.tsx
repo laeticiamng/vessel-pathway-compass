@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowLeft, HeartPulse, Mail, MessageCircle, BookOpen, Shield, Globe } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { ArrowLeft, HeartPulse, Mail, MessageCircle, BookOpen, Shield, Globe, Send, Loader2 } from "lucide-react";
 import { useTranslation, type Language } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -11,11 +15,28 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { toast } from "sonner";
 
 export default function Support() {
   const { t, language, setLanguage } = useTranslation();
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [sending, setSending] = useState(false);
 
   const faqItems: { q: string; a: string }[] = (t("support.faq.items") as any) || [];
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSending(true);
+    // Simulate send — in production, connect to an edge function or email API
+    await new Promise((r) => setTimeout(r, 1200));
+    toast.success(t("support.contact.sent") as string);
+    setContactName("");
+    setContactEmail("");
+    setContactMessage("");
+    setSending(false);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -80,6 +101,54 @@ export default function Support() {
             </CardContent>
           </Card>
         </div>
+
+        {/* Contact Form */}
+        <Card className="mb-12">
+          <CardContent className="pt-6">
+            <h2 className="text-xl font-bold mb-1">{t("support.contact.title")}</h2>
+            <p className="text-sm text-muted-foreground mb-6">{t("support.contact.desc")}</p>
+            <form onSubmit={handleContactSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="contact-name">{t("support.contact.name")}</Label>
+                  <Input
+                    id="contact-name"
+                    value={contactName}
+                    onChange={(e) => setContactName(e.target.value)}
+                    placeholder={t("support.contact.namePlaceholder") as string}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="contact-email">{t("support.contact.email")}</Label>
+                  <Input
+                    id="contact-email"
+                    type="email"
+                    value={contactEmail}
+                    onChange={(e) => setContactEmail(e.target.value)}
+                    placeholder={t("support.contact.emailPlaceholder") as string}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contact-message">{t("support.contact.message")}</Label>
+                <Textarea
+                  id="contact-message"
+                  value={contactMessage}
+                  onChange={(e) => setContactMessage(e.target.value)}
+                  placeholder={t("support.contact.messagePlaceholder") as string}
+                  rows={5}
+                  required
+                />
+              </div>
+              <Button type="submit" disabled={sending} className="gap-2">
+                {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+                {sending ? (t("common.loading") as string) : (t("support.contact.send") as string)}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
 
         <h2 className="text-2xl font-bold mb-6">{t("support.faq.title")}</h2>
         {Array.isArray(faqItems) && faqItems.length > 0 && (

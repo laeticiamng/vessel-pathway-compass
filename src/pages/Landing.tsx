@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import dashboardPreview from "@/assets/dashboard-preview.jpg";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -224,6 +225,26 @@ export default function Landing() {
               <Button asChild variant="outline" size="lg" className="text-base px-8 h-12 border-primary-foreground/40 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 backdrop-blur-sm">
                 <Link to="/pricing">{t("landing.hero.secondary")}</Link>
               </Button>
+            </div>
+            <p className="mt-6 text-sm text-primary-foreground/50 flex items-center justify-center gap-2">
+              <span className="inline-block h-2 w-2 rounded-full bg-success animate-pulse" />
+              {t("landing.hero.socialProof")}
+            </p>
+          </motion.div>
+          {/* Dashboard Preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="mt-16 max-w-5xl mx-auto"
+          >
+            <div className="rounded-2xl border border-primary-foreground/10 shadow-2xl shadow-primary/10 overflow-hidden bg-card/5 backdrop-blur-sm">
+              <img
+                src={dashboardPreview}
+                alt="Vascular Atlas clinical dashboard showing patient statistics, risk distribution and module overview"
+                className="w-full h-auto"
+                loading="eager"
+              />
             </div>
           </motion.div>
         </div>

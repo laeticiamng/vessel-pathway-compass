@@ -97,6 +97,7 @@ export const fr = {
       subtitle: "Gérez vos patients, générez des rapports cliniques IA, suivez les résultats, obtenez des certifications et collaborez avec des experts — dans un seul outil sécurisé.",
       cta: "Essayer gratuitement",
       secondary: "Voir les tarifs",
+      socialProof: "Utilisé par des spécialistes vasculaires dans plus de 12 pays",
     },
     modules: {
       title: "Tout ce dont vous avez besoin",
@@ -1268,6 +1269,18 @@ export const fr = {
       ],
     },
     links: { terms: "Conditions générales", privacy: "Politique de confidentialité" },
+    contact: {
+      title: "Envoyez-nous un message",
+      desc: "Une question, une suggestion ou besoin d'aide ? Remplissez le formulaire et nous vous répondrons.",
+      name: "Votre nom",
+      namePlaceholder: "Dr. Marie Dupont",
+      email: "Votre email",
+      emailPlaceholder: "vous@hopital.fr",
+      message: "Message",
+      messagePlaceholder: "Décrivez votre question ou problème...",
+      send: "Envoyer le message",
+      sent: "Message envoyé ! Nous vous répondrons sous 24h.",
+    },
   },
 
   timeAgo: {
