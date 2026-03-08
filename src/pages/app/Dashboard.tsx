@@ -101,6 +101,11 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8 max-w-7xl">
+      <SEOHead
+        title={t("seo.dashboard.title") as string}
+        description={t("seo.dashboard.description") as string}
+        path="/app"
+      />
       <div>
         <h1 className="text-3xl font-bold">{t("dashboard.title")}</h1>
         <p className="text-muted-foreground mt-1">{t("dashboard.welcome")}</p>
