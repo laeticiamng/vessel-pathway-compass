@@ -171,6 +171,24 @@ export const de = {
         { q: "Kann mein Team es nutzen?", a: "Auf jeden Fall. Der Institutionsplan unterstützt Teams mit gemeinsamen Registern, Analysen und rollenbasierten Berechtigungen." },
       ],
     },
+    about: {
+      title: "Wer wir sind",
+      description: "Vascular Atlas wird von einem Team aus Gefäßmedizinern, klinischen Forschern und Software-Ingenieuren entwickelt, die davon überzeugt sind, dass die moderne Gefäßmedizin eine dedizierte digitale Plattform verdient. Unsere Mission: klinische Workflows schneller, sicherer und kollaborativer machen — ohne Kompromisse beim Datenschutz.",
+      highlights: {
+        clinical: {
+          title: "Von Klinikern entwickelt",
+          desc: "Jede Funktion ist für reale klinische Workflows konzipiert und von praktizierenden Gefäßspezialisten validiert.",
+        },
+        privacy: {
+          title: "Datenschutz zuerst",
+          desc: "Pseudonymisierte Daten, vollständige Audit-Trails und DSGVO-, HIPAA- und nDSG-Konformität von Tag eins.",
+        },
+        community: {
+          title: "Wachsende Gemeinschaft",
+          desc: "Treten Sie einem Netzwerk von Gefäßprofis bei, die Wissen, Benchmarks und Best Practices über Einrichtungsgrenzen hinweg teilen.",
+        },
+      },
+    },
     cta: {
       title: "Bereit, Ihre Gefäßpraxis zu vereinfachen?",
       subtitle: "Schließen Sie sich Hunderten von Gefäßspezialisten an, die die Plattform bereits erkunden.",
