@@ -136,6 +136,7 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
               placeholder={t("patients.form.caseTitlePlaceholder")}
               value={caseTitle}
               onChange={(e) => setCaseTitle(e.target.value)}
+              maxLength={200}
             />
           </div>
         </div>
