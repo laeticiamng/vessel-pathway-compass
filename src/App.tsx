@@ -60,6 +60,7 @@ const App = () => (
         <Sonner />
       <BrowserRouter>
         <CookieConsent />
+        <Suspense fallback={<LazyFallback />}>
         <Routes>
           {/* Public */}
           <Route path="/" element={<Landing />} />
@@ -98,6 +99,7 @@ const App = () => (
 
           <Route path="*" element={<NotFound />} />
         </Routes>
+        </Suspense>
       </BrowserRouter>
         </AuthProvider>
       </TooltipProvider>
