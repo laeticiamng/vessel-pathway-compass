@@ -7,7 +7,20 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const logStep = (step: string, details?: any) => {
+// ── In-memory rate limiter (5 req/min per user) ─────────────────────
+const WINDOW_MS = 60_000;
+const MAX_REQ = 5;
+const rlMap = new Map<string, { count: number; resetAt: number }>();
+
+function isRateLimited(uid: string): boolean {
+  const now = Date.now();
+  const e = rlMap.get(uid);
+  if (!e || now > e.resetAt) { rlMap.set(uid, { count: 1, resetAt: now + WINDOW_MS }); return false; }
+  return ++e.count > MAX_REQ;
+}
+setInterval(() => { const now = Date.now(); for (const [k, v] of rlMap) if (now > v.resetAt) rlMap.delete(k); }, 60_000);
+
+const logStep = (step: string, details?: unknown) => {
   const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
   console.log(`[CREATE-CHECKOUT] ${step}${detailsStr}`);
 };
@@ -32,6 +45,15 @@ serve(async (req) => {
     if (!user?.email) throw new Error("User not authenticated or email not available");
     logStep("User authenticated", { email: user.email });
 
+    // ── Rate limit ───────────────────────────────────────────────────
+    if (isRateLimited(user.id)) {
+      logStep("Rate limited", { userId: user.id });
+      return new Response(
+        JSON.stringify({ error: "Too many checkout attempts. Please wait a moment." }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const { priceId } = await req.json();
     if (!priceId) throw new Error("priceId is required");
     logStep("Price ID received", { priceId });
@@ -55,6 +77,19 @@ serve(async (req) => {
       cancel_url: `${origin}/checkout/cancel`,
     });
     logStep("Checkout session created", { sessionId: session.id });
+
+    // ── Audit log (fire & forget) ────────────────────────────────────
+    const svcClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    );
+    svcClient.from("audit_logs").insert({
+      user_id: user.id,
+      action: "checkout_started",
+      entity_type: "subscription",
+      details: { priceId, sessionId: session.id },
+    }).then(() => {});
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
