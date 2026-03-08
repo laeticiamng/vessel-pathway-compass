@@ -99,6 +99,15 @@ export const fr = {
       secondary: "Voir les tarifs",
       socialProof: "Utilisé par des spécialistes vasculaires dans plus de 12 pays",
     },
+    howItWorks: {
+      title: "Comment ça marche",
+      subtitle: "Démarrez en quelques minutes — aucune installation, aucune configuration complexe.",
+      steps: [
+        { title: "Créez votre compte gratuit", desc: "Inscrivez-vous en 30 secondes avec votre e-mail ou Google. Sans carte bancaire." },
+        { title: "Ajoutez votre premier patient", desc: "Créez un dossier patient pseudonymisé et commencez à documenter avec les rapports assistés par IA." },
+        { title: "Explorez tous les modules", desc: "Simulations, formation, registre des résultats et consultations d'experts — tout au même endroit." },
+      ],
+    },
     modules: {
       title: "Tout ce dont vous avez besoin",
       subtitle: "Six modules intégrés conçus pour votre workflow clinique quotidien.",
