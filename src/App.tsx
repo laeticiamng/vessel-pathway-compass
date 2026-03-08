@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,36 +9,46 @@ import { LanguageProvider } from "@/i18n/context";
 import { AuthProvider } from "./hooks/useAuth";
 
 import Landing from "./pages/Landing";
-import Pricing from "./pages/Pricing";
 import Auth from "./pages/Auth";
-import CheckoutSuccess from "./pages/CheckoutSuccess";
-import CheckoutCancel from "./pages/CheckoutCancel";
-import ResetPassword from "./pages/ResetPassword";
 import NotFound from "./pages/NotFound";
-import Onboarding from "./pages/Onboarding";
-import Legal from "./pages/Legal";
-import Support from "./pages/Support";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
 import { CookieConsent } from "./components/CookieConsent";
-import Dashboard from "./pages/app/Dashboard";
-import AIAssistant from "./pages/app/AIAssistant";
-import Patients from "./pages/app/Patients";
-import PatientDetail from "./pages/app/PatientDetail";
-import DigitalTwin from "./pages/app/DigitalTwin";
-import Registry from "./pages/app/Registry";
-import Education from "./pages/app/Education";
-import Simulation from "./pages/app/Simulation";
-import Network from "./pages/app/Network";
-import Research from "./pages/app/Research";
-import Compliance from "./pages/app/Compliance";
-import Analytics from "./pages/app/Analytics";
-import Team from "./pages/app/Team";
-import Settings from "./pages/app/Settings";
-import InnovationLab from "./pages/app/beta/InnovationLab";
+
+// Lazy-loaded routes
+const Pricing = lazy(() => import("./pages/Pricing"));
+const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
+const CheckoutCancel = lazy(() => import("./pages/CheckoutCancel"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const Onboarding = lazy(() => import("./pages/Onboarding"));
+const Legal = lazy(() => import("./pages/Legal"));
+const Support = lazy(() => import("./pages/Support"));
+const Dashboard = lazy(() => import("./pages/app/Dashboard"));
+const AIAssistant = lazy(() => import("./pages/app/AIAssistant"));
+const Patients = lazy(() => import("./pages/app/Patients"));
+const PatientDetail = lazy(() => import("./pages/app/PatientDetail"));
+const DigitalTwin = lazy(() => import("./pages/app/DigitalTwin"));
+const Registry = lazy(() => import("./pages/app/Registry"));
+const Education = lazy(() => import("./pages/app/Education"));
+const Simulation = lazy(() => import("./pages/app/Simulation"));
+const Network = lazy(() => import("./pages/app/Network"));
+const Research = lazy(() => import("./pages/app/Research"));
+const Compliance = lazy(() => import("./pages/app/Compliance"));
+const Analytics = lazy(() => import("./pages/app/Analytics"));
+const Team = lazy(() => import("./pages/app/Team"));
+const Settings = lazy(() => import("./pages/app/Settings"));
+const InnovationLab = lazy(() => import("./pages/app/beta/InnovationLab"));
 
 const queryClient = new QueryClient();
+
+function LazyFallback() {
+  return (
+    <div className="flex items-center justify-center min-h-[50vh]">
+      <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+    </div>
+  );
+}
 
 const App = () => (
   <LanguageProvider>
