@@ -226,6 +226,10 @@ export default function Landing() {
                 <Link to="/pricing">{t("landing.hero.secondary")}</Link>
               </Button>
             </div>
+            <p className="mt-6 text-sm text-primary-foreground/50 flex items-center justify-center gap-2">
+              <span className="inline-block h-2 w-2 rounded-full bg-success animate-pulse" />
+              {t("landing.hero.socialProof")}
+            </p>
           </motion.div>
           {/* Dashboard Preview */}
           <motion.div
