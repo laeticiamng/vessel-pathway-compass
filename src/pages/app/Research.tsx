@@ -1,3 +1,4 @@
+import ResearchExportButton from "@/components/research/ResearchExportButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
