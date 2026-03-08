@@ -11,6 +11,7 @@ interface Props {
     aiReports: number;
     outcomes: number;
     simulations: number;
+    educationExplored?: boolean;
   };
 }
 
