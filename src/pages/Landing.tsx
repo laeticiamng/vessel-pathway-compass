@@ -227,6 +227,22 @@ export default function Landing() {
               </Button>
             </div>
           </motion.div>
+          {/* Dashboard Preview */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="mt-16 max-w-5xl mx-auto"
+          >
+            <div className="rounded-2xl border border-primary-foreground/10 shadow-2xl shadow-primary/10 overflow-hidden bg-card/5 backdrop-blur-sm">
+              <img
+                src={dashboardPreview}
+                alt="Vascular Atlas clinical dashboard showing patient statistics, risk distribution and module overview"
+                className="w-full h-auto"
+                loading="eager"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
