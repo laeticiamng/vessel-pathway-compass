@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FlaskConical, Play, Timer, Pencil, Plus, Trophy, Clock, CheckCircle2, XCircle, ArrowRight } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import { toast } from "sonner";
 import SimulationRunner from "@/components/simulation/SimulationRunner";
 
