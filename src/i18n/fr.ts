@@ -68,7 +68,7 @@ export const fr = {
     dashboard: "Tableau de bord",
     aiAssistant: "Assistant clinique IA",
     patients: "Dossiers patients",
-    digitalTwin: "Jumeau numérique",
+    digitalTwin: "Cartographie vasculaire",
     registry: "Registre des résultats",
     education: "Pôle formation",
     simulation: "Labo de simulation",
