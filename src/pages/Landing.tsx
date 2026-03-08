@@ -90,6 +90,10 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Skip to content – accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg">
+        Skip to content
+      </a>
       <SEOHead
         title="Vascular Atlas — AI-Powered Clinical Platform for Vascular Medicine"
         description="Unify AI clinical reports, patient case management, outcomes registry, certification, simulation and expert networking for vascular surgeons and angiologists. Free during beta."
