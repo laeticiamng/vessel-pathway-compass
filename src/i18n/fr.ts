@@ -328,7 +328,7 @@ export const fr = {
       simulations: "Simulations",
     },
     moduleDesc: {
-      ai: "Générez des rapports cliniques assistés par IA avec notes SOAP structurées et diagnostics différentiels.",
+      ai: "Générez des rapports cliniques assistés par IA avec notes structurées et diagnostics différentiels.",
       twin: "Visualisez les chronologies patient, les cartes vasculaires et lancez des simulations de scénarios.",
       registry: "Contribuez et analysez les données de résultats vasculaires avec benchmarking respectueux de la vie privée.",
       education: "Complétez les parcours de compétences, obtenez des crédits FMC et collectez des badges numériques.",
