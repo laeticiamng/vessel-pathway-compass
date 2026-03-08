@@ -286,7 +286,7 @@ export default function Onboarding() {
                     <SelectTrigger><SelectValue placeholder="—" /></SelectTrigger>
                     <SelectContent>
                       {CATEGORIES.map((c) => (
-                        <SelectItem key={c} value={c}>{c}</SelectItem>
+                        <SelectItem key={c} value={c}>{t(`medicalCategories.${c.toLowerCase()}`) as string || c}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
