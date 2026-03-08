@@ -1298,6 +1298,18 @@ export const en = {
       ],
     },
     links: { terms: "Terms of Service", privacy: "Privacy Policy" },
+    contact: {
+      title: "Send Us a Message",
+      desc: "Have a question, a suggestion or need help? Fill out the form and we'll get back to you.",
+      name: "Your Name",
+      namePlaceholder: "Dr. Jane Smith",
+      email: "Your Email",
+      emailPlaceholder: "you@hospital.org",
+      message: "Message",
+      messagePlaceholder: "Describe your question or issue...",
+      send: "Send Message",
+      sent: "Message sent! We'll respond within 24 hours.",
+    },
   },
 
   // TimeAgo
