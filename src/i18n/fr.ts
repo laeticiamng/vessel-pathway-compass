@@ -97,6 +97,7 @@ export const fr = {
       subtitle: "Gérez vos patients, générez des rapports cliniques IA, suivez les résultats, obtenez des certifications et collaborez avec des experts — dans un seul outil sécurisé.",
       cta: "Essayer gratuitement",
       secondary: "Voir les tarifs",
+      socialProof: "Utilisé par des spécialistes vasculaires dans plus de 12 pays",
     },
     modules: {
       title: "Tout ce dont vous avez besoin",

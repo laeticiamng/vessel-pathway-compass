@@ -97,6 +97,7 @@ export const de = {
       subtitle: "Verwalten Sie Patientenfälle, erstellen Sie KI-Berichte, verfolgen Sie Ergebnisse, erwerben Sie Zertifizierungen und arbeiten Sie mit Experten zusammen — alles in einem sicheren Tool.",
       cta: "Kostenlos testen — keine Kreditkarte",
       secondary: "Pläne & Preise",
+      socialProof: "Genutzt von Gefäßspezialisten in über 12 Ländern",
     },
     modules: {
       title: "Alles, was Sie brauchen — in einer Plattform",
