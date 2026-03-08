@@ -1353,5 +1353,13 @@ export const en = {
       privacy: { title: "Privacy Policy — Vascular Atlas", description: "Vascular Atlas Privacy Policy — how we handle your data with GDPR compliance." },
       notice: { title: "Legal Notice — Vascular Atlas", description: "Vascular Atlas Legal Notice — company information and disclaimers." },
     },
+    notFound: {
+      title: "Page Not Found — Vascular Atlas",
+      description: "The page you are looking for does not exist or has been moved.",
+    },
+    settings: {
+      title: "Settings — Vascular Atlas",
+      description: "Manage your Vascular Atlas account, profile, language and appearance preferences.",
+    },
   },
 };

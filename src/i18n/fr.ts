@@ -1322,5 +1322,13 @@ export const fr = {
       privacy: { title: "Politique de confidentialité — Vascular Atlas", description: "Politique de confidentialité Vascular Atlas — traitement de vos données conforme au RGPD." },
       notice: { title: "Mentions légales — Vascular Atlas", description: "Mentions légales Vascular Atlas — informations sur l'éditeur et avertissements." },
     },
+    notFound: {
+      title: "Page introuvable — Vascular Atlas",
+      description: "La page que vous recherchez n'existe pas ou a été déplacée.",
+    },
+    settings: {
+      title: "Paramètres — Vascular Atlas",
+      description: "Gérez votre compte Vascular Atlas, profil, langue et préférences d'apparence.",
+    },
   },
 };
