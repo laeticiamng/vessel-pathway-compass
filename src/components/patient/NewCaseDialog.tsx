@@ -46,6 +46,8 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
   const createMutation = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("Not authenticated");
+      const parsed = newPatientCaseSchema.safeParse({ pseudonym, ageRange, sex, category, caseTitle });
+      if (!parsed.success) throw new Error(parsed.error.issues[0].message);
       const { data: patient, error: pErr } = await supabase
         .from("patients")
         .insert({
