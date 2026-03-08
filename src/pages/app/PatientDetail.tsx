@@ -48,6 +48,8 @@ export default function PatientDetail() {
 
   if (patientLoading) {
     return (
+      <>
+      <SEOHead title="Patient" description="Patient detail" path={`/app/patients/${id}`} noindex />
       <div className="space-y-6 max-w-5xl">
         <Skeleton className="h-8 w-64" />
         <Skeleton className="h-4 w-48" />
