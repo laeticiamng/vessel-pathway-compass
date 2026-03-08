@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { ArrowLeft, HeartPulse, Mail, MessageCircle, BookOpen, Shield } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function Support() {
   const { t } = useTranslation();
@@ -60,18 +66,20 @@ export default function Support() {
         </div>
 
         <h2 className="text-2xl font-bold mb-6">{t("support.faq.title")}</h2>
-        <div className="space-y-4">
-          {Array.isArray(faqItems) && faqItems.map((item, i) => (
-            <Card key={i}>
-              <CardHeader className="pb-2">
-                <CardTitle className="text-base">{item.q}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{item.a}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        {Array.isArray(faqItems) && faqItems.length > 0 && (
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item, i) => (
+              <AccordionItem key={i} value={`faq-${i}`}>
+                <AccordionTrigger className="text-left text-base hover:no-underline">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        )}
 
         <div className="mt-12 grid sm:grid-cols-2 gap-4">
           <Button variant="outline" asChild>
