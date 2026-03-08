@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { SEOHead } from "@/components/SEOHead";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
 import { Button } from "@/components/ui/button";
@@ -47,6 +48,8 @@ export default function PatientDetail() {
 
   if (patientLoading) {
     return (
+      <>
+      <SEOHead title="Patient" description="Patient detail" path={`/app/patients/${id}`} noindex />
       <div className="space-y-6 max-w-5xl">
         <Skeleton className="h-8 w-64" />
         <Skeleton className="h-4 w-48" />
@@ -54,6 +57,7 @@ export default function PatientDetail() {
           <Skeleton className="h-24" /><Skeleton className="h-24" /><Skeleton className="h-24" />
         </div>
       </div>
+      </>
     );
   }
 
@@ -69,7 +73,9 @@ export default function PatientDetail() {
   }
 
   return (
-    <div className="space-y-6 max-w-5xl">
+    <>
+      <SEOHead title="Patient" description="Patient detail" path={`/app/patients/${id}`} noindex />
+      <div className="space-y-6 max-w-5xl">
       <PatientHeader
         patient={patient}
         latestCase={cases?.[0]}
@@ -191,5 +197,6 @@ export default function PatientDetail() {
         onConfirm={() => deleteMeasId && deleteMeasMutation.mutate(deleteMeasId)}
       />
     </div>
+    </>
   );
 }

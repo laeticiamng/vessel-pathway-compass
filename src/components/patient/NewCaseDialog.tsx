@@ -13,6 +13,7 @@ import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
+import { newPatientCaseSchema } from "@/lib/validation";
 
 const CATEGORIES = ["PAD", "Aortic", "Venous", "Carotid", "DVT/PE"] as const;
 const AGE_RANGES = ["18-30", "31-40", "41-50", "51-60", "61-70", "71-80", "80+"] as const;
@@ -45,6 +46,8 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
   const createMutation = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("Not authenticated");
+      const parsed = newPatientCaseSchema.safeParse({ pseudonym, ageRange, sex, category, caseTitle });
+      if (!parsed.success) throw new Error(parsed.error.issues[0].message);
       const { data: patient, error: pErr } = await supabase
         .from("patients")
         .insert({
@@ -90,6 +93,7 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
               placeholder={t("patients.form.pseudonymPlaceholder")}
               value={pseudonym}
               onChange={(e) => setPseudonym(e.target.value)}
+              maxLength={100}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -132,6 +136,7 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
               placeholder={t("patients.form.caseTitlePlaceholder")}
               value={caseTitle}
               onChange={(e) => setCaseTitle(e.target.value)}
+              maxLength={200}
             />
           </div>
         </div>

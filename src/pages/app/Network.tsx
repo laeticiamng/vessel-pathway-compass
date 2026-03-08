@@ -21,6 +21,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
 import { useToast } from "@/hooks/use-toast";
+import { forumPostSchema, expertRequestSchema } from "@/lib/validation";
 
 const TOPICS = ["PAD", "Aorta", "Venous", "Carotid", "Wounds", "Thrombosis"] as const;
 
@@ -106,10 +107,12 @@ export default function Network() {
   const createPost = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("Not authenticated");
+      const parsed = forumPostSchema.safeParse({ title: postTitle, topic: postTopic || "General", content: postContent });
+      if (!parsed.success) throw new Error(parsed.error.issues[0].message);
       const { error } = await supabase.from("forum_posts").insert({
-        title: postTitle,
-        topic: postTopic || "General",
-        content: postContent,
+        title: parsed.data.title,
+        topic: parsed.data.topic,
+        content: parsed.data.content,
         user_id: user.id,
       });
       if (error) throw error;
@@ -129,10 +132,12 @@ export default function Network() {
   const createExpertReq = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("Not authenticated");
+      const parsed = expertRequestSchema.safeParse({ title: expertTitle, topic: expertTopic || "General", case_summary: expertSummary });
+      if (!parsed.success) throw new Error(parsed.error.issues[0].message);
       const { error } = await supabase.from("expert_requests").insert({
-        title: expertTitle,
-        topic: expertTopic || "General",
-        case_summary: expertSummary,
+        title: parsed.data.title,
+        topic: parsed.data.topic,
+        case_summary: parsed.data.case_summary,
         requester_id: user.id,
       });
       if (error) throw error;

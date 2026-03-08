@@ -13,6 +13,7 @@ import { NewCaseDialog } from "@/components/patient/NewCaseDialog";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import PatientTrash from "@/components/patient/PatientTrash";
 import { UsageLimitBanner } from "@/components/UsageLimitBanner";
+import { SEOHead } from "@/components/SEOHead";
 
 const FREE_PATIENT_LIMIT = 5;
 
@@ -93,49 +94,52 @@ export default function Patients() {
   });
 
   return (
-    <div className="space-y-6 max-w-6xl">
-      <UsageLimitBanner current={patients?.length ?? 0} limit={FREE_PATIENT_LIMIT} featureKey="patients" />
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold">{t("patients.title")}</h1>
-          <p className="text-muted-foreground mt-1">{t("patients.subtitle")}</p>
-        </div>
-        <Button
-          onClick={() => setDialogOpen(true)}
-          disabled={!subscribed && (patients?.length ?? 0) >= FREE_PATIENT_LIMIT}
-        >
-          <Plus className="h-4 w-4 mr-2" />
-          {t("patients.newCase")}
-        </Button>
-      </div>
-
-      <PatientFilters
-        search={search} onSearchChange={setSearch}
-        filterCategory={filterCategory} onFilterCategoryChange={setFilterCategory}
-        filterStatus={filterStatus} onFilterStatusChange={setFilterStatus}
-        filterRisk={filterRisk} onFilterRiskChange={setFilterRisk}
-      />
-
-      <PatientsTable
-        patients={filtered}
-        isLoading={isLoading}
-        onRowClick={(id) => navigate(`/app/patients/${id}`)}
-        onNewCase={() => setDialogOpen(true)}
-      />
-
-      <NewCaseDialog open={dialogOpen} onOpenChange={setDialogOpen} />
-
-      <Collapsible open={trashOpen} onOpenChange={setTrashOpen}>
-        <CollapsibleTrigger asChild>
-          <Button variant="ghost" size="sm" className="text-muted-foreground">
-            <Trash2 className="h-4 w-4 mr-2" />
-            {t("patientDetail.trash.showTrash")}
+    <>
+      <SEOHead title="Patients" description="Patient management" path="/app/patients" noindex />
+      <div className="space-y-6 max-w-6xl">
+        <UsageLimitBanner current={patients?.length ?? 0} limit={FREE_PATIENT_LIMIT} featureKey="patients" />
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold">{t("patients.title")}</h1>
+            <p className="text-muted-foreground mt-1">{t("patients.subtitle")}</p>
+          </div>
+          <Button
+            onClick={() => setDialogOpen(true)}
+            disabled={!subscribed && (patients?.length ?? 0) >= FREE_PATIENT_LIMIT}
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            {t("patients.newCase")}
           </Button>
-        </CollapsibleTrigger>
-        <CollapsibleContent className="mt-4">
-          <PatientTrash />
-        </CollapsibleContent>
-      </Collapsible>
-    </div>
+        </div>
+
+        <PatientFilters
+          search={search} onSearchChange={setSearch}
+          filterCategory={filterCategory} onFilterCategoryChange={setFilterCategory}
+          filterStatus={filterStatus} onFilterStatusChange={setFilterStatus}
+          filterRisk={filterRisk} onFilterRiskChange={setFilterRisk}
+        />
+
+        <PatientsTable
+          patients={filtered}
+          isLoading={isLoading}
+          onRowClick={(id) => navigate(`/app/patients/${id}`)}
+          onNewCase={() => setDialogOpen(true)}
+        />
+
+        <NewCaseDialog open={dialogOpen} onOpenChange={setDialogOpen} />
+
+        <Collapsible open={trashOpen} onOpenChange={setTrashOpen}>
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm" className="text-muted-foreground">
+              <Trash2 className="h-4 w-4 mr-2" />
+              {t("patientDetail.trash.showTrash")}
+            </Button>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="mt-4">
+            <PatientTrash />
+          </CollapsibleContent>
+        </Collapsible>
+      </div>
+    </>
   );
 }

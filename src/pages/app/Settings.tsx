@@ -16,6 +16,7 @@ import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { SEOHead } from "@/components/SEOHead";
 
 const langs: { lang: string; code: Language }[] = [
   { lang: "English", code: "en" },
@@ -90,7 +91,9 @@ export default function Settings() {
       role !== (profile.role ?? ""));
 
   return (
-    <div className="space-y-6 max-w-3xl">
+    <>
+      <SEOHead title="Settings" description="Account settings" path="/app/settings" noindex />
+      <div className="space-y-6 max-w-3xl">
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">
           <SettingsIcon className="h-8 w-8 text-primary" />
@@ -189,5 +192,6 @@ export default function Settings() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

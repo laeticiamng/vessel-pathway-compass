@@ -55,7 +55,7 @@ export function EditPatientDialog({ open, onOpenChange, patient, mutation }: Edi
         <div className="space-y-4 py-2">
           <div className="space-y-2">
             <Label>{t("patientDetail.editDialog.pseudonym")}</Label>
-            <Input value={pseudonym} onChange={(e) => setPseudonym(e.target.value)} />
+            <Input value={pseudonym} onChange={(e) => setPseudonym(e.target.value)} maxLength={100} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -117,7 +117,7 @@ export function AddEventDialog({ open, onOpenChange, mutation }: AddEventDialogP
         <div className="space-y-4 py-2">
           <div className="space-y-2">
             <Label>{t("patientDetail.eventDialog.titleLabel")}</Label>
-            <Input placeholder={t("patientDetail.eventDialog.titlePlaceholder")} value={title} onChange={(e) => setTitle(e.target.value)} />
+            <Input placeholder={t("patientDetail.eventDialog.titlePlaceholder")} value={title} onChange={(e) => setTitle(e.target.value)} maxLength={200} />
           </div>
           <div className="space-y-2">
             <Label>{t("patientDetail.eventDialog.eventType")}</Label>
@@ -134,7 +134,7 @@ export function AddEventDialog({ open, onOpenChange, mutation }: AddEventDialogP
           </div>
           <div className="space-y-2">
             <Label>{t("patientDetail.eventDialog.description")}</Label>
-            <Input placeholder={t("patientDetail.eventDialog.descPlaceholder")} value={desc} onChange={(e) => setDesc(e.target.value)} />
+            <Input placeholder={t("patientDetail.eventDialog.descPlaceholder")} value={desc} onChange={(e) => setDesc(e.target.value)} maxLength={1000} />
           </div>
         </div>
         <DialogFooter>
