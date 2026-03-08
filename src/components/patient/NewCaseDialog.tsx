@@ -93,6 +93,7 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
               placeholder={t("patients.form.pseudonymPlaceholder")}
               value={pseudonym}
               onChange={(e) => setPseudonym(e.target.value)}
+              maxLength={100}
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
