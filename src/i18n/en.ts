@@ -95,13 +95,13 @@ export const en = {
       explore: "Features",
     },
     hero: {
-      badge: "Manage vascular cases, generate AI reports, track outcomes — in one tool.",
+      badge: "All-in-one platform for vascular medicine — now in free beta",
       title: "Vascular Atlas",
       headlinePre: "AI-Powered Clinical Platform for",
       headlineHighlight: "Vascular Medicine",
-      subtitle: "Unifying clinical workflow, AI assistance, outcomes registry, certification, research, and expert networking — across USA, EU & Switzerland.",
-      cta: "Start Free Trial",
-      secondary: "View Plans",
+      subtitle: "Manage patient cases, generate AI clinical reports, track outcomes, earn certifications and collaborate with experts — all in one secure tool.",
+      cta: "Try Free — No Credit Card",
+      secondary: "See Plans & Pricing",
     },
     modules: {
       title: "Six Core Modules",
