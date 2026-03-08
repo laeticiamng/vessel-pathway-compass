@@ -383,10 +383,24 @@ export default function Landing() {
               </div>
             </div>
           </div>
-          <div className="border-t pt-6">
-            <p className="text-sm text-muted-foreground text-center">
+          <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Vascular Atlas. {t("landing.footer.rights")}
             </p>
+            <div className="flex items-center gap-1">
+              <Globe className="h-3.5 w-3.5 text-muted-foreground mr-1" />
+              {(["en", "fr", "de"] as Language[]).map((lang) => (
+                <Button
+                  key={lang}
+                  variant={language === lang ? "default" : "ghost"}
+                  size="sm"
+                  className="h-7 px-2.5 text-xs"
+                  onClick={() => setLanguage(lang)}
+                >
+                  {langLabels[lang]}
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
       </footer>
