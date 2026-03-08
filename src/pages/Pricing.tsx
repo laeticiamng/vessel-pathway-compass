@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,6 +15,7 @@ const planKeys = ["individual", "professional", "institution"] as const;
 export default function Pricing() {
   const { t } = useTranslation();
   const { session } = useAuth();
+  const navigate = useNavigate();
   const { currentPlan, subscribed, openPortal, createCheckout } = useSubscription();
   const { toast } = useToast();
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
@@ -33,7 +34,7 @@ export default function Pricing() {
   const handleCheckout = async (planKey: string) => {
     if (planKey === "institution") return;
     if (!session) {
-      window.location.href = "/auth?mode=signup";
+      navigate("/auth?mode=signup");
       return;
     }
     if (planKey === "individual") return;

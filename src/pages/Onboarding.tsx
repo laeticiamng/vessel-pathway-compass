@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useTranslation } from "@/i18n/context";
@@ -143,7 +143,13 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
+      <Link to="/" className="flex items-center gap-2 mb-6">
+        <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center">
+          <HeartPulse className="h-5 w-5 text-primary-foreground" />
+        </div>
+        <span className="text-xl font-bold">Vascular Atlas</span>
+      </Link>
       <div className="w-full max-w-lg space-y-6">
         {/* Progress */}
         <div className="space-y-2">
