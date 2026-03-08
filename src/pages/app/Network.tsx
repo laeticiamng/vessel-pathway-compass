@@ -107,10 +107,12 @@ export default function Network() {
   const createPost = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("Not authenticated");
+      const parsed = forumPostSchema.safeParse({ title: postTitle, topic: postTopic || "General", content: postContent });
+      if (!parsed.success) throw new Error(parsed.error.issues[0].message);
       const { error } = await supabase.from("forum_posts").insert({
-        title: postTitle,
-        topic: postTopic || "General",
-        content: postContent,
+        title: parsed.data.title,
+        topic: parsed.data.topic,
+        content: parsed.data.content,
         user_id: user.id,
       });
       if (error) throw error;
