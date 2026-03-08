@@ -92,7 +92,7 @@ export default function Settings() {
 
   return (
     <>
-      <SEOHead title="Settings" description="Account settings" path="/app/settings" noindex />
+      <SEOHead title={t("seo.settings.title") as string} description={t("seo.settings.description") as string} path="/app/settings" noindex />
       <div className="space-y-6 max-w-3xl">
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">

@@ -1322,5 +1322,13 @@ export const de = {
       privacy: { title: "Datenschutzrichtlinie — Vascular Atlas", description: "Datenschutzrichtlinie von Vascular Atlas — DSGVO-konformer Umgang mit Ihren Daten." },
       notice: { title: "Impressum — Vascular Atlas", description: "Impressum von Vascular Atlas — Unternehmensangaben und Haftungsausschlüsse." },
     },
+    notFound: {
+      title: "Seite nicht gefunden — Vascular Atlas",
+      description: "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    },
+    settings: {
+      title: "Einstellungen — Vascular Atlas",
+      description: "Verwalten Sie Ihr Vascular Atlas Konto, Profil, Sprache und Darstellungseinstellungen.",
+    },
   },
 };
