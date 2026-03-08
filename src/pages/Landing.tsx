@@ -24,6 +24,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { FAQSection } from "@/components/landing/FAQSection";
+import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
