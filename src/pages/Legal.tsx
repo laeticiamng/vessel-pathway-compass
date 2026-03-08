@@ -18,8 +18,8 @@ export default function Legal() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title={seoTitles[current]}
-        description={seoDescs[current]}
+        title={seoTitle}
+        description={seoDesc}
         path={`/legal/${current}`}
       />
       <nav className="border-b">
