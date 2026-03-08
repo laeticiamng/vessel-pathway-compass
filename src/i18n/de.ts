@@ -1118,7 +1118,7 @@ export const de = {
   },
 
   contentGate: {
-    previewBanner: "👀 Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
+    previewBanner: "Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
     title: "Möchten Sie dieses Modul nutzen?",
     subtitle: "Erstellen Sie in 30 Sekunden ein kostenloses Konto, um alle Funktionen zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
     createAccount: "Kostenloses Konto erstellen",

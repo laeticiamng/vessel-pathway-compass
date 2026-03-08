@@ -1118,7 +1118,7 @@ export const fr = {
   },
 
   contentGate: {
-    previewBanner: "👀 Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
+    previewBanner: "Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
     title: "Envie d'utiliser ce module ?",
     subtitle: "Créez un compte gratuit en 30 secondes pour accéder à toutes les fonctionnalités, sauvegarder vos données et suivre votre progression.",
     createAccount: "Créer un compte gratuit",
