@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+import { AboutSection } from "@/components/landing/AboutSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
