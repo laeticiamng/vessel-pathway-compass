@@ -57,6 +57,7 @@ export default function PatientDetail() {
           <Skeleton className="h-24" /><Skeleton className="h-24" /><Skeleton className="h-24" />
         </div>
       </div>
+      </>
     );
   }
 
