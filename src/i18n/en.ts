@@ -331,6 +331,15 @@ export const en = {
       noPatients: "No patients registered yet",
       totalPatients: "total patients",
     },
+    activityLabels: {
+      ai_report_generated: "AI report generated",
+      ai_report_signed_off: "AI report signed off",
+      patient_created: "Patient created",
+      case_created: "Case created",
+      measurement_added: "Measurement added",
+      event_added: "Event added",
+      outcome_recorded: "Outcome recorded",
+    },
   },
 
   // AI Assistant
@@ -1365,6 +1374,50 @@ export const en = {
     settings: {
       title: "Settings — Vascular Atlas",
       description: "Manage your Vascular Atlas account, profile, language and appearance preferences.",
+    },
+    dashboard: {
+      title: "Dashboard — Vascular Atlas",
+      description: "Overview of your cases, AI reports, outcomes and activity on Vascular Atlas.",
+    },
+    digitalTwin: {
+      title: "Digital Twin — Vascular Atlas",
+      description: "Interactive vascular map and patient timeline for clinical decision support.",
+    },
+    education: {
+      title: "Education — Vascular Atlas",
+      description: "Vascular medicine courses, quizzes and digital badges for continuous certification.",
+    },
+    network: {
+      title: "Expert Network — Vascular Atlas",
+      description: "Discuss cases, ask experts and connect with the vascular medicine community.",
+    },
+    simulation: {
+      title: "Simulation Lab — Vascular Atlas",
+      description: "Clinical simulation cases to sharpen decision-making skills in vascular medicine.",
+    },
+    registry: {
+      title: "Outcomes Registry — Vascular Atlas",
+      description: "Track patient outcomes, complication rates and benchmarks for quality improvement.",
+    },
+    compliance: {
+      title: "Compliance — Vascular Atlas",
+      description: "Audit trail, consent management and AI safety monitoring for regulatory compliance.",
+    },
+    team: {
+      title: "Team — Vascular Atlas",
+      description: "Manage your institution team members and roles on Vascular Atlas.",
+    },
+    research: {
+      title: "Research Hub — Vascular Atlas",
+      description: "Create studies, manage research members and export data for vascular research.",
+    },
+    aiAssistant: {
+      title: "AI Assistant — Vascular Atlas",
+      description: "Generate AI-assisted clinical reports with evidence-based vascular medicine analysis.",
+    },
+    patients: {
+      title: "Patients — Vascular Atlas",
+      description: "Manage patient cases, measurements and clinical documentation.",
     },
   },
 };

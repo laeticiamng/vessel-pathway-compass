@@ -1,4 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import PatientRiskDistribution from "@/components/dashboard/PatientRiskDistribution";
 import { OnboardingChecklist } from "@/components/dashboard/OnboardingChecklist";
@@ -101,6 +102,11 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-8 max-w-7xl">
+      <SEOHead
+        title={t("seo.dashboard.title") as string}
+        description={t("seo.dashboard.description") as string}
+        path="/app"
+      />
       <div>
         <h1 className="text-3xl font-bold">{t("dashboard.title")}</h1>
         <p className="text-muted-foreground mt-1">{t("dashboard.welcome")}</p>
@@ -179,10 +185,8 @@ export default function Dashboard() {
                         <Icon className="h-4 w-4 text-primary" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium">{item.action}</p>
-                        <p className="text-xs text-muted-foreground truncate">
-                          {item.entity_type}{item.entity_id ? ` · ${item.entity_id.slice(0, 8)}` : ""}
-                        </p>
+                        <p className="text-sm font-medium">{(t(`dashboard.activityLabels.${item.action}`) as string) || item.action.replace(/_/g, " ")}</p>
+                        <p className="text-xs text-muted-foreground truncate">{item.entity_type}{item.entity_id ? ` · ${item.entity_id.slice(0, 8)}` : ""}</p>
                       </div>
                       <span className="text-xs text-muted-foreground shrink-0">{timeAgo(item.created_at)}</span>
                     </div>

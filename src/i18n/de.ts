@@ -319,6 +319,15 @@ export const de = {
       noPatients: "Noch keine Patienten registriert",
       totalPatients: "Patienten insgesamt",
     },
+    activityLabels: {
+      ai_report_generated: "KI-Bericht erstellt",
+      ai_report_signed_off: "KI-Bericht bestätigt",
+      patient_created: "Patient erstellt",
+      case_created: "Fall erstellt",
+      measurement_added: "Messung hinzugefügt",
+      event_added: "Ereignis hinzugefügt",
+      outcome_recorded: "Ergebnis erfasst",
+    },
   },
 
   aiAssistant: {
@@ -1334,6 +1343,50 @@ export const de = {
     settings: {
       title: "Einstellungen — Vascular Atlas",
       description: "Verwalten Sie Ihr Vascular Atlas Konto, Profil, Sprache und Darstellungseinstellungen.",
+    },
+    dashboard: {
+      title: "Dashboard — Vascular Atlas",
+      description: "Übersicht über Ihre Fälle, KI-Berichte, Ergebnisse und Aktivität auf Vascular Atlas.",
+    },
+    digitalTwin: {
+      title: "Digitaler Zwilling — Vascular Atlas",
+      description: "Interaktive Gefäßkarte und Patienten-Zeitachse zur klinischen Entscheidungsunterstützung.",
+    },
+    education: {
+      title: "Fortbildung — Vascular Atlas",
+      description: "Gefäßmedizin-Kurse, Quizze und digitale Abzeichen für die Weiterbildung.",
+    },
+    network: {
+      title: "Expertennetzwerk — Vascular Atlas",
+      description: "Diskutieren Sie Fälle, fragen Sie Experten und vernetzen Sie sich.",
+    },
+    simulation: {
+      title: "Simulationslabor — Vascular Atlas",
+      description: "Klinische Simulationsfälle zur Verbesserung der Entscheidungsfindung.",
+    },
+    registry: {
+      title: "Ergebnisregister — Vascular Atlas",
+      description: "Verfolgen Sie Patientenergebnisse, Komplikationsraten und Benchmarks.",
+    },
+    compliance: {
+      title: "Compliance — Vascular Atlas",
+      description: "Audit-Trail, Einwilligungsverwaltung und KI-Sicherheitsüberwachung.",
+    },
+    team: {
+      title: "Team — Vascular Atlas",
+      description: "Verwalten Sie Ihre Institutionsmitglieder und Rollen auf Vascular Atlas.",
+    },
+    research: {
+      title: "Forschung — Vascular Atlas",
+      description: "Erstellen Sie Studien, verwalten Sie Mitglieder und exportieren Sie Forschungsdaten.",
+    },
+    aiAssistant: {
+      title: "KI-Assistent — Vascular Atlas",
+      description: "Erstellen Sie KI-gestützte klinische Berichte mit evidenzbasierter Gefäßmedizin-Analyse.",
+    },
+    patients: {
+      title: "Patienten — Vascular Atlas",
+      description: "Verwalten Sie Patientenfälle, Messungen und klinische Dokumentation.",
     },
   },
 };
