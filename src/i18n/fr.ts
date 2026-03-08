@@ -104,7 +104,7 @@ export const fr = {
       subtitle: "Six modules intégrés conçus pour votre workflow clinique quotidien.",
       ai: {
         title: "Assistant clinique IA",
-        desc: "Générez des notes SOAP structurées, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
+        desc: "Générez des comptes-rendus cliniques structurés, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
       },
       twin: {
         title: "Jumeau numérique vasculaire",
