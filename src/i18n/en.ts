@@ -112,7 +112,7 @@ export const en = {
       },
       twin: {
         title: "Vascular Digital Twin",
-        desc: "Longitudinal patient timelines with interactive vascular maps, lesion tracking, and scenario simulation.",
+        desc: "Visualize each patient's vascular anatomy over time with interactive maps, lesion tracking and scenario planning.",
       },
       registry: {
         title: "Global Outcomes Registry",
