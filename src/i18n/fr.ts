@@ -1344,5 +1344,49 @@ export const fr = {
       title: "Paramètres — Vascular Atlas",
       description: "Gérez votre compte Vascular Atlas, profil, langue et préférences d'apparence.",
     },
+    dashboard: {
+      title: "Tableau de bord — Vascular Atlas",
+      description: "Vue d'ensemble de vos cas, rapports IA, résultats et activité sur Vascular Atlas.",
+    },
+    digitalTwin: {
+      title: "Jumeau numérique — Vascular Atlas",
+      description: "Carte vasculaire interactive et chronologie patient pour l'aide à la décision clinique.",
+    },
+    education: {
+      title: "Formation — Vascular Atlas",
+      description: "Cours de médecine vasculaire, quiz et badges numériques pour la certification continue.",
+    },
+    network: {
+      title: "Réseau d'experts — Vascular Atlas",
+      description: "Discutez de cas, consultez des experts et connectez-vous à la communauté vasculaire.",
+    },
+    simulation: {
+      title: "Laboratoire de simulation — Vascular Atlas",
+      description: "Cas cliniques simulés pour affiner vos compétences décisionnelles.",
+    },
+    registry: {
+      title: "Registre des résultats — Vascular Atlas",
+      description: "Suivez les résultats patients, taux de complications et benchmarks qualité.",
+    },
+    compliance: {
+      title: "Conformité — Vascular Atlas",
+      description: "Piste d'audit, gestion du consentement et surveillance de la sécurité IA.",
+    },
+    team: {
+      title: "Équipe — Vascular Atlas",
+      description: "Gérez les membres et rôles de votre institution sur Vascular Atlas.",
+    },
+    research: {
+      title: "Recherche — Vascular Atlas",
+      description: "Créez des études, gérez les membres et exportez des données pour la recherche vasculaire.",
+    },
+    aiAssistant: {
+      title: "Assistant IA — Vascular Atlas",
+      description: "Générez des rapports cliniques assistés par IA avec analyse vasculaire basée sur les preuves.",
+    },
+    patients: {
+      title: "Patients — Vascular Atlas",
+      description: "Gérez les cas patients, mesures et documentation clinique.",
+    },
   },
 };
