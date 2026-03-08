@@ -139,6 +139,18 @@ export const fr = {
         { quote: "Une plateforme conçue avec soin qui reflète les véritables workflows de la médecine vasculaire. Vivement la version complète.", author: "Participant bêta #3", role: "Chirurgien vasculaire" },
       ],
     },
+    faq: {
+      title: "Questions fréquentes",
+      subtitle: "Tout ce que vous devez savoir sur Vascular Atlas.",
+      items: [
+        { q: "Qu'est-ce que Vascular Atlas ?", a: "Vascular Atlas est une plateforme clinique propulsée par l'IA pour la médecine vasculaire. Elle unifie la gestion des cas patients, les comptes rendus assistés par IA, le registre des résultats, la certification, la simulation clinique et le réseau d'experts." },
+        { q: "À qui s'adresse Vascular Atlas ?", a: "Vascular Atlas est conçu pour les chirurgiens vasculaires, angiologues, radiologues interventionnels, internes et services hospitaliers spécialisés en médecine vasculaire." },
+        { q: "Combien ça coûte ?", a: "Vascular Atlas propose un plan Individuel gratuit, un plan Professionnel à 99 $/mois et un tarif Institution sur mesure. Toutes les fonctionnalités sont gratuites pendant la période bêta." },
+        { q: "Vascular Atlas est-il un dispositif médical ?", a: "Non. Vascular Atlas est une plateforme de workflow clinique et de documentation. Ce n'est pas un dispositif médical certifié. Toutes les sorties IA nécessitent une confirmation du clinicien." },
+        { q: "Mes données sont-elles sécurisées ?", a: "Oui. Toutes les données sont chiffrées au repos et en transit. La plateforme est conçue en conformité avec le RGPD, HIPAA et la nLPD suisse, avec des journaux d'audit complets et un contrôle d'accès basé sur les rôles." },
+        { q: "Puis-je l'utiliser avec mon équipe ?", a: "Absolument. Le plan Institution prend en charge les équipes multi-utilisateurs avec des registres patients partagés, des analyses d'équipe et des permissions basées sur les rôles." },
+      ],
+    },
     cta: {
       title: "Prêt à transformer la prise en charge vasculaire ?",
       subtitle: "Rejoignez les spécialistes vasculaires qui explorent Vascular Atlas.",

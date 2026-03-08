@@ -21,6 +21,7 @@ import {
   Menu,
   Sparkles,
 } from "lucide-react";
+import { FAQSection } from "@/components/landing/FAQSection";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -320,6 +321,9 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FAQSection />
 
       {/* CTA */}
       <section className="py-24 relative overflow-hidden">

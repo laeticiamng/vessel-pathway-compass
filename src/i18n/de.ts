@@ -139,6 +139,18 @@ export const de = {
         { quote: "Eine durchdacht gestaltete Plattform, die reale gefäßmedizinische Arbeitsabläufe widerspiegelt. Freue mich auf die Vollversion.", author: "Beta-Teilnehmer #3", role: "Gefäßchirurg" },
       ],
     },
+    faq: {
+      title: "Häufig gestellte Fragen",
+      subtitle: "Alles, was Sie über Vascular Atlas wissen müssen.",
+      items: [
+        { q: "Was ist Vascular Atlas?", a: "Vascular Atlas ist eine KI-gestützte klinische Plattform für Gefäßmedizin, die Patientenfallmanagement, KI-gestützte Berichterstattung, Ergebnisregister, Zertifizierung, klinische Simulation und Expertennetzwerk vereint." },
+        { q: "Für wen ist Vascular Atlas gedacht?", a: "Vascular Atlas richtet sich an Gefäßchirurgen, Angiologen, interventionelle Radiologen, Auszubildende und Krankenhausabteilungen, die auf Gefäßmedizin spezialisiert sind." },
+        { q: "Was kostet es?", a: "Vascular Atlas bietet einen kostenlosen Einzelplan, einen Professional-Plan für 99 $/Monat und individuelle Institutionspreise. Alle Funktionen sind während der Beta-Phase kostenlos." },
+        { q: "Ist Vascular Atlas ein Medizinprodukt?", a: "Nein. Vascular Atlas ist eine Plattform für klinische Arbeitsabläufe und Dokumentation. Es ist kein zertifiziertes Medizinprodukt. Alle KI-Ausgaben erfordern eine Bestätigung durch den Kliniker." },
+        { q: "Sind meine Daten sicher?", a: "Ja. Alle Daten werden im Ruhezustand und bei der Übertragung verschlüsselt. Die Plattform ist auf DSGVO-, HIPAA- und Schweizer nDSG-Konformität ausgelegt, mit vollständigen Audit-Trails und rollenbasierter Zugriffskontrolle." },
+        { q: "Kann ich es mit meinem Team nutzen?", a: "Auf jeden Fall. Der Institutionsplan unterstützt Mehrbenutzer-Teams mit gemeinsamen Patientenregistern, Teamanalysen und rollenbasierten Berechtigungen." },
+      ],
+    },
     cta: {
       title: "Bereit, die Gefäßmedizin zu transformieren?",
       subtitle: "Schließen Sie sich Gefäßspezialisten an, die Vascular Atlas erkunden.",

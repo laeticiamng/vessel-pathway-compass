@@ -146,6 +146,18 @@ export const en = {
         { quote: "A thoughtfully designed platform that reflects real vascular medicine workflows. Looking forward to the full release.", author: "Beta Participant #3", role: "Vascular Surgeon" },
       ],
     },
+    faq: {
+      title: "Frequently Asked Questions",
+      subtitle: "Everything you need to know about Vascular Atlas.",
+      items: [
+        { q: "What is Vascular Atlas?", a: "Vascular Atlas is an AI-powered clinical platform for vascular medicine that unifies patient case management, AI-assisted reporting, outcomes registry, certification, clinical simulation, and expert networking." },
+        { q: "Who is Vascular Atlas for?", a: "Vascular Atlas is designed for vascular surgeons, angiologists, interventional radiologists, trainees, and hospital departments specializing in vascular medicine." },
+        { q: "How much does it cost?", a: "Vascular Atlas offers a free Individual plan, a Professional plan at $99/month, and custom Institution pricing. All features are currently free during the beta period." },
+        { q: "Is Vascular Atlas a medical device?", a: "No. Vascular Atlas is a clinical workflow and documentation platform. It is not a certified medical device. All AI outputs require clinician confirmation before use." },
+        { q: "Is my data secure?", a: "Yes. All data is encrypted at rest and in transit. The platform is designed with GDPR, HIPAA, and Swiss nFADP compliance in mind, with full audit trails and role-based access control." },
+        { q: "Can I use it with my team?", a: "Absolutely. The Institution plan supports multi-user teams with shared patient registries, team analytics, and role-based permissions." },
+      ],
+    },
     cta: {
       title: "Ready to Transform Vascular Care?",
       subtitle: "Join vascular specialists exploring Vascular Atlas.",
