@@ -10,7 +10,7 @@ type Section = typeof sections[number];
 
 export default function Legal() {
   const { section = "terms" } = useParams<{ section: string }>();
-  const { t } = useTranslation();
+  const { t, language, setLanguage } = useTranslation();
   const current = sections.includes(section as Section) ? (section as Section) : "terms";
 
   const seoTitle = t(`seo.legal.${current}.title`) as string;
