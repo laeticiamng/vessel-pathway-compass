@@ -67,7 +67,7 @@ export function SubscriptionSettingsCard() {
             </div>
             {subscribed && subscriptionEnd && (
               <p className="text-xs text-muted-foreground">
-                {t("settings.plan.renewsOn") || "Renews on"} {new Date(subscriptionEnd).toLocaleDateString()}
+                {t("settings.plan.renewsOn")} {new Date(subscriptionEnd).toLocaleDateString()}
               </p>
             )}
           </>
