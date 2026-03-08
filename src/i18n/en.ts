@@ -312,6 +312,7 @@ export const en = {
       outcomes: "Outcomes",
       registryEntries: "Registry entries",
       completed: "Completed",
+      generated: "Generated",
       cmeCredits: "CME Credits",
       simulations: "Simulations",
     },
@@ -1342,6 +1343,15 @@ export const en = {
     support: {
       title: "Support & FAQ — Vascular Atlas",
       description: "Get help with Vascular Atlas. Contact support, browse FAQs about AI clinical reports, patient management, certification and more.",
+    },
+    auth: {
+      title: "Sign In — Vascular Atlas",
+      description: "Sign in or create a Vascular Atlas account to access all clinical modules.",
+    },
+    legal: {
+      terms: { title: "Terms of Service — Vascular Atlas", description: "Read Vascular Atlas Terms of Service — usage conditions for the clinical platform." },
+      privacy: { title: "Privacy Policy — Vascular Atlas", description: "Vascular Atlas Privacy Policy — how we handle your data with GDPR compliance." },
+      notice: { title: "Legal Notice — Vascular Atlas", description: "Vascular Atlas Legal Notice — company information and disclaimers." },
     },
   },
 };

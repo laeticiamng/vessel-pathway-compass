@@ -42,7 +42,7 @@ export default function Pricing() {
     try {
       await createCheckout(STRIPE_PLANS.professional.price_id);
     } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: t("auth.error"), description: err.message, variant: "destructive" });
     } finally {
       setCheckoutLoading(null);
     }
@@ -52,7 +52,7 @@ export default function Pricing() {
     try {
       await openPortal();
     } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: t("auth.error"), description: err.message, variant: "destructive" });
     }
   };
 

@@ -300,6 +300,7 @@ export const de = {
       outcomes: "Ergebnisse",
       registryEntries: "Registereinträge",
       completed: "Abgeschlossen",
+      generated: "Generiert",
       cmeCredits: "CME-Punkte",
       simulations: "Simulationen",
     },
@@ -1311,6 +1312,15 @@ export const de = {
     support: {
       title: "Support & FAQ — Vascular Atlas",
       description: "Hilfe zu Vascular Atlas. Kontaktieren Sie den Support, durchsuchen Sie FAQ zu KI-Berichten, Patientenmanagement, Zertifizierung und mehr.",
+    },
+    auth: {
+      title: "Anmelden — Vascular Atlas",
+      description: "Melden Sie sich an oder erstellen Sie ein Vascular Atlas Konto für den Zugang zu allen klinischen Modulen.",
+    },
+    legal: {
+      terms: { title: "Nutzungsbedingungen — Vascular Atlas", description: "Nutzungsbedingungen von Vascular Atlas — Nutzungsbedingungen der klinischen Plattform." },
+      privacy: { title: "Datenschutzrichtlinie — Vascular Atlas", description: "Datenschutzrichtlinie von Vascular Atlas — DSGVO-konformer Umgang mit Ihren Daten." },
+      notice: { title: "Impressum — Vascular Atlas", description: "Impressum von Vascular Atlas — Unternehmensangaben und Haftungsausschlüsse." },
     },
   },
 };

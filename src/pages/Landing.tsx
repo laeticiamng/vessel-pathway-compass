@@ -40,6 +40,7 @@ const staggerContainer = {
 
 const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
 const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
+const modulePaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network"];
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
@@ -57,6 +58,7 @@ export default function Landing() {
     icon: moduleIcons[i],
     title: t(`landing.modules.${key}.title`),
     description: t(`landing.modules.${key}.desc`),
+    path: modulePaths[i],
   }));
 
   const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
@@ -248,15 +250,19 @@ export default function Landing() {
                 key={i}
                 custom={i}
                 variants={fadeUp}
-                className="group relative rounded-2xl border bg-card p-7 card-hover shine-hover"
               >
-                <div className="relative z-10">
-                  <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors duration-300">
-                    <mod.icon className="h-5 w-5 text-primary" />
+                <Link to={mod.path} className="group relative rounded-2xl border bg-card p-7 card-hover shine-hover block h-full">
+                  <div className="relative z-10">
+                    <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors duration-300">
+                      <mod.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2.5">{mod.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{mod.description}</p>
+                    <span className="inline-flex items-center gap-1 mt-4 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {t("common.learnMore")} <ArrowRight className="h-3 w-3" />
+                    </span>
                   </div>
-                  <h3 className="text-lg font-semibold mb-2.5">{mod.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{mod.description}</p>
-                </div>
+                </Link>
               </motion.div>
             ))}
           </motion.div>
@@ -383,10 +389,24 @@ export default function Landing() {
               </div>
             </div>
           </div>
-          <div className="border-t pt-6">
-            <p className="text-sm text-muted-foreground text-center">
+          <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-muted-foreground">
               © {new Date().getFullYear()} Vascular Atlas. {t("landing.footer.rights")}
             </p>
+            <div className="flex items-center gap-1">
+              <Globe className="h-3.5 w-3.5 text-muted-foreground mr-1" />
+              {(["en", "fr", "de"] as Language[]).map((lang) => (
+                <Button
+                  key={lang}
+                  variant={language === lang ? "default" : "ghost"}
+                  size="sm"
+                  className="h-7 px-2.5 text-xs"
+                  onClick={() => setLanguage(lang)}
+                >
+                  {langLabels[lang]}
+                </Button>
+              ))}
+            </div>
           </div>
         </div>
       </footer>

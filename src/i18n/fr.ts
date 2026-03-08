@@ -300,6 +300,7 @@ export const fr = {
       outcomes: "Résultats",
       registryEntries: "Entrées du registre",
       completed: "Terminées",
+      generated: "Générés",
       cmeCredits: "Crédits FMC",
       simulations: "Simulations",
     },
@@ -1311,6 +1312,15 @@ export const fr = {
     support: {
       title: "Support & FAQ — Vascular Atlas",
       description: "Obtenez de l'aide avec Vascular Atlas. Contactez le support, consultez la FAQ sur les rapports IA, la gestion des patients, la certification et plus.",
+    },
+    auth: {
+      title: "Connexion — Vascular Atlas",
+      description: "Connectez-vous ou créez un compte Vascular Atlas pour accéder à tous les modules cliniques.",
+    },
+    legal: {
+      terms: { title: "Conditions d'utilisation — Vascular Atlas", description: "Conditions d'utilisation de Vascular Atlas — règles d'usage de la plateforme clinique." },
+      privacy: { title: "Politique de confidentialité — Vascular Atlas", description: "Politique de confidentialité Vascular Atlas — traitement de vos données conforme au RGPD." },
+      notice: { title: "Mentions légales — Vascular Atlas", description: "Mentions légales Vascular Atlas — informations sur l'éditeur et avertissements." },
     },
   },
 };
