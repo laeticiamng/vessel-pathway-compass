@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { HeartPulse, MapPin, Calendar, Activity, Stethoscope, Scan, Target, User } from "lucide-react";
+import { SEOHead } from "@/components/SEOHead";
 import VascularMap, { VASCULAR_SEGMENTS } from "@/components/digital-twin/VascularMap";
 import SegmentDetail from "@/components/digital-twin/SegmentDetail";
 
