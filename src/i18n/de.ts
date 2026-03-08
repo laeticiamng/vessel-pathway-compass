@@ -328,7 +328,7 @@ export const de = {
       simulations: "Simulationen",
     },
     moduleDesc: {
-      ai: "Erstellen Sie KI-gestützte klinische Berichte mit strukturierten SOAP-Notizen und Differentialdiagnosen.",
+      ai: "Erstellen Sie KI-gestützte klinische Berichte mit strukturierten Notizen und Differentialdiagnosen.",
       twin: "Sehen Sie longitudinale Patienten-Zeitleisten, Gefäßkarten und führen Sie Szenario-Simulationen durch.",
       registry: "Tragen Sie zu vaskulären Ergebnisdaten bei und analysieren Sie diese mit datenschutzfreundlichem Benchmarking.",
       education: "Absolvieren Sie Kompetenzpfade, sammeln Sie CME-Punkte und erhalten Sie digitale Abzeichen.",
