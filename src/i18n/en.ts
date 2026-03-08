@@ -168,12 +168,13 @@ export const en = {
       ],
     },
     cta: {
-      title: "Ready to Transform Vascular Care?",
-      subtitle: "Join vascular specialists exploring Vascular Atlas.",
-      button: "Get Started Free",
+      title: "Ready to Streamline Your Vascular Practice?",
+      subtitle: "Join hundreds of vascular specialists already exploring the platform.",
+      button: "Create Free Account",
     },
     footer: {
-      tagline: "Compliance-ready platform for vascular medicine. Not a medical device.",
+      tagline: "The clinical platform built for vascular medicine professionals.",
+      notMedicalDevice: "Clinical decision support — not a medical device.",
       product: "Product",
       legal: "Legal",
       rights: "All rights reserved.",
