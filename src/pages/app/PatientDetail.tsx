@@ -197,5 +197,6 @@ export default function PatientDetail() {
         onConfirm={() => deleteMeasId && deleteMeasMutation.mutate(deleteMeasId)}
       />
     </div>
+    </>
   );
 }
