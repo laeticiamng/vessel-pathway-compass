@@ -1,8 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, HeartPulse } from "lucide-react";
-import { useTranslation } from "@/i18n/context";
+import { ArrowLeft, HeartPulse, Globe } from "lucide-react";
+import { useTranslation, type Language } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
 const sections = ["terms", "privacy", "notice"] as const;
 type Section = typeof sections[number];
