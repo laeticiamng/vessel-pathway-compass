@@ -7,9 +7,20 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const logStep = (step: string, details?: any) => {
-  const detailsStr = details ? ` - ${JSON.stringify(details)}` : '';
-  console.log(`[CUSTOMER-PORTAL] ${step}${detailsStr}`);
+// ── Rate limiter (10 req/min per user) ───────────────────────────────
+const WINDOW_MS = 60_000;
+const MAX_REQ = 10;
+const rlMap = new Map<string, { count: number; resetAt: number }>();
+function isRateLimited(uid: string): boolean {
+  const now = Date.now();
+  const e = rlMap.get(uid);
+  if (!e || now > e.resetAt) { rlMap.set(uid, { count: 1, resetAt: now + WINDOW_MS }); return false; }
+  return ++e.count > MAX_REQ;
+}
+setInterval(() => { const now = Date.now(); for (const [k, v] of rlMap) if (now > v.resetAt) rlMap.delete(k); }, 60_000);
+
+const logStep = (step: string, details?: unknown) => {
+  console.log(`[CUSTOMER-PORTAL] ${step}${details ? ` - ${JSON.stringify(details)}` : ''}`);
 };
 
 serve(async (req) => {
@@ -39,14 +50,34 @@ serve(async (req) => {
     if (!user?.email) throw new Error("User not authenticated or email not available");
     logStep("User authenticated", { email: user.email });
 
-    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
-    const customers = await stripe.customers.list({ email: user.email, limit: 1 });
-    if (customers.data.length === 0) {
-      throw new Error("No Stripe customer found for this user");
+    // Rate limit
+    if (isRateLimited(user.id)) {
+      return new Response(JSON.stringify({ error: "Too many requests" }), {
+        status: 429, headers: { ...corsHeaders, "Content-Type": "application/json", "Retry-After": "60" },
+      });
     }
 
-    const customerId = customers.data[0].id;
-    logStep("Found Stripe customer", { customerId });
+    const stripe = new Stripe(stripeKey, { apiVersion: "2025-08-27.basil" });
+
+    // Try DB first for customer ID
+    let customerId: string | null = null;
+    const { data: dbSub } = await supabaseClient
+      .from("subscriptions")
+      .select("stripe_customer_id")
+      .eq("user_id", user.id)
+      .maybeSingle();
+
+    if (dbSub?.stripe_customer_id) {
+      customerId = dbSub.stripe_customer_id;
+      logStep("Customer ID from DB", { customerId });
+    } else {
+      const customers = await stripe.customers.list({ email: user.email, limit: 1 });
+      if (customers.data.length === 0) {
+        throw new Error("No Stripe customer found for this user");
+      }
+      customerId = customers.data[0].id;
+      logStep("Customer ID from Stripe", { customerId });
+    }
 
     const origin = req.headers.get("origin") || "http://localhost:8080";
     const portalSession = await stripe.billingPortal.sessions.create({
@@ -56,15 +87,13 @@ serve(async (req) => {
     logStep("Portal session created", { url: portalSession.url });
 
     return new Response(JSON.stringify({ url: portalSession.url }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 200,
+      headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200,
     });
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     logStep("ERROR", { message: errorMessage });
     return new Response(JSON.stringify({ error: errorMessage }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-      status: 500,
+      headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500,
     });
   }
 });

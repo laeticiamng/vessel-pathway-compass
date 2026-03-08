@@ -1,21 +1,98 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2, HeartPulse, ArrowRight } from "lucide-react";
+import { CheckCircle2, HeartPulse, ArrowRight, Loader2, AlertTriangle } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
 import { useSubscription } from "@/hooks/useSubscription";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+
+type VerifyState = "loading" | "verified" | "failed";
 
 export default function CheckoutSuccess() {
   const { t } = useTranslation();
   const { checkSubscription } = useSubscription();
+  const { session } = useAuth();
+  const [searchParams] = useSearchParams();
+  const sessionId = searchParams.get("session_id");
+  const [verifyState, setVerifyState] = useState<VerifyState>(sessionId ? "loading" : "verified");
 
   useEffect(() => {
-    // Refresh subscription status after successful checkout
-    const timer = setTimeout(() => checkSubscription(), 2000);
-    return () => clearTimeout(timer);
-  }, [checkSubscription]);
+    if (!sessionId || !session?.access_token) {
+      // No session_id param — legacy flow, just refresh subscription
+      const timer = setTimeout(() => checkSubscription(), 2000);
+      return () => clearTimeout(timer);
+    }
+
+    // Server-side verification of Stripe checkout session
+    const verify = async () => {
+      try {
+        const { data, error } = await supabase.functions.invoke("verify-checkout-session", {
+          body: { sessionId },
+          headers: { Authorization: `Bearer ${session.access_token}` },
+        });
+
+        if (error || !data?.valid) {
+          console.error("Checkout verification failed:", error || data?.error);
+          setVerifyState("failed");
+          return;
+        }
+
+        setVerifyState("verified");
+        checkSubscription();
+      } catch {
+        setVerifyState("failed");
+      }
+    };
+
+    verify();
+  }, [sessionId, session?.access_token, checkSubscription]);
+
+  if (verifyState === "loading") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-6">
+        <SEOHead title="Verifying Payment — Vascular Atlas" description="Verifying your payment." path="/checkout/success" />
+        <Card className="max-w-md w-full text-center">
+          <CardContent className="pt-10 pb-8 space-y-6">
+            <Loader2 className="h-10 w-10 animate-spin text-primary mx-auto" />
+            <p className="text-muted-foreground">{t("checkout.success.verifying") || "Verifying your payment..."}</p>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (verifyState === "failed") {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center p-6">
+        <SEOHead title="Payment Verification Issue — Vascular Atlas" description="We could not verify your payment." path="/checkout/success" />
+        <Card className="max-w-md w-full text-center">
+          <CardContent className="pt-10 pb-8 space-y-6">
+            <div className="mx-auto w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center">
+              <AlertTriangle className="h-8 w-8 text-destructive" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold mb-2">{t("checkout.success.verifyFailed") || "Verification Issue"}</h1>
+              <p className="text-muted-foreground">{t("checkout.success.verifyFailedDesc") || "We couldn't verify your payment session. If you were charged, your subscription will be activated shortly. Contact support if the issue persists."}</p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <Button asChild>
+                <Link to="/app">
+                  {t("checkout.success.goToDashboard")}
+                  <ArrowRight className="h-4 w-4 ml-2" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link to="/support">{t("common.support") || "Contact Support"}</Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-6">
