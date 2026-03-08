@@ -54,10 +54,11 @@ export function AppSidebar() {
       ? location.pathname === "/app"
       : location.pathname.startsWith(path);
 
+  // Items visible to everyone (semi-public with ContentGate)
   const coreItems = [
     { title: t("sidebar.dashboard"), url: "/app", icon: LayoutDashboard },
     { title: t("sidebar.aiAssistant"), url: "/app/ai-assistant", icon: Brain },
-    { title: t("sidebar.patients"), url: "/app/patients", icon: HeartPulse },
+    ...(session ? [{ title: t("sidebar.patients"), url: "/app/patients", icon: HeartPulse }] : []),
     { title: t("sidebar.digitalTwin"), url: "/app/digital-twin", icon: Activity },
     { title: t("sidebar.registry"), url: "/app/registry", icon: LineChart },
     { title: t("sidebar.education"), url: "/app/education", icon: BookOpen },
@@ -70,7 +71,7 @@ export function AppSidebar() {
   const adminItems = [
     { title: t("sidebar.compliance"), url: "/app/compliance", icon: Shield },
     { title: t("sidebar.team"), url: "/app/team", icon: Users },
-    { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
+    ...(session ? [{ title: t("sidebar.settings"), url: "/app/settings", icon: Settings }] : []),
   ];
 
   return (
