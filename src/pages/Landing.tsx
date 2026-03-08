@@ -322,6 +322,9 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <FAQSection />
+
       {/* CTA */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 dot-pattern opacity-30" />
