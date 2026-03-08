@@ -1389,5 +1389,9 @@ export const de = {
       title: "Patienten — Vascular Atlas",
       description: "Verwalten Sie Patientenfälle, Messungen und klinische Dokumentation.",
     },
+    analytics: {
+      title: "Analytik — Vascular Atlas",
+      description: "Klinisches Analyse-Dashboard mit Falltrends, Messungen und institutionellen Vergleichen.",
+    },
   },
 };

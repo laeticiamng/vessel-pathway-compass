@@ -1420,5 +1420,9 @@ export const en = {
       title: "Patients — Vascular Atlas",
       description: "Manage patient cases, measurements and clinical documentation.",
     },
+    analytics: {
+      title: "Analytics — Vascular Atlas",
+      description: "Clinical analytics dashboard with case trends, measurements and institutional comparisons.",
+    },
   },
 };
