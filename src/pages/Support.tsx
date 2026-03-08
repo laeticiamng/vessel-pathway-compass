@@ -19,8 +19,8 @@ export default function Support() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Support & FAQ"
-        description="Get help with Vascular Atlas. Contact support, browse FAQs about AI clinical reports, patient management, certification and more."
+        title={t("seo.support.title") as string}
+        description={t("seo.support.description") as string}
         path="/support"
       />
       <nav className="border-b">

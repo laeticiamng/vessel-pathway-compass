@@ -1084,11 +1084,11 @@ export const fr = {
   },
 
   contentGate: {
-    previewBanner: "🔒 Aperçu limité — connectez-vous ou abonnez-vous pour un accès complet",
+    previewBanner: "🔒 Aperçu limité — connectez-vous ou inscrivez-vous pour un accès complet",
     title: "Vous consultez un aperçu limité",
-    subtitle: "Ce contenu est restreint. Connectez-vous à votre compte gratuit pour continuer, ou passez au plan Professionnel pour un accès illimité à tous les modules.",
-    signIn: "Se connecter pour continuer",
-    viewPlans: "Voir les plans & tarifs",
+    subtitle: "Ce contenu est restreint. Créez un compte gratuit pour continuer, ou connectez-vous si vous en avez déjà un.",
+    createAccount: "Créer un compte gratuit",
+    signIn: "Se connecter",
   },
 
   notifications: {
@@ -1296,6 +1296,21 @@ export const fr = {
       imaging: { title: "Pipeline d'imagerie", desc: "Résumés d'imagerie, mesures structurées et outils d'annotation. Architecture compatible DICOM." },
       wearables: { title: "Objets connectés & Suivi", desc: "Application patient pour tests de marche, journal des symptômes, photos de plaies et observance de la compression." },
       arTraining: { title: "Formation immersive RA", desc: "Mode check-list RA et formation échographique par stations." },
+    },
+  },
+
+  seo: {
+    landing: {
+      title: "Vascular Atlas — Plateforme clinique IA pour la médecine vasculaire",
+      description: "Unifiez comptes rendus IA, gestion de cas patients, registre des résultats, certification, simulation et réseau d'experts pour chirurgiens vasculaires et angiologues. Gratuit pendant la bêta.",
+    },
+    pricing: {
+      title: "Tarifs — Plans Vascular Atlas",
+      description: "Comparez les plans Vascular Atlas : Individuel gratuit, Professionnel à 99 €/mois et tarif Institution sur mesure. Toutes les fonctionnalités gratuites pendant la bêta.",
+    },
+    support: {
+      title: "Support & FAQ — Vascular Atlas",
+      description: "Obtenez de l'aide avec Vascular Atlas. Contactez le support, consultez la FAQ sur les rapports IA, la gestion des patients, la certification et plus.",
     },
   },
 };

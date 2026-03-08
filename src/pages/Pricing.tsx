@@ -75,8 +75,8 @@ export default function Pricing() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Pricing — Vascular Atlas Plans"
-        description="Compare Vascular Atlas plans: Free Individual, $99/mo Professional, and custom Institution pricing. All features free during beta."
+        title={t("seo.pricing.title") as string}
+        description={t("seo.pricing.description") as string}
         path="/pricing"
       />
       <nav className="border-b">

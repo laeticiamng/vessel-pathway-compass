@@ -1114,9 +1114,9 @@ export const en = {
   contentGate: {
     previewBanner: "🔒 Limited preview — sign in or subscribe for full access",
     title: "You're viewing a limited preview",
-    subtitle: "This content is restricted. Sign in to your free account to continue, or upgrade to Professional for unlimited access to all modules.",
-    signIn: "Sign In to Continue",
-    viewPlans: "See Plans & Pricing",
+    subtitle: "This content is restricted. Create a free account to continue, or sign in if you already have one.",
+    createAccount: "Create Free Account",
+    signIn: "Sign In",
   },
 
   notifications: {
@@ -1327,6 +1327,21 @@ export const en = {
       imaging: { title: "Imaging Pipeline", desc: "Upload imaging summaries, structured measurements, and annotation tools. DICOM-ready." },
       wearables: { title: "Wearables & Home Monitoring", desc: "Patient app for walking tests, symptom diary, wound photos, and compression adherence." },
       arTraining: { title: "Immersive AR Training", desc: "AR checklist mode and station-based ultrasound training concepts." },
+    },
+  },
+
+  seo: {
+    landing: {
+      title: "Vascular Atlas — AI-Powered Clinical Platform for Vascular Medicine",
+      description: "Unify AI clinical reports, patient case management, outcomes registry, certification, simulation and expert networking for vascular surgeons and angiologists. Free during beta.",
+    },
+    pricing: {
+      title: "Pricing — Vascular Atlas Plans",
+      description: "Compare Vascular Atlas plans: Free Individual, $99/mo Professional, and custom Institution pricing. All features free during beta.",
+    },
+    support: {
+      title: "Support & FAQ — Vascular Atlas",
+      description: "Get help with Vascular Atlas. Contact support, browse FAQs about AI clinical reports, patient management, certification and more.",
     },
   },
 };

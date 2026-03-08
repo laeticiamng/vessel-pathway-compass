@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,7 @@ import {
   CheckCircle2,
   Menu,
   Sparkles,
+  ChevronUp,
 } from "lucide-react";
 import { FAQSection } from "@/components/landing/FAQSection";
 
@@ -43,7 +44,14 @@ const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "networ
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
+
+  useEffect(() => {
+    const handleScroll = () => setShowScrollTop(window.scrollY > 600);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const modules = moduleKeys.map((key, i) => ({
     icon: moduleIcons[i],
@@ -82,9 +90,13 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Skip to content – accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg">
+        Skip to content
+      </a>
       <SEOHead
-        title="Vascular Atlas — AI-Powered Clinical Platform for Vascular Medicine"
-        description="Unify AI clinical reports, patient case management, outcomes registry, certification, simulation and expert networking for vascular surgeons and angiologists. Free during beta."
+        title={t("seo.landing.title") as string}
+        description={t("seo.landing.description") as string}
         path="/"
         jsonLd={faqJsonLd}
       />
@@ -163,7 +175,7 @@ export default function Landing() {
       </nav>
       </header>
 
-      <main>
+      <main id="main-content">
       {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
@@ -179,7 +191,7 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm max-w-[90vw]">
               <Sparkles className="h-3.5 w-3.5 text-primary-foreground/80" />
               <span className="text-sm font-medium text-primary-foreground/80">
                 {t("landing.hero.badge")}
@@ -378,6 +390,22 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+
+      {/* Scroll to top */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 right-6 z-50 h-11 w-11 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 flex items-center justify-center hover:bg-primary/90 transition-colors"
+            aria-label="Scroll to top"
+          >
+            <ChevronUp className="h-5 w-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
