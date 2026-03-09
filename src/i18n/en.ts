@@ -1305,7 +1305,7 @@ export const en = {
       title: "Legal Notice",
       lastUpdated: "Last updated: March 2026",
       sections: [
-        { heading: "Publisher", body: "Vascular Atlas\nContact: contact@vascularatlas.com" },
+        { heading: "Publisher", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, France\nContact: contact@emotionscare.com" },
         { heading: "Hosting", body: "The Platform is hosted on cloud infrastructure in the European Union." },
         { heading: "Medical Disclaimer", body: "Vascular Atlas is NOT a medical device. It is a clinical decision support tool intended for use by qualified healthcare professionals only. All AI-generated content requires review by a licensed clinician." },
         { heading: "Intellectual Property", body: "All rights reserved. The Vascular Atlas name, logo, and platform design are protected by intellectual property law." },
