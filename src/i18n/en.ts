@@ -120,7 +120,9 @@ export const en = {
     },
     modules: {
       title: "Everything You Need in One Platform",
-      subtitle: "Eleven integrated modules designed for your daily clinical workflow.",
+      subtitle: "Six core modules designed for your daily clinical workflow.",
+      moreTitle: "And Even More",
+      moreSubtitle: "Additional tools to go further in outcomes, performance and interoperability.",
       ai: {
         title: "AI Clinical Assistant",
         desc: "Generate structured clinical reports, differential diagnoses and care pathways — always reviewed and confirmed by you.",

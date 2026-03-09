@@ -115,7 +115,9 @@ export const fr = {
     },
     modules: {
       title: "Tout ce dont vous avez besoin",
-      subtitle: "Onze modules intégrés conçus pour votre workflow clinique quotidien.",
+      subtitle: "Six modules essentiels conçus pour votre workflow clinique quotidien.",
+      moreTitle: "Et bien plus encore",
+      moreSubtitle: "Des outils supplémentaires pour aller plus loin en résultats, performance et interopérabilité.",
       ai: {
         title: "Assistant clinique IA",
         desc: "Générez des comptes-rendus cliniques structurés, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
