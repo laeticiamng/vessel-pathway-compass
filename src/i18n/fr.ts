@@ -98,10 +98,11 @@ export const fr = {
       title: "Vascular Atlas",
       headlinePre: "Plateforme clinique IA pour la",
       headlineHighlight: "Médecine Vasculaire",
-      subtitle: "Gérez vos patients, générez des rapports cliniques IA, suivez les résultats, obtenez des certifications et collaborez avec des experts — dans un seul outil sécurisé.",
-      cta: "Essayer gratuitement",
+      subtitle: "Gérez vos patients, générez des rapports IA, suivez les résultats et collaborez avec des experts — une plateforme sécurisée pour la médecine vasculaire.",
+      cta: "Essayer gratuitement — sans carte bancaire",
       secondary: "Voir les tarifs",
-      socialProof: "Utilisé par des spécialistes vasculaires dans plus de 12 pays",
+      socialProof: "Bêta gratuite — ouverte aux spécialistes vasculaires du monde entier",
+      dashboardCaption: "Le tableau de bord clinique : vue d'ensemble des patients, distribution des risques et accès rapide à tous les modules.",
     },
     howItWorks: {
       title: "Comment ça marche",
@@ -114,7 +115,9 @@ export const fr = {
     },
     modules: {
       title: "Tout ce dont vous avez besoin",
-      subtitle: "Onze modules intégrés conçus pour votre workflow clinique quotidien.",
+      subtitle: "Six modules essentiels conçus pour votre workflow clinique quotidien.",
+      moreTitle: "Et bien plus encore",
+      moreSubtitle: "Des outils supplémentaires pour aller plus loin en résultats, performance et interopérabilité.",
       ai: {
         title: "Assistant clinique IA",
         desc: "Générez des comptes-rendus cliniques structurés, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",

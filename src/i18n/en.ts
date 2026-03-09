@@ -103,10 +103,11 @@ export const en = {
       title: "Vascular Atlas",
       headlinePre: "AI-Powered Clinical Platform for",
       headlineHighlight: "Vascular Medicine",
-      subtitle: "Manage patient cases, generate AI clinical reports, track outcomes, earn certifications and collaborate with experts — all in one secure tool.",
+      subtitle: "Manage patients, generate AI reports, track outcomes and collaborate with experts — one secure platform for vascular medicine.",
       cta: "Try Free — No Credit Card",
       secondary: "See Plans & Pricing",
-      socialProof: "Used by vascular specialists across 12+ countries",
+      socialProof: "Free beta — open to vascular specialists worldwide",
+      dashboardCaption: "The clinical dashboard: patient overview, risk distribution and quick access to all modules.",
     },
     howItWorks: {
       title: "How It Works",
@@ -119,7 +120,9 @@ export const en = {
     },
     modules: {
       title: "Everything You Need in One Platform",
-      subtitle: "Eleven integrated modules designed for your daily clinical workflow.",
+      subtitle: "Six core modules designed for your daily clinical workflow.",
+      moreTitle: "And Even More",
+      moreSubtitle: "Additional tools to go further in outcomes, performance and interoperability.",
       ai: {
         title: "AI Clinical Assistant",
         desc: "Generate structured clinical reports, differential diagnoses and care pathways — always reviewed and confirmed by you.",

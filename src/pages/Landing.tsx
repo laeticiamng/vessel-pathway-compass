@@ -46,9 +46,13 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe, ClipboardList, Stethoscope, Calculator, FileText, Link2];
-const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "network", "outcomes", "performance", "riskCalc", "researchExport", "fhir"] as const;
-const modulePaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network", "/app/outcomes", "/app/performance", "/app/risk-calculator", "/app/research", "/app/patients"];
+const primaryIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
+const primaryKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
+const primaryPaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network"];
+
+const secondaryIcons = [ClipboardList, Stethoscope, Calculator, FileText, Link2];
+const secondaryKeys = ["outcomes", "performance", "riskCalc", "researchExport", "fhir"] as const;
+const secondaryPaths = ["/app/outcomes", "/app/performance", "/app/risk-calculator", "/app/research", "/app/patients"];
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
@@ -62,11 +66,18 @@ export default function Landing() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const modules = moduleKeys.map((key, i) => ({
-    icon: moduleIcons[i],
+  const primaryModules = primaryKeys.map((key, i) => ({
+    icon: primaryIcons[i],
     title: t(`landing.modules.${key}.title`),
     description: t(`landing.modules.${key}.desc`),
-    path: modulePaths[i],
+    path: primaryPaths[i],
+  }));
+
+  const secondaryModules = secondaryKeys.map((key, i) => ({
+    icon: secondaryIcons[i],
+    title: t(`landing.modules.${key}.title`),
+    description: t(`landing.modules.${key}.desc`),
+    path: secondaryPaths[i],
   }));
 
   const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
@@ -253,6 +264,9 @@ export default function Landing() {
                 loading="lazy"
               />
             </div>
+            <p className="mt-4 text-sm text-primary-foreground/40 italic">
+              {t("landing.hero.dashboardCaption")}
+            </p>
           </motion.div>
         </div>
       </section>
@@ -282,7 +296,7 @@ export default function Landing() {
             whileInView="visible"
             viewport={{ once: true, margin: "-80px" }}
           >
-            {modules.map((mod, i) => (
+            {primaryModules.map((mod, i) => (
               <motion.div
                 key={i}
                 custom={i}
@@ -299,6 +313,39 @@ export default function Landing() {
                       {t("common.learnMore")} <ArrowRight className="h-3 w-3" />
                     </span>
                   </div>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Secondary modules — compact */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mt-16 mb-8"
+          >
+            <h3 className="text-2xl font-bold mb-2">{t("landing.modules.moreTitle")}</h3>
+            <p className="text-muted-foreground text-base max-w-lg mx-auto">
+              {t("landing.modules.moreSubtitle")}
+            </p>
+          </motion.div>
+          <motion.div
+            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-5xl mx-auto"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+          >
+            {secondaryModules.map((mod, i) => (
+              <motion.div key={i} custom={i} variants={fadeUp}>
+                <Link to={mod.path} className="group flex flex-col items-center text-center rounded-xl border bg-card p-5 card-hover block h-full">
+                  <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/15 transition-colors duration-300">
+                    <mod.icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <h4 className="text-sm font-semibold mb-1">{mod.title}</h4>
+                  <p className="text-muted-foreground text-xs leading-relaxed">{mod.description}</p>
                 </Link>
               </motion.div>
             ))}
