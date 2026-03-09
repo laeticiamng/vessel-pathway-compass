@@ -98,10 +98,11 @@ export const de = {
       title: "Vascular Atlas",
       headlinePre: "KI-gestützte klinische Plattform für",
       headlineHighlight: "Gefäßmedizin",
-      subtitle: "Verwalten Sie Patientenfälle, erstellen Sie KI-Berichte, verfolgen Sie Ergebnisse, erwerben Sie Zertifizierungen und arbeiten Sie mit Experten zusammen — alles in einem sicheren Tool.",
+      subtitle: "Verwalten Sie Patienten, erstellen Sie KI-Berichte, verfolgen Sie Ergebnisse und arbeiten Sie mit Experten zusammen — eine sichere Plattform für Gefäßmedizin.",
       cta: "Kostenlos testen — keine Kreditkarte",
       secondary: "Pläne & Preise",
-      socialProof: "Genutzt von Gefäßspezialisten in über 12 Ländern",
+      socialProof: "Kostenlose Beta — offen für Gefäßspezialisten weltweit",
+      dashboardCaption: "Das klinische Dashboard: Patientenübersicht, Risikoverteilung und Schnellzugriff auf alle Module.",
     },
     howItWorks: {
       title: "So funktioniert's",
