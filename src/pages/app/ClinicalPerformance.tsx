@@ -184,6 +184,7 @@ export default function ClinicalPerformance() {
           isLoading={isLoading}
           vsBenchmarkLabel={vsBenchmark}
           euBenchmarkLabel={euBenchmark}
+          higherIsBetter
         />
       </div>
 
