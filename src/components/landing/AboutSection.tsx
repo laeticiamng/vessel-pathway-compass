@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/i18n/context";
 import { HeartPulse, ShieldCheck, Users } from "lucide-react";
@@ -8,11 +9,11 @@ const highlights = [
   { icon: Users, key: "community" },
 ] as const;
 
-export function AboutSection() {
+export const AboutSection = forwardRef<HTMLElement>(function AboutSection(_, ref) {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="py-24 bg-muted/30">
+    <section id="about" className="py-24 bg-muted/30" ref={ref}>
       <div className="container mx-auto px-6 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -54,4 +55,4 @@ export function AboutSection() {
       </div>
     </section>
   );
-}
+});

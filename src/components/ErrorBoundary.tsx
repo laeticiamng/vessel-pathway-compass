@@ -38,7 +38,7 @@ export class ErrorBoundary extends Component<Props, State> {
             <div className="mx-auto w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
               <AlertTriangle className="h-6 w-6 text-destructive" />
             </div>
-            <h1 className="text-xl font-semibold">Something went wrong</h1>
+            <h1 className="text-xl font-semibold">Something went wrong / Une erreur est survenue / Ein Fehler ist aufgetreten</h1>
             <p className="text-muted-foreground text-sm">
               An unexpected error occurred. Please try refreshing the page or return to the home page.
             </p>
@@ -49,9 +49,9 @@ export class ErrorBoundary extends Component<Props, State> {
             )}
             <div className="flex gap-3 justify-center">
               <Button variant="outline" onClick={() => window.location.reload()}>
-                Refresh Page
+                Refresh / Actualiser / Aktualisieren
               </Button>
-              <Button onClick={this.handleReset}>Back to Home</Button>
+              <Button onClick={this.handleReset}>Home / Accueil / Startseite</Button>
             </div>
           </div>
         </div>

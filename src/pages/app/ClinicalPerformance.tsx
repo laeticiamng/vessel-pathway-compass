@@ -17,7 +17,7 @@ const EU_BENCHMARKS = {
   patientSatisfaction: { value: 78, unit: "/100" },
 };
 
-function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBenchmarkLabel, euBenchmarkLabel }: {
+function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBenchmarkLabel, euBenchmarkLabel, higherIsBetter = false }: {
   title: string;
   value: number | null;
   unit: string;
@@ -26,6 +26,7 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBench
   isLoading: boolean;
   vsBenchmarkLabel: string;
   euBenchmarkLabel: string;
+  higherIsBetter?: boolean;
 }) {
   if (isLoading) {
     return (
@@ -34,7 +35,7 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBench
   }
 
   const displayValue = value ?? 0;
-  const isBetter = title.includes("Satisfaction") || title.includes("Zufriedenheit") || title.includes("Satisfaction")
+  const isBetter = higherIsBetter
     ? displayValue >= benchmark.value
     : displayValue <= benchmark.value;
 
@@ -183,6 +184,7 @@ export default function ClinicalPerformance() {
           isLoading={isLoading}
           vsBenchmarkLabel={vsBenchmark}
           euBenchmarkLabel={euBenchmark}
+          higherIsBetter
         />
       </div>
 
@@ -196,7 +198,7 @@ export default function ClinicalPerformance() {
           <p><strong>{t("clinicalPerformance.restenosisRate")}:</strong> {t("clinicalPerformance.restenosisDesc")}</p>
           <p><strong>{t("clinicalPerformance.patientSatisfaction")}:</strong> {t("clinicalPerformance.satisfactionDesc")}</p>
           <p className="pt-2 flex items-center gap-2">
-            <Badge variant="outline">European Benchmarks</Badge>
+            <Badge variant="outline">{t("clinicalPerformance.euBenchmark")}</Badge>
             {t("clinicalPerformance.benchmarkNote")}
           </p>
         </CardContent>
