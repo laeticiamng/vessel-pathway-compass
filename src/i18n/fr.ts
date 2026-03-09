@@ -1297,7 +1297,7 @@ export const fr = {
         { q: "Comment les données patients sont-elles protégées ?", a: "Toutes les données sont pseudonymisées. Nous utilisons la sécurité au niveau des lignes, le chiffrement et des journaux d'audit complets." },
         { q: "Puis-je exporter mes données ?", a: "Oui. Vous pouvez exporter les données patients, mesures et rapports en CSV et PDF." },
         { q: "Que se passe-t-il pendant la bêta gratuite ?", a: "Pendant la période bêta, toutes les fonctionnalités sont disponibles gratuitement. Nous vous informerons avant toute facturation." },
-        { q: "Comment supprimer mon compte ?", a: "Contactez support@vascularatlas.com. Vos données seront supprimées sous 30 jours." },
+        { q: "Comment supprimer mon compte ?", a: "Contactez contact@emotionscare.com. Vos données seront supprimées sous 30 jours." },
       ],
     },
     links: { terms: "Conditions générales", privacy: "Politique de confidentialité" },
