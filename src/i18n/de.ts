@@ -114,7 +114,7 @@ export const de = {
     },
     modules: {
       title: "Alles, was Sie brauchen — in einer Plattform",
-      subtitle: "Sechs integrierte Module für Ihren klinischen Alltag.",
+      subtitle: "Elf integrierte Module für Ihren klinischen Alltag.",
       ai: {
         title: "Klinischer KI-Assistent",
         desc: "Erstellen Sie strukturierte klinische Berichte, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
