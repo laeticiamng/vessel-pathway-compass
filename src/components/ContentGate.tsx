@@ -21,7 +21,8 @@ export function ContentGate({ children }: ContentGateProps) {
         <p className="text-sm text-primary font-medium">{t("contentGate.previewBanner")}</p>
       </div>
       <div className="relative max-h-[38vh] overflow-hidden rounded-xl" aria-hidden="true">
-        {children}
+        {/* Render a static placeholder instead of actual children to avoid triggering queries */}
+        <div className="h-64 bg-muted/30 animate-pulse rounded-xl" />
         <div className="absolute inset-0 backdrop-blur-[2px]" style={{
           background: "linear-gradient(to top, hsl(var(--background)) 0%, hsl(var(--background) / 0.95) 20%, hsl(var(--background) / 0.6) 50%, transparent 100%)"
         }} />

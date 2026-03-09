@@ -2,27 +2,30 @@ import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useTranslation } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Activity, TrendingDown, TrendingUp, Clock, Heart, ThumbsUp, AlertTriangle } from "lucide-react";
 
 // European Vascular Surgery benchmarks (ESVS / Vascunet)
 const EU_BENCHMARKS = {
-  complicationRate30d: { value: 8.5, unit: "%", label: "30-Day Complication Rate" },
-  meanTimeToProcedure: { value: 14, unit: "days", label: "Mean Time to Procedure" },
-  restenosisRate6m: { value: 12, unit: "%", label: "Re-stenosis Rate (6 mo)" },
-  patientSatisfaction: { value: 78, unit: "/100", label: "Patient Satisfaction" },
+  complicationRate30d: { value: 8.5, unit: "%" },
+  meanTimeToProcedure: { value: 14, unit: "days" },
+  restenosisRate6m: { value: 12, unit: "%" },
+  patientSatisfaction: { value: 78, unit: "/100" },
 };
 
-function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading }: {
+function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBenchmarkLabel, euBenchmarkLabel }: {
   title: string;
   value: number | null;
   unit: string;
   benchmark: { value: number; unit: string };
   icon: typeof Activity;
   isLoading: boolean;
+  vsBenchmarkLabel: string;
+  euBenchmarkLabel: string;
 }) {
   if (isLoading) {
     return (
@@ -31,8 +34,7 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading }: {
   }
 
   const displayValue = value ?? 0;
-  // Lower is better for complication/restenosis, higher is better for satisfaction
-  const isBetter = title.includes("Satisfaction")
+  const isBetter = title.includes("Satisfaction") || title.includes("Zufriedenheit") || title.includes("Satisfaction")
     ? displayValue >= benchmark.value
     : displayValue <= benchmark.value;
 
@@ -57,7 +59,7 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading }: {
                 <TrendingDown className="h-3.5 w-3.5 text-destructive" />
               )}
               <span className={`text-xs font-medium ${isBetter ? "text-success" : "text-destructive"}`}>
-                {isBetter ? "+" : ""}{diff > 0 ? "+" : "-"}{diffAbs} vs EU benchmark
+                {isBetter ? "+" : ""}{diff > 0 ? "+" : "-"}{diffAbs} {vsBenchmarkLabel}
               </span>
             </div>
           </div>
@@ -67,7 +69,7 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading }: {
         </div>
         <div className="mt-3 pt-3 border-t">
           <div className="flex justify-between text-xs text-muted-foreground">
-            <span>EU Benchmark</span>
+            <span>{euBenchmarkLabel}</span>
             <span className="font-medium">{benchmark.value}{benchmark.unit}</span>
           </div>
         </div>
@@ -78,14 +80,14 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading }: {
 
 export default function ClinicalPerformance() {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
-  // Fetch cases + outcomes for KPI computation
   const { data, isLoading } = useQuery({
     queryKey: ["clinical-performance", user?.id],
     queryFn: async () => {
       const [casesRes, outcomesRes, promsRes] = await Promise.all([
-        supabase.from("cases").select("id, category, status, created_at, updated_at"),
-        supabase.from("outcomes").select("id, outcome_type, outcome_date, case_id, details"),
+        supabase.from("cases").select("id, category, status, created_at, updated_at").eq("created_by", user!.id),
+        supabase.from("outcomes").select("id, outcome_type, outcome_date, case_id, details").eq("created_by", user!.id),
         supabase.from("proms").select("id, score, completed_at"),
       ]);
       return {
@@ -101,11 +103,9 @@ export default function ClinicalPerformance() {
     if (!data) return null;
     const { cases, outcomes, proms } = data;
 
-    // 30-day complication rate
     const complications = outcomes.filter((o) => o.outcome_type === "complication");
     const complicationRate = cases.length > 0 ? (complications.length / cases.length) * 100 : 0;
 
-    // Mean time to procedure (days from case creation to first intervention outcome)
     const interventionTimes: number[] = [];
     for (const c of cases) {
       const intervention = outcomes.find((o) => o.case_id === c.id && (o.outcome_type === "intervention" || o.outcome_type === "procedure"));
@@ -118,11 +118,9 @@ export default function ClinicalPerformance() {
       ? interventionTimes.reduce((a, b) => a + b, 0) / interventionTimes.length
       : 0;
 
-    // Re-stenosis rate at 6 months
     const restenosis = outcomes.filter((o) => o.outcome_type === "restenosis");
     const restenosisRate = cases.length > 0 ? (restenosis.length / cases.length) * 100 : 0;
 
-    // Patient satisfaction (avg PROM score)
     const satisfaction = proms.length > 0
       ? proms.reduce((sum, p) => sum + (p.score ?? 0), 0) / proms.length
       : 0;
@@ -130,66 +128,76 @@ export default function ClinicalPerformance() {
     return { complicationRate, meanTime, restenosisRate, satisfaction };
   }, [data]);
 
+  const vsBenchmark = t("clinicalPerformance.vsBenchmark") as string;
+  const euBenchmark = t("clinicalPerformance.euBenchmark") as string;
+
   return (
     <div className="space-y-6 max-w-6xl">
-      <SEOHead title="Clinical Performance — Vascular Atlas" description="At-a-glance clinical KPIs with European benchmark comparison" path="/app/performance" noindex />
+      <SEOHead title={t("seo.performance.title") as string} description={t("seo.performance.description") as string} path="/app/performance" noindex />
 
       <div>
         <h1 className="text-3xl font-bold flex items-center gap-3">
           <Activity className="h-8 w-8 text-primary" />
-          Clinical Performance Dashboard
+          {t("clinicalPerformance.title")}
         </h1>
-        <p className="text-muted-foreground mt-1">Key performance indicators compared to European vascular benchmarks (ESVS / Vascunet)</p>
+        <p className="text-muted-foreground mt-1">{t("clinicalPerformance.subtitle")}</p>
       </div>
 
       <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <KPICard
-          title={EU_BENCHMARKS.complicationRate30d.label}
+          title={t("clinicalPerformance.complicationRate") as string}
           value={kpis?.complicationRate ?? null}
           unit="%"
           benchmark={EU_BENCHMARKS.complicationRate30d}
           icon={AlertTriangle}
           isLoading={isLoading}
+          vsBenchmarkLabel={vsBenchmark}
+          euBenchmarkLabel={euBenchmark}
         />
         <KPICard
-          title={EU_BENCHMARKS.meanTimeToProcedure.label}
+          title={t("clinicalPerformance.meanTimeToProcedure") as string}
           value={kpis?.meanTime ?? null}
           unit="days"
           benchmark={EU_BENCHMARKS.meanTimeToProcedure}
           icon={Clock}
           isLoading={isLoading}
+          vsBenchmarkLabel={vsBenchmark}
+          euBenchmarkLabel={euBenchmark}
         />
         <KPICard
-          title={EU_BENCHMARKS.restenosisRate6m.label}
+          title={t("clinicalPerformance.restenosisRate") as string}
           value={kpis?.restenosisRate ?? null}
           unit="%"
           benchmark={EU_BENCHMARKS.restenosisRate6m}
           icon={Heart}
           isLoading={isLoading}
+          vsBenchmarkLabel={vsBenchmark}
+          euBenchmarkLabel={euBenchmark}
         />
         <KPICard
-          title={EU_BENCHMARKS.patientSatisfaction.label}
+          title={t("clinicalPerformance.patientSatisfaction") as string}
           value={kpis?.satisfaction ?? null}
           unit="/100"
           benchmark={EU_BENCHMARKS.patientSatisfaction}
           icon={ThumbsUp}
           isLoading={isLoading}
+          vsBenchmarkLabel={vsBenchmark}
+          euBenchmarkLabel={euBenchmark}
         />
       </div>
 
-      {/* Methodology note */}
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Methodology & Data Sources</CardTitle>
+          <CardTitle className="text-base">{t("clinicalPerformance.methodology")}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-2 text-sm text-muted-foreground">
-          <p><strong>30-Day Complication Rate:</strong> Outcomes marked as "complication" within your cases, divided by total case count.</p>
-          <p><strong>Mean Time to Procedure:</strong> Average number of days between case creation and first intervention/procedure outcome.</p>
-          <p><strong>Re-stenosis Rate (6 months):</strong> Outcomes marked as "restenosis" as a percentage of total cases.</p>
-          <p><strong>Patient Satisfaction:</strong> Average normalized PROM score across all completed questionnaires.</p>
+          <p><strong>{t("clinicalPerformance.complicationRate")}:</strong> {t("clinicalPerformance.complicationDesc")}</p>
+          <p><strong>{t("clinicalPerformance.meanTimeToProcedure")}:</strong> {t("clinicalPerformance.meanTimeDesc")}</p>
+          <p><strong>{t("clinicalPerformance.restenosisRate")}:</strong> {t("clinicalPerformance.restenosisDesc")}</p>
+          <p><strong>{t("clinicalPerformance.patientSatisfaction")}:</strong> {t("clinicalPerformance.satisfactionDesc")}</p>
           <p className="pt-2 flex items-center gap-2">
             <Badge variant="outline">European Benchmarks</Badge>
-            Based on ESVS guidelines and Vascunet registry aggregate data (2023–2024).
+            {t("clinicalPerformance.benchmarkNote")}
           </p>
         </CardContent>
       </Card>

@@ -70,9 +70,9 @@ export function AppSidebar() {
     { title: t("sidebar.aiAssistant"), url: "/app/ai-assistant", icon: Brain },
     ...(session ? [{ title: t("sidebar.patients"), url: "/app/patients", icon: HeartPulse }] : []),
     { title: t("sidebar.digitalTwin"), url: "/app/digital-twin", icon: Activity },
-    { title: "Patient Outcomes", url: "/app/outcomes", icon: ClipboardList },
-    { title: "Clinical Performance", url: "/app/performance", icon: Stethoscope },
-    { title: "Risk Calculator", url: "/app/risk-calculator", icon: Calculator },
+    { title: t("sidebar.patientOutcomes"), url: "/app/outcomes", icon: ClipboardList },
+    { title: t("sidebar.clinicalPerformance"), url: "/app/performance", icon: Stethoscope },
+    { title: t("sidebar.riskCalculator"), url: "/app/risk-calculator", icon: Calculator },
   ];
 
   // Secondary items — collapsed by default under "More tools"

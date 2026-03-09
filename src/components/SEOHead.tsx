@@ -22,11 +22,7 @@ export function SEOHead({ title, description, path = "/", noindex = false, jsonL
       <link rel="canonical" href={canonicalUrl} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
 
-      {/* Hreflang alternates */}
-      <link rel="alternate" hrefLang="en" href={`${BASE_URL}${path}`} />
-      <link rel="alternate" hrefLang="fr" href={`${BASE_URL}${path}${path.includes('?') ? '&' : '?'}lang=fr`} />
-      <link rel="alternate" hrefLang="de" href={`${BASE_URL}${path}${path.includes('?') ? '&' : '?'}lang=de`} />
-      <link rel="alternate" hrefLang="x-default" href={`${BASE_URL}${path}`} />
+      {/* Canonical only — hreflang removed (SPA uses localStorage for language, not URL params) */}
 
       {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />
