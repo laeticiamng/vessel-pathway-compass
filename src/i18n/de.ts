@@ -1276,7 +1276,7 @@ export const de = {
       title: "Impressum",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
       sections: [
-        { heading: "Herausgeber", body: "Vascular Atlas\nKontakt: contact@vascularatlas.com" },
+        { heading: "Herausgeber", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, Frankreich\nKontakt: contact@emotionscare.com" },
         { heading: "Hosting", body: "Die Plattform wird in der Europäischen Union gehostet." },
         { heading: "Medizinischer Hinweis", body: "Vascular Atlas ist KEIN Medizinprodukt." },
         { heading: "Geistiges Eigentum", body: "Alle Rechte vorbehalten." },
