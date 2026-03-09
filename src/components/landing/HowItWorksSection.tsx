@@ -1,10 +1,11 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/i18n/context";
 import { UserPlus, HeartPulse, Rocket } from "lucide-react";
 
 const stepIcons = [UserPlus, HeartPulse, Rocket];
 
-export function HowItWorksSection() {
+export const HowItWorksSection = forwardRef<HTMLElement>(function HowItWorksSection(_, ref) {
   const { t } = useTranslation();
   const steps = t("landing.howItWorks.steps") as any as Array<{ title: string; desc: string }>;
 
