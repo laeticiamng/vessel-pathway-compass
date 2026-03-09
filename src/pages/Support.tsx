@@ -30,6 +30,7 @@ export default function Support() {
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (honeypot) return; // bot detected
     setSending(true);
     try {
       const { data, error } = await supabase.functions.invoke("contact-form", {
