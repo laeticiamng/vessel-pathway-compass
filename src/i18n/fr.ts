@@ -323,6 +323,7 @@ export const fr = {
     invalidLink: "Lien invalide ou expiré",
     invalidLinkDesc: "Ce lien de réinitialisation n'est plus valide. Veuillez en demander un nouveau.",
     acceptTerms: "J'accepte les",
+    acceptTermsHint: "Vos données sont chiffrées et jamais partagées. Vous pouvez supprimer votre compte à tout moment.",
     passwordWeak: "Faible — ajoutez des majuscules, chiffres ou symboles",
     passwordMedium: "Moyen — ajoutez plus de variété",
     passwordStrong: "Mot de passe fort",

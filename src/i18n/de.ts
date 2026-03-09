@@ -323,6 +323,7 @@ export const de = {
     invalidLink: "Ungültiger oder abgelaufener Link",
     invalidLinkDesc: "Dieser Link ist nicht mehr gültig. Bitte fordern Sie einen neuen an.",
     acceptTerms: "Ich akzeptiere die",
+    acceptTermsHint: "Ihre Daten sind verschlüsselt und werden nie geteilt. Sie können Ihr Konto jederzeit löschen.",
     passwordWeak: "Schwach — Großbuchstaben, Zahlen oder Symbole hinzufügen",
     passwordMedium: "Mittel — mehr Vielfalt hinzufügen",
     passwordStrong: "Starkes Passwort",
