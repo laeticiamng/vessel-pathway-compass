@@ -41,6 +41,10 @@ export class ErrorBoundary extends Component<Props, State> {
             <h1 className="text-xl font-semibold">Something went wrong / Une erreur est survenue / Ein Fehler ist aufgetreten</h1>
             <p className="text-muted-foreground text-sm">
               An unexpected error occurred. Please try refreshing the page or return to the home page.
+              <br />
+              Une erreur inattendue s'est produite. Veuillez rafraîchir la page ou retourner à l'accueil.
+              <br />
+              Ein unerwarteter Fehler ist aufgetreten. Bitte laden Sie die Seite neu oder kehren Sie zur Startseite zurück.
             </p>
             {process.env.NODE_ENV === "development" && this.state.error && (
               <pre className="text-xs text-left bg-muted p-3 rounded-lg overflow-auto max-h-32 text-destructive">

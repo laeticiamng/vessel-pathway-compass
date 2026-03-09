@@ -86,15 +86,22 @@ export default function ClinicalPerformance() {
   const { data, isLoading } = useQuery({
     queryKey: ["clinical-performance", user?.id],
     queryFn: async () => {
-      const [casesRes, outcomesRes, promsRes] = await Promise.all([
-        supabase.from("cases").select("id, category, status, created_at, updated_at").eq("created_by", user!.id),
+      // First fetch user's cases to get case_ids
+      const casesRes = await supabase.from("cases").select("id, category, status, created_at, updated_at").eq("created_by", user!.id);
+      const cases = casesRes.data ?? [];
+      const caseIds = cases.map((c) => c.id);
+
+      // Then fetch outcomes and proms filtered by user's case_ids (defense-in-depth)
+      const [outcomesRes, promsRes] = await Promise.all([
         supabase.from("outcomes").select("id, outcome_type, outcome_date, case_id, details").eq("created_by", user!.id),
-        supabase.from("proms").select("id, score, completed_at"),
+        caseIds.length > 0
+          ? supabase.from("proms").select("id, score, completed_at").in("case_id", caseIds)
+          : Promise.resolve({ data: [] as { id: string; score: number | null; completed_at: string }[] }),
       ]);
       return {
-        cases: casesRes.data ?? [],
+        cases,
         outcomes: outcomesRes.data ?? [],
-        proms: promsRes.data ?? [],
+        proms: (promsRes as { data: { id: string; score: number | null; completed_at: string }[] | null }).data ?? [],
       };
     },
     enabled: !!user,

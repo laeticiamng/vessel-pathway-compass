@@ -48,6 +48,7 @@ const CIVIQ14_ITEMS = [
 ];
 
 export default function PatientOutcomes() {
+  const { language } = useTranslation();
   const { user } = useAuth();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
