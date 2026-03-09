@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/i18n/context";
 import { HeartPulse, ShieldCheck, Users } from "lucide-react";
@@ -8,7 +9,7 @@ const highlights = [
   { icon: Users, key: "community" },
 ] as const;
 
-export function AboutSection() {
+export const AboutSection = forwardRef<HTMLElement>(function AboutSection(_, ref) {
   const { t } = useTranslation();
 
   return (
