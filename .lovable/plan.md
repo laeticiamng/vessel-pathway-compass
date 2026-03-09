@@ -1,28 +1,36 @@
 
 
-## Plan: Créer des patients de test avec différents niveaux de risque
+## Analysis
 
-### Objectif
-Insérer 4 patients de test dans la base de données, chacun avec un nombre différent de facteurs de risque pour couvrir les 4 niveaux (low, moderate, high, critical), puis vérifier que le filtre par risque fonctionne.
+All five requested features already exist in the codebase:
+1. **Patient Outcomes** — `src/pages/app/PatientOutcomes.tsx` (VascuQoL-6, CIVIQ-14, trend charts)
+2. **Clinical Performance Dashboard** — `src/pages/app/ClinicalPerformance.tsx` (4 KPI cards vs EU benchmarks)
+3. **Risk Calculator** — `src/pages/app/RiskCalculator.tsx` (SCORE2, Wells DVT, ABI tabs)
+4. **Research Export** — `src/components/research/ResearchExportButton.tsx` (anonymized aggregate summary)
+5. **FHIR Badge** — `src/components/patient/FHIRBadge.tsx` (on patient records)
 
-### Données à insérer
+The only gap: **the landing page does not showcase these features**. It currently shows 6 modules (AI, Digital Twin, Registry, Education, Simulation, Network). The 5 new features need to be added to the landing page modules grid.
 
-| Pseudonym | Risk Factors | Niveau attendu |
-|---|---|---|
-| TEST-LOW-001 | `[]` (0 facteurs) | Low |
-| TEST-MOD-001 | `["smoking", "hypertension"]` (2 facteurs) | Moderate |
-| TEST-HIGH-001 | `["smoking", "hypertension", "diabetes"]` (3 facteurs) | High |
-| TEST-CRIT-001 | `["smoking", "hypertension", "diabetes", "obesity"]` (4 facteurs) | Critical |
+## Plan
 
-### Étapes
+### 1. Add i18n keys for 5 new module cards (en.ts, fr.ts, de.ts)
 
-1. **Récupérer l'ID utilisateur** connecté via une requête sur `profiles`
-2. **Insérer 4 patients** avec `created_by` = user ID et des `risk_factors` variés
-3. **Créer un case** pour chaque patient (nécessaire pour qu'ils apparaissent dans la liste filtrée)
-4. **Tester** le filtre par risque sur la page Patients dans le navigateur
+Add entries under `landing.modules` for: `outcomes`, `performance`, `riskCalc`, `researchExport`, `fhir`.
 
-### Détails techniques
-- Les insertions se feront via l'outil d'insertion SQL (pas de migration, c'est de la donnée)
-- Chaque patient aura un `age_range` et `sex` pour simuler des données réalistes
-- Un case "active" sera associé à chaque patient pour qu'ils soient visibles dans le tableau
+Update subtitle from "Six integrated modules" to "Eleven integrated modules".
+
+### 2. Update Landing.tsx module arrays
+
+Add 5 new entries to `moduleIcons`, `moduleKeys`, and `modulePaths`:
+- outcomes → `ClipboardList` → `/app/outcomes`
+- performance → `Stethoscope` → `/app/performance`
+- riskCalc → `Calculator` → `/app/risk-calculator`
+- researchExport → `FileText` → `/app/research`
+- fhir → `CheckCircle2` → `/app/patients` (FHIR is per-patient, link to patients list)
+
+Import the additional icons from lucide-react.
+
+### 3. No database or backend changes needed
+
+All features are fully implemented. This is a landing page content update only.
 
