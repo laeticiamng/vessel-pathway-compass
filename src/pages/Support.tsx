@@ -153,6 +153,11 @@ export default function Support() {
                   required
                 />
               </div>
+              {/* Honeypot field - hidden from real users */}
+              <div className="absolute opacity-0 -z-10 h-0 overflow-hidden" aria-hidden="true" tabIndex={-1}>
+                <Label htmlFor="website">Website</Label>
+                <Input id="website" name="website" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} autoComplete="off" tabIndex={-1} />
+              </div>
               <Button type="submit" disabled={sending} className="gap-2">
                 {sending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
                 {sending ? (t("common.loading") as string) : (t("support.contact.send") as string)}
