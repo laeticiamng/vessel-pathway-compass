@@ -245,7 +245,7 @@ export default function Landing() {
                 src={dashboardPreview}
                 alt="Vascular Atlas clinical dashboard showing patient statistics, risk distribution and module overview"
                 className="w-full h-auto"
-                loading="eager"
+                loading="lazy"
               />
             </div>
           </motion.div>
