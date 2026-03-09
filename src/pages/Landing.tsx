@@ -22,6 +22,11 @@ import {
   Menu,
   Sparkles,
   ChevronUp,
+  ClipboardList,
+  Stethoscope,
+  Calculator,
+  FileText,
+  Link2,
 } from "lucide-react";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
