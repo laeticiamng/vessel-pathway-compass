@@ -13,9 +13,19 @@ Deno.serve(async (req) => {
 
   try {
     const authHeader = req.headers.get("Authorization");
-    const cronSecret = req.headers.get("x-cron-secret");
+    const cronSecretHeader = req.headers.get("x-cron-secret");
     const expectedSecret = Deno.env.get("CRON_SECRET");
 
+    // Support cron secret from header or from JSON body
+    let cronSecretBody: string | null = null;
+    if (req.method === "POST") {
+      try {
+        const body = await req.json();
+        cronSecretBody = body?.cronSecret ?? null;
+      } catch { /* no body */ }
+    }
+
+    const cronSecret = cronSecretHeader || cronSecretBody;
     const isCronJob = expectedSecret && cronSecret === expectedSecret;
 
     if (!isCronJob) {
