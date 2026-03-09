@@ -1297,7 +1297,7 @@ export const de = {
         { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
         { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
         { q: "Was passiert während der kostenlosen Beta?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar. Wir informieren Sie bevor eine Abrechnung beginnt." },
-        { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie support@vascularatlas.com. Löschung innerhalb von 30 Tagen." },
+        { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie contact@emotionscare.com. Löschung innerhalb von 30 Tagen." },
       ],
     },
     links: { terms: "AGB", privacy: "Datenschutzrichtlinie" },
