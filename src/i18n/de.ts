@@ -1169,8 +1169,14 @@ export const de = {
     previewBanner: "Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
     title: "Möchten Sie dieses Modul nutzen?",
     subtitle: "Erstellen Sie in 30 Sekunden ein kostenloses Konto, um alle Funktionen zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
-    createAccount: "Kostenloses Konto erstellen",
+    createAccount: "Kostenloses Konto erstellen — keine Kreditkarte",
     signIn: "Ich habe bereits ein Konto",
+    benefits: [
+      "KI-gestützte klinische Berichte",
+      "Patientenmanagement mit Gefäßkarten",
+      "Ergebnisregister & Leistungs-Dashboards",
+      "Fortbildung, Simulation & Expertennetzwerk",
+    ],
   },
 
   notifications: {

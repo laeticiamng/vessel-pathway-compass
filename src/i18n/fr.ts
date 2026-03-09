@@ -1169,8 +1169,14 @@ export const fr = {
     previewBanner: "Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
     title: "Envie d'utiliser ce module ?",
     subtitle: "Créez un compte gratuit en 30 secondes pour accéder à toutes les fonctionnalités, sauvegarder vos données et suivre votre progression.",
-    createAccount: "Créer un compte gratuit",
+    createAccount: "Créer un compte gratuit — sans carte bancaire",
     signIn: "J'ai déjà un compte",
+    benefits: [
+      "Rapports cliniques assistés par IA",
+      "Gestion de patients avec cartographie vasculaire",
+      "Registre des résultats & tableaux de performance",
+      "Formation, simulation & réseau d'experts",
+    ],
   },
 
   notifications: {

@@ -107,6 +107,12 @@ export default function Pricing() {
       </nav>
 
       <div className="container mx-auto px-6 py-20">
+        {/* Beta highlight banner */}
+        <div className="max-w-3xl mx-auto mb-10 rounded-2xl border-2 border-success/30 bg-success/5 px-6 py-5 text-center">
+          <p className="text-lg font-semibold text-success mb-1">{t("pricing.betaBannerTitle")}</p>
+          <p className="text-sm text-muted-foreground">{t("pricing.betaBannerDesc")}</p>
+        </div>
+
         <div className="text-center mb-16">
           <Badge className="mb-4 bg-success/10 text-success border-success/30">{t("pricing.betaBadge")}</Badge>
           <h1 className="text-4xl font-bold mb-4">{t("pricing.title")}</h1>

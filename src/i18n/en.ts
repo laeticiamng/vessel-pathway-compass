@@ -1197,8 +1197,14 @@ export const en = {
     previewBanner: "You're browsing as a guest — sign in to unlock all features",
     title: "Want to use this module?",
     subtitle: "Create a free account in 30 seconds to access all features, save your data and track your progress.",
-    createAccount: "Create Free Account",
+    createAccount: "Create Free Account — No Credit Card",
     signIn: "I Already Have an Account",
+    benefits: [
+      "AI-assisted clinical reports",
+      "Patient case management with vascular maps",
+      "Outcomes registry & performance dashboards",
+      "Education, simulation & expert network",
+    ],
   },
 
   notifications: {
