@@ -235,6 +235,8 @@ export const fr = {
   pricing: {
     title: "Plans et tarifs",
     betaBadge: "🎉 Bêta en cours — accès gratuit à toutes les fonctionnalités",
+    betaBannerTitle: "🚀 Toutes les fonctionnalités sont gratuites pendant la bêta",
+    betaBannerDesc: "Sans carte bancaire. Sans limite de temps. Explorez tous les modules gratuitement — les tarifs s'appliqueront après le lancement officiel.",
     subtitle: "Du médecin individuel aux grandes institutions — trouvez le plan adapté à votre pratique vasculaire.",
     betaNote: "Pendant la bêta, les fonctionnalités payantes sont accessibles sans facturation. Les tarifs affichés s'appliqueront au lancement officiel.",
     mostPopular: "Le plus populaire",
