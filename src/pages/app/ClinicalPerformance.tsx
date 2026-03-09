@@ -35,7 +35,7 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBench
   }
 
   const displayValue = value ?? 0;
-  const isBetter = title.includes("Satisfaction") || title.includes("Zufriedenheit") || title.includes("Satisfaction")
+  const isBetter = higherIsBetter
     ? displayValue >= benchmark.value
     : displayValue <= benchmark.value;
 
