@@ -198,7 +198,7 @@ export default function ClinicalPerformance() {
           <p><strong>{t("clinicalPerformance.restenosisRate")}:</strong> {t("clinicalPerformance.restenosisDesc")}</p>
           <p><strong>{t("clinicalPerformance.patientSatisfaction")}:</strong> {t("clinicalPerformance.satisfactionDesc")}</p>
           <p className="pt-2 flex items-center gap-2">
-            <Badge variant="outline">European Benchmarks</Badge>
+            <Badge variant="outline">{t("clinicalPerformance.euBenchmark")}</Badge>
             {t("clinicalPerformance.benchmarkNote")}
           </p>
         </CardContent>
