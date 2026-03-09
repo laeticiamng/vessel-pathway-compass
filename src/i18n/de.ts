@@ -1239,7 +1239,7 @@ export const de = {
 
   legal: {
     tabs: { terms: "AGB", privacy: "Datenschutz", notice: "Impressum" },
-    contact: "Bei Fragen kontaktieren Sie uns: legal@vascularatlas.com",
+    contact: "Bei Fragen kontaktieren Sie uns: contact@emotionscare.com",
     terms: {
       title: "Allgemeine Geschäftsbedingungen",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
