@@ -235,6 +235,8 @@ export const de = {
   pricing: {
     title: "Pläne & Preise",
     betaBadge: "🎉 Beta läuft — kostenloser Zugriff auf alle Funktionen",
+    betaBannerTitle: "🚀 Alle Funktionen sind während der Beta kostenlos",
+    betaBannerDesc: "Keine Kreditkarte erforderlich. Kein Zeitlimit. Entdecken Sie jedes Modul kostenlos — Preise gelten nach dem offiziellen Start.",
     subtitle: "Vom einzelnen Arzt bis zur großen Einrichtung — finden Sie den passenden Plan für Ihre Gefäßpraxis.",
     betaNote: "Während der Beta sind kostenpflichtige Funktionen ohne Abrechnung nutzbar; die angezeigten Preise gelten zum offiziellen Start.",
     mostPopular: "Am beliebtesten",
@@ -1167,8 +1169,14 @@ export const de = {
     previewBanner: "Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
     title: "Möchten Sie dieses Modul nutzen?",
     subtitle: "Erstellen Sie in 30 Sekunden ein kostenloses Konto, um alle Funktionen zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
-    createAccount: "Kostenloses Konto erstellen",
+    createAccount: "Kostenloses Konto erstellen — keine Kreditkarte",
     signIn: "Ich habe bereits ein Konto",
+    benefits: [
+      "KI-gestützte klinische Berichte",
+      "Patientenmanagement mit Gefäßkarten",
+      "Ergebnisregister & Leistungs-Dashboards",
+      "Fortbildung, Simulation & Expertennetzwerk",
+    ],
   },
 
   notifications: {

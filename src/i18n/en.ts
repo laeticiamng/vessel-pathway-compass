@@ -243,6 +243,8 @@ export const en = {
   pricing: {
     title: "Plans & Pricing",
     betaBadge: "🎉 Beta ongoing — free access to all features",
+    betaBannerTitle: "🚀 All features are free during the beta",
+    betaBannerDesc: "No credit card required. No time limit. Explore every module at no cost — pricing will apply after public launch.",
     subtitle: "From individual physicians to large institutions — find the right plan for your vascular practice.",
     betaNote: "During beta, paid features are available without billing; listed prices apply when public launch starts.",
     mostPopular: "Most Popular",
@@ -1195,8 +1197,14 @@ export const en = {
     previewBanner: "You're browsing as a guest — sign in to unlock all features",
     title: "Want to use this module?",
     subtitle: "Create a free account in 30 seconds to access all features, save your data and track your progress.",
-    createAccount: "Create Free Account",
+    createAccount: "Create Free Account — No Credit Card",
     signIn: "I Already Have an Account",
+    benefits: [
+      "AI-assisted clinical reports",
+      "Patient case management with vascular maps",
+      "Outcomes registry & performance dashboards",
+      "Education, simulation & expert network",
+    ],
   },
 
   notifications: {

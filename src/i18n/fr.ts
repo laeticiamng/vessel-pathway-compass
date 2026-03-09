@@ -235,6 +235,8 @@ export const fr = {
   pricing: {
     title: "Plans et tarifs",
     betaBadge: "🎉 Bêta en cours — accès gratuit à toutes les fonctionnalités",
+    betaBannerTitle: "🚀 Toutes les fonctionnalités sont gratuites pendant la bêta",
+    betaBannerDesc: "Sans carte bancaire. Sans limite de temps. Explorez tous les modules gratuitement — les tarifs s'appliqueront après le lancement officiel.",
     subtitle: "Du médecin individuel aux grandes institutions — trouvez le plan adapté à votre pratique vasculaire.",
     betaNote: "Pendant la bêta, les fonctionnalités payantes sont accessibles sans facturation. Les tarifs affichés s'appliqueront au lancement officiel.",
     mostPopular: "Le plus populaire",
@@ -1167,8 +1169,14 @@ export const fr = {
     previewBanner: "Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
     title: "Envie d'utiliser ce module ?",
     subtitle: "Créez un compte gratuit en 30 secondes pour accéder à toutes les fonctionnalités, sauvegarder vos données et suivre votre progression.",
-    createAccount: "Créer un compte gratuit",
+    createAccount: "Créer un compte gratuit — sans carte bancaire",
     signIn: "J'ai déjà un compte",
+    benefits: [
+      "Rapports cliniques assistés par IA",
+      "Gestion de patients avec cartographie vasculaire",
+      "Registre des résultats & tableaux de performance",
+      "Formation, simulation & réseau d'experts",
+    ],
   },
 
   notifications: {
