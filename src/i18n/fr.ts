@@ -114,7 +114,7 @@ export const fr = {
     },
     modules: {
       title: "Tout ce dont vous avez besoin",
-      subtitle: "Six modules intégrés conçus pour votre workflow clinique quotidien.",
+      subtitle: "Onze modules intégrés conçus pour votre workflow clinique quotidien.",
       ai: {
         title: "Assistant clinique IA",
         desc: "Générez des comptes-rendus cliniques structurés, diagnostics différentiels et parcours de soins — toujours vérifiés et confirmés par vous.",
@@ -138,6 +138,26 @@ export const fr = {
       network: {
         title: "Réseau d'experts",
         desc: "Discutez de cas anonymisés avec vos pairs, demandez des avis d'experts et trouvez des mentors entre spécialités.",
+      },
+      outcomes: {
+        title: "Résultats patients (PROMs)",
+        desc: "Collectez des questionnaires vasculaires validés (VascuQoL-6, CIVIQ-14) sous forme numérique hebdomadaire avec visualisation des tendances.",
+      },
+      performance: {
+        title: "Performance clinique",
+        desc: "KPIs en un coup d'œil : taux de complications à 30 jours, délai moyen avant intervention, taux de resténose — comparés aux benchmarks européens.",
+      },
+      riskCalc: {
+        title: "Calculateur de risque",
+        desc: "Outils interactifs SCORE2, Wells TVP et interprétation IPS avec résultats instantanés et recommandations thérapeutiques.",
+      },
+      researchExport: {
+        title: "Export recherche",
+        desc: "Générez des résumés statistiques agrégés et anonymisés formatés pour soumission au registre — aucune donnée patient individuelle exposée.",
+      },
+      fhir: {
+        title: "Interopérabilité FHIR",
+        desc: "Chaque dossier patient affiche un badge de compatibilité FHIR indiquant le statut d'interopérabilité avec les standards HL7.",
       },
     },
     trust: {

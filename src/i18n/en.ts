@@ -119,7 +119,7 @@ export const en = {
     },
     modules: {
       title: "Everything You Need in One Platform",
-      subtitle: "Six integrated modules designed for your daily clinical workflow.",
+      subtitle: "Eleven integrated modules designed for your daily clinical workflow.",
       ai: {
         title: "AI Clinical Assistant",
         desc: "Generate structured clinical reports, differential diagnoses and care pathways — always reviewed and confirmed by you.",
@@ -143,6 +143,26 @@ export const en = {
       network: {
         title: "Expert Network",
         desc: "Discuss anonymized cases with peers, request expert opinions and find mentors across specialties.",
+      },
+      outcomes: {
+        title: "Patient Outcomes (PROMs)",
+        desc: "Collect validated vascular questionnaires (VascuQoL-6, CIVIQ-14) as weekly digital forms with trend visualization over time.",
+      },
+      performance: {
+        title: "Clinical Performance",
+        desc: "At-a-glance KPIs: 30-day complication rate, mean time to procedure, re-stenosis rate — compared to European benchmarks.",
+      },
+      riskCalc: {
+        title: "Risk Calculator",
+        desc: "Interactive SCORE2, Wells DVT and ABI interpretation tools with instant results and treatment recommendations.",
+      },
+      researchExport: {
+        title: "Research Export",
+        desc: "Generate anonymized aggregate dataset summaries formatted for registry submission — no individual patient data exposed.",
+      },
+      fhir: {
+        title: "FHIR Interoperability",
+        desc: "Each patient record displays a FHIR compatibility badge indicating interoperability status with HL7 standards.",
       },
     },
     trust: {

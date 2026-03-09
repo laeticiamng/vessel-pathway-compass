@@ -22,6 +22,11 @@ import {
   Menu,
   Sparkles,
   ChevronUp,
+  ClipboardList,
+  Stethoscope,
+  Calculator,
+  FileText,
+  Link2,
 } from "lucide-react";
 import { FAQSection } from "@/components/landing/FAQSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
@@ -41,9 +46,9 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
-const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
-const modulePaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network"];
+const moduleIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe, ClipboardList, Stethoscope, Calculator, FileText, Link2];
+const moduleKeys = ["ai", "twin", "registry", "education", "simulation", "network", "outcomes", "performance", "riskCalc", "researchExport", "fhir"] as const;
+const modulePaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network", "/app/outcomes", "/app/performance", "/app/risk-calculator", "/app/research", "/app/patients"];
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
