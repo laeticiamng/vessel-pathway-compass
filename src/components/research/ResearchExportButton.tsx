@@ -19,20 +19,24 @@ export default function ResearchExportButton() {
     if (!user) return;
     setLoading(true);
     try {
-      const [casesRes, outcomesRes, measRes, patientsRes, promsRes] = await Promise.all([
+      const [casesRes, outcomesRes, measRes, patientsRes] = await Promise.all([
         supabase.from("cases").select("id, category, status, created_at").eq("created_by", user.id),
         supabase.from("outcomes").select("id, outcome_type, outcome_date").eq("created_by", user.id),
         supabase.from("measurements").select("id, measurement_type, value, unit").eq("created_by", user.id),
         supabase.from("patients").select("id, age_range, sex, risk_factors").eq("created_by", user.id).is("deleted_at", null),
-        supabase.from("proms").select("id, questionnaire_type, score, case_id"),
       ]);
 
       const cases = casesRes.data ?? [];
       const outcomes = outcomesRes.data ?? [];
       const measurements = measRes.data ?? [];
       const patients = patientsRes.data ?? [];
-      const caseIds = new Set(cases.map((c) => c.id));
-      const proms = (promsRes.data ?? []).filter((p) => caseIds.has(p.case_id));
+      const caseIds = cases.map((c) => c.id);
+
+      // Filter proms server-side by user's case_ids (defense-in-depth)
+      const promsRes = caseIds.length > 0
+        ? await supabase.from("proms").select("id, questionnaire_type, score, case_id").in("case_id", caseIds)
+        : { data: [] as { id: string; questionnaire_type: string; score: number | null; case_id: string }[] };
+      const proms = promsRes.data ?? [];
 
       const catCounts: Record<string, number> = {};
       cases.forEach((c) => { catCounts[c.category] = (catCounts[c.category] || 0) + 1; });

@@ -48,6 +48,7 @@ const CIVIQ14_ITEMS = [
 ];
 
 export default function PatientOutcomes() {
+  const { language } = useTranslation();
   const { user } = useAuth();
   const { t } = useTranslation();
   const queryClient = useQueryClient();
@@ -132,13 +133,15 @@ export default function PatientOutcomes() {
   // Chart data grouped by questionnaire type
   const chartData = useMemo(() => {
     if (!proms) return { vascuqol6: [], civiq14: [] };
+    const localeMap: Record<string, string> = { en: "en-US", fr: "fr-FR", de: "de-DE" };
+    const dateLocale = localeMap[language] || "en-US";
     const vq = proms.filter((p) => p.questionnaire_type === "vascuqol6").map((p) => ({
-      date: new Date(p.completed_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      date: new Date(p.completed_at).toLocaleDateString(dateLocale, { month: "short", day: "numeric" }),
       score: p.score ?? 0,
       raw: p.completed_at,
     }));
     const cq = proms.filter((p) => p.questionnaire_type === "civiq14").map((p) => ({
-      date: new Date(p.completed_at).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+      date: new Date(p.completed_at).toLocaleDateString(dateLocale, { month: "short", day: "numeric" }),
       score: p.score ?? 0,
       raw: p.completed_at,
     }));
