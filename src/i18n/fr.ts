@@ -218,7 +218,7 @@ export const fr = {
     },
     cta: {
       title: "Prêt à simplifier votre pratique vasculaire ?",
-      subtitle: "Rejoignez des centaines de spécialistes vasculaires qui explorent déjà la plateforme.",
+      subtitle: "Rejoignez les spécialistes vasculaires qui explorent déjà la plateforme — gratuit pendant la bêta.",
       button: "Créer un compte gratuit",
     },
     footer: {

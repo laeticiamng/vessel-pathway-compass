@@ -218,7 +218,7 @@ export const de = {
     },
     cta: {
       title: "Bereit, Ihre Gefäßpraxis zu vereinfachen?",
-      subtitle: "Schließen Sie sich Hunderten von Gefäßspezialisten an, die die Plattform bereits erkunden.",
+      subtitle: "Schließen Sie sich Gefäßspezialisten an, die die Plattform bereits erkunden — kostenlos während der Beta.",
       button: "Kostenloses Konto erstellen",
     },
     footer: {
