@@ -24,14 +24,15 @@ export default function ResearchExportButton() {
         supabase.from("outcomes").select("id, outcome_type, outcome_date").eq("created_by", user.id),
         supabase.from("measurements").select("id, measurement_type, value, unit").eq("created_by", user.id),
         supabase.from("patients").select("id, age_range, sex, risk_factors").eq("created_by", user.id).is("deleted_at", null),
-        supabase.from("proms").select("id, questionnaire_type, score"),
+        supabase.from("proms").select("id, questionnaire_type, score, case_id"),
       ]);
 
       const cases = casesRes.data ?? [];
       const outcomes = outcomesRes.data ?? [];
       const measurements = measRes.data ?? [];
       const patients = patientsRes.data ?? [];
-      const proms = promsRes.data ?? [];
+      const caseIds = new Set(cases.map((c) => c.id));
+      const proms = (promsRes.data ?? []).filter((p) => caseIds.has(p.case_id));
 
       const catCounts: Record<string, number> = {};
       cases.forEach((c) => { catCounts[c.category] = (catCounts[c.category] || 0) + 1; });
