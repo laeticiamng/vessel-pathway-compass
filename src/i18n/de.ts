@@ -199,7 +199,8 @@ export const de = {
     },
     about: {
       title: "Wer wir sind",
-      description: "Vascular Atlas wird von einem Team aus Gefäßmedizinern, klinischen Forschern und Software-Ingenieuren entwickelt, die davon überzeugt sind, dass die moderne Gefäßmedizin eine dedizierte digitale Plattform verdient. Unsere Mission: klinische Workflows schneller, sicherer und kollaborativer machen — ohne Kompromisse beim Datenschutz.",
+      description: "Vascular Atlas wird von EMOTIONSCARE entwickelt, einem Health-Tech-Unternehmen mit Sitz in Amiens, Frankreich. Gegründet von Klinikern und Ingenieuren, ist unsere Mission, Gefäßprofis eine dedizierte, moderne Plattform zu bieten — aufgebaut um ihre echten Workflows, nicht generische Vorlagen.",
+      foundedLine: "Gegründet in Amiens, Frankreich — EMOTIONSCARE SASU",
       highlights: {
         clinical: {
           title: "Von Klinikern entwickelt",
