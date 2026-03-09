@@ -450,20 +450,17 @@ export default function Landing() {
       {/* Scroll to top */}
       <AnimatePresence>
         {showScrollTop && (
-          <motion.div
+          <motion.button
+            key="scroll-top"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className="fixed bottom-6 right-6 z-50"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-6 right-6 z-50 h-11 w-11 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 flex items-center justify-center hover:bg-primary/90 transition-colors"
+            aria-label="Scroll to top"
           >
-            <button
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="h-11 w-11 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 flex items-center justify-center hover:bg-primary/90 transition-colors"
-              aria-label="Scroll to top"
-            >
-              <ChevronUp className="h-5 w-5" />
-            </button>
-          </motion.div>
+            <ChevronUp className="h-5 w-5" />
+          </motion.button>
         )}
       </AnimatePresence>
     </div>

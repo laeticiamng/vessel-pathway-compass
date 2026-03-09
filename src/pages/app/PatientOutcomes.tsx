@@ -82,13 +82,21 @@ export default function PatientOutcomes() {
     enabled: !!user,
   });
 
-  // Fetch PROMs data (RLS filters by case ownership)
+  // Fetch PROMs data — filter by user's cases for defense-in-depth
   const { data: proms, isLoading } = useQuery({
     queryKey: ["proms-all", user?.id],
     queryFn: async () => {
+      // First get user's case IDs, then fetch proms for those cases
+      const { data: userCases } = await supabase
+        .from("cases")
+        .select("id")
+        .eq("created_by", user!.id);
+      const caseIds = userCases?.map((c) => c.id) ?? [];
+      if (caseIds.length === 0) return [];
       const { data, error } = await supabase
         .from("proms")
         .select("id, case_id, questionnaire_type, score, responses, completed_at")
+        .in("case_id", caseIds)
         .order("completed_at", { ascending: true });
       if (error) throw error;
       return data;
