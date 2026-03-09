@@ -139,6 +139,26 @@ export const de = {
         title: "Expertennetzwerk",
         desc: "Diskutieren Sie anonymisierte Fälle mit Kollegen, holen Sie Expertenmeinungen ein und finden Sie Mentoren über Fachgrenzen hinweg.",
       },
+      outcomes: {
+        title: "Patientenergebnisse (PROMs)",
+        desc: "Erfassen Sie validierte vaskuläre Fragebögen (VascuQoL-6, CIVIQ-14) als wöchentliche digitale Formulare mit Trendvisualisierung.",
+      },
+      performance: {
+        title: "Klinische Leistung",
+        desc: "KPIs auf einen Blick: 30-Tage-Komplikationsrate, mittlere Zeit bis zum Eingriff, Restenose-Rate — verglichen mit europäischen Benchmarks.",
+      },
+      riskCalc: {
+        title: "Risikorechner",
+        desc: "Interaktive SCORE2-, Wells-TVT- und ABI-Interpretationstools mit Sofortergebnissen und Therapieempfehlungen.",
+      },
+      researchExport: {
+        title: "Forschungsexport",
+        desc: "Erstellen Sie anonymisierte aggregierte Datensatzzusammenfassungen für Registereinreichungen — keine individuellen Patientendaten.",
+      },
+      fhir: {
+        title: "FHIR-Interoperabilität",
+        desc: "Jeder Patientendatensatz zeigt ein FHIR-Kompatibilitätsbadge mit HL7-Interoperabilitätsstatus an.",
+      },
     },
     trust: {
       title: "Sicher & compliance-bereit",
