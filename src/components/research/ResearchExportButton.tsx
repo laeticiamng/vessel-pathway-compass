@@ -31,7 +31,8 @@ export default function ResearchExportButton() {
       const outcomes = outcomesRes.data ?? [];
       const measurements = measRes.data ?? [];
       const patients = patientsRes.data ?? [];
-      const proms = promsRes.data ?? [];
+      const caseIds = new Set(cases.map((c) => c.id));
+      const proms = (promsRes.data ?? []).filter((p) => caseIds.has(p.case_id));
 
       const catCounts: Record<string, number> = {};
       cases.forEach((c) => { catCounts[c.category] = (catCounts[c.category] || 0) + 1; });
