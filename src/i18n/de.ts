@@ -235,6 +235,8 @@ export const de = {
   pricing: {
     title: "Pläne & Preise",
     betaBadge: "🎉 Beta läuft — kostenloser Zugriff auf alle Funktionen",
+    betaBannerTitle: "🚀 Alle Funktionen sind während der Beta kostenlos",
+    betaBannerDesc: "Keine Kreditkarte erforderlich. Kein Zeitlimit. Entdecken Sie jedes Modul kostenlos — Preise gelten nach dem offiziellen Start.",
     subtitle: "Vom einzelnen Arzt bis zur großen Einrichtung — finden Sie den passenden Plan für Ihre Gefäßpraxis.",
     betaNote: "Während der Beta sind kostenpflichtige Funktionen ohne Abrechnung nutzbar; die angezeigten Preise gelten zum offiziellen Start.",
     mostPopular: "Am beliebtesten",
