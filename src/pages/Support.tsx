@@ -23,6 +23,7 @@ export default function Support() {
   const [contactName, setContactName] = useState("");
   const [contactEmail, setContactEmail] = useState("");
   const [contactMessage, setContactMessage] = useState("");
+  const [honeypot, setHoneypot] = useState("");
   const [sending, setSending] = useState(false);
 
   const faqItems: { q: string; a: string }[] = (t("support.faq.items") as any) || [];
