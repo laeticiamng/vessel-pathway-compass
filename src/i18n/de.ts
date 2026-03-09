@@ -1239,7 +1239,7 @@ export const de = {
 
   legal: {
     tabs: { terms: "AGB", privacy: "Datenschutz", notice: "Impressum" },
-    contact: "Bei Fragen kontaktieren Sie uns: legal@vascularatlas.com",
+    contact: "Bei Fragen kontaktieren Sie uns: contact@emotionscare.com",
     terms: {
       title: "Allgemeine Geschäftsbedingungen",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
@@ -1276,7 +1276,7 @@ export const de = {
       title: "Impressum",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
       sections: [
-        { heading: "Herausgeber", body: "Vascular Atlas\nKontakt: contact@vascularatlas.com" },
+        { heading: "Herausgeber", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, Frankreich\nKontakt: contact@emotionscare.com" },
         { heading: "Hosting", body: "Die Plattform wird in der Europäischen Union gehostet." },
         { heading: "Medizinischer Hinweis", body: "Vascular Atlas ist KEIN Medizinprodukt." },
         { heading: "Geistiges Eigentum", body: "Alle Rechte vorbehalten." },
@@ -1297,7 +1297,7 @@ export const de = {
         { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
         { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
         { q: "Was passiert während der kostenlosen Beta?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar. Wir informieren Sie bevor eine Abrechnung beginnt." },
-        { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie support@vascularatlas.com. Löschung innerhalb von 30 Tagen." },
+        { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie contact@emotionscare.com. Löschung innerhalb von 30 Tagen." },
       ],
     },
     links: { terms: "AGB", privacy: "Datenschutzrichtlinie" },
@@ -1360,7 +1360,7 @@ export const de = {
   innovationLab: {
     title: "Innovationslabor",
     subtitle: "Kommende Funktionen und experimentelle Fähigkeiten in Entwicklung.",
-    feedback: "Eine Idee oder Feedback? Kontaktieren Sie uns: support@vascularatlas.com",
+    feedback: "Eine Idee oder Feedback? Kontaktieren Sie uns: contact@emotionscare.com",
     status: { planned: "Geplant", concept: "Konzept" },
     features: {
       federated: { title: "Föderiertes Lernen", desc: "Datenschutzfreundliches kollaboratives KI-Training — Modell-Updates geteilt, Daten bleiben lokal." },

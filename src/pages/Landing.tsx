@@ -427,7 +427,7 @@ export default function Landing() {
           </div>
           <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Vascular Atlas. {t("landing.footer.rights")}
+              © {new Date().getFullYear()} EMOTIONSCARE SASU — SIREN 944 505 445 — Amiens, France. {t("landing.footer.rights")}
             </p>
             <div className="flex items-center gap-1">
               <Globe className="h-3.5 w-3.5 text-muted-foreground mr-1" />

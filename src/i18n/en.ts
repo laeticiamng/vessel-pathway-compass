@@ -1268,7 +1268,7 @@ export const en = {
   // Legal
   legal: {
     tabs: { terms: "Terms of Service", privacy: "Privacy Policy", notice: "Legal Notice" },
-    contact: "For any questions, contact us at: legal@vascularatlas.com",
+    contact: "For any questions, contact us at: contact@emotionscare.com",
     terms: {
       title: "Terms of Service",
       lastUpdated: "Last updated: March 2026",
@@ -1305,7 +1305,7 @@ export const en = {
       title: "Legal Notice",
       lastUpdated: "Last updated: March 2026",
       sections: [
-        { heading: "Publisher", body: "Vascular Atlas\nContact: contact@vascularatlas.com" },
+        { heading: "Publisher", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, France\nContact: contact@emotionscare.com" },
         { heading: "Hosting", body: "The Platform is hosted on cloud infrastructure in the European Union." },
         { heading: "Medical Disclaimer", body: "Vascular Atlas is NOT a medical device. It is a clinical decision support tool intended for use by qualified healthcare professionals only. All AI-generated content requires review by a licensed clinician." },
         { heading: "Intellectual Property", body: "All rights reserved. The Vascular Atlas name, logo, and platform design are protected by intellectual property law." },
@@ -1327,7 +1327,7 @@ export const en = {
         { q: "How is patient data protected?", a: "All patient data is pseudonymized. We use row-level security, encryption at rest and in transit, and maintain comprehensive audit trails." },
         { q: "Can I export my data?", a: "Yes. You can export patient data, measurements, and reports in CSV and PDF formats from the relevant sections." },
         { q: "What happens during the free beta?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
-        { q: "How do I delete my account?", a: "Contact support@vascularatlas.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
+        { q: "How do I delete my account?", a: "Contact contact@emotionscare.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
       ],
     },
     links: { terms: "Terms of Service", privacy: "Privacy Policy" },
@@ -1391,7 +1391,7 @@ export const en = {
   innovationLab: {
     title: "Innovation Lab",
     subtitle: "Upcoming features and experimental capabilities in development.",
-    feedback: "Have an idea or feedback? Contact us at support@vascularatlas.com",
+    feedback: "Have an idea or feedback? Contact us at contact@emotionscare.com",
     status: { planned: "Planned", concept: "Concept" },
     features: {
       federated: { title: "Federated Learning", desc: "Privacy-preserving collaborative AI training — model updates shared, data stays local." },

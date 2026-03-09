@@ -1239,7 +1239,7 @@ export const fr = {
 
   legal: {
     tabs: { terms: "CGU", privacy: "Confidentialité", notice: "Mentions légales" },
-    contact: "Pour toute question, contactez-nous : legal@vascularatlas.com",
+    contact: "Pour toute question, contactez-nous : contact@emotionscare.com",
     terms: {
       title: "Conditions Générales d'Utilisation",
       lastUpdated: "Dernière mise à jour : mars 2026",
@@ -1276,7 +1276,7 @@ export const fr = {
       title: "Mentions Légales",
       lastUpdated: "Dernière mise à jour : mars 2026",
       sections: [
-        { heading: "Éditeur", body: "Vascular Atlas\nContact : contact@vascularatlas.com" },
+        { heading: "Éditeur", body: "EMOTIONSCARE SASU\nSIREN : 944 505 445\n80000 Amiens, France\nContact : contact@emotionscare.com" },
         { heading: "Hébergement", body: "La Plateforme est hébergée sur une infrastructure cloud dans l'Union Européenne." },
         { heading: "Avertissement médical", body: "Vascular Atlas N'EST PAS un dispositif médical. C'est un outil d'aide à la décision clinique destiné aux professionnels de santé qualifiés." },
         { heading: "Propriété intellectuelle", body: "Tous droits réservés. Le nom, le logo et le design de Vascular Atlas sont protégés." },
@@ -1297,7 +1297,7 @@ export const fr = {
         { q: "Comment les données patients sont-elles protégées ?", a: "Toutes les données sont pseudonymisées. Nous utilisons la sécurité au niveau des lignes, le chiffrement et des journaux d'audit complets." },
         { q: "Puis-je exporter mes données ?", a: "Oui. Vous pouvez exporter les données patients, mesures et rapports en CSV et PDF." },
         { q: "Que se passe-t-il pendant la bêta gratuite ?", a: "Pendant la période bêta, toutes les fonctionnalités sont disponibles gratuitement. Nous vous informerons avant toute facturation." },
-        { q: "Comment supprimer mon compte ?", a: "Contactez support@vascularatlas.com. Vos données seront supprimées sous 30 jours." },
+        { q: "Comment supprimer mon compte ?", a: "Contactez contact@emotionscare.com. Vos données seront supprimées sous 30 jours." },
       ],
     },
     links: { terms: "Conditions générales", privacy: "Politique de confidentialité" },
@@ -1360,7 +1360,7 @@ export const fr = {
   innovationLab: {
     title: "Labo d'innovation",
     subtitle: "Fonctionnalités à venir et capacités expérimentales en développement.",
-    feedback: "Une idée ou un retour ? Contactez-nous à support@vascularatlas.com",
+    feedback: "Une idée ou un retour ? Contactez-nous à contact@emotionscare.com",
     status: { planned: "Planifié", concept: "Concept" },
     features: {
       federated: { title: "Apprentissage fédéré", desc: "Entraînement IA collaboratif respectueux de la vie privée — mises à jour du modèle partagées, données restent locales." },
