@@ -17,7 +17,7 @@ const EU_BENCHMARKS = {
   patientSatisfaction: { value: 78, unit: "/100" },
 };
 
-function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBenchmarkLabel, euBenchmarkLabel }: {
+function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBenchmarkLabel, euBenchmarkLabel, higherIsBetter = false }: {
   title: string;
   value: number | null;
   unit: string;
@@ -26,6 +26,7 @@ function KPICard({ title, value, unit, benchmark, icon: Icon, isLoading, vsBench
   isLoading: boolean;
   vsBenchmarkLabel: string;
   euBenchmarkLabel: string;
+  higherIsBetter?: boolean;
 }) {
   if (isLoading) {
     return (
