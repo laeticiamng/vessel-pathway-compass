@@ -1268,7 +1268,7 @@ export const en = {
   // Legal
   legal: {
     tabs: { terms: "Terms of Service", privacy: "Privacy Policy", notice: "Legal Notice" },
-    contact: "For any questions, contact us at: legal@vascularatlas.com",
+    contact: "For any questions, contact us at: contact@emotionscare.com",
     terms: {
       title: "Terms of Service",
       lastUpdated: "Last updated: March 2026",
