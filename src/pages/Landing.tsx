@@ -66,11 +66,18 @@ export default function Landing() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const modules = moduleKeys.map((key, i) => ({
-    icon: moduleIcons[i],
+  const primaryModules = primaryKeys.map((key, i) => ({
+    icon: primaryIcons[i],
     title: t(`landing.modules.${key}.title`),
     description: t(`landing.modules.${key}.desc`),
-    path: modulePaths[i],
+    path: primaryPaths[i],
+  }));
+
+  const secondaryModules = secondaryKeys.map((key, i) => ({
+    icon: secondaryIcons[i],
+    title: t(`landing.modules.${key}.title`),
+    description: t(`landing.modules.${key}.desc`),
+    path: secondaryPaths[i],
   }));
 
   const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
