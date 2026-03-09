@@ -16,7 +16,7 @@ export const FAQSection = forwardRef<HTMLElement>(function FAQSection(_, ref) {
   if (!Array.isArray(faqItems)) return null;
 
   return (
-    <section className="py-24 bg-muted/40">
+    <section className="py-24 bg-muted/40" ref={ref}>
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mx-auto">
           <motion.div
