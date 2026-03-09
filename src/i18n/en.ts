@@ -62,6 +62,9 @@ export const en = {
     team: "Team",
     settings: "Settings",
     moreTools: "More Tools",
+    patientOutcomes: "Patient Outcomes",
+    clinicalPerformance: "Clinical Performance",
+    riskCalculator: "Risk Calculator",
   },
 
   // Command palette

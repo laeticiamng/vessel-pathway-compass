@@ -60,6 +60,9 @@ export const de = {
     team: "Team",
     settings: "Einstellungen",
     moreTools: "Weitere Tools",
+    patientOutcomes: "Patientenergebnisse",
+    clinicalPerformance: "Klinische Leistung",
+    riskCalculator: "Risikorechner",
   },
 
   command: {
