@@ -55,4 +55,4 @@ export const AboutSection = forwardRef<HTMLElement>(function AboutSection(_, ref
       </div>
     </section>
   );
-}
+});
