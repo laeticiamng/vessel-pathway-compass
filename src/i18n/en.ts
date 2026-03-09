@@ -243,6 +243,8 @@ export const en = {
   pricing: {
     title: "Plans & Pricing",
     betaBadge: "🎉 Beta ongoing — free access to all features",
+    betaBannerTitle: "🚀 All features are free during the beta",
+    betaBannerDesc: "No credit card required. No time limit. Explore every module at no cost — pricing will apply after public launch.",
     subtitle: "From individual physicians to large institutions — find the right plan for your vascular practice.",
     betaNote: "During beta, paid features are available without billing; listed prices apply when public launch starts.",
     mostPopular: "Most Popular",
