@@ -225,7 +225,7 @@ export const en = {
     },
     cta: {
       title: "Ready to Streamline Your Vascular Practice?",
-      subtitle: "Join hundreds of vascular specialists already exploring the platform.",
+      subtitle: "Join vascular specialists already exploring the platform — free during beta.",
       button: "Create Free Account",
     },
     footer: {
