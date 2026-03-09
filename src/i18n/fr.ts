@@ -180,9 +180,9 @@ export const fr = {
       title: "Ce qu'en disent les premiers utilisateurs",
       disclaimer: "Retours issus de notre programme bêta. Identités confidentielles à la demande des participants.",
       items: [
-        { quote: "Les rapports IA structurés me font gagner au moins 30 minutes par cas. C'est devenu partie intégrante de mon workflow.", author: "Chirurgien vasculaire", role: "Hôpital universitaire, UE" },
-        { quote: "Le jumeau numérique change la donne pour expliquer l'anatomie complexe aux internes pendant les visites.", author: "Angiologue", role: "Centre vasculaire privé, CH" },
-        { quote: "Enfin une plateforme qui reflète notre façon réelle de travailler en médecine vasculaire. Claire, ciblée, pratique.", author: "Chirurgien vasculaire", role: "CHU, USA" },
+        { quote: "Les rapports IA structurés me font gagner au moins 30 minutes par cas. Avant, je dictais tout — maintenant je relis et je valide. C'est entré dans ma routine quotidienne.", author: "Chirurgien vasculaire", role: "Hôpital universitaire, UE" },
+        { quote: "J'utilise le jumeau numérique pendant les visites pour montrer aux internes exactement où sont les lésions et comment elles ont évolué. Ça a remplacé nos schémas au tableau.", author: "Radiologue interventionnel", role: "Centre vasculaire privé, CH" },
+        { quote: "En tant qu'interne de 3e année, le labo de simulation et le carnet de stage m'ont aidé à suivre ma progression et préparer mon examen. Rien d'autre ne proposait ça.", author: "Interne en chirurgie vasculaire", role: "CHU, USA" },
       ],
     },
     faq: {
