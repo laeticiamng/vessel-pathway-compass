@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/i18n/context";
 import { HelpCircle } from "lucide-react";
@@ -8,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export function FAQSection() {
+export const FAQSection = forwardRef<HTMLElement>(function FAQSection(_, ref) {
   const { t } = useTranslation();
   const faqItems = t("landing.faq.items") as any as Array<{ q: string; a: string }>;
 
