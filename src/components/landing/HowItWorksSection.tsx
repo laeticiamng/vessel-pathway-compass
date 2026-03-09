@@ -55,4 +55,4 @@ export const HowItWorksSection = forwardRef<HTMLElement>(function HowItWorksSect
       </div>
     </section>
   );
-}
+});

@@ -57,4 +57,4 @@ export const FAQSection = forwardRef<HTMLElement>(function FAQSection(_, ref) {
       </div>
     </section>
   );
-}
+});
