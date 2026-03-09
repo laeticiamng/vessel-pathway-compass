@@ -264,6 +264,9 @@ export default function Landing() {
                 loading="lazy"
               />
             </div>
+            <p className="mt-4 text-sm text-primary-foreground/40 italic">
+              {t("landing.hero.dashboardCaption")}
+            </p>
           </motion.div>
         </div>
       </section>
