@@ -187,9 +187,9 @@ export const en = {
       title: "What Early Users Say",
       disclaimer: "Feedback from our beta program. Identities kept confidential at participants' request.",
       items: [
-        { quote: "The structured AI reports save me at least 30 minutes per case. It's become part of my daily workflow.", author: "Vascular Surgeon", role: "University Hospital, EU" },
-        { quote: "The digital twin is a game-changer for explaining complex anatomy to trainees during rounds.", author: "Angiologist", role: "Private Vascular Center, CH" },
-        { quote: "Finally a platform that mirrors how we actually work in vascular medicine. Clean, focused, practical.", author: "Vascular Surgeon", role: "Teaching Hospital, USA" },
+        { quote: "The structured AI reports save me at least 30 minutes per case. I used to dictate everything — now I review and confirm. It's become part of my daily routine.", author: "Vascular Surgeon", role: "University Hospital, EU" },
+        { quote: "I use the digital twin during rounds to show trainees exactly where the lesions are and how they've evolved. It replaced our whiteboard sketches.", author: "Interventional Radiologist", role: "Private Vascular Center, CH" },
+        { quote: "As a third-year trainee, the simulation lab and logbook helped me track my progress and prepare for my board exam. Nothing else offered this.", author: "Vascular Surgery Trainee", role: "Teaching Hospital, USA" },
       ],
     },
     faq: {
