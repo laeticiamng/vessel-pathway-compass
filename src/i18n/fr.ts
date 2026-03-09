@@ -1276,7 +1276,7 @@ export const fr = {
       title: "Mentions Légales",
       lastUpdated: "Dernière mise à jour : mars 2026",
       sections: [
-        { heading: "Éditeur", body: "Vascular Atlas\nContact : contact@vascularatlas.com" },
+        { heading: "Éditeur", body: "EMOTIONSCARE SASU\nSIREN : 944 505 445\n80000 Amiens, France\nContact : contact@emotionscare.com" },
         { heading: "Hébergement", body: "La Plateforme est hébergée sur une infrastructure cloud dans l'Union Européenne." },
         { heading: "Avertissement médical", body: "Vascular Atlas N'EST PAS un dispositif médical. C'est un outil d'aide à la décision clinique destiné aux professionnels de santé qualifiés." },
         { heading: "Propriété intellectuelle", body: "Tous droits réservés. Le nom, le logo et le design de Vascular Atlas sont protégés." },
