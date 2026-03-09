@@ -1391,7 +1391,7 @@ export const en = {
   innovationLab: {
     title: "Innovation Lab",
     subtitle: "Upcoming features and experimental capabilities in development.",
-    feedback: "Have an idea or feedback? Contact us at support@vascularatlas.com",
+    feedback: "Have an idea or feedback? Contact us at contact@emotionscare.com",
     status: { planned: "Planned", concept: "Concept" },
     features: {
       federated: { title: "Federated Learning", desc: "Privacy-preserving collaborative AI training — model updates shared, data stays local." },

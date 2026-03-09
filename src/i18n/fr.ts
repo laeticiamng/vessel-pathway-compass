@@ -1360,7 +1360,7 @@ export const fr = {
   innovationLab: {
     title: "Labo d'innovation",
     subtitle: "Fonctionnalités à venir et capacités expérimentales en développement.",
-    feedback: "Une idée ou un retour ? Contactez-nous à support@vascularatlas.com",
+    feedback: "Une idée ou un retour ? Contactez-nous à contact@emotionscare.com",
     status: { planned: "Planifié", concept: "Concept" },
     features: {
       federated: { title: "Apprentissage fédéré", desc: "Entraînement IA collaboratif respectueux de la vie privée — mises à jour du modèle partagées, données restent locales." },

@@ -1360,7 +1360,7 @@ export const de = {
   innovationLab: {
     title: "Innovationslabor",
     subtitle: "Kommende Funktionen und experimentelle Fähigkeiten in Entwicklung.",
-    feedback: "Eine Idee oder Feedback? Kontaktieren Sie uns: support@vascularatlas.com",
+    feedback: "Eine Idee oder Feedback? Kontaktieren Sie uns: contact@emotionscare.com",
     status: { planned: "Geplant", concept: "Konzept" },
     features: {
       federated: { title: "Föderiertes Lernen", desc: "Datenschutzfreundliches kollaboratives KI-Training — Modell-Updates geteilt, Daten bleiben lokal." },
