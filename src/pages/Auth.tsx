@@ -296,18 +296,21 @@ export default function Auth() {
                   )}
                 </div>
                 {isSignUp && (
-                  <div className="flex items-start gap-2">
-                    <Checkbox
-                      id="terms"
-                      checked={acceptedTerms}
-                      onCheckedChange={(c) => setAcceptedTerms(c === true)}
-                    />
-                    <label htmlFor="terms" className="text-xs text-muted-foreground leading-tight cursor-pointer">
-                      {t("auth.acceptTerms")}{" "}
-                      <Link to="/legal/terms" className="text-primary hover:underline" target="_blank">{t("legal.tabs.terms")}</Link>
-                      {" & "}
-                      <Link to="/legal/privacy" className="text-primary hover:underline" target="_blank">{t("legal.tabs.privacy")}</Link>
-                    </label>
+                  <div className="space-y-1.5">
+                    <div className="flex items-start gap-2">
+                      <Checkbox
+                        id="terms"
+                        checked={acceptedTerms}
+                        onCheckedChange={(c) => setAcceptedTerms(c === true)}
+                      />
+                      <label htmlFor="terms" className="text-xs text-muted-foreground leading-tight cursor-pointer">
+                        {t("auth.acceptTerms")}{" "}
+                        <Link to="/legal/terms" className="text-primary hover:underline" target="_blank">{t("legal.tabs.terms")}</Link>
+                        {" & "}
+                        <Link to="/legal/privacy" className="text-primary hover:underline" target="_blank">{t("legal.tabs.privacy")}</Link>
+                      </label>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground/60 pl-6">{t("auth.acceptTermsHint")}</p>
                   </div>
                 )}
               </CardContent>

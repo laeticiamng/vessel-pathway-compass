@@ -180,9 +180,9 @@ export const de = {
       title: "Was frühe Nutzer sagen",
       disclaimer: "Feedback aus unserem Beta-Programm. Identitäten auf Wunsch der Teilnehmer vertraulich.",
       items: [
-        { quote: "Die strukturierten KI-Berichte sparen mir mindestens 30 Minuten pro Fall. Sie sind Teil meines täglichen Workflows geworden.", author: "Gefäßchirurg", role: "Universitätsklinik, EU" },
-        { quote: "Der digitale Zwilling ist ein Gamechanger, um komplexe Anatomie bei der Visite mit Assistenzärzten zu erklären.", author: "Angiologe", role: "Privates Gefäßzentrum, CH" },
-        { quote: "Endlich eine Plattform, die unsere tatsächliche Arbeitsweise in der Gefäßmedizin widerspiegelt. Klar, fokussiert, praktisch.", author: "Gefäßchirurg", role: "Lehrkrankenhaus, USA" },
+        { quote: "Die strukturierten KI-Berichte sparen mir mindestens 30 Minuten pro Fall. Früher habe ich alles diktiert — jetzt prüfe und bestätige ich. Das gehört zu meinem Arbeitsalltag.", author: "Gefäßchirurg", role: "Universitätsklinik, EU" },
+        { quote: "Ich nutze den digitalen Zwilling bei der Visite, um Assistenzärzten genau zu zeigen, wo die Läsionen sind und wie sie sich entwickelt haben. Das hat unsere Tafelskizzen ersetzt.", author: "Interventioneller Radiologe", role: "Privates Gefäßzentrum, CH" },
+        { quote: "Als Assistenzarzt im 3. Jahr haben mir das Simulationslabor und das Logbuch geholfen, meinen Fortschritt zu verfolgen und mich auf die Facharztprüfung vorzubereiten. Nichts anderes bot das.", author: "Assistenzarzt Gefäßchirurgie", role: "Lehrkrankenhaus, USA" },
       ],
     },
     faq: {
@@ -199,7 +199,8 @@ export const de = {
     },
     about: {
       title: "Wer wir sind",
-      description: "Vascular Atlas wird von einem Team aus Gefäßmedizinern, klinischen Forschern und Software-Ingenieuren entwickelt, die davon überzeugt sind, dass die moderne Gefäßmedizin eine dedizierte digitale Plattform verdient. Unsere Mission: klinische Workflows schneller, sicherer und kollaborativer machen — ohne Kompromisse beim Datenschutz.",
+      description: "Vascular Atlas wird von EMOTIONSCARE entwickelt, einem Health-Tech-Unternehmen mit Sitz in Amiens, Frankreich. Gegründet von Klinikern und Ingenieuren, ist unsere Mission, Gefäßprofis eine dedizierte, moderne Plattform zu bieten — aufgebaut um ihre echten Workflows, nicht generische Vorlagen.",
+      foundedLine: "Gegründet in Amiens, Frankreich — EMOTIONSCARE SASU",
       highlights: {
         clinical: {
           title: "Von Klinikern entwickelt",
@@ -217,7 +218,7 @@ export const de = {
     },
     cta: {
       title: "Bereit, Ihre Gefäßpraxis zu vereinfachen?",
-      subtitle: "Schließen Sie sich Hunderten von Gefäßspezialisten an, die die Plattform bereits erkunden.",
+      subtitle: "Schließen Sie sich Gefäßspezialisten an, die die Plattform bereits erkunden — kostenlos während der Beta.",
       button: "Kostenloses Konto erstellen",
     },
     footer: {
@@ -322,6 +323,7 @@ export const de = {
     invalidLink: "Ungültiger oder abgelaufener Link",
     invalidLinkDesc: "Dieser Link ist nicht mehr gültig. Bitte fordern Sie einen neuen an.",
     acceptTerms: "Ich akzeptiere die",
+    acceptTermsHint: "Ihre Daten sind verschlüsselt und werden nie geteilt. Sie können Ihr Konto jederzeit löschen.",
     passwordWeak: "Schwach — Großbuchstaben, Zahlen oder Symbole hinzufügen",
     passwordMedium: "Mittel — mehr Vielfalt hinzufügen",
     passwordStrong: "Starkes Passwort",

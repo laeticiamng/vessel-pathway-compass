@@ -187,9 +187,9 @@ export const en = {
       title: "What Early Users Say",
       disclaimer: "Feedback from our beta program. Identities kept confidential at participants' request.",
       items: [
-        { quote: "The structured AI reports save me at least 30 minutes per case. It's become part of my daily workflow.", author: "Vascular Surgeon", role: "University Hospital, EU" },
-        { quote: "The digital twin is a game-changer for explaining complex anatomy to trainees during rounds.", author: "Angiologist", role: "Private Vascular Center, CH" },
-        { quote: "Finally a platform that mirrors how we actually work in vascular medicine. Clean, focused, practical.", author: "Vascular Surgeon", role: "Teaching Hospital, USA" },
+        { quote: "The structured AI reports save me at least 30 minutes per case. I used to dictate everything — now I review and confirm. It's become part of my daily routine.", author: "Vascular Surgeon", role: "University Hospital, EU" },
+        { quote: "I use the digital twin during rounds to show trainees exactly where the lesions are and how they've evolved. It replaced our whiteboard sketches.", author: "Interventional Radiologist", role: "Private Vascular Center, CH" },
+        { quote: "As a third-year trainee, the simulation lab and logbook helped me track my progress and prepare for my board exam. Nothing else offered this.", author: "Vascular Surgery Trainee", role: "Teaching Hospital, USA" },
       ],
     },
     faq: {
@@ -206,7 +206,8 @@ export const en = {
     },
     about: {
       title: "Who We Are",
-      description: "Vascular Atlas is built by a team of vascular physicians, clinical researchers and software engineers who believe that modern vascular medicine deserves a dedicated, purpose-built digital platform. Our mission: make clinical workflows faster, safer and more collaborative — without compromising on data privacy.",
+      description: "Vascular Atlas is developed by EMOTIONSCARE, a health-tech company based in Amiens, France. Founded by clinicians and engineers, our mission is to give vascular professionals a dedicated, modern platform — built around their real workflows, not generic healthcare templates.",
+      foundedLine: "Founded in Amiens, France — EMOTIONSCARE SASU",
       highlights: {
         clinical: {
           title: "Built by Clinicians",
@@ -224,7 +225,7 @@ export const en = {
     },
     cta: {
       title: "Ready to Streamline Your Vascular Practice?",
-      subtitle: "Join hundreds of vascular specialists already exploring the platform.",
+      subtitle: "Join vascular specialists already exploring the platform — free during beta.",
       button: "Create Free Account",
     },
     footer: {
@@ -330,7 +331,8 @@ export const en = {
     passwordUpdatedDesc: "Your password has been successfully updated.",
     invalidLink: "Invalid or expired link",
     invalidLinkDesc: "This password reset link is no longer valid. Please request a new one.",
-    acceptTerms: "I accept the",
+     acceptTerms: "I accept the",
+     acceptTermsHint: "Your data is encrypted and never shared. You can delete your account at any time.",
     passwordWeak: "Weak — add uppercase, numbers, or symbols",
     passwordMedium: "Medium — add more variety",
     passwordStrong: "Strong password",

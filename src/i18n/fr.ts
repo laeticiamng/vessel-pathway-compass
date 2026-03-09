@@ -180,9 +180,9 @@ export const fr = {
       title: "Ce qu'en disent les premiers utilisateurs",
       disclaimer: "Retours issus de notre programme bêta. Identités confidentielles à la demande des participants.",
       items: [
-        { quote: "Les rapports IA structurés me font gagner au moins 30 minutes par cas. C'est devenu partie intégrante de mon workflow.", author: "Chirurgien vasculaire", role: "Hôpital universitaire, UE" },
-        { quote: "Le jumeau numérique change la donne pour expliquer l'anatomie complexe aux internes pendant les visites.", author: "Angiologue", role: "Centre vasculaire privé, CH" },
-        { quote: "Enfin une plateforme qui reflète notre façon réelle de travailler en médecine vasculaire. Claire, ciblée, pratique.", author: "Chirurgien vasculaire", role: "CHU, USA" },
+        { quote: "Les rapports IA structurés me font gagner au moins 30 minutes par cas. Avant, je dictais tout — maintenant je relis et je valide. C'est entré dans ma routine quotidienne.", author: "Chirurgien vasculaire", role: "Hôpital universitaire, UE" },
+        { quote: "J'utilise le jumeau numérique pendant les visites pour montrer aux internes exactement où sont les lésions et comment elles ont évolué. Ça a remplacé nos schémas au tableau.", author: "Radiologue interventionnel", role: "Centre vasculaire privé, CH" },
+        { quote: "En tant qu'interne de 3e année, le labo de simulation et le carnet de stage m'ont aidé à suivre ma progression et préparer mon examen. Rien d'autre ne proposait ça.", author: "Interne en chirurgie vasculaire", role: "CHU, USA" },
       ],
     },
     faq: {
@@ -199,7 +199,8 @@ export const fr = {
     },
     about: {
       title: "Qui sommes-nous",
-      description: "Vascular Atlas est conçu par une équipe de médecins vasculaires, chercheurs cliniques et ingénieurs logiciels convaincus que la médecine vasculaire mérite une plateforme numérique dédiée. Notre mission : rendre les workflows cliniques plus rapides, plus sûrs et plus collaboratifs — sans compromis sur la confidentialité des données.",
+      description: "Vascular Atlas est développé par EMOTIONSCARE, une entreprise de santé numérique basée à Amiens, en France. Fondée par des cliniciens et des ingénieurs, notre mission est d'offrir aux professionnels vasculaires une plateforme dédiée et moderne — conçue autour de leurs vrais workflows, pas de modèles génériques.",
+      foundedLine: "Fondée à Amiens, France — EMOTIONSCARE SASU",
       highlights: {
         clinical: {
           title: "Conçu par des cliniciens",
@@ -217,7 +218,7 @@ export const fr = {
     },
     cta: {
       title: "Prêt à simplifier votre pratique vasculaire ?",
-      subtitle: "Rejoignez des centaines de spécialistes vasculaires qui explorent déjà la plateforme.",
+      subtitle: "Rejoignez les spécialistes vasculaires qui explorent déjà la plateforme — gratuit pendant la bêta.",
       button: "Créer un compte gratuit",
     },
     footer: {
@@ -322,6 +323,7 @@ export const fr = {
     invalidLink: "Lien invalide ou expiré",
     invalidLinkDesc: "Ce lien de réinitialisation n'est plus valide. Veuillez en demander un nouveau.",
     acceptTerms: "J'accepte les",
+    acceptTermsHint: "Vos données sont chiffrées et jamais partagées. Vous pouvez supprimer votre compte à tout moment.",
     passwordWeak: "Faible — ajoutez des majuscules, chiffres ou symboles",
     passwordMedium: "Moyen — ajoutez plus de variété",
     passwordStrong: "Mot de passe fort",
