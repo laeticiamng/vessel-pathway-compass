@@ -96,7 +96,7 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-6">
+    <div className="min-h-screen-safe flex items-center justify-center bg-background p-4 sm:p-6">
       <div className="absolute top-4 right-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

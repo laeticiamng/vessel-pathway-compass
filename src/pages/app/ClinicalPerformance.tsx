@@ -144,14 +144,14 @@ export default function ClinicalPerformance() {
       <SEOHead title={t("seo.performance.title") as string} description={t("seo.performance.description") as string} path="/app/performance" noindex />
 
       <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <Activity className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <Activity className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
           {t("clinicalPerformance.title")}
         </h1>
         <p className="text-muted-foreground mt-1">{t("clinicalPerformance.subtitle")}</p>
       </div>
 
-      <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         <KPICard
           title={t("clinicalPerformance.complicationRate") as string}
           value={kpis?.complicationRate ?? null}

@@ -165,8 +165,8 @@ export default function Network() {
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.network.title") as string} description={t("seo.network.description") as string} path="/app/network" noindex />
       <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <Globe className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3">
+          <Globe className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
           {t("network.title")}
         </h1>
         <p className="text-muted-foreground mt-1">{t("network.subtitle")}</p>
@@ -185,7 +185,7 @@ export default function Network() {
             <ForumThreadDetail postId={selectedPostId} onBack={() => setSelectedPostId(null)} />
           ) : (
             <>
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
@@ -269,12 +269,12 @@ export default function Network() {
 
         {/* Ask Expert Tab */}
         <TabsContent value="ask-expert" className="mt-6 space-y-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
             <div>
-              <h2 className="text-xl font-semibold">{t("network.tabs.askExpert")}</h2>
+              <h2 className="text-lg sm:text-xl font-semibold">{t("network.tabs.askExpert")}</h2>
               <p className="text-sm text-muted-foreground mt-1">{t("network.askExpertDesc")}</p>
             </div>
-            <Button onClick={() => setExpertDialogOpen(true)}>
+            <Button className="self-start sm:self-auto shrink-0" onClick={() => setExpertDialogOpen(true)}>
               <Send className="h-4 w-4 mr-2" />
               {t("network.submitCase")}
             </Button>

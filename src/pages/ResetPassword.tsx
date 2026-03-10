@@ -67,7 +67,7 @@ export default function ResetPassword() {
 
   if (!isRecovery) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-6">
+      <div className="min-h-screen flex items-center justify-center bg-background px-4 py-6 sm:p-6">
         <div className="w-full max-w-md">
           <Link to="/" className="flex items-center justify-center gap-2 mb-8">
             <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
@@ -92,7 +92,7 @@ export default function ResetPassword() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-6">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4 py-6 sm:p-6">
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center justify-center gap-2 mb-8">
           <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">

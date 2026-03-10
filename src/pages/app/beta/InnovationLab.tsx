@@ -22,8 +22,8 @@ export default function InnovationLab() {
   return (
     <div className="space-y-6 max-w-4xl">
       <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <Rocket className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <Rocket className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
           {t("innovationLab.title")}
         </h1>
         <p className="text-muted-foreground mt-1">{t("innovationLab.subtitle")}</p>

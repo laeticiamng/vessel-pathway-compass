@@ -26,10 +26,10 @@ export function UsageLimitBanner({ current, limit, featureKey }: UsageLimitBanne
   if (!nearLimit) return null;
 
   return (
-    <div className={`flex items-center justify-between gap-4 p-3 rounded-lg border ${atLimit ? "bg-destructive/10 border-destructive/30" : "bg-warning/10 border-warning/30"}`}>
-      <div className="flex items-center gap-3">
+    <div className={`flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 p-3 rounded-lg border ${atLimit ? "bg-destructive/10 border-destructive/30" : "bg-warning/10 border-warning/30"}`}>
+      <div className="flex items-center gap-3 min-w-0">
         <Crown className={`h-4 w-4 shrink-0 ${atLimit ? "text-destructive" : "text-warning"}`} />
-        <p className="text-sm">
+        <p className="text-sm leading-snug">
           {atLimit
             ? (t("premiumGate.limitReached") as string).replace("{{feature}}", t(`premiumGate.features.${featureKey}`) as string)
             : (t("premiumGate.limitNear") as string)
@@ -38,7 +38,7 @@ export function UsageLimitBanner({ current, limit, featureKey }: UsageLimitBanne
               .replace("{{feature}}", t(`premiumGate.features.${featureKey}`) as string)}
         </p>
       </div>
-      <Button asChild size="sm" variant={atLimit ? "default" : "outline"}>
+      <Button asChild size="sm" variant={atLimit ? "default" : "outline"} className="shrink-0 self-end sm:self-auto">
         <Link to="/pricing">{t("premiumGate.upgrade")}</Link>
       </Button>
     </div>

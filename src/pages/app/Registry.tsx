@@ -111,15 +111,15 @@ export default function Registry() {
   return (
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.registry.title") as string} description={t("seo.registry.description") as string} path="/app/registry" noindex />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <LineChart className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+            <LineChart className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("registry.title")}
           </h1>
           <p className="text-muted-foreground mt-1">{t("registry.subtitle")}</p>
         </div>
-        <Badge variant="outline" className="flex items-center gap-1.5">
+        <Badge variant="outline" className="flex items-center gap-1.5 self-start sm:self-auto">
           <Shield className="h-3 w-3" />
           {t("registry.badge")}
         </Badge>
@@ -139,7 +139,7 @@ export default function Registry() {
         </TabsList>
 
         <TabsContent value="physician" className="mt-6 space-y-4">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {summaryStats.map((s) => (
               <Card key={s.label}>
                 <CardContent className="pt-6">
@@ -165,10 +165,10 @@ export default function Registry() {
                     <tr className="border-b">
                       <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.category")}</th>
                       <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.entries")}</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.amputation")}</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.restenosis")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground hidden sm:table-cell">{t("registry.table.amputation")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground hidden sm:table-cell">{t("registry.table.restenosis")}</th>
                       <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.mortality")}</th>
-                      <th className="text-left p-3 font-medium text-muted-foreground">{t("registry.table.complications")}</th>
+                      <th className="text-left p-3 font-medium text-muted-foreground hidden sm:table-cell">{t("registry.table.complications")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -185,10 +185,10 @@ export default function Registry() {
                           <tr key={o.category} className="border-b last:border-0">
                             <td className="p-3 font-medium">{o.category}</td>
                             <td className="p-3">{o.entries}</td>
-                            <td className="p-3">{o.amputation}</td>
-                            <td className="p-3">{o.restenosis}</td>
+                            <td className="p-3 hidden sm:table-cell">{o.amputation}</td>
+                            <td className="p-3 hidden sm:table-cell">{o.restenosis}</td>
                             <td className="p-3">{o.mortality}</td>
-                            <td className="p-3">{o.complications}</td>
+                            <td className="p-3 hidden sm:table-cell">{o.complications}</td>
                           </tr>
                         ))
                       : !isLoading && (

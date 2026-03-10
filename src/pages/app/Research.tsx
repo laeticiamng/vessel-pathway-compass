@@ -75,15 +75,15 @@ export default function Research() {
   return (
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.research.title") as string} description={t("seo.research.description") as string} path="/app/research" noindex />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <FileText className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+            <FileText className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("research.title")}
           </h1>
           <p className="text-muted-foreground mt-1">{t("research.subtitle")}</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-2 self-start sm:self-auto">
           <ResearchExportButton />
           <Button onClick={() => setDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
@@ -92,7 +92,7 @@ export default function Research() {
         </div>
       </div>
 
-      <div className="grid sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>
           <CardContent className="pt-6">
             <p className="text-sm text-muted-foreground">{t("research.stats.activeStudies")}</p>
@@ -127,9 +127,9 @@ export default function Research() {
           {studies.map((s) => (
             <Card key={s.id} className="hover:border-primary/30 transition-colors">
               <CardContent className="pt-6">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2 mb-1 flex-wrap">
                       <h3 className="font-semibold">{s.title}</h3>
                       <Badge variant={s.status === "active" ? "default" : s.status === "recruiting" ? "secondary" : "outline"}>
                         {t(`research.statuses.${s.status}` as any) || s.status}
@@ -139,17 +139,17 @@ export default function Research() {
                       <span className="flex items-center gap-1">
                         <Users className="h-3 w-3" /> {(s as any).study_members?.[0]?.count ?? 0} {t("research.members")}
                       </span>
-                      {s.description && <span className="truncate max-w-[300px]">{s.description}</span>}
+                      {s.description && <span className="truncate max-w-[200px] sm:max-w-[300px]">{s.description}</span>}
                     </div>
                   </div>
-                  <div className="flex gap-2">
+                  <div className="flex gap-2 shrink-0">
                     <Button variant="outline" size="sm" onClick={() => toast.info(t("common.comingSoon"))}>
-                      <BarChart3 className="h-3.5 w-3.5 mr-1" />
-                      {t("common.analytics")}
+                      <BarChart3 className="h-3.5 w-3.5 sm:mr-1" />
+                      <span className="hidden sm:inline">{t("common.analytics")}</span>
                     </Button>
                     <Button variant="outline" size="sm" onClick={() => toast.info(t("common.comingSoon"))}>
-                      <Download className="h-3.5 w-3.5 mr-1" />
-                      {t("common.export")}
+                      <Download className="h-3.5 w-3.5 sm:mr-1" />
+                      <span className="hidden sm:inline">{t("common.export")}</span>
                     </Button>
                   </div>
                 </div>

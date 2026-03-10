@@ -54,7 +54,7 @@ export default function PatientDetail() {
       <div className="space-y-6 max-w-5xl">
         <Skeleton className="h-8 w-64" />
         <Skeleton className="h-4 w-48" />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <Skeleton className="h-24" /><Skeleton className="h-24" /><Skeleton className="h-24" />
         </div>
       </div>
@@ -76,8 +76,8 @@ export default function PatientDetail() {
   return (
     <>
       <SEOHead title={t("seo.patients.title") as string} description={t("seo.patients.description") as string} path={`/app/patients/${id}`} noindex />
-      <div className="space-y-6 max-w-5xl">
-      <div className="flex items-center justify-between">
+      <div className="space-y-4 sm:space-y-6 max-w-5xl">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <PatientHeader
           patient={patient}
           latestCase={cases?.[0]}

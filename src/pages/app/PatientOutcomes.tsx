@@ -171,8 +171,8 @@ export default function PatientOutcomes() {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <ClipboardList className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+            <ClipboardList className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("patientOutcomes.title")}
           </h1>
           <p className="text-muted-foreground mt-1">{t("patientOutcomes.subtitle")}</p>
@@ -183,7 +183,7 @@ export default function PatientOutcomes() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardContent className="pt-6">
             <p className="text-sm text-muted-foreground">{t("patientOutcomes.totalSubmissions")}</p>
@@ -247,7 +247,7 @@ export default function PatientOutcomes() {
                     </div>
                   </div>
                 ) : (
-                  <ResponsiveContainer width="100%" height={300}>
+                  <ResponsiveContainer width="100%" height={280} className="h-[220px] sm:h-[280px]">
                     <LineChart data={chartData[type]}>
                       <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                       <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
@@ -277,23 +277,23 @@ export default function PatientOutcomes() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("patientOutcomes.date")}</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("patientOutcomes.questionnaire")}</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("patientOutcomes.score")}</th>
-                    <th className="text-left p-4 text-sm font-medium text-muted-foreground">{t("patientOutcomes.status")}</th>
+                    <th className="text-left p-3 sm:p-4 text-sm font-medium text-muted-foreground">{t("patientOutcomes.date")}</th>
+                    <th className="text-left p-3 sm:p-4 text-sm font-medium text-muted-foreground">{t("patientOutcomes.questionnaire")}</th>
+                    <th className="text-left p-3 sm:p-4 text-sm font-medium text-muted-foreground">{t("patientOutcomes.score")}</th>
+                    <th className="text-left p-3 sm:p-4 text-sm font-medium text-muted-foreground hidden sm:table-cell">{t("patientOutcomes.status")}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {proms.slice(-10).reverse().map((p) => (
                     <tr key={p.id} className="border-b last:border-0">
-                      <td className="p-4 text-sm">{new Date(p.completed_at).toLocaleDateString()}</td>
-                      <td className="p-4"><Badge variant="secondary">{p.questionnaire_type === "vascuqol6" ? "VascuQoL-6" : "CIVIQ-14"}</Badge></td>
-                      <td className="p-4">
+                      <td className="p-3 sm:p-4 text-sm">{new Date(p.completed_at).toLocaleDateString()}</td>
+                      <td className="p-3 sm:p-4"><Badge variant="secondary">{p.questionnaire_type === "vascuqol6" ? "VascuQoL-6" : "CIVIQ-14"}</Badge></td>
+                      <td className="p-3 sm:p-4">
                         <span className={`font-bold ${(p.score ?? 0) >= 70 ? "text-success" : (p.score ?? 0) >= 40 ? "text-warning" : "text-destructive"}`}>
                           {p.score}/100
                         </span>
                       </td>
-                      <td className="p-4"><Badge variant="outline"><CheckCircle2 className="h-3 w-3 mr-1" /> {t("patientOutcomes.completed")}</Badge></td>
+                      <td className="p-3 sm:p-4 hidden sm:table-cell"><Badge variant="outline"><CheckCircle2 className="h-3 w-3 mr-1" /> {t("patientOutcomes.completed")}</Badge></td>
                     </tr>
                   ))}
                 </tbody>

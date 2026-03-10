@@ -167,22 +167,22 @@ export default function Simulation() {
   return (
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.simulation.title") as string} description={t("seo.simulation.description") as string} path="/app/simulation" noindex />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <FlaskConical className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+            <FlaskConical className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("simulation.title")}
           </h1>
           <p className="text-muted-foreground mt-1">{t("simulation.subtitle")}</p>
         </div>
-        <Button onClick={() => setCreateOpen(true)}>
+        <Button onClick={() => setCreateOpen(true)} className="self-start sm:self-auto">
           <Plus className="h-4 w-4 mr-2" />
           {t("simulation.createCase")}
         </Button>
       </div>
 
       {/* Stats */}
-      <div className="grid sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center gap-3">
@@ -246,15 +246,15 @@ export default function Simulation() {
             const bestScore = runs.length > 0 ? Math.max(...runs.filter(r => r.score != null).map(r => r.score!)) : null;
             return (
               <Card key={sim.id} className="hover:border-primary/30 transition-colors">
-                <CardContent className="pt-6 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                <CardContent className="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                       <FlaskConical className="h-5 w-5 text-primary" />
                     </div>
-                    <div>
-                      <h3 className="font-semibold">{sim.title}</h3>
+                    <div className="min-w-0">
+                      <h3 className="font-semibold truncate">{sim.title}</h3>
                       {sim.description && <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1">{sim.description}</p>}
-                      <div className="flex items-center gap-2 mt-1">
+                      <div className="flex items-center gap-2 mt-1 flex-wrap">
                         <Badge variant="secondary" className="text-xs capitalize">{sim.category}</Badge>
                         {sim.time_limit_seconds && (
                           <span className="text-xs text-muted-foreground flex items-center gap-1">
@@ -272,7 +272,7 @@ export default function Simulation() {
                       </div>
                     </div>
                   </div>
-                  <Button size="sm" onClick={() => setRunningSimId(sim.id)}>
+                  <Button size="sm" onClick={() => setRunningSimId(sim.id)} className="self-start sm:self-auto shrink-0">
                     <Play className="h-3.5 w-3.5 mr-1" />
                     {runs.length > 0 ? t("simulation.retry") : t("common.start")}
                   </Button>

@@ -118,7 +118,7 @@ export default function SimulationRunner({ simulation, rubrics, onComplete, onCa
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="text-center">
-              <p className="text-5xl font-bold font-mono">{score}%</p>
+              <p className="text-4xl sm:text-5xl font-bold font-mono">{score}%</p>
               <p className="text-sm text-muted-foreground mt-1">
                 {score! >= 70 ? t("simulation.results.passed") : t("simulation.results.needsWork")}
               </p>
@@ -174,12 +174,12 @@ export default function SimulationRunner({ simulation, rubrics, onComplete, onCa
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <Button variant="ghost" size="sm" onClick={onCancel}>
-          <ArrowLeft className="h-4 w-4 mr-1" />
-          {t("simulation.backToList")}
+          <ArrowLeft className="h-4 w-4 sm:mr-1" />
+          <span className="hidden sm:inline">{t("simulation.backToList")}</span>
         </Button>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {timeRemaining != null && (
             <Badge variant={timeRemaining < 60 ? "destructive" : "secondary"} className="font-mono">
               <Clock className="h-3 w-3 mr-1" />
@@ -207,7 +207,7 @@ export default function SimulationRunner({ simulation, rubrics, onComplete, onCa
               <button
                 key={idx}
                 onClick={() => selectOption(step.id, idx)}
-                className={`w-full text-left p-3 rounded-lg border transition-colors ${
+                className={`w-full text-left p-3 sm:p-4 rounded-lg border transition-colors active:scale-[0.99] ${
                   decisions[step.id] === idx
                     ? "border-primary bg-primary/10 text-foreground"
                     : "border-border hover:border-primary/40 text-foreground"

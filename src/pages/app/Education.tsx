@@ -182,15 +182,15 @@ export default function Education() {
   return (
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.education.title") as string} description={t("seo.education.description") as string} path="/app/education" noindex />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <BookOpen className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3">
+            <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("education.title")}
           </h1>
-          <p className="text-muted-foreground mt-1">{t("education.subtitle")}</p>
+          <p className="text-muted-foreground text-sm mt-1">{t("education.subtitle")}</p>
         </div>
-        <Button onClick={() => setCreateOpen(true)}>
+        <Button className="self-start sm:self-auto shrink-0" onClick={() => setCreateOpen(true)}>
           <Plus className="h-4 w-4 mr-2" />
           {t("education.createCourse")}
         </Button>
@@ -257,12 +257,12 @@ export default function Education() {
           return (
             <Card key={course.id} className="hover:border-primary/30 transition-colors cursor-pointer" onClick={() => setSelectedCourseId(course.id)}>
               <CardContent className="pt-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl">{emoji}</span>
-                    <div>
-                      <h3 className="font-semibold">{course.title}</h3>
-                      <div className="flex items-center gap-2 mt-1">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="text-2xl shrink-0">{emoji}</span>
+                    <div className="min-w-0">
+                      <h3 className="font-semibold truncate">{course.title}</h3>
+                      <div className="flex items-center gap-2 mt-1 flex-wrap">
                         <Badge variant="secondary" className="text-xs capitalize">{course.track.replace("-", " ")}</Badge>
                         <Badge variant="outline" className="text-xs capitalize">{course.difficulty}</Badge>
                         {course.duration_hours && (

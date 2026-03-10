@@ -107,7 +107,7 @@ export default function SegmentDetail({ segmentLabel, measurements, isLoading }:
                   </div>
                   {/* Mini sparkline of values */}
                   {values.length > 1 && (
-                    <div className="flex items-end gap-1 mt-2 h-8">
+                    <div className="flex items-end gap-1 mt-2 h-10 sm:h-8">
                       {values.slice(0, 10).reverse().map((v, i) => {
                         const max = Math.max(...values.map((x) => x.value));
                         const min = Math.min(...values.map((x) => x.value));

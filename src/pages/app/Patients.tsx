@@ -96,14 +96,15 @@ export default function Patients() {
   return (
     <>
       <SEOHead title={t("seo.patients.title") as string} description={t("seo.patients.description") as string} path="/app/patients" noindex />
-      <div className="space-y-6 max-w-6xl">
+      <div className="space-y-4 sm:space-y-6 max-w-6xl">
         <UsageLimitBanner current={patients?.length ?? 0} limit={FREE_PATIENT_LIMIT} featureKey="patients" />
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h1 className="text-3xl font-bold">{t("patients.title")}</h1>
-            <p className="text-muted-foreground mt-1">{t("patients.subtitle")}</p>
+            <h1 className="text-2xl sm:text-3xl font-bold">{t("patients.title")}</h1>
+            <p className="text-muted-foreground text-sm mt-1">{t("patients.subtitle")}</p>
           </div>
           <Button
+            className="self-start sm:self-auto shrink-0"
             onClick={() => setDialogOpen(true)}
             disabled={!subscribed && (patients?.length ?? 0) >= FREE_PATIENT_LIMIT}
           >

@@ -360,17 +360,17 @@ export default function Analytics() {
       <SEOHead title={t("seo.analytics.title") as string} description={t("seo.analytics.description") as string} path="/app/analytics" noindex />
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <BarChart3 className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3">
+            <BarChart3 className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("analytics.title")}
           </h1>
-          <p className="text-muted-foreground mt-1">{t("analytics.subtitle")}</p>
+          <p className="text-muted-foreground text-sm mt-1">{t("analytics.subtitle")}</p>
         </div>
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           <div className="flex items-center gap-2">
-            <Filter className="h-4 w-4 text-muted-foreground" />
+            <Filter className="h-4 w-4 text-muted-foreground shrink-0" />
             <Select value={period} onValueChange={(v) => setPeriod(v as PeriodKey)}>
-              <SelectTrigger className="w-[130px] h-9">
+              <SelectTrigger className="w-[110px] sm:w-[130px] h-9">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -383,7 +383,7 @@ export default function Analytics() {
             </Select>
           </div>
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-            <SelectTrigger className="w-[160px] h-9">
+            <SelectTrigger className="w-[130px] sm:w-[160px] h-9">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -397,7 +397,7 @@ export default function Analytics() {
           </Select>
           {institutions && institutions.length > 0 && (
             <Select value={institutionFilter} onValueChange={setInstitutionFilter}>
-              <SelectTrigger className="w-[200px] h-9">
+              <SelectTrigger className="w-[150px] sm:w-[200px] h-9">
                 <div className="flex items-center gap-2">
                   <Building2 className="h-3.5 w-3.5 text-muted-foreground" />
                   <SelectValue />

@@ -95,8 +95,8 @@ export default function Settings() {
       <SEOHead title={t("seo.settings.title") as string} description={t("seo.settings.description") as string} path="/app/settings" noindex />
       <div className="space-y-6 max-w-3xl">
       <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <SettingsIcon className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <SettingsIcon className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
           {t("settings.title")}
         </h1>
         <p className="text-muted-foreground mt-1">{t("settings.subtitle")}</p>

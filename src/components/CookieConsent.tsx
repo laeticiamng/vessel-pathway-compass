@@ -26,8 +26,8 @@ export function CookieConsent() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 p-4 bg-card border-t shadow-lg">
-      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 max-w-4xl">
+    <div className="fixed bottom-0 left-0 right-0 z-50 p-3 sm:p-4 bg-card border-t shadow-lg" style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}>
+      <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 max-w-4xl">
         <div className="flex items-start gap-3">
           <Cookie className="h-5 w-5 text-primary shrink-0 mt-0.5" />
           <div className="text-sm">

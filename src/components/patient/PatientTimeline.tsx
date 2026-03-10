@@ -64,17 +64,18 @@ export default function PatientTimeline({
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <h2 className="text-lg font-semibold">{t("patientDetail.caseTimeline")}</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 shrink-0">
           {selected.size > 0 && (
             <Button size="sm" variant="destructive" onClick={handleBulkDelete} disabled={bulkDeletePending}>
-              <Trash2 className="h-4 w-4 mr-1" />
-              {bulkDeletePending ? t("common.loading") : `${t("patientDetail.bulkDelete")} (${selected.size})`}
+              <Trash2 className="h-4 w-4 sm:mr-1" />
+              <span className="hidden sm:inline">{bulkDeletePending ? t("common.loading") : `${t("patientDetail.bulkDelete")} (${selected.size})`}</span>
+              <span className="sm:hidden">{selected.size}</span>
             </Button>
           )}
           <Button size="sm" onClick={onAddEvent} disabled={!hasCases}>
-            <Plus className="h-4 w-4 mr-1" /> {t("patientDetail.addEvent")}
+            <Plus className="h-4 w-4 sm:mr-1" /> <span className="hidden sm:inline">{t("patientDetail.addEvent")}</span>
           </Button>
         </div>
       </div>
@@ -129,7 +130,7 @@ export default function PatientTimeline({
                 </div>
                 <Button
                   variant="ghost" size="icon"
-                  className="opacity-0 group-hover:opacity-100 transition-opacity shrink-0 h-8 w-8 text-muted-foreground hover:text-destructive"
+                  className="sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shrink-0 h-8 w-8 text-muted-foreground hover:text-destructive"
                   onClick={() => onDeleteEvent(ev.id)}
                 >
                   <Trash2 className="h-4 w-4" />

@@ -40,8 +40,8 @@ export function SubscriptionSettingsCard() {
           </div>
         ) : (
           <>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 <span className="text-sm font-medium">{t("settings.plan.currentPlan")}</span>
                 <Badge variant={subscribed ? "default" : "secondary"}>
                   {subscribed ? t("pricing.plans.professional.name") : t("settings.plan.free")}

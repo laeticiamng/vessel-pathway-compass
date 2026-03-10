@@ -54,7 +54,7 @@ function Score2Tab() {
   const riskColor = !result ? "" : result.categoryKey === "low" ? "text-success" : result.categoryKey === "moderate" ? "text-warning" : "text-destructive";
 
   return (
-    <div className="grid md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card>
         <CardHeader>
           <CardTitle>{t("riskCalculator.score2.title")}</CardTitle>
@@ -136,7 +136,7 @@ function WellsDVTTab() {
   const riskColor = score <= 0 ? "text-success" : score <= 2 ? "text-warning" : "text-destructive";
 
   return (
-    <div className="grid md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card>
         <CardHeader>
           <CardTitle>{t("riskCalculator.wells.title")}</CardTitle>
@@ -207,7 +207,7 @@ function ABITab() {
   const abiColor = (abi: number) => abi >= 1.0 && abi <= 1.4 ? "text-success" : abi >= 0.9 ? "text-warning" : "text-destructive";
 
   return (
-    <div className="grid md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <Card>
         <CardHeader>
           <CardTitle>{t("riskCalculator.abi.title")}</CardTitle>
@@ -278,8 +278,8 @@ export default function RiskCalculator() {
       <SEOHead title={t("seo.riskCalculator.title") as string} description={t("seo.riskCalculator.description") as string} path="/app/risk-calculator" noindex />
 
       <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <Calculator className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <Calculator className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
           {t("riskCalculator.title")}
         </h1>
         <p className="text-muted-foreground mt-1">{t("riskCalculator.subtitle")}</p>

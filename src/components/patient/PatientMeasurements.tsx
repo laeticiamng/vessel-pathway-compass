@@ -69,22 +69,23 @@ export default function PatientMeasurements({
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <h2 className="text-lg font-semibold">{t("patientDetail.measurements")}</h2>
-        <div className="flex gap-2">
+        <div className="flex gap-2 shrink-0 flex-wrap">
           {selected.size > 0 && (
             <Button size="sm" variant="destructive" onClick={handleBulkDelete} disabled={bulkDeletePending}>
-              <Trash2 className="h-4 w-4 mr-1" />
-              {bulkDeletePending ? t("common.loading") : `${t("patientDetail.bulkDelete")} (${selected.size})`}
+              <Trash2 className="h-4 w-4 sm:mr-1" />
+              <span className="hidden sm:inline">{bulkDeletePending ? t("common.loading") : `${t("patientDetail.bulkDelete")} (${selected.size})`}</span>
+              <span className="sm:hidden">{selected.size}</span>
             </Button>
           )}
           {measurements && measurements.length > 0 && selected.size === 0 && (
             <Button size="sm" variant="outline" onClick={exportCSV}>
-              <Download className="h-4 w-4 mr-1" /> {t("patientDetail.exportCSV")}
+              <Download className="h-4 w-4 sm:mr-1" /> <span className="hidden sm:inline">{t("patientDetail.exportCSV")}</span>
             </Button>
           )}
           <Button size="sm" onClick={onAddMeasurement} disabled={!hasCases}>
-            <Plus className="h-4 w-4 mr-1" /> {t("patientDetail.addMeasurement")}
+            <Plus className="h-4 w-4 sm:mr-1" /> <span className="hidden sm:inline">{t("patientDetail.addMeasurement")}</span>
           </Button>
         </div>
       </div>
@@ -103,40 +104,43 @@ export default function PatientMeasurements({
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="p-3 w-10">
+                    <th className="p-2 sm:p-3 w-10">
                       <Checkbox
                         checked={selected.size === measurements.length && measurements.length > 0}
                         onCheckedChange={toggleAll}
                         aria-label="Select all"
                       />
                     </th>
-                    <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.type")}</th>
-                    <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.value")}</th>
-                    <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.unit")}</th>
-                    <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.site")}</th>
-                    <th className="text-left p-3 font-medium text-muted-foreground">{t("patientDetail.table.date")}</th>
+                    <th className="text-left p-2 sm:p-3 text-xs sm:text-sm font-medium text-muted-foreground">{t("patientDetail.table.type")}</th>
+                    <th className="text-left p-2 sm:p-3 text-xs sm:text-sm font-medium text-muted-foreground">{t("patientDetail.table.value")}</th>
+                    <th className="text-left p-2 sm:p-3 text-xs sm:text-sm font-medium text-muted-foreground hidden sm:table-cell">{t("patientDetail.table.unit")}</th>
+                    <th className="text-left p-2 sm:p-3 text-xs sm:text-sm font-medium text-muted-foreground hidden md:table-cell">{t("patientDetail.table.site")}</th>
+                    <th className="text-left p-2 sm:p-3 text-xs sm:text-sm font-medium text-muted-foreground hidden sm:table-cell">{t("patientDetail.table.date")}</th>
                     <th className="w-10"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {measurements.map((m) => (
                     <tr key={m.id} className={`border-b last:border-0 group ${selected.has(m.id) ? "bg-primary/5" : ""}`}>
-                      <td className="p-3">
+                      <td className="p-2 sm:p-3">
                         <Checkbox
                           checked={selected.has(m.id)}
                           onCheckedChange={() => toggleOne(m.id)}
                           aria-label={`Select ${m.measurement_type}`}
                         />
                       </td>
-                      <td className="p-3 font-medium capitalize">{m.measurement_type}</td>
-                      <td className="p-3 font-mono">{m.value}</td>
-                      <td className="p-3">{m.unit}</td>
-                      <td className="p-3">{m.site ?? "—"}</td>
-                      <td className="p-3 text-muted-foreground">{new Date(m.measured_at).toLocaleDateString()}</td>
-                      <td className="p-3">
+                      <td className="p-2 sm:p-3 font-medium capitalize">
+                        <span>{m.measurement_type}</span>
+                        <span className="block text-xs text-muted-foreground sm:hidden">{m.unit} · {new Date(m.measured_at).toLocaleDateString()}</span>
+                      </td>
+                      <td className="p-2 sm:p-3 font-mono">{m.value}</td>
+                      <td className="p-2 sm:p-3 hidden sm:table-cell">{m.unit}</td>
+                      <td className="p-2 sm:p-3 hidden md:table-cell">{m.site ?? "—"}</td>
+                      <td className="p-2 sm:p-3 text-muted-foreground hidden sm:table-cell">{new Date(m.measured_at).toLocaleDateString()}</td>
+                      <td className="p-2 sm:p-3">
                         <Button
                           variant="ghost" size="icon"
-                          className="opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7 text-muted-foreground hover:text-destructive"
+                          className="sm:opacity-0 sm:group-hover:opacity-100 transition-opacity h-8 w-8 text-muted-foreground hover:text-destructive"
                           onClick={() => onDeleteMeasurement(m.id)}
                         >
                           <Trash2 className="h-3.5 w-3.5" />

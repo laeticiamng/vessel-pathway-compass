@@ -111,13 +111,13 @@ export default function RiskFactorsEditor({ patientId, riskFactors }: Props) {
         {suggestions.length > 0 && (
           <div>
             <p className="text-xs text-muted-foreground mb-2">{t("patientDetail.riskFactors.quickAdd")}</p>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2 sm:gap-1.5">
               {suggestions.map((factor) => (
                 <button
                   key={factor}
                   onClick={() => addFactor(factor)}
                   disabled={updateMutation.isPending}
-                  className="text-xs px-2 py-1 rounded-full border border-dashed border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                  className="text-xs px-2.5 py-1.5 sm:px-2 sm:py-1 rounded-full border border-dashed border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary transition-colors active:bg-primary/10"
                 >
                   + {formatLabel(factor)}
                 </button>

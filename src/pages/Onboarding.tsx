@@ -73,10 +73,10 @@ export default function Onboarding() {
   const progress = ((step + 1) / STEP_COUNT) * 100;
 
   const stepIcons = [
-    <Stethoscope key="r" className="h-5 w-5" />,
-    <Building2 key="i" className="h-5 w-5" />,
-    <HeartPulse key="s" className="h-5 w-5" />,
-    <UserPlus key="p" className="h-5 w-5" />,
+    <Stethoscope key="r" className="h-4 w-4 sm:h-5 sm:w-5" />,
+    <Building2 key="i" className="h-4 w-4 sm:h-5 sm:w-5" />,
+    <HeartPulse key="s" className="h-4 w-4 sm:h-5 sm:w-5" />,
+    <UserPlus key="p" className="h-4 w-4 sm:h-5 sm:w-5" />,
   ];
 
   const stepTitles = [
@@ -148,7 +148,7 @@ export default function Onboarding() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-background p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4 py-6 sm:p-6">
       <Link to="/" className="flex items-center gap-2 mb-6">
         <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center">
           <HeartPulse className="h-5 w-5 text-primary-foreground" />
@@ -167,7 +167,7 @@ export default function Onboarding() {
             {stepIcons.map((icon, i) => (
               <div
                 key={i}
-                className={`rounded-full p-2 transition-colors ${
+                className={`rounded-full p-1.5 sm:p-2 transition-colors ${
                   i <= step
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground"
@@ -302,25 +302,26 @@ export default function Onboarding() {
             variant="outline"
             onClick={() => setStep((s) => s - 1)}
             disabled={step === 0}
+            className="min-h-[44px]"
           >
-            <ChevronLeft className="h-4 w-4 mr-1" />
-            {t("common.back")}
+            <ChevronLeft className="h-4 w-4 sm:mr-1" />
+            <span className="hidden sm:inline">{t("common.back")}</span>
           </Button>
 
           <div className="flex gap-2">
             {step === 3 && (
-              <Button variant="ghost" onClick={() => finish(true)} disabled={saving}>
-                <SkipForward className="h-4 w-4 mr-1" />
-                {t("onboarding.skip")}
+              <Button variant="ghost" onClick={() => finish(true)} disabled={saving} className="min-h-[44px]">
+                <SkipForward className="h-4 w-4 sm:mr-1" />
+                <span className="hidden sm:inline">{t("onboarding.skip")}</span>
               </Button>
             )}
             {step < STEP_COUNT - 1 ? (
-              <Button onClick={() => setStep((s) => s + 1)}>
-                {t("common.next")}
-                <ChevronRight className="h-4 w-4 ml-1" />
+              <Button onClick={() => setStep((s) => s + 1)} className="min-h-[44px]">
+                <span className="hidden sm:inline">{t("common.next")}</span>
+                <ChevronRight className="h-4 w-4 sm:ml-1" />
               </Button>
             ) : (
-              <Button onClick={() => finish(false)} disabled={saving}>
+              <Button onClick={() => finish(false)} disabled={saving} className="min-h-[44px]">
                 <Check className="h-4 w-4 mr-1" />
                 {t("onboarding.finish")}
               </Button>

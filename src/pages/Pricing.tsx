@@ -106,23 +106,23 @@ export default function Pricing() {
         </div>
       </nav>
 
-      <div className="container mx-auto px-6 py-20">
+      <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
         {/* Beta highlight banner */}
-        <div className="max-w-3xl mx-auto mb-10 rounded-2xl border-2 border-success/30 bg-success/5 px-6 py-5 text-center">
-          <p className="text-lg font-semibold text-success mb-1">{t("pricing.betaBannerTitle")}</p>
+        <div className="max-w-3xl mx-auto mb-8 sm:mb-10 rounded-2xl border-2 border-success/30 bg-success/5 px-4 sm:px-6 py-4 sm:py-5 text-center">
+          <p className="text-base sm:text-lg font-semibold text-success mb-1">{t("pricing.betaBannerTitle")}</p>
           <p className="text-sm text-muted-foreground">{t("pricing.betaBannerDesc")}</p>
         </div>
 
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-16">
           <Badge className="mb-4 bg-success/10 text-success border-success/30">{t("pricing.betaBadge")}</Badge>
-          <h1 className="text-4xl font-bold mb-4">{t("pricing.title")}</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold mb-4">{t("pricing.title")}</h1>
           <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             {t("pricing.subtitle")}
           </p>
           <p className="text-sm text-muted-foreground/90 mt-3 max-w-xl mx-auto">{t("pricing.betaNote")}</p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
           {plans.map((plan) => {
             const isCurrentPlan = session && (
               (plan.key === "individual" && currentPlan === "individual") ||

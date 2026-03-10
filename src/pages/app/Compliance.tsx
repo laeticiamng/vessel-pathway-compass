@@ -146,14 +146,14 @@ export default function Compliance() {
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.compliance.title") as string} description={t("seo.compliance.description") as string} path="/app/compliance" noindex />
       <div>
-        <h1 className="text-3xl font-bold flex items-center gap-3">
-          <Shield className="h-8 w-8 text-primary" />
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
           {t("compliance.title")}
         </h1>
         <p className="text-muted-foreground mt-1">{t("compliance.subtitle")}</p>
       </div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s) => (
           <Card key={s.label}>
             <CardContent className="pt-6 flex items-center gap-3">
@@ -200,8 +200,8 @@ export default function Compliance() {
                       <thead>
                         <tr className="border-b">
                           <th className="text-left p-3 font-medium text-muted-foreground">{t("compliance.table.action")}</th>
-                          <th className="text-left p-3 font-medium text-muted-foreground">{t("compliance.table.type")}</th>
-                          <th className="text-left p-3 font-medium text-muted-foreground">{t("compliance.table.status")}</th>
+                          <th className="text-left p-3 font-medium text-muted-foreground hidden sm:table-cell">{t("compliance.table.type")}</th>
+                          <th className="text-left p-3 font-medium text-muted-foreground hidden sm:table-cell">{t("compliance.table.status")}</th>
                           <th className="text-left p-3 font-medium text-muted-foreground">{t("compliance.table.time")}</th>
                         </tr>
                       </thead>
@@ -212,10 +212,10 @@ export default function Compliance() {
                           return (
                             <tr key={log.id} className="border-b last:border-0">
                               <td className="p-3 font-medium">{log.action}</td>
-                              <td className="p-3">
+                              <td className="p-3 hidden sm:table-cell">
                                 <Badge variant="outline" className="text-xs">{log.entity_type}</Badge>
                               </td>
-                              <td className="p-3">
+                              <td className="p-3 hidden sm:table-cell">
                                 <Badge variant={status === "Pending" ? "destructive" : "secondary"} className="text-xs">
                                   {status}
                                 </Badge>
@@ -290,7 +290,7 @@ export default function Compliance() {
             </CardHeader>
             <CardContent className="space-y-4">
               {aiSafetyLoading ? (
-                <div className="grid sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   {[...Array(3)].map((_, i) => (
                     <Skeleton key={i} className="h-20 w-full" />
                   ))}
@@ -301,7 +301,7 @@ export default function Compliance() {
                   <p className="text-sm">{t("compliance.empty.aiOutputs")}</p>
                 </div>
               ) : (
-                <div className="grid sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="p-4 rounded-lg border">
                     <p className="text-sm text-muted-foreground">{t("compliance.aiSafetyMetrics.modelVersion")}</p>
                     <p className="text-lg font-bold mt-1">{aiSafety.latestModel}</p>

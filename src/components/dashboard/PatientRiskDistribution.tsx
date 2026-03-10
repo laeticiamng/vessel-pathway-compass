@@ -110,7 +110,7 @@ export default function PatientRiskDistribution() {
             </div>
 
             {/* Stats grid */}
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {(["low", "moderate", "high", "critical"] as RiskLevel[]).map((level) => {
                 const pct = total > 0 ? Math.round((dist[level] / total) * 100) : 0;
                 const config = RISK_CONFIG[level];
