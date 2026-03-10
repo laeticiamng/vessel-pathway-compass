@@ -302,14 +302,14 @@ export default function Landing() {
                 custom={i}
                 variants={fadeUp}
               >
-                <Link to={mod.path} className="group relative rounded-2xl border bg-card p-7 card-hover shine-hover block h-full">
+                <Link to={mod.path} className="group relative rounded-2xl border bg-card p-5 sm:p-7 card-hover shine-hover block h-full">
                   <div className="relative z-10">
                     <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors duration-300">
                       <mod.icon className="h-5 w-5 text-primary" />
                     </div>
                     <h3 className="text-lg font-semibold mb-2.5">{mod.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{mod.description}</p>
-                    <span className="inline-flex items-center gap-1 mt-4 text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <span className="inline-flex items-center gap-1 mt-4 text-xs font-medium text-primary opacity-60 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {t("common.learnMore")} <ArrowRight className="h-3 w-3" />
                     </span>
                   </div>
@@ -332,7 +332,7 @@ export default function Landing() {
             </p>
           </motion.div>
           <motion.div
-            className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 max-w-5xl mx-auto"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl mx-auto"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -396,7 +396,7 @@ export default function Landing() {
         <div className="container mx-auto px-6">
           <h2 className="text-3xl font-bold text-center mb-4">{t("landing.testimonials.title")}</h2>
           <p className="text-sm text-muted-foreground text-center mb-12">{t("landing.testimonials.disclaimer")}</p>
-          <div className="grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto">
             {(t("landing.testimonials.items") as any as Array<{ quote: string; author: string; role: string }>)?.map((item, i) => (
               <motion.div
                 key={i}
@@ -449,9 +449,9 @@ export default function Landing() {
       </section>
       </main>
 
-      <footer className="border-t py-12 bg-card/50">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+      <footer className="border-t py-8 sm:py-12 bg-card/50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <HeartPulse className="h-5 w-5 text-primary" />

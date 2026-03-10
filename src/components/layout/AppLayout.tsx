@@ -31,8 +31,8 @@ export function AppLayout() {
       <div className="min-h-screen flex w-full">
         <AppSidebar />
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="h-14 flex items-center justify-between border-b px-4 glass-strong sticky top-0 z-30">
-            <div className="flex items-center gap-2">
+          <header className="h-14 flex items-center justify-between border-b px-3 sm:px-4 glass-strong sticky top-0 z-30">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               <SidebarTrigger />
               <Button
                 variant="outline"
@@ -46,13 +46,22 @@ export function AppLayout() {
                   ⌘K
                 </kbd>
               </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden h-9 w-9"
+                onClick={() => setCommandOpen(true)}
+                aria-label={t("topBar.searchPlaceholder")}
+              >
+                <Search className="h-4 w-4" />
+              </Button>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="gap-1.5 text-xs font-medium">
+                  <Button variant="ghost" size="sm" className="gap-1.5 text-xs font-medium h-9 px-2 sm:px-3">
                     <Globe className="h-3.5 w-3.5" />
-                    {language.toUpperCase()}
+                    <span className="hidden sm:inline">{language.toUpperCase()}</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -71,6 +80,7 @@ export function AppLayout() {
               <Button
                 variant="ghost"
                 size="icon"
+                className="h-9 w-9"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
                 aria-label={t("topBar.toggleTheme")}
               >
@@ -80,7 +90,7 @@ export function AppLayout() {
               <NotificationBell />
             </div>
           </header>
-          <main className="flex-1 p-6 overflow-auto">
+          <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto">
             <Outlet />
           </main>
         </div>

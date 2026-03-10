@@ -57,7 +57,7 @@ export function EditPatientDialog({ open, onOpenChange, patient, mutation }: Edi
             <Label>{t("patientDetail.editDialog.pseudonym")}</Label>
             <Input value={pseudonym} onChange={(e) => setPseudonym(e.target.value)} maxLength={100} />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>{t("patientDetail.editDialog.ageRange")}</Label>
               <Select value={ageRange} onValueChange={setAgeRange}>
@@ -191,7 +191,7 @@ export function AddMeasurementDialog({ open, onOpenChange, mutation }: AddMeasDi
               </SelectContent>
             </Select>
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>{t("patientDetail.measDialog.value")}</Label>
               <Input type="number" step="any" placeholder={t("patientDetail.measDialog.valuePlaceholder")} value={measValue} onChange={(e) => setMeasValue(e.target.value)} />

@@ -113,7 +113,7 @@ export default function MeasurementTrendChart({ measurements }: Props) {
             </TabsList>
 
             <TabsContent value="all">
-              <ChartContainer config={chartConfig} className="h-[280px] w-full">
+              <ChartContainer config={chartConfig} className="h-[220px] sm:h-[280px] w-full">
                 <LineChart data={chartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                   <XAxis dataKey="date" className="text-xs fill-muted-foreground" tick={{ fontSize: 12 }} />
@@ -226,7 +226,7 @@ function SingleTypeChart({
           )}
         </div>
       )}
-      <ChartContainer config={chartConfig} className="h-[280px] w-full">
+      <ChartContainer config={chartConfig} className="h-[220px] sm:h-[280px] w-full">
         <AreaChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
           <defs>
             <linearGradient id={`gradient-${typeName}`} x1="0" y1="0" x2="0" y2="1">

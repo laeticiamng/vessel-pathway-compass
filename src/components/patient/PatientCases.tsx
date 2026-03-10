@@ -15,10 +15,10 @@ export default function PatientCases({ cases }: PatientCasesProps) {
       <h2 className="text-lg font-semibold">{t("patientDetail.associatedCases")}</h2>
       {cases?.map((c) => (
         <Card key={c.id}>
-          <CardContent className="pt-6 flex items-center justify-between">
-            <div>
-              <h3 className="font-semibold">{c.title}</h3>
-              <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+          <CardContent className="pt-6 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div className="min-w-0">
+              <h3 className="font-semibold truncate">{c.title}</h3>
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mt-1 text-xs text-muted-foreground">
                 <Badge variant="secondary" className="text-xs">{c.category}</Badge>
                 <Badge variant="outline" className="text-xs capitalize">{c.status}</Badge>
                 <span>{new Date(c.created_at).toLocaleDateString()}</span>

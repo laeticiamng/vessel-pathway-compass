@@ -133,36 +133,36 @@ export default function DigitalTwin() {
   return (
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.digitalTwin.title") as string} description={t("seo.digitalTwin.description") as string} path="/app/digital-twin" noindex />
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <HeartPulse className="h-8 w-8 text-primary" />
-            {t("digitalTwin.title")}
-          </h1>
-          <p className="text-muted-foreground mt-1">{t("digitalTwin.subtitle")}</p>
-        </div>
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <HeartPulse className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
+          {t("digitalTwin.title")}
+        </h1>
+        <p className="text-muted-foreground mt-1">{t("digitalTwin.subtitle")}</p>
       </div>
 
       {/* Patient selector */}
       <Card>
         <CardContent className="pt-6">
-          <div className="flex items-center gap-4">
-            <User className="h-5 w-5 text-muted-foreground" />
-            <Select value={selectedPatientId ?? ""} onValueChange={setSelectedPatientId}>
-              <SelectTrigger className="w-[300px]">
-                <SelectValue placeholder={t("digitalTwin.selectPatient")} />
-              </SelectTrigger>
-              <SelectContent>
-                {patients?.map((p) => (
-                  <SelectItem key={p.id} value={p.id}>
-                    <span className="font-mono">{p.pseudonym}</span>
-                    {p.age_range && <span className="text-muted-foreground ml-2">· {p.age_range}</span>}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex items-center gap-4">
+              <User className="h-5 w-5 text-muted-foreground shrink-0" />
+              <Select value={selectedPatientId ?? ""} onValueChange={setSelectedPatientId}>
+                <SelectTrigger className="w-full sm:w-[300px]">
+                  <SelectValue placeholder={t("digitalTwin.selectPatient")} />
+                </SelectTrigger>
+                <SelectContent>
+                  {patients?.map((p) => (
+                    <SelectItem key={p.id} value={p.id}>
+                      <span className="font-mono">{p.pseudonym}</span>
+                      {p.age_range && <span className="text-muted-foreground ml-2">· {p.age_range}</span>}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
             {selectedPatient && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 flex-wrap">
                 <Badge variant="secondary">{selectedPatient.age_range ?? "—"}</Badge>
                 <Badge variant="outline">{selectedPatient.sex ?? "—"}</Badge>
                 <Badge variant="outline">{cases?.length ?? 0} {t("digitalTwin.cases")}</Badge>
@@ -188,7 +188,7 @@ export default function DigitalTwin() {
           </TabsList>
 
           <TabsContent value="map" className="mt-6">
-            <div className="grid lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* SVG Map */}
               <Card>
                 <CardHeader className="pb-2">
@@ -272,12 +272,12 @@ export default function DigitalTwin() {
               events!.map((ev) => {
                 const Icon = eventIcons[ev.event_type] ?? Activity;
                 return (
-                  <div key={ev.id} className="flex gap-4 p-4 rounded-lg border">
-                    <div className="h-10 w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                      <Icon className="h-5 w-5 text-primary" />
+                  <div key={ev.id} className="flex gap-3 sm:gap-4 p-3 sm:p-4 rounded-lg border">
+                    <div className="h-9 w-9 sm:h-10 sm:w-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                      <Icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1 flex-wrap">
                         <h3 className="font-semibold">{ev.title}</h3>
                         <Badge variant="outline" className="text-xs">{new Date(ev.event_date).toLocaleDateString()}</Badge>
                         <Badge variant="secondary" className="text-xs capitalize">{ev.event_type.replace(/_/g, " ")}</Badge>
@@ -304,9 +304,9 @@ export default function DigitalTwin() {
                 ) : (
                   <div className="space-y-3">
                     {cases!.map((c) => (
-                      <div key={c.id} className="flex items-center justify-between p-3 rounded-lg border">
-                        <div>
-                          <p className="font-medium">{c.title}</p>
+                      <div key={c.id} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-lg border">
+                        <div className="min-w-0">
+                          <p className="font-medium truncate">{c.title}</p>
                           <div className="flex items-center gap-2 mt-1">
                             <Badge variant="secondary" className="text-xs capitalize">{c.category}</Badge>
                             <span className="text-xs text-muted-foreground">{new Date(c.updated_at).toLocaleDateString()}</span>

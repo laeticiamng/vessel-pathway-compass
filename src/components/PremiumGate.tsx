@@ -27,7 +27,7 @@ export function PremiumGate({ children, feature }: PremiumGateProps) {
 
   return (
     <Card className="border-primary/20">
-      <CardContent className="flex flex-col items-center justify-center py-12 px-6 text-center">
+      <CardContent className="flex flex-col items-center justify-center py-8 sm:py-12 px-4 sm:px-6 text-center">
         <div className="rounded-full bg-primary/10 p-4 mb-4">
           <Crown className="h-8 w-8 text-primary" />
         </div>

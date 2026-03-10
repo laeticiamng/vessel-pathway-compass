@@ -9,10 +9,10 @@ export default function CheckoutCancel() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-6">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-6 sm:p-6">
       <SEOHead title={`${t("checkout.cancel.title")} — Vascular Atlas`} description={t("checkout.cancel.desc") as string} path="/checkout/cancel" noindex />
       <Card className="max-w-md w-full text-center">
-        <CardContent className="pt-10 pb-8 space-y-6">
+        <CardContent className="pt-8 pb-6 sm:pt-10 sm:pb-8 space-y-6">
           <div className="mx-auto w-16 h-16 rounded-full bg-muted flex items-center justify-center">
             <XCircle className="h-8 w-8 text-muted-foreground" />
           </div>

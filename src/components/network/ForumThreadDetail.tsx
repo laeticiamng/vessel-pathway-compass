@@ -127,19 +127,19 @@ export default function ForumThreadDetail({ postId, onBack }: ForumThreadDetailP
   return (
     <div className="space-y-6">
       {/* Back button */}
-      <Button variant="ghost" onClick={onBack} className="gap-2">
+      <Button variant="ghost" onClick={onBack} className="gap-2 min-h-[44px]">
         <ArrowLeft className="h-4 w-4" /> {t("network.thread.backToDiscussions")}
       </Button>
 
       {/* Original post */}
       <Card>
-        <CardContent className="pt-6 space-y-4">
-          <div className="flex items-start justify-between">
-            <div className="flex items-start gap-3">
+        <CardContent className="p-3 sm:p-4 md:p-6 pt-4 sm:pt-6 space-y-4">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex items-start gap-3 min-w-0">
               <VoteButtons postId={post.id} className="mt-1" />
-              <div className="space-y-1">
-                <h2 className="text-xl font-bold">{post.title}</h2>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <div className="space-y-1 min-w-0">
+                <h2 className="text-lg sm:text-xl font-bold">{post.title}</h2>
+                <div className="flex items-center gap-2 sm:gap-3 text-xs text-muted-foreground flex-wrap">
                   <Badge variant="outline">{post.topic}</Badge>
                   <span className="flex items-center gap-1">
                     <User className="h-3 w-3" /> {getName(post.user_id)}
@@ -151,7 +151,7 @@ export default function ForumThreadDetail({ postId, onBack }: ForumThreadDetailP
                 </div>
               </div>
             </div>
-            <Badge variant="secondary" className="flex items-center gap-1">
+            <Badge variant="secondary" className="flex items-center gap-1 shrink-0">
               <MessageSquare className="h-3 w-3" /> {replies?.length ?? 0}
             </Badge>
           </div>
@@ -221,9 +221,10 @@ export default function ForumThreadDetail({ postId, onBack }: ForumThreadDetailP
                 onClick={() => replyMutation.mutate()}
                 disabled={!replyContent.trim() || replyMutation.isPending}
                 size="sm"
+                className="min-h-[44px] min-w-[44px]"
               >
-                <Send className="h-4 w-4 mr-2" />
-                {replyMutation.isPending ? t("common.loading") : t("network.thread.reply")}
+                <Send className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">{replyMutation.isPending ? t("common.loading") : t("network.thread.reply")}</span>
               </Button>
             </div>
           </CardContent>

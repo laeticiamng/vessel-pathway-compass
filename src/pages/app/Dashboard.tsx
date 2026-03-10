@@ -101,7 +101,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="space-y-8 max-w-7xl">
+    <div className="space-y-5 sm:space-y-8 max-w-7xl">
       <SEOHead
         title={t("seo.dashboard.title") as string}
         description={t("seo.dashboard.description") as string}
@@ -109,8 +109,8 @@ export default function Dashboard() {
         noindex
       />
       <div>
-        <h1 className="text-3xl font-bold">{t("dashboard.title")}</h1>
-        <p className="text-muted-foreground mt-1">{t("dashboard.welcome")}</p>
+        <h1 className="text-2xl sm:text-3xl font-bold">{t("dashboard.title")}</h1>
+        <p className="text-muted-foreground text-sm mt-1">{t("dashboard.welcome")}</p>
       </div>
 
       {stats && <OnboardingChecklist stats={stats} />}

@@ -75,7 +75,7 @@ export default function VoteButtons({ postId, className }: VoteButtonsProps) {
         variant="ghost"
         size="icon"
         className={cn(
-          "h-7 w-7",
+          "h-9 w-9 sm:h-7 sm:w-7",
           userVote === "up" && "text-primary bg-primary/10"
         )}
         onClick={(e) => {
@@ -100,7 +100,7 @@ export default function VoteButtons({ postId, className }: VoteButtonsProps) {
         variant="ghost"
         size="icon"
         className={cn(
-          "h-7 w-7",
+          "h-9 w-9 sm:h-7 sm:w-7",
           userVote === "down" && "text-destructive bg-destructive/10"
         )}
         onClick={(e) => {

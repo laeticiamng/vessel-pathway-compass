@@ -239,15 +239,15 @@ export default function AIAssistant() {
     <div className="space-y-6 max-w-7xl">
       <SEOHead title={t("seo.aiAssistant.title") as string} description={t("seo.aiAssistant.description") as string} path="/app/ai-assistant" noindex />
       <UsageLimitBanner current={todayCount} limit={FREE_DAILY_AI_LIMIT} featureKey="aiReports" />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <Brain className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+            <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("aiAssistant.title")}
           </h1>
           <p className="text-muted-foreground mt-1">{t("aiAssistant.subtitle")}</p>
         </div>
-        <Badge variant="outline" className="flex items-center gap-1.5">
+        <Badge variant="outline" className="flex items-center gap-1.5 self-start sm:self-auto">
           <Shield className="h-3 w-3" />
           {t("aiAssistant.badge")}
         </Badge>
@@ -268,7 +268,7 @@ export default function AIAssistant() {
         </div>
       )}
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-1">
           <CardHeader>
             <CardTitle>{t("aiAssistant.intake.title")}</CardTitle>

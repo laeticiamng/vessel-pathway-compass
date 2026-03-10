@@ -81,18 +81,19 @@ export default function Team() {
   return (
     <div className="space-y-6 max-w-4xl">
       <SEOHead title={t("seo.team.title") as string} description={t("seo.team.description") as string} path="/app/team" noindex />
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-3xl font-bold flex items-center gap-3">
-            <Users className="h-8 w-8 text-primary" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2 sm:gap-3">
+            <Users className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("team.title")}
           </h1>
-          <p className="text-muted-foreground mt-1">{t("team.subtitle")}</p>
+          <p className="text-muted-foreground text-sm mt-1">{t("team.subtitle")}</p>
         </div>
-        <Button disabled>
+        <Button disabled className="self-start sm:self-auto shrink-0">
           <Plus className="h-4 w-4 mr-2" />
-          {t("team.inviteMember")}
-          <Badge variant="secondary" className="ml-2 text-xs">{t("common.comingSoon")}</Badge>
+          <span className="hidden sm:inline">{t("team.inviteMember")}</span>
+          <span className="sm:hidden">{t("team.inviteMember")}</span>
+          <Badge variant="secondary" className="ml-2 text-xs hidden sm:inline-flex">{t("common.comingSoon")}</Badge>
         </Button>
       </div>
 

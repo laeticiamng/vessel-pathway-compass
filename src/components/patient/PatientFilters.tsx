@@ -32,8 +32,8 @@ export function PatientFilters({
   const hasFilters = filterCategory !== "all" || filterStatus !== "all" || filterRisk !== "all" || search;
 
   return (
-    <div className="flex flex-wrap gap-3">
-      <div className="relative flex-1 min-w-[200px]">
+    <div className="flex flex-wrap gap-2 sm:gap-3">
+      <div className="relative flex-1 min-w-0 w-full sm:min-w-[200px]">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
         <Input
           placeholder={t("patients.searchPlaceholder")}
@@ -43,7 +43,7 @@ export function PatientFilters({
         />
       </div>
       <Select value={filterCategory} onValueChange={onFilterCategoryChange}>
-        <SelectTrigger className="w-[160px]">
+        <SelectTrigger className="w-full sm:w-[160px]">
           <SelectValue placeholder={t("patients.filters.allCategories")} />
         </SelectTrigger>
         <SelectContent>
@@ -54,7 +54,7 @@ export function PatientFilters({
         </SelectContent>
       </Select>
       <Select value={filterStatus} onValueChange={onFilterStatusChange}>
-        <SelectTrigger className="w-[160px]">
+        <SelectTrigger className="w-full sm:w-[160px]">
           <SelectValue placeholder={t("patients.filters.allStatuses")} />
         </SelectTrigger>
         <SelectContent>
@@ -65,7 +65,7 @@ export function PatientFilters({
         </SelectContent>
       </Select>
       <Select value={filterRisk} onValueChange={onFilterRiskChange}>
-        <SelectTrigger className="w-[160px]">
+        <SelectTrigger className="w-full sm:w-[160px]">
           <SelectValue placeholder={t("patients.filters.allRisks")} />
         </SelectTrigger>
         <SelectContent>

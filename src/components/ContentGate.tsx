@@ -25,12 +25,12 @@ export function ContentGate({ children }: ContentGateProps) {
 
       {/* Simulated module preview — gives a sense of what's inside */}
       <div className="relative max-h-[28vh] overflow-hidden rounded-xl" aria-hidden="true">
-        <div className="grid grid-cols-3 gap-3 p-4">
-          <div className="h-24 rounded-lg bg-muted/50 border" />
-          <div className="h-24 rounded-lg bg-muted/50 border" />
-          <div className="h-24 rounded-lg bg-muted/50 border" />
-          <div className="h-16 rounded-lg bg-muted/30 border col-span-2" />
-          <div className="h-16 rounded-lg bg-muted/30 border" />
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4">
+          <div className="h-20 sm:h-24 rounded-lg bg-muted/50 border" />
+          <div className="h-20 sm:h-24 rounded-lg bg-muted/50 border" />
+          <div className="h-20 sm:h-24 rounded-lg bg-muted/50 border hidden sm:block" />
+          <div className="h-14 sm:h-16 rounded-lg bg-muted/30 border col-span-2" />
+          <div className="h-14 sm:h-16 rounded-lg bg-muted/30 border hidden sm:block" />
         </div>
         <div className="absolute inset-0" style={{
           background: "linear-gradient(to top, hsl(var(--background)) 10%, hsl(var(--background) / 0.85) 40%, hsl(var(--background) / 0.3) 80%, transparent 100%)"
