@@ -165,7 +165,7 @@ export default function CourseDetail({ course, modules, quizzes, attempts, onBac
       pdf.line(40, 160, w - 40, 160);
       pdf.setTextColor(100, 116, 139);
       pdf.setFontSize(8);
-      pdf.text("Vascular Atlas — Continuing Medical Education Platform", w / 2, 168, { align: "center" });
+      pdf.text("AquaMR Flow — Continuing Medical Education Platform", w / 2, 168, { align: "center" });
       pdf.text("This certificate verifies completion of all course modules and assessments.", w / 2, 174, { align: "center" });
 
       pdf.save(`certificate-${course.track}-${new Date().toISOString().slice(0, 10)}.pdf`);

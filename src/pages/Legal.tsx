@@ -28,7 +28,7 @@ export default function Legal() {
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
             <HeartPulse className="h-5 w-5 text-primary" />
-            <span className="font-bold">Vascular Atlas</span>
+            <span className="font-bold">AquaMR Flow</span>
           </Link>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

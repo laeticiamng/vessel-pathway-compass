@@ -25,23 +25,18 @@ const Onboarding = lazy(() => import("./pages/Onboarding"));
 const Legal = lazy(() => import("./pages/Legal"));
 const Support = lazy(() => import("./pages/Support"));
 const Dashboard = lazy(() => import("./pages/app/Dashboard"));
-const AIAssistant = lazy(() => import("./pages/app/AIAssistant"));
+const ProcedurePlanner = lazy(() => import("./pages/app/ProcedurePlanner"));
+const FusionViewer = lazy(() => import("./pages/app/FusionViewer"));
 const Patients = lazy(() => import("./pages/app/Patients"));
 const PatientDetail = lazy(() => import("./pages/app/PatientDetail"));
 const DigitalTwin = lazy(() => import("./pages/app/DigitalTwin"));
+const CIAKIEngine = lazy(() => import("./pages/app/CIAKIEngine"));
 const Registry = lazy(() => import("./pages/app/Registry"));
 const Education = lazy(() => import("./pages/app/Education"));
 const Simulation = lazy(() => import("./pages/app/Simulation"));
-const Network = lazy(() => import("./pages/app/Network"));
 const Research = lazy(() => import("./pages/app/Research"));
-const Compliance = lazy(() => import("./pages/app/Compliance"));
 const Analytics = lazy(() => import("./pages/app/Analytics"));
-const Team = lazy(() => import("./pages/app/Team"));
 const Settings = lazy(() => import("./pages/app/Settings"));
-const InnovationLab = lazy(() => import("./pages/app/beta/InnovationLab"));
-const PatientOutcomes = lazy(() => import("./pages/app/PatientOutcomes"));
-const ClinicalPerformance = lazy(() => import("./pages/app/ClinicalPerformance"));
-const RiskCalculator = lazy(() => import("./pages/app/RiskCalculator"));
 
 const queryClient = new QueryClient();
 
@@ -55,7 +50,7 @@ function LazyFallback() {
 
 const App = () => (
   <LanguageProvider>
-  <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="vascular-atlas-theme">
+  <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="aquamr-flow-theme">
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
@@ -77,24 +72,29 @@ const App = () => (
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
 
-          {/* Semi-public: visible at 35% without auth */}
+          {/* Semi-public: visible with content gate */}
           <Route path="/app" element={<PublicAppRoute />}>
             <Route index element={<ContentGate><Dashboard /></ContentGate>} />
-            <Route path="ai-assistant" element={<ContentGate><AIAssistant /></ContentGate>} />
+            <Route path="procedure-planner" element={<ContentGate><ProcedurePlanner /></ContentGate>} />
+            <Route path="fusion-viewer" element={<ContentGate><FusionViewer /></ContentGate>} />
             <Route path="digital-twin" element={<ContentGate><DigitalTwin /></ContentGate>} />
-            <Route path="registry" element={<ContentGate><Registry /></ContentGate>} />
-            <Route path="education" element={<ContentGate><Education /></ContentGate>} />
+            <Route path="ci-aki-engine" element={<ContentGate><CIAKIEngine /></ContentGate>} />
             <Route path="simulation" element={<ContentGate><Simulation /></ContentGate>} />
-            <Route path="network" element={<ContentGate><Network /></ContentGate>} />
+            <Route path="registry" element={<ContentGate><Registry /></ContentGate>} />
             <Route path="research" element={<ContentGate><Research /></ContentGate>} />
-            <Route path="compliance" element={<ContentGate><Compliance /></ContentGate>} />
+            <Route path="education" element={<ContentGate><Education /></ContentGate>} />
             <Route path="analytics" element={<ContentGate><Analytics /></ContentGate>} />
-            <Route path="outcomes" element={<ContentGate><PatientOutcomes /></ContentGate>} />
-            <Route path="performance" element={<ContentGate><ClinicalPerformance /></ContentGate>} />
-            <Route path="risk-calculator" element={<ContentGate><RiskCalculator /></ContentGate>} />
-            <Route path="team" element={<ContentGate><Team /></ContentGate>} />
-            <Route path="beta" element={<ContentGate><InnovationLab /></ContentGate>} />
           </Route>
+
+          {/* Legacy redirects */}
+          <Route path="/app/ai-assistant" element={<Navigate to="/app/procedure-planner" replace />} />
+          <Route path="/app/risk-calculator" element={<Navigate to="/app/ci-aki-engine" replace />} />
+          <Route path="/app/beta" element={<Navigate to="/app" replace />} />
+          <Route path="/app/outcomes" element={<Navigate to="/app/registry" replace />} />
+          <Route path="/app/performance" element={<Navigate to="/app/analytics" replace />} />
+          <Route path="/app/network" element={<Navigate to="/app/research" replace />} />
+          <Route path="/app/compliance" element={<Navigate to="/app/settings" replace />} />
+          <Route path="/app/team" element={<Navigate to="/app/settings" replace />} />
 
           {/* Fully protected: sensitive data */}
           <Route path="/app" element={<ProtectedRoute />}>

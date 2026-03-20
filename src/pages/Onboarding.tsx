@@ -153,7 +153,7 @@ export default function Onboarding() {
         <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center">
           <HeartPulse className="h-5 w-5 text-primary-foreground" />
         </div>
-        <span className="text-xl font-bold">Vascular Atlas</span>
+        <span className="text-xl font-bold">AquaMR Flow</span>
       </Link>
       <div className="w-full max-w-lg space-y-6">
         {/* Progress */}

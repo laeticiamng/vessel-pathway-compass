@@ -1,6 +1,6 @@
 export const de = {
   common: {
-    appName: "Vascular Atlas",
+    appName: "AquaMR Flow",
     loading: "Laden...",
     save: "Speichern",
     cancel: "Abbrechen",
@@ -46,7 +46,7 @@ export const de = {
     dashboard: "Dashboard",
     aiAssistant: "KI-Assistent",
     patients: "Patienten",
-    digitalTwin: "Vaskuläre Patientenkarte",
+    digitalTwin: "AquaMR Digital Twin",
     registry: "Register",
     education: "Fortbildung",
     simulationLab: "Simulationslabor",
@@ -72,9 +72,9 @@ export const de = {
     dashboard: "Dashboard",
     aiAssistant: "Klinischer KI-Assistent",
     patients: "Patientenfälle",
-    digitalTwin: "Vaskuläre Patientenkarte",
-    registry: "Ergebnisregister",
-    education: "Fortbildungszentrum",
+    digitalTwin: "AquaMR Digital Twin",
+    registry: "AquaMR Registry",
+    education: "AquaMR Academy",
     simulation: "Simulationslabor",
     network: "Expertennetzwerk",
     research: "Forschungszentrum",
@@ -95,7 +95,7 @@ export const de = {
     },
     hero: {
       badge: "Die All-in-One-Plattform für Gefäßmedizin — jetzt als kostenlose Beta",
-      title: "Vascular Atlas",
+      title: "AquaMR Flow",
       headlinePre: "KI-gestützte klinische Plattform für",
       headlineHighlight: "Gefäßmedizin",
       subtitle: "Verwalten Sie Patienten, erstellen Sie KI-Berichte, verfolgen Sie Ergebnisse und arbeiten Sie mit Experten zusammen — eine sichere Plattform für Gefäßmedizin.",
@@ -110,7 +110,7 @@ export const de = {
       steps: [
         { title: "Kostenloses Konto erstellen", desc: "Registrieren Sie sich in 30 Sekunden mit E-Mail oder Google. Keine Kreditkarte nötig." },
         { title: "Ersten Patienten anlegen", desc: "Erstellen Sie einen pseudonymisierten Patientenfall und beginnen Sie mit KI-gestützten Berichten." },
-        { title: "Alle Module entdecken", desc: "Simulationen, Fortbildung, Ergebnisregister und Expertenkonsultationen — alles an einem Ort." },
+        { title: "Alle Module entdecken", desc: "Simulationen, Fortbildung, AquaMR Registry und Expertenkonsultationen — alles an einem Ort." },
       ],
     },
     modules: {
@@ -123,11 +123,11 @@ export const de = {
         desc: "Erstellen Sie strukturierte klinische Berichte, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
       },
       twin: {
-        title: "Vaskuläre Patientenkarte",
+        title: "AquaMR Digital Twin",
         desc: "Visualisieren Sie die Gefäßanatomie jedes Patienten über die Zeit mit interaktiven Karten, Läsionsverfolgung und Szenarioplanung.",
       },
       registry: {
-        title: "Ergebnisregister",
+        title: "AquaMR Registry",
         desc: "Erfassen und vergleichen Sie Patientenergebnisse für pAVK, Aorten-, Karotis-, Venen- und Thromboembolie-Fälle — anonymisiertes Benchmarking inklusive.",
       },
       education: {
@@ -187,19 +187,19 @@ export const de = {
     },
     faq: {
       title: "Häufig gestellte Fragen",
-      subtitle: "Alles, was Sie über Vascular Atlas wissen müssen.",
+      subtitle: "Alles, was Sie über AquaMR Flow wissen müssen.",
       items: [
-        { q: "Was ist Vascular Atlas?", a: "Vascular Atlas ist eine All-in-One-Plattform für Gefäßmedizin. Sie vereint Patientenmanagement, KI-gestützte Berichte, Ergebnisverfolgung, Fortbildung, Simulation und Expertennetzwerk in einem Tool." },
+        { q: "Was ist AquaMR Flow?", a: "AquaMR Flow ist eine All-in-One-Plattform für Gefäßmedizin. Sie vereint Patientenmanagement, KI-gestützte Berichte, Ergebnisverfolgung, Fortbildung, Simulation und Expertennetzwerk in einem Tool." },
         { q: "Für wen ist es gedacht?", a: "Gefäßchirurgen, Angiologen, interventionelle Radiologen, Assistenzärzte und Krankenhausabteilungen der Gefäßmedizin." },
         { q: "Was kostet es?", a: "Während der kostenlosen Beta sind alle Funktionen ohne Kosten verfügbar. Nach dem Launch: kostenloser Einzelplan, Professional-Plan für 99 $/Monat und individuelle Institutionspreise." },
-        { q: "Ist es ein Medizinprodukt?", a: "Nein. Vascular Atlas ist ein klinisches Dokumentations- und Workflow-Tool. Kein zertifiziertes Medizinprodukt. Alle KI-Ausgaben erfordern Ihre Überprüfung." },
+        { q: "Ist es ein Medizinprodukt?", a: "Nein. AquaMR Flow ist ein klinisches Dokumentations- und Workflow-Tool. Kein zertifiziertes Medizinprodukt. Alle KI-Ausgaben erfordern Ihre Überprüfung." },
         { q: "Sind meine Daten sicher?", a: "Ja. Alle Daten werden verschlüsselt, pseudonymisiert und mit vollständigen Audit-Trails gespeichert. Die Plattform ist auf DSGVO, HIPAA und Schweizer nDSG ausgelegt." },
         { q: "Kann mein Team es nutzen?", a: "Auf jeden Fall. Der Institutionsplan unterstützt Teams mit gemeinsamen Registern, Analysen und rollenbasierten Berechtigungen." },
       ],
     },
     about: {
       title: "Wer wir sind",
-      description: "Vascular Atlas wird von EMOTIONSCARE entwickelt, einem Health-Tech-Unternehmen mit Sitz in Amiens, Frankreich. Gegründet von Klinikern und Ingenieuren, ist unsere Mission, Gefäßprofis eine dedizierte, moderne Plattform zu bieten — aufgebaut um ihre echten Workflows, nicht generische Vorlagen.",
+      description: "AquaMR Flow wird von EMOTIONSCARE entwickelt, einem Health-Tech-Unternehmen mit Sitz in Amiens, Frankreich. Gegründet von Klinikern und Ingenieuren, ist unsere Mission, Gefäßprofis eine dedizierte, moderne Plattform zu bieten — aufgebaut um ihre echten Workflows, nicht generische Vorlagen.",
       foundedLine: "Gegründet in Amiens, Frankreich — EMOTIONSCARE SASU",
       highlights: {
         clinical: {
@@ -251,7 +251,7 @@ export const de = {
         features: [
           "Klinischer KI-Assistent (begrenzt)",
           "5 Patientenfälle",
-          "Zugang zum Fortbildungszentrum",
+          "Zugang zum AquaMR Academy",
           "Zugang zum Community-Forum",
         ],
         cta: "Kostenlos starten",
@@ -264,8 +264,8 @@ export const de = {
         features: [
           "Unbegrenzter KI-Assistent",
           "Unbegrenzte Patientenfälle",
-          "Digitaler Zwilling + Zeitleiste",
-          "Ergebnisregister",
+          "AquaMR Digital Twin + Zeitleiste",
+          "AquaMR Registry",
           "Vollständige Fortbildung + Zertifizierung",
           "Zugang zum Simulationslabor",
           "Expertenkonsultationen (5/Monat)",
@@ -296,7 +296,7 @@ export const de = {
     createAccount: "Konto erstellen",
     welcomeBack: "Willkommen zurück",
     signUpDesc: "Treten Sie der globalen Plattform für Gefäßmedizin bei",
-    signInDesc: "Melden Sie sich bei Ihrem Vascular Atlas Konto an",
+    signInDesc: "Melden Sie sich bei Ihrem AquaMR Flow Konto an",
     email: "E-Mail",
     emailPlaceholder: "sie@krankenhaus.de",
     password: "Passwort",
@@ -353,7 +353,7 @@ export const de = {
       subtitle: "Führen Sie diese Schritte aus, um Ihren Arbeitsbereich einzurichten",
       createPatient: "Ersten Patienten erstellen",
       generateAI: "KI-Bericht erstellen",
-      exploreEducation: "Fortbildungszentrum erkunden",
+      exploreEducation: "AquaMR Academy erkunden",
       runSimulation: "Klinische Simulation starten",
     },
     quickActions: {
@@ -516,7 +516,7 @@ export const de = {
   },
 
   digitalTwin: {
-    title: "Vaskuläre Patientenkarte",
+    title: "AquaMR Digital Twin",
     subtitle: "Interaktive Gefäßkartierung mit echten Patientenmessungen",
     selectPatient: "Patient auswählen...",
     selectPatientPrompt: "Wählen Sie einen Patienten, um seine Gefäßanatomie mit echten Messdaten zu visualisieren",
@@ -547,7 +547,7 @@ export const de = {
   },
 
   registry: {
-    title: "Ergebnisregister",
+    title: "AquaMR Registry",
     subtitle: "Strukturierte vaskuläre Ergebnisdaten mit datenschutzfreundlichem Benchmarking",
     badge: "Nur anonymisierte Daten",
     tabs: {
@@ -580,7 +580,7 @@ export const de = {
   },
 
   education: {
-    title: "Fortbildungszentrum",
+    title: "AquaMR Academy",
     subtitle: "Kompetenzpfade, Zertifizierung und CME-Punkte",
     cmeCredits: "CME-Punkte",
     stats: {
@@ -1174,7 +1174,7 @@ export const de = {
     benefits: [
       "KI-gestützte klinische Berichte",
       "Patientenmanagement mit Gefäßkarten",
-      "Ergebnisregister & Leistungs-Dashboards",
+      "AquaMR Registry & Leistungs-Dashboards",
       "Fortbildung, Simulation & Expertennetzwerk",
     ],
   },
@@ -1277,13 +1277,13 @@ export const de = {
       title: "Allgemeine Geschäftsbedingungen",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
       sections: [
-        { heading: "1. Annahme der Bedingungen", body: "Durch den Zugang zu Vascular Atlas (\"die Plattform\") erklären Sie sich mit diesen AGB einverstanden." },
-        { heading: "2. Beschreibung des Dienstes", body: "Vascular Atlas ist eine klinische Entscheidungsunterstützungsplattform. Die Plattform ist KEIN Medizinprodukt." },
+        { heading: "1. Annahme der Bedingungen", body: "Durch den Zugang zu AquaMR Flow (\"die Plattform\") erklären Sie sich mit diesen AGB einverstanden." },
+        { heading: "2. Beschreibung des Dienstes", body: "AquaMR Flow ist eine klinische Entscheidungsunterstützungsplattform. Die Plattform ist KEIN Medizinprodukt." },
         { heading: "3. Benutzerkonten", body: "Sie müssen bei der Registrierung korrekte Angaben machen und sind für die Vertraulichkeit Ihrer Zugangsdaten verantwortlich." },
         { heading: "4. Zulässige Nutzung", body: "Sie dürfen die Plattform nur für rechtmäßige Zwecke und gemäß den geltenden medizinischen Vorschriften nutzen." },
         { heading: "5. KI-generierte Inhalte", body: "Alle KI-Ausgaben dienen nur der Entscheidungsunterstützung und erfordern die Überprüfung durch qualifiziertes medizinisches Fachpersonal." },
         { heading: "6. Daten und Datenschutz", body: "Patientendaten werden pseudonymisiert. Siehe unsere Datenschutzrichtlinie für Details." },
-        { heading: "7. Geistiges Eigentum", body: "Alle Inhalte und Software der Plattform sind Eigentum von Vascular Atlas." },
+        { heading: "7. Geistiges Eigentum", body: "Alle Inhalte und Software der Plattform sind Eigentum von AquaMR Flow." },
         { heading: "8. Haftungsbeschränkung", body: "Die Plattform wird 'wie besehen' bereitgestellt, ohne Gewährleistungen jeglicher Art." },
         { heading: "9. Kündigung", body: "Wir können Ihren Zugang jederzeit bei Verstoß gegen diese AGB sperren." },
         { heading: "10. Anwendbares Recht", body: "Diese AGB unterliegen dem Recht der Europäischen Union." },
@@ -1293,7 +1293,7 @@ export const de = {
       title: "Datenschutzrichtlinie",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
       sections: [
-        { heading: "1. Verantwortlicher", body: "Vascular Atlas ist verantwortlich für die Datenverarbeitung. Kontakt: privacy@vascularatlas.com" },
+        { heading: "1. Verantwortlicher", body: "AquaMR Flow ist verantwortlich für die Datenverarbeitung. Kontakt: privacy@aquamrflow.com" },
         { heading: "2. Erhobene Daten", body: "Kontodaten: E-Mail, Name, Institution.\nKlinische Daten: pseudonymisierte Patientendaten.\nNutzungsdaten: Interaktionen, Audit-Logs." },
         { heading: "3. Rechtsgrundlage (DSGVO Art. 6)", body: "Einwilligung, berechtigtes Interesse, gesetzliche Verpflichtung." },
         { heading: "4. Datennutzung", body: "Bereitstellung und Verbesserung der Dienste, anonymisierte Insights, Audit-Trails." },
@@ -1311,7 +1311,7 @@ export const de = {
       sections: [
         { heading: "Herausgeber", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, Frankreich\nKontakt: contact@emotionscare.com" },
         { heading: "Hosting", body: "Die Plattform wird in der Europäischen Union gehostet." },
-        { heading: "Medizinischer Hinweis", body: "Vascular Atlas ist KEIN Medizinprodukt." },
+        { heading: "Medizinischer Hinweis", body: "AquaMR Flow ist KEIN Medizinprodukt." },
         { heading: "Geistiges Eigentum", body: "Alle Rechte vorbehalten." },
         { heading: "Anwendbares Recht", body: "Recht der Europäischen Union." },
       ],
@@ -1320,13 +1320,13 @@ export const de = {
 
   support: {
     title: "Hilfe & Support",
-    subtitle: "Hilfe zu Ihrem Vascular Atlas Konto und Funktionen.",
+    subtitle: "Hilfe zu Ihrem AquaMR Flow Konto und Funktionen.",
     email: { title: "E-Mail-Support", desc: "Erhalten Sie innerhalb von 24 Stunden Hilfe." },
     response: { title: "Antwortzeit", desc: "Wir antworten in der Regel innerhalb von 24 Geschäftsstunden." },
     faq: {
       title: "Häufig gestellte Fragen",
       items: [
-        { q: "Ist Vascular Atlas ein Medizinprodukt?", a: "Nein. Es ist ein Entscheidungsunterstützungstool. Alle KI-Ausgaben erfordern eine ärztliche Überprüfung." },
+        { q: "Ist AquaMR Flow ein Medizinprodukt?", a: "Nein. Es ist ein Entscheidungsunterstützungstool. Alle KI-Ausgaben erfordern eine ärztliche Überprüfung." },
         { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
         { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
         { q: "Was passiert während der kostenlosen Beta?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar. Wir informieren Sie bevor eine Abrechnung beginnt." },
@@ -1406,92 +1406,92 @@ export const de = {
 
   seo: {
     landing: {
-      title: "Vascular Atlas — KI-gestützte klinische Plattform für Gefäßmedizin",
-      description: "KI-Berichte, Patientenfallmanagement, Ergebnisregister, Zertifizierung, Simulation und Expertennetzwerk für Gefäßchirurgen und Angiologen vereint. Kostenlos während der Beta.",
+      title: "AquaMR Flow — KI-gestützte klinische Plattform für Gefäßmedizin",
+      description: "KI-Berichte, Patientenfallmanagement, AquaMR Registry, Zertifizierung, Simulation und Expertennetzwerk für Gefäßchirurgen und Angiologen vereint. Kostenlos während der Beta.",
     },
     pricing: {
-      title: "Preise — Vascular Atlas Pläne",
-      description: "Vergleichen Sie Vascular Atlas Pläne: Kostenloser Einzelplan, Professionell für 99 €/Monat und individuelle Institutionspreise. Alle Funktionen kostenlos während der Beta.",
+      title: "Preise — AquaMR Flow Pläne",
+      description: "Vergleichen Sie AquaMR Flow Pläne: Kostenloser Einzelplan, Professionell für 99 €/Monat und individuelle Institutionspreise. Alle Funktionen kostenlos während der Beta.",
     },
     support: {
-      title: "Support & FAQ — Vascular Atlas",
-      description: "Hilfe zu Vascular Atlas. Kontaktieren Sie den Support, durchsuchen Sie FAQ zu KI-Berichten, Patientenmanagement, Zertifizierung und mehr.",
+      title: "Support & FAQ — AquaMR Flow",
+      description: "Hilfe zu AquaMR Flow. Kontaktieren Sie den Support, durchsuchen Sie FAQ zu KI-Berichten, Patientenmanagement, Zertifizierung und mehr.",
     },
     auth: {
-      title: "Anmelden — Vascular Atlas",
-      description: "Melden Sie sich an oder erstellen Sie ein Vascular Atlas Konto für den Zugang zu allen klinischen Modulen.",
+      title: "Anmelden — AquaMR Flow",
+      description: "Melden Sie sich an oder erstellen Sie ein AquaMR Flow Konto für den Zugang zu allen klinischen Modulen.",
     },
     legal: {
-      terms: { title: "Nutzungsbedingungen — Vascular Atlas", description: "Nutzungsbedingungen von Vascular Atlas — Nutzungsbedingungen der klinischen Plattform." },
-      privacy: { title: "Datenschutzrichtlinie — Vascular Atlas", description: "Datenschutzrichtlinie von Vascular Atlas — DSGVO-konformer Umgang mit Ihren Daten." },
-      notice: { title: "Impressum — Vascular Atlas", description: "Impressum von Vascular Atlas — Unternehmensangaben und Haftungsausschlüsse." },
+      terms: { title: "Nutzungsbedingungen — AquaMR Flow", description: "Nutzungsbedingungen von AquaMR Flow — Nutzungsbedingungen der klinischen Plattform." },
+      privacy: { title: "Datenschutzrichtlinie — AquaMR Flow", description: "Datenschutzrichtlinie von AquaMR Flow — DSGVO-konformer Umgang mit Ihren Daten." },
+      notice: { title: "Impressum — AquaMR Flow", description: "Impressum von AquaMR Flow — Unternehmensangaben und Haftungsausschlüsse." },
     },
     notFound: {
-      title: "Seite nicht gefunden — Vascular Atlas",
+      title: "Seite nicht gefunden — AquaMR Flow",
       description: "Die gesuchte Seite existiert nicht oder wurde verschoben.",
     },
     settings: {
-      title: "Einstellungen — Vascular Atlas",
-      description: "Verwalten Sie Ihr Vascular Atlas Konto, Profil, Sprache und Darstellungseinstellungen.",
+      title: "Einstellungen — AquaMR Flow",
+      description: "Verwalten Sie Ihr AquaMR Flow Konto, Profil, Sprache und Darstellungseinstellungen.",
     },
     dashboard: {
-      title: "Dashboard — Vascular Atlas",
-      description: "Übersicht über Ihre Fälle, KI-Berichte, Ergebnisse und Aktivität auf Vascular Atlas.",
+      title: "Dashboard — AquaMR Flow",
+      description: "Übersicht über Ihre Fälle, KI-Berichte, Ergebnisse und Aktivität auf AquaMR Flow.",
     },
     digitalTwin: {
-      title: "Digitaler Zwilling — Vascular Atlas",
+      title: "AquaMR Digital Twin — AquaMR Flow",
       description: "Interaktive Gefäßkarte und Patienten-Zeitachse zur klinischen Entscheidungsunterstützung.",
     },
     education: {
-      title: "Fortbildung — Vascular Atlas",
+      title: "Fortbildung — AquaMR Flow",
       description: "Gefäßmedizin-Kurse, Quizze und digitale Abzeichen für die Weiterbildung.",
     },
     network: {
-      title: "Expertennetzwerk — Vascular Atlas",
+      title: "Expertennetzwerk — AquaMR Flow",
       description: "Diskutieren Sie Fälle, fragen Sie Experten und vernetzen Sie sich.",
     },
     simulation: {
-      title: "Simulationslabor — Vascular Atlas",
+      title: "Simulationslabor — AquaMR Flow",
       description: "Klinische Simulationsfälle zur Verbesserung der Entscheidungsfindung.",
     },
     registry: {
-      title: "Ergebnisregister — Vascular Atlas",
+      title: "AquaMR Registry — AquaMR Flow",
       description: "Verfolgen Sie Patientenergebnisse, Komplikationsraten und Benchmarks.",
     },
     compliance: {
-      title: "Compliance — Vascular Atlas",
+      title: "Compliance — AquaMR Flow",
       description: "Audit-Trail, Einwilligungsverwaltung und KI-Sicherheitsüberwachung.",
     },
     team: {
-      title: "Team — Vascular Atlas",
-      description: "Verwalten Sie Ihre Institutionsmitglieder und Rollen auf Vascular Atlas.",
+      title: "Team — AquaMR Flow",
+      description: "Verwalten Sie Ihre Institutionsmitglieder und Rollen auf AquaMR Flow.",
     },
     research: {
-      title: "Forschung — Vascular Atlas",
+      title: "Forschung — AquaMR Flow",
       description: "Erstellen Sie Studien, verwalten Sie Mitglieder und exportieren Sie Forschungsdaten.",
     },
     aiAssistant: {
-      title: "KI-Assistent — Vascular Atlas",
+      title: "KI-Assistent — AquaMR Flow",
       description: "Erstellen Sie KI-gestützte klinische Berichte mit evidenzbasierter Gefäßmedizin-Analyse.",
     },
     patients: {
-      title: "Patienten — Vascular Atlas",
+      title: "Patienten — AquaMR Flow",
       description: "Verwalten Sie Patientenfälle, Messungen und klinische Dokumentation.",
     },
     analytics: {
-      title: "Analytik — Vascular Atlas",
+      title: "Analytik — AquaMR Flow",
       description: "Klinisches Analyse-Dashboard mit Falltrends, Messungen und institutionellen Vergleichen.",
     },
     outcomes: {
-      title: "Patientenergebnisse — Vascular Atlas",
+      title: "Patientenergebnisse — AquaMR Flow",
       description: "Erfassung patientenberichteter Ergebnisse mit validierten vaskulären Fragebögen.",
     },
     performance: {
-      title: "Klinische Leistung — Vascular Atlas",
+      title: "Klinische Leistung — AquaMR Flow",
       description: "Klinische Kennzahlen im Vergleich zu europäischen Benchmarks.",
     },
     riskCalculator: {
-      title: "Risikorechner — Vascular Atlas",
+      title: "Risikorechner — AquaMR Flow",
       description: "Klinische Risikorechner: SCORE2, Wells TVT, ABI-Interpretation.",
     },
   },

@@ -2,95 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Core public pages -->
   <url>
-    <loc>https://vascular-atlas.com/</loc>
+    <loc>https://aquamr-flow.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/pricing</loc>
+    <loc>https://aquamr-flow.com/pricing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/auth</loc>
+    <loc>https://aquamr-flow.com/auth</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/support</loc>
+    <loc>https://aquamr-flow.com/support</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/legal/terms</loc>
+    <loc>https://aquamr-flow.com/legal/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/legal/privacy</loc>
+    <loc>https://aquamr-flow.com/legal/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/legal/notice</loc>
+    <loc>https://aquamr-flow.com/legal/notice</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
-  <!-- Semi-public preview routes (ContentGate) -->
+  <!-- Semi-public app routes -->
   <url>
-    <loc>https://vascular-atlas.com/app</loc>
+    <loc>https://aquamr-flow.com/app</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/ai-assistant</loc>
+    <loc>https://aquamr-flow.com/app/procedure-planner</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/digital-twin</loc>
+    <loc>https://aquamr-flow.com/app/fusion-viewer</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/registry</loc>
+    <loc>https://aquamr-flow.com/app/digital-twin</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/education</loc>
+    <loc>https://aquamr-flow.com/app/ci-aki-engine</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/simulation</loc>
+    <loc>https://aquamr-flow.com/app/simulation</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/network</loc>
+    <loc>https://aquamr-flow.com/app/registry</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/research</loc>
+    <loc>https://aquamr-flow.com/app/research</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/compliance</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://vascular-atlas.com/app/analytics</loc>
+    <loc>https://aquamr-flow.com/app/education</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://vascular-atlas.com/app/team</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <loc>https://aquamr-flow.com/app/analytics</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
