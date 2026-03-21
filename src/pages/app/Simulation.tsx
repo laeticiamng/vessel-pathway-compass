@@ -54,7 +54,7 @@ export default function Simulation() {
   const [runningSimId, setRunningSimId] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("pad");
+  const [category, setCategory] = useState("coronary");
   const [difficulty, setDifficulty] = useState("intermediate");
   const [timeLimit, setTimeLimit] = useState("600");
 
@@ -364,9 +364,9 @@ export default function Simulation() {
                 <Select value={category} onValueChange={setCategory}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="pad">{t("simulation.categories.pad")}</SelectItem>
-                    <SelectItem value="aortic">{t("simulation.categories.aortic")}</SelectItem>
-                    <SelectItem value="venous">{t("simulation.categories.venous")}</SelectItem>
+                    <SelectItem value="coronary">{t("simulation.categories.coronary")}</SelectItem>
+                    <SelectItem value="peripheral">{t("simulation.categories.peripheral")}</SelectItem>
+                    <SelectItem value="renal">{t("simulation.categories.renal")}</SelectItem>
                     <SelectItem value="carotid">{t("simulation.categories.carotid")}</SelectItem>
                   </SelectContent>
                 </Select>

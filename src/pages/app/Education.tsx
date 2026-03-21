@@ -18,11 +18,11 @@ import { toast } from "sonner";
 import CourseDetail from "@/components/education/CourseDetail";
 
 const TRACK_EMOJI: Record<string, string> = {
-  "vascular-ultrasound": "🔊",
-  "pad-limb": "🦵",
-  "aorta": "❤️",
-  "venous": "🩸",
-  "thrombosis": "⚡",
+  "low-field-mri": "🧲",
+  "non-contrast-mra": "🫀",
+  "ivus-guided-pci": "🔬",
+  "contrast-sparing": "💧",
+  "simulation-linked": "🧪",
 };
 
 export default function Education() {
@@ -33,7 +33,7 @@ export default function Education() {
   const [createOpen, setCreateOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [track, setTrack] = useState("vascular-ultrasound");
+  const [track, setTrack] = useState("low-field-mri");
   const [difficulty, setDifficulty] = useState("beginner");
   const [durationHours, setDurationHours] = useState("2");
 
@@ -348,11 +348,11 @@ export default function Education() {
                 <Select value={track} onValueChange={setTrack}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="vascular-ultrasound">{t("education.trackNames.vascularUltrasound")}</SelectItem>
-                    <SelectItem value="pad-limb">{t("education.trackNames.padLimb")}</SelectItem>
-                    <SelectItem value="aorta">{t("education.trackNames.aorta")}</SelectItem>
-                    <SelectItem value="venous">{t("education.trackNames.venous")}</SelectItem>
-                    <SelectItem value="thrombosis">{t("education.trackNames.thrombosis")}</SelectItem>
+                    <SelectItem value="low-field-mri">{t("education.trackNames.lowFieldMri")}</SelectItem>
+                    <SelectItem value="non-contrast-mra">{t("education.trackNames.nonContrastMra")}</SelectItem>
+                    <SelectItem value="ivus-guided-pci">{t("education.trackNames.ivusGuidedPci")}</SelectItem>
+                    <SelectItem value="contrast-sparing">{t("education.trackNames.contrastSparing")}</SelectItem>
+                    <SelectItem value="simulation-linked">{t("education.trackNames.simulationLinked")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

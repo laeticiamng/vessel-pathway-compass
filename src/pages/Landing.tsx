@@ -46,13 +46,13 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const primaryIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
-const primaryKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
-const primaryPaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network"];
+const primaryIcons = [Brain, HeartPulse, Calculator, Activity, FlaskConical, LineChart];
+const primaryKeys = ["procedurePlanner", "fusionViewer", "ciAkiEngine", "twin", "simulation", "registry"] as const;
+const primaryPaths = ["/app/procedure-planner", "/app/fusion-viewer", "/app/ci-aki-engine", "/app/digital-twin", "/app/simulation", "/app/registry"];
 
-const secondaryIcons = [ClipboardList, Stethoscope, Calculator, FileText, Link2];
-const secondaryKeys = ["outcomes", "performance", "riskCalc", "researchExport", "fhir"] as const;
-const secondaryPaths = ["/app/outcomes", "/app/performance", "/app/risk-calculator", "/app/research", "/app/patients"];
+const secondaryIcons = [BookOpen, FileText, Stethoscope, Link2];
+const secondaryKeys = ["education", "research", "analytics", "fhir"] as const;
+const secondaryPaths = ["/app/education", "/app/research", "/app/analytics", "/app/patients"];
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
