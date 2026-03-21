@@ -8,11 +8,11 @@ interface SEOHeadProps {
   jsonLd?: Record<string, unknown>;
 }
 
-const BASE_URL = "https://vascular-atlas.com";
+const BASE_URL = "https://aquamr-flow.com";
 const OG_IMAGE = "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/804abac6-e232-40c4-ad96-d95870e4f118/id-preview-02ca198e--22a2eaf4-5506-427a-b4e7-0077ed460f35.lovable.app-1772885625498.png";
 
 export function SEOHead({ title, description, path = "/", noindex = false, jsonLd }: SEOHeadProps) {
-  const fullTitle = path === "/" ? title : `${title} | Vascular Atlas`;
+  const fullTitle = path === "/" ? title : `${title} | AquaMR Flow`;
   const canonicalUrl = `${BASE_URL}${path}`;
 
   return (
@@ -29,7 +29,7 @@ export function SEOHead({ title, description, path = "/", noindex = false, jsonL
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content="website" />
-      <meta property="og:site_name" content="Vascular Atlas" />
+      <meta property="og:site_name" content="AquaMR Flow" />
       <meta property="og:image" content={OG_IMAGE} />
 
       {/* Twitter */}

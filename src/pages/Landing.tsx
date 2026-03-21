@@ -46,13 +46,13 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.08 } },
 };
 
-const primaryIcons = [Brain, Activity, LineChart, BookOpen, FlaskConical, Globe];
-const primaryKeys = ["ai", "twin", "registry", "education", "simulation", "network"] as const;
-const primaryPaths = ["/app/ai-assistant", "/app/digital-twin", "/app/registry", "/app/education", "/app/simulation", "/app/network"];
+const primaryIcons = [Brain, HeartPulse, Calculator, Activity, FlaskConical, LineChart];
+const primaryKeys = ["procedurePlanner", "fusionViewer", "ciAkiEngine", "twin", "simulation", "registry"] as const;
+const primaryPaths = ["/app/procedure-planner", "/app/fusion-viewer", "/app/ci-aki-engine", "/app/digital-twin", "/app/simulation", "/app/registry"];
 
-const secondaryIcons = [ClipboardList, Stethoscope, Calculator, FileText, Link2];
-const secondaryKeys = ["outcomes", "performance", "riskCalc", "researchExport", "fhir"] as const;
-const secondaryPaths = ["/app/outcomes", "/app/performance", "/app/risk-calculator", "/app/research", "/app/patients"];
+const secondaryIcons = [BookOpen, FileText, Stethoscope, Link2];
+const secondaryKeys = ["education", "research", "analytics", "fhir"] as const;
+const secondaryPaths = ["/app/education", "/app/research", "/app/analytics", "/app/patients"];
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
@@ -88,23 +88,23 @@ export default function Landing() {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is Vascular Atlas?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Vascular Atlas is an AI-powered clinical platform for vascular medicine that unifies patient case management, AI-assisted reporting, outcomes registry, certification, clinical simulation, and expert networking." }
+        "name": "What is AquaMR Flow?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AquaMR Flow is a clinical software platform for non-ionizing, contrast-sparing vascular workflows. It combines procedure planning, multimodal imaging fusion, CI-AKI risk prevention, clinical simulation, and a research registry." }
       },
       {
         "@type": "Question",
-        "name": "Who is Vascular Atlas for?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Vascular Atlas is designed for vascular surgeons, angiologists, interventional radiologists, trainees, and hospital departments specializing in vascular medicine." }
+        "name": "Who is AquaMR Flow for?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AquaMR Flow is designed for interventional cardiologists, interventional radiologists, vascular medicine physicians, clinical researchers, and trainees working with non-ionizing and contrast-sparing vascular procedures." }
       },
       {
         "@type": "Question",
-        "name": "How much does Vascular Atlas cost?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Vascular Atlas offers a free Individual plan, a Professional plan at $99/month, and custom Institution pricing. All features are currently free during the beta period." }
+        "name": "How much does AquaMR Flow cost?",
+        "acceptedAnswer": { "@type": "Answer", "text": "AquaMR Flow offers a free Individual plan, a Professional plan at $99/month, and custom Institution pricing. All features are currently free during the beta period." }
       },
       {
         "@type": "Question",
-        "name": "Is Vascular Atlas a medical device?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Vascular Atlas is a clinical workflow and documentation platform. It is not a certified medical device. All AI outputs require clinician confirmation before use." }
+        "name": "Is AquaMR Flow a medical device?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. AquaMR Flow is a clinical decision support and workflow planning platform. It is not a certified medical device. All outputs require clinician review and confirmation before any clinical action." }
       }
     ]
   };
@@ -128,7 +128,7 @@ export default function Landing() {
             <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-md">
               <HeartPulse className="h-5 w-5 text-primary-foreground" />
             </div>
-            <span className="text-xl font-bold tracking-tight">Vascular Atlas</span>
+            <span className="text-xl font-bold tracking-tight">AquaMR Flow</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <a href="#modules" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -259,7 +259,7 @@ export default function Landing() {
             <div className="rounded-2xl border border-primary-foreground/10 shadow-2xl shadow-primary/10 overflow-hidden bg-card/5 backdrop-blur-sm">
               <img
                 src={dashboardPreview}
-                alt="Vascular Atlas clinical dashboard showing patient statistics, risk distribution and module overview"
+                alt="AquaMR Flow clinical dashboard showing patient statistics, risk distribution and module overview"
                 className="w-full h-auto"
                 loading="lazy"
               />
@@ -455,7 +455,7 @@ export default function Landing() {
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <HeartPulse className="h-5 w-5 text-primary" />
-                <span className="font-semibold">Vascular Atlas</span>
+                <span className="font-semibold">AquaMR Flow</span>
               </div>
               <p className="text-sm text-muted-foreground">{t("landing.footer.tagline")}</p>
               <p className="text-xs text-muted-foreground/70 mt-1">{t("landing.footer.notMedicalDevice")}</p>

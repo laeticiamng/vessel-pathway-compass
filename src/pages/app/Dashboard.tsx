@@ -21,6 +21,9 @@ import {
   TrendingUp,
   FileText,
   ArrowRight,
+  Image,
+  Calculator,
+  BarChart3,
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -76,10 +79,10 @@ export default function Dashboard() {
   ];
 
   const quickActions = [
-    { label: t("dashboard.quickActions.newCase"), icon: HeartPulse, path: "/app/patients" },
-    { label: t("dashboard.quickActions.aiAssistant"), icon: Brain, path: "/app/ai-assistant" },
+    { label: t("dashboard.quickActions.procedurePlanner"), icon: Brain, path: "/app/procedure-planner" },
+    { label: t("dashboard.quickActions.fusionViewer"), icon: Image, path: "/app/fusion-viewer" },
+    { label: t("dashboard.quickActions.ciAkiEngine"), icon: Calculator, path: "/app/ci-aki-engine" },
     { label: t("dashboard.quickActions.simulation"), icon: FlaskConical, path: "/app/simulation" },
-    { label: t("dashboard.quickActions.education"), icon: BookOpen, path: "/app/education" },
   ];
 
   function timeAgo(dateStr: string) {
@@ -210,11 +213,14 @@ export default function Dashboard() {
       {/* Module Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-in">
         {[
-          { title: t("sidebar.aiAssistant"), desc: t("dashboard.moduleDesc.ai"), icon: Brain, path: "/app/ai-assistant" },
+          { title: t("sidebar.procedurePlanner"), desc: t("dashboard.moduleDesc.procedurePlanner"), icon: Brain, path: "/app/procedure-planner" },
+          { title: t("sidebar.fusionViewer"), desc: t("dashboard.moduleDesc.fusionViewer"), icon: Image, path: "/app/fusion-viewer" },
+          { title: t("sidebar.ciAkiEngine"), desc: t("dashboard.moduleDesc.ciAkiEngine"), icon: Calculator, path: "/app/ci-aki-engine" },
           { title: t("sidebar.digitalTwin"), desc: t("dashboard.moduleDesc.twin"), icon: Activity, path: "/app/digital-twin" },
+          { title: t("sidebar.simulationLab"), desc: t("dashboard.moduleDesc.simulation"), icon: FlaskConical, path: "/app/simulation" },
           { title: t("sidebar.registry"), desc: t("dashboard.moduleDesc.registry"), icon: LineChart, path: "/app/registry" },
           { title: t("sidebar.education"), desc: t("dashboard.moduleDesc.education"), icon: BookOpen, path: "/app/education" },
-          { title: t("sidebar.simulationLab"), desc: t("dashboard.moduleDesc.simulation"), icon: FlaskConical, path: "/app/simulation" },
+          { title: t("sidebar.analytics"), desc: t("dashboard.moduleDesc.analytics"), icon: BarChart3, path: "/app/analytics" },
           { title: t("sidebar.researchHub"), desc: t("dashboard.moduleDesc.research"), icon: FileText, path: "/app/research" },
         ].map((mod) => (
           <Link key={mod.title} to={mod.path}>

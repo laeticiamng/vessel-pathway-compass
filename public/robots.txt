@@ -1,4 +1,4 @@
-# Vascular Atlas — robots.txt
+# AquaMR Flow — robots.txt
 
 User-agent: Googlebot
 Allow: /
@@ -46,4 +46,4 @@ Disallow: /onboarding
 Disallow: /reset-password
 Disallow: /checkout/
 
-Sitemap: https://vascular-atlas.com/sitemap.xml
+Sitemap: https://aquamr-flow.com/sitemap.xml

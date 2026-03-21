@@ -37,9 +37,9 @@ interface AiOutput {
   created_at: string;
 }
 
-const FREE_DAILY_AI_LIMIT = 3;
+const FREE_DAILY_LIMIT = 3;
 
-export default function AIAssistant() {
+export default function ProcedurePlanner() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<string | null>(null);
   const [currentOutputId, setCurrentOutputId] = useState<string | null>(null);
@@ -56,13 +56,13 @@ export default function AIAssistant() {
   }, [history]);
 
   const [formData, setFormData] = useState({
-    symptoms: "",
-    riskFactors: "",
-    abi: "",
-    doppler: "",
-    imaging: "",
+    clinicalPresentation: "",
+    renalFunction: "",
+    plannedProcedure: "",
+    priorImaging: "",
     labs: "",
     medications: "",
+    comorbidities: "",
   });
 
   useEffect(() => {
@@ -100,7 +100,7 @@ export default function AIAssistant() {
       .single();
 
     if (error) {
-      console.error("Failed to save AI output:", error);
+      console.error("Failed to save output:", error);
       return null;
     }
 
@@ -125,7 +125,7 @@ export default function AIAssistant() {
       .eq("id", currentOutputId);
 
     if (error) {
-      toast({ title: t("auth.error"), description: t("aiAssistant.errors.signOffFailed"), variant: "destructive" });
+      toast({ title: t("auth.error"), description: t("procedurePlanner.errors.signOffFailed"), variant: "destructive" });
       return;
     }
 
@@ -137,7 +137,7 @@ export default function AIAssistant() {
       details: { signed_off_at: new Date().toISOString() },
     });
 
-    toast({ title: t("aiAssistant.output.signedOff"), description: t("aiAssistant.output.signedOffDesc") });
+    toast({ title: t("procedurePlanner.output.signedOff"), description: t("procedurePlanner.output.signedOffDesc") });
     loadHistory();
   };
 
@@ -148,7 +148,7 @@ export default function AIAssistant() {
       return;
     }
 
-    if (!subscribed && todayCount >= FREE_DAILY_AI_LIMIT) {
+    if (!subscribed && todayCount >= FREE_DAILY_LIMIT) {
       toast({ title: t("premiumGate.title"), description: (t("premiumGate.limitReached") as string).replace("{{feature}}", t("premiumGate.features.aiReports") as string), variant: "destructive" });
       return;
     }
@@ -171,14 +171,14 @@ export default function AIAssistant() {
       );
 
       if (response.status === 429) {
-        toast({ title: t("aiAssistant.errors.rateLimited"), description: t("aiAssistant.errors.rateLimitedDesc"), variant: "destructive" });
+        toast({ title: t("procedurePlanner.errors.rateLimited"), description: t("procedurePlanner.errors.rateLimitedDesc"), variant: "destructive" });
         return;
       }
       if (response.status === 402) {
-        toast({ title: t("aiAssistant.errors.creditsRequired"), description: t("aiAssistant.errors.creditsRequiredDesc"), variant: "destructive" });
+        toast({ title: t("procedurePlanner.errors.creditsRequired"), description: t("procedurePlanner.errors.creditsRequiredDesc"), variant: "destructive" });
         return;
       }
-      if (!response.ok || !response.body) throw new Error("Failed to generate report");
+      if (!response.ok || !response.body) throw new Error("Failed to generate plan");
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -224,46 +224,49 @@ export default function AIAssistant() {
     setCurrentOutputId(output.id);
     if (output.input_summary) {
       setFormData({
-        symptoms: output.input_summary.symptoms || "",
-        riskFactors: output.input_summary.riskFactors || "",
-        abi: output.input_summary.abi || "",
-        doppler: output.input_summary.doppler || "",
-        imaging: output.input_summary.imaging || "",
+        clinicalPresentation: output.input_summary.clinicalPresentation || output.input_summary.symptoms || "",
+        renalFunction: output.input_summary.renalFunction || "",
+        plannedProcedure: output.input_summary.plannedProcedure || "",
+        priorImaging: output.input_summary.priorImaging || output.input_summary.imaging || "",
         labs: output.input_summary.labs || "",
         medications: output.input_summary.medications || "",
+        comorbidities: output.input_summary.comorbidities || output.input_summary.riskFactors || "",
       });
     }
   };
 
   return (
     <div className="space-y-6 max-w-7xl">
-      <SEOHead title={t("seo.aiAssistant.title") as string} description={t("seo.aiAssistant.description") as string} path="/app/ai-assistant" noindex />
-      <UsageLimitBanner current={todayCount} limit={FREE_DAILY_AI_LIMIT} featureKey="aiReports" />
+      <SEOHead title={t("seo.procedurePlanner.title") as string} description={t("seo.procedurePlanner.description") as string} path="/app/procedure-planner" noindex />
+      <UsageLimitBanner current={todayCount} limit={FREE_DAILY_LIMIT} featureKey="aiReports" />
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
             <Brain className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
-            {t("aiAssistant.title")}
+            {t("procedurePlanner.title")}
           </h1>
-          <p className="text-muted-foreground mt-1">{t("aiAssistant.subtitle")}</p>
+          <p className="text-muted-foreground mt-1">{t("procedurePlanner.subtitle")}</p>
         </div>
-        <Badge variant="outline" className="flex items-center gap-1.5 self-start sm:self-auto">
-          <Shield className="h-3 w-3" />
-          {t("aiAssistant.badge")}
-        </Badge>
+        <div className="flex items-center gap-2 self-start sm:self-auto">
+          <Badge variant="outline" className="flex items-center gap-1.5">
+            <Shield className="h-3 w-3" />
+            {t("procedurePlanner.badge")}
+          </Badge>
+          <Badge variant="secondary" className="text-xs">Research Prototype</Badge>
+        </div>
       </div>
 
       <div className="flex items-start gap-3 p-4 rounded-xl bg-warning/10 border border-warning/30">
         <AlertTriangle className="h-5 w-5 text-warning shrink-0 mt-0.5" />
         <div className="text-sm">
-          <p className="font-medium">{t("aiAssistant.disclaimer.title")}</p>
-          <p className="text-muted-foreground mt-1">{t("aiAssistant.disclaimer.body")}</p>
+          <p className="font-medium">{t("procedurePlanner.disclaimer.title")}</p>
+          <p className="text-muted-foreground mt-1">{t("procedurePlanner.disclaimer.body")}</p>
         </div>
       </div>
 
       {!user && (
         <div className="p-4 rounded-xl bg-info/10 border border-info/30 text-center">
-          <p className="text-sm font-medium">{t("aiAssistant.signInPrompt")}</p>
+          <p className="text-sm font-medium">{t("procedurePlanner.signInPrompt")}</p>
           <Button size="sm" className="mt-2" onClick={() => navigate("/auth")}>{t("common.signIn")}</Button>
         </div>
       )}
@@ -271,31 +274,31 @@ export default function AIAssistant() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle>{t("aiAssistant.intake.title")}</CardTitle>
-            <CardDescription>{t("aiAssistant.intake.subtitle")}</CardDescription>
+            <CardTitle>{t("procedurePlanner.intake.title")}</CardTitle>
+            <CardDescription>{t("procedurePlanner.intake.subtitle")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {([
-              ["symptoms", "symptoms", "symptomsPlaceholder", true],
-              ["riskFactors", "riskFactors", "riskFactorsPlaceholder", true],
-              ["abi", "abi", "abiPlaceholder", false],
-              ["doppler", "doppler", "dopplerPlaceholder", false],
-              ["imaging", "imaging", "imagingPlaceholder", true],
+              ["clinicalPresentation", "clinicalPresentation", "clinicalPresentationPlaceholder", true],
+              ["renalFunction", "renalFunction", "renalFunctionPlaceholder", false],
+              ["plannedProcedure", "plannedProcedure", "plannedProcedurePlaceholder", false],
+              ["priorImaging", "priorImaging", "priorImagingPlaceholder", true],
               ["labs", "labs", "labsPlaceholder", false],
               ["medications", "medications", "medicationsPlaceholder", false],
+              ["comorbidities", "comorbidities", "comorbiditiesPlaceholder", true],
             ] as const).map(([field, labelKey, placeholderKey, isTextarea]) => (
               <div key={field} className="space-y-2">
-                <Label>{t(`aiAssistant.intake.${labelKey}`)}</Label>
+                <Label>{t(`procedurePlanner.intake.${labelKey}`)}</Label>
                 {isTextarea ? (
                   <Textarea
-                    placeholder={t(`aiAssistant.intake.${placeholderKey}`)}
+                    placeholder={t(`procedurePlanner.intake.${placeholderKey}`)}
                     value={(formData as any)[field]}
                     onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-                    rows={field === "symptoms" ? 3 : 2}
+                    rows={field === "clinicalPresentation" ? 3 : 2}
                   />
                 ) : (
                   <Input
-                    placeholder={t(`aiAssistant.intake.${placeholderKey}`)}
+                    placeholder={t(`procedurePlanner.intake.${placeholderKey}`)}
                     value={(formData as any)[field]}
                     onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
                   />
@@ -306,12 +309,12 @@ export default function AIAssistant() {
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                  {t("aiAssistant.generating")}
+                  {t("procedurePlanner.generating")}
                 </>
               ) : (
                 <>
                   <Brain className="h-4 w-4 mr-2" />
-                  {t("aiAssistant.generate")}
+                  {t("procedurePlanner.generate")}
                 </>
               )}
             </Button>
@@ -320,18 +323,18 @@ export default function AIAssistant() {
 
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle>{t("aiAssistant.output.title")}</CardTitle>
-            <CardDescription>{t("aiAssistant.output.subtitle")}</CardDescription>
+            <CardTitle>{t("procedurePlanner.output.title")}</CardTitle>
+            <CardDescription>{t("procedurePlanner.output.subtitle")}</CardDescription>
           </CardHeader>
           <CardContent>
             {result ? (
               <div className="space-y-4">
-                <Tabs defaultValue="report">
+                <Tabs defaultValue="plan">
                   <TabsList className="w-full">
-                    <TabsTrigger value="report" className="flex-1">{t("aiAssistant.output.report")}</TabsTrigger>
-                    <TabsTrigger value="evidence" className="flex-1">{t("aiAssistant.output.evidence")}</TabsTrigger>
+                    <TabsTrigger value="plan" className="flex-1">{t("procedurePlanner.output.plan")}</TabsTrigger>
+                    <TabsTrigger value="evidence" className="flex-1">{t("procedurePlanner.output.evidence")}</TabsTrigger>
                   </TabsList>
-                  <TabsContent value="report" className="mt-4">
+                  <TabsContent value="plan" className="mt-4">
                     <div className="prose prose-sm max-w-none dark:prose-invert whitespace-pre-wrap text-sm leading-relaxed bg-muted/50 p-4 rounded-lg max-h-[500px] overflow-auto">
                       {result}
                     </div>
@@ -341,23 +344,23 @@ export default function AIAssistant() {
                       <div className="p-3 rounded-lg bg-info/10 border border-info/20">
                         <div className="flex items-center gap-2 mb-1">
                           <Info className="h-4 w-4 text-info" />
-                          <span className="text-sm font-medium">{t("aiAssistant.output.dataUsed")}</span>
+                          <span className="text-sm font-medium">{t("procedurePlanner.output.dataUsed")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">{t("aiAssistant.output.dataUsedDesc")}</p>
+                        <p className="text-xs text-muted-foreground">{t("procedurePlanner.output.dataUsedDesc")}</p>
                       </div>
                       <div className="p-3 rounded-lg bg-warning/10 border border-warning/20">
                         <div className="flex items-center gap-2 mb-1">
                           <AlertTriangle className="h-4 w-4 text-warning" />
-                          <span className="text-sm font-medium">{t("aiAssistant.output.uncertainty")}</span>
+                          <span className="text-sm font-medium">{t("procedurePlanner.output.uncertainty")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">{t("aiAssistant.output.uncertaintyDesc")}</p>
+                        <p className="text-xs text-muted-foreground">{t("procedurePlanner.output.uncertaintyDesc")}</p>
                       </div>
                       <div className="p-3 rounded-lg bg-destructive/10 border border-destructive/20">
                         <div className="flex items-center gap-2 mb-1">
                           <Shield className="h-4 w-4 text-destructive" />
-                          <span className="text-sm font-medium">{t("aiAssistant.output.clinicianRequired")}</span>
+                          <span className="text-sm font-medium">{t("procedurePlanner.output.clinicianRequired")}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">{t("aiAssistant.output.clinicianRequiredDesc")}</p>
+                        <p className="text-xs text-muted-foreground">{t("procedurePlanner.output.clinicianRequiredDesc")}</p>
                       </div>
                     </div>
                   </TabsContent>
@@ -369,24 +372,24 @@ export default function AIAssistant() {
                     size="sm"
                     onClick={() => {
                       navigator.clipboard.writeText(result);
-                      toast({ title: t("aiAssistant.output.copied"), description: t("aiAssistant.output.copiedDesc") });
+                      toast({ title: t("procedurePlanner.output.copied"), description: t("procedurePlanner.output.copiedDesc") });
                     }}
                   >
                     <Copy className="h-3.5 w-3.5 mr-1" />
-                    {t("aiAssistant.output.copyEHR")}
+                    {t("procedurePlanner.output.copyEHR")}
                   </Button>
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => toast({ title: t("common.comingSoon"), description: t("aiAssistant.output.exportPDFSoon") })}
+                    onClick={() => toast({ title: t("common.comingSoon"), description: t("procedurePlanner.output.exportPDFSoon") })}
                   >
                     <Download className="h-3.5 w-3.5 mr-1" />
-                    {t("aiAssistant.output.exportPDF")}
+                    {t("procedurePlanner.output.exportPDF")}
                   </Button>
                   {user && (
                     <Button size="sm" className="ml-auto" onClick={handleSignOff}>
                       <CheckCircle2 className="h-3.5 w-3.5 mr-1" />
-                      {t("aiAssistant.output.confirmSign")}
+                      {t("procedurePlanner.output.confirmSign")}
                     </Button>
                   )}
                 </div>
@@ -394,7 +397,7 @@ export default function AIAssistant() {
             ) : (
               <div className="flex flex-col items-center justify-center h-64 text-muted-foreground">
                 <Brain className="h-12 w-12 mb-4 opacity-20" />
-                <p className="text-sm">{t("aiAssistant.output.empty")}</p>
+                <p className="text-sm">{t("procedurePlanner.output.empty")}</p>
               </div>
             )}
           </CardContent>
@@ -404,9 +407,9 @@ export default function AIAssistant() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <History className="h-5 w-5" />
-              {t("aiAssistant.history.title")}
+              {t("procedurePlanner.history.title")}
             </CardTitle>
-            <CardDescription>{t("aiAssistant.history.subtitle")}</CardDescription>
+            <CardDescription>{t("procedurePlanner.history.subtitle")}</CardDescription>
           </CardHeader>
           <CardContent>
             {history.length > 0 ? (
@@ -426,10 +429,10 @@ export default function AIAssistant() {
                       {output.user_signoff ? (
                         <Badge variant="default" className="text-[10px] h-5">
                           <CheckCircle2 className="h-3 w-3 mr-1" />
-                          {t("aiAssistant.history.signed")}
+                          {t("procedurePlanner.history.signed")}
                         </Badge>
                       ) : (
-                        <Badge variant="outline" className="text-[10px] h-5">{t("aiAssistant.history.pending")}</Badge>
+                        <Badge variant="outline" className="text-[10px] h-5">{t("procedurePlanner.history.pending")}</Badge>
                       )}
                     </div>
                     <p className="text-xs text-muted-foreground line-clamp-2">
@@ -445,8 +448,8 @@ export default function AIAssistant() {
             ) : (
               <div className="flex flex-col items-center justify-center h-32 text-muted-foreground">
                 <FileText className="h-8 w-8 mb-2 opacity-20" />
-                <p className="text-sm font-medium">{t("aiAssistant.history.empty")}</p>
-                <p className="text-xs">{t("aiAssistant.history.emptyDesc")}</p>
+                <p className="text-sm font-medium">{t("procedurePlanner.history.empty")}</p>
+                <p className="text-xs">{t("procedurePlanner.history.emptyDesc")}</p>
               </div>
             )}
           </CardContent>

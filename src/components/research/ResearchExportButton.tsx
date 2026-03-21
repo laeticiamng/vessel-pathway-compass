@@ -74,7 +74,7 @@ export default function ResearchExportButton() {
       const lines: string[] = [
         `ANONYMIZED REGISTRY DATASET SUMMARY`,
         `Generated: ${now}`,
-        `Institution: Vascular Atlas Platform`,
+        `Institution: AquaMR Flow Platform`,
         `Format: Aggregate statistics only — no individual patient data`,
         ``,
         `== COHORT OVERVIEW ==`,

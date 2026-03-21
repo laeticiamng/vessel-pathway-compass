@@ -13,7 +13,7 @@ interface I18nContextType {
   t: (key: string) => string;
 }
 
-const I18N_CONTEXT_KEY = "__vascular_atlas_i18n_context__";
+const I18N_CONTEXT_KEY = "__aquamr_flow_i18n_context__";
 const globalI18n = globalThis as typeof globalThis & {
   [I18N_CONTEXT_KEY]?: React.Context<I18nContextType | null>;
 };
@@ -33,13 +33,13 @@ function getNestedValue(obj: any, path: string): any {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
-    const stored = localStorage.getItem("vascular-atlas-lang");
+    const stored = localStorage.getItem("aquamr-flow-lang");
     return (stored === "fr" || stored === "de") ? stored : "en";
   });
 
   const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("vascular-atlas-lang", lang);
+    localStorage.setItem("aquamr-flow-lang", lang);
   }, []);
 
   const t = useCallback(

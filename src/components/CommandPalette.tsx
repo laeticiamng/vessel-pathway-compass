@@ -13,13 +13,14 @@ import {
   Brain,
   HeartPulse,
   FlaskConical,
-  Globe,
   BookOpen,
   LayoutDashboard,
   LineChart,
   Activity,
   FileText,
-  Shield,
+  BarChart3,
+  Calculator,
+  Image,
   Settings,
 } from "lucide-react";
 
@@ -30,15 +31,16 @@ interface CommandPaletteProps {
 
 const commandDefs = [
   { key: "command.dashboard", icon: LayoutDashboard, path: "/app" },
-  { key: "command.aiAssistant", icon: Brain, path: "/app/ai-assistant" },
+  { key: "command.procedurePlanner", icon: Brain, path: "/app/procedure-planner" },
+  { key: "command.fusionViewer", icon: Image, path: "/app/fusion-viewer" },
   { key: "command.patients", icon: HeartPulse, path: "/app/patients" },
   { key: "command.digitalTwin", icon: Activity, path: "/app/digital-twin" },
-  { key: "command.registry", icon: LineChart, path: "/app/registry" },
-  { key: "command.education", icon: BookOpen, path: "/app/education" },
+  { key: "command.ciAkiEngine", icon: Calculator, path: "/app/ci-aki-engine" },
   { key: "command.simulation", icon: FlaskConical, path: "/app/simulation" },
-  { key: "command.network", icon: Globe, path: "/app/network" },
+  { key: "command.registry", icon: LineChart, path: "/app/registry" },
   { key: "command.research", icon: FileText, path: "/app/research" },
-  { key: "command.compliance", icon: Shield, path: "/app/compliance" },
+  { key: "command.education", icon: BookOpen, path: "/app/education" },
+  { key: "command.analytics", icon: BarChart3, path: "/app/analytics" },
   { key: "command.settings", icon: Settings, path: "/app/settings" },
 ];
 

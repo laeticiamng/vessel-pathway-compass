@@ -6,18 +6,13 @@ import {
   BookOpen,
   Calculator,
   ChevronDown,
-  ClipboardList,
   FlaskConical,
-  Globe,
+  FileText,
   HeartPulse,
+  Image,
   LayoutDashboard,
   LineChart,
-  Shield,
   Settings,
-  Stethoscope,
-  Users,
-  Rocket,
-  FileText,
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
@@ -64,36 +59,32 @@ export function AppSidebar() {
       ? location.pathname === "/app"
       : location.pathname.startsWith(path);
 
-  // Primary items — always visible
+  // Primary clinical workflow items
   const primaryItems = [
     { title: t("sidebar.dashboard"), url: "/app", icon: LayoutDashboard },
-    { title: t("sidebar.aiAssistant"), url: "/app/ai-assistant", icon: Brain },
+    { title: t("sidebar.procedurePlanner"), url: "/app/procedure-planner", icon: Brain },
+    { title: t("sidebar.fusionViewer"), url: "/app/fusion-viewer", icon: Image },
     ...(session ? [{ title: t("sidebar.patients"), url: "/app/patients", icon: HeartPulse }] : []),
     { title: t("sidebar.digitalTwin"), url: "/app/digital-twin", icon: Activity },
-    { title: t("sidebar.patientOutcomes"), url: "/app/outcomes", icon: ClipboardList },
-    { title: t("sidebar.clinicalPerformance"), url: "/app/performance", icon: Stethoscope },
-    { title: t("sidebar.riskCalculator"), url: "/app/risk-calculator", icon: Calculator },
+    { title: t("sidebar.ciAkiEngine"), url: "/app/ci-aki-engine", icon: Calculator },
+    { title: t("sidebar.simulationLab"), url: "/app/simulation", icon: FlaskConical },
   ];
 
-  // Secondary items — collapsed by default under "More tools"
-  const moreToolsItems = [
+  // Platform items — collapsible
+  const platformItems = [
     { title: t("sidebar.registry"), url: "/app/registry", icon: LineChart },
-    { title: t("sidebar.education"), url: "/app/education", icon: BookOpen },
-    { title: t("sidebar.simulationLab"), url: "/app/simulation", icon: FlaskConical },
-    { title: t("sidebar.expertNetwork"), url: "/app/network", icon: Globe },
     { title: t("sidebar.researchHub"), url: "/app/research", icon: FileText },
+    { title: t("sidebar.education"), url: "/app/education", icon: BookOpen },
     { title: t("sidebar.analytics"), url: "/app/analytics", icon: BarChart3 },
   ];
 
   const adminItems = [
-    { title: t("sidebar.compliance"), url: "/app/compliance", icon: Shield },
-    { title: t("sidebar.team"), url: "/app/team", icon: Users },
     ...(session ? [{ title: t("sidebar.settings"), url: "/app/settings", icon: Settings }] : []),
   ];
 
-  // Auto-open "More tools" if user is currently on one of those pages
-  const isOnMoreTool = moreToolsItems.some((item) => isActive(item.url));
-  const [moreOpen, setMoreOpen] = useState(isOnMoreTool);
+  // Auto-open platform section if user is on one of those pages
+  const isOnPlatform = platformItems.some((item) => isActive(item.url));
+  const [platformOpen, setPlatformOpen] = useState(isOnPlatform);
 
   return (
     <Sidebar collapsible="icon">
@@ -104,14 +95,14 @@ export function AppSidebar() {
           </div>
           {!collapsed && (
             <span className="text-lg font-bold tracking-tight">
-              Vascular Atlas
+              AquaMR Flow
             </span>
           )}
         </NavLink>
       </SidebarHeader>
 
       <SidebarContent>
-        {/* Primary clinical tools */}
+        {/* Primary clinical workflow */}
         <SidebarGroup>
           <SidebarGroupLabel>{t("sidebar.clinical")}</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -130,18 +121,18 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        {/* Secondary tools — collapsible */}
+        {/* Platform tools — collapsible */}
         {!collapsed ? (
-          <Collapsible open={moreOpen} onOpenChange={setMoreOpen}>
+          <Collapsible open={platformOpen} onOpenChange={setPlatformOpen}>
             <SidebarGroup>
               <CollapsibleTrigger className="flex items-center justify-between w-full px-3 py-1.5 text-xs font-medium text-muted-foreground uppercase tracking-wider hover:text-foreground transition-colors">
-                {t("sidebar.moreTools")}
-                <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`} />
+                {t("sidebar.platform")}
+                <ChevronDown className={`h-3.5 w-3.5 transition-transform duration-200 ${platformOpen ? "rotate-180" : ""}`} />
               </CollapsibleTrigger>
               <CollapsibleContent>
                 <SidebarGroupContent>
                   <SidebarMenu>
-                    {moreToolsItems.map((item) => (
+                    {platformItems.map((item) => (
                       <SidebarMenuItem key={item.url}>
                         <SidebarMenuButton asChild isActive={isActive(item.url)}>
                           <NavLink to={item.url}>
@@ -160,7 +151,7 @@ export function AppSidebar() {
           <SidebarGroup>
             <SidebarGroupContent>
               <SidebarMenu>
-                {moreToolsItems.map((item) => (
+                {platformItems.map((item) => (
                   <SidebarMenuItem key={item.url}>
                     <SidebarMenuButton asChild isActive={isActive(item.url)}>
                       <NavLink to={item.url}>
@@ -174,41 +165,26 @@ export function AppSidebar() {
           </SidebarGroup>
         )}
 
-        {/* Beta */}
-        <SidebarGroup>
-          <SidebarGroupLabel>{t("sidebar.betaPreview")}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/app/beta")}>
-                  <NavLink to="/app/beta">
-                    <Rocket className="h-4 w-4" />
-                    {!collapsed && <span>{t("sidebar.innovationLab")}</span>}
-                  </NavLink>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
         {/* Administration */}
-        <SidebarGroup>
-          <SidebarGroupLabel>{t("sidebar.administration")}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {adminItems.map((item) => (
-                <SidebarMenuItem key={item.url}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                    <NavLink to={item.url}>
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        {adminItems.length > 0 && (
+          <SidebarGroup>
+            <SidebarGroupLabel>{t("sidebar.administration")}</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {adminItems.map((item) => (
+                  <SidebarMenuItem key={item.url}>
+                    <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                      <NavLink to={item.url}>
+                        <item.icon className="h-4 w-4" />
+                        {!collapsed && <span>{item.title}</span>}
+                      </NavLink>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
+          </SidebarGroup>
+        )}
       </SidebarContent>
 
       <SidebarFooter className="p-3 space-y-2">
