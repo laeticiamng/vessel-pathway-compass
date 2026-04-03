@@ -178,6 +178,53 @@ export type Database = {
           },
         ]
       }
+      eco_metrics: {
+        Row: {
+          id: string
+          case_id: string
+          contrast_agent_type: string
+          contrast_volume_ml: number
+          gadolinium_avoided_mg: number
+          radiation_avoided_mgy: number
+          water_contamination_prevented_l: number
+          eco_impact_score: number
+          created_by: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          case_id: string
+          contrast_agent_type?: string
+          contrast_volume_ml?: number
+          gadolinium_avoided_mg?: number
+          radiation_avoided_mgy?: number
+          water_contamination_prevented_l?: number
+          eco_impact_score?: number
+          created_by: string
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          case_id?: string
+          contrast_agent_type?: string
+          contrast_volume_ml?: number
+          gadolinium_avoided_mg?: number
+          radiation_avoided_mgy?: number
+          water_contamination_prevented_l?: number
+          eco_impact_score?: number
+          created_by?: string
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eco_metrics_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       consents: {
         Row: {
           consent_type: string

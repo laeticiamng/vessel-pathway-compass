@@ -248,6 +248,8 @@ export default function DigitalTwin() {
                     segmentLabel={activeSegment.label}
                     measurements={segmentMeasurements}
                     isLoading={measLoading}
+                    contrastFreeMode={contrastFreeMode}
+                    segmentId={selectedSegment}
                   />
                 ) : (
                   <Card>

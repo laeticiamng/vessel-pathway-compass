@@ -391,6 +391,12 @@ export const de = {
       noPatients: "Noch keine Patienten registriert",
       totalPatients: "Patienten insgesamt",
     },
+    ecoImpact: {
+      title: "Öko-Impact",
+      gadoliniumAvoided: "Gadolinium vermieden",
+      ecoScore: "Öko-Impact-Score",
+      viewRegistry: "Öko-Register anzeigen",
+    },
     activityLabels: {
       ai_report_generated: "KI-Bericht erstellt",
       ai_report_signed_off: "KI-Bericht bestätigt",
@@ -429,6 +435,8 @@ export const de = {
       comorbidities: "Komorbiditäten",
       comorbiditiesPlaceholder: "z.B. Diabetes, CKD Stadium 3b, vorherige AKI, LVEF 45%",
     },
+    preferBioContrast: "Bio-Kontrast (BBCA) bevorzugen",
+    bbcaDisclaimer: "Forschung — BBCA ist ein präklinischer pflanzlicher Wirkstoff, nicht für den klinischen Einsatz zugelassen. Nur für Forschungsplanung einbeziehen.",
     generate: "Plan erstellen",
     generating: "Wird erstellt...",
     output: {
@@ -617,6 +625,19 @@ export const de = {
     carePlan: {
       title: "Patientenfälle",
     },
+    segmentDetail: {
+      contrastFree: {
+        title: "Kontrastmittelfreie Machbarkeit",
+        level: {
+          excellent: "Ausgezeichnet",
+          moderate: "Moderat",
+          limited: "Begrenzt",
+        },
+        recNoContrast: "Kein Kontrastmittel erforderlich",
+        recBBCA: "BBCA kann die Bildgebung verbessern",
+        recTraditional: "Traditionelles Kontrastmittel kann erforderlich sein",
+      },
+    },
   },
 
   registry: {
@@ -627,6 +648,7 @@ export const de = {
       physician: "Meine Ergebnisse",
       institution: "Einrichtung",
       benchmarking: "Benchmarking",
+      ecoImpact: "Öko-Impact",
     },
     stats: {
       casesContributed: "Beigetragene Fälle",
@@ -650,6 +672,17 @@ export const de = {
     },
     institutionPlaceholder: "Aggregiertes Einrichtungs-Dashboard — erfordert Klinik-Admin-Rolle",
     benchmarkPlaceholder: "Perzentilvergleich mit dem globalen Register — anonymisiert",
+    ecoImpact: {
+      title: "Öko-Impact-Register",
+      subtitle: "Umweltauswirkungen der kontrastmittelsparenden Workflows verfolgen",
+      gadoliniumAvoided: "Gadolinium vermieden",
+      contrastSpared: "Kontrastmittelvolumen gespart",
+      waterPrevented: "Wasserverschmutzung verhindert",
+      ecoScore: "Öko-Impact-Score",
+      bbcaCases: "BBCA-Fälle",
+      noContrastCases: "Null-Kontrast-Fälle",
+      empty: "Noch keine Öko-Impact-Daten. Verwenden Sie BBCA oder Null-Kontrast-Workflows, um die Verfolgung zu starten.",
+    },
   },
 
   education: {
@@ -705,6 +738,7 @@ export const de = {
       ivusGuidedPci: "IVUS-geführte PCI",
       contrastSparing: "Kontrastmittelsparende Workflows",
       simulationLinked: "Simulationsgestütztes Lernen",
+      greenImaging: "Grüne Bildgebung",
     },
     quiz: {
       take: "Quiz starten",
@@ -799,6 +833,7 @@ export const de = {
       peripheral: "Peripher",
       renal: "Renal",
       carotid: "Karotis",
+      bioContrast: "Bio-Kontrast",
     },
     skills: {
       triageAccuracy: "Triage-Genauigkeit",
@@ -1190,6 +1225,16 @@ export const de = {
     allCategories: "Alle Kategorien",
     allInstitutions: "Alle Institutionen",
     noInstitution: "Ohne Institution",
+    greenRadiology: {
+      title: "Grüne Radiologie",
+      subtitle: "Umweltauswirkungen der Kontrastmittelauswahl in Ihrer Praxis",
+      gadoliniumAvoided: "Gadolinium vermieden",
+      contrastSpared: "Kontrastmittel gespart",
+      ecoScore: "Öko-Impact-Score",
+      agentDistribution: "Verteilung der Agententypen",
+      gadoliniumTrend: "Vermiedenes Gadolinium pro Monat",
+      noData: "Noch keine Öko-Impact-Daten",
+    },
     institutionComparison: "Institutionsvergleich",
     institutionComparisonDesc: "Kennzahlen Ihrer Institutionen im Vergleich",
     noInstitutions: "Keine Institutionen gefunden. Treten Sie einer Institution bei, um Vergleiche zu sehen.",

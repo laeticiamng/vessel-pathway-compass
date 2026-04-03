@@ -2,7 +2,8 @@ import { useTranslation } from "@/i18n/context";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Activity, TrendingUp, TrendingDown, Minus, Clock } from "lucide-react";
+import { Activity, TrendingUp, TrendingDown, Minus, Clock, Leaf } from "lucide-react";
+import { CONTRAST_FREE_FEASIBILITY, FEASIBILITY_COLORS, type ContrastFreeFeasibility } from "./VascularMap";
 
 interface Measurement {
   id: string;
@@ -17,9 +18,17 @@ interface SegmentDetailProps {
   segmentLabel: string;
   measurements: Measurement[];
   isLoading: boolean;
+  contrastFreeMode?: boolean;
+  segmentId?: string;
 }
 
-export default function SegmentDetail({ segmentLabel, measurements, isLoading }: SegmentDetailProps) {
+const FEASIBILITY_BADGE_COLORS: Record<ContrastFreeFeasibility, string> = {
+  excellent: "bg-emerald-500/15 text-emerald-700 border-emerald-500/30",
+  moderate: "bg-yellow-500/15 text-yellow-700 border-yellow-500/30",
+  limited: "bg-red-500/15 text-red-700 border-red-500/30",
+};
+
+export default function SegmentDetail({ segmentLabel, measurements, isLoading, contrastFreeMode = false, segmentId }: SegmentDetailProps) {
   const { t } = useTranslation();
 
   // Group by measurement type
@@ -63,6 +72,8 @@ export default function SegmentDetail({ segmentLabel, measurements, isLoading }:
     );
   }
 
+  const feasibility = segmentId ? CONTRAST_FREE_FEASIBILITY[segmentId] : null;
+
   return (
     <Card>
       <CardHeader className="pb-3">
@@ -72,6 +83,31 @@ export default function SegmentDetail({ segmentLabel, measurements, isLoading }:
         </CardTitle>
       </CardHeader>
       <CardContent>
+        {/* Contrast-free feasibility panel */}
+        {contrastFreeMode && feasibility && (
+          <div className="mb-4 p-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5">
+            <div className="flex items-center gap-2 mb-2">
+              <Leaf className="h-4 w-4 text-emerald-500" />
+              <span className="text-sm font-medium">{t("digitalTwin.segmentDetail.contrastFree.title")}</span>
+            </div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className={FEASIBILITY_BADGE_COLORS[feasibility.level]}>
+                  {t(`digitalTwin.segmentDetail.contrastFree.level.${feasibility.level}`)}
+                </Badge>
+              </div>
+              <p className="text-xs text-muted-foreground">{feasibility.note}</p>
+              <p className="text-xs font-medium">
+                {feasibility.level === "excellent"
+                  ? t("digitalTwin.segmentDetail.contrastFree.recNoContrast")
+                  : feasibility.level === "moderate"
+                    ? t("digitalTwin.segmentDetail.contrastFree.recBBCA")
+                    : t("digitalTwin.segmentDetail.contrastFree.recTraditional")}
+              </p>
+            </div>
+          </div>
+        )}
+
         {measurements.length === 0 ? (
           <div className="text-center py-6">
             <Activity className="h-8 w-8 mx-auto text-muted-foreground/30 mb-2" />

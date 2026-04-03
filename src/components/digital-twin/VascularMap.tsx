@@ -85,7 +85,7 @@ export const CONTRAST_FREE_FEASIBILITY: Record<string, { level: ContrastFreeFeas
   "renal-l": { level: "moderate", note: "PC-MRA feasible; ASL emerging" },
 };
 
-const FEASIBILITY_COLORS: Record<ContrastFreeFeasibility, { fill: string; stroke: string }> = {
+export const FEASIBILITY_COLORS: Record<ContrastFreeFeasibility, { fill: string; stroke: string }> = {
   excellent: { fill: "hsl(145 70% 45%)", stroke: "hsl(145 80% 55%)" },
   moderate: { fill: "hsl(45 85% 50%)", stroke: "hsl(45 90% 60%)" },
   limited: { fill: "hsl(0 70% 55%)", stroke: "hsl(0 80% 65%)" },

@@ -368,6 +368,7 @@ export default function Simulation() {
                     <SelectItem value="peripheral">{t("simulation.categories.peripheral")}</SelectItem>
                     <SelectItem value="renal">{t("simulation.categories.renal")}</SelectItem>
                     <SelectItem value="carotid">{t("simulation.categories.carotid")}</SelectItem>
+                    <SelectItem value="bio-contrast">{t("simulation.categories.bioContrast")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

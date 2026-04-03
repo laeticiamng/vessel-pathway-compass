@@ -23,6 +23,7 @@ const TRACK_EMOJI: Record<string, string> = {
   "ivus-guided-pci": "🔬",
   "contrast-sparing": "💧",
   "simulation-linked": "🧪",
+  "green-imaging": "🌿",
 };
 
 export default function Education() {
@@ -353,6 +354,7 @@ export default function Education() {
                     <SelectItem value="ivus-guided-pci">{t("education.trackNames.ivusGuidedPci")}</SelectItem>
                     <SelectItem value="contrast-sparing">{t("education.trackNames.contrastSparing")}</SelectItem>
                     <SelectItem value="simulation-linked">{t("education.trackNames.simulationLinked")}</SelectItem>
+                    <SelectItem value="green-imaging">{t("education.trackNames.greenImaging")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
