@@ -483,6 +483,13 @@ export const fr = {
       contrastVolume: "Volume de Contraste Planifié (mL)",
       diabetes: "Diabète",
       hydration: "Protocole d'Hydratation",
+      agentType: "Type d'Agent de Contraste",
+    },
+    agentOptions: {
+      gbca: "GBCA (à base de Gadolinium)",
+      bbca: "BBCA (Bétalaïne / Dérivé végétal)",
+      none: "Pas d'Agent de Contraste",
+      bbcaNote: "Préclinique — dérivé végétal, pas de néphrotoxicité observée",
     },
     hydrationOptions: {
       ivNormal: "Sérum physiologique IV (1 mL/kg/h)",
@@ -509,6 +516,24 @@ export const fr = {
       standard: "Protocole de contraste standard avec hydratation",
       ultraLow: "Technique de contraste ultra-faible",
       zeroContrast: "Approche zéro-contraste IVUS-first",
+      bioContrast: "ARM bio-contraste avec agent dérivé végétal (BBCA)",
+      standardContrast: "Protocole de contraste standard avec hydratation",
+      ultraLowContrast: "Technique de contraste ultra-faible avec minimisation du volume",
+      lowDetails: "Protocole d'hydratation standard recommandé. Surveiller la créatinine sérique à 48-72h post-procédure.",
+      moderateDetails: "Envisager une approche IVUS-first ou OCT-saline. Minimiser le volume de contraste. Hydratation pré/post obligatoire.",
+      highDetails: "Workflow zéro-contraste recommandé. ICP guidée par IVUS ou ARM sans contraste. Éviter les agents iodés/gadolinium.",
+    },
+    ecoImpact: {
+      title: "Impact Environnemental",
+      envGBCA: "Agent gadolinium standard — contribue à la contamination des eaux via l'excrétion urinaire.",
+      envBBCA: "Agent végétal — biodégradable, pas de pollution aux métaux lourds, source renouvelable (betterave).",
+      envNone: "Sans contraste — empreinte environnementale nulle des agents d'imagerie.",
+      nephroRisk: "Risque de néphrotoxicité",
+      nephro: {
+        standard: "Standard (associé au gadolinium)",
+        reduced: "Réduit (pas de néphrotoxicité en données précliniques)",
+        none: "Aucun (procédure sans contraste)",
+      },
     },
   },
 
@@ -573,6 +598,7 @@ export const fr = {
     vascularMap: {
       title: "Carte vasculaire",
       clickPrompt: "Cliquez sur un segment pour voir les mesures",
+      contrastFreeMode: "Faisabilité sans contraste",
     },
     legend: {
       normal: "Normal",
@@ -876,6 +902,37 @@ export const fr = {
       ivus: "IVUS",
       oct: "OCT",
       ultrasound: "Échographie",
+      bioMra: "Bio-ARM",
+    },
+    modalities: {
+      mri: {
+        title: "Visionneuse IRM",
+        desc: "Imagerie par résonance magnétique — visualisation non ionisante des tissus mous",
+      },
+      ivus: {
+        title: "Visionneuse IVUS",
+        desc: "Échographie intravasculaire — imagerie endoluminale en temps réel",
+      },
+      oct: {
+        title: "Visionneuse OCT",
+        desc: "Tomographie par cohérence optique — imagerie intimale haute résolution",
+      },
+      ultrasound: {
+        title: "Visionneuse Échographie",
+        desc: "Duplex / Doppler — évaluation hémodynamique non invasive",
+      },
+      bioMra: {
+        title: "ARM Bio-Contraste",
+        badge: "Recherche PhytoTech",
+        desc: "Agents de contraste dérivés végétaux pour angiographie par résonance magnétique non néphrotoxique — pipeline de recherche préclinique",
+        agent: "Agent de Contraste",
+        agentDesc: "BBCA (Agent de contraste à base de bétalaïne) — dérivé de betterave, classifié GRAS, rehaussement paramagnétique T1",
+        sequences: "Séquences Compatibles",
+        sequencesDesc: "TOF-ARM, ARM en contraste de phase, ASL, bSSFP — améliorées par le raccourcissement T1 bio-dérivé",
+        safety: "Profil de Sécurité",
+        safetyDesc: "Sans gadolinium, sans néphrotoxicité, biodégradable. Potentiel théranostique (antioxydant + anti-inflammatoire)",
+        placeholder: "Visionneuse de fusion Bio-ARM — en attente de données de validation clinique",
+      },
     },
     viewerPlaceholder: "Visionneuse compatible DICOM — téléversez des données d'imagerie pour commencer",
     dicomReady: "Pipeline d'ingestion DICOM — architecture prête",

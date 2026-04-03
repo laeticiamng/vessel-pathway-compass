@@ -497,6 +497,13 @@ export const en = {
       contrastVolume: "Planned Contrast Volume (mL)",
       diabetes: "Diabetes mellitus",
       hydration: "Hydration Protocol",
+      agentType: "Contrast Agent Type",
+    },
+    agentOptions: {
+      gbca: "GBCA (Gadolinium-based)",
+      bbca: "BBCA (Betalain / Plant-derived)",
+      none: "No Contrast Agent",
+      bbcaNote: "Preclinical — plant-derived, no nephrotoxicity observed",
     },
     hydrationOptions: {
       ivNormal: "IV Normal Saline (1 mL/kg/h)",
@@ -523,6 +530,24 @@ export const en = {
       standard: "Standard contrast protocol with hydration",
       ultraLow: "Ultra-low contrast technique",
       zeroContrast: "Zero-contrast IVUS-first approach",
+      bioContrast: "Bio-contrast MRA with plant-derived agent (BBCA)",
+      standardContrast: "Standard contrast protocol with hydration",
+      ultraLowContrast: "Ultra-low contrast technique with volume minimization",
+      lowDetails: "Standard hydration protocol recommended. Monitor serum creatinine at 48-72h post-procedure.",
+      moderateDetails: "Consider IVUS-first or OCT-saline approach. Minimize contrast volume. Pre/post hydration mandatory.",
+      highDetails: "Zero-contrast workflow recommended. IVUS-guided PCI or non-contrast MRA. Avoid iodinated/gadolinium agents.",
+    },
+    ecoImpact: {
+      title: "Environmental Impact",
+      envGBCA: "Standard gadolinium agent — contributes to water contamination via urinary excretion.",
+      envBBCA: "Plant-derived agent — biodegradable, no heavy metal pollution, renewable source (beetroot).",
+      envNone: "No contrast — zero environmental footprint from imaging agents.",
+      nephroRisk: "Nephrotoxicity risk",
+      nephro: {
+        standard: "Standard (gadolinium-associated)",
+        reduced: "Reduced (no nephrotoxicity in preclinical data)",
+        none: "None (contrast-free procedure)",
+      },
     },
   },
 
@@ -589,6 +614,7 @@ export const en = {
     vascularMap: {
       title: "Vascular Map",
       clickPrompt: "Click on a vessel segment to see measurements",
+      contrastFreeMode: "Contrast-free feasibility",
     },
     legend: {
       normal: "Normal",
@@ -898,6 +924,37 @@ export const en = {
       ivus: "IVUS",
       oct: "OCT",
       ultrasound: "Ultrasound",
+      bioMra: "Bio-MRA",
+    },
+    modalities: {
+      mri: {
+        title: "MRI Viewer",
+        desc: "Magnetic Resonance Imaging — non-ionizing soft tissue visualization",
+      },
+      ivus: {
+        title: "IVUS Viewer",
+        desc: "Intravascular Ultrasound — real-time endoluminal imaging",
+      },
+      oct: {
+        title: "OCT Viewer",
+        desc: "Optical Coherence Tomography — high-resolution intimal imaging",
+      },
+      ultrasound: {
+        title: "Ultrasound Viewer",
+        desc: "Duplex / Doppler — non-invasive hemodynamic assessment",
+      },
+      bioMra: {
+        title: "Bio-Contrast MRA",
+        badge: "PhytoTech Research",
+        desc: "Plant-derived contrast agents for non-nephrotoxic magnetic resonance angiography — preclinical research pipeline",
+        agent: "Contrast Agent",
+        agentDesc: "BBCA (Betalain-Based Contrast Agent) — beetroot-derived, GRAS-classified, paramagnetic T1 enhancement",
+        sequences: "Compatible Sequences",
+        sequencesDesc: "TOF-MRA, Phase-Contrast MRA, ASL, bSSFP — enhanced by bio-derived T1 shortening",
+        safety: "Safety Profile",
+        safetyDesc: "No gadolinium, no nephrotoxicity, biodegradable. Theranostic potential (antioxidant + anti-inflammatory)",
+        placeholder: "Bio-MRA fusion viewer — awaiting clinical validation data",
+      },
     },
     viewerPlaceholder: "DICOM-ready viewer placeholder — upload imaging data to begin",
     dicomReady: "DICOM ingest pipeline — architecture ready",

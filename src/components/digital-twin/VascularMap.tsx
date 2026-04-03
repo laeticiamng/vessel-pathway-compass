@@ -62,16 +62,55 @@ export const VESSEL_COLORS: Record<string, { normal: string; hover: string; acti
   renal: { normal: "hsl(30 70% 50%)", hover: "hsl(30 75% 60%)", active: "hsl(30 80% 45%)" },
 };
 
+// Contrast-free imaging feasibility per segment
+// Based on current non-contrast MRA capabilities (TOF, PC-MRA, ASL)
+export type ContrastFreeFeasibility = "excellent" | "moderate" | "limited";
+
+export const CONTRAST_FREE_FEASIBILITY: Record<string, { level: ContrastFreeFeasibility; note: string }> = {
+  "carotid-r": { level: "excellent", note: "TOF-MRA / Duplex excellent" },
+  "carotid-l": { level: "excellent", note: "TOF-MRA / Duplex excellent" },
+  "aorta-thoracic": { level: "excellent", note: "Non-contrast MRA (bSSFP) well-established" },
+  "aorta-abdominal": { level: "excellent", note: "Non-contrast MRA / CTA alternative" },
+  "iliac-r": { level: "moderate", note: "PC-MRA feasible; BBCA may enhance" },
+  "iliac-l": { level: "moderate", note: "PC-MRA feasible; BBCA may enhance" },
+  "femoral-r": { level: "excellent", note: "Duplex + IVUS-first workflow" },
+  "femoral-l": { level: "excellent", note: "Duplex + IVUS-first workflow" },
+  "popliteal-r": { level: "moderate", note: "Duplex adequate; MRA for complex lesions" },
+  "popliteal-l": { level: "moderate", note: "Duplex adequate; MRA for complex lesions" },
+  "tibial-r": { level: "limited", note: "Small vessel; bio-contrast may be needed" },
+  "tibial-l": { level: "limited", note: "Small vessel; bio-contrast may be needed" },
+  "subclavian-r": { level: "excellent", note: "TOF-MRA / Duplex well-established" },
+  "subclavian-l": { level: "excellent", note: "TOF-MRA / Duplex well-established" },
+  "renal-r": { level: "moderate", note: "PC-MRA feasible; ASL emerging" },
+  "renal-l": { level: "moderate", note: "PC-MRA feasible; ASL emerging" },
+};
+
+const FEASIBILITY_COLORS: Record<ContrastFreeFeasibility, { fill: string; stroke: string }> = {
+  excellent: { fill: "hsl(145 70% 45%)", stroke: "hsl(145 80% 55%)" },
+  moderate: { fill: "hsl(45 85% 50%)", stroke: "hsl(45 90% 60%)" },
+  limited: { fill: "hsl(0 70% 55%)", stroke: "hsl(0 80% 65%)" },
+};
+
 interface VascularMapProps {
   selectedSegment: string | null;
   onSegmentClick: (segmentId: string) => void;
   segmentStatus?: Record<string, "normal" | "warning" | "critical">;
+  contrastFreeMode?: boolean;
 }
 
-export default function VascularMap({ selectedSegment, onSegmentClick, segmentStatus = {} }: VascularMapProps) {
+export default function VascularMap({ selectedSegment, onSegmentClick, segmentStatus = {}, contrastFreeMode = false }: VascularMapProps) {
   const [hoveredSegment, setHoveredSegment] = useState<string | null>(null);
 
   const statusColor = (segmentId: string, vessel: string) => {
+    // In contrast-free mode, override colors with feasibility
+    if (contrastFreeMode) {
+      const feasibility = CONTRAST_FREE_FEASIBILITY[segmentId];
+      if (feasibility) {
+        const fColors = FEASIBILITY_COLORS[feasibility.level];
+        if (selectedSegment === segmentId || hoveredSegment === segmentId) return fColors.stroke;
+        return fColors.fill;
+      }
+    }
     const status = segmentStatus[segmentId];
     if (status === "critical") return "hsl(0 84% 60%)";
     if (status === "warning") return "hsl(38 92% 50%)";
@@ -184,19 +223,39 @@ export default function VascularMap({ selectedSegment, onSegmentClick, segmentSt
         const seg = VASCULAR_SEGMENTS.find((s) => s.id === hoveredSegment)!;
         const tx = seg.x + seg.width / 2;
         const ty = seg.y - 8;
+        const feasibility = contrastFreeMode ? CONTRAST_FREE_FEASIBILITY[seg.id] : null;
+        const tooltipWidth = contrastFreeMode ? 140 : 90;
         return (
           <g>
-            <rect x={tx - 45} y={ty - 16} width={90} height={18} rx={4} fill="hsl(var(--popover))" stroke="hsl(var(--border))" strokeWidth={0.5} />
-            <text x={tx} y={ty - 4} textAnchor="middle" fill="hsl(var(--popover-foreground))" fontSize="9" fontWeight="500">
+            <rect x={tx - tooltipWidth / 2} y={ty - (contrastFreeMode ? 28 : 16)} width={tooltipWidth} height={contrastFreeMode ? 30 : 18} rx={4} fill="hsl(var(--popover))" stroke="hsl(var(--border))" strokeWidth={0.5} />
+            <text x={tx} y={ty - (contrastFreeMode ? 16 : 4)} textAnchor="middle" fill="hsl(var(--popover-foreground))" fontSize="9" fontWeight="500">
               {seg.label}
             </text>
+            {feasibility && (
+              <text x={tx} y={ty - 4} textAnchor="middle" fill={FEASIBILITY_COLORS[feasibility.level].stroke} fontSize="7" fontWeight="400">
+                {feasibility.note}
+              </text>
+            )}
           </g>
         );
       })()}
 
+      {/* Contrast-free feasibility legend */}
+      {contrastFreeMode && (
+        <g>
+          <rect x={10} y={5} width={110} height={52} rx={6} fill="hsl(var(--popover))" stroke="hsl(var(--border))" strokeWidth={0.5} fillOpacity={0.9} />
+          <circle cx={22} cy={18} r={4} fill={FEASIBILITY_COLORS.excellent.fill} />
+          <text x={30} y={21} fill="hsl(var(--popover-foreground))" fontSize="7">No contrast needed</text>
+          <circle cx={22} cy={32} r={4} fill={FEASIBILITY_COLORS.moderate.fill} />
+          <text x={30} y={35} fill="hsl(var(--popover-foreground))" fontSize="7">Bio-contrast possible</text>
+          <circle cx={22} cy={46} r={4} fill={FEASIBILITY_COLORS.limited.fill} />
+          <text x={30} y={49} fill="hsl(var(--popover-foreground))" fontSize="7">Contrast may be required</text>
+        </g>
+      )}
+
       {/* Labels */}
       <text x="160" y="435" textAnchor="middle" fill="hsl(var(--muted-foreground))" fontSize="8" opacity="0.6">
-        Click a segment to view measurements
+        {contrastFreeMode ? "Contrast-free feasibility map" : "Click a segment to view measurements"}
       </text>
     </svg>
   );

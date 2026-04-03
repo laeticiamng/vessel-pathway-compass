@@ -8,15 +8,22 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Calculator, AlertTriangle, Info, Shield, Printer, FileText } from "lucide-react";
+import { Calculator, AlertTriangle, Info, Shield, Printer, FileText, Leaf } from "lucide-react";
 
 type RiskTier = "low" | "moderate" | "high";
+type ContrastAgentType = "gbca" | "bbca" | "none";
 
 interface CIAKIResult {
   riskTier: RiskTier;
   riskScore: number;
   strategy: string;
   details: string;
+  agentType: ContrastAgentType;
+  ecoImpact: {
+    gadoliniumAvoided: boolean;
+    nephrotoxicityRisk: "standard" | "reduced" | "none";
+    environmentalNote: string;
+  };
 }
 
 function calculateCIAKIRisk(params: {
@@ -26,8 +33,9 @@ function calculateCIAKIRisk(params: {
   lvef: number;
   contrastVolume: number;
   hydration: string;
+  agentType: ContrastAgentType;
 }): CIAKIResult {
-  const { egfr, age, diabetes, lvef, contrastVolume, hydration } = params;
+  const { egfr, age, diabetes, lvef, contrastVolume, hydration, agentType } = params;
 
   let score = 0;
 
@@ -49,11 +57,20 @@ function calculateCIAKIRisk(params: {
   else if (lvef < 40) score += 2;
   else if (lvef < 50) score += 1;
 
-  // Contrast volume / eGFR ratio
+  // Contrast volume / eGFR ratio — modulated by agent type
   const ratio = contrastVolume / Math.max(egfr, 1);
-  if (ratio > 3.7) score += 3;
-  else if (ratio > 2.0) score += 2;
-  else if (ratio > 1.0) score += 1;
+  if (agentType === "none") {
+    // No contrast → no nephrotoxicity contribution
+  } else if (agentType === "bbca") {
+    // BBCA (betalain-based) — plant-derived, no nephrotoxicity in preclinical data
+    // Reduced scoring: only count extreme volumes as a minor factor
+    if (ratio > 3.7) score += 1;
+  } else {
+    // Standard GBCA — full nephrotoxicity scoring
+    if (ratio > 3.7) score += 3;
+    else if (ratio > 2.0) score += 2;
+    else if (ratio > 1.0) score += 1;
+  }
 
   // Hydration protocol bonus
   if (hydration === "none") score += 1;
@@ -68,7 +85,7 @@ function calculateCIAKIRisk(params: {
     details = "lowDetails";
   } else if (score <= 7) {
     riskTier = "moderate";
-    strategy = "ultraLowContrast";
+    strategy = agentType === "bbca" ? "bioContrast" : "ultraLowContrast";
     details = "moderateDetails";
   } else {
     riskTier = "high";
@@ -76,7 +93,14 @@ function calculateCIAKIRisk(params: {
     details = "highDetails";
   }
 
-  return { riskTier, riskScore: score, strategy, details };
+  // Eco-impact assessment
+  const ecoImpact = {
+    gadoliniumAvoided: agentType !== "gbca",
+    nephrotoxicityRisk: agentType === "none" ? "none" as const : agentType === "bbca" ? "reduced" as const : "standard" as const,
+    environmentalNote: agentType === "gbca" ? "envGBCA" : agentType === "bbca" ? "envBBCA" : "envNone",
+  };
+
+  return { riskTier, riskScore: score, strategy, details, agentType, ecoImpact };
 }
 
 export default function CIAKIEngine() {
@@ -87,6 +111,7 @@ export default function CIAKIEngine() {
   const [lvef, setLvef] = useState("");
   const [contrastVolume, setContrastVolume] = useState("");
   const [hydration, setHydration] = useState("iv_normal");
+  const [agentType, setAgentType] = useState<ContrastAgentType>("gbca");
   const [result, setResult] = useState<CIAKIResult | null>(null);
 
   const handleCalculate = () => {
@@ -103,6 +128,7 @@ export default function CIAKIEngine() {
       lvef: l,
       contrastVolume: c,
       hydration,
+      agentType,
     }));
   };
 
@@ -180,6 +206,27 @@ export default function CIAKIEngine() {
             </div>
 
             <div className="space-y-2">
+              <Label className="flex items-center gap-2">
+                <Leaf className="h-3.5 w-3.5 text-emerald-500" />
+                {t("ciAkiEngine.fields.agentType")}
+              </Label>
+              <Select value={agentType} onValueChange={(v) => setAgentType(v as ContrastAgentType)}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gbca">{t("ciAkiEngine.agentOptions.gbca")}</SelectItem>
+                  <SelectItem value="bbca">{t("ciAkiEngine.agentOptions.bbca")}</SelectItem>
+                  <SelectItem value="none">{t("ciAkiEngine.agentOptions.none")}</SelectItem>
+                </SelectContent>
+              </Select>
+              {agentType === "bbca" && (
+                <p className="text-xs text-emerald-500/80 flex items-center gap-1">
+                  <Leaf className="h-3 w-3" />
+                  {t("ciAkiEngine.agentOptions.bbcaNote")}
+                </p>
+              )}
+            </div>
+
+            <div className="space-y-2">
               <Label>{t("ciAkiEngine.fields.hydration")}</Label>
               <Select value={hydration} onValueChange={setHydration}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
@@ -230,6 +277,21 @@ export default function CIAKIEngine() {
                   </p>
                   <p className="text-xs text-muted-foreground">{t("ciAkiEngine.contrastRatioNote")}</p>
                 </div>
+
+                {result.ecoImpact.gadoliniumAvoided && (
+                  <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/20 space-y-2">
+                    <p className="text-sm font-medium flex items-center gap-2">
+                      <Leaf className="h-4 w-4 text-emerald-500" />
+                      {t("ciAkiEngine.ecoImpact.title")}
+                    </p>
+                    <p className="text-sm text-emerald-400/90">
+                      {t(`ciAkiEngine.ecoImpact.${result.ecoImpact.environmentalNote}`)}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {t("ciAkiEngine.ecoImpact.nephroRisk")}: {t(`ciAkiEngine.ecoImpact.nephro.${result.ecoImpact.nephrotoxicityRisk}`)}
+                    </p>
+                  </div>
+                )}
               </CardContent>
             </Card>
 

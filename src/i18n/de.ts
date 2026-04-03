@@ -487,6 +487,13 @@ export const de = {
       contrastVolume: "Geplantes Kontrastmittelvolumen (mL)",
       diabetes: "Diabetes mellitus",
       hydration: "Hydratationsprotokoll",
+      agentType: "Kontrastmitteltyp",
+    },
+    agentOptions: {
+      gbca: "GBCA (Gadolinium-basiert)",
+      bbca: "BBCA (Betalain / Pflanzlich abgeleitet)",
+      none: "Kein Kontrastmittel",
+      bbcaNote: "Präklinisch — pflanzlich abgeleitet, keine Nephrotoxizität beobachtet",
     },
     hydrationOptions: {
       ivNormal: "IV Kochsalzlösung (1 mL/kg/h)",
@@ -513,6 +520,24 @@ export const de = {
       standard: "Standard-Kontrastmittelprotokoll mit Hydratation",
       ultraLow: "Ultra-niedrig-Kontrast-Technik",
       zeroContrast: "Null-Kontrast-IVUS-first-Ansatz",
+      bioContrast: "Bio-Kontrast-MRA mit pflanzlichem Wirkstoff (BBCA)",
+      standardContrast: "Standard-Kontrastmittelprotokoll mit Hydratation",
+      ultraLowContrast: "Ultra-niedrig-Kontrast-Technik mit Volumenminimierung",
+      lowDetails: "Standard-Hydratationsprotokoll empfohlen. Serumkreatinin 48-72h nach dem Eingriff überwachen.",
+      moderateDetails: "IVUS-first oder OCT-Kochsalzlösung-Ansatz in Betracht ziehen. Kontrastmittelvolumen minimieren. Prä/Post-Hydratation obligatorisch.",
+      highDetails: "Null-Kontrast-Workflow empfohlen. IVUS-geführte PCI oder kontrastmittelfreie MRA. Jod-/Gadolinium-Mittel vermeiden.",
+    },
+    ecoImpact: {
+      title: "Umweltauswirkungen",
+      envGBCA: "Standard-Gadolinium-Mittel — trägt zur Wasserverschmutzung durch Harnausscheidung bei.",
+      envBBCA: "Pflanzliches Mittel — biologisch abbaubar, keine Schwermetallverschmutzung, erneuerbare Quelle (Rote Beete).",
+      envNone: "Ohne Kontrast — kein ökologischer Fußabdruck durch Bildgebungsmittel.",
+      nephroRisk: "Nephrotoxizitätsrisiko",
+      nephro: {
+        standard: "Standard (Gadolinium-assoziiert)",
+        reduced: "Reduziert (keine Nephrotoxizität in präklinischen Daten)",
+        none: "Keines (kontrastmittelfreier Eingriff)",
+      },
     },
   },
 
@@ -577,6 +602,7 @@ export const de = {
     vascularMap: {
       title: "Gefäßkarte",
       clickPrompt: "Klicken Sie auf ein Segment, um Messungen zu sehen",
+      contrastFreeMode: "Kontrastmittelfreie Machbarkeit",
     },
     legend: {
       normal: "Normal",
@@ -880,6 +906,37 @@ export const de = {
       ivus: "IVUS",
       oct: "OCT",
       ultrasound: "Ultraschall",
+      bioMra: "Bio-MRA",
+    },
+    modalities: {
+      mri: {
+        title: "MRT-Betrachter",
+        desc: "Magnetresonanztomographie — nicht-ionisierende Weichteilvisualisierung",
+      },
+      ivus: {
+        title: "IVUS-Betrachter",
+        desc: "Intravaskulärer Ultraschall — endoluminale Echtzeitbildgebung",
+      },
+      oct: {
+        title: "OCT-Betrachter",
+        desc: "Optische Kohärenztomographie — hochauflösende Intima-Bildgebung",
+      },
+      ultrasound: {
+        title: "Ultraschall-Betrachter",
+        desc: "Duplex / Doppler — nicht-invasive hämodynamische Beurteilung",
+      },
+      bioMra: {
+        title: "Bio-Kontrast-MRA",
+        badge: "PhytoTech-Forschung",
+        desc: "Pflanzlich abgeleitete Kontrastmittel für nicht-nephrotoxische Magnetresonanzangiographie — präklinische Forschungspipeline",
+        agent: "Kontrastmittel",
+        agentDesc: "BBCA (Betalain-basiertes Kontrastmittel) — aus Roter Beete, GRAS-klassifiziert, paramagnetische T1-Verstärkung",
+        sequences: "Kompatible Sequenzen",
+        sequencesDesc: "TOF-MRA, Phasenkontrast-MRA, ASL, bSSFP — verstärkt durch bio-abgeleitete T1-Verkürzung",
+        safety: "Sicherheitsprofil",
+        safetyDesc: "Kein Gadolinium, keine Nephrotoxizität, biologisch abbaubar. Theranostisches Potenzial (antioxidativ + entzündungshemmend)",
+        placeholder: "Bio-MRA Fusionsbetrachter — klinische Validierungsdaten ausstehend",
+      },
     },
     viewerPlaceholder: "DICOM-fähiger Betrachter-Platzhalter — Bildgebungsdaten hochladen zum Starten",
     dicomReady: "DICOM-Ingest-Pipeline — Architektur bereit",
