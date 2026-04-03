@@ -21,6 +21,7 @@ import {
   Filter,
   Download,
   Loader2,
+  Leaf,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -228,6 +229,53 @@ export default function Analytics() {
     },
     enabled: !!user,
   });
+
+  // Fetch eco metrics for Green Radiology dashboard
+  const { data: ecoMetrics } = useQuery({
+    queryKey: ["analytics-eco-metrics", user?.id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("eco_metrics")
+        .select("*")
+        .eq("created_by", user!.id);
+      if (error) throw error;
+      return data ?? [];
+    },
+    enabled: !!user,
+  });
+
+  // Green Radiology computed data
+  const greenData = (() => {
+    const metrics = ecoMetrics ?? [];
+    const gbcaCount = metrics.filter((m) => m.contrast_agent_type === "gbca").length;
+    const bbcaCount = metrics.filter((m) => m.contrast_agent_type === "bbca").length;
+    const noneCount = metrics.filter((m) => m.contrast_agent_type === "none").length;
+    const agentDistribution = [
+      { name: "GBCA", value: gbcaCount },
+      { name: "BBCA", value: bbcaCount },
+      { name: "None", value: noneCount },
+    ].filter((d) => d.value > 0);
+
+    // Gadolinium avoided by month
+    const byMonth: Record<string, number> = {};
+    for (const m of metrics) {
+      const month = m.created_at.slice(0, 7);
+      byMonth[month] = (byMonth[month] || 0) + Number(m.gadolinium_avoided_mg);
+    }
+    const gadoByMonth = Object.entries(byMonth)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([month, value]) => ({ month, gadolinium: Math.round(value) }));
+
+    const totalGadoAvoided = Math.round(metrics.reduce((s, m) => s + Number(m.gadolinium_avoided_mg), 0));
+    const totalContrastSpared = Math.round(metrics.reduce((s, m) => s + Number(m.contrast_volume_ml), 0));
+    const avgEcoScore = metrics.length > 0
+      ? Math.round(metrics.reduce((s, m) => s + Number(m.eco_impact_score), 0) / metrics.length)
+      : 0;
+
+    return { agentDistribution, gadoByMonth, totalGadoAvoided, totalContrastSpared, avgEcoScore, total: metrics.length };
+  })();
+
+  const GREEN_COLORS = ["hsl(200 70% 50%)", "hsl(145 70% 45%)", "hsl(45 85% 50%)"];
 
   const cutoff = getPeriodCutoff(period);
 
@@ -695,6 +743,106 @@ export default function Analytics() {
           </CardContent>
         </Card>
       <InstitutionComparison />
+      </div>
+
+      {/* Green Radiology Section */}
+      <div className="space-y-4 border border-emerald-500/20 rounded-xl p-4 sm:p-6">
+        <div className="flex items-center gap-2">
+          <Leaf className="h-5 w-5 text-emerald-500" />
+          <h2 className="text-lg font-semibold">{t("analytics.greenRadiology.title")}</h2>
+          <Badge variant="outline" className="text-xs border-emerald-500/30 text-emerald-600">PhytoTech</Badge>
+        </div>
+        <p className="text-sm text-muted-foreground">{t("analytics.greenRadiology.subtitle")}</p>
+
+        {/* Stat cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {[
+            { label: t("analytics.greenRadiology.gadoliniumAvoided"), value: `${greenData.totalGadoAvoided} mg` },
+            { label: t("analytics.greenRadiology.contrastSpared"), value: `${greenData.totalContrastSpared} mL` },
+            { label: t("analytics.greenRadiology.ecoScore"), value: greenData.avgEcoScore },
+          ].map((s) => (
+            <Card key={s.label} className="border-emerald-500/10">
+              <CardContent className="pt-6">
+                <p className="text-sm text-muted-foreground">{s.label}</p>
+                <p className="text-2xl font-bold mt-1 text-emerald-600">{s.value}</p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6">
+          {/* Agent distribution pie */}
+          <Card className="border-emerald-500/10">
+            <CardHeader>
+              <CardTitle className="text-base">{t("analytics.greenRadiology.agentDistribution")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {greenData.agentDistribution.length === 0 ? (
+                <div className="h-48 flex items-center justify-center text-muted-foreground">
+                  <p>{t("analytics.greenRadiology.noData")}</p>
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height={200}>
+                  <PieChart>
+                    <Pie
+                      data={greenData.agentDistribution}
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={45}
+                      outerRadius={75}
+                      paddingAngle={3}
+                      dataKey="value"
+                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                    >
+                      {greenData.agentDistribution.map((_, i) => (
+                        <Cell key={i} fill={GREEN_COLORS[i % GREEN_COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "hsl(var(--popover))",
+                        border: "1px solid hsl(var(--border))",
+                        borderRadius: "8px",
+                        color: "hsl(var(--popover-foreground))",
+                      }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              )}
+            </CardContent>
+          </Card>
+
+          {/* Gadolinium avoided by month */}
+          <Card className="border-emerald-500/10">
+            <CardHeader>
+              <CardTitle className="text-base">{t("analytics.greenRadiology.gadoliniumTrend")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {greenData.gadoByMonth.length === 0 ? (
+                <div className="h-48 flex items-center justify-center text-muted-foreground">
+                  <p>{t("analytics.greenRadiology.noData")}</p>
+                </div>
+              ) : (
+                <ResponsiveContainer width="100%" height={200}>
+                  <BarChart data={greenData.gadoByMonth}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                    <XAxis dataKey="month" tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
+                    <YAxis tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: "hsl(var(--popover))",
+                        border: "1px solid hsl(var(--border))",
+                        borderRadius: "8px",
+                        color: "hsl(var(--popover-foreground))",
+                      }}
+                    />
+                    <Bar dataKey="gadolinium" fill="hsl(145 70% 45%)" radius={[4, 4, 0, 0]} name="Gd avoided (mg)" />
+                  </BarChart>
+                </ResponsiveContainer>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
       </div>
     </div>

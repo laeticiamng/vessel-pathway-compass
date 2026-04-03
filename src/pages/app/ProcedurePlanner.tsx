@@ -18,7 +18,9 @@ import {
   Info,
   History,
   Clock,
+  Leaf,
 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -54,6 +56,8 @@ export default function ProcedurePlanner() {
     const today = new Date().toISOString().slice(0, 10);
     return history.filter((h) => h.created_at.slice(0, 10) === today).length;
   }, [history]);
+
+  const [preferBioContrast, setPreferBioContrast] = useState(false);
 
   const [formData, setFormData] = useState({
     clinicalPresentation: "",
@@ -166,7 +170,7 @@ export default function ProcedurePlanner() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-          body: JSON.stringify({ clinicalData: formData }),
+          body: JSON.stringify({ clinicalData: { ...formData, preferBioContrast } }),
         }
       );
 
@@ -305,6 +309,25 @@ export default function ProcedurePlanner() {
                 )}
               </div>
             ))}
+            <div className="flex items-center justify-between p-3 rounded-lg border border-emerald-500/20 bg-emerald-500/5">
+              <div className="flex items-center gap-2">
+                <Leaf className="h-4 w-4 text-emerald-500" />
+                <Label htmlFor="prefer-bio" className="text-sm cursor-pointer">
+                  {t("procedurePlanner.preferBioContrast")}
+                </Label>
+              </div>
+              <Switch
+                id="prefer-bio"
+                checked={preferBioContrast}
+                onCheckedChange={setPreferBioContrast}
+              />
+            </div>
+            {preferBioContrast && (
+              <div className="p-2 rounded-lg bg-warning/10 border border-warning/20 text-xs text-muted-foreground">
+                <AlertTriangle className="h-3 w-3 inline mr-1 text-warning" />
+                {t("procedurePlanner.bbcaDisclaimer")}
+              </div>
+            )}
             <Button onClick={handleGenerate} disabled={loading} className="w-full">
               {loading ? (
                 <>

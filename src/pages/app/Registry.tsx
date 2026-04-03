@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { LineChart, BarChart3, TrendingUp, Shield } from "lucide-react";
+import { LineChart, BarChart3, TrendingUp, Shield, Leaf, Droplets } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -101,6 +101,37 @@ export default function Registry() {
     enabled: !!user,
   });
 
+  // Fetch eco metrics
+  const { data: ecoMetrics, isLoading: ecoLoading } = useQuery({
+    queryKey: ["registry-eco-metrics", user?.id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("eco_metrics")
+        .select("*")
+        .eq("created_by", user!.id);
+      if (error) throw error;
+      const metrics = data ?? [];
+      const totalGadoliniumAvoided = metrics.reduce((s, m) => s + Number(m.gadolinium_avoided_mg), 0);
+      const totalContrastSpared = metrics.reduce((s, m) => s + Number(m.contrast_volume_ml), 0);
+      const totalWaterPrevented = metrics.reduce((s, m) => s + Number(m.water_contamination_prevented_l), 0);
+      const avgEcoScore = metrics.length > 0
+        ? Math.round(metrics.reduce((s, m) => s + Number(m.eco_impact_score), 0) / metrics.length)
+        : 0;
+      const bbcaCount = metrics.filter((m) => m.contrast_agent_type === "bbca").length;
+      const noneCount = metrics.filter((m) => m.contrast_agent_type === "none").length;
+      return {
+        totalGadoliniumAvoided,
+        totalContrastSpared,
+        totalWaterPrevented,
+        avgEcoScore,
+        bbcaCount,
+        noneCount,
+        total: metrics.length,
+      };
+    },
+    enabled: !!user,
+  });
+
   const summaryStats = [
     { label: t("registry.stats.casesContributed"), value: data?.totalCases ?? 0 },
     { label: t("registry.stats.mortality30day"), value: data?.mortalityRate ?? "—" },
@@ -136,6 +167,10 @@ export default function Registry() {
           <TabsTrigger value="physician">{t("registry.tabs.physician")}</TabsTrigger>
           <TabsTrigger value="institution">{t("registry.tabs.institution")}</TabsTrigger>
           <TabsTrigger value="benchmark">{t("registry.tabs.benchmarking")}</TabsTrigger>
+          <TabsTrigger value="eco" className="flex items-center gap-1.5">
+            <Leaf className="h-3.5 w-3.5 text-emerald-500" />
+            {t("registry.tabs.ecoImpact")}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="physician" className="mt-6 space-y-4">
@@ -236,6 +271,62 @@ export default function Registry() {
                 <TrendingUp className="h-12 w-12 mx-auto mb-4 opacity-30" />
                 <p>{t("registry.benchmarkPlaceholder")}</p>
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="eco" className="mt-6 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { label: t("registry.ecoImpact.gadoliniumAvoided"), value: `${ecoMetrics?.totalGadoliniumAvoided ?? 0} mg`, icon: Leaf, color: "text-emerald-500" },
+              { label: t("registry.ecoImpact.contrastSpared"), value: `${ecoMetrics?.totalContrastSpared ?? 0} mL`, icon: Droplets, color: "text-emerald-500" },
+              { label: t("registry.ecoImpact.waterPrevented"), value: `${ecoMetrics?.totalWaterPrevented?.toFixed(1) ?? 0} L`, icon: Droplets, color: "text-blue-500" },
+              { label: t("registry.ecoImpact.ecoScore"), value: ecoMetrics?.avgEcoScore ?? 0, icon: TrendingUp, color: "text-emerald-500" },
+            ].map((s) => (
+              <Card key={s.label} className="border-emerald-500/20">
+                <CardContent className="pt-6">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm text-muted-foreground">{s.label}</p>
+                      {ecoLoading ? (
+                        <Skeleton className="h-8 w-16 mt-1" />
+                      ) : (
+                        <p className="text-3xl font-bold mt-1">{s.value}</p>
+                      )}
+                    </div>
+                    <s.icon className={`h-8 w-8 ${s.color} opacity-60`} />
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          <Card className="border-emerald-500/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Leaf className="h-5 w-5 text-emerald-500" />
+                {t("registry.ecoImpact.title")}
+              </CardTitle>
+              <CardDescription>{t("registry.ecoImpact.subtitle")}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {ecoLoading ? (
+                <Skeleton className="h-32 w-full" />
+              ) : (ecoMetrics?.total ?? 0) === 0 ? (
+                <div className="text-center py-8 text-muted-foreground">
+                  <Leaf className="h-10 w-10 mx-auto mb-3 opacity-30" />
+                  <p>{t("registry.ecoImpact.empty")}</p>
+                </div>
+              ) : (
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
+                    <p className="text-sm font-medium">{t("registry.ecoImpact.bbcaCases")}</p>
+                    <p className="text-2xl font-bold text-emerald-600 mt-1">{ecoMetrics?.bbcaCount ?? 0}</p>
+                  </div>
+                  <div className="p-4 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
+                    <p className="text-sm font-medium">{t("registry.ecoImpact.noContrastCases")}</p>
+                    <p className="text-2xl font-bold text-emerald-600 mt-1">{ecoMetrics?.noneCount ?? 0}</p>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>

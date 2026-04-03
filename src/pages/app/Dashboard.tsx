@@ -24,6 +24,7 @@ import {
   Image,
   Calculator,
   BarChart3,
+  Leaf,
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -67,6 +68,26 @@ export default function Dashboard() {
         .limit(6);
       if (error) throw error;
       return data;
+    },
+    enabled: !!user,
+  });
+
+  // Fetch eco metrics summary
+  const { data: ecoSummary } = useQuery({
+    queryKey: ["dashboard-eco-summary", user?.id],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from("eco_metrics")
+        .select("gadolinium_avoided_mg, eco_impact_score")
+        .eq("created_by", user!.id);
+      if (error) throw error;
+      const metrics = data ?? [];
+      return {
+        gadoliniumAvoided: Math.round(metrics.reduce((s, m) => s + Number(m.gadolinium_avoided_mg), 0)),
+        ecoScore: metrics.length > 0
+          ? Math.round(metrics.reduce((s, m) => s + Number(m.eco_impact_score), 0) / metrics.length)
+          : 0,
+      };
     },
     enabled: !!user,
   });
@@ -161,6 +182,33 @@ export default function Dashboard() {
           </Card>
         ))}
       </div>
+
+      {/* Eco-Impact Summary */}
+      <Card className="border-emerald-500/20">
+        <CardHeader className="flex flex-row items-center justify-between pb-2">
+          <CardTitle className="text-sm font-medium text-muted-foreground">{t("dashboard.ecoImpact.title")}</CardTitle>
+          <div className="h-8 w-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+            <Leaf className="h-4 w-4 text-emerald-500" />
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center gap-6">
+            <div>
+              <p className="text-2xl font-bold tracking-tight">{ecoSummary?.gadoliniumAvoided ?? 0} mg</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{t("dashboard.ecoImpact.gadoliniumAvoided")}</p>
+            </div>
+            <div className="h-10 border-l" />
+            <div>
+              <p className="text-2xl font-bold tracking-tight">{ecoSummary?.ecoScore ?? 0}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">{t("dashboard.ecoImpact.ecoScore")}</p>
+            </div>
+          </div>
+          <Link to="/app/registry" className="text-xs text-emerald-600 hover:underline mt-2 inline-flex items-center gap-1">
+            {t("dashboard.ecoImpact.viewRegistry")}
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </CardContent>
+      </Card>
 
       {/* Recent Activity */}
       <Card>
