@@ -7,8 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { HeartPulse, MapPin, Calendar, Activity, Stethoscope, Scan, Target, User } from "lucide-react";
+import { HeartPulse, MapPin, Calendar, Activity, Stethoscope, Scan, Target, User, Leaf } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import VascularMap, { VASCULAR_SEGMENTS } from "@/components/digital-twin/VascularMap";
 import SegmentDetail from "@/components/digital-twin/SegmentDetail";
 
@@ -17,6 +19,7 @@ export default function DigitalTwin() {
   const { user } = useAuth();
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
   const [selectedSegment, setSelectedSegment] = useState<string | null>(null);
+  const [contrastFreeMode, setContrastFreeMode] = useState(false);
 
   // Fetch patients
   const { data: patients } = useQuery({
@@ -192,17 +195,33 @@ export default function DigitalTwin() {
               {/* SVG Map */}
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base flex items-center gap-2">
-                    <MapPin className="h-4 w-4 text-primary" />
-                    {t("digitalTwin.vascularMap.title")}
-                  </CardTitle>
-                  <CardDescription className="text-xs">{t("digitalTwin.vascularMap.clickPrompt")}</CardDescription>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <CardTitle className="text-base flex items-center gap-2">
+                        <MapPin className="h-4 w-4 text-primary" />
+                        {t("digitalTwin.vascularMap.title")}
+                      </CardTitle>
+                      <CardDescription className="text-xs">{t("digitalTwin.vascularMap.clickPrompt")}</CardDescription>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Switch
+                        id="contrast-free"
+                        checked={contrastFreeMode}
+                        onCheckedChange={setContrastFreeMode}
+                      />
+                      <Label htmlFor="contrast-free" className="text-xs flex items-center gap-1 cursor-pointer">
+                        <Leaf className="h-3.5 w-3.5 text-emerald-500" />
+                        {t("digitalTwin.vascularMap.contrastFreeMode")}
+                      </Label>
+                    </div>
+                  </div>
                 </CardHeader>
                 <CardContent>
                   <VascularMap
                     selectedSegment={selectedSegment}
                     onSegmentClick={setSelectedSegment}
                     segmentStatus={segmentStatus}
+                    contrastFreeMode={contrastFreeMode}
                   />
                   {/* Legend */}
                   <div className="flex items-center justify-center gap-4 mt-4 text-xs">
