@@ -57,6 +57,9 @@ export const fr = {
     analytics: "Analytique Programme",
     administration: "Administration",
     settings: "Paramètres",
+    network: "Réseau Communautaire",
+    logbook: "Carnet de Procédures",
+    admin: "Panneau Admin",
   },
 
   command: {

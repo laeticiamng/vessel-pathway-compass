@@ -59,6 +59,9 @@ export const en = {
     analytics: "Program Analytics",
     administration: "Administration",
     settings: "Settings",
+    network: "Community Network",
+    logbook: "Procedure Logbook",
+    admin: "Admin Panel",
   },
 
   // Command palette
@@ -926,7 +929,22 @@ export const en = {
     },
     security: {
       title: "Security",
-      desc: "Your account is protected with encrypted sessions, role-based access control, and full audit trail. Password changes can be initiated from the sign-in page.",
+      desc: "Manage your account security settings",
+      newPassword: "New Password",
+      confirmPassword: "Confirm Password",
+      changePassword: "Change Password",
+      changed: "Password updated successfully",
+      minLength: "Password must be at least 8 characters",
+      mismatch: "Passwords do not match",
+    },
+    profile: {
+      avatar: "Profile Picture",
+      avatarDesc: "Upload a profile picture (max 2MB)",
+      uploadAvatar: "Upload",
+      removeAvatar: "Remove",
+      avatarUpdated: "Profile picture updated",
+      avatarRemoved: "Profile picture removed",
+      avatarError: "Failed to update profile picture",
     },
     plan: {
       title: "Plan & Billing",
@@ -1486,5 +1504,37 @@ export const en = {
     download: "Download .txt",
     downloadSuccess: "Report downloaded",
     error: "Failed to generate export",
+  },
+
+  // Network / Community
+  network: {
+    title: "Community Network",
+    subtitle: "Connect with interventional specialists, share cases, and get expert opinions",
+    tabs: { forum: "Forum", experts: "Expert Requests" },
+    newPost: "New Discussion",
+    newPostDesc: "Start a new discussion in the community",
+    postCreated: "Discussion posted",
+    emptyForum: "No discussions yet. Start the first one!",
+    emptyExperts: "No expert requests yet.",
+    fields: { title: "Title", content: "Content", topic: "Topic" },
+  },
+
+  // Logbook
+  logbook: {
+    title: "Procedure Logbook",
+    subtitle: "Track your clinical procedures for training validation",
+    addEntry: "Log Procedure",
+    addEntryDesc: "Record a new procedure in your logbook",
+    entryCreated: "Procedure logged",
+    empty: "No procedures logged yet. Start logging your first procedure.",
+    stats: { total: "Total", validated: "Validated", pending: "Pending" },
+    fields: { procedure: "Procedure Type", track: "Track", description: "Description" },
+  },
+
+  // Admin
+  admin: {
+    title: "Administration",
+    subtitle: "Manage user roles and system settings",
+    tabs: { users: "User Roles", messages: "Contact Messages" },
   },
 };
