@@ -6,13 +6,16 @@ import {
   BookOpen,
   Calculator,
   ChevronDown,
+  ClipboardList,
   FlaskConical,
   FileText,
+  Globe,
   HeartPulse,
   Image,
   LayoutDashboard,
   LineChart,
   Settings,
+  ShieldCheck,
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
@@ -76,10 +79,17 @@ export function AppSidebar() {
     { title: t("sidebar.researchHub"), url: "/app/research", icon: FileText },
     { title: t("sidebar.education"), url: "/app/education", icon: BookOpen },
     { title: t("sidebar.analytics"), url: "/app/analytics", icon: BarChart3 },
+    ...(session ? [
+      { title: t("sidebar.network") || "Network", url: "/app/network", icon: Globe },
+      { title: t("sidebar.logbook") || "Logbook", url: "/app/logbook", icon: ClipboardList },
+    ] : []),
   ];
 
   const adminItems = [
-    ...(session ? [{ title: t("sidebar.settings"), url: "/app/settings", icon: Settings }] : []),
+    ...(session ? [
+      { title: t("sidebar.admin") || "Admin", url: "/app/admin", icon: ShieldCheck },
+      { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
+    ] : []),
   ];
 
   // Auto-open platform section if user is on one of those pages
