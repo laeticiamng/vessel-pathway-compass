@@ -180,8 +180,9 @@ export default function Settings() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2"><Shield className="h-5 w-5" /> {t("settings.security.title")}</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">{t("settings.security.desc")}</p>
+          <PasswordChangeForm />
         </CardContent>
       </Card>
 
