@@ -944,15 +944,6 @@ export const en = {
       minLength: "Password must be at least 8 characters",
       mismatch: "Passwords do not match",
     },
-    profile: {
-      avatar: "Profile Picture",
-      avatarDesc: "Upload a profile picture (max 2MB)",
-      uploadAvatar: "Upload",
-      removeAvatar: "Remove",
-      avatarUpdated: "Profile picture updated",
-      avatarRemoved: "Profile picture removed",
-      avatarError: "Failed to update profile picture",
-    },
     plan: {
       title: "Plan & Billing",
       desc: "Manage your subscription and billing details",
