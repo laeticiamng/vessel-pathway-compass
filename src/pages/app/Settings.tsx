@@ -7,7 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Settings as SettingsIcon, Building, Globe, Shield, Palette, CreditCard, ArrowRight, LogOut, User, Loader2 } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Settings as SettingsIcon, Building, Globe, Shield, Palette, CreditCard, ArrowRight, LogOut, User, Loader2, Camera, Trash2 } from "lucide-react";
 import { useTranslation, Language } from "@/i18n/context";
 import { useTheme } from "next-themes";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,7 +16,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useAuth } from "@/hooks/useAuth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { SEOHead } from "@/components/SEOHead";
 
 function PasswordChangeForm() {
@@ -157,6 +158,7 @@ export default function Settings() {
             <div className="flex justify-center py-4"><Loader2 className="h-5 w-5 animate-spin text-muted-foreground" /></div>
           ) : (
             <>
+              <AvatarUpload userId={user?.id} currentUrl={(profile as any)?.avatar_url} onUpdated={() => queryClient.invalidateQueries({ queryKey: ["profile"] })} />
               <div className="space-y-2">
                 <Label>{t("settings.profile.displayName")}</Label>
                 <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder={t("settings.profile.displayNamePlaceholder")} />
