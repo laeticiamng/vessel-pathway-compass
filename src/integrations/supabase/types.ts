@@ -282,6 +282,53 @@ export type Database = {
         }
         Relationships: []
       }
+      eco_metrics: {
+        Row: {
+          case_id: string
+          contrast_agent_type: string
+          contrast_volume_ml: number
+          created_at: string
+          created_by: string
+          eco_impact_score: number
+          gadolinium_avoided_mg: number
+          id: string
+          updated_at: string
+          water_contamination_prevented_l: number
+        }
+        Insert: {
+          case_id: string
+          contrast_agent_type?: string
+          contrast_volume_ml?: number
+          created_at?: string
+          created_by: string
+          eco_impact_score?: number
+          gadolinium_avoided_mg?: number
+          id?: string
+          updated_at?: string
+          water_contamination_prevented_l?: number
+        }
+        Update: {
+          case_id?: string
+          contrast_agent_type?: string
+          contrast_volume_ml?: number
+          created_at?: string
+          created_by?: string
+          eco_impact_score?: number
+          gadolinium_avoided_mg?: number
+          id?: string
+          updated_at?: string
+          water_contamination_prevented_l?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "eco_metrics_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       expert_requests: {
         Row: {
           case_summary: string

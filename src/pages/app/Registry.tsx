@@ -106,19 +106,19 @@ export default function Registry() {
     queryKey: ["registry-eco-metrics", user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("eco_metrics")
+        .from("eco_metrics" as any)
         .select("*")
         .eq("created_by", user!.id);
       if (error) throw error;
-      const metrics = data ?? [];
-      const totalGadoliniumAvoided = metrics.reduce((s, m) => s + Number(m.gadolinium_avoided_mg), 0);
-      const totalContrastSpared = metrics.reduce((s, m) => s + Number(m.contrast_volume_ml), 0);
-      const totalWaterPrevented = metrics.reduce((s, m) => s + Number(m.water_contamination_prevented_l), 0);
+      const metrics = (data as any[]) ?? [];
+      const totalGadoliniumAvoided = metrics.reduce((s: number, m: any) => s + Number(m.gadolinium_avoided_mg), 0);
+      const totalContrastSpared = metrics.reduce((s: number, m: any) => s + Number(m.contrast_volume_ml), 0);
+      const totalWaterPrevented = metrics.reduce((s: number, m: any) => s + Number(m.water_contamination_prevented_l), 0);
       const avgEcoScore = metrics.length > 0
-        ? Math.round(metrics.reduce((s, m) => s + Number(m.eco_impact_score), 0) / metrics.length)
+        ? Math.round(metrics.reduce((s: number, m: any) => s + Number(m.eco_impact_score), 0) / metrics.length)
         : 0;
-      const bbcaCount = metrics.filter((m) => m.contrast_agent_type === "bbca").length;
-      const noneCount = metrics.filter((m) => m.contrast_agent_type === "none").length;
+      const bbcaCount = metrics.filter((m: any) => m.contrast_agent_type === "bbca").length;
+      const noneCount = metrics.filter((m: any) => m.contrast_agent_type === "none").length;
       return {
         totalGadoliniumAvoided,
         totalContrastSpared,

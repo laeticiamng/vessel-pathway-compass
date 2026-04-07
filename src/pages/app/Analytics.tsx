@@ -235,21 +235,21 @@ export default function Analytics() {
     queryKey: ["analytics-eco-metrics", user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("eco_metrics")
+        .from("eco_metrics" as any)
         .select("*")
         .eq("created_by", user!.id);
       if (error) throw error;
-      return data ?? [];
+      return (data as any[]) ?? [];
     },
     enabled: !!user,
   });
 
   // Green Radiology computed data
   const greenData = (() => {
-    const metrics = ecoMetrics ?? [];
-    const gbcaCount = metrics.filter((m) => m.contrast_agent_type === "gbca").length;
-    const bbcaCount = metrics.filter((m) => m.contrast_agent_type === "bbca").length;
-    const noneCount = metrics.filter((m) => m.contrast_agent_type === "none").length;
+    const metrics: any[] = ecoMetrics ?? [];
+    const gbcaCount = metrics.filter((m: any) => m.contrast_agent_type === "gbca").length;
+    const bbcaCount = metrics.filter((m: any) => m.contrast_agent_type === "bbca").length;
+    const noneCount = metrics.filter((m: any) => m.contrast_agent_type === "none").length;
     const agentDistribution = [
       { name: "GBCA", value: gbcaCount },
       { name: "BBCA", value: bbcaCount },
@@ -266,10 +266,10 @@ export default function Analytics() {
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([month, value]) => ({ month, gadolinium: Math.round(value) }));
 
-    const totalGadoAvoided = Math.round(metrics.reduce((s, m) => s + Number(m.gadolinium_avoided_mg), 0));
-    const totalContrastSpared = Math.round(metrics.reduce((s, m) => s + Number(m.contrast_volume_ml), 0));
+    const totalGadoAvoided = Math.round(metrics.reduce((s: number, m: any) => s + Number(m.gadolinium_avoided_mg), 0));
+    const totalContrastSpared = Math.round(metrics.reduce((s: number, m: any) => s + Number(m.contrast_volume_ml), 0));
     const avgEcoScore = metrics.length > 0
-      ? Math.round(metrics.reduce((s, m) => s + Number(m.eco_impact_score), 0) / metrics.length)
+      ? Math.round(metrics.reduce((s: number, m: any) => s + Number(m.eco_impact_score), 0) / metrics.length)
       : 0;
 
     return { agentDistribution, gadoByMonth, totalGadoAvoided, totalContrastSpared, avgEcoScore, total: metrics.length };
