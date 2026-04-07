@@ -64,6 +64,80 @@ function PasswordChangeForm() {
   );
 }
 
+function AvatarUpload({ userId, currentUrl, onUpdated }: { userId?: string; currentUrl?: string | null; onUpdated: () => void }) {
+  const { t } = useTranslation();
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !userId) return;
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("File too large (max 2MB)");
+      return;
+    }
+    setUploading(true);
+    try {
+      const ext = file.name.split(".").pop();
+      const path = `${userId}/avatar.${ext}`;
+      const { error: uploadError } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
+      if (uploadError) throw uploadError;
+      const { data: { publicUrl } } = supabase.storage.from("avatars").getPublicUrl(path);
+      const avatarUrl = `${publicUrl}?t=${Date.now()}`;
+      await supabase.from("profiles").update({ avatar_url: avatarUrl } as any).eq("user_id", userId);
+      toast.success(t("settings.profile.avatarUpdated"));
+      onUpdated();
+    } catch (err) {
+      console.error(err);
+      toast.error(t("settings.profile.avatarError"));
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  };
+
+  const handleRemove = async () => {
+    if (!userId) return;
+    setUploading(true);
+    try {
+      await supabase.from("profiles").update({ avatar_url: null } as any).eq("user_id", userId);
+      toast.success(t("settings.profile.avatarRemoved"));
+      onUpdated();
+    } catch {
+      toast.error(t("settings.profile.avatarError"));
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const initials = userId?.slice(0, 2).toUpperCase() ?? "?";
+
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar className="h-16 w-16">
+        <AvatarImage src={currentUrl ?? undefined} />
+        <AvatarFallback className="text-lg">{initials}</AvatarFallback>
+      </Avatar>
+      <div className="flex flex-col gap-2">
+        <p className="text-sm text-muted-foreground">{t("settings.profile.avatarDesc")}</p>
+        <div className="flex gap-2">
+          <Button size="sm" variant="outline" onClick={() => fileRef.current?.click()} disabled={uploading}>
+            {uploading ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Camera className="h-3.5 w-3.5 mr-1" />}
+            {t("settings.profile.uploadAvatar")}
+          </Button>
+          {currentUrl && (
+            <Button size="sm" variant="ghost" onClick={handleRemove} disabled={uploading}>
+              <Trash2 className="h-3.5 w-3.5 mr-1" />
+              {t("settings.profile.removeAvatar")}
+            </Button>
+          )}
+        </div>
+        <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleUpload} />
+      </div>
+    </div>
+  );
+}
+
 const langs: { lang: string; code: Language }[] = [
   { lang: "English", code: "en" },
   { lang: "Français", code: "fr" },
