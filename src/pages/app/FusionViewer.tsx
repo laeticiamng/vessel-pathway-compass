@@ -179,6 +179,33 @@ export default function FusionViewer() {
         </TabsContent>
       </Tabs>
 
+      {/* Uploaded files list */}
+      {files.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileImage className="h-5 w-5 text-primary" />
+              {t("fusionViewer.uploadedFiles") || "Uploaded Files"}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {files.map((f) => (
+                <div key={f.name} className="flex items-center justify-between p-2 rounded-lg bg-muted/30 border">
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium truncate">{f.name.replace(/^\d+-/, "")}</p>
+                    <p className="text-xs text-muted-foreground">{((f.metadata as any)?.size ? ((f.metadata as any).size / 1024).toFixed(1) + " KB" : "—")}</p>
+                  </div>
+                  <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-destructive shrink-0" onClick={() => handleDelete(f.name)}>
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
