@@ -62,9 +62,9 @@ export function NotificationBell() {
 
     // Navigate based on reference_type
     if (n.reference_type === "forum_post" && n.reference_id) {
-      navigate("/app/research");
+      navigate("/app/network");
     } else if (n.reference_type === "expert_request" && n.reference_id) {
-      navigate("/app/research");
+      navigate("/app/network");
     } else if (n.reference_type === "case" && n.reference_id) {
       // Find the patient for this case, navigate to patient detail
       supabase

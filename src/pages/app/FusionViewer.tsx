@@ -1,12 +1,57 @@
+import { useState, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Image, Upload, Ruler, Pencil, AlertTriangle, Shield, Leaf } from "lucide-react";
+import { Image, Upload, Ruler, Pencil, AlertTriangle, Shield, Leaf, Loader2, Trash2, FileImage } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 export default function FusionViewer() {
   const { t } = useTranslation();
+  const { user } = useAuth();
+  const queryClient = useQueryClient();
+  const [uploading, setUploading] = useState(false);
+
+  const { data: files = [], isLoading: filesLoading } = useQuery({
+    queryKey: ["dicom-files", user?.id],
+    queryFn: async () => {
+      const { data, error } = await supabase.storage.from("dicom-uploads").list(user!.id, { limit: 50, sortBy: { column: "created_at", order: "desc" } });
+      if (error) throw error;
+      return data ?? [];
+    },
+    enabled: !!user,
+  });
+
+  const handleUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !user) return;
+    setUploading(true);
+    try {
+      const path = `${user.id}/${Date.now()}-${file.name}`;
+      const { error } = await supabase.storage.from("dicom-uploads").upload(path, file);
+      if (error) throw error;
+      queryClient.invalidateQueries({ queryKey: ["dicom-files"] });
+      toast.success(t("fusionViewer.uploadSuccess") || "File uploaded");
+    } catch (err: any) {
+      toast.error(err.message);
+    } finally {
+      setUploading(false);
+      e.target.value = "";
+    }
+  }, [user, queryClient, t]);
+
+  const handleDelete = useCallback(async (name: string) => {
+    if (!user) return;
+    const { error } = await supabase.storage.from("dicom-uploads").remove([`${user.id}/${name}`]);
+    if (error) { toast.error(error.message); return; }
+    queryClient.invalidateQueries({ queryKey: ["dicom-files"] });
+    toast.success("File deleted");
+  }, [user, queryClient]);
 
   return (
     <div className="space-y-6 max-w-5xl">
@@ -39,11 +84,15 @@ export default function FusionViewer() {
       </div>
 
       <div className="grid sm:grid-cols-3 gap-4">
-        <Card className="hover:border-primary/30 transition-colors cursor-pointer">
+        <Card className="hover:border-primary/30 transition-colors cursor-pointer relative">
           <CardContent className="pt-6 text-center">
             <Upload className="h-8 w-8 text-primary mx-auto mb-3" />
             <h3 className="font-semibold">{t("fusionViewer.upload")}</h3>
             <p className="text-xs text-muted-foreground mt-1">{t("fusionViewer.uploadDesc")}</p>
+            <label className="absolute inset-0 cursor-pointer">
+              <input type="file" className="hidden" accept=".dcm,.dicom,.nii,.nii.gz,.png,.jpg,.jpeg" onChange={handleUpload} disabled={uploading} />
+            </label>
+            {uploading && <Loader2 className="h-4 w-4 animate-spin mx-auto mt-2 text-primary" />}
           </CardContent>
         </Card>
         <Card className="hover:border-primary/30 transition-colors cursor-pointer">
@@ -129,6 +178,33 @@ export default function FusionViewer() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Uploaded files list */}
+      {files.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileImage className="h-5 w-5 text-primary" />
+              {t("fusionViewer.uploadedFiles") || "Uploaded Files"}
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {files.map((f) => (
+                <div key={f.name} className="flex items-center justify-between p-2 rounded-lg bg-muted/30 border">
+                  <div className="min-w-0">
+                    <p className="text-sm font-medium truncate">{f.name.replace(/^\d+-/, "")}</p>
+                    <p className="text-xs text-muted-foreground">{((f.metadata as any)?.size ? ((f.metadata as any).size / 1024).toFixed(1) + " KB" : "—")}</p>
+                  </div>
+                  <Button variant="ghost" size="icon" className="h-7 w-7 text-muted-foreground hover:text-destructive shrink-0" onClick={() => handleDelete(f.name)}>
+                    <Trash2 className="h-3.5 w-3.5" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
 
       <Card>
         <CardHeader>

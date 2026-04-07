@@ -147,7 +147,30 @@ export default function Research() {
                       <BarChart3 className="h-3.5 w-3.5 sm:mr-1" />
                       <span className="hidden sm:inline">{t("common.analytics")}</span>
                     </Button>
-                    <Button variant="outline" size="sm" onClick={() => toast.info(t("common.comingSoon"))}>
+                    <Button variant="outline" size="sm" onClick={async () => {
+                      try {
+                        // Fetch outcomes for this study's cases
+                        const { data: studyCases } = await supabase.from("cases").select("id, category, status, created_at, patient_id").eq("created_by", user!.id);
+                        const { data: outcomes } = await supabase.from("outcomes").select("*").eq("created_by", user!.id);
+                        const rows = [
+                          ["study_title", "study_status", "case_id", "case_category", "case_status", "outcome_type", "outcome_date"].join(","),
+                          ...(studyCases ?? []).map(c => {
+                            const oc = (outcomes ?? []).find(o => o.case_id === c.id);
+                            return [s.title, s.status, c.id, c.category, c.status, oc?.outcome_type ?? "", oc?.outcome_date ?? ""].join(",");
+                          }),
+                        ];
+                        const blob = new Blob([rows.join("\n")], { type: "text/csv" });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = `study-${s.id.slice(0, 8)}-export.csv`;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                        toast.success(t("common.exportSuccess") || "CSV exported");
+                      } catch (err: any) {
+                        toast.error(err.message);
+                      }
+                    }}>
                       <Download className="h-3.5 w-3.5 sm:mr-1" />
                       <span className="hidden sm:inline">{t("common.export")}</span>
                     </Button>

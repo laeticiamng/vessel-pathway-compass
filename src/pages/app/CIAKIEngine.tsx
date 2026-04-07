@@ -8,7 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { Calculator, AlertTriangle, Info, Shield, Printer, FileText, Leaf } from "lucide-react";
+import { Calculator, AlertTriangle, Info, Shield, Printer, FileText, Leaf, Save, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 type RiskTier = "low" | "moderate" | "high";
 type ContrastAgentType = "gbca" | "bbca" | "none";
@@ -105,7 +108,9 @@ function calculateCIAKIRisk(params: {
 
 export default function CIAKIEngine() {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [egfr, setEgfr] = useState("");
+  const [saving, setSaving] = useState(false);
   const [age, setAge] = useState("");
   const [diabetes, setDiabetes] = useState(false);
   const [lvef, setLvef] = useState("");
@@ -295,7 +300,7 @@ export default function CIAKIEngine() {
               </CardContent>
             </Card>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap">
               <Button variant="outline" size="sm" onClick={() => window.print()}>
                 <Printer className="h-3.5 w-3.5 mr-1" />
                 {t("ciAkiEngine.printSummary")}
@@ -303,6 +308,48 @@ export default function CIAKIEngine() {
               <Button variant="outline" size="sm">
                 <FileText className="h-3.5 w-3.5 mr-1" />
                 {t("ciAkiEngine.auditTrail")}
+              </Button>
+              <Button
+                size="sm"
+                disabled={saving || !user}
+                onClick={async () => {
+                  if (!user || !result) return;
+                  setSaving(true);
+                  try {
+                    // We need a case_id; pick the user's most recent case
+                    const { data: latestCase } = await supabase
+                      .from("cases")
+                      .select("id")
+                      .eq("created_by", user.id)
+                      .order("created_at", { ascending: false })
+                      .limit(1)
+                      .single();
+                    if (!latestCase) {
+                      toast.error(t("ciAkiEngine.noCaseError") || "Create a patient case first");
+                      return;
+                    }
+                    const cv = parseFloat(contrastVolume) || 0;
+                    const gadoAvoided = result.agentType !== "gbca" ? cv * 0.5 : 0;
+                    const { error } = await supabase.from("eco_metrics").insert({
+                      case_id: latestCase.id,
+                      created_by: user.id,
+                      contrast_agent_type: result.agentType === "gbca" ? "gadolinium" : result.agentType === "bbca" ? "betalain" : "none",
+                      contrast_volume_ml: cv,
+                      gadolinium_avoided_mg: gadoAvoided,
+                      water_contamination_prevented_l: gadoAvoided * 0.01,
+                      eco_impact_score: result.riskScore,
+                    });
+                    if (error) throw error;
+                    toast.success(t("ciAkiEngine.saved") || "Result saved to eco dashboard");
+                  } catch (err: any) {
+                    toast.error(err.message);
+                  } finally {
+                    setSaving(false);
+                  }
+                }}
+              >
+                {saving ? <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> : <Save className="h-3.5 w-3.5 mr-1" />}
+                {t("ciAkiEngine.saveResult") || "Save"}
               </Button>
             </div>
           </div>
