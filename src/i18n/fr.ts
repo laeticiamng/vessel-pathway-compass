@@ -891,6 +891,13 @@ export const fr = {
       rolePlaceholder: "ex. Chirurgien vasculaire",
       institution: "Établissement",
       saved: "Profil enregistré",
+      avatar: "Photo de profil",
+      avatarDesc: "Téléversez une photo de profil (max 2 Mo)",
+      uploadAvatar: "Téléverser",
+      removeAvatar: "Supprimer",
+      avatarUpdated: "Photo de profil mise à jour",
+      avatarRemoved: "Photo de profil supprimée",
+      avatarError: "Échec de la mise à jour de la photo",
     },
     institution: {
       title: "Établissement",
@@ -908,7 +915,13 @@ export const fr = {
     },
     security: {
       title: "Sécurité",
-      desc: "Votre compte est protégé par des sessions chiffrées, un contrôle d'accès par rôle et une traçabilité complète. Le changement de mot de passe peut être initié depuis la page de connexion.",
+      desc: "Gérez la sécurité de votre compte",
+      newPassword: "Nouveau mot de passe",
+      confirmPassword: "Confirmer le mot de passe",
+      changePassword: "Changer le mot de passe",
+      changed: "Mot de passe mis à jour",
+      minLength: "Le mot de passe doit contenir au moins 8 caractères",
+      mismatch: "Les mots de passe ne correspondent pas",
     },
     plan: {
       title: "Plan & Facturation",
@@ -1461,5 +1474,34 @@ export const fr = {
     download: "Télécharger .txt",
     downloadSuccess: "Rapport téléchargé",
     error: "Échec de la génération de l'export",
+  },
+
+  network: {
+    title: "Réseau Communautaire",
+    subtitle: "Connectez-vous avec des spécialistes, partagez des cas et obtenez des avis d'experts",
+    tabs: { forum: "Forum", experts: "Demandes d'experts" },
+    newPost: "Nouvelle discussion",
+    newPostDesc: "Démarrez une nouvelle discussion dans la communauté",
+    postCreated: "Discussion publiée",
+    emptyForum: "Aucune discussion pour le moment. Lancez la première !",
+    emptyExperts: "Aucune demande d'expert pour le moment.",
+    fields: { title: "Titre", content: "Contenu", topic: "Sujet" },
+  },
+
+  logbook: {
+    title: "Carnet de Procédures",
+    subtitle: "Suivez vos procédures cliniques pour la validation de formation",
+    addEntry: "Enregistrer une procédure",
+    addEntryDesc: "Enregistrez une nouvelle procédure dans votre carnet",
+    entryCreated: "Procédure enregistrée",
+    empty: "Aucune procédure enregistrée. Commencez par enregistrer votre première procédure.",
+    stats: { total: "Total", validated: "Validées", pending: "En attente" },
+    fields: { procedure: "Type de procédure", track: "Filière", description: "Description" },
+  },
+
+  admin: {
+    title: "Administration",
+    subtitle: "Gérer les rôles utilisateurs et les paramètres système",
+    tabs: { users: "Rôles utilisateurs", messages: "Messages de contact" },
   },
 };
