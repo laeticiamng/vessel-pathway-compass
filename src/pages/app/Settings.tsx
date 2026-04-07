@@ -18,6 +18,51 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { SEOHead } from "@/components/SEOHead";
 
+function PasswordChangeForm() {
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+
+  const handleChangePassword = async () => {
+    if (newPassword.length < 8) {
+      toast.error(t("settings.security.minLength") || "Password must be at least 8 characters");
+      return;
+    }
+    if (newPassword !== confirmPassword) {
+      toast.error(t("settings.security.mismatch") || "Passwords do not match");
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    setLoading(false);
+    if (error) {
+      toast.error(error.message);
+    } else {
+      toast.success(t("settings.security.changed") || "Password updated successfully");
+      setNewPassword("");
+      setConfirmPassword("");
+    }
+  };
+
+  return (
+    <div className="space-y-3">
+      <div className="space-y-2">
+        <Label>{t("settings.security.newPassword") || "New Password"}</Label>
+        <Input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="••••••••" />
+      </div>
+      <div className="space-y-2">
+        <Label>{t("settings.security.confirmPassword") || "Confirm Password"}</Label>
+        <Input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="••••••••" />
+      </div>
+      <Button onClick={handleChangePassword} disabled={loading || !newPassword || !confirmPassword} variant="outline">
+        {loading && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+        {t("settings.security.changePassword") || "Change Password"}
+      </Button>
+    </div>
+  );
+}
+
 const langs: { lang: string; code: Language }[] = [
   { lang: "English", code: "en" },
   { lang: "Français", code: "fr" },
