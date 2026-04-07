@@ -100,11 +100,10 @@ export default function Network() {
     onError: () => toast.error(t("auth.error")),
   });
 
-  const selectedPost = posts?.find((p) => p.id === selectedPostId);
-  if (selectedPost) {
+  if (selectedPostId) {
     return (
       <ForumThreadDetail
-        post={selectedPost}
+        postId={selectedPostId}
         onBack={() => setSelectedPostId(null)}
       />
     );

@@ -36,6 +36,9 @@ const Education = lazy(() => import("./pages/app/Education"));
 const Simulation = lazy(() => import("./pages/app/Simulation"));
 const Research = lazy(() => import("./pages/app/Research"));
 const Analytics = lazy(() => import("./pages/app/Analytics"));
+const Network = lazy(() => import("./pages/app/Network"));
+const Logbook = lazy(() => import("./pages/app/Logbook"));
+const Admin = lazy(() => import("./pages/app/Admin"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 
 const queryClient = new QueryClient();
