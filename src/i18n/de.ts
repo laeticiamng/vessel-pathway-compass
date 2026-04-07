@@ -57,6 +57,9 @@ export const de = {
     analytics: "Programmanalytik",
     administration: "Administration",
     settings: "Einstellungen",
+    network: "Community-Netzwerk",
+    logbook: "Prozedurlogbuch",
+    admin: "Admin-Panel",
   },
 
   command: {
@@ -892,6 +895,13 @@ export const de = {
       rolePlaceholder: "z.B. Gefäßchirurg",
       institution: "Einrichtung",
       saved: "Profil gespeichert",
+      avatar: "Profilbild",
+      avatarDesc: "Laden Sie ein Profilbild hoch (max. 2 MB)",
+      uploadAvatar: "Hochladen",
+      removeAvatar: "Entfernen",
+      avatarUpdated: "Profilbild aktualisiert",
+      avatarRemoved: "Profilbild entfernt",
+      avatarError: "Profilbild konnte nicht aktualisiert werden",
     },
     institution: {
       title: "Einrichtung",
@@ -909,7 +919,13 @@ export const de = {
     },
     security: {
       title: "Sicherheit",
-      desc: "Ihr Konto ist durch verschlüsselte Sitzungen, rollenbasierte Zugriffskontrolle und vollständige Audit-Trails geschützt. Passwortänderungen können über die Anmeldeseite initiiert werden.",
+      desc: "Verwalten Sie Ihre Kontosicherheit",
+      newPassword: "Neues Passwort",
+      confirmPassword: "Passwort bestätigen",
+      changePassword: "Passwort ändern",
+      changed: "Passwort erfolgreich aktualisiert",
+      minLength: "Das Passwort muss mindestens 8 Zeichen lang sein",
+      mismatch: "Passwörter stimmen nicht überein",
     },
     plan: {
       title: "Plan & Abrechnung",
@@ -1462,5 +1478,34 @@ export const de = {
     download: ".txt herunterladen",
     downloadSuccess: "Bericht heruntergeladen",
     error: "Export-Generierung fehlgeschlagen",
+  },
+
+  network: {
+    title: "Community-Netzwerk",
+    subtitle: "Vernetzen Sie sich mit Spezialisten, teilen Sie Fälle und holen Sie Expertenmeinungen ein",
+    tabs: { forum: "Forum", experts: "Expertenanfragen" },
+    newPost: "Neue Diskussion",
+    newPostDesc: "Starten Sie eine neue Diskussion in der Community",
+    postCreated: "Diskussion veröffentlicht",
+    emptyForum: "Noch keine Diskussionen. Starten Sie die erste!",
+    emptyExperts: "Noch keine Expertenanfragen.",
+    fields: { title: "Titel", content: "Inhalt", topic: "Thema" },
+  },
+
+  logbook: {
+    title: "Prozedurlogbuch",
+    subtitle: "Verfolgen Sie Ihre klinischen Eingriffe zur Ausbildungsvalidierung",
+    addEntry: "Eingriff erfassen",
+    addEntryDesc: "Erfassen Sie einen neuen Eingriff in Ihrem Logbuch",
+    entryCreated: "Eingriff erfasst",
+    empty: "Noch keine Eingriffe erfasst. Erfassen Sie Ihren ersten Eingriff.",
+    stats: { total: "Gesamt", validated: "Validiert", pending: "Ausstehend" },
+    fields: { procedure: "Eingriffstyp", track: "Track", description: "Beschreibung" },
+  },
+
+  admin: {
+    title: "Administration",
+    subtitle: "Benutzerrollen und Systemeinstellungen verwalten",
+    tabs: { users: "Benutzerrollen", messages: "Kontaktnachrichten" },
   },
 };
