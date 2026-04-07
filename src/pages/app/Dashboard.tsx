@@ -77,15 +77,15 @@ export default function Dashboard() {
     queryKey: ["dashboard-eco-summary", user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("eco_metrics")
+        .from("eco_metrics" as any)
         .select("gadolinium_avoided_mg, eco_impact_score")
         .eq("created_by", user!.id);
       if (error) throw error;
-      const metrics = data ?? [];
+      const metrics = (data as any[]) ?? [];
       return {
-        gadoliniumAvoided: Math.round(metrics.reduce((s, m) => s + Number(m.gadolinium_avoided_mg), 0)),
+        gadoliniumAvoided: Math.round(metrics.reduce((s: number, m: any) => s + Number(m.gadolinium_avoided_mg), 0)),
         ecoScore: metrics.length > 0
-          ? Math.round(metrics.reduce((s, m) => s + Number(m.eco_impact_score), 0) / metrics.length)
+          ? Math.round(metrics.reduce((s: number, m: any) => s + Number(m.eco_impact_score), 0) / metrics.length)
           : 0,
       };
     },
