@@ -912,6 +912,13 @@ export const en = {
       rolePlaceholder: "e.g. Interventional Cardiologist",
       institution: "Institution",
       saved: "Profile saved",
+      avatar: "Profile Picture",
+      avatarDesc: "Upload a profile picture (max 2MB)",
+      uploadAvatar: "Upload",
+      removeAvatar: "Remove",
+      avatarUpdated: "Profile picture updated",
+      avatarRemoved: "Profile picture removed",
+      avatarError: "Failed to update profile picture",
     },
     institution: {
       title: "Institution",
