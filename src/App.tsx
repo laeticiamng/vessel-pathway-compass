@@ -36,6 +36,9 @@ const Education = lazy(() => import("./pages/app/Education"));
 const Simulation = lazy(() => import("./pages/app/Simulation"));
 const Research = lazy(() => import("./pages/app/Research"));
 const Analytics = lazy(() => import("./pages/app/Analytics"));
+const Network = lazy(() => import("./pages/app/Network"));
+const Logbook = lazy(() => import("./pages/app/Logbook"));
+const Admin = lazy(() => import("./pages/app/Admin"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 
 const queryClient = new QueryClient();
@@ -92,7 +95,7 @@ const App = () => (
           <Route path="/app/beta" element={<Navigate to="/app" replace />} />
           <Route path="/app/outcomes" element={<Navigate to="/app/registry" replace />} />
           <Route path="/app/performance" element={<Navigate to="/app/analytics" replace />} />
-          <Route path="/app/network" element={<Navigate to="/app/research" replace />} />
+          <Route path="/app/compliance" element={<Navigate to="/app/settings" replace />} />
           <Route path="/app/compliance" element={<Navigate to="/app/settings" replace />} />
           <Route path="/app/team" element={<Navigate to="/app/settings" replace />} />
 
@@ -100,6 +103,9 @@ const App = () => (
           <Route path="/app" element={<ProtectedRoute />}>
             <Route path="patients" element={<Patients />} />
             <Route path="patients/:id" element={<PatientDetail />} />
+            <Route path="network" element={<Network />} />
+            <Route path="logbook" element={<Logbook />} />
+            <Route path="admin" element={<Admin />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 

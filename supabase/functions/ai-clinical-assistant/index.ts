@@ -6,7 +6,6 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-// ── In-memory rate limiter (20 req/min per user) ────────────────────
 const WINDOW_MS = 60_000;
 const MAX_REQ = 20;
 const rlMap = new Map<string, { count: number; resetAt: number }>();
@@ -30,7 +29,6 @@ serve(async (req) => {
       });
     }
 
-    // Use service role client for auth verification
     const svcClient = createClient(
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
@@ -47,14 +45,12 @@ serve(async (req) => {
 
     const userId = userData.user.id;
 
-    // ── Rate limit ───────────────────────────────────────────────────
     if (isRateLimited(userId)) {
       return new Response(JSON.stringify({ error: "Too many requests. Please wait before trying again." }), {
         status: 429, headers: { ...corsHeaders, "Content-Type": "application/json", "Retry-After": "60" },
       });
     }
 
-    // ── Server-side entitlement check ────────────────────────────
     const { data: subData } = await svcClient
       .from("subscriptions")
       .select("status, current_period_end")
@@ -65,7 +61,6 @@ serve(async (req) => {
       && subData?.current_period_end
       && new Date(subData.current_period_end) > new Date();
 
-    // Count today's AI outputs for free-tier limiting
     if (!hasActiveSubscription) {
       const todayStart = new Date();
       todayStart.setHours(0, 0, 0, 0);
@@ -91,6 +86,18 @@ serve(async (req) => {
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
+    // Support both old field names and new ProcedurePlanner field names
+    const presentation = clinicalData.clinicalPresentation || clinicalData.symptoms || "Not provided";
+    const renalFunction = clinicalData.renalFunction || "Not provided";
+    const plannedProcedure = clinicalData.plannedProcedure || "Not provided";
+    const priorImaging = clinicalData.priorImaging || clinicalData.imaging || "Not provided";
+    const labs = clinicalData.labs || "Not provided";
+    const medications = clinicalData.medications || "Not provided";
+    const comorbidities = clinicalData.comorbidities || clinicalData.riskFactors || "Not provided";
+    const abi = clinicalData.abi || "Not provided";
+    const doppler = clinicalData.doppler || "Not provided";
+    const preferBioContrast = clinicalData.preferBioContrast === true;
+
     const systemPrompt = `You are a vascular medicine clinical assistant. Generate a structured clinical report based on the provided patient data.
 
 IMPORTANT RULES:
@@ -98,6 +105,7 @@ IMPORTANT RULES:
 - Use "Citation Placeholder" where guideline references would go — never fabricate citations.
 - Always include uncertainty statements.
 - Label all suggestions as "Suggested" not "Recommended".
+${preferBioContrast ? "- The clinician has indicated a preference for bio-based contrast agents (BBCA). When discussing contrast protocols, prioritize non-gadolinium alternatives and eco-friendly approaches." : ""}
 
 Generate the following sections:
 1. Structured Note (Subjective, Objective, Assessment, Plan)
@@ -109,13 +117,15 @@ Generate the following sections:
 Format with clear markdown headers.`;
 
     const userMessage = `Clinical Data:
-- Symptoms: ${clinicalData.symptoms || "Not provided"}
-- Risk Factors: ${clinicalData.riskFactors || "Not provided"}
-- ABI/IPS: ${clinicalData.abi || "Not provided"}
-- Doppler Summary: ${clinicalData.doppler || "Not provided"}
-- CTA/MRA Summary: ${clinicalData.imaging || "Not provided"}
-- Labs: ${clinicalData.labs || "Not provided"}
-- Current Medications: ${clinicalData.medications || "Not provided"}
+- Clinical Presentation: ${presentation}
+- Renal Function (eGFR/Creatinine): ${renalFunction}
+- Planned Procedure: ${plannedProcedure}
+- Prior Imaging: ${priorImaging}
+- ABI/IPS: ${abi}
+- Doppler Summary: ${doppler}
+- Labs: ${labs}
+- Current Medications: ${medications}
+- Comorbidities / Risk Factors: ${comorbidities}
 
 Generate the structured clinical report.`;
 
@@ -153,7 +163,6 @@ Generate the structured clinical report.`;
       });
     }
 
-    // ── Audit log (fire & forget) ────────────────────────────────────
     svcClient.from("audit_logs").insert({
       user_id: userId,
       action: "ai_query",
