@@ -22,6 +22,7 @@ import {
   Calculator,
   Image,
   Settings,
+  Stethoscope,
 } from "lucide-react";
 
 interface CommandPaletteProps {
@@ -42,6 +43,7 @@ const commandDefs = [
   { key: "command.education", icon: BookOpen, path: "/app/education" },
   { key: "command.analytics", icon: BarChart3, path: "/app/analytics" },
   { key: "command.settings", icon: Settings, path: "/app/settings" },
+  { key: "command.vascscreen", icon: Stethoscope, path: "/app/vascscreen" },
 ];
 
 export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {

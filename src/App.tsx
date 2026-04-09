@@ -40,6 +40,14 @@ const Network = lazy(() => import("./pages/app/Network"));
 const Logbook = lazy(() => import("./pages/app/Logbook"));
 const Admin = lazy(() => import("./pages/app/Admin"));
 const Settings = lazy(() => import("./pages/app/Settings"));
+const VascScreen = lazy(() => import("./pages/app/VascScreen"));
+const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
+const VascScreenAssessment = lazy(() => import("./pages/app/VascScreenAssessment"));
+const VascScreenABI = lazy(() => import("./pages/app/VascScreenABI"));
+const VascScreenResults = lazy(() => import("./pages/app/VascScreenResults"));
+const VascScreenDashboard = lazy(() => import("./pages/app/VascScreenDashboard"));
+const VascScreenAnalytics = lazy(() => import("./pages/app/VascScreenAnalytics"));
+const VascScreenStudy = lazy(() => import("./pages/app/VascScreenStudy"));
 
 const queryClient = new QueryClient();
 
@@ -87,6 +95,14 @@ const App = () => (
             <Route path="research" element={<ContentGate><Research /></ContentGate>} />
             <Route path="education" element={<ContentGate><Education /></ContentGate>} />
             <Route path="analytics" element={<ContentGate><Analytics /></ContentGate>} />
+            <Route path="vascscreen" element={<ContentGate><VascScreen /></ContentGate>} />
+            <Route path="vascscreen/patient-entry" element={<ContentGate><VascScreenPatientEntry /></ContentGate>} />
+            <Route path="vascscreen/assessment" element={<ContentGate><VascScreenAssessment /></ContentGate>} />
+            <Route path="vascscreen/abi" element={<ContentGate><VascScreenABI /></ContentGate>} />
+            <Route path="vascscreen/results" element={<ContentGate><VascScreenResults /></ContentGate>} />
+            <Route path="vascscreen/dashboard" element={<ContentGate><VascScreenDashboard /></ContentGate>} />
+            <Route path="vascscreen/analytics" element={<ContentGate><VascScreenAnalytics /></ContentGate>} />
+            <Route path="vascscreen/study" element={<ContentGate><VascScreenStudy /></ContentGate>} />
           </Route>
 
           {/* Legacy redirects */}
