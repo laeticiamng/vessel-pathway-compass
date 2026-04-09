@@ -16,6 +16,7 @@ import {
   LineChart,
   Settings,
   ShieldCheck,
+  Stethoscope,
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
@@ -73,6 +74,11 @@ export function AppSidebar() {
     { title: t("sidebar.simulationLab"), url: "/app/simulation", icon: FlaskConical },
   ];
 
+  // Screening items
+  const screeningItems = [
+    { title: t("sidebar.vascscreen"), url: "/app/vascscreen", icon: Stethoscope },
+  ];
+
   // Platform items — collapsible
   const platformItems = [
     { title: t("sidebar.registry"), url: "/app/registry", icon: LineChart },
@@ -121,6 +127,25 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.url}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url} end={item.url === "/app"}>
+                      <item.icon className="h-4 w-4" />
+                      {!collapsed && <span>{item.title}</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* Screening */}
+        <SidebarGroup>
+          <SidebarGroupLabel>{t("sidebar.screening")}</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {screeningItems.map((item) => (
+                <SidebarMenuItem key={item.url}>
+                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                    <NavLink to={item.url}>
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>
