@@ -46,7 +46,7 @@ export function StudyExport({ patients, cohortName }: StudyExportProps) {
     const headers = Object.keys(patients[0]);
     const rows = patients.map((p) =>
       headers.map((h) => {
-        const val = (p as Record<string, unknown>)[h];
+        const val = (p as unknown as Record<string, unknown>)[h];
         return typeof val === "string" ? `"${val}"` : String(val ?? "");
       }).join(",")
     );
