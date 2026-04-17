@@ -1557,6 +1557,7 @@ export type Database = {
         }
         Returns: string
       }
+      system_health_metrics: { Args: never; Returns: Json }
       user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
     }
     Enums: {
