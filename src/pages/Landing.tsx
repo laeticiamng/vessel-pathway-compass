@@ -124,10 +124,10 @@ export default function Landing() {
         {t("landing.footer.skipToContent")}
       </a>
       <SEOHead
-        title={t("seo.landing.title") as string}
-        description={t("seo.landing.description") as string}
+        title="AquaMR Flow | Plateforme de workflow non ionisant pour la médecine vasculaire"
+        description="AquaMR Flow est une plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche."
         path="/"
-        jsonLd={faqJsonLd}
+        jsonLd={structuredData}
       />
       <header>
       <nav className="fixed top-0 w-full z-50 glass-strong" aria-label="Main navigation">
@@ -229,32 +229,33 @@ export default function Landing() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm max-w-[90vw]">
               <Sparkles className="h-3.5 w-3.5 text-primary-foreground/80" />
               <span className="text-sm font-medium text-primary-foreground/80">
-                {t("landing.hero.badge")}
+                Prototype de recherche — médecine vasculaire
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.08] mb-6 max-w-4xl mx-auto">
-              {t("landing.hero.headlinePre")}{" "}
+              AquaMR Flow :{" "}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, hsl(220 80% 70%), hsl(165 60% 60%))" }}>
-                {t("landing.hero.headlineHighlight")}
+                plateforme de workflow non ionisant pour la médecine vasculaire
               </span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {t("landing.hero.subtitle")}
+              Planifiez les procédures, organisez les données d’imagerie, structurez la simulation clinique et
+              centralisez les registres de recherche dans une interface unique.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
-                <Link to="/auth?mode=signup">
-                  {t("landing.hero.cta")}
+                <a href="#comment-ca-marche">
+                  Voir comment ça fonctionne
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                </a>
               </Button>
               <Button asChild variant="outline" size="lg" className="text-base px-8 h-12 border-primary-foreground/40 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 backdrop-blur-sm">
-                <Link to="/pricing">{t("landing.hero.secondary")}</Link>
+                <Link to="/pricing">Voir les tarifs</Link>
               </Button>
             </div>
-            <p className="mt-6 text-sm text-primary-foreground/50 flex items-center justify-center gap-2">
-              <span className="inline-block h-2 w-2 rounded-full bg-success animate-pulse" />
-              {t("landing.hero.socialProof")}
+            <p className="mt-6 text-sm text-primary-foreground/60 max-w-xl mx-auto leading-relaxed">
+              Prototype de recherche conçu pour les équipes impliquées dans la préparation et l’analyse des
+              procédures vasculaires.
             </p>
           </motion.div>
           {/* Dashboard Preview */}
