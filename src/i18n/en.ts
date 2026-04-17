@@ -1056,6 +1056,16 @@ export const en = {
       timeline: "Timeline",
       measurements: "Measurements",
       cases: "Cases",
+      signoff: "Clinical Sign-off",
+      history: "Versioned History",
+    },
+    signoff: {
+      title: "Patient clinical sign-offs",
+      description: "Track and co-sign major clinical decisions for this patient (ADR-002).",
+    },
+    history: {
+      empty: "No clinical case. Versioned history is linked to cases (ADR-007).",
+      casePrefix: "Case:",
     },
     caseTimeline: "Case Timeline",
     addEvent: "Add Event",

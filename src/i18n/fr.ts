@@ -1034,6 +1034,16 @@ export const fr = {
       timeline: "Chronologie",
       measurements: "Mesures",
       cases: "Dossiers",
+      signoff: "Validation clinique",
+      history: "Historique versionné",
+    },
+    signoff: {
+      title: "Signoffs cliniques du patient",
+      description: "Tracez et faites cosigner les décisions cliniques majeures concernant ce patient (ADR-002).",
+    },
+    history: {
+      empty: "Aucun cas clinique. L'historique versionné est lié aux cas (ADR-007).",
+      casePrefix: "Cas :",
     },
     caseTimeline: "Chronologie du dossier",
     addEvent: "Ajouter un événement",
