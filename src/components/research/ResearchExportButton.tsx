@@ -113,6 +113,20 @@ export default function ResearchExportButton() {
       ];
 
       setReport(lines.join("\n"));
+
+      // Audit transverse (ADR-001) — traçabilité des exports recherche
+      await log({
+        category: "research",
+        action: "registry.export.generated",
+        severity: "info",
+        targetEntityType: "registry_export",
+        context: {
+          totalPatients: patients.length,
+          totalCases: cases.length,
+          totalOutcomes: outcomes.length,
+          totalMeasurements: measurements.length,
+        },
+      });
     } catch (err) {
       console.error(err);
       toast.error(t("researchExport.error") as string);
