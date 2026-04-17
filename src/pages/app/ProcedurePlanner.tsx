@@ -108,13 +108,12 @@ export default function ProcedurePlanner() {
       return null;
     }
 
-    await supabase.from("audit_logs").insert({
-      user_id: user.id,
-      action: "ai_report_generated",
-      entity_type: "ai_output",
-      entity_id: data.id,
-      details: { model: "google/gemini-3-flash-preview", input_fields: Object.keys(formData).filter(k => (formData as any)[k]) },
-    });
+    await supabase.rpc("log_audit_event" as never, {
+      _action: "ai_report_generated",
+      _entity_type: "ai_output",
+      _entity_id: data.id,
+      _details: { model: "google/gemini-3-flash-preview", input_fields: Object.keys(formData).filter(k => (formData as any)[k]) } as never,
+    } as never);
 
     setCurrentOutputId(data.id);
     loadHistory();
@@ -133,13 +132,12 @@ export default function ProcedurePlanner() {
       return;
     }
 
-    await supabase.from("audit_logs").insert({
-      user_id: user.id,
-      action: "ai_report_signed_off",
-      entity_type: "ai_output",
-      entity_id: currentOutputId,
-      details: { signed_off_at: new Date().toISOString() },
-    });
+    await supabase.rpc("log_audit_event" as never, {
+      _action: "ai_report_signed_off",
+      _entity_type: "ai_output",
+      _entity_id: currentOutputId,
+      _details: { signed_off_at: new Date().toISOString() } as never,
+    } as never);
 
     toast({ title: t("procedurePlanner.output.signedOff"), description: t("procedurePlanner.output.signedOffDesc") });
     loadHistory();
