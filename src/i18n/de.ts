@@ -31,6 +31,8 @@ export const de = {
     upload: "Hochladen",
     start: "Starten",
     continue: "Fortsetzen",
+    download: "Herunterladen",
+    exportSuccess: "Export erfolgreich",
   },
 
   medicalCategories: {
@@ -470,6 +472,7 @@ export const de = {
       confirmSign: "Bestätigen & Unterschreiben",
       signedOff: "Unterschrieben",
       signedOffDesc: "Plan vom Arzt bestätigt und unterschrieben.",
+      plan: "Plan",
     },
     history: {
       title: "Planverlauf",
@@ -558,6 +561,9 @@ export const de = {
         none: "Keines (kontrastmittelfreier Eingriff)",
       },
     },
+    noCaseError: "Kein Patientenfall ausgewählt",
+    saveResult: "Ergebnis speichern",
+    saved: "Ergebnis gespeichert",
   },
 
   patients: {
@@ -960,6 +966,8 @@ export const de = {
     measurementsDesc: "Modalitätsübergreifender Messungsvergleich",
     annotation: "Annotation",
     annotationDesc: "Bildgebungsbefunde über Modalitäten hinweg markieren und annotieren",
+    uploadSuccess: "Datei erfolgreich hochgeladen",
+    uploadedFiles: "Hochgeladene Dateien",
     tabs: {
       mri: "MRT",
       ivus: "IVUS",
@@ -1093,6 +1101,7 @@ export const de = {
       unitPlaceholder: "z.B. Verhältnis, mm, %",
       site: "Stelle (optional)",
       sitePlaceholder: "z.B. Rechte AFS, Linke ATA",
+      bloodPressure: "Blutdruck (mmHg)",
     },
     toasts: {
       updated: "Aktualisiert",
@@ -1498,6 +1507,17 @@ export const de = {
     emptyForum: "Noch keine Diskussionen. Starten Sie die erste!",
     emptyExperts: "Noch keine Expertenanfragen.",
     fields: { title: "Titel", content: "Inhalt", topic: "Thema" },
+    errorTitle: "Fehler",
+    thread: {
+      backToDiscussions: "Zurück zu Diskussionen",
+      noReplies: "Noch keine Antworten. Seien Sie der Erste.",
+      notFound: "Diskussion nicht gefunden",
+      replies: "Antworten",
+      reply: "Antworten",
+      replyPlaceholder: "Schreiben Sie Ihre Antwort...",
+      replyPosted: "Antwort veröffentlicht",
+      writeReply: "Antwort schreiben",
+    },
   },
 
   logbook: {
