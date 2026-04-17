@@ -247,6 +247,18 @@ export default function Governance() {
                       Santé système
                     </Link>
                   </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/governance/dpia">
+                      <ShieldCheck className="h-4 w-4 mr-2" />
+                      DPIA (art. 35)
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/admin/users">
+                      <ShieldCheck className="h-4 w-4 mr-2" />
+                      Utilisateurs & rôles
+                    </Link>
+                  </Button>
                   <ProcessingRegisterButton />
                 </div>
 

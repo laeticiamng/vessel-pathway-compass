@@ -7,10 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { ShieldCheck, Loader2, PenLine } from "lucide-react";
+import { ShieldCheck, Loader2, PenLine, Award } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
 
+type EidasMeta = { level: string; sha256: string; timestamp: string; algorithm: string; standard: string };
 type Signoff = {
   id: string;
   entity_type: string;
@@ -22,6 +23,7 @@ type Signoff = {
   signed_at: string | null;
   cosigned_at: string | null;
   created_at: string;
+  metadata: { eidas?: EidasMeta } | null;
 };
 
 interface SignoffPanelProps {
@@ -93,6 +95,20 @@ export function SignoffPanel({ entityType, entityId, title, description }: Signo
     onError: (e: Error) => toast.error(e.message),
   });
 
+  const applyEidas = useMutation({
+    mutationFn: async (signoffId: string) => {
+      const content = JSON.stringify({ entityType, entityId, signoffId, signedAt: new Date().toISOString() });
+      const { data, error } = await supabase.rpc("sign_with_eidas" as never, { _signoff_id: signoffId, _content: content } as never);
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Signature eIDAS appliquée (SHA-256 + horodatage).");
+      qc.invalidateQueries({ queryKey: ["signoffs", entityType, entityId] });
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
   return (
     <Card>
       <CardHeader>
@@ -130,15 +146,39 @@ export function SignoffPanel({ entityType, entityId, title, description }: Signo
             <ul className="space-y-2">
               {signoffs.map((s) => (
                 <li key={s.id} className="rounded-md border p-3 text-sm space-y-1">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2 flex-wrap">
                     <span className="font-mono text-xs">#{s.id.slice(0, 8)}</span>
-                    <Badge variant={statusVariant(s.status)}>{s.status}</Badge>
+                    <div className="flex items-center gap-1">
+                      {s.metadata?.eidas && (
+                        <Badge variant="default" className="gap-1 bg-primary/90">
+                          <Award className="h-3 w-3" />eIDAS {s.metadata.eidas.level}
+                        </Badge>
+                      )}
+                      <Badge variant={statusVariant(s.status)}>{s.status}</Badge>
+                    </div>
                   </div>
                   <p className="text-xs text-muted-foreground">
                     Signé le {s.signed_at ? format(new Date(s.signed_at), "dd/MM/yyyy HH:mm") : "—"}
                     {s.cosigned_at && ` · Cosigné le ${format(new Date(s.cosigned_at), "dd/MM/yyyy HH:mm")}`}
                   </p>
                   {s.justification && <p className="text-sm mt-1">{s.justification}</p>}
+                  {s.metadata?.eidas && (
+                    <p className="text-xs text-muted-foreground font-mono break-all border-t pt-1 mt-1">
+                      SHA-256 : {s.metadata.eidas.sha256.slice(0, 32)}…
+                    </p>
+                  )}
+                  {!s.metadata?.eidas && (s.signed_by === user?.id || s.cosigned_by === user?.id) && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => applyEidas.mutate(s.id)}
+                      disabled={applyEidas.isPending}
+                      className="mt-2"
+                    >
+                      <Award className="h-3 w-3 mr-1" />
+                      Renforcer (eIDAS)
+                    </Button>
+                  )}
                 </li>
               ))}
             </ul>

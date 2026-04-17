@@ -360,6 +360,60 @@ export type Database = {
         }
         Relationships: []
       }
+      dpia_assessments: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          created_at: string
+          created_by: string
+          data_categories: string[]
+          id: string
+          legal_basis: string
+          mitigation_measures: Json
+          processing_purpose: string
+          residual_risk_level: string
+          risks: Json
+          scope: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          created_by: string
+          data_categories?: string[]
+          id?: string
+          legal_basis: string
+          mitigation_measures?: Json
+          processing_purpose: string
+          residual_risk_level?: string
+          risks?: Json
+          scope: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          created_at?: string
+          created_by?: string
+          data_categories?: string[]
+          id?: string
+          legal_basis?: string
+          mitigation_measures?: Json
+          processing_purpose?: string
+          residual_risk_level?: string
+          risks?: Json
+          scope?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       eco_metrics: {
         Row: {
           case_id: string
@@ -1535,6 +1589,13 @@ export type Database = {
       }
     }
     Functions: {
+      assign_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _target_user_id: string
+        }
+        Returns: undefined
+      }
       count_pending_signoffs: { Args: { _user_id: string }; Returns: number }
       enforce_data_lifecycle: { Args: never; Returns: Json }
       has_role: {
@@ -1543,6 +1604,19 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      list_users_with_activity: {
+        Args: never
+        Returns: {
+          display_name: string
+          events_30d: number
+          last_activity_at: string
+          patients_count: number
+          pending_signoffs: number
+          profile_role: string
+          role_app: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }[]
       }
       log_governance_event: {
         Args: {
@@ -1556,6 +1630,17 @@ export type Database = {
           _target_user?: string
         }
         Returns: string
+      }
+      revoke_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _target_user_id: string
+        }
+        Returns: undefined
+      }
+      sign_with_eidas: {
+        Args: { _content: string; _signoff_id: string }
+        Returns: Json
       }
       system_health_metrics: { Args: never; Returns: Json }
       user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
