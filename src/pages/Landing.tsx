@@ -444,7 +444,10 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* Home FAQ — French, optimized for SEO/GEO */}
+      <HomeFAQSection />
+
+      {/* FAQ (multilingual fallback) */}
       <FAQSection />
 
       {/* About */}
@@ -488,19 +491,21 @@ export default function Landing() {
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
-              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
-                <Link to="/auth?mode=signup" className="hover:text-foreground transition-colors">{t("common.getStarted")}</Link>
-                <Link to="/support" className="hover:text-foreground transition-colors">{t("landing.footer.contact")}</Link>
-              </div>
+              <nav aria-label="Footer produit" className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <a href="#modules" className="hover:text-foreground transition-colors">Fonctionnalités</a>
+                <Link to="/pricing" className="hover:text-foreground transition-colors">Tarifs</Link>
+                <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
+                <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+                <Link to="/securite-confidentialite" className="hover:text-foreground transition-colors">Sécurité et confidentialité</Link>
+              </nav>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.legal")}</h4>
-              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+              <nav aria-label="Footer juridique" className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <Link to="/legal/terms" className="hover:text-foreground transition-colors">{t("legal.tabs.terms")}</Link>
                 <Link to="/legal/privacy" className="hover:text-foreground transition-colors">{t("legal.tabs.privacy")}</Link>
                 <Link to="/legal/notice" className="hover:text-foreground transition-colors">{t("legal.tabs.notice")}</Link>
-              </div>
+              </nav>
             </div>
           </div>
           <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
