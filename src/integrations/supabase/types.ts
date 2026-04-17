@@ -1914,6 +1914,16 @@ export type Database = {
       }
       compliance_score: { Args: never; Returns: Json }
       count_pending_signoffs: { Args: { _user_id: string }; Returns: number }
+      create_notification: {
+        Args: {
+          _body?: string
+          _reference_id?: string
+          _reference_type?: string
+          _title: string
+          _type: string
+        }
+        Returns: string
+      }
       enforce_data_lifecycle: { Args: never; Returns: Json }
       freeze_user_account: {
         Args: { _reason: string; _target_user_id: string }
@@ -1939,6 +1949,15 @@ export type Database = {
           role_app: Database["public"]["Enums"]["app_role"]
           user_id: string
         }[]
+      }
+      log_audit_event: {
+        Args: {
+          _action: string
+          _details?: Json
+          _entity_id?: string
+          _entity_type: string
+        }
+        Returns: string
       }
       log_governance_event: {
         Args: {
