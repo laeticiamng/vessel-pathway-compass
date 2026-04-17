@@ -259,6 +259,12 @@ export default function Governance() {
                       Utilisateurs & rôles
                     </Link>
                   </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/governance/compliance">
+                      <CheckCircle2 className="h-4 w-4 mr-2" />
+                      Score de conformité
+                    </Link>
+                  </Button>
                   <ProcessingRegisterButton />
                 </div>
 

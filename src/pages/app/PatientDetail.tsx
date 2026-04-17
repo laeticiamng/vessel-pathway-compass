@@ -17,6 +17,7 @@ import PatientCases from "@/components/patient/PatientCases";
 import RiskFactorsEditor from "@/components/patient/RiskFactorsEditor";
 import FHIRBadge from "@/components/patient/FHIRBadge";
 import { SignoffPanel } from "@/components/governance/SignoffPanel";
+import { CaseRevisionsTimeline } from "@/components/patient/CaseRevisionsTimeline";
 import {
   EditPatientDialog,
   AddEventDialog,
@@ -107,6 +108,7 @@ export default function PatientDetail() {
           <TabsTrigger value="measurements">{t("patientDetail.tabs.measurements")}</TabsTrigger>
           <TabsTrigger value="cases">{t("patientDetail.tabs.cases")}</TabsTrigger>
           <TabsTrigger value="signoff">Validation clinique</TabsTrigger>
+          <TabsTrigger value="history">Historique versionné</TabsTrigger>
         </TabsList>
 
         <TabsContent value="timeline" className="mt-6">
@@ -144,6 +146,19 @@ export default function PatientDetail() {
             title="Signoffs cliniques du patient"
             description="Tracez et faites cosigner les décisions cliniques majeures concernant ce patient (ADR-002)."
           />
+        </TabsContent>
+
+        <TabsContent value="history" className="mt-6 space-y-4">
+          {(cases ?? []).length === 0 ? (
+            <Card><CardContent className="py-8 text-center text-muted-foreground text-sm">Aucun cas clinique. L'historique versionné est lié aux cas (ADR-007).</CardContent></Card>
+          ) : (
+            (cases ?? []).map((c) => (
+              <div key={c.id} className="space-y-2">
+                <p className="text-sm font-medium">Cas : {c.title}</p>
+                <CaseRevisionsTimeline caseId={c.id} />
+              </div>
+            ))
+          )}
         </TabsContent>
       </Tabs>
 
