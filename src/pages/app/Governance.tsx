@@ -8,10 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ShieldCheck, Activity, FlaskConical, Stethoscope, Loader2, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, Activity, FlaskConical, Stethoscope, Loader2, AlertTriangle, CheckCircle2, Search } from "lucide-react";
+import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { useAuditLog } from "@/hooks/useAuditLog";
+import { AnomalyPanel } from "@/components/governance/AnomalyPanel";
+import { ProcessingRegisterButton } from "@/components/governance/ProcessingRegisterButton";
 
 type AppRole = "admin" | "physician" | "trainee" | "expert_reviewer" | "hospital_admin" | "research_lead" | "super_admin";
 

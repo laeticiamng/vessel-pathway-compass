@@ -26,3 +26,6 @@ verify_jwt = false
 
 [functions.export-user-data]
 verify_jwt = false
+
+[functions.lifecycle-enforcer]
+verify_jwt = false
