@@ -1914,11 +1914,22 @@ export type Database = {
       }
       compliance_score: { Args: never; Returns: Json }
       count_pending_signoffs: { Args: { _user_id: string }; Returns: number }
+      create_notification: {
+        Args: {
+          _body?: string
+          _reference_id?: string
+          _reference_type?: string
+          _title: string
+          _type: string
+        }
+        Returns: string
+      }
       enforce_data_lifecycle: { Args: never; Returns: Json }
       freeze_user_account: {
         Args: { _reason: string; _target_user_id: string }
         Returns: Json
       }
+      get_quiz_for_learner: { Args: { _quiz_id: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1927,6 +1938,14 @@ export type Database = {
         Returns: boolean
       }
       institution_health: { Args: { _institution_id: string }; Returns: Json }
+      list_quizzes_for_module: {
+        Args: { _module_id: string }
+        Returns: {
+          id: string
+          passing_score: number
+          title: string
+        }[]
+      }
       list_users_with_activity: {
         Args: never
         Returns: {
@@ -1939,6 +1958,15 @@ export type Database = {
           role_app: Database["public"]["Enums"]["app_role"]
           user_id: string
         }[]
+      }
+      log_audit_event: {
+        Args: {
+          _action: string
+          _details?: Json
+          _entity_id?: string
+          _entity_type: string
+        }
+        Returns: string
       }
       log_governance_event: {
         Args: {
@@ -1986,6 +2014,10 @@ export type Database = {
       }
       sla_metrics_30d: { Args: never; Returns: Json }
       snapshot_compliance_score: { Args: never; Returns: string }
+      submit_quiz_attempt: {
+        Args: { _answers: Json; _quiz_id: string }
+        Returns: Json
+      }
       system_health_metrics: { Args: never; Returns: Json }
       user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
     }
