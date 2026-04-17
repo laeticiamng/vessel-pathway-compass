@@ -43,6 +43,8 @@ const Governance = lazy(() => import("./pages/app/Governance"));
 const AuditSearch = lazy(() => import("./pages/app/AuditSearch"));
 const LifecyclePolicies = lazy(() => import("./pages/app/LifecyclePolicies"));
 const SystemHealth = lazy(() => import("./pages/app/SystemHealth"));
+const UsersAdmin = lazy(() => import("./pages/app/UsersAdmin"));
+const Dpia = lazy(() => import("./pages/app/Dpia"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const VascScreen = lazy(() => import("./pages/app/VascScreen"));
 const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
