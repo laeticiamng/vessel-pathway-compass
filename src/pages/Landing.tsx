@@ -31,6 +31,15 @@ import {
 import { FAQSection } from "@/components/landing/FAQSection";
 import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
 import { AboutSection } from "@/components/landing/AboutSection";
+import {
+  EnBrefSection,
+  AudienceSection,
+  HowItWorksFRSection,
+  UseCasesSection,
+  LimitsSection,
+  HomeFAQSection,
+  homeFaqJsonLd,
+} from "@/components/landing/HomeSections";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
