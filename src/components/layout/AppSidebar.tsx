@@ -94,10 +94,11 @@ export function AppSidebar() {
   const adminItems = [
     ...(session ? [
       { title: t("sidebar.admin") || "Admin", url: "/app/admin", icon: ShieldCheck },
-      { title: "Gouvernance", url: "/app/governance", icon: ShieldCheck },
-      { title: "IEC 62304", url: "/app/governance/iec62304", icon: FileText },
-      { title: "Institution", url: "/app/admin/institution", icon: ShieldCheck },
-      { title: "Santé système", url: "/app/admin/system-health", icon: Activity },
+      { title: t("sidebar.governance") || "Gouvernance", url: "/app/governance", icon: ShieldCheck },
+      { title: t("sidebar.iec62304") || "IEC 62304", url: "/app/governance/iec62304", icon: FileText },
+      { title: t("sidebar.exportsAudit") || "Audit exports", url: "/app/governance/exports", icon: FileText },
+      { title: t("sidebar.institution") || "Institution", url: "/app/admin/institution", icon: ShieldCheck },
+      { title: t("sidebar.systemHealth") || "Santé système", url: "/app/admin/system-health", icon: Activity },
       { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
     ] : []),
   ];

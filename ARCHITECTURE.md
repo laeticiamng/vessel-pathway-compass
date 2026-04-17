@@ -173,12 +173,46 @@ R = Read, W = Write, *own* = ses données, *inst* = institution, *study cohort* 
 - ✅ Tendance 90 jours du score dans `/app/governance/compliance`
 - ✅ Réactivation de comptes gelés via `reactivate_user_account()` (sévérité `warn`)
 
-### P6 — Scale & certification
-- [ ] Bounded context `Billing` séparé en edge functions dédiées
-- [ ] Multi-région avec data residency par institution
-- [ ] Préparation IEC 62304 (SOUP, traçabilité exigences ↔ tests, gestion SOUP)
+### P6 — Consolidation exécutive (livré)
+- ✅ Replay temporel + snapshots quotidiens (cf. ADR-010 / ADR-011)
+- ✅ Compliance Pack PDF 5 pages exportable (audit externe)
+- ✅ Réactivation de comptes gelés (`reactivate_user_account`)
+
+### P7 — Certification DM & multi-tenant (livré)
+- ✅ Traçabilité IEC 62304 : `software_versions`, `soup_components`, `clinical_algorithms` (cf. ADR-012)
+- ✅ Page `/app/governance/iec62304` + Technical File PDF signé
+- ✅ Cloisonnement multi-institution renforcé : `institution_settings` + RPC `institution_health()` (cf. ADR-013)
+- ✅ Page `/app/admin/institution` (data region, classe MDR, contact DPO)
+- ✅ SLA tracking : table `sla_incidents`, vue `sla_metrics_30d`, widget dans System Health (cf. ADR-015)
+- ✅ Chain-of-custody export SHA-256 : `export_manifests` + RPC `register_export_manifest` (cf. ADR-014)
+- ✅ Détection volume suspect (>5 exports/h) avec alerte gouvernance
+
+### P8 — CE marking & FHIR (à venir)
+- [ ] Générateur "CE technical file" complet (assemble IEC 62304 + DPIA + registre RGPD + Compliance Pack)
+- [ ] Intégration FHIR R5 inbound (Patient, Observation, DiagnosticReport)
 - [ ] Signature qualifiée eIDAS niveau « high » (token cryptographique externe)
 - [ ] API publique de vérification de conformité (webhook auditeurs)
+- [ ] Bounded context `Billing` séparé en edge functions dédiées
+
+### ADR-012 — Traçabilité IEC 62304 (cycle de vie logiciel)
+**Contexte** : la plateforme intègre des aides à la décision clinique (CI-AKI, ESC 2024, ABI). Pour viser un marquage CE classe IIa+, la norme **IEC 62304** impose une traçabilité explicite des versions, des composants tiers (SOUP) et des algorithmes cliniques.
+**Décision** : 3 tables `software_versions` (release + classe risque A/B/C), `soup_components` (CVE status, licence, usage), `clinical_algorithms` (statut de validation, evidence URL, dernière revue). RLS lecture authentifiée, écriture super_admin. Page dédiée `/app/governance/iec62304` avec export PDF "Technical File" signé SHA-256.
+**Conséquence** : dossier de conception conforme exportable à tout instant ; revue annuelle des SOUP traçable ; audit notifié facilité.
+
+### ADR-013 — Cloisonnement multi-institution & data residency
+**Contexte** : RLS via `user_institution_ids()` cloisonne les données mais n'expose ni dashboard scopé hospital_admin ni paramètres opérationnels par établissement (région, contact DPO, classe MDR).
+**Décision** : table `institution_settings` (1-1 avec `institutions`) avec `data_region`, `mdr_class`, `dpo_contact_email`, `retention_override_days`. RPC SECURITY DEFINER `institution_health(_institution_id)` accessible aux hospital_admin de l'institution uniquement. Page `/app/admin/institution`.
+**Conséquence** : un établissement peut piloter sa propre conformité sans accès au reste de la plateforme ; route stockage future alignée sur `data_region`.
+
+### ADR-014 — Export chain-of-custody (SHA-256)
+**Contexte** : les exports CSV/PDF (audit, registre, compliance pack, recherche) ne sont pas traçables après téléchargement → impossible de prouver l'intégrité ou la non-altération en cas de litige.
+**Décision** : table `export_manifests` (user_id, entity_type, format, row_count, sha256, purpose, expires_at 90j). RPC `register_export_manifest()` appelée par chaque générateur (PDF/CSV) avant téléchargement. Hash injecté en pied de page. Détection automatique de volume suspect (>5 exports/h) avec alerte gouvernance.
+**Conséquence** : chaque export est cryptographiquement signé et opposable ; détection précoce d'exfiltration ; page `/app/governance/exports` pour audit historique.
+
+### ADR-015 — SLA tracking & observabilité opérationnelle
+**Contexte** : les incidents de service ne sont pas formalisés → pas de MTTR, pas de calcul d'uptime, impossible de tenir des SLA contractuels avec les hôpitaux.
+**Décision** : table `sla_incidents` (severity sev1-4, started_at, resolved_at, mttr_minutes auto-calculé via trigger `compute_sla_mttr`, affected_users, root_cause). Vue/RPC `sla_metrics_30d()` (uptime %, MTTR moyen, répartition par sévérité). Widget intégré dans `/app/admin/system-health` avec déclaration d'incident en 1 clic (super_admin).
+**Conséquence** : SLA mesurables et exportables ; alignement de la classe MDR de chaque institution sur des engagements contractuels.
 
 ## 7. Conventions techniques
 
