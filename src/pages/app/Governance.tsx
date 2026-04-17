@@ -228,6 +228,18 @@ export default function Governance() {
               <Card><CardContent className="py-8 text-center text-muted-foreground">Réservé aux DPO (admin / super_admin).</CardContent></Card>
             ) : (
               <>
+                <div className="flex flex-wrap gap-2">
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/governance/audit-search">
+                      <Search className="h-4 w-4 mr-2" />
+                      Recherche audit avancée
+                    </Link>
+                  </Button>
+                  <ProcessingRegisterButton />
+                </div>
+
+                <AnomalyPanel />
+
                 <Card>
                   <CardHeader>
                     <CardTitle>Journal de gouvernance (200 derniers)</CardTitle>
