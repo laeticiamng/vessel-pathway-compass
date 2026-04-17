@@ -131,7 +131,9 @@ const App = () => (
             <Route path="governance" element={<Governance />} />
             <Route path="governance/audit-search" element={<AuditSearch />} />
             <Route path="governance/policies" element={<LifecyclePolicies />} />
+            <Route path="governance/dpia" element={<Dpia />} />
             <Route path="admin/system-health" element={<SystemHealth />} />
+            <Route path="admin/users" element={<UsersAdmin />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 
