@@ -18,7 +18,6 @@ export default function ResearchExportButton() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<string | null>(null);
-  const [reportSha, setReportSha] = useState<string | null>(null);
 
   const generateExport = async () => {
     if (!user) return;
@@ -135,7 +134,6 @@ export default function ResearchExportButton() {
         : reportText;
 
       setReport(finalReport);
-      setReportSha(manifest?.sha256 ?? null);
 
       // Audit transverse (ADR-001) — traçabilité des exports recherche
       await log({
