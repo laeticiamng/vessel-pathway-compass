@@ -95,28 +95,43 @@ serve(async (req) => {
           break;
         }
 
-        // Look up user by email via subscriptions table first, then fall back to profiles
+        // Look up user_id with progressive fallbacks (most reliable first)
         let matchedUserId: string | null = null;
 
-        // Check existing subscription record for this customer
-        const { data: existingSub } = await svcClient
-          .from("subscriptions")
-          .select("user_id")
-          .eq("stripe_customer_id", customerId)
-          .maybeSingle();
+        // 1. subscription.metadata.user_id (set during create-checkout)
+        if (subscription.metadata?.user_id) {
+          matchedUserId = subscription.metadata.user_id as string;
+          logStep("Found user via subscription metadata", { userId: matchedUserId });
+        }
 
-        if (existingSub) {
-          matchedUserId = existingSub.user_id;
-          logStep("Found user via subscriptions table", { userId: matchedUserId });
-        } else {
-          // Fall back to admin lookup (only for first-time customer mapping)
-          const { data: authData } = await svcClient.auth.admin.listUsers({ perPage: 1, page: 1 });
-          // Search by email with a targeted query
-          const { data: allUsers } = await svcClient.auth.admin.listUsers({ perPage: 1000 });
-          const matchedUser = allUsers?.users?.find(u => u.email === customer.email);
-          if (matchedUser) {
-            matchedUserId = matchedUser.id;
-            logStep("Found user via auth lookup", { userId: matchedUserId });
+        // 2. existing subscription record for this customer
+        if (!matchedUserId) {
+          const { data: existingSub } = await svcClient
+            .from("subscriptions")
+            .select("user_id")
+            .eq("stripe_customer_id", customerId)
+            .maybeSingle();
+          if (existingSub) {
+            matchedUserId = existingSub.user_id;
+            logStep("Found user via subscriptions table", { userId: matchedUserId });
+          }
+        }
+
+        // 3. customer.metadata.user_id
+        if (!matchedUserId && customer.metadata?.user_id) {
+          matchedUserId = customer.metadata.user_id as string;
+          logStep("Found user via customer metadata", { userId: matchedUserId });
+        }
+
+        // 4. last-resort paginated email lookup (resilient beyond 1000 users)
+        if (!matchedUserId) {
+          const PAGE_SIZE = 200;
+          for (let page = 1; page <= 50; page++) {
+            const { data: pageData } = await svcClient.auth.admin.listUsers({ perPage: PAGE_SIZE, page });
+            const users = pageData?.users ?? [];
+            const found = users.find(u => u.email?.toLowerCase() === customer.email!.toLowerCase());
+            if (found) { matchedUserId = found.id; logStep("Found user via paginated lookup", { userId: matchedUserId, page }); break; }
+            if (users.length < PAGE_SIZE) break;
           }
         }
 

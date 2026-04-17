@@ -33,12 +33,19 @@ export default function Pricing() {
   }));
 
   const handleCheckout = async (planKey: string) => {
-    if (planKey === "institution") return;
+    if (planKey === "institution") {
+      navigate("/contact");
+      return;
+    }
     if (!session) {
       navigate("/auth?mode=signup");
       return;
     }
-    if (planKey === "individual") return;
+    if (planKey === "individual") {
+      // Free tier — already accessible after signup
+      navigate("/app");
+      return;
+    }
 
     setCheckoutLoading(planKey);
     try {
@@ -59,19 +66,20 @@ export default function Pricing() {
   };
 
   const getButtonAction = (planKey: string) => {
+    const label = plans.find(p => p.key === planKey)!.cta;
     if (planKey === "institution") {
-      return { href: "/support", onClick: undefined, label: plans.find(p => p.key === planKey)!.cta };
+      return { href: "/contact", onClick: undefined, label };
     }
     if (planKey === "individual") {
-      if (!session) return { href: "/auth?mode=signup", onClick: undefined, label: plans.find(p => p.key === planKey)!.cta };
+      if (!session) return { href: "/auth?mode=signup", onClick: undefined, label };
       if (currentPlan === "individual" && !subscribed) return { href: undefined, onClick: undefined, label: t("pricing.currentPlan"), disabled: true };
-      return { href: "/auth?mode=signup", onClick: undefined, label: plans.find(p => p.key === planKey)!.cta };
+      return { href: "/app", onClick: undefined, label };
     }
     // professional
     if (subscribed && currentPlan === "professional") {
       return { href: undefined, onClick: handleManage, label: t("pricing.managePlan") };
     }
-    return { href: undefined, onClick: () => handleCheckout(planKey), label: plans.find(p => p.key === planKey)!.cta };
+    return { href: undefined, onClick: () => handleCheckout(planKey), label };
   };
 
   return (
