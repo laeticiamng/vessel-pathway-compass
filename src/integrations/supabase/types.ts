@@ -1518,10 +1518,25 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      governance_anomalies: {
+        Row: {
+          actor_id: string | null
+          anomaly_type: string | null
+          day: string | null
+          error_count: number | null
+          export_count: number | null
+          last_event_at: string | null
+          phi_access_count: number | null
+          severity: string | null
+          signoff_count: number | null
+          total_events: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       count_pending_signoffs: { Args: { _user_id: string }; Returns: number }
+      enforce_data_lifecycle: { Args: never; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

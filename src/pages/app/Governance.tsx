@@ -8,10 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ShieldCheck, Activity, FlaskConical, Stethoscope, Loader2, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, Activity, FlaskConical, Stethoscope, Loader2, AlertTriangle, CheckCircle2, Search } from "lucide-react";
+import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import { toast } from "sonner";
 import { useAuditLog } from "@/hooks/useAuditLog";
+import { AnomalyPanel } from "@/components/governance/AnomalyPanel";
+import { ProcessingRegisterButton } from "@/components/governance/ProcessingRegisterButton";
 
 type AppRole = "admin" | "physician" | "trainee" | "expert_reviewer" | "hospital_admin" | "research_lead" | "super_admin";
 
@@ -225,6 +228,18 @@ export default function Governance() {
               <Card><CardContent className="py-8 text-center text-muted-foreground">Réservé aux DPO (admin / super_admin).</CardContent></Card>
             ) : (
               <>
+                <div className="flex flex-wrap gap-2">
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/governance/audit-search">
+                      <Search className="h-4 w-4 mr-2" />
+                      Recherche audit avancée
+                    </Link>
+                  </Button>
+                  <ProcessingRegisterButton />
+                </div>
+
+                <AnomalyPanel />
+
                 <Card>
                   <CardHeader>
                     <CardTitle>Journal de gouvernance (200 derniers)</CardTitle>
