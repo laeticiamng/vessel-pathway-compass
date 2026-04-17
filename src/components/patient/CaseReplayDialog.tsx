@@ -99,8 +99,8 @@ export function CaseReplayDialog({ caseId }: Props) {
                   const now = current[f];
                   const changed = JSON.stringify(past) !== JSON.stringify(now);
                   return (
-                    <div key={f} className={cn("rounded border p-2 font-mono text-xs", changed && "border-amber-500/40 bg-amber-500/5")}>
-                      <div className="font-semibold text-foreground mb-1">{f} {changed && <span className="text-amber-600 dark:text-amber-400">●</span>}</div>
+                    <div key={f} className={cn("rounded border p-2 font-mono text-xs", changed && "border-primary/40 bg-primary/5")}>
+                      <div className="font-semibold text-foreground mb-1">{f} {changed && <span className="text-primary">●</span>}</div>
                       <div className="grid grid-cols-2 gap-2">
                         <div>
                           <span className="text-muted-foreground">Alors :</span>{" "}

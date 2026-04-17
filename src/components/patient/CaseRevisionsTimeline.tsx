@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Loader2, GitCommit, Plus, Edit3, ArrowRightLeft, Tag } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
+import { CaseReplayDialog } from "./CaseReplayDialog";
 
 interface CaseRevision {
   id: string;
@@ -56,11 +57,12 @@ export function CaseRevisionsTimeline({ caseId }: { caseId: string }) {
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between gap-2">
         <CardTitle className="flex items-center gap-2 text-base">
           <GitCommit className="h-4 w-4" />
           Historique versionné (event sourcing)
         </CardTitle>
+        <CaseReplayDialog caseId={caseId} />
       </CardHeader>
       <CardContent>
         {isLoading ? (

@@ -5,6 +5,8 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Shield, FileCheck, ScrollText, AlertTriangle, Recycle } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
+import { CompliancePackButton } from "@/components/governance/CompliancePackButton";
+import { ComplianceTrendChart } from "@/components/governance/ComplianceTrendChart";
 
 interface ComplianceBreakdown {
   score: number;
@@ -48,9 +50,12 @@ export default function ComplianceScore() {
     <>
       <SEOHead title="Score de conformité — Gouvernance" description="Score global de conformité RGPD/MDR de la plateforme." path="/app/governance/compliance" noindex />
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Score de conformité global</h1>
-          <p className="text-muted-foreground">Vision unifiée de la santé conformité (RGPD · MDR · ISO 14971).</p>
+        <div className="flex items-start justify-between gap-4 flex-wrap">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">Score de conformité global</h1>
+            <p className="text-muted-foreground">Vision unifiée de la santé conformité (RGPD · MDR · ISO 14971).</p>
+          </div>
+          {data && <CompliancePackButton data={data} />}
         </div>
 
         {isLoading || !data ? (
@@ -113,6 +118,8 @@ export default function ComplianceScore() {
                 warning={!data.breakdown.lifecycle.last_run}
               />
             </div>
+
+            <ComplianceTrendChart />
           </>
         )}
       </div>

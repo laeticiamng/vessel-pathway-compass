@@ -53,7 +53,7 @@ export function UnfreezeAccountButton({ targetUserId, targetName, onReactivated 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
       <AlertDialogTrigger asChild>
-        <Button size="sm" variant="outline" className="border-emerald-500/50 text-emerald-700 hover:bg-emerald-500/10 dark:text-emerald-400">
+        <Button size="sm" variant="outline">
           <UserCheck className="h-3 w-3 mr-1" />
           Réactiver
         </Button>
