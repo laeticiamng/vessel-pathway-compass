@@ -1929,6 +1929,7 @@ export type Database = {
         Args: { _reason: string; _target_user_id: string }
         Returns: Json
       }
+      get_quiz_for_learner: { Args: { _quiz_id: string }; Returns: Json }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -2005,6 +2006,10 @@ export type Database = {
       }
       sla_metrics_30d: { Args: never; Returns: Json }
       snapshot_compliance_score: { Args: never; Returns: string }
+      submit_quiz_attempt: {
+        Args: { _answers: Json; _quiz_id: string }
+        Returns: Json
+      }
       system_health_metrics: { Args: never; Returns: Json }
       user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
     }
