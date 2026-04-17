@@ -124,6 +124,50 @@ export type Database = {
           },
         ]
       }
+      case_revisions: {
+        Row: {
+          case_id: string
+          change_type: string
+          changed_by: string
+          changed_fields: Json
+          created_at: string
+          id: string
+          new_snapshot: Json
+          previous_snapshot: Json | null
+          revision_number: number
+        }
+        Insert: {
+          case_id: string
+          change_type: string
+          changed_by: string
+          changed_fields?: Json
+          created_at?: string
+          id?: string
+          new_snapshot: Json
+          previous_snapshot?: Json | null
+          revision_number: number
+        }
+        Update: {
+          case_id?: string
+          change_type?: string
+          changed_by?: string
+          changed_fields?: Json
+          created_at?: string
+          id?: string
+          new_snapshot?: Json
+          previous_snapshot?: Json | null
+          revision_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "case_revisions_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       cases: {
         Row: {
           category: string
@@ -1596,8 +1640,13 @@ export type Database = {
         }
         Returns: undefined
       }
+      compliance_score: { Args: never; Returns: Json }
       count_pending_signoffs: { Args: { _user_id: string }; Returns: number }
       enforce_data_lifecycle: { Args: never; Returns: Json }
+      freeze_user_account: {
+        Args: { _reason: string; _target_user_id: string }
+        Returns: Json
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]

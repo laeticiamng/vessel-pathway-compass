@@ -12,6 +12,7 @@ import { Loader2, ShieldAlert, Users, UserPlus, UserMinus } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import { fr } from "date-fns/locale";
 import { toast } from "sonner";
+import { FreezeAccountButton } from "@/components/governance/FreezeAccountButton";
 
 type AppRole = "admin" | "physician" | "trainee" | "expert_reviewer" | "hospital_admin" | "research_lead" | "super_admin";
 
@@ -150,6 +151,13 @@ export default function UsersAdmin() {
                         onClick={() => revoke.mutate({ targetId: u.user_id, role: pendingRole[u.user_id]! })}>
                         <UserMinus className="h-3 w-3 mr-1" />Révoquer
                       </Button>
+                      {u.user_id !== user?.id && (
+                        <FreezeAccountButton
+                          targetUserId={u.user_id}
+                          targetName={u.display_name ?? u.user_id.slice(0, 8)}
+                          onFrozen={() => qc.invalidateQueries({ queryKey: ["admin-users"] })}
+                        />
+                      )}
                     </div>
                   )}
                 </CardContent>

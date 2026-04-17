@@ -72,6 +72,21 @@ R = Read, W = Write, *own* = ses données, *inst* = institution, *study cohort* 
 **Décision** : `user_roles` + fonction `has_role()` SECURITY DEFINER. RLS via `has_role()`.  
 **Conséquence** : impossible pour un utilisateur d'auto-promouvoir son rôle.
 
+### ADR-007 — Event sourcing léger via `case_revisions`
+**Contexte** : MDR / IEC 62304 exigent une traçabilité immuable des modifications cliniques.
+**Décision** : table append-only `case_revisions` alimentée par trigger `capture_case_revision()` sur `cases`. Aucun INSERT/UPDATE/DELETE depuis le client. Snapshot `previous` + `new` + diff structuré dans `changed_fields`.
+**Conséquence** : timeline versionnée disponible dans `PatientDetail` ; reconstitution complète possible à tout instant ; preuve d'intégrité opposable.
+
+### ADR-008 — Score de conformité agrégé via RPC `compliance_score()`
+**Contexte** : besoin d'une métrique unique pour piloter la conformité (RGPD/MDR/ISO 14971) sans agrégation côté client.
+**Décision** : fonction SECURITY DEFINER calculant 5 sous-scores pondérés (DPIA 25 / RGPD 25 / signoffs eIDAS 25 / anomalies 15 / lifecycle 10) → note 0-100 + grade A→E. Restreinte aux DPO/super_admin.
+**Conséquence** : KPI exécutif unique, refresh 60 s, exposable en API future pour tableau de bord direction.
+
+### ADR-009 — Gel de compte via `freeze_user_account()`
+**Contexte** : incident RH ou sécurité → besoin de suspendre instantanément tous les rôles applicatifs sans supprimer le compte.
+**Décision** : RPC SECURITY DEFINER qui (1) collecte les rôles, (2) les supprime atomiquement, (3) journalise l'action en sévérité `critical` avec motif obligatoire. Réservée à `super_admin`. Auto-protection : impossible de geler son propre compte.
+**Conséquence** : réponse à incident en 1 clic, traçabilité complète, réversibilité par réattribution manuelle des rôles.
+
 ## 5. Couche audit applicative
 
 ```
@@ -121,10 +136,32 @@ R = Read, W = Write, *own* = ses données, *inst* = institution, *study cohort* 
 - [ ] DPIA (Data Protection Impact Assessment) workflow
 - [ ] Préparation IEC 62304 (SOUP, traçabilité exigences ↔ tests)
 
-### P3 — Scale
+### P2 — Conformité avancée (livré)
+- ✅ Signature électronique qualifiée (eIDAS substantiel) via `sign_with_eidas()` — hash SHA-256 + timestamp RFC3161-compatible
+- ✅ Export registre des traitements (RGPD art. 30) en PDF (`ProcessingRegisterButton`)
+- ✅ Détection d'anomalie sur `governance_events` via vue `governance_anomalies`
+- ✅ DPIA workflow complet (`dpia_assessments` + page `/app/governance/dpia` + export PDF)
+- ✅ Notification temps réel DPO sur événement critique (trigger `notify_dpo_on_critical_event`)
+- ✅ Cycle de vie automatisé via cron `enforce_data_lifecycle()` quotidien
+
+### P3 — Observabilité & RBAC avancé (livré)
+- ✅ Dashboard santé système `/app/admin/system-health` (RPC `system_health_metrics()`, refresh 30 s)
+- ✅ Page UI politiques cycle de vie `/app/governance/policies` avec preview d'impact
+- ✅ Gestion utilisateurs `/app/admin/users` (RPC `list_users_with_activity` + assign/revoke)
+- ✅ Recherche audit avancée `/app/governance/audit-search` avec export CSV
+
+### P4 — Event sourcing & gouvernance exécutive (livré)
+- ✅ Event sourcing léger sur `cases` via `case_revisions` immuable + trigger
+- ✅ Timeline versionnée intégrée dans `PatientDetail` (onglet "Historique versionné")
+- ✅ Score de conformité global `/app/governance/compliance` (5 sous-scores + grade A-E)
+- ✅ Gel de compte via `freeze_user_account()` + bouton dans `UsersAdmin` (action critical)
+
+### P5 — Scale & certification
 - [ ] Bounded context `Billing` séparé en edge functions dédiées
-- [ ] Event sourcing léger sur `cases` (versions immuables)
 - [ ] Multi-région avec data residency par institution
+- [ ] Préparation IEC 62304 (SOUP, traçabilité exigences ↔ tests)
+- [ ] Reconstitution d'état historique d'un case à instant T (replay des `case_revisions`)
+- [ ] Export "compliance pack" PDF (score + DPIA + registre + anomalies 30 j) pour audit externe
 
 ## 7. Conventions techniques
 
