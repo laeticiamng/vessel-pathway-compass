@@ -109,14 +109,30 @@ serve(async (req) => {
           matchedUserId = existingSub.user_id;
           logStep("Found user via subscriptions table", { userId: matchedUserId });
         } else {
-          // Fall back to admin lookup (only for first-time customer mapping)
-          const { data: authData } = await svcClient.auth.admin.listUsers({ perPage: 1, page: 1 });
-          // Search by email with a targeted query
-          const { data: allUsers } = await svcClient.auth.admin.listUsers({ perPage: 1000 });
-          const matchedUser = allUsers?.users?.find(u => u.email === customer.email);
-          if (matchedUser) {
-            matchedUserId = matchedUser.id;
-            logStep("Found user via auth lookup", { userId: matchedUserId });
+          // Use Stripe customer metadata.user_id (set during create-checkout) as primary mapping
+          if (customer.metadata?.user_id) {
+            matchedUserId = customer.metadata.user_id as string;
+            logStep("Found user via customer metadata", { userId: matchedUserId });
+          } else {
+            // Fallback: paginate through auth users (resilient beyond 1000 users)
+            const PAGE_SIZE = 200;
+            let page = 1;
+            while (!matchedUserId) {
+              const { data: pageData } = await svcClient.auth.admin.listUsers({ perPage: PAGE_SIZE, page });
+              const users = pageData?.users ?? [];
+              const found = users.find(u => u.email?.toLowerCase() === customer.email!.toLowerCase());
+              if (found) {
+                matchedUserId = found.id;
+                logStep("Found user via paginated auth lookup", { userId: matchedUserId, page });
+                break;
+              }
+              if (users.length < PAGE_SIZE) break;
+              page += 1;
+              if (page > 50) {
+                logStep("Aborting auth lookup after 50 pages", { email: customer.email });
+                break;
+              }
+            }
           }
         }
 
