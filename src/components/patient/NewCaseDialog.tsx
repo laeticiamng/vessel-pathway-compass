@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { newPatientCaseSchema } from "@/lib/validation";
+import { useAuditLog } from "@/hooks/useAuditLog";
 
 const CATEGORIES = ["PAD", "Aortic", "Venous", "Carotid", "DVT/PE"] as const;
 const AGE_RANGES = ["18-30", "31-40", "41-50", "51-60", "61-70", "71-80", "80+"] as const;
@@ -28,6 +29,7 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { log } = useAuditLog();
 
   const [pseudonym, setPseudonym] = useState("");
   const [ageRange, setAgeRange] = useState("");
@@ -60,13 +62,31 @@ export function NewCaseDialog({ open, onOpenChange }: NewCaseDialogProps) {
         .single();
       if (pErr) throw pErr;
 
-      const { error: cErr } = await supabase.from("cases").insert({
+      const { data: caseRow, error: cErr } = await supabase.from("cases").insert({
         patient_id: patient.id,
         category: category || "pad",
         title: caseTitle || pseudonym,
         created_by: user.id,
-      });
+      }).select("id").single();
       if (cErr) throw cErr;
+
+      // Audit transverse (ADR-001)
+      await log({
+        category: "clinical",
+        action: "patient.created",
+        severity: "info",
+        targetEntityType: "patient",
+        targetEntityId: patient.id,
+        context: { ageRange, sex, hasCase: true },
+      });
+      await log({
+        category: "clinical",
+        action: "case.created",
+        severity: "info",
+        targetEntityType: "case",
+        targetEntityId: caseRow?.id,
+        context: { category: category || "pad", patientId: patient.id },
+      });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["patients"] });

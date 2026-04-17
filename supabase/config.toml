@@ -23,3 +23,6 @@ verify_jwt = false
 
 [functions.verify-checkout-session]
 verify_jwt = false
+
+[functions.export-user-data]
+verify_jwt = false

@@ -7,10 +7,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Download, FileText, Shield, Loader2 } from "lucide-react";
+import { useAuditLog } from "@/hooks/useAuditLog";
 
 export default function ResearchExportButton() {
   const { user } = useAuth();
   const { t } = useTranslation();
+  const { log } = useAuditLog();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<string | null>(null);
@@ -111,6 +113,20 @@ export default function ResearchExportButton() {
       ];
 
       setReport(lines.join("\n"));
+
+      // Audit transverse (ADR-001) — traçabilité des exports recherche
+      await log({
+        category: "research",
+        action: "registry.export.generated",
+        severity: "info",
+        targetEntityType: "registry_export",
+        context: {
+          totalPatients: patients.length,
+          totalCases: cases.length,
+          totalOutcomes: outcomes.length,
+          totalMeasurements: measurements.length,
+        },
+      });
     } catch (err) {
       console.error(err);
       toast.error(t("researchExport.error") as string);

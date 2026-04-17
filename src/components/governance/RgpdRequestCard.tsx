@@ -11,6 +11,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { format } from "date-fns";
+import { RgpdExportButton } from "@/components/governance/RgpdExportButton";
 
 const REQUEST_TYPES = [
   { value: "access", label: "Droit d'accès (art. 15)" },
@@ -113,10 +114,13 @@ export function RgpdRequestCard() {
             maxLength={1000}
           />
         </div>
-        <Button onClick={() => submit.mutate()} disabled={submit.isPending}>
-          {submit.isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
-          Soumettre la demande
-        </Button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Button onClick={() => submit.mutate()} disabled={submit.isPending}>
+            {submit.isPending && <Loader2 className="h-4 w-4 mr-2 animate-spin" />}
+            Soumettre la demande
+          </Button>
+          <RgpdExportButton />
+        </div>
 
         <div className="border-t pt-4 space-y-2">
           <p className="text-sm font-medium flex items-center gap-2">
