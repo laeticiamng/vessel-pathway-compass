@@ -62,6 +62,11 @@ export const de = {
     admin: "Admin-Panel",
     screening: "Screening",
     vascscreen: "VascScreen",
+    governance: "Governance",
+    iec62304: "IEC 62304",
+    exportsAudit: "Export-Audit",
+    institution: "Institution",
+    systemHealth: "Systemzustand",
   },
 
   command: {
