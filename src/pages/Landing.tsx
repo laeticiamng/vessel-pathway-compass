@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import dashboardPreview from "@/assets/dashboard-preview.jpg";
-import { Card, CardContent } from "@/components/ui/card";
+// Card import removed — testimonials section deleted
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, type Language } from "@/i18n/context";
@@ -28,8 +28,7 @@ import {
   FileText,
   Link2,
 } from "lucide-react";
-import { FAQSection } from "@/components/landing/FAQSection";
-import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+// FAQSection + HowItWorksSection legacy retirés (doublons)
 import { AboutSection } from "@/components/landing/AboutSection";
 import {
   EnBrefSection,
@@ -229,33 +228,38 @@ export default function Landing() {
             <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm max-w-[90vw]">
               <Sparkles className="h-3.5 w-3.5 text-primary-foreground/80" />
               <span className="text-sm font-medium text-primary-foreground/80">
-                Prototype de recherche — médecine vasculaire
+                Bêta ouverte — accès complet gratuit
               </span>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[1.08] mb-6 max-w-4xl mx-auto">
-              AquaMR Flow :{" "}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-[1.1] mb-6 max-w-4xl mx-auto">
+              Moins de contraste. Moins de radiation.{" "}
               <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, hsl(220 80% 70%), hsl(165 60% 60%))" }}>
-                plateforme de workflow non ionisant pour la médecine vasculaire
+                Plus de contrôle sur vos procédures vasculaires.
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-              Planifiez les procédures, organisez les données d’imagerie, structurez la simulation clinique et
-              centralisez les registres de recherche dans une interface unique.
+            <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
+              AquaMR Flow centralise planification, imagerie multimodale, stratification CI-AKI et registre — pour
+              les équipes vasculaires qui veulent structurer leurs workflows non ionisants.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
-                <a href="#comment-ca-marche">
-                  Voir comment ça fonctionne
+                <Link to="/auth?mode=signup">
+                  Créer un compte gratuit
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </a>
+                </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="text-base px-8 h-12 border-primary-foreground/40 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 backdrop-blur-sm">
-                <Link to="/pricing">Voir les tarifs</Link>
+                <a href="#comment-ca-marche">Voir comment ça marche</a>
               </Button>
             </div>
-            <p className="mt-6 text-sm text-primary-foreground/60 max-w-xl mx-auto leading-relaxed">
-              Prototype de recherche conçu pour les équipes impliquées dans la préparation et l’analyse des
-              procédures vasculaires.
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-primary-foreground/70">
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> Sans carte bancaire</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> Accès complet pendant la bêta</span>
+              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> Données pseudonymisées, RGPD</span>
+            </div>
+            <p className="mt-6 text-xs text-primary-foreground/50 max-w-xl mx-auto leading-relaxed">
+              Prototype de recherche — pas un dispositif médical. Toute aide à la décision nécessite la
+              confirmation d'un clinicien.
             </p>
           </motion.div>
           {/* Dashboard Preview */}
@@ -297,8 +301,7 @@ export default function Landing() {
       {/* Limites actuelles */}
       <LimitsSection />
 
-      {/* Legacy stepper (kept for richer detail) */}
-      <HowItWorksSection />
+      {/* Legacy stepper supprimé — doublon de HowItWorksFRSection */}
 
       {/* Modules */}
       <section id="modules" className="py-24 bg-background scroll-mt-20">
@@ -417,38 +420,12 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-4">{t("landing.testimonials.title")}</h2>
-          <p className="text-sm text-muted-foreground text-center mb-12">{t("landing.testimonials.disclaimer")}</p>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto">
-            {(t("landing.testimonials.items") as any as Array<{ quote: string; author: string; role: string }>)?.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
-              >
-                <Card className="p-6 h-full card-hover">
-                  <CardContent className="p-0">
-                    <p className="text-sm italic text-muted-foreground mb-4 leading-relaxed">"{item.quote}"</p>
-                    <p className="text-sm font-semibold">{item.author}</p>
-                    <p className="text-xs text-muted-foreground">{item.role}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Témoignages retirés : non vérifiables, contraires à la stratégie social-proof transparente. */}
 
       {/* Home FAQ — French, optimized for SEO/GEO */}
       <HomeFAQSection />
 
-      {/* FAQ (multilingual fallback) */}
-      <FAQSection />
+      {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
 
       {/* About */}
       <AboutSection />
