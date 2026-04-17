@@ -557,6 +557,9 @@ export const fr = {
         none: "Aucun (procédure sans contraste)",
       },
     },
+    noCaseError: "Aucun dossier patient sélectionné",
+    saveResult: "Enregistrer le résultat",
+    saved: "Résultat enregistré",
   },
 
   patients: {
@@ -959,6 +962,8 @@ export const fr = {
     measurementsDesc: "Comparaison de mesures inter-modalités",
     annotation: "Annotation",
     annotationDesc: "Marquer et annoter les résultats d'imagerie à travers les modalités",
+    uploadSuccess: "Fichier téléversé avec succès",
+    uploadedFiles: "Fichiers téléversés",
     tabs: {
       mri: "IRM",
       ivus: "IVUS",
@@ -1092,6 +1097,7 @@ export const fr = {
       unitPlaceholder: "ex. : ratio, mm, %",
       site: "Site (optionnel)",
       sitePlaceholder: "ex. : AFS droite, ATA gauche",
+      bloodPressure: "Tension artérielle (mmHg)",
     },
     toasts: {
       updated: "Mis à jour",
@@ -1497,6 +1503,17 @@ export const fr = {
     emptyForum: "Aucune discussion pour le moment. Lancez la première !",
     emptyExperts: "Aucune demande d'expert pour le moment.",
     fields: { title: "Titre", content: "Contenu", topic: "Sujet" },
+    errorTitle: "Erreur",
+    thread: {
+      backToDiscussions: "Retour aux discussions",
+      noReplies: "Aucune réponse pour le moment. Soyez le premier à répondre.",
+      notFound: "Discussion introuvable",
+      replies: "Réponses",
+      reply: "Répondre",
+      replyPlaceholder: "Écrivez votre réponse...",
+      replyPosted: "Réponse publiée",
+      writeReply: "Écrire une réponse",
+    },
   },
 
   logbook: {
