@@ -1938,6 +1938,14 @@ export type Database = {
         Returns: boolean
       }
       institution_health: { Args: { _institution_id: string }; Returns: Json }
+      list_quizzes_for_module: {
+        Args: { _module_id: string }
+        Returns: {
+          id: string
+          passing_score: number
+          title: string
+        }[]
+      }
       list_users_with_activity: {
         Args: never
         Returns: {
