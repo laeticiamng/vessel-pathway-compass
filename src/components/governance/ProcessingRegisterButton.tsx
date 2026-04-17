@@ -6,6 +6,7 @@ import { useAuditLog } from "@/hooks/useAuditLog";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useExportManifest } from "@/hooks/useExportManifest";
 
 /**
  * Génère le registre des traitements RGPD (art. 30) en PDF.
@@ -13,6 +14,7 @@ import autoTable from "jspdf-autotable";
  */
 export function ProcessingRegisterButton() {
   const { log } = useAuditLog();
+  const { register } = useExportManifest();
   const [loading, setLoading] = useState(false);
 
   const handle = async () => {
@@ -94,13 +96,31 @@ export function ProcessingRegisterButton() {
       ];
       lines.forEach((l, i) => doc.text(l, 14, finalY2 + 6 + i * 5));
 
+      // Register chain-of-custody manifest (P7 — ADR-014)
+      const payload = JSON.stringify({ policies, byCat, generated_at: new Date().toISOString() });
+      const manifest = await register({
+        entityType: "rgpd_processing_register",
+        format: "pdf",
+        rowCount: policies.length,
+        payload,
+        purpose: "Registre RGPD art. 30",
+        context: { events_30d: events.length },
+      });
+
+      // Footer signature
+      const sigY = finalY2 + 6 + lines.length * 5 + 8;
+      doc.setFontSize(8);
+      doc.setTextColor(100);
+      doc.text(`SHA-256: ${manifest?.sha256 ?? "n/a"}`, 14, sigY);
+      doc.setTextColor(0);
+
       doc.save(`registre-traitements-rgpd-${new Date().toISOString().slice(0, 10)}.pdf`);
 
       await log({
         category: "compliance",
         action: "rgpd.register.generated",
         severity: "info",
-        context: { policies: policies.length, events_30d: events.length },
+        context: { policies: policies.length, events_30d: events.length, sha256: manifest?.sha256 },
       });
       toast.success("Registre RGPD téléchargé");
     } catch (err) {

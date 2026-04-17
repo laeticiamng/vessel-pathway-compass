@@ -13,6 +13,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Loader2, Search, Download, ShieldAlert } from "lucide-react";
 import { format } from "date-fns";
 import { useAuditLog } from "@/hooks/useAuditLog";
+import { useExportManifest } from "@/hooks/useExportManifest";
 import { toast } from "sonner";
 
 type GovEvent = {
@@ -36,6 +37,7 @@ const sevVariant = (s: string) =>
 export default function AuditSearch() {
   const { user } = useAuth();
   const { log } = useAuditLog();
+  const { register } = useExportManifest();
   const [category, setCategory] = useState("all");
   const [severity, setSeverity] = useState("all");
   const [actionFilter, setActionFilter] = useState("");
@@ -99,7 +101,21 @@ export default function AuditSearch() {
       toast.info("Aucun résultat à exporter");
       return;
     }
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+    // Register chain-of-custody manifest (P7 — ADR-014)
+    const manifest = await register({
+      entityType: "governance_audit",
+      format: "csv",
+      rowCount: events?.length ?? 0,
+      payload: csv,
+      purpose: `Export audit DPO — filtres: ${category}/${severity}`,
+      context: { filters: { category, severity, actionFilter, from, to } },
+    });
+
+    const signedCsv = manifest?.sha256
+      ? `${csv}\n# SHA-256: ${manifest.sha256}\n# Manifest: ${manifest.manifestId}\n`
+      : csv;
+
+    const blob = new Blob([signedCsv], { type: "text/csv;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -110,9 +126,9 @@ export default function AuditSearch() {
       category: "compliance",
       action: "audit.export.csv",
       severity: "info",
-      context: { count: events?.length ?? 0, filters: { category, severity, actionFilter, from, to } },
+      context: { count: events?.length ?? 0, filters: { category, severity, actionFilter, from, to }, sha256: manifest?.sha256 },
     });
-    toast.success(`${events?.length ?? 0} événements exportés`);
+    toast.success(`${events?.length ?? 0} événements exportés (SHA-256 signé)`);
   };
 
   if (authorized === false) {
