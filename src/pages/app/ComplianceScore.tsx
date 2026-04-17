@@ -3,7 +3,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Shield, FileCheck, ScrollText, AlertTriangle, Recycle } from "lucide-react";
+import { Loader2, Shield, FileCheck, ScrollText, AlertTriangle, Recycle, History } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { SEOHead } from "@/components/SEOHead";
 import { CompliancePackButton } from "@/components/governance/CompliancePackButton";
 import { ComplianceTrendChart } from "@/components/governance/ComplianceTrendChart";
@@ -55,7 +57,14 @@ export default function ComplianceScore() {
             <h1 className="text-2xl font-bold tracking-tight">Score de conformité global</h1>
             <p className="text-muted-foreground">Vision unifiée de la santé conformité (RGPD · MDR · ISO 14971).</p>
           </div>
-          {data && <CompliancePackButton data={data} />}
+          <div className="flex items-center gap-2">
+            <Button asChild variant="outline" size="sm">
+              <Link to="/app/governance/compliance-history">
+                <History className="h-4 w-4 mr-1" /> Historique 90j
+              </Link>
+            </Button>
+            {data && <CompliancePackButton data={data} />}
+          </div>
         </div>
 
         {isLoading || !data ? (
