@@ -87,6 +87,16 @@ R = Read, W = Write, *own* = ses données, *inst* = institution, *study cohort* 
 **Décision** : RPC SECURITY DEFINER qui (1) collecte les rôles, (2) les supprime atomiquement, (3) journalise l'action en sévérité `critical` avec motif obligatoire. Réservée à `super_admin`. Auto-protection : impossible de geler son propre compte.
 **Conséquence** : réponse à incident en 1 clic, traçabilité complète, réversibilité par réattribution manuelle des rôles.
 
+### ADR-010 — Snapshots de conformité quotidiens
+**Contexte** : le score de conformité (`compliance_score()`) reflète l'état **instantané** ; impossible de prouver à un auditeur l'amélioration ou la dégradation de la posture sécurité dans le temps.
+**Décision** : table `compliance_snapshots` (immuable côté utilisateur, écriture exclusive via SECURITY DEFINER) + RPC `snapshot_compliance_score()` exécutée chaque nuit à 03:30 UTC par `pg_cron`. Lecture réservée DPO + hospital_admin.
+**Conséquence** : courbe de tendance 90 jours visible dans `/app/governance/compliance`, preuve d'amélioration continue exportable dans le Compliance Pack PDF.
+
+### ADR-011 — Replay temporel des dossiers cliniques
+**Contexte** : un litige peut survenir des mois après une décision clinique ; il faut pouvoir reconstituer l'**état exact du dossier au moment de la décision**, pas seulement le diff.
+**Décision** : RPC `replay_case_at(_case_id, _at)` qui retourne `new_snapshot` de la dernière révision `case_revisions` antérieure à `_at`. Contrôle d'accès aligné sur la RLS de `case_revisions`. UI : bouton « Voir à la date… » dans `CaseRevisionsTimeline` avec diff visuel vs version actuelle.
+**Conséquence** : preuve juridique reproductible sans dépendance applicative ; validation des décisions médicales contre l'état réel des données à un instant T.
+
 ## 5. Couche audit applicative
 
 ```
@@ -156,12 +166,19 @@ R = Read, W = Write, *own* = ses données, *inst* = institution, *study cohort* 
 - ✅ Score de conformité global `/app/governance/compliance` (5 sous-scores + grade A-E)
 - ✅ Gel de compte via `freeze_user_account()` + bouton dans `UsersAdmin` (action critical)
 
-### P5 — Scale & certification
+### P5 — Robustesse opérationnelle (livré)
+- ✅ Reconstitution d'état historique d'un case à instant T (RPC `replay_case_at`)
+- ✅ Export "compliance pack" PDF (5 pages : score + DPIA + registre + anomalies + critiques 30 j) pour audit externe
+- ✅ Snapshots quotidiens de conformité (table `compliance_snapshots` + cron pg_cron 03:30 UTC)
+- ✅ Tendance 90 jours du score dans `/app/governance/compliance`
+- ✅ Réactivation de comptes gelés via `reactivate_user_account()` (sévérité `warn`)
+
+### P6 — Scale & certification
 - [ ] Bounded context `Billing` séparé en edge functions dédiées
 - [ ] Multi-région avec data residency par institution
-- [ ] Préparation IEC 62304 (SOUP, traçabilité exigences ↔ tests)
-- [ ] Reconstitution d'état historique d'un case à instant T (replay des `case_revisions`)
-- [ ] Export "compliance pack" PDF (score + DPIA + registre + anomalies 30 j) pour audit externe
+- [ ] Préparation IEC 62304 (SOUP, traçabilité exigences ↔ tests, gestion SOUP)
+- [ ] Signature qualifiée eIDAS niveau « high » (token cryptographique externe)
+- [ ] API publique de vérification de conformité (webhook auditeurs)
 
 ## 7. Conventions techniques
 
