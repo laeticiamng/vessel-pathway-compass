@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import dashboardPreview from "@/assets/dashboard-preview.jpg";
-import { Card, CardContent } from "@/components/ui/card";
+// Card import removed — testimonials section deleted
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, type Language } from "@/i18n/context";
@@ -28,8 +28,7 @@ import {
   FileText,
   Link2,
 } from "lucide-react";
-import { FAQSection } from "@/components/landing/FAQSection";
-import { HowItWorksSection } from "@/components/landing/HowItWorksSection";
+// FAQSection + HowItWorksSection legacy retirés (doublons)
 import { AboutSection } from "@/components/landing/AboutSection";
 import {
   EnBrefSection,
