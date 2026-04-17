@@ -385,6 +385,15 @@ export default function CIAKIEngine() {
         )}
       </div>
 
+      {savedAiOutputId && (
+        <SignoffPanel
+          entityType="ai_output"
+          entityId={savedAiOutputId}
+          title="Validation de la décision CI-AKI"
+          description="Tracez votre validation médicale du calcul IA. Un expert reviewer pourra cosigner pour double validation."
+        />
+      )}
+
       <p className="text-xs text-muted-foreground">{t("ciAkiEngine.disclaimerFooter")}</p>
     </div>
   );

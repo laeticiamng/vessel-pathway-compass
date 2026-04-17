@@ -16,6 +16,7 @@ import PatientMeasurements from "@/components/patient/PatientMeasurements";
 import PatientCases from "@/components/patient/PatientCases";
 import RiskFactorsEditor from "@/components/patient/RiskFactorsEditor";
 import FHIRBadge from "@/components/patient/FHIRBadge";
+import { SignoffPanel } from "@/components/governance/SignoffPanel";
 import {
   EditPatientDialog,
   AddEventDialog,
@@ -105,6 +106,7 @@ export default function PatientDetail() {
           <TabsTrigger value="timeline">{t("patientDetail.tabs.timeline")}</TabsTrigger>
           <TabsTrigger value="measurements">{t("patientDetail.tabs.measurements")}</TabsTrigger>
           <TabsTrigger value="cases">{t("patientDetail.tabs.cases")}</TabsTrigger>
+          <TabsTrigger value="signoff">Validation clinique</TabsTrigger>
         </TabsList>
 
         <TabsContent value="timeline" className="mt-6">
@@ -133,6 +135,15 @@ export default function PatientDetail() {
 
         <TabsContent value="cases" className="mt-6">
           <PatientCases cases={cases} />
+        </TabsContent>
+
+        <TabsContent value="signoff" className="mt-6">
+          <SignoffPanel
+            entityType="patient"
+            entityId={patient.id}
+            title="Signoffs cliniques du patient"
+            description="Tracez et faites cosigner les décisions cliniques majeures concernant ce patient (ADR-002)."
+          />
         </TabsContent>
       </Tabs>
 

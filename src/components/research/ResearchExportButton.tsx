@@ -7,10 +7,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Download, FileText, Shield, Loader2 } from "lucide-react";
+import { useAuditLog } from "@/hooks/useAuditLog";
 
 export default function ResearchExportButton() {
   const { user } = useAuth();
   const { t } = useTranslation();
+  const { log } = useAuditLog();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<string | null>(null);
