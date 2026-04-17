@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Activity, Database, ShieldAlert, AlertTriangle, Users, FileWarning, Clock, Zap } from "lucide-react";
 import { format } from "date-fns";
+import { SLAWidget } from "@/components/admin/SLAWidget";
 
 type Health = {
   patients_total: number;

@@ -265,6 +265,18 @@ export default function Governance() {
                       Score de conformité
                     </Link>
                   </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/governance/iec62304">
+                      <ShieldCheck className="h-4 w-4 mr-2" />
+                      IEC 62304
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/governance/exports">
+                      <Search className="h-4 w-4 mr-2" />
+                      Audit exports (SHA-256)
+                    </Link>
+                  </Button>
                   <ProcessingRegisterButton />
                 </div>
 
