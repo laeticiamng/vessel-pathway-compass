@@ -31,6 +31,8 @@ export const fr = {
     upload: "Téléverser",
     start: "Démarrer",
     continue: "Continuer",
+    download: "Télécharger",
+    exportSuccess: "Export réussi",
   },
 
   medicalCategories: {
@@ -481,6 +483,9 @@ export const fr = {
       creditsRequired: "Crédits nécessaires",
       creditsRequiredDesc: "Veuillez ajouter des crédits pour continuer à utiliser les fonctionnalités de planification.",
       signOffFailed: "Échec de la validation. Veuillez réessayer.",
+    },
+    output: {
+      plan: "Plan",
     },
   },
 
