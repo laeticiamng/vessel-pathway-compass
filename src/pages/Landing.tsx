@@ -91,31 +91,30 @@ export default function Landing() {
 
   const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
 
-  const faqJsonLd = {
+  // JSON-LD: minimal, non-risky structured data (WebPage + SoftwareApplication + FAQPage)
+  const structuredData = {
     "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
+    "@graph": [
       {
-        "@type": "Question",
-        "name": "What is AquaMR Flow?",
-        "acceptedAnswer": { "@type": "Answer", "text": "AquaMR Flow is a clinical software platform for non-ionizing, contrast-sparing vascular workflows. It combines procedure planning, multimodal imaging fusion, CI-AKI risk prevention, clinical simulation, and a research registry." }
+        "@type": "WebPage",
+        "@id": "https://aquamr-flow.com/#webpage",
+        url: "https://aquamr-flow.com/",
+        name: "AquaMR Flow — Plateforme de workflow non ionisant pour la médecine vasculaire",
+        description:
+          "AquaMR Flow est une plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
+        inLanguage: "fr",
       },
       {
-        "@type": "Question",
-        "name": "Who is AquaMR Flow for?",
-        "acceptedAnswer": { "@type": "Answer", "text": "AquaMR Flow is designed for interventional cardiologists, interventional radiologists, vascular medicine physicians, clinical researchers, and trainees working with non-ionizing and contrast-sparing vascular procedures." }
+        "@type": "SoftwareApplication",
+        name: "AquaMR Flow",
+        applicationCategory: "HealthApplication",
+        operatingSystem: "Web",
+        url: "https://aquamr-flow.com",
+        description:
+          "Plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
       },
-      {
-        "@type": "Question",
-        "name": "How much does AquaMR Flow cost?",
-        "acceptedAnswer": { "@type": "Answer", "text": "AquaMR Flow offers a free Individual plan, a Professional plan at $99/month, and custom Institution pricing. All features are currently free during the beta period." }
-      },
-      {
-        "@type": "Question",
-        "name": "Is AquaMR Flow a medical device?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. AquaMR Flow is a clinical decision support and workflow planning platform. It is not a certified medical device. All outputs require clinician review and confirmation before any clinical action." }
-      }
-    ]
+      homeFaqJsonLd,
+    ],
   };
 
   return (
