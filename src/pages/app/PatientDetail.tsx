@@ -107,8 +107,8 @@ export default function PatientDetail() {
           <TabsTrigger value="timeline">{t("patientDetail.tabs.timeline")}</TabsTrigger>
           <TabsTrigger value="measurements">{t("patientDetail.tabs.measurements")}</TabsTrigger>
           <TabsTrigger value="cases">{t("patientDetail.tabs.cases")}</TabsTrigger>
-          <TabsTrigger value="signoff">Validation clinique</TabsTrigger>
-          <TabsTrigger value="history">Historique versionné</TabsTrigger>
+          <TabsTrigger value="signoff">{t("patientDetail.tabs.signoff")}</TabsTrigger>
+          <TabsTrigger value="history">{t("patientDetail.tabs.history")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="timeline" className="mt-6">
@@ -143,18 +143,18 @@ export default function PatientDetail() {
           <SignoffPanel
             entityType="patient"
             entityId={patient.id}
-            title="Signoffs cliniques du patient"
-            description="Tracez et faites cosigner les décisions cliniques majeures concernant ce patient (ADR-002)."
+            title={t("patientDetail.signoff.title")}
+            description={t("patientDetail.signoff.description")}
           />
         </TabsContent>
 
         <TabsContent value="history" className="mt-6 space-y-4">
           {(cases ?? []).length === 0 ? (
-            <Card><CardContent className="py-8 text-center text-muted-foreground text-sm">Aucun cas clinique. L'historique versionné est lié aux cas (ADR-007).</CardContent></Card>
+            <Card><CardContent className="py-8 text-center text-muted-foreground text-sm">{t("patientDetail.history.empty")}</CardContent></Card>
           ) : (
             (cases ?? []).map((c) => (
               <div key={c.id} className="space-y-2">
-                <p className="text-sm font-medium">Cas : {c.title}</p>
+                <p className="text-sm font-medium">{t("patientDetail.history.casePrefix")} {c.title}</p>
                 <CaseRevisionsTimeline caseId={c.id} />
               </div>
             ))
