@@ -1,59 +1,60 @@
 
-The platform has reached a mature governance state through P0–P5 (audit transverse, signoffs eIDAS, DPIA, lifecycle automation, anomaly detection, compliance scoring, event sourcing, account freeze). The natural next step is **P6: Executive consolidation, temporal replay & continuous compliance monitoring** — turning the foundations into operational, externally-auditable artefacts.
+P0–P6 livrés (audit transverse, lifecycle, anomalies, DPIA, eIDAS, event sourcing, compliance pack, replay temporel, snapshots quotidiens). La maturité gouvernance est élevée. Le prochain palier logique est **P7 : Certification & opérations multi-tenant** — passer d'une plateforme conforme à une plateforme **certifiable DM (IEC 62304)** et **opérable à l'échelle hospitalière** (multi-institution avec cloisonnement strict + observabilité SLA).
 
-## P6 — Plan : consolidation exécutive & conformité continue
+## P7 — Plan : certification dispositif médical & opérations multi-tenant
 
-### 1. Compliance Pack PDF (export auditeur externe)
-Un seul bouton dans `/app/governance/compliance` génère un PDF consolidé :
-- Page 1 : score global + grade A-E + 5 sous-scores (visuel)
-- Page 2 : DPIA approuvées (titre, périmètre, risque résiduel)
-- Page 3 : registre RGPD art. 30 (politiques cycle de vie)
-- Page 4 : anomalies 30 j (vue `governance_anomalies`)
-- Page 5 : événements critiques 30 j + signature horodatée du pack
-→ Composant `CompliancePackButton.tsx` dans `ComplianceScore.tsx`.
+### 1. Traçabilité IEC 62304 (SOUP & versioning logiciel)
+Norme obligatoire pour toute fonction clinique d'aide à la décision (CI-AKI, ESC 2024, scoring vasculaire).
+- Table `software_versions` : `version`, `released_at`, `release_notes`, `risk_class` (A/B/C), `git_sha`, `signed_by`.
+- Table `soup_components` (Software Of Unknown Provenance) : `name`, `version`, `license`, `cve_status`, `purpose`, `risk_assessment`.
+- Table `clinical_algorithms` : `name`, `version`, `validation_status`, `evidence_url`, `last_review_at`, `reviewer_id`.
+- Page `/app/governance/iec62304` : 3 onglets (Versions / SOUP / Algorithmes), export PDF "Technical File".
 
-### 2. Historique du score de conformité (90 jours)
-- Nouvelle table `compliance_snapshots` (date, score, grade, breakdown jsonb).
-- Cron quotidien `pg_cron` qui appelle `compliance_score()` et insère un snapshot.
-- Page `/app/governance/compliance` enrichie d'un graphe Recharts (90 j) avec tendance.
+### 2. Cloisonnement multi-institution renforcé (data residency)
+Aujourd'hui : RLS via `user_institution_ids()`. Manque : **vue admin par hôpital** + métriques cloisonnées.
+- Table `institution_settings` : `data_region` (eu-west / eu-central), `retention_override_days`, `dpo_contact_email`, `mdr_class` (I/IIa/IIb).
+- RPC `institution_health(_institution_id)` : métriques scopées (patients actifs, signoffs en attente, anomalies 7j) — accessible `hospital_admin` de l'institution uniquement.
+- Page `/app/admin/institution` (rôle `hospital_admin`) : tableau de bord cloisonné + paramètres + liste des membres.
 
-### 3. Réactivation de compte gelé
-- Bouton `UnfreezeAccountButton` dans `UsersAdmin` (visible uniquement si l'utilisateur n'a aucun rôle).
-- RPC `reactivate_user_account(_target, _role, _reason)` : réattribue 1 rôle de base + log `account.reactivated` sévérité `warn`.
+### 3. SLA & observabilité opérationnelle
+- Table `sla_incidents` : `severity` (sev1-4), `started_at`, `resolved_at`, `mttr_minutes`, `affected_users`, `root_cause`, `postmortem_url`.
+- Vue `sla_metrics_30d` : disponibilité calculée (uptime %), MTTR moyen, nb incidents par sévérité.
+- Widget SLA dans `/app/admin/system-health` : badge uptime + bouton "Déclarer un incident" (super_admin).
 
-### 4. Replay temporel d'un case
-- Bouton « Voir à la date… » dans `CaseRevisionsTimeline`.
-- Sélecteur de date → reconstitue le snapshot du case à T en parcourant `case_revisions` (déjà immuable, ADR-007).
-- Diff visuel vs version actuelle (champ par champ).
+### 4. Audit chain-of-custody pour exports
+Les exports CSV/PDF actuels ne sont pas traçables après téléchargement.
+- Table `export_manifests` : `export_id`, `user_id`, `entity_type`, `row_count`, `sha256`, `purpose`, `expires_at`, `download_count`.
+- À chaque export (`AuditSearch.tsx`, `CompliancePackButton`, `ProcessingRegisterButton`, `ResearchExportButton`), insérer un manifest + injecter le hash SHA-256 en pied de page PDF/CSV.
+- Page `/app/governance/exports` : historique des exports avec hash, motif déclaré, et alertes si volume suspect (> 5 exports/h).
 
 ### 5. Documentation
-- Mise à jour `ARCHITECTURE.md` : ADR-010 (Compliance snapshots), ADR-011 (Replay temporel), roadmap P6 livrée + amorce P7 (multi-région, IEC 62304).
+- `ARCHITECTURE.md` : ADR-012 (IEC 62304), ADR-013 (Multi-tenant data residency), ADR-014 (Export chain-of-custody), ADR-015 (SLA tracking).
+- Roadmap P7 livrée + amorce P8 : marquage CE technique file generator + intégration FHIR R5 inbound.
 
 ### Contexte technique
 | Élément | Type | Détail |
 |---|---|---|
-| `compliance_snapshots` | table | `id`, `captured_at`, `score`, `grade`, `breakdown jsonb`, RLS DPO/super_admin |
-| `snapshot_compliance_score()` | RPC | SECURITY DEFINER, appelée par pg_cron 03:30 UTC |
-| `reactivate_user_account()` | RPC | super_admin only, log `identity/account.reactivated` |
-| `replay_case_at(case_id, ts)` | RPC | retourne le snapshot reconstruit |
-| `CompliancePackButton.tsx` | component | jspdf + jspdf-autotable (déjà installés) |
-| `ComplianceTrendChart.tsx` | component | Recharts area chart 90j |
-| `CaseReplayDialog.tsx` | component | Dialog + date picker + diff renderer |
-
-### Flux de cron
-```text
-03:15 UTC → enforce_data_lifecycle()      (déjà en place)
-03:30 UTC → snapshot_compliance_score()   (nouveau)
-```
+| `software_versions` | table | RLS lecture authentifiée, écriture super_admin |
+| `soup_components` | table | RLS super_admin only |
+| `clinical_algorithms` | table | RLS super_admin write, authenticated read |
+| `institution_settings` | table | RLS hospital_admin de l'institution |
+| `sla_incidents` | table | RLS super_admin write, authenticated read |
+| `export_manifests` | table | RLS user voit ses exports + super_admin tout |
+| `institution_health(uuid)` | RPC | check `hospital_admin` + membership |
+| `register_export_manifest()` | RPC | appelée par tous les boutons d'export |
+| `IEC62304Page.tsx` | page | 3 onglets + export PDF "Technical File" |
+| `InstitutionAdmin.tsx` | page | dashboard hospital_admin scopé |
+| `ExportsAudit.tsx` | page | historique + détection volume suspect |
+| `SLAWidget.tsx` | composant | uptime + MTTR + incidents |
 
 ### Personas impactés
-- **DPO / super_admin** : Compliance Pack + tendance 90 j + réactivation
-- **Hospital admin** : lecture des snapshots
-- **Physician / expert reviewer** : replay temporel des cases
+- **Super admin / DPO** : technical file IEC 62304, SLA tracking, audit exports global
+- **Hospital admin** : dashboard institution scopé + paramètres data residency
+- **Tous utilisateurs** : exports désormais signés SHA-256 + motif obligatoire
 
 ### Livrables fichiers
-- Nouveau : `src/components/governance/CompliancePackButton.tsx`, `src/components/governance/ComplianceTrendChart.tsx`, `src/components/governance/UnfreezeAccountButton.tsx`, `src/components/patient/CaseReplayDialog.tsx`
-- Migration SQL : table `compliance_snapshots` + 2 RPC + cron
-- Édités : `src/pages/app/ComplianceScore.tsx`, `src/pages/app/UsersAdmin.tsx`, `src/components/patient/CaseRevisionsTimeline.tsx`, `ARCHITECTURE.md`
+- Nouveau : `src/pages/app/IEC62304.tsx`, `src/pages/app/InstitutionAdmin.tsx`, `src/pages/app/ExportsAudit.tsx`, `src/components/admin/SLAWidget.tsx`, `src/components/governance/IECTechnicalFileButton.tsx`, `src/components/governance/ExportManifestRow.tsx`
+- Migration SQL : 6 tables + 2 RPC + RLS + seed des 3 algorithmes cliniques existants (CI-AKI, ESC 2024, ABI)
+- Édités : `src/App.tsx`, `src/components/layout/AppSidebar.tsx`, `src/pages/app/Governance.tsx`, `src/pages/app/SystemHealth.tsx`, `src/pages/app/AuditSearch.tsx`, `src/components/governance/CompliancePackButton.tsx`, `src/components/governance/ProcessingRegisterButton.tsx`, `ARCHITECTURE.md`
 
-Aucun secret supplémentaire, aucune dépendance npm nouvelle (jspdf et recharts sont déjà présents).
+Aucun secret ni dépendance npm supplémentaire (jspdf déjà présent).
