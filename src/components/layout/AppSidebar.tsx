@@ -94,6 +94,7 @@ export function AppSidebar() {
   const adminItems = [
     ...(session ? [
       { title: t("sidebar.admin") || "Admin", url: "/app/admin", icon: ShieldCheck },
+      { title: "Gouvernance", url: "/app/governance", icon: ShieldCheck },
       { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
     ] : []),
   ];

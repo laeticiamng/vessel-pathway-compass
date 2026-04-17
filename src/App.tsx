@@ -39,6 +39,7 @@ const Analytics = lazy(() => import("./pages/app/Analytics"));
 const Network = lazy(() => import("./pages/app/Network"));
 const Logbook = lazy(() => import("./pages/app/Logbook"));
 const Admin = lazy(() => import("./pages/app/Admin"));
+const Governance = lazy(() => import("./pages/app/Governance"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const VascScreen = lazy(() => import("./pages/app/VascScreen"));
 const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
@@ -122,6 +123,7 @@ const App = () => (
             <Route path="network" element={<Network />} />
             <Route path="logbook" element={<Logbook />} />
             <Route path="admin" element={<Admin />} />
+            <Route path="governance" element={<Governance />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 
