@@ -12,6 +12,8 @@ import { Calculator, AlertTriangle, Info, Shield, Printer, FileText, Leaf, Save,
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { useAuditLog } from "@/hooks/useAuditLog";
+import { SignoffPanel } from "@/components/governance/SignoffPanel";
 
 type RiskTier = "low" | "moderate" | "high";
 type ContrastAgentType = "gbca" | "bbca" | "none";
@@ -109,6 +111,7 @@ function calculateCIAKIRisk(params: {
 export default function CIAKIEngine() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { log } = useAuditLog();
   const [egfr, setEgfr] = useState("");
   const [saving, setSaving] = useState(false);
   const [age, setAge] = useState("");
@@ -118,6 +121,7 @@ export default function CIAKIEngine() {
   const [hydration, setHydration] = useState("iv_normal");
   const [agentType, setAgentType] = useState<ContrastAgentType>("gbca");
   const [result, setResult] = useState<CIAKIResult | null>(null);
+  const [savedAiOutputId, setSavedAiOutputId] = useState<string | null>(null);
 
   const handleCalculate = () => {
     const e = parseFloat(egfr);
@@ -340,9 +344,27 @@ export default function CIAKIEngine() {
                       eco_impact_score: result.riskScore,
                     });
                     if (error) throw error;
+
+                    // Persist AI output for traceability + signoff (ADR-002)
+                    const { data: aiRow } = await supabase.from("ai_outputs").insert({
+                      user_id: user.id,
+                      input_summary: { egfr, age, diabetes, lvef, contrastVolume, agentType, hydration },
+                      output_text: `CI-AKI risk: ${result.riskTier} (score ${result.riskScore}). Strategy: ${result.strategy}.`,
+                      model_version: "ci-aki-engine/v1",
+                    }).select("id").maybeSingle();
+                    setSavedAiOutputId((aiRow as { id?: string } | null)?.id ?? null);
+
+                    await log({
+                      category: "clinical",
+                      action: "ciaki.calculated",
+                      severity: result.riskTier === "high" ? "warn" : "info",
+                      targetEntityType: "ai_output",
+                      targetEntityId: (aiRow as { id?: string } | null)?.id,
+                      context: { riskTier: result.riskTier, score: result.riskScore, agentType: result.agentType },
+                    });
                     toast.success(t("ciAkiEngine.saved") || "Result saved to eco dashboard");
-                  } catch (err: any) {
-                    toast.error(err.message);
+                  } catch (err) {
+                    toast.error(err instanceof Error ? err.message : "Save failed");
                   } finally {
                     setSaving(false);
                   }
