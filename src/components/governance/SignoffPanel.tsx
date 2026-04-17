@@ -7,10 +7,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { ShieldCheck, Loader2, PenLine } from "lucide-react";
+import { ShieldCheck, Loader2, PenLine, Award } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
 
+type EidasMeta = { level: string; sha256: string; timestamp: string; algorithm: string; standard: string };
 type Signoff = {
   id: string;
   entity_type: string;
@@ -22,6 +23,7 @@ type Signoff = {
   signed_at: string | null;
   cosigned_at: string | null;
   created_at: string;
+  metadata: { eidas?: EidasMeta } | null;
 };
 
 interface SignoffPanelProps {
