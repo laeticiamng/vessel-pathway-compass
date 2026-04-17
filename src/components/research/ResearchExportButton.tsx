@@ -8,14 +8,17 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Download, FileText, Shield, Loader2 } from "lucide-react";
 import { useAuditLog } from "@/hooks/useAuditLog";
+import { useExportManifest } from "@/hooks/useExportManifest";
 
 export default function ResearchExportButton() {
   const { user } = useAuth();
   const { t } = useTranslation();
   const { log } = useAuditLog();
+  const { register } = useExportManifest();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [report, setReport] = useState<string | null>(null);
+  const [reportSha, setReportSha] = useState<string | null>(null);
 
   const generateExport = async () => {
     if (!user) return;
@@ -112,7 +115,27 @@ export default function ResearchExportButton() {
         `- Compliant with GDPR Article 89 (research exemption)`,
       ];
 
-      setReport(lines.join("\n"));
+      const reportText = lines.join("\n");
+
+      // Register chain-of-custody manifest (P7 — ADR-014)
+      const manifest = await register({
+        entityType: "research_registry_export",
+        format: "csv",
+        rowCount: cases.length + outcomes.length + measurements.length + patients.length + proms.length,
+        payload: reportText,
+        purpose: "Export anonymisé recherche (RGPD art. 89)",
+        context: {
+          totalPatients: patients.length,
+          totalCases: cases.length,
+        },
+      });
+
+      const finalReport = manifest?.sha256
+        ? `${reportText}\n\n== CHAIN OF CUSTODY ==\nSHA-256: ${manifest.sha256}\nManifest ID: ${manifest.manifestId}\n`
+        : reportText;
+
+      setReport(finalReport);
+      setReportSha(manifest?.sha256 ?? null);
 
       // Audit transverse (ADR-001) — traçabilité des exports recherche
       await log({
@@ -125,6 +148,7 @@ export default function ResearchExportButton() {
           totalCases: cases.length,
           totalOutcomes: outcomes.length,
           totalMeasurements: measurements.length,
+          sha256: manifest?.sha256,
         },
       });
     } catch (err) {

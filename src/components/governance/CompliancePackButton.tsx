@@ -5,6 +5,7 @@ import { FileDown, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { useExportManifest } from "@/hooks/useExportManifest";
 
 interface ComplianceData {
   total: number;
@@ -15,6 +16,7 @@ interface ComplianceData {
 
 export function CompliancePackButton({ data }: { data: ComplianceData }) {
   const [loading, setLoading] = useState(false);
+  const { register } = useExportManifest();
 
   const generate = async () => {
     setLoading(true);
@@ -29,7 +31,24 @@ export function CompliancePackButton({ data }: { data: ComplianceData }) {
 
       const doc = new jsPDF();
       const now = new Date();
-      const packHash = btoa(`${now.toISOString()}-${data.total}-${data.grade}`).slice(0, 32);
+
+      // Register chain-of-custody manifest BEFORE generating PDF (P7 — ADR-014)
+      const payload = JSON.stringify({
+        score: data.total,
+        grade: data.grade,
+        breakdown: data.breakdown,
+        computed_at: data.computed_at,
+        emitted_at: now.toISOString(),
+      });
+      const manifest = await register({
+        entityType: "compliance_pack",
+        format: "pdf",
+        rowCount: (dpiaRes.data?.length ?? 0) + (policiesRes.data?.length ?? 0) + (anomaliesRes.data?.length ?? 0) + (criticalRes.data?.length ?? 0),
+        payload,
+        purpose: "Audit externe — Compliance Pack",
+        context: { score: data.total, grade: data.grade },
+      });
+      const packHash = manifest?.sha256 ?? btoa(`${now.toISOString()}-${data.total}-${data.grade}`).slice(0, 32);
 
       // Page 1 — Score global
       doc.setFontSize(20);
@@ -121,10 +140,13 @@ export function CompliancePackButton({ data }: { data: ComplianceData }) {
       const finalY = (doc as unknown as { lastAutoTable?: { finalY: number } }).lastAutoTable?.finalY ?? 50;
       doc.setFontSize(10);
       doc.setTextColor(100);
-      doc.text("Signature horodatée du pack", 14, finalY + 15);
+      doc.text("Signature horodatée du pack (chain-of-custody — ADR-014)", 14, finalY + 15);
       doc.setFont("courier", "normal");
-      doc.text(`SHA-pack: ${packHash}`, 14, finalY + 22);
+      doc.text(`SHA-256: ${packHash}`, 14, finalY + 22);
       doc.text(`Émis le : ${now.toISOString()}`, 14, finalY + 28);
+      if (manifest?.manifestId) {
+        doc.text(`Manifest: ${manifest.manifestId.slice(0, 16)}…`, 14, finalY + 34);
+      }
       doc.setFont("helvetica", "normal");
       doc.setTextColor(0);
 
