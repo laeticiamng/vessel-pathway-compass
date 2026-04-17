@@ -95,6 +95,20 @@ export function SignoffPanel({ entityType, entityId, title, description }: Signo
     onError: (e: Error) => toast.error(e.message),
   });
 
+  const applyEidas = useMutation({
+    mutationFn: async (signoffId: string) => {
+      const content = JSON.stringify({ entityType, entityId, signoffId, signedAt: new Date().toISOString() });
+      const { data, error } = await supabase.rpc("sign_with_eidas" as never, { _signoff_id: signoffId, _content: content } as never);
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      toast.success("Signature eIDAS appliquée (SHA-256 + horodatage).");
+      qc.invalidateQueries({ queryKey: ["signoffs", entityType, entityId] });
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
+
   return (
     <Card>
       <CardHeader>
