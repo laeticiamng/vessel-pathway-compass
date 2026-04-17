@@ -64,15 +64,29 @@ serve(async (req) => {
     let customerId;
     if (customers.data.length > 0) {
       customerId = customers.data[0].id;
+      // Backfill metadata if missing so the webhook can map without listUsers
+      if (!customers.data[0].metadata?.user_id) {
+        await stripe.customers.update(customerId, { metadata: { user_id: user.id } });
+        logStep("Backfilled customer metadata", { customerId, userId: user.id });
+      }
       logStep("Existing customer found", { customerId });
+    } else {
+      // Pre-create customer with metadata so the webhook can map deterministically
+      const newCustomer = await stripe.customers.create({
+        email: user.email,
+        metadata: { user_id: user.id },
+      });
+      customerId = newCustomer.id;
+      logStep("New customer created with metadata", { customerId, userId: user.id });
     }
 
     const origin = req.headers.get("origin") || "http://localhost:8080";
     const session = await stripe.checkout.sessions.create({
       customer: customerId,
-      customer_email: customerId ? undefined : user.email,
+      client_reference_id: user.id,
       line_items: [{ price: priceId, quantity: 1 }],
       mode: "subscription",
+      subscription_data: { metadata: { user_id: user.id } },
       success_url: `${origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/checkout/cancel`,
     });
