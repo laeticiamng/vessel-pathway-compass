@@ -41,6 +41,8 @@ const Logbook = lazy(() => import("./pages/app/Logbook"));
 const Admin = lazy(() => import("./pages/app/Admin"));
 const Governance = lazy(() => import("./pages/app/Governance"));
 const AuditSearch = lazy(() => import("./pages/app/AuditSearch"));
+const LifecyclePolicies = lazy(() => import("./pages/app/LifecyclePolicies"));
+const SystemHealth = lazy(() => import("./pages/app/SystemHealth"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const VascScreen = lazy(() => import("./pages/app/VascScreen"));
 const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
@@ -126,6 +128,8 @@ const App = () => (
             <Route path="admin" element={<Admin />} />
             <Route path="governance" element={<Governance />} />
             <Route path="governance/audit-search" element={<AuditSearch />} />
+            <Route path="governance/policies" element={<LifecyclePolicies />} />
+            <Route path="admin/system-health" element={<SystemHealth />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 

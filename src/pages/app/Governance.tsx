@@ -235,6 +235,18 @@ export default function Governance() {
                       Recherche audit avancée
                     </Link>
                   </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/governance/policies">
+                      <ShieldCheck className="h-4 w-4 mr-2" />
+                      Politiques cycle de vie
+                    </Link>
+                  </Button>
+                  <Button asChild variant="outline" size="sm">
+                    <Link to="/app/admin/system-health">
+                      <Activity className="h-4 w-4 mr-2" />
+                      Santé système
+                    </Link>
+                  </Button>
                   <ProcessingRegisterButton />
                 </div>
 
