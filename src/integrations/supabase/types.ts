@@ -267,6 +267,33 @@ export type Database = {
         }
         Relationships: []
       }
+      compliance_snapshots: {
+        Row: {
+          breakdown: Json
+          captured_at: string
+          created_at: string
+          grade: string
+          id: string
+          score: number
+        }
+        Insert: {
+          breakdown?: Json
+          captured_at?: string
+          created_at?: string
+          grade: string
+          id?: string
+          score: number
+        }
+        Update: {
+          breakdown?: Json
+          captured_at?: string
+          created_at?: string
+          grade?: string
+          id?: string
+          score?: number
+        }
+        Relationships: []
+      }
       consents: {
         Row: {
           consent_type: string
@@ -1680,6 +1707,15 @@ export type Database = {
         }
         Returns: string
       }
+      reactivate_user_account: {
+        Args: {
+          _reason: string
+          _role: Database["public"]["Enums"]["app_role"]
+          _target_user_id: string
+        }
+        Returns: Json
+      }
+      replay_case_at: { Args: { _at: string; _case_id: string }; Returns: Json }
       revoke_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -1691,6 +1727,7 @@ export type Database = {
         Args: { _content: string; _signoff_id: string }
         Returns: Json
       }
+      snapshot_compliance_score: { Args: never; Returns: string }
       system_health_metrics: { Args: never; Returns: Json }
       user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
     }
