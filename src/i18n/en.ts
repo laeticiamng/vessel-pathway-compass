@@ -32,6 +32,8 @@ export const en = {
     upload: "Upload",
     start: "Start",
     continue: "Continue",
+    download: "Download",
+    exportSuccess: "Export successful",
   },
 
   medicalCategories: {
@@ -479,6 +481,7 @@ export const en = {
       confirmSign: "Confirm & Sign",
       signedOff: "Signed off",
       signedOffDesc: "Plan confirmed and signed by clinician.",
+      plan: "Plan",
     },
     history: {
       title: "Plan History",
@@ -568,6 +571,9 @@ export const en = {
         none: "None (contrast-free procedure)",
       },
     },
+    noCaseError: "No patient case selected",
+    saveResult: "Save result",
+    saved: "Result saved",
   },
 
   // Patients
@@ -978,6 +984,8 @@ export const en = {
     measurementsDesc: "Cross-modality measurement comparison",
     annotation: "Annotation",
     annotationDesc: "Mark and annotate imaging findings across modalities",
+    uploadSuccess: "File uploaded successfully",
+    uploadedFiles: "Uploaded files",
     tabs: {
       mri: "MRI",
       ivus: "IVUS",
@@ -1111,6 +1119,7 @@ export const en = {
       unitPlaceholder: "e.g. ratio, mm, %",
       site: "Site (optional)",
       sitePlaceholder: "e.g. Right SFA, Left ATA",
+      bloodPressure: "Blood pressure (mmHg)",
     },
     toasts: {
       updated: "Updated",
@@ -1523,6 +1532,17 @@ export const en = {
     emptyForum: "No discussions yet. Start the first one!",
     emptyExperts: "No expert requests yet.",
     fields: { title: "Title", content: "Content", topic: "Topic" },
+    errorTitle: "Error",
+    thread: {
+      backToDiscussions: "Back to discussions",
+      noReplies: "No replies yet. Be the first to reply.",
+      notFound: "Discussion not found",
+      replies: "Replies",
+      reply: "Reply",
+      replyPlaceholder: "Write your reply...",
+      replyPosted: "Reply posted",
+      writeReply: "Write a reply",
+    },
   },
 
   // Logbook
