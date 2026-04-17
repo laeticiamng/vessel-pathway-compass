@@ -24,6 +24,9 @@ const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const Onboarding = lazy(() => import("./pages/Onboarding"));
 const Legal = lazy(() => import("./pages/Legal"));
 const Support = lazy(() => import("./pages/Support"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const Contact = lazy(() => import("./pages/Contact"));
+const SecurityPrivacy = lazy(() => import("./pages/SecurityPrivacy"));
 const Dashboard = lazy(() => import("./pages/app/Dashboard"));
 const ProcedurePlanner = lazy(() => import("./pages/app/ProcedurePlanner"));
 const FusionViewer = lazy(() => import("./pages/app/FusionViewer"));
@@ -90,6 +93,9 @@ const App = () => (
           <Route path="/legal/:section" element={<Legal />} />
           <Route path="/legal" element={<Legal />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/securite-confidentialite" element={<SecurityPrivacy />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
 
