@@ -280,7 +280,24 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* How It Works */}
+      {/* En bref — directly under hero */}
+      <EnBrefSection />
+
+      {/* Audience */}
+      <AudienceSection />
+
+      {/* Comment ça marche (anchor target for hero CTA) */}
+      <div id="comment-ca-marche" className="scroll-mt-20">
+        <HowItWorksFRSection />
+      </div>
+
+      {/* Cas d’usage */}
+      <UseCasesSection />
+
+      {/* Limites actuelles */}
+      <LimitsSection />
+
+      {/* Legacy stepper (kept for richer detail) */}
       <HowItWorksSection />
 
       {/* Modules */}
