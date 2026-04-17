@@ -157,8 +157,22 @@ export default function Pricing() {
                   <CardTitle>{plan.name}</CardTitle>
                   <CardDescription>{plan.description}</CardDescription>
                   <div className="pt-4">
-                    <span className="text-4xl font-bold">{plan.price}</span>
-                    <span className="text-muted-foreground ml-1">{plan.period}</span>
+                    {plan.key === "professional" ? (
+                      <>
+                        <div className="flex items-baseline gap-2">
+                          <span className="text-4xl font-bold text-success">Gratuit</span>
+                          <span className="text-sm text-muted-foreground">pendant la bêta</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground mt-1">
+                          <span className="line-through">{plan.price}{plan.period}</span> au lancement officiel
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-4xl font-bold">{plan.price}</span>
+                        <span className="text-muted-foreground ml-1">{plan.period}</span>
+                      </>
+                    )}
                   </div>
                 </CardHeader>
                 <CardContent className="flex-1">
