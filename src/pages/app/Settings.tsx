@@ -18,6 +18,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState, useRef } from "react";
 import { SEOHead } from "@/components/SEOHead";
+import { RgpdRequestCard } from "@/components/governance/RgpdRequestCard";
 
 function PasswordChangeForm() {
   const [newPassword, setNewPassword] = useState("");
@@ -306,6 +307,8 @@ export default function Settings() {
           <PasswordChangeForm />
         </CardContent>
       </Card>
+
+      <RgpdRequestCard />
 
       <Card>
         <CardContent className="pt-6">

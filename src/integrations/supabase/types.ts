@@ -178,6 +178,51 @@ export type Database = {
           },
         ]
       }
+      clinical_signoffs: {
+        Row: {
+          cosigned_at: string | null
+          cosigned_by: string | null
+          created_at: string
+          entity_id: string
+          entity_type: string
+          id: string
+          justification: string | null
+          metadata: Json | null
+          signed_at: string | null
+          signed_by: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          cosigned_at?: string | null
+          cosigned_by?: string | null
+          created_at?: string
+          entity_id: string
+          entity_type: string
+          id?: string
+          justification?: string | null
+          metadata?: Json | null
+          signed_at?: string | null
+          signed_by: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          cosigned_at?: string | null
+          cosigned_by?: string | null
+          created_at?: string
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          justification?: string | null
+          metadata?: Json | null
+          signed_at?: string | null
+          signed_by?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       consents: {
         Row: {
           consent_type: string
@@ -278,6 +323,39 @@ export type Database = {
           is_published?: boolean
           title?: string
           track?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      data_lifecycle_policies: {
+        Row: {
+          automatic_action: string
+          created_at: string
+          description: string | null
+          entity_type: string
+          id: string
+          legal_basis: string
+          retention_days: number
+          updated_at: string
+        }
+        Insert: {
+          automatic_action?: string
+          created_at?: string
+          description?: string | null
+          entity_type: string
+          id?: string
+          legal_basis: string
+          retention_days: number
+          updated_at?: string
+        }
+        Update: {
+          automatic_action?: string
+          created_at?: string
+          description?: string | null
+          entity_type?: string
+          id?: string
+          legal_basis?: string
+          retention_days?: number
           updated_at?: string
         }
         Relationships: []
@@ -507,6 +585,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      governance_events: {
+        Row: {
+          actor_id: string | null
+          context: Json | null
+          created_at: string
+          event_action: string
+          event_category: string
+          id: string
+          institution_id: string | null
+          severity: string
+          target_entity_id: string | null
+          target_entity_type: string | null
+          target_user_id: string | null
+        }
+        Insert: {
+          actor_id?: string | null
+          context?: Json | null
+          created_at?: string
+          event_action: string
+          event_category: string
+          id?: string
+          institution_id?: string | null
+          severity?: string
+          target_entity_id?: string | null
+          target_entity_type?: string | null
+          target_user_id?: string | null
+        }
+        Update: {
+          actor_id?: string | null
+          context?: Json | null
+          created_at?: string
+          event_action?: string
+          event_category?: string
+          id?: string
+          institution_id?: string | null
+          severity?: string
+          target_entity_id?: string | null
+          target_entity_type?: string | null
+          target_user_id?: string | null
+        }
+        Relationships: []
       }
       imaging_summaries: {
         Row: {
@@ -1040,6 +1160,48 @@ export type Database = {
         }
         Relationships: []
       }
+      rgpd_requests: {
+        Row: {
+          created_at: string
+          description: string | null
+          due_date: string
+          handled_at: string | null
+          handled_by: string | null
+          id: string
+          request_type: string
+          response: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          due_date?: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          request_type: string
+          response?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          due_date?: string
+          handled_at?: string | null
+          handled_by?: string | null
+          id?: string
+          request_type?: string
+          response?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       rubrics: {
         Row: {
           created_at: string
@@ -1359,12 +1521,26 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      count_pending_signoffs: { Args: { _user_id: string }; Returns: number }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      log_governance_event: {
+        Args: {
+          _action: string
+          _category: string
+          _context?: Json
+          _institution_id?: string
+          _severity?: string
+          _target_entity_id?: string
+          _target_entity_type?: string
+          _target_user?: string
+        }
+        Returns: string
       }
       user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
     }
