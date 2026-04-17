@@ -302,8 +302,7 @@ export default function Landing() {
       {/* Limites actuelles */}
       <LimitsSection />
 
-      {/* Legacy stepper (kept for richer detail) */}
-      <HowItWorksSection />
+      {/* Legacy stepper supprimé — doublon de HowItWorksFRSection */}
 
       {/* Modules */}
       <section id="modules" className="py-24 bg-background scroll-mt-20">
@@ -422,38 +421,12 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto px-6">
-          <h2 className="text-3xl font-bold text-center mb-4">{t("landing.testimonials.title")}</h2>
-          <p className="text-sm text-muted-foreground text-center mb-12">{t("landing.testimonials.disclaimer")}</p>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 max-w-5xl mx-auto">
-            {(t("landing.testimonials.items") as any as Array<{ quote: string; author: string; role: string }>)?.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.4 }}
-              >
-                <Card className="p-6 h-full card-hover">
-                  <CardContent className="p-0">
-                    <p className="text-sm italic text-muted-foreground mb-4 leading-relaxed">"{item.quote}"</p>
-                    <p className="text-sm font-semibold">{item.author}</p>
-                    <p className="text-xs text-muted-foreground">{item.role}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Témoignages retirés : non vérifiables, contraires à la stratégie social-proof transparente. */}
 
       {/* Home FAQ — French, optimized for SEO/GEO */}
       <HomeFAQSection />
 
-      {/* FAQ (multilingual fallback) */}
-      <FAQSection />
+      {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
 
       {/* About */}
       <AboutSection />
