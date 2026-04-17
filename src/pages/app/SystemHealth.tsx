@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Loader2, Activity, Database, ShieldAlert, AlertTriangle, Users, FileWarning, Clock, Zap } from "lucide-react";
 import { format } from "date-fns";
+import { SLAWidget } from "@/components/admin/SLAWidget";
 
 type Health = {
   patients_total: number;
@@ -53,13 +54,16 @@ function MetricCard({ icon, label, value, hint, tone = "default" }: {
 export default function SystemHealth() {
   const { user } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
   const [checking, setChecking] = useState(true);
 
   useEffect(() => {
     if (!user) { setChecking(false); return; }
     (async () => {
       const { data } = await supabase.from("user_roles").select("role").eq("user_id", user.id);
-      setIsAdmin((data ?? []).some((r) => r.role === "super_admin" || r.role === "admin"));
+      const roles = (data ?? []).map((r) => r.role as string);
+      setIsAdmin(roles.some((r) => r === "super_admin" || r === "admin"));
+      setIsSuperAdmin(roles.includes("super_admin"));
       setChecking(false);
     })();
   }, [user]);
@@ -128,6 +132,8 @@ export default function SystemHealth() {
               <MetricCard icon={<Clock className="h-3.5 w-3.5" />} label="Signoffs en attente" value={health.pending_signoffs} tone={health.pending_signoffs > 5 ? "warn" : "default"} />
               <MetricCard icon={<Zap className="h-3.5 w-3.5" />} label="Événements (24h)" value={health.governance_events_24h} hint="Activité globale" />
             </div>
+
+            <SLAWidget isSuperAdmin={isSuperAdmin} />
 
             {/* Data volumes */}
             <Card>

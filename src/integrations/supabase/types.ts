@@ -222,6 +222,48 @@ export type Database = {
           },
         ]
       }
+      clinical_algorithms: {
+        Row: {
+          created_at: string
+          description: string | null
+          evidence_url: string | null
+          id: string
+          last_review_at: string | null
+          name: string
+          reviewer_id: string | null
+          risk_class: string
+          updated_at: string
+          validation_status: string
+          version: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          evidence_url?: string | null
+          id?: string
+          last_review_at?: string | null
+          name: string
+          reviewer_id?: string | null
+          risk_class?: string
+          updated_at?: string
+          validation_status?: string
+          version: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          evidence_url?: string | null
+          id?: string
+          last_review_at?: string | null
+          name?: string
+          reviewer_id?: string | null
+          risk_class?: string
+          updated_at?: string
+          validation_status?: string
+          version?: string
+        }
+        Relationships: []
+      }
       clinical_signoffs: {
         Row: {
           cosigned_at: string | null
@@ -597,6 +639,48 @@ export type Database = {
           },
         ]
       }
+      export_manifests: {
+        Row: {
+          context: Json | null
+          created_at: string
+          download_count: number
+          entity_type: string
+          expires_at: string | null
+          export_format: string
+          id: string
+          purpose: string
+          row_count: number
+          sha256: string
+          user_id: string
+        }
+        Insert: {
+          context?: Json | null
+          created_at?: string
+          download_count?: number
+          entity_type: string
+          expires_at?: string | null
+          export_format?: string
+          id?: string
+          purpose: string
+          row_count?: number
+          sha256: string
+          user_id: string
+        }
+        Update: {
+          context?: Json | null
+          created_at?: string
+          download_count?: number
+          entity_type?: string
+          expires_at?: string | null
+          export_format?: string
+          id?: string
+          purpose?: string
+          row_count?: number
+          sha256?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       exports: {
         Row: {
           created_at: string
@@ -787,6 +871,47 @@ export type Database = {
             columns: ["case_id"]
             isOneToOne: false
             referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      institution_settings: {
+        Row: {
+          created_at: string
+          data_region: string
+          dpo_contact_email: string | null
+          id: string
+          institution_id: string
+          mdr_class: string
+          retention_override_days: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          data_region?: string
+          dpo_contact_email?: string | null
+          id?: string
+          institution_id: string
+          mdr_class?: string
+          retention_override_days?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          data_region?: string
+          dpo_contact_email?: string | null
+          id?: string
+          institution_id?: string
+          mdr_class?: string
+          retention_override_days?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "institution_settings_institution_id_fkey"
+            columns: ["institution_id"]
+            isOneToOne: true
+            referencedRelation: "institutions"
             referencedColumns: ["id"]
           },
         ]
@@ -1448,6 +1573,126 @@ export type Database = {
         }
         Relationships: []
       }
+      sla_incidents: {
+        Row: {
+          affected_users: number | null
+          created_at: string
+          declared_by: string
+          description: string | null
+          id: string
+          mttr_minutes: number | null
+          postmortem_url: string | null
+          resolved_at: string | null
+          root_cause: string | null
+          severity: string
+          started_at: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          affected_users?: number | null
+          created_at?: string
+          declared_by: string
+          description?: string | null
+          id?: string
+          mttr_minutes?: number | null
+          postmortem_url?: string | null
+          resolved_at?: string | null
+          root_cause?: string | null
+          severity: string
+          started_at?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          affected_users?: number | null
+          created_at?: string
+          declared_by?: string
+          description?: string | null
+          id?: string
+          mttr_minutes?: number | null
+          postmortem_url?: string | null
+          resolved_at?: string | null
+          root_cause?: string | null
+          severity?: string
+          started_at?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      software_versions: {
+        Row: {
+          created_at: string
+          git_sha: string | null
+          id: string
+          release_notes: string | null
+          released_at: string
+          risk_class: string
+          signed_by: string | null
+          version: string
+        }
+        Insert: {
+          created_at?: string
+          git_sha?: string | null
+          id?: string
+          release_notes?: string | null
+          released_at?: string
+          risk_class?: string
+          signed_by?: string | null
+          version: string
+        }
+        Update: {
+          created_at?: string
+          git_sha?: string | null
+          id?: string
+          release_notes?: string | null
+          released_at?: string
+          risk_class?: string
+          signed_by?: string | null
+          version?: string
+        }
+        Relationships: []
+      }
+      soup_components: {
+        Row: {
+          created_at: string
+          cve_status: string
+          id: string
+          last_reviewed_at: string | null
+          license: string | null
+          name: string
+          purpose: string | null
+          risk_assessment: string | null
+          updated_at: string
+          version: string
+        }
+        Insert: {
+          created_at?: string
+          cve_status?: string
+          id?: string
+          last_reviewed_at?: string | null
+          license?: string | null
+          name: string
+          purpose?: string | null
+          risk_assessment?: string | null
+          updated_at?: string
+          version: string
+        }
+        Update: {
+          created_at?: string
+          cve_status?: string
+          id?: string
+          last_reviewed_at?: string | null
+          license?: string | null
+          name?: string
+          purpose?: string | null
+          risk_assessment?: string | null
+          updated_at?: string
+          version?: string
+        }
+        Relationships: []
+      }
       stripe_webhook_events: {
         Row: {
           event_id: string
@@ -1681,6 +1926,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      institution_health: { Args: { _institution_id: string }; Returns: Json }
       list_users_with_activity: {
         Args: never
         Returns: {
@@ -1715,6 +1961,17 @@ export type Database = {
         }
         Returns: Json
       }
+      register_export_manifest: {
+        Args: {
+          _context?: Json
+          _entity_type: string
+          _export_format: string
+          _purpose: string
+          _row_count: number
+          _sha256: string
+        }
+        Returns: Json
+      }
       replay_case_at: { Args: { _at: string; _case_id: string }; Returns: Json }
       revoke_role: {
         Args: {
@@ -1727,6 +1984,7 @@ export type Database = {
         Args: { _content: string; _signoff_id: string }
         Returns: Json
       }
+      sla_metrics_30d: { Args: never; Returns: Json }
       snapshot_compliance_score: { Args: never; Returns: string }
       system_health_metrics: { Args: never; Returns: Json }
       user_institution_ids: { Args: { _user_id: string }; Returns: string[] }
