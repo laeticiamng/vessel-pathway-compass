@@ -95,6 +95,7 @@ export function AppSidebar() {
     ...(session ? [
       { title: t("sidebar.admin") || "Admin", url: "/app/admin", icon: ShieldCheck },
       { title: "Gouvernance", url: "/app/governance", icon: ShieldCheck },
+      { title: "Santé système", url: "/app/admin/system-health", icon: Activity },
       { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
     ] : []),
   ];
