@@ -3,7 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, Shield, FileCheck, ScrollText, AlertTriangle, Recycle, History } from "lucide-react";
+import { Loader2, Shield, FileCheck, ScrollText, AlertTriangle, Recycle, History, Lock, UserCog } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { SEOHead } from "@/components/SEOHead";
@@ -37,16 +38,35 @@ const GRADE_COLORS: Record<string, string> = {
   E: "bg-destructive/15 text-destructive border-destructive/30",
 };
 
+function isForbiddenError(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false;
+  const e = err as { code?: string; message?: string; status?: number };
+  const msg = (e.message || "").toLowerCase();
+  return (
+    e.code === "42501" ||
+    e.code === "PGRST301" ||
+    e.status === 401 ||
+    e.status === 403 ||
+    msg.includes("forbidden") ||
+    msg.includes("permission denied") ||
+    msg.includes("not authorized") ||
+    msg.includes("insufficient")
+  );
+}
+
 export default function ComplianceScore() {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error, refetch, isRefetching } = useQuery({
     queryKey: ["compliance-score"],
     queryFn: async (): Promise<ComplianceData> => {
       const { data, error } = await supabase.rpc("compliance_score" as never);
       if (error) throw error;
       return data as unknown as ComplianceData;
     },
-    refetchInterval: 60_000,
+    refetchInterval: (query) => (query.state.error ? false : 60_000),
+    retry: (failureCount, err) => !isForbiddenError(err) && failureCount < 2,
   });
+
+  const forbidden = error ? isForbiddenError(error) : false;
 
   return (
     <>
@@ -67,7 +87,42 @@ export default function ComplianceScore() {
           </div>
         </div>
 
-        {isLoading || !data ? (
+        {forbidden ? (
+          <Alert variant="destructive">
+            <Lock className="h-4 w-4" />
+            <AlertTitle>Accès refusé</AlertTitle>
+            <AlertDescription className="space-y-3">
+              <p>
+                Le score de conformité est réservé aux rôles <strong>admin</strong> ou{" "}
+                <strong>super_admin</strong>. Votre compte ne dispose pas des permissions nécessaires
+                pour consulter cette page.
+              </p>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <Button asChild size="sm" variant="outline">
+                  <Link to="/app/admin/users">
+                    <UserCog className="h-4 w-4 mr-1" /> Gérer les rôles utilisateurs
+                  </Link>
+                </Button>
+                <Button size="sm" variant="ghost" onClick={() => refetch()} disabled={isRefetching}>
+                  {isRefetching ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : null}
+                  Réessayer
+                </Button>
+              </div>
+            </AlertDescription>
+          </Alert>
+        ) : error ? (
+          <Alert variant="destructive">
+            <AlertTriangle className="h-4 w-4" />
+            <AlertTitle>Erreur de chargement</AlertTitle>
+            <AlertDescription className="space-y-3">
+              <p>Impossible de récupérer le score de conformité. {(error as Error).message}</p>
+              <Button size="sm" variant="outline" onClick={() => refetch()} disabled={isRefetching}>
+                {isRefetching ? <Loader2 className="h-4 w-4 mr-1 animate-spin" /> : null}
+                Réessayer
+              </Button>
+            </AlertDescription>
+          </Alert>
+        ) : isLoading || !data ? (
           <div className="flex justify-center py-12">
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           </div>
