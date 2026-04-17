@@ -1,4 +1,3 @@
-import { AppLayout } from "@/components/layout/AppLayout";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,8 +45,8 @@ export default function ComplianceScore() {
   });
 
   return (
-    <AppLayout>
-      <SEOHead title="Score de conformité — Gouvernance" description="Score global de conformité RGPD/MDR de la plateforme." />
+    <>
+      <SEOHead title="Score de conformité — Gouvernance" description="Score global de conformité RGPD/MDR de la plateforme." path="/app/governance/compliance" noindex />
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Score de conformité global</h1>
@@ -117,7 +116,7 @@ export default function ComplianceScore() {
           </>
         )}
       </div>
-    </AppLayout>
+    </>
   );
 }
 
