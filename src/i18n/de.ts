@@ -1038,6 +1038,16 @@ export const de = {
       timeline: "Zeitleiste",
       measurements: "Messungen",
       cases: "Fälle",
+      signoff: "Klinische Freigabe",
+      history: "Versionierter Verlauf",
+    },
+    signoff: {
+      title: "Klinische Freigaben des Patienten",
+      description: "Verfolgen und gegenzeichnen Sie wichtige klinische Entscheidungen für diesen Patienten (ADR-002).",
+    },
+    history: {
+      empty: "Kein klinischer Fall. Der versionierte Verlauf ist mit Fällen verknüpft (ADR-007).",
+      casePrefix: "Fall:",
     },
     caseTimeline: "Fall-Zeitleiste",
     addEvent: "Ereignis hinzufügen",
