@@ -468,6 +468,7 @@ export const fr = {
       confirmSign: "Confirmer et signer",
       signedOff: "Signé",
       signedOffDesc: "Plan confirmé et signé par le clinicien.",
+      plan: "Plan",
     },
     history: {
       title: "Historique des Plans",
@@ -483,9 +484,6 @@ export const fr = {
       creditsRequired: "Crédits nécessaires",
       creditsRequiredDesc: "Veuillez ajouter des crédits pour continuer à utiliser les fonctionnalités de planification.",
       signOffFailed: "Échec de la validation. Veuillez réessayer.",
-    },
-    output: {
-      plan: "Plan",
     },
   },
 
