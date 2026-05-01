@@ -252,9 +252,6 @@ export function AntiOverpromiseSection({ compact = false }: { compact?: boolean 
                 </div>
 
                 <div className="pl-[3.25rem] border-l border-dashed border-primary/20 ml-4">
-                  <p className="text-[10px] font-semibold uppercase tracking-wider text-primary/80 mb-1">
-                    {c.labelInstead}
-                  </p>
                   <p className="text-sm leading-snug text-foreground">
                     {card.insteadSays}
                   </p>
