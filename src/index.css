@@ -6,11 +6,12 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 25% 10%;
+    /* Pearled blue-white background — premium clinical light mode */
+    --background: 210 40% 98%;
+    --foreground: 222 35% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card: 210 40% 99.5%;
+    --card-foreground: 222 35% 12%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 220 25% 10%;
@@ -177,10 +178,10 @@
     --glass-border: 188 60% 50%;
     --hero-gradient: linear-gradient(
       100deg,
-      hsl(188 100% 78%) 0%,
-      hsl(172 95% 70%) 35%,
-      hsl(195 100% 78%) 70%,
-      hsl(210 100% 80%) 100%
+      hsl(188 100% 72%) 0%,
+      hsl(180 100% 75%) 30%,
+      hsl(195 100% 78%) 60%,
+      hsl(210 100% 78%) 100%
     );
     --surface-glass: 222 45% 9%;
   }
@@ -533,29 +534,26 @@
       drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.28));
   }
 
-  /* Dark mode: vivid neon glow, cockpit / vascular imaging vibe */
+  /* Dark mode: vivid neon glow, cockpit / vascular imaging vibe.
+     We deliberately drop the text-stroke + overlay in dark to keep the
+     gradient saturated and the text legible. */
   .dark .hero-neon-text {
-    background-image:
-      linear-gradient(180deg, hsl(188 100% 92% / 0.45) 0%, hsl(0 0% 100% / 0) 50%),
-      var(--hero-gradient);
-    -webkit-text-stroke: 0.5px hsl(var(--neon-glow) / 0.45);
-    filter:
-      drop-shadow(0 0 1px hsl(188 100% 90% / 0.6))
-      drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.55))
-      drop-shadow(0 0 42px hsl(var(--neon-glow) / 0.28));
-  }
-  .dark .hero-neon-text.hero-neon-soft {
+    background-image: var(--hero-gradient);
     -webkit-text-stroke: 0;
     filter:
-      drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.35))
-      drop-shadow(0 0 24px hsl(var(--neon-glow) / 0.18));
+      drop-shadow(0 0 14px hsl(var(--neon-glow) / 0.4))
+      drop-shadow(0 0 36px hsl(var(--neon-glow) / 0.22));
+  }
+  .dark .hero-neon-text.hero-neon-soft {
+    filter:
+      drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.25))
+      drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.12));
   }
   .dark .hero-neon-text.hero-neon-strong {
     filter:
-      drop-shadow(0 0 2px hsl(188 100% 92% / 0.7))
-      drop-shadow(0 0 24px hsl(var(--neon-glow) / 0.7))
-      drop-shadow(0 0 60px hsl(var(--neon-glow) / 0.35))
-      drop-shadow(0 0 100px hsl(205 100% 70% / 0.18));
+      drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.45))
+      drop-shadow(0 0 48px hsl(var(--neon-glow) / 0.22))
+      drop-shadow(0 0 90px hsl(205 100% 70% / 0.12));
   }
 
   /* Respect reduced motion / high contrast preferences */
@@ -573,5 +571,250 @@
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     border: 1px solid hsl(var(--glass-border) / 0.35);
+  }
+
+  /* =====================================================================
+     GLOBAL COCKPIT THEMING — propagates the premium look to every
+     shadcn <Card>, table, input across the platform without touching pages.
+     ===================================================================== */
+
+  /* --- Cards: glass surface + fine luminous border (light & dark) --- */
+  [data-slot="card"],
+  .ui-card {
+    background: hsl(var(--surface-glass) / 0.65);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
+    backdrop-filter: blur(10px) saturate(135%);
+    -webkit-backdrop-filter: blur(10px) saturate(135%);
+    box-shadow:
+      0 1px 0 hsl(0 0% 100% / 0.5) inset,
+      0 1px 3px hsl(220 25% 10% / 0.04),
+      0 8px 24px -12px hsl(195 65% 42% / 0.12);
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  [data-slot="card"]:hover,
+  .ui-card:hover {
+    border-color: hsl(var(--accent-cyan) / 0.45);
+    box-shadow:
+      0 1px 0 hsl(0 0% 100% / 0.55) inset,
+      0 8px 30px -8px hsl(var(--accent-cyan) / 0.22);
+  }
+
+  .dark [data-slot="card"],
+  .dark .ui-card {
+    background:
+      linear-gradient(180deg, hsl(222 45% 11% / 0.85) 0%, hsl(222 47% 7% / 0.85) 100%);
+    border: 1px solid hsl(188 95% 58% / 0.18);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+      0 1px 0 hsl(188 100% 80% / 0.05) inset,
+      0 1px 2px hsl(0 0% 0% / 0.4),
+      0 0 0 1px hsl(188 95% 58% / 0.04);
+  }
+  .dark [data-slot="card"]:hover,
+  .dark .ui-card:hover {
+    border-color: hsl(188 95% 58% / 0.45);
+    box-shadow:
+      0 1px 0 hsl(188 100% 80% / 0.08) inset,
+      0 0 0 1px hsl(188 95% 58% / 0.25),
+      0 8px 30px -6px hsl(188 95% 58% / 0.25);
+  }
+
+  /* Opt-out for cards that should keep a flat background (e.g., wrappers
+     used for layout only). Add class="card-flat" on the <Card>. */
+  [data-slot="card"].card-flat,
+  .dark [data-slot="card"].card-flat {
+    background: hsl(var(--card));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+
+  /* --- Inputs / Selects / Textareas: glass field --- */
+  .dark input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  .dark textarea,
+  .dark select,
+  .dark [data-slot="input"],
+  .dark [data-slot="textarea"],
+  .dark [data-slot="select-trigger"] {
+    background: hsl(222 45% 9% / 0.6) !important;
+    border-color: hsl(188 95% 58% / 0.22) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .dark input:focus-visible,
+  .dark textarea:focus-visible,
+  .dark select:focus-visible,
+  .dark [data-slot="input"]:focus-visible,
+  .dark [data-slot="select-trigger"]:focus-visible {
+    border-color: hsl(188 95% 58% / 0.55) !important;
+    box-shadow: 0 0 0 3px hsl(188 95% 58% / 0.15) !important;
+  }
+
+  /* --- Tables: subtle separators, neon hover row in dark --- */
+  .dark table tbody tr {
+    border-color: hsl(222 35% 18%);
+  }
+  .dark table tbody tr:hover {
+    background: hsl(188 95% 58% / 0.04);
+  }
+  .dark table thead {
+    color: hsl(var(--text-secondary));
+  }
+
+  /* --- Buttons: keep functional, just enrich the primary glow in dark --- */
+  .dark .btn-primary,
+  .dark button[data-variant="default"]:not([disabled]) {
+    box-shadow: 0 0 0 1px hsl(188 95% 58% / 0.25), 0 6px 18px -6px hsl(188 95% 58% / 0.4);
+  }
+
+  /* --- Lucide icon harmonization --- */
+  /* Default stroke width for all Lucide icons across the app */
+  svg.lucide {
+    stroke-width: 1.75;
+  }
+  .dark svg.lucide {
+    stroke-width: 1.65;
+  }
+
+  /* --- Premium subtle background grid for "cockpit" sections --- */
+  .cockpit-grid {
+    background-image:
+      linear-gradient(hsl(var(--accent-cyan) / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--accent-cyan) / 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .dark .cockpit-grid {
+    background-image:
+      linear-gradient(hsl(var(--accent-cyan) / 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--accent-cyan) / 0.06) 1px, transparent 1px);
+  }
+
+  /* --- Risk pills, used by RiskBadge component --- */
+  .risk-low {
+    background: hsl(152 75% 45% / 0.12);
+    border: 1px solid hsl(152 75% 45% / 0.5);
+    color: hsl(152 75% 32%);
+  }
+  .dark .risk-low {
+    background: hsl(152 75% 50% / 0.12);
+    border-color: hsl(152 75% 50% / 0.55);
+    color: hsl(152 90% 70%);
+    box-shadow: 0 0 12px hsl(152 75% 50% / 0.2);
+  }
+  .risk-moderate {
+    background: hsl(38 92% 50% / 0.12);
+    border: 1px solid hsl(38 92% 50% / 0.5);
+    color: hsl(32 95% 38%);
+  }
+  .dark .risk-moderate {
+    background: hsl(42 95% 60% / 0.12);
+    border-color: hsl(42 95% 60% / 0.55);
+    color: hsl(42 100% 72%);
+    box-shadow: 0 0 12px hsl(42 95% 60% / 0.2);
+  }
+  .risk-high {
+    background: hsl(0 72% 51% / 0.1);
+    border: 1px solid hsl(0 72% 51% / 0.5);
+    color: hsl(0 75% 42%);
+  }
+  .dark .risk-high {
+    background: hsl(0 75% 62% / 0.12);
+    border-color: hsl(0 75% 62% / 0.55);
+    color: hsl(0 95% 78%);
+    box-shadow: 0 0 12px hsl(0 75% 62% / 0.2);
+  }
+
+  /* =====================================================================
+     PremiumCard / GlassPanel — single source of truth for the cockpit look
+     ===================================================================== */
+  .premium-card {
+    position: relative;
+    background: hsl(var(--surface-glass) / 0.7);
+    border: 1px solid hsl(var(--glass-border) / 0.35);
+    backdrop-filter: blur(12px) saturate(140%);
+    -webkit-backdrop-filter: blur(12px) saturate(140%);
+    box-shadow:
+      0 1px 0 hsl(0 0% 100% / 0.55) inset,
+      0 1px 3px hsl(220 25% 10% / 0.04),
+      0 8px 24px -12px hsl(var(--accent-cyan) / 0.18);
+    transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+  }
+  .premium-card:not(.premium-card-static):hover {
+    transform: translateY(-1px);
+    border-color: hsl(var(--accent-cyan) / 0.55);
+    box-shadow:
+      0 1px 0 hsl(0 0% 100% / 0.6) inset,
+      0 10px 32px -10px hsl(var(--accent-cyan) / 0.28);
+  }
+  .premium-card-violet:not(.premium-card-static):hover { border-color: hsl(270 85% 60% / 0.55); }
+  .premium-card-teal:not(.premium-card-static):hover { border-color: hsl(var(--accent-teal) / 0.55); }
+
+  .dark .premium-card {
+    background:
+      linear-gradient(180deg, hsl(222 45% 11% / 0.85) 0%, hsl(222 47% 7% / 0.85) 100%);
+    border-color: hsl(188 95% 58% / 0.2);
+    box-shadow:
+      0 1px 0 hsl(188 100% 80% / 0.05) inset,
+      0 1px 2px hsl(0 0% 0% / 0.45),
+      0 0 0 1px hsl(188 95% 58% / 0.04);
+  }
+  .dark .premium-card-violet { border-color: hsl(270 85% 68% / 0.22); }
+  .dark .premium-card-teal { border-color: hsl(var(--accent-teal) / 0.28); }
+  .dark .premium-card-neutral { border-color: hsl(222 30% 22%); }
+  .dark .premium-card:not(.premium-card-static):hover {
+    border-color: hsl(188 95% 58% / 0.55);
+    box-shadow:
+      0 1px 0 hsl(188 100% 80% / 0.1) inset,
+      0 0 0 1px hsl(188 95% 58% / 0.3),
+      0 10px 36px -8px hsl(188 95% 58% / 0.32);
+  }
+  .dark .premium-card-violet:not(.premium-card-static):hover {
+    border-color: hsl(270 85% 68% / 0.55);
+    box-shadow:
+      0 0 0 1px hsl(270 85% 68% / 0.3),
+      0 10px 36px -8px hsl(270 85% 68% / 0.32);
+  }
+  .dark .premium-card-teal:not(.premium-card-static):hover {
+    border-color: hsl(var(--accent-teal) / 0.6);
+    box-shadow:
+      0 0 0 1px hsl(var(--accent-teal) / 0.3),
+      0 10px 36px -8px hsl(var(--accent-teal) / 0.32);
+  }
+
+  /* GlassPanel — translucent surface for headers, search bars, toolbars */
+  .glass-panel {
+    background: hsl(var(--surface-glass) / 0.55);
+    border: 1px solid hsl(var(--glass-border) / 0.3);
+    backdrop-filter: blur(12px) saturate(135%);
+    -webkit-backdrop-filter: blur(12px) saturate(135%);
+  }
+  .glass-panel-soft {
+    background: hsl(var(--surface-glass) / 0.4);
+    backdrop-filter: blur(8px) saturate(125%);
+    -webkit-backdrop-filter: blur(8px) saturate(125%);
+  }
+  .glass-panel-strong {
+    background: hsl(var(--surface-glass) / 0.78);
+    backdrop-filter: blur(18px) saturate(150%);
+    -webkit-backdrop-filter: blur(18px) saturate(150%);
+  }
+  .dark .glass-panel {
+    background: hsl(222 45% 9% / 0.6);
+    border-color: hsl(188 95% 58% / 0.2);
+  }
+  .dark .glass-panel-strong {
+    background: hsl(222 45% 9% / 0.85);
+    border-color: hsl(188 95% 58% / 0.25);
+  }
+
+  /* NeonIcon teal variant */
+  .neon-icon-ring.teal {
+    border-color: hsl(var(--accent-teal) / 0.45);
+    background: hsl(var(--accent-teal) / 0.08);
+    color: hsl(var(--accent-teal));
+  }
+  .dark .neon-icon-ring.teal {
+    box-shadow: inset 0 0 12px hsl(var(--accent-teal) / 0.18), 0 0 12px hsl(var(--accent-teal) / 0.18);
   }
 }
