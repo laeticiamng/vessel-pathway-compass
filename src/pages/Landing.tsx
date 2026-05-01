@@ -36,7 +36,6 @@ import {
   AudienceSection,
   HowItWorksFRSection,
   UseCasesSection,
-  LimitsSection,
   HomeFAQSection,
   homeFaqJsonLd,
 } from "@/components/landing/HomeSections";
