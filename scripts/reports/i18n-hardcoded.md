@@ -1,6 +1,6 @@
 # Hardcoded UI Strings — i18n Audit
 
-_Generated: 2026-05-01T09:27:55.594Z_
+_Generated: 2026-05-01T09:42:09.281Z_
 
 **Methodology:** static scan of `.tsx` files for JSX text, prop strings (title/label/placeholder/description/aria-label/alt/tooltip), and toast messages that look like user-facing copy. Strings already wrapped in `t("…")`, code identifiers, technical tokens, units, and clinical instrument names (VascuQol-6, CIVIQ-14, WIQ, 6-MWT, ABI, …) are filtered out per project i18n rules.
 
@@ -16,9 +16,9 @@ _Generated: 2026-05-01T09:27:55.594Z_
 | Wave 4 — Research / Education / Simulation / Governance / Admin | 36 | 294 | 290 | 288 | 294 |
 | Wave 5 — Remaining VASCU-LINK scientific components | 14 | 52 | 52 | 51 | 52 |
 | Wave 6 — Layout, navigation & misc | 1 | 1 | 1 | 1 | 1 |
-| Unassigned | 2 | 2 | 2 | 2 | 2 |
+| Unassigned | 3 | 4 | 4 | 4 | 4 |
 
-**Total findings:** 498 across 147 scanned files.
+**Total findings:** 500 across 149 scanned files.
 
 ## Wave 1 — Public site (landing / pricing / legal / FAQ / support)
 
@@ -26,19 +26,19 @@ _Generated: 2026-05-01T09:27:55.594Z_
 
 | Line | Kind | FR | EN | DE | String |
 |---:|---|:---:|:---:|:---:|---|
-| 129 | prop:title | ✗ | ✗ | ✗ | AquaMR Flow \| Plateforme de workflow non ionisant pour la médecine vasculaire |
-| 130 | prop:description | ✗ | ✗ | ✗ | AquaMR Flow est une plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulatio |
-| 135 | prop:aria-label | ✗ | ✗ | ✗ | Main navigation |
-| 233 | jsx-text | ✗ | ✗ | ✗ | Bêta ouverte — accès complet gratuit |
-| 239 | jsx-text | ✗ | ✗ | ✗ | Plus de contrôle sur vos procédures vasculaires. |
-| 243 | jsx-text | ✗ | ✗ | ✗ | AquaMR Flow centralise planification, imagerie multimodale, stratification CI-AKI et registre — pour les équipes vascula |
-| 249 | jsx-text | ✓ | ✗ | ✗ | Créer un compte gratuit |
-| 255 | jsx-text | ✗ | ✗ | ✗ | Voir comment ça marche |
-| 260 | jsx-text | ✗ | ✗ | ✗ | Accès complet pendant la bêta |
-| 261 | jsx-text | ✗ | ✗ | ✗ | Données pseudonymisées, RGPD |
-| 263 | jsx-text | ✗ | ✗ | ✗ | Prototype de recherche — pas un dispositif médical. Toute aide à la décision nécessite la confirmation d'un clinicien. |
-| 278 | prop:alt | ✗ | ✗ | ✗ | AquaMR Flow clinical dashboard showing patient statistics, risk distribution and module overview |
-| 309 | jsx-text | ✗ | ✗ | ✗ | Three concentric circles · 4-zero angiographic function · proximity vascular medicine. Doctoral protocol of Dr Laëticia  |
+| 130 | prop:title | ✗ | ✗ | ✗ | AquaMR Flow \| Plateforme de workflow non ionisant pour la médecine vasculaire |
+| 131 | prop:description | ✗ | ✗ | ✗ | AquaMR Flow est une plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulatio |
+| 136 | prop:aria-label | ✗ | ✗ | ✗ | Main navigation |
+| 234 | jsx-text | ✗ | ✗ | ✗ | Bêta ouverte — accès complet gratuit |
+| 240 | jsx-text | ✗ | ✗ | ✗ | Plus de contrôle sur vos procédures vasculaires. |
+| 244 | jsx-text | ✗ | ✗ | ✗ | AquaMR Flow centralise planification, imagerie multimodale, stratification CI-AKI et registre — pour les équipes vascula |
+| 250 | jsx-text | ✓ | ✗ | ✗ | Créer un compte gratuit |
+| 256 | jsx-text | ✗ | ✗ | ✗ | Voir comment ça marche |
+| 261 | jsx-text | ✗ | ✗ | ✗ | Accès complet pendant la bêta |
+| 262 | jsx-text | ✗ | ✗ | ✗ | Données pseudonymisées, RGPD |
+| 264 | jsx-text | ✗ | ✗ | ✗ | Prototype de recherche — pas un dispositif médical. Toute aide à la décision nécessite la confirmation d'un clinicien. |
+| 279 | prop:alt | ✗ | ✗ | ✗ | AquaMR Flow clinical dashboard showing patient statistics, risk distribution and module overview |
+| 310 | jsx-text | ✗ | ✗ | ✗ | Three concentric circles · 4-zero angiographic function · proximity vascular medicine. Doctoral protocol of Dr Laëticia  |
 | 493 | prop:aria-label | ✗ | ✗ | ✗ | Footer produit |
 | 494 | jsx-text | ✓ | ✗ | ✗ | Fonctionnalités |
 | 498 | jsx-text | ✓ | ✗ | ✗ | Sécurité et confidentialité |
@@ -980,14 +980,21 @@ _Generated: 2026-05-01T09:27:55.594Z_
 
 ## Unassigned
 
+### `src/i18n/context.tsx` — 2 findings
+
+| Line | Kind | FR | EN | DE | String |
+|---:|---|:---:|:---:|:---:|---|
+| 24 | jsx-text | ✗ | ✗ | ✗ | void; /** * Resolve a translation key. * * - `t("foo.bar")` → string (legacy, unchanged — `key` returned if missing). *  |
+| 59 | jsx-text | ✗ | ✗ | ✗ | ( (acc, part) => (acc && typeof acc === "object" ? (acc as Record |
+
 ### `src/hooks/useAuth.tsx` — 1 finding
 
 | Line | Kind | FR | EN | DE | String |
 |---:|---|:---:|:---:|:---:|---|
 | 14 | jsx-text | ✗ | ✗ | ✗ | (null); const [user, setUser] = useState |
 
-### `src/i18n/context.tsx` — 1 finding
+### `src/i18n/I18nDiagnostics.tsx` — 1 finding
 
 | Line | Kind | FR | EN | DE | String |
 |---:|---|:---:|:---:|:---:|---|
-| 48 | jsx-text | ✗ | ✗ | ✗ | getNestedValue(dictionaries[language], key), [language] ); return ( |
+| 84 | jsx-text | ✗ | ✗ | ✗ | i18n fallback |
