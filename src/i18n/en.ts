@@ -194,6 +194,46 @@ export const en = {
         { q: "What does 'non-ionizing workflow' mean?", a: "Non-ionizing workflows use imaging modalities that do not produce ionizing radiation — such as MRI, IVUS, OCT, and ultrasound — instead of fluoroscopy and CT. AquaMR Flow helps plan and execute these contrast-sparing, radiation-free approaches." },
       ],
     },
+    complianceFaq: {
+      badge: "Compliance-ready",
+      title: "Compliance FAQ — auditability, traceability, security",
+      subtitle: "How AquaMR Flow is engineered for serious clinical use, and what \"no regulatory approval\" means today.",
+      disclaimer: "This FAQ describes the compliance posture targeted by AquaMR Flow. It does not constitute legal, medical or regulatory advice and does not replace institutional due diligence.",
+      items: [
+        {
+          q: "What does \"no regulatory approval\" mean for AquaMR Flow?",
+          a: "AquaMR Flow is a research prototype in open beta. It is not CE-marked as a medical device, not FDA-cleared and not Swissmedic-approved.\n\nIn practice:\n• It does not establish a diagnosis and does not prescribe a treatment.\n• Any decision support (CI-AKI, planning, digital twin) must be confirmed by a qualified clinician, who remains solely responsible for the medical act.\n• Clinical use takes place within a research, training or workflow-organization framework.\n\nThe architecture is designed to eventually target MDR / GDPR / IEC 62304 compliance, but this objective is not achieved at this stage.",
+        },
+        {
+          q: "How is auditability ensured?",
+          a: "Every sensitive action (read, write, export, score computation, decision) is:\n• timestamped,\n• tied to an authenticated user,\n• tracked in a backend application log,\n• accessible to an institution administrator upon justified request.\n\nCritical Edge Functions require a valid JWT and verify roles server-side. Data exports generate a dedicated audit entry (who, what, when, format, scope).",
+        },
+        {
+          q: "How is the traceability of clinical decisions handled?",
+          a: "Any decision documented in the platform (procedure plan, CI-AKI score, L1 validation, registry entry) keeps:\n• the patient's pseudonymized identifier,\n• the input parameters used,\n• the version of the model or formula applied,\n• the validating clinician,\n• the UTC date and time.\n\nThis allows the exact context of a decision to be reconstructed in the event of a retrospective review or institutional audit.",
+        },
+        {
+          q: "What does \"security by design\" mean in AquaMR Flow?",
+          a: "Principles applied from the architecture stage:\n• TLS 1.2+ encryption in transit, encryption at rest on the backend.\n• Row-Level Security enabled on all sensitive tables (patients, cases, PROMs, audit).\n• Defense-in-depth filtering: RLS + server-side `case_id` filters on PROMs queries.\n• Separated roles (clinician, researcher, administrator, support).\n• Systematic pseudonymization of patient data before any benchmark or aggregated export.\n• Soft-delete with a 30-day grace period and automatic purge.\n• No sharing of AI models trained on identifiable patient data.",
+        },
+        {
+          q: "Does my patient data leave the European Union or Switzerland?",
+          a: "Today, the platform relies on infrastructure hosted by Lovable Cloud / Supabase. A migration to a clinical HDS (EU/CH) hosting environment is planned before any institutional production use.\n\nFor institutions with strict constraints (French HDS, CH hosting), a data isolation and localization arrangement is negotiable on a case-by-case basis prior to deployment.",
+        },
+        {
+          q: "What is the stance regarding GDPR and nFADP?",
+          a: "The architecture targets GDPR (EU) and nFADP (Switzerland) compliance:\n• documented legal basis per use case (research, care, training),\n• minimization of collected data,\n• supported access, rectification, erasure rights,\n• processing register maintained on the publisher side,\n• identified sub-processors (DPA available upon request).\n\nA simplified DPIA is provided to partner institutions before any pilot.",
+        },
+        {
+          q: "What happens in the event of a security incident?",
+          a: "Procedure:\n1. Detection via application monitoring and backend alerts.\n2. Triage within 24 business hours.\n3. Notification to affected institutions within GDPR deadlines (72h for personal data breaches).\n4. Documented post-mortem and shared corrective measures.\n\nAudit logs make it possible to delimit the exact scope (users, patients, actions) impacted by an incident.",
+        },
+        {
+          q: "Can I audit the platform before a clinical pilot?",
+          a: "Yes. Upon justified request from an institution, we provide:\n• a security dossier (architecture, RLS, secrets management, sub-processors),\n• the regulatory disclaimers in force,\n• the list of locked L1 endpoints and the version of the applicable clinical protocol,\n• access to an isolated test environment to verify behavior.\n\nIn-depth technical audits (pentests, code review) can be organized under NDA.",
+        },
+      ],
+    },
     about: {
       title: "Who We Are",
       description: "AquaMR Flow is developed by EMOTIONSCARE, a health-tech company based in Amiens, France. Founded by Laëticia Motongane, internal medicine resident (FMH track, vascular medicine), our mission is to advance non-ionizing, contrast-sparing vascular workflows — built around real interventional needs, not generic healthcare templates.",
