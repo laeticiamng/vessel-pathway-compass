@@ -12,6 +12,9 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
+import { NeonKpi } from "@/components/neon/NeonKpi";
+import { NeonModuleTile } from "@/components/neon/NeonModuleTile";
+import { NeonPageHeader } from "@/components/neon/NeonPageHeader";
 import {
   Brain,
   Activity,
@@ -28,6 +31,7 @@ import {
   Calculator,
   BarChart3,
   Leaf,
+  LayoutGrid,
 } from "lucide-react";
 
 export default function Dashboard() {
@@ -96,10 +100,10 @@ export default function Dashboard() {
   });
 
   const statCards = [
-    { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, icon: HeartPulse, trend: `${stats?.totalCases ?? 0} total`, color: "bg-primary/10 text-primary" },
-    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.generated"), color: "bg-info/10 text-info" },
-    { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, icon: LineChart, trend: t("dashboard.stats.registryEntries"), color: "bg-success/10 text-success" },
-    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: FlaskConical, trend: t("dashboard.stats.completed"), color: "bg-warning/10 text-warning" },
+    { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, icon: HeartPulse, trend: `${stats?.totalCases ?? 0} ${t("dashboard.stats.total") ?? "total"}`, variant: "cyan" as const },
+    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.generated") as string, variant: "cyan" as const, unit: "/day" },
+    { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, icon: LineChart, trend: t("dashboard.stats.registryEntries") as string, variant: "cyan" as const },
+    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: LayoutGrid, trend: t("dashboard.stats.completed") as string, variant: "violet" as const },
   ];
 
   const quickActions = [
@@ -135,12 +139,28 @@ export default function Dashboard() {
         path="/app"
         noindex
       />
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold">{t("dashboard.title")}</h1>
-        <p className="text-muted-foreground text-sm mt-1">{t("dashboard.welcome")}</p>
-      </div>
+      <NeonPageHeader
+        title={t("dashboard.title") as string}
+        subtitle={t("dashboard.welcome") as string}
+      />
 
       {stats && <OnboardingChecklist stats={stats} />}
+
+      {/* KPI grid — AquaMR Flow signature */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 stagger-in">
+        {statCards.map((stat) => (
+          <NeonKpi
+            key={stat.label}
+            label={stat.label as string}
+            value={stat.value}
+            unit={(stat as any).unit}
+            icon={stat.icon}
+            variant={stat.variant}
+            trend={stat.trend as string}
+            loading={statsLoading}
+          />
+        ))}
+      </div>
 
       {/* Quick Actions */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 stagger-in">
@@ -164,31 +184,6 @@ export default function Dashboard() {
       <AngiographicFunctionTrajectory />
 
       <ScientificSafetyBox />
-
-      {/* Stats */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-in">
-        {statCards.map((stat) => (
-          <Card key={stat.label} className="card-hover">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.label}</CardTitle>
-              <div className={`h-8 w-8 rounded-lg ${stat.color} flex items-center justify-center`}>
-                <stat.icon className="h-4 w-4" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              {statsLoading ? (
-                <Skeleton className="h-8 w-16" />
-              ) : (
-                <div className="text-3xl font-bold tracking-tight">{stat.value}</div>
-              )}
-              <p className="text-xs text-muted-foreground mt-1.5 flex items-center gap-1">
-                <TrendingUp className="h-3 w-3 text-success" />
-                {stat.trend}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
 
       {/* Eco-Impact Summary */}
       <Card className="border-emerald-500/20">
@@ -267,24 +262,48 @@ export default function Dashboard() {
 
       <ModalityPositioningMatrix />
 
-      {/* Module Grid */}
+      {/* Hero module tiles — AquaMR Flow signature row */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 stagger-in">
+        <NeonModuleTile
+          title={t("sidebar.procedurePlanner") as string}
+          icon={Brain}
+          to="/app/procedure-planner"
+          variant="cyan"
+        />
+        <NeonModuleTile
+          title={t("sidebar.digitalTwin") as string}
+          icon={Activity}
+          to="/app/digital-twin"
+          variant="cyan"
+        />
+        <NeonModuleTile
+          title={t("sidebar.registry") as string}
+          icon={BarChart3}
+          to="/app/registry"
+          variant="cyan"
+        />
+        <NeonModuleTile
+          title={t("sidebar.education") as string}
+          icon={BookOpen}
+          to="/app/education"
+          variant="violet"
+        />
+      </div>
+
+      {/* Secondary modules */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-in">
         {[
-          { title: t("sidebar.procedurePlanner"), desc: t("dashboard.moduleDesc.procedurePlanner"), icon: Brain, path: "/app/procedure-planner" },
           { title: t("sidebar.fusionViewer"), desc: t("dashboard.moduleDesc.fusionViewer"), icon: Image, path: "/app/fusion-viewer" },
           { title: t("sidebar.ciAkiEngine"), desc: t("dashboard.moduleDesc.ciAkiEngine"), icon: Calculator, path: "/app/ci-aki-engine" },
-          { title: t("sidebar.digitalTwin"), desc: t("dashboard.moduleDesc.twin"), icon: Activity, path: "/app/digital-twin" },
           { title: t("sidebar.simulationLab"), desc: t("dashboard.moduleDesc.simulation"), icon: FlaskConical, path: "/app/simulation" },
-          { title: t("sidebar.registry"), desc: t("dashboard.moduleDesc.registry"), icon: LineChart, path: "/app/registry" },
-          { title: t("sidebar.education"), desc: t("dashboard.moduleDesc.education"), icon: BookOpen, path: "/app/education" },
-          { title: t("sidebar.analytics"), desc: t("dashboard.moduleDesc.analytics"), icon: BarChart3, path: "/app/analytics" },
+          { title: t("sidebar.analytics"), desc: t("dashboard.moduleDesc.analytics"), icon: LineChart, path: "/app/analytics" },
           { title: t("sidebar.researchHub"), desc: t("dashboard.moduleDesc.research"), icon: FileText, path: "/app/research" },
         ].map((mod) => (
-          <Link key={mod.title} to={mod.path}>
-            <Card className="card-hover shine-hover cursor-pointer h-full group">
+          <Link key={mod.title as string} to={mod.path}>
+            <Card className="neon-card card-hover shine-hover cursor-pointer h-full group">
               <CardHeader className="flex flex-row items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors duration-200">
-                  <mod.icon className="h-5 w-5 text-primary" />
+                <div className="neon-icon-ring shrink-0">
+                  <mod.icon className="h-5 w-5" strokeWidth={1.75} />
                 </div>
                 <div className="relative z-10 flex-1 min-w-0">
                   <CardTitle className="text-base">{mod.title}</CardTitle>
