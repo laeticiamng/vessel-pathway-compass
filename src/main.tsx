@@ -4,6 +4,7 @@ import { HelmetProvider } from "react-helmet-async";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import App from "./App.tsx";
 import "./index.css";
+import { startWebVitalsTracking } from "./lib/webVitals";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
@@ -14,3 +15,6 @@ createRoot(document.getElementById("root")!).render(
     </ErrorBoundary>
   </StrictMode>
 );
+
+// Start RUM after the React tree mounts
+startWebVitalsTracking();

@@ -1886,6 +1886,48 @@ export type Database = {
         }
         Relationships: []
       }
+      web_vitals: {
+        Row: {
+          app_version: string | null
+          connection_type: string | null
+          created_at: string
+          id: number
+          metric: string
+          navigation_type: string | null
+          path: string
+          rating: string
+          session_id: string | null
+          user_agent: string | null
+          value: number
+        }
+        Insert: {
+          app_version?: string | null
+          connection_type?: string | null
+          created_at?: string
+          id?: number
+          metric: string
+          navigation_type?: string | null
+          path: string
+          rating: string
+          session_id?: string | null
+          user_agent?: string | null
+          value: number
+        }
+        Update: {
+          app_version?: string | null
+          connection_type?: string | null
+          created_at?: string
+          id?: number
+          metric?: string
+          navigation_type?: string | null
+          path?: string
+          rating?: string
+          session_id?: string | null
+          user_agent?: string | null
+          value?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       governance_anomalies: {
