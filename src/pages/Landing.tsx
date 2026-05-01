@@ -293,7 +293,11 @@ export default function Landing() {
                 src={dashboardPreview}
                 alt={t("home.hero.dashboardAlt")}
                 className="w-full h-auto"
-                loading="lazy"
+                width={1920}
+                height={1088}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
             <p className="mt-4 text-sm text-primary-foreground/40 italic">
