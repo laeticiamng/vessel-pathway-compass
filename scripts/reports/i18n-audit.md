@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-01T09:52:44.039Z_
+_Generated: 2026-05-01T09:53:09.327Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 

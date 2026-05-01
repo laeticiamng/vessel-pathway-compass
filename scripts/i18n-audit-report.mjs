@@ -77,8 +77,11 @@ function flattenKeys(obj, prefix = "", out = new Map()) {
 // ---------------------------------------------------------------------------
 // Used-key extractor
 // ---------------------------------------------------------------------------
-const T_LITERAL_RE = /\bt[<\w,\s\[\]]*\(\s*["'`]([\w.]+)["'`]/g;
-const T_TEMPLATE_RE = /\bt[<\w,\s\[\]]*\(\s*`([\w.]+)`/g;
+// Match `t(`, `t<…>(`, `tString(`-style is excluded. The `(?<![A-Za-z0-9_$])`
+// negative lookbehind guarantees `t` is not part of a longer identifier
+// (e.g. `toLocaleDateString` no longer matches).
+const T_LITERAL_RE = /(?<![A-Za-z0-9_$])t(?:<[^>]+>)?\(\s*["'`]([\w.]+)["'`]/g;
+const T_TEMPLATE_RE = /(?<![A-Za-z0-9_$])t(?:<[^>]+>)?\(\s*`([\w.]+)`/g;
 
 function extractUsedKeys(files) {
   const used = new Map(); // key -> Set(files)
@@ -104,7 +107,7 @@ function extractUsedKeys(files) {
       used.get(key).add(rel);
     }
     // Dynamic template literals like `seo.legal.${current}.title`
-    const tplDyn = /\bt[<\w,\s\[\]]*\(\s*`([\w.]*\$\{[^}]+\}[\w.]*)`/g;
+    const tplDyn = /(?<![A-Za-z0-9_$])t(?:<[^>]+>)?\(\s*`([\w.]*\$\{[^}]+\}[\w.]*)`/g;
     while ((m = tplDyn.exec(code)) !== null) {
       // Capture the static prefix ending before ${
       const prefix = m[1].split("${")[0].replace(/\.$/, "");
