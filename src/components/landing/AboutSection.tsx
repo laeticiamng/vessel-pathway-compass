@@ -2,6 +2,7 @@ import { forwardRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/i18n/context";
 import { HeartPulse, ShieldCheck, Users } from "lucide-react";
+import { MedRegBadge } from "@/components/MedRegBadge";
 
 const highlights = [
   { icon: HeartPulse, key: "clinical" },
@@ -31,6 +32,9 @@ export const AboutSection = forwardRef<HTMLElement>(function AboutSection(_, ref
           <p className="text-sm text-muted-foreground/70">
             {t("landing.about.foundedLine")}
           </p>
+          <div className="mt-6 max-w-md mx-auto">
+            <MedRegBadge variant="full" />
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6">

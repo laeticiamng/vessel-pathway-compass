@@ -31,6 +31,7 @@ import {
 // FAQSection + HowItWorksSection legacy retirés (doublons)
 import { AboutSection } from "@/components/landing/AboutSection";
 import { LimitsSection } from "@/components/landing/LimitsSection";
+import { MedRegBadge } from "@/components/MedRegBadge";
 import {
   EnBrefSection,
   AudienceSection,
@@ -508,9 +509,12 @@ export default function Landing() {
             </div>
           </div>
           <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} EMOTIONSCARE SASU — Amiens, France. {t("landing.footer.rights")}
-            </p>
+            <div className="flex flex-col items-center sm:items-start gap-2">
+              <p className="text-sm text-muted-foreground">
+                © {new Date().getFullYear()} EMOTIONSCARE SASU — Amiens, France. {t("landing.footer.rights")}
+              </p>
+              <MedRegBadge variant="compact" />
+            </div>
             <div className="flex items-center gap-1">
               <Globe className="h-3.5 w-3.5 text-muted-foreground mr-1" />
               {(["en", "fr", "de"] as Language[]).map((lang) => (
