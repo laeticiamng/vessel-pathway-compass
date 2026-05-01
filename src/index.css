@@ -534,29 +534,27 @@
       drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.28));
   }
 
-  /* Dark mode: vivid neon glow, cockpit / vascular imaging vibe */
+  /* Dark mode: vivid neon glow, cockpit / vascular imaging vibe.
+     We deliberately drop the text-stroke in dark to avoid a hollow look. */
   .dark .hero-neon-text {
     background-image:
-      linear-gradient(180deg, hsl(188 100% 92% / 0.45) 0%, hsl(0 0% 100% / 0) 50%),
+      linear-gradient(180deg, hsl(188 100% 95% / 0.5) 0%, hsl(0 0% 100% / 0) 55%),
       var(--hero-gradient);
-    -webkit-text-stroke: 0.5px hsl(var(--neon-glow) / 0.45);
-    filter:
-      drop-shadow(0 0 1px hsl(188 100% 90% / 0.6))
-      drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.55))
-      drop-shadow(0 0 42px hsl(var(--neon-glow) / 0.28));
-  }
-  .dark .hero-neon-text.hero-neon-soft {
     -webkit-text-stroke: 0;
     filter:
-      drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.35))
-      drop-shadow(0 0 24px hsl(var(--neon-glow) / 0.18));
+      drop-shadow(0 0 14px hsl(var(--neon-glow) / 0.35))
+      drop-shadow(0 0 36px hsl(var(--neon-glow) / 0.18));
+  }
+  .dark .hero-neon-text.hero-neon-soft {
+    filter:
+      drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.25))
+      drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.12));
   }
   .dark .hero-neon-text.hero-neon-strong {
     filter:
-      drop-shadow(0 0 2px hsl(188 100% 92% / 0.7))
-      drop-shadow(0 0 24px hsl(var(--neon-glow) / 0.7))
-      drop-shadow(0 0 60px hsl(var(--neon-glow) / 0.35))
-      drop-shadow(0 0 100px hsl(205 100% 70% / 0.18));
+      drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.45))
+      drop-shadow(0 0 48px hsl(var(--neon-glow) / 0.22))
+      drop-shadow(0 0 90px hsl(205 100% 70% / 0.12));
   }
 
   /* Respect reduced motion / high contrast preferences */
