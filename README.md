@@ -13,6 +13,7 @@ AquaMR Flow is a clinical software cockpit for contrast-sparing and non-ionizing
 | Module | Description |
 |--------|-------------|
 | **Dashboard** | Clinical cockpit with workflow overview, CI-AKI risk distribution, and program metrics |
+| **L1 Decision Board** | VASCU-LINK pre-revascularization decision support: AquaMR cartography, C4-i, PROMs, decision delta, sign-off and research export |
 | **Procedure Planner** | Workflow recommendations and modality selection (IVUS-first, OCT-saline, non-contrast MRA) |
 | **Fusion Viewer** | Multimodal imaging tabs (MRI / IVUS / OCT / Ultrasound) with DICOM-ready architecture |
 | **AquaMR Digital Twin** | Patient-specific vascular modeling with segment-based vessel mapping |
@@ -22,6 +23,75 @@ AquaMR Flow is a clinical software cockpit for contrast-sparing and non-ionizing
 | **Research** | Study cohort creation, pseudo-anonymized exports, and collaboration tools |
 | **AquaMR Academy** | Education on low-field MRI, non-contrast MRA, and IVUS-guided techniques |
 | **Program Analytics** | Zero-contrast rates, contrast avoided, radiation avoided, and institutional dashboards |
+
+---
+
+## Scientific Positioning
+
+VASCU-LINK is **not designed as a Doppler replacement**. Doppler remains the
+first-line hemodynamic examination.
+
+The platform explores whether selected angiographic functions can be
+progressively reconstructed in a **4-zero chain**:
+
+- no ionizing radiation,
+- no injected iodinated or gadolinium contrast,
+- no helium,
+- radically reduced infrastructure and ecological footprint.
+
+The translational sequence is:
+
+1. **L1 — See & Decide**: pre-revascularization mapping and decision.
+2. **L2 — Simulate & Guide**: phantom / simulation guidance.
+3. **L3 — Preclinical Intervention**: non-human intervention feasibility.
+4. **Post-PhD — Selected 4-Zero Revascularization**: long-term horizon only.
+
+The platform does not perform or autonomously recommend human revascularization.
+Conventional angiography remains mandatory for emergencies, complex high-risk
+interventions, insufficient image quality, or when standard-of-care requires it.
+
+---
+
+## AquaMR vs Vessel Pathway Compass vs VASCU-LINK
+
+- **AquaMR** — 4-zero angiographic imaging device concept.
+- **Vessel Pathway Compass** — clinical cockpit and pre-revascularization
+  decision platform.
+- **VASCU-LINK** — full translational chain combining AquaMR, Doppler, C4-i,
+  PROMs, registry, simulation and preclinical guidance roadmap.
+
+---
+
+## VASCU-LINK L1 flow
+
+The **L1 Decision Board** (`/app/l1-decision-board`) is the central pre-revascularization
+flow that wires together every brick relevant to the doctoral protocol:
+
+```
+patient → Doppler / ABI / TBI → AquaMR cartography → C4-i concordance →
+  PROMs (WIQ / VascuQol-6 / 6-MWT) → decision before/after AquaMR →
+  clinician sign-off → audit log → research export (CSV / JSON / PDF)
+```
+
+L1 makes the AOMI patient legible, classable and routable. It does **not** treat. The
+decision categories produced are limited to:
+
+- `medical_optimized`
+- `surveillance`
+- `standard_imaging`
+- `endovascular_discussion`
+- `surgical_discussion`
+
+If AquaMR cartography is non-interpretable, the board automatically recommends a
+fallback to standard-of-care imaging.
+
+Backed by:
+
+- `supabase/migrations/20260501073611_l1_decision_board.sql` (`l1_assessments`,
+  `l1_segment_findings` + RLS aligned with `cases`)
+- `src/lib/l1/decision.ts` — `computeDecisionDelta()`
+- `src/lib/l1/schemas.ts` — Zod payload validation + direct-identifier guard
+- `src/test/l1.test.ts` — Vitest coverage of decision logic, schemas and exports
 
 ---
 

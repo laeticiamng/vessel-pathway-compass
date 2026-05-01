@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { SEOHead } from "@/components/SEOHead";
+import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -191,6 +192,8 @@ export default function Governance() {
             {roles.map((r) => <Badge key={r} variant="secondary">{r}</Badge>)}
           </div>
         </div>
+
+        <ScientificSafetyBox />
 
         {/* KPIs */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

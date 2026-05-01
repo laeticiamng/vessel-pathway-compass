@@ -3,9 +3,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Image, Upload, Ruler, Pencil, AlertTriangle, Shield, Leaf, Loader2, Trash2, FileImage } from "lucide-react";
+import { Image, Upload, Ruler, Pencil, AlertTriangle, Shield, Leaf, Loader2, Trash2, FileImage, Compass } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
+import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -82,6 +83,21 @@ export default function FusionViewer() {
           <p className="text-muted-foreground mt-1">{t("fusionViewer.disclaimer.body")}</p>
         </div>
       </div>
+
+      <div className="flex items-start gap-3 p-4 rounded-xl bg-primary/5 border border-primary/30">
+        <Compass className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+        <div className="text-sm space-y-1">
+          <p className="font-medium">AquaMR role in the 4-zero angiographic chain</p>
+          <p className="text-muted-foreground">
+            AquaMR is the 4-zero imaging device of the VASCU-LINK trajectory: no
+            ionizing radiation, no injected contrast, no helium. The Fusion Viewer
+            renders multimodal correlation, while the L1 Decision Board consumes
+            AquaMR cartography to support pre-revascularization decisions.
+          </p>
+        </div>
+      </div>
+
+      <ScientificSafetyBox />
 
       <div className="grid sm:grid-cols-3 gap-4">
         <Card className="hover:border-primary/30 transition-colors cursor-pointer relative">

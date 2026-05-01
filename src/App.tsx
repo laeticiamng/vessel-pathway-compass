@@ -29,6 +29,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const SecurityPrivacy = lazy(() => import("./pages/SecurityPrivacy"));
 const Dashboard = lazy(() => import("./pages/app/Dashboard"));
 const ProcedurePlanner = lazy(() => import("./pages/app/ProcedurePlanner"));
+const L1DecisionBoard = lazy(() => import("./pages/app/L1DecisionBoard"));
 const FusionViewer = lazy(() => import("./pages/app/FusionViewer"));
 const Patients = lazy(() => import("./pages/app/Patients"));
 const PatientDetail = lazy(() => import("./pages/app/PatientDetail"));
@@ -104,6 +105,7 @@ const App = () => (
           <Route path="/app" element={<PublicAppRoute />}>
             <Route index element={<ContentGate><Dashboard /></ContentGate>} />
             <Route path="procedure-planner" element={<ContentGate><ProcedurePlanner /></ContentGate>} />
+            <Route path="l1-decision-board" element={<ContentGate><L1DecisionBoard /></ContentGate>} />
             <Route path="fusion-viewer" element={<ContentGate><FusionViewer /></ContentGate>} />
             <Route path="digital-twin" element={<ContentGate><DigitalTwin /></ContentGate>} />
             <Route path="ci-aki-engine" element={<ContentGate><CIAKIEngine /></ContentGate>} />

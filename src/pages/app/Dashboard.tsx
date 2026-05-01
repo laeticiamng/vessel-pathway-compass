@@ -3,6 +3,9 @@ import { SEOHead } from "@/components/SEOHead";
 import { Button } from "@/components/ui/button";
 import PatientRiskDistribution from "@/components/dashboard/PatientRiskDistribution";
 import { OnboardingChecklist } from "@/components/dashboard/OnboardingChecklist";
+import { AngiographicFunctionTrajectory } from "@/components/vasculink/AngiographicFunctionTrajectory";
+import { ModalityPositioningMatrix } from "@/components/vasculink/ModalityPositioningMatrix";
+import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -158,6 +161,10 @@ export default function Dashboard() {
         ))}
       </div>
 
+      <AngiographicFunctionTrajectory />
+
+      <ScientificSafetyBox />
+
       {/* Stats */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-in">
         {statCards.map((stat) => (
@@ -257,6 +264,8 @@ export default function Dashboard() {
       </Card>
 
       <PatientRiskDistribution />
+
+      <ModalityPositioningMatrix />
 
       {/* Module Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-in">

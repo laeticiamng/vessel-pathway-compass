@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FileText, Plus, Users, Database, Download, BarChart3, Loader2 } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
+import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -91,6 +92,8 @@ export default function Research() {
           </Button>
         </div>
       </div>
+
+      <ScientificSafetyBox />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>
