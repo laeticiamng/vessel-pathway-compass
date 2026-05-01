@@ -41,8 +41,8 @@ export function NeonModuleTile({
         className={cn(
           "h-16 w-16 sm:h-20 sm:w-20 rounded-2xl flex items-center justify-center border transition-transform duration-300 group-hover:scale-105",
           isViolet
-            ? "border-accent/40 text-accent bg-accent/5"
-            : "border-primary/40 text-primary bg-primary/5"
+            ? "border-accent/50 text-accent bg-accent/10 dark:bg-accent/5"
+            : "border-primary/50 text-primary bg-primary/10 dark:bg-primary/5"
         )}
       >
         {image ? (
@@ -53,7 +53,11 @@ export function NeonModuleTile({
             loading="lazy"
             width={80}
             height={80}
-            className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+            className={cn(
+              "h-12 w-12 sm:h-14 sm:w-14 object-contain",
+              // Light mode: deepen the cyan/violet line-art so it stays visible on a pale background
+              "[filter:brightness(0.55)_saturate(1.6)_contrast(1.15)] dark:[filter:none]"
+            )}
           />
         ) : Icon ? (
           <Icon className="h-9 w-9 sm:h-10 sm:w-10" strokeWidth={1.5} />

@@ -53,7 +53,7 @@ export function NeonKpi({
               loading="lazy"
               width={40}
               height={40}
-              className="h-7 w-7 object-contain"
+              className="h-7 w-7 object-contain [filter:brightness(0.55)_saturate(1.6)_contrast(1.15)] dark:[filter:none]"
             />
           ) : Icon ? (
             <Icon className="h-5 w-5" strokeWidth={1.75} />
