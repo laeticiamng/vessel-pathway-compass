@@ -44,6 +44,7 @@ import {
 } from "@/components/landing/HomeSections";
 import { ComplianceFAQSection, complianceFaqJsonLd } from "@/components/landing/ComplianceFAQSection";
 import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
+import { InteractiveDemoSection } from "@/components/landing/InteractiveDemoSection";
 import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
 import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
