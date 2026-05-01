@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Plus, Users, Download, BarChart3, Loader2, Calculator, ShieldCheck, Leaf, FolderOpen } from "lucide-react";
+import { FileText, Plus, Users, Download, BarChart3, Loader2, Calculator, ShieldCheck, Leaf, FolderOpen, CalendarClock } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { PowerCalculation } from "@/components/vasculink/PowerCalculation";
@@ -11,6 +11,8 @@ import { DSMBCharter } from "@/components/vasculink/DSMBCharter";
 import { LCAQALYFramework } from "@/components/vasculink/LCAQALYFramework";
 import { DSMBExportButton } from "@/components/vasculink/DSMBExportButton";
 import { AuditPackButton } from "@/components/vasculink/AuditPackButton";
+import { AuditDataExportButtons } from "@/components/vasculink/AuditDataExportButton";
+import { ADRTimeline } from "@/components/vasculink/ADRTimeline";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -102,6 +104,7 @@ export default function Research() {
         </div>
         <div className="flex gap-2 self-start sm:self-auto flex-wrap">
           <AuditPackButton />
+          <AuditDataExportButtons />
           <ResearchExportButton />
           <Button onClick={() => setDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
@@ -118,7 +121,12 @@ export default function Research() {
           <TabsTrigger value="power"><Calculator className="h-4 w-4 mr-1" /> Power</TabsTrigger>
           <TabsTrigger value="dsmb"><ShieldCheck className="h-4 w-4 mr-1" /> DSMB Charter</TabsTrigger>
           <TabsTrigger value="lca"><Leaf className="h-4 w-4 mr-1" /> LCA / QALY</TabsTrigger>
+          <TabsTrigger value="timeline"><CalendarClock className="h-4 w-4 mr-1" /> Timeline</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="timeline">
+          <ADRTimeline />
+        </TabsContent>
 
         <TabsContent value="power">
           <PowerCalculation />
