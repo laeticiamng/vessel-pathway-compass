@@ -463,8 +463,8 @@
     color: hsl(188 100% 82%);
     box-shadow:
       inset 0 1px 0 hsl(188 95% 70% / 0.12),
-      inset 0 0 14px hsl(188 95% 58% / 0.18),
-      0 0 16px -2px hsl(188 95% 58% / 0.22);
+      inset 0 0 var(--neon-ring-glow-inner) hsl(188 95% 58% / var(--neon-ring-glow-opacity-inner)),
+      0 0 var(--neon-ring-glow-outer) -2px hsl(188 95% 58% / var(--neon-ring-glow-opacity-outer));
   }
   .neon-icon-ring.violet {
     border-color: hsl(var(--contrast-violet) / 0.4);
@@ -477,8 +477,8 @@
     color: hsl(280 95% 88%);
     box-shadow:
       inset 0 1px 0 hsl(280 95% 80% / 0.12),
-      inset 0 0 14px hsl(270 85% 68% / 0.18),
-      0 0 16px -2px hsl(270 85% 68% / 0.22);
+      inset 0 0 var(--neon-ring-glow-inner) hsl(270 85% 68% / var(--neon-ring-glow-opacity-inner)),
+      0 0 var(--neon-ring-glow-outer) -2px hsl(270 85% 68% / var(--neon-ring-glow-opacity-outer));
   }
   /* === Dark-mode illustration tint ===
      Applies to ALL raster illustrations (PNG/JPG via <img>) inside icon
@@ -488,15 +488,13 @@
      `data-neon-keep-color`. */
   .dark .neon-icon-ring img:not([data-neon-keep-color]),
   .dark .neon-icon-ring svg[data-neon-illustration]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(86%) sepia(48%) saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
-    opacity: 0.92;
+    filter: var(--neon-tint-cyan);
+    opacity: var(--neon-tint-opacity);
   }
   .dark .neon-icon-ring.violet img:not([data-neon-keep-color]),
   .dark .neon-icon-ring.violet svg[data-neon-illustration]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(82%) sepia(28%) saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
-    opacity: 0.92;
+    filter: var(--neon-tint-violet);
+    opacity: var(--neon-tint-opacity);
   }
   /* Generic dark-mode tint for any signature illustration (PNG or SVG)
      placed OUTSIDE an icon ring (cards, hero, modules…). The
@@ -504,13 +502,18 @@
      remain in their original palette (logos, photographs, charts). */
   .dark img[data-neon-illustration]:not([data-neon-keep-color]),
   .dark svg[data-neon-illustration]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(86%) sepia(48%) saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
-    opacity: 0.92;
+    filter: var(--neon-tint-cyan);
+    opacity: var(--neon-tint-opacity);
   }
   .dark [data-neon-illustration][data-neon-tone="violet"]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(82%) sepia(28%) saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
+    filter: var(--neon-tint-violet);
+  }
+  /* Belt-and-suspenders: explicit opt-out always wins, even against
+     more-specific selectors above. Tested by `dark-mode-keep-color`
+     Playwright spec. */
+  .dark [data-neon-keep-color],
+  .dark .neon-icon-ring [data-neon-keep-color] {
+    filter: none !important;
   }
 
   .neon-divider {
