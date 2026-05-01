@@ -1243,11 +1243,26 @@ export const fr = {
         { q: "Comment en savoir plus ou demander un accès ?", a: "Vous pouvez consulter la page Tarifs, parcourir la FAQ, ou contacter l'équipe via la page Contact." },
       ],
     },
+    validation: {
+      badge: "Protocole de validation clinique L1",
+      title: "Validation clinique structurée",
+      subtitle: "VASCU-LINK n'est pas qu'une vision technologique : la ligne L1 (Diagnose) fait l'objet d'un protocole de recherche prospectif avec endpoints, comparateurs et règles Go/No-Go pré-spécifiés.",
+      cards: [
+        { title: "Endpoint principal", desc: "Concordance segmentaire (κ pondéré) ≥ 0,75 vs imagerie de référence (CTA / MRA / DSA), borne inférieure IC 95 % ≥ 0,60." },
+        { title: "Comparateurs explicites", desc: "Angio-CT, Angio-RM et angiographie soustraite (DSA) selon indication, plus échographie-Doppler standard pour valeur ajoutée." },
+        { title: "Bascule sécurité", desc: "Retour obligatoire à l'imagerie de référence en cas de qualité d'acquisition insuffisante, anatomie complexe ou indication interventionnelle." },
+        { title: "Règles Go / No-Go", desc: "Critères pré-spécifiés a priori : Go (κ ≥ 0,75), Réévaluation (0,60–0,75), No-Go (< 0,60). Analyse intermédiaire de futilité à n=50." },
+      ],
+      scopeStatement: "L1 valide voir, cartographier et décider chez l'humain. L2 (Guide) reste en simulation et fantôme. L3 (Treat) reste strictement préclinique. Aucune revascularisation humaine dans la thèse.",
+      ctaProtocol: "Lire le protocole complet",
+      disclaimer: "VASCU-LINK / AquaMR Flow est un prototype de recherche non certifié. Estimation BoM < 15 k€ donnée sans devis fournisseur formel à ce stade. Hypothèse réglementaire (classe IIa, voie validation clinique) à confirmer auprès d'un organisme notifié. Performances cliniques à valider prospectivement.",
+    },
     footerNav: {
       productAria: "Liens produit",
       legalAria: "Liens juridiques",
       features: "Fonctionnalités",
       security: "Sécurité et confidentialité",
+      protocol: "Protocole & Validation",
     },
   },
   contactPage: {
