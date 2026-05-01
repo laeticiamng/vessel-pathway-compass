@@ -452,6 +452,7 @@ export default function Landing() {
                 <Link to="/legal/terms" className="hover:text-foreground transition-colors">{t("legal.tabs.terms")}</Link>
                 <Link to="/legal/privacy" className="hover:text-foreground transition-colors">{t("legal.tabs.privacy")}</Link>
                 <Link to="/legal/notice" className="hover:text-foreground transition-colors">{t("legal.tabs.notice")}</Link>
+                <Link to="/transparence" className="hover:text-foreground transition-colors">Transparence</Link>
               </nav>
             </div>
           </div>

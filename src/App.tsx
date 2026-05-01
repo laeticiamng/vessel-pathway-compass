@@ -30,6 +30,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const SecurityPrivacy = lazy(() => import("./pages/SecurityPrivacy"));
 const Protocol = lazy(() => import("./pages/Protocol"));
 const Modules = lazy(() => import("./pages/Modules"));
+const Transparency = lazy(() => import("./pages/Transparency"));
 const Dashboard = lazy(() => import("./pages/app/Dashboard"));
 const ProcedurePlanner = lazy(() => import("./pages/app/ProcedurePlanner"));
 const L1DecisionBoard = lazy(() => import("./pages/app/L1DecisionBoard"));
@@ -105,6 +106,8 @@ const App = () => (
           <Route path="/securite-confidentialite" element={<SecurityPrivacy />} />
           <Route path="/protocol" element={<Protocol />} />
           <Route path="/modules" element={<Modules />} />
+          <Route path="/transparence" element={<Transparency />} />
+          <Route path="/transparency" element={<Navigate to="/transparence" replace />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
 
