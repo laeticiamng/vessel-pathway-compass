@@ -10,12 +10,12 @@ import {
  * before any FlateEncode compression is applied at output time, so we can
  * inspect them directly without decoding the binary PDF.
  */
-function pageTexts(doc: { internal: { pages: string[] } }): string[] {
-  // index 0 is empty in jsPDF
-  return doc.internal.pages.slice(1);
+function pageTexts(doc: { internal: { pages: unknown[] } }): string[] {
+  // index 0 is empty in jsPDF; each entry can be a string or an array of strings
+  return doc.internal.pages.slice(1).map((p) => Array.isArray(p) ? p.join("\n") : String(p));
 }
 
-function allText(doc: { internal: { pages: string[] } }): string {
+function allText(doc: { internal: { pages: unknown[] } }): string {
   return pageTexts(doc).join("\n");
 }
 
