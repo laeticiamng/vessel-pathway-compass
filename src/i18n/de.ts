@@ -1247,11 +1247,26 @@ export const de = {
         { q: "Wie erfahre ich mehr oder beantrage Zugang?", a: "Sie können die Preisseite besuchen, die FAQ lesen oder das Team über die Kontaktseite erreichen." },
       ],
     },
+    validation: {
+      badge: "L1 klinisches Validierungsprotokoll",
+      title: "Strukturierte klinische Validierung",
+      subtitle: "VASCU-LINK ist mehr als eine technologische Vision: Die L1-Linie (Diagnose) wird durch ein prospektives Forschungsprotokoll mit vordefinierten Endpunkten, Vergleichsgrößen und Go/No-Go-Regeln geregelt.",
+      cards: [
+        { title: "Primärer Endpunkt", desc: "Segmentale Übereinstimmung (gewichtetes κ) ≥ 0,75 vs. Referenzbildgebung (CTA / MRA / DSA), untere 95 %-KI-Grenze ≥ 0,60." },
+        { title: "Explizite Vergleichsgrößen", desc: "CT-Angiographie, MR-Angiographie und digitale Subtraktionsangiographie (DSA) je nach Indikation, plus Standard-Duplexsonographie für inkrementellen Mehrwert." },
+        { title: "Sicherheits-Fallback", desc: "Obligatorische Rückkehr zur Referenzbildgebung bei unzureichender Aufnahmequalität, komplexer Anatomie oder interventioneller Indikation." },
+        { title: "Go / No-Go-Regeln", desc: "Vordefiniert a priori: Go (κ ≥ 0,75), Neubewertung (0,60–0,75), No-Go (< 0,60). Zwischenanalyse zur Futilität bei n=50." },
+      ],
+      scopeStatement: "L1 validiert Sehen, Kartieren und Entscheiden beim Menschen. L2 (Guide) bleibt in Simulation und Phantom. L3 (Treat) bleibt streng präklinisch. Keine humane Revaskularisation in der Doktorarbeit.",
+      ctaProtocol: "Vollständiges Protokoll lesen",
+      disclaimer: "VASCU-LINK / AquaMR Flow ist ein nicht zertifizierter Forschungsprototyp. BoM-Schätzung < 15 000 € ohne formelles Lieferantenangebot in diesem Stadium. Regulatorische Hypothese (Klasse IIa, Weg klinische Validierung) bei einer Benannten Stelle zu bestätigen. Klinische Leistung prospektiv zu validieren.",
+    },
     footerNav: {
       productAria: "Produkt-Links",
       legalAria: "Rechtliche Links",
       features: "Funktionen",
       security: "Sicherheit & Datenschutz",
+      protocol: "Protokoll & Validierung",
     },
   },
   contactPage: {

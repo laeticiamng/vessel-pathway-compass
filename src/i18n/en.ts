@@ -1263,11 +1263,26 @@ export const en = {
         { q: "How can I learn more or request access?", a: "You can browse the Pricing page, read the FAQ, or contact the team via the Contact page." },
       ],
     },
+    validation: {
+      badge: "L1 clinical validation protocol",
+      title: "Structured clinical validation",
+      subtitle: "VASCU-LINK is more than a technological vision: the L1 (Diagnose) line is governed by a prospective research protocol with pre-specified endpoints, comparators and Go/No-Go rules.",
+      cards: [
+        { title: "Primary endpoint", desc: "Segmental concordance (weighted κ) ≥ 0.75 vs reference imaging (CTA / MRA / DSA), 95 % CI lower bound ≥ 0.60." },
+        { title: "Explicit comparators", desc: "CT angiography, MR angiography and digital subtraction angiography (DSA) per indication, plus standard duplex ultrasound for incremental value." },
+        { title: "Safety fallback", desc: "Mandatory return to reference imaging in case of insufficient acquisition quality, complex anatomy or interventional indication." },
+        { title: "Go / No-Go rules", desc: "Pre-specified a priori: Go (κ ≥ 0.75), Reassessment (0.60–0.75), No-Go (< 0.60). Interim futility analysis at n=50." },
+      ],
+      scopeStatement: "L1 validates seeing, mapping and deciding in humans. L2 (Guide) remains in simulation and phantom. L3 (Treat) remains strictly preclinical. No human revascularization within the thesis.",
+      ctaProtocol: "Read the full protocol",
+      disclaimer: "VASCU-LINK / AquaMR Flow is an uncertified research prototype. BoM estimate < €15k provided without formal supplier quote at this stage. Regulatory hypothesis (class IIa, clinical-validation pathway) to be confirmed with a notified body. Clinical performance to be validated prospectively.",
+    },
     footerNav: {
       productAria: "Product links",
       legalAria: "Legal links",
       features: "Features",
       security: "Security & privacy",
+      protocol: "Protocol & Validation",
     },
   },
   contactPage: {
