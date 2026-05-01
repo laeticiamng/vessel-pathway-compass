@@ -15,6 +15,7 @@ import { useTranslation } from "@/i18n/context";
 import { NeonKpi } from "@/components/neon/NeonKpi";
 import { NeonModuleTile } from "@/components/neon/NeonModuleTile";
 import { NeonPageHeader } from "@/components/neon/NeonPageHeader";
+import { aquaIcons } from "@/components/branding/aquaIcons";
 import {
   Brain,
   Activity,
