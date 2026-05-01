@@ -192,6 +192,41 @@
       hsl(210 100% 78%) 100%
     );
     --surface-glass: 222 45% 9%;
+
+    /* === Dark-mode glow / halo tokens (single source of truth) ===
+       Refactored from inline magic numbers. Keep these in sync — the
+       `dark-mode-tokens.test.ts` regression test fails if any consumer
+       rule hardcodes a value instead of referencing one of these. */
+    /* Hero-neon halo (drop-shadow radius + opacity) */
+    --neon-halo-radius: 12px;
+    --neon-halo-opacity: 0.20;
+    --neon-halo-radius-soft: 8px;
+    --neon-halo-opacity-soft: 0.14;
+    --neon-halo-radius-strong: 16px;
+    --neon-halo-opacity-strong: 0.24;
+    /* Mobile-tightened halo (reduced bloom on small screens) */
+    --neon-halo-radius-mobile: 6px;
+    --neon-halo-opacity-mobile: 0.14;
+    --neon-halo-radius-mobile-soft: 4px;
+    --neon-halo-opacity-mobile-soft: 0.10;
+    --neon-halo-radius-mobile-strong: 9px;
+    --neon-halo-opacity-mobile-strong: 0.18;
+    /* Icon-ring inner + outer glow */
+    --neon-ring-glow-inner: 14px;
+    --neon-ring-glow-outer: 16px;
+    --neon-ring-glow-inner-mobile: 8px;
+    --neon-ring-glow-outer-mobile: 8px;
+    --neon-ring-glow-opacity-inner: 0.18;
+    --neon-ring-glow-opacity-outer: 0.22;
+    --neon-ring-glow-opacity-inner-mobile: 0.12;
+    --neon-ring-glow-opacity-outer-mobile: 0.16;
+    /* Illustration tint filter (PNG + data-neon-illustration SVG) */
+    --neon-tint-cyan: brightness(0) saturate(100%) invert(86%) sepia(48%)
+      saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
+    --neon-tint-violet: brightness(0) saturate(100%) invert(82%) sepia(28%)
+      saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
+    --neon-tint-opacity: 0.92;
+    --neon-tint-opacity-mobile: 0.98;
   }
 }
 
