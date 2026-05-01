@@ -121,6 +121,7 @@ export default function Landing() {
       },
       homeFaqJsonLd,
       complianceFaqJsonLd,
+    ],
   };
 
   return (
