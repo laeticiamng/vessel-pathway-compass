@@ -514,6 +514,83 @@
     }
   }
 
+  /* =====================================================================
+     REINFORCED CONTRAST MODE — toggled via <html class="high-contrast">.
+     Deepens borders, icon colors and KPI values; removes glows so cards
+     and KPIs stay perfectly legible on every screen (light & dark).
+     ===================================================================== */
+  :root.high-contrast {
+    --contrast-strong: 220 60% 6%;
+    --contrast-cyan: 198 100% 20%;
+    --contrast-cyan-surface: 192 80% 88%;
+    --contrast-violet: 270 75% 22%;
+    --contrast-violet-surface: 272 80% 92%;
+    --contrast-border: 210 35% 45%;
+    --border: 220 25% 60%;
+    --border-subtle: 220 22% 60%;
+    --muted-foreground: 220 25% 22%;
+  }
+  :root.high-contrast.dark {
+    --contrast-strong: 195 100% 92%;
+    --contrast-cyan: 188 100% 78%;
+    --contrast-violet: 280 100% 84%;
+    --contrast-border: 188 90% 60%;
+    --border: 188 70% 50%;
+    --border-subtle: 188 70% 45%;
+    --muted-foreground: 210 40% 92%;
+  }
+  .high-contrast .neon-card {
+    border-width: 1.5px;
+    box-shadow:
+      0 0 0 1px hsl(var(--contrast-border) / 0.6),
+      0 6px 16px -10px hsl(220 60% 10% / 0.25) !important;
+  }
+  .high-contrast.dark .neon-card,
+  .high-contrast .dark .neon-card {
+    box-shadow:
+      0 0 0 1px hsl(var(--contrast-border) / 0.55),
+      0 6px 16px -10px hsl(0 0% 0% / 0.6) !important;
+  }
+  .high-contrast .neon-icon-ring {
+    border-width: 1.5px;
+    border-color: hsl(var(--contrast-cyan) / 0.85) !important;
+    color: hsl(var(--contrast-cyan)) !important;
+  }
+  .high-contrast .neon-icon-ring.violet {
+    border-color: hsl(var(--contrast-violet) / 0.8) !important;
+    color: hsl(var(--contrast-violet)) !important;
+  }
+  .high-contrast .neon-kpi-value {
+    color: hsl(var(--contrast-strong)) !important;
+    text-shadow: none !important;
+  }
+  .high-contrast .neon-kpi-value.violet {
+    color: hsl(var(--contrast-violet)) !important;
+  }
+  /* Deepen illustrated icons (PNG/SVG) so they keep contrast in light mode
+     and stay vivid in dark mode. */
+  .high-contrast .neon-icon-ring img,
+  .high-contrast [data-neon-illustration] {
+    filter: brightness(0.32) saturate(2.1) contrast(1.4) !important;
+  }
+  .high-contrast.dark .neon-icon-ring img,
+  .high-contrast .dark .neon-icon-ring img,
+  .high-contrast.dark [data-neon-illustration],
+  .high-contrast .dark [data-neon-illustration] {
+    filter: brightness(1.2) saturate(1.4) contrast(1.1) !important;
+  }
+  /* Apply globally to shadcn cards, inputs and Lucide icons so every page
+     (dashboard, forms, admin) inherits the reinforced contrast. */
+  .high-contrast [data-slot="card"],
+  .high-contrast .ui-card {
+    border-color: hsl(var(--contrast-border) / 0.7) !important;
+    border-width: 1.5px;
+  }
+  .high-contrast svg.lucide {
+    stroke-width: 2.1 !important;
+  }
+
+
   /* Stronger card border in dark for separation */
   .dark .card,
   .dark [data-slot="card"] {
