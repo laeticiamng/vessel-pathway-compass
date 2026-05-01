@@ -1185,6 +1185,20 @@ export const fr = {
       disclaimer: "Prototype de recherche — pas un dispositif médical. Toute aide à la décision nécessite la confirmation d'un clinicien.",
       dashboardAlt: "Tableau de bord clinique AquaMR Flow montrant les statistiques patients, la distribution des risques et la vue d'ensemble des modules",
     },
+    completeness: {
+      badge: "Plateforme livrée",
+      title: "Une plateforme vasculaire complète, en production",
+      subtitle: "10 modules cliniques, un protocole L1 verrouillé, trois langues et une architecture conçue pour viser la conformité MDR / RGPD / IEC 62304.",
+      available: "Disponible",
+      disclaimer: "Les modules sont accessibles dans la bêta ouverte. Prototype de recherche — non certifié comme dispositif médical à ce stade.",
+      stats: [
+        { value: "10", label: "Modules cliniques" },
+        { value: "3", label: "Langues (FR · EN · DE)" },
+        { value: "L1", label: "Protocole verrouillé" },
+        { value: "MDR", label: "Architecture cible" },
+        { value: "Green", label: "Radiologie verte" },
+      ],
+    },
     vasculink: {
       title: "Architecture scientifique VASCU-LINK",
       subtitle: "Trois cercles concentriques · fonction angiographique 4-zéro · médecine vasculaire de proximité. Protocole doctoral du Dr Laëticia Motongane (partenariat académique en négociation).",

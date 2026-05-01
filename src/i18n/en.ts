@@ -1205,6 +1205,20 @@ export const en = {
       disclaimer: "Research prototype — not a medical device. Any decision support requires clinician confirmation.",
       dashboardAlt: "AquaMR Flow clinical dashboard showing patient statistics, risk distribution and module overview",
     },
+    completeness: {
+      badge: "Platform shipped",
+      title: "A complete vascular platform, in production",
+      subtitle: "10 clinical modules, a locked L1 protocol, three languages and an architecture designed to target MDR / GDPR / IEC 62304 compliance.",
+      available: "Available",
+      disclaimer: "All modules are accessible in the open beta. Research prototype — not certified as a medical device at this stage.",
+      stats: [
+        { value: "10", label: "Clinical modules" },
+        { value: "3", label: "Languages (EN · FR · DE)" },
+        { value: "L1", label: "Locked protocol" },
+        { value: "MDR", label: "Target architecture" },
+        { value: "Green", label: "Green radiology" },
+      ],
+    },
     vasculink: {
       title: "VASCU-LINK scientific architecture",
       subtitle: "Three concentric circles · 4-zero angiographic function · proximity vascular medicine. Doctoral protocol of Dr Laëticia Motongane (academic partnership in negotiation).",

@@ -1189,6 +1189,20 @@ export const de = {
       disclaimer: "Forschungsprototyp — kein Medizinprodukt. Jede Entscheidungsunterstützung erfordert die Bestätigung einer Ärztin oder eines Arztes.",
       dashboardAlt: "AquaMR Flow Klinik-Dashboard mit Patientenstatistiken, Risikoverteilung und Modulübersicht",
     },
+    completeness: {
+      badge: "Plattform ausgeliefert",
+      title: "Eine vollständige Gefäßplattform, im Einsatz",
+      subtitle: "10 klinische Module, ein verriegeltes L1-Protokoll, drei Sprachen und eine Architektur, die auf MDR / DSGVO / IEC 62304 ausgerichtet ist.",
+      available: "Verfügbar",
+      disclaimer: "Alle Module sind in der offenen Beta zugänglich. Forschungsprototyp — derzeit nicht als Medizinprodukt zertifiziert.",
+      stats: [
+        { value: "10", label: "Klinische Module" },
+        { value: "3", label: "Sprachen (DE · EN · FR)" },
+        { value: "L1", label: "Verriegeltes Protokoll" },
+        { value: "MDR", label: "Zielarchitektur" },
+        { value: "Green", label: "Grüne Radiologie" },
+      ],
+    },
     vasculink: {
       title: "Wissenschaftliche Architektur VASCU-LINK",
       subtitle: "Drei konzentrische Kreise · 4-Null-Angiographie-Funktion · gefäßmedizinische Nahversorgung. Doktorprotokoll von Dr. Laëticia Motongane (akademische Partnerschaft in Verhandlung).",
