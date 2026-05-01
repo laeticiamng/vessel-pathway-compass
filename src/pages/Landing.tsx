@@ -456,6 +456,9 @@ export default function Landing() {
       {/* Home FAQ — French, optimized for SEO/GEO */}
       <HomeFAQSection />
 
+      {/* Compliance-ready FAQ */}
+      <ComplianceFAQSection />
+
       {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
 
       {/* LimitsSection retirée ici — déjà rendue plus haut, juste après VASCU-LINK */}
