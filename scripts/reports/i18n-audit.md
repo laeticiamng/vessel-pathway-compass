@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-01T09:52:26.886Z_
+_Generated: 2026-05-01T09:52:44.039Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 
@@ -8,11 +8,11 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 
 | Metric | Count |
 |---|---:|
-| Translation keys referenced from code | 1243 |
+| Translation keys referenced from code | 1233 |
 | Dynamic key prefixes detected | 33 |
-| Keys missing in FR | 12 |
-| Keys missing in EN | 12 |
-| Keys missing in DE | 12 |
+| Keys missing in FR | 2 |
+| Keys missing in EN | 2 |
+| Keys missing in DE | 2 |
 | Orphan keys (defined, unused) | 83 |
 | Public pages with hardcoded candidates | 2 (2 findings) |
 
@@ -22,16 +22,6 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 |---|---|---|
 | `foo.bar` | absent | src/i18n/context.tsx |
 | `en` | absent | src/pages/app/VascScreenDashboard.tsx |
-| `unchanged` | absent | src/test/l1.test.ts |
-| `medical_optimized` | absent | src/test/l1.test.ts |
-| `escalation` | absent | src/test/l1.test.ts |
-| `endovascular_discussion` | absent | src/test/l1.test.ts |
-| `de_escalation` | absent | src/test/l1.test.ts |
-| `insufficient_image_quality` | absent | src/test/l1.test.ts |
-| `standard_imaging` | absent | src/test/l1.test.ts |
-| `surveillance` | absent | src/test/l1.test.ts |
-| `unknown` | absent | src/test/l1.test.ts |
-| `assessment_id` | absent | src/test/l1.test.ts |
 
 ## Missing keys — EN
 
@@ -39,16 +29,6 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 |---|---|---|
 | `foo.bar` | absent | src/i18n/context.tsx |
 | `en` | absent | src/pages/app/VascScreenDashboard.tsx |
-| `unchanged` | absent | src/test/l1.test.ts |
-| `medical_optimized` | absent | src/test/l1.test.ts |
-| `escalation` | absent | src/test/l1.test.ts |
-| `endovascular_discussion` | absent | src/test/l1.test.ts |
-| `de_escalation` | absent | src/test/l1.test.ts |
-| `insufficient_image_quality` | absent | src/test/l1.test.ts |
-| `standard_imaging` | absent | src/test/l1.test.ts |
-| `surveillance` | absent | src/test/l1.test.ts |
-| `unknown` | absent | src/test/l1.test.ts |
-| `assessment_id` | absent | src/test/l1.test.ts |
 
 ## Missing keys — DE
 
@@ -56,16 +36,6 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 |---|---|---|
 | `foo.bar` | absent | src/i18n/context.tsx |
 | `en` | absent | src/pages/app/VascScreenDashboard.tsx |
-| `unchanged` | absent | src/test/l1.test.ts |
-| `medical_optimized` | absent | src/test/l1.test.ts |
-| `escalation` | absent | src/test/l1.test.ts |
-| `endovascular_discussion` | absent | src/test/l1.test.ts |
-| `de_escalation` | absent | src/test/l1.test.ts |
-| `insufficient_image_quality` | absent | src/test/l1.test.ts |
-| `standard_imaging` | absent | src/test/l1.test.ts |
-| `surveillance` | absent | src/test/l1.test.ts |
-| `unknown` | absent | src/test/l1.test.ts |
-| `assessment_id` | absent | src/test/l1.test.ts |
 
 ## Orphan keys (defined in FR dictionary but never referenced)
 
