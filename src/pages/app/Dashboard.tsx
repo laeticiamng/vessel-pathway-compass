@@ -12,6 +12,9 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation } from "@/i18n/context";
+import { NeonKpi } from "@/components/neon/NeonKpi";
+import { NeonModuleTile } from "@/components/neon/NeonModuleTile";
+import { NeonPageHeader } from "@/components/neon/NeonPageHeader";
 import {
   Brain,
   Activity,
@@ -28,6 +31,7 @@ import {
   Calculator,
   BarChart3,
   Leaf,
+  LayoutGrid,
 } from "lucide-react";
 
 export default function Dashboard() {
