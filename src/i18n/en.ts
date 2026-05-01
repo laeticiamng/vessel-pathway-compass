@@ -48,6 +48,7 @@ export const en = {
   sidebar: {
     clinical: "Clinical",
     dashboard: "Dashboard",
+    l1DecisionBoard: "L1 Decision Board",
     procedurePlanner: "Procedure Planner",
     fusionViewer: "Fusion Viewer",
     patients: "Patients",

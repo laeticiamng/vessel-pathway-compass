@@ -46,6 +46,7 @@ export const fr = {
   sidebar: {
     clinical: "Clinique",
     dashboard: "Tableau de bord",
+    l1DecisionBoard: "Tableau de décision L1",
     procedurePlanner: "Planificateur de Procédure",
     fusionViewer: "Visionneuse Fusion",
     patients: "Patients",

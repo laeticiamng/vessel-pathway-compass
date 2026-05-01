@@ -7,6 +7,7 @@ import {
   Calculator,
   ChevronDown,
   ClipboardList,
+  Compass,
   FlaskConical,
   FileText,
   Globe,
@@ -66,6 +67,7 @@ export function AppSidebar() {
   // Primary clinical workflow items
   const primaryItems = [
     { title: t("sidebar.dashboard"), url: "/app", icon: LayoutDashboard },
+    { title: t("sidebar.l1DecisionBoard") || "L1 Decision Board", url: "/app/l1-decision-board", icon: Compass },
     { title: t("sidebar.procedurePlanner"), url: "/app/procedure-planner", icon: Brain },
     { title: t("sidebar.fusionViewer"), url: "/app/fusion-viewer", icon: Image },
     ...(session ? [{ title: t("sidebar.patients"), url: "/app/patients", icon: HeartPulse }] : []),
