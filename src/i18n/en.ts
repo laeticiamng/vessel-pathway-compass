@@ -1430,6 +1430,99 @@ export const en = {
       patients: "patients",
     },
   },
+  pages: {
+    common: {
+      backHome: "Home",
+      contactUs: "Contact us",
+      seePricing: "See pricing",
+      privacyPolicy: "Privacy policy",
+      legalNotice: "Legal notice",
+      home: "Home",
+      faq: "FAQ",
+      pricing: "Pricing",
+      contact: "Contact",
+      security: "Security",
+    },
+    faq: {
+      seoTitle: "FAQ — Frequently asked questions about AquaMR Flow",
+      seoDescription: "Answers to frequently asked questions about AquaMR Flow: what it is, who it's for, prototype limitations, security, access and pricing.",
+      title: "Frequently asked questions",
+      subtitle: "Understand AquaMR Flow, its uses and its limitations.",
+      cantFindTitle: "Can't find your answer?",
+      cantFindDesc: "Browse the dedicated pages or contact the team directly.",
+      items: [
+        { q: "What is AquaMR Flow?", a: "AquaMR Flow is a web platform that helps structure planning, imaging, simulation and research around vascular procedures. The content shown here describes a research prototype, not a certified medical device." },
+        { q: "Who is the platform for?", a: "Teams involved in preparing, coordinating and analysing vascular procedures: vascular physicians, interventional radiologists, clinical research teams and vascular units." },
+        { q: "What problems does the product address?", a: "Tool fragmentation, the difficulty of centralising case-relevant information, and the lack of traceability between preparation, procedure and follow-up." },
+        { q: "Does it replace existing tools?", a: "No. AquaMR Flow aims to better organise the workflow around the tools already in use; it does not replace a PACS, an EHR or a certified medical device." },
+        { q: "Is the product already deployed in routine clinical care?", a: "No. The content shown here describes a research prototype. No diagnostic or therapeutic decision should rely on the platform alone. The exact clinical scope of use must be discussed with the team before any deployment." },
+        { q: "How can I learn more or request access?", a: "You can check the Pricing page for the current options, or use the Contact page to reach the team directly." },
+        { q: "Is my data protected?", a: "Data is encrypted in transit and at rest, access is partitioned by authenticated account and logged. Details are on the Security & privacy page and in our legal notices." },
+        { q: "Are there limitations to the current prototype?", a: "Yes. Features evolve, some outputs are indicative, and any information not explicitly confirmed on the site should be treated as such. See the Current limitations section for the full picture." },
+      ],
+    },
+    security: {
+      seoTitle: "Security and privacy — AquaMR Flow",
+      seoDescription: "AquaMR Flow's approach to security, privacy and data protection: principles, prototype scope and links to legal notices.",
+      title: "Security and privacy",
+      subtitle: "Our approach to data protection within the current prototype scope.",
+      principlesTitle: "Principles",
+      principles: {
+        protection: { title: "Data protection", desc: "Data is encrypted in transit (TLS 1.2+) and at rest. Access is controlled per authenticated account, with mandatory strong passwords." },
+        visibility: { title: "Limited visibility", desc: "Each user only accesses data relevant to their role (PostgreSQL Row-Level Security on the database, server-side checks)." },
+        traceability: { title: "Traceability", desc: "Sensitive operations (PHI reads, exports, deletions) are recorded in an immutable audit log accessible to administrators." },
+      },
+      scopeTitle: "Prototype scope",
+      scopeP1: "AquaMR Flow is currently a research prototype in open beta. Features, the exact scope of processing and operational commitments are subject to change.",
+      scopeP2: "For precise information on data processing, the data controller and associated rights (access, rectification, erasure, portability), please refer to the legal notices and privacy policy.",
+      nextTitle: "Going further",
+      nextDesc: "Browse the dedicated pages or contact the team for any question.",
+    },
+    limits: {
+      title: "Current prototype limitations",
+      subtitle: "Full transparency on what the platform does — and does not — do today.",
+      sections: {
+        regulatory: {
+          title: "Regulatory status",
+          items: [
+            "AquaMR Flow is NOT a certified medical device (CE, FDA, MDR).",
+            "No diagnostic or therapeutic decision should rely on the platform alone.",
+            "Every decision-support output (AI, risk score, recommendation) requires confirmation by a qualified clinician.",
+            "Use is limited to research, education and workflow exploration contexts.",
+          ],
+        },
+        clinical: {
+          title: "Clinical scope",
+          items: [
+            "No autonomous revascularization: the platform never triggers an invasive action.",
+            "Clinical questionnaires (VascuQoL-6, CIVIQ-14) remain in English — the scientifically validated version.",
+            "CHUV validation cohort underway (n≈250, milestones J1-J5) — results not yet published.",
+            "The CI-AKI engine uses published models but should be recalibrated on the local population.",
+          ],
+        },
+        technical: {
+          title: "Technical scope",
+          items: [
+            "DICOM viewing limited to common modalities (CT, MRI, IVUS, OCT) — no real-time 3D reconstruction.",
+            "The vascular Digital Twin uses an 18-segment SVG model — a schematic representation, not a hemodynamic simulation.",
+            "No direct PACS / EHR integration at this stage — imports are performed manually.",
+            "European hosting (Supabase EU) — no French HDS certification yet.",
+          ],
+        },
+        usage: {
+          title: "Free plan usage limits",
+          items: [
+            "Maximum 3 AI reports generated per day.",
+            "Maximum 5 active patient records.",
+            "During the open beta: every feature is accessible without a credit card — limits will apply after official launch.",
+            "Deleted patients are kept for 30 days in the trash before automatic permanent deletion.",
+          ],
+        },
+      },
+      ctaTitle: "A question about these limitations?",
+      ctaDesc: "The team responds directly, with no middleman. Any feedback on prototype scope is valuable for the thesis framing.",
+    },
+  },
 
   seo: {
     landing: {
