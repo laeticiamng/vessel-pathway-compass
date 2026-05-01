@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Activity } from "lucide-react";
 import { z } from "zod";
 import { hemodynamicsSchema } from "@/lib/l1/schemas";
+import { useTranslation } from "@/i18n/context";
 
 export type Hemodynamics = z.infer<typeof hemodynamicsSchema>;
 
@@ -21,6 +22,7 @@ function parseNumber(input: string): number | undefined {
 }
 
 export function HemodynamicsPanel({ value, onChange, disabled }: Props) {
+  const { t } = useTranslation();
   const update = <K extends keyof Hemodynamics>(key: K, v: Hemodynamics[K]) =>
     onChange({ ...value, [key]: v });
 
@@ -29,16 +31,14 @@ export function HemodynamicsPanel({ value, onChange, disabled }: Props) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <Activity className="h-4 w-4 text-primary" />
-          Hemodynamics
+          {t("l1.hemodynamics.title")}
         </CardTitle>
-        <CardDescription>
-          ABI / TBI / Doppler — confronted with AquaMR cartography in the C4-i analysis.
-        </CardDescription>
+        <CardDescription>{t("l1.hemodynamics.description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="l1-abi-left">ABI left</Label>
+            <Label htmlFor="l1-abi-left">{t("l1.hemodynamics.abiLeft")}</Label>
             <Input
               id="l1-abi-left"
               type="number"
@@ -50,7 +50,7 @@ export function HemodynamicsPanel({ value, onChange, disabled }: Props) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="l1-abi-right">ABI right</Label>
+            <Label htmlFor="l1-abi-right">{t("l1.hemodynamics.abiRight")}</Label>
             <Input
               id="l1-abi-right"
               type="number"
@@ -65,7 +65,7 @@ export function HemodynamicsPanel({ value, onChange, disabled }: Props) {
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="l1-tbi-left">TBI left</Label>
+            <Label htmlFor="l1-tbi-left">{t("l1.hemodynamics.tbiLeft")}</Label>
             <Input
               id="l1-tbi-left"
               type="number"
@@ -77,7 +77,7 @@ export function HemodynamicsPanel({ value, onChange, disabled }: Props) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="l1-tbi-right">TBI right</Label>
+            <Label htmlFor="l1-tbi-right">{t("l1.hemodynamics.tbiRight")}</Label>
             <Input
               id="l1-tbi-right"
               type="number"
@@ -91,7 +91,7 @@ export function HemodynamicsPanel({ value, onChange, disabled }: Props) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="l1-oximetry">TcPO2 / oximetry (mmHg)</Label>
+          <Label htmlFor="l1-oximetry">{t("l1.hemodynamics.oximetry")}</Label>
           <Input
             id="l1-oximetry"
             type="number"
@@ -103,11 +103,11 @@ export function HemodynamicsPanel({ value, onChange, disabled }: Props) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="l1-doppler">Doppler summary</Label>
+          <Label htmlFor="l1-doppler">{t("l1.hemodynamics.doppler")}</Label>
           <Textarea
             id="l1-doppler"
             rows={3}
-            placeholder="Triphasic / biphasic / monophasic, peak systolic velocities, occlusion sites…"
+            placeholder={t("l1.hemodynamics.dopplerPlaceholder")}
             value={value.doppler_summary ?? ""}
             onChange={(e) => update("doppler_summary", e.target.value)}
             disabled={disabled}

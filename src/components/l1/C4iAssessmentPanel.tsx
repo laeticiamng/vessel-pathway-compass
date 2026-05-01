@@ -16,6 +16,7 @@ import {
   promsSummarySchema,
 } from "@/lib/l1/schemas";
 import { C4iConcordance } from "@/lib/l1/types";
+import { useTranslation } from "@/i18n/context";
 
 export type C4iAssessment = z.infer<typeof c4iAssessmentSchema>;
 export type PromsSummary = z.infer<typeof promsSummarySchema>;
@@ -34,12 +35,6 @@ function parseNumber(input: string): number | undefined {
   return Number.isFinite(v) ? v : undefined;
 }
 
-const CONCORDANCE_LABEL: Record<C4iConcordance, string> = {
-  concordant: "Concordant",
-  discordant_mild: "Discordant — mild",
-  discordant_high: "Discordant — high",
-};
-
 export function C4iAssessmentPanel({
   c4i,
   proms,
@@ -47,34 +42,38 @@ export function C4iAssessmentPanel({
   onChangeProms,
   disabled,
 }: Props) {
+  const { t } = useTranslation();
   const updateC4i = <K extends keyof C4iAssessment>(key: K, v: C4iAssessment[K]) =>
     onChangeC4i({ ...c4i, [key]: v });
   const updateProms = <K extends keyof PromsSummary>(key: K, v: PromsSummary[K]) =>
     onChangeProms({ ...proms, [key]: v });
+
+  const CONCORDANCE_LABEL: Record<C4iConcordance, string> = {
+    concordant: t("l1.c4i.concordant"),
+    discordant_mild: t("l1.c4i.discordantMild"),
+    discordant_high: t("l1.c4i.discordantHigh"),
+  };
 
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <Network className="h-4 w-4 text-primary" />
-          C4-i & PROMs
-          <span className="ml-auto text-[10px] font-mono text-muted-foreground">framework v11.1</span>
+          {t("l1.c4i.title")}
+          <span className="ml-auto text-[10px] font-mono text-muted-foreground">{t("l1.c4i.framework")}</span>
         </CardTitle>
-        <CardDescription>
-          Clinical–imaging concordance (C4-i v11.1, recalibrated on external validation cohort)
-          and patient-reported outcome measures (WIQ · VascuQol-6 · 6-MWT, in English per protocol).
-        </CardDescription>
+        <CardDescription>{t("l1.c4i.description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="l1-concordance">Clinico-physiological concordance</Label>
+          <Label htmlFor="l1-concordance">{t("l1.c4i.concordance")}</Label>
           <Select
             value={c4i.concordance ?? ""}
             onValueChange={(v) => updateC4i("concordance", v as C4iConcordance)}
             disabled={disabled}
           >
             <SelectTrigger id="l1-concordance">
-              <SelectValue placeholder="Select…" />
+              <SelectValue placeholder={t("l1.c4i.concordancePlaceholder")} />
             </SelectTrigger>
             <SelectContent>
               {(Object.keys(CONCORDANCE_LABEL) as C4iConcordance[]).map((k) => (
@@ -87,11 +86,11 @@ export function C4iAssessmentPanel({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="l1-c4i-reason">C4-i reasoning</Label>
+          <Label htmlFor="l1-c4i-reason">{t("l1.c4i.reasoning")}</Label>
           <Textarea
             id="l1-c4i-reason"
             rows={3}
-            placeholder="Why concordant or discordant: hemodynamic vs anatomical mismatch, PROMs…"
+            placeholder={t("l1.c4i.reasoningPlaceholder")}
             value={c4i.reason ?? ""}
             onChange={(e) => updateC4i("reason", e.target.value)}
             disabled={disabled}
@@ -101,11 +100,11 @@ export function C4iAssessmentPanel({
         <div className="border-t pt-4 space-y-3">
           <p className="text-sm font-medium flex items-center gap-2">
             <Stethoscope className="h-3.5 w-3.5 text-primary" />
-            PROMs
+            {t("l1.c4i.promsTitle")}
           </p>
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="l1-wiq">WIQ (0–100)</Label>
+              <Label htmlFor="l1-wiq">{t("l1.c4i.wiq")}</Label>
               <Input
                 id="l1-wiq"
                 type="number"
@@ -116,7 +115,7 @@ export function C4iAssessmentPanel({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="l1-vascuqol">VascuQol-6</Label>
+              <Label htmlFor="l1-vascuqol">{t("l1.c4i.vascuqol")}</Label>
               <Input
                 id="l1-vascuqol"
                 type="number"
@@ -127,7 +126,7 @@ export function C4iAssessmentPanel({
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="l1-6mwt">6-MWT (m)</Label>
+              <Label htmlFor="l1-6mwt">{t("l1.c4i.sixMwt")}</Label>
               <Input
                 id="l1-6mwt"
                 type="number"
@@ -140,11 +139,11 @@ export function C4iAssessmentPanel({
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="l1-proms-notes">PROMs notes</Label>
+            <Label htmlFor="l1-proms-notes">{t("l1.c4i.promsNotes")}</Label>
             <Textarea
               id="l1-proms-notes"
               rows={2}
-              placeholder="Trajectory across visits, patient priorities…"
+              placeholder={t("l1.c4i.promsNotesPlaceholder")}
               value={proms.notes ?? ""}
               onChange={(e) => updateProms("notes", e.target.value)}
               disabled={disabled}
