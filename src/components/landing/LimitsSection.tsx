@@ -1,4 +1,6 @@
-import { AlertTriangle, Stethoscope, Cpu, Gauge, ShieldAlert, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, Stethoscope, Cpu, Gauge, ShieldAlert, CheckCircle2, ArrowRight, Scale } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/i18n/context";
 
 type SectionKey = "regulatory" | "clinical" | "technical" | "usage";
@@ -90,7 +92,15 @@ export function LimitsSection() {
 
         <div className="text-center mt-10 max-w-xl mx-auto">
           <h3 className="font-semibold mb-2">{t("pages.limits.ctaTitle")}</h3>
-          <p className="text-sm text-muted-foreground">{t("pages.limits.ctaDesc")}</p>
+          <p className="text-sm text-muted-foreground mb-5">{t("pages.limits.ctaDesc")}</p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/transparence">
+              <Scale className="h-4 w-4" />
+              {t("pages.limits.transparencyCta") as string ||
+                "Voir la page Transparence & Gouvernance"}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>

@@ -14,6 +14,7 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation, type Language } from "@/i18n/context";
 import { motion } from "framer-motion";
+import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
 
 /* ============================================================================
  * Transparency & Governance
@@ -576,6 +577,11 @@ export default function Transparency() {
           itemIcon={<CircleSlash className="h-4 w-4 text-warning shrink-0 mt-0.5" />}
         />
 
+        {/* Anti-overpromise — paired claim/limit table */}
+        <div className="-mx-4 sm:-mx-6 mt-12">
+          <AntiOverpromiseSection compact />
+        </div>
+
         {/* Audit */}
         <section
           aria-labelledby="audit-title"
@@ -600,6 +606,28 @@ export default function Transparency() {
               </li>
             ))}
           </ol>
+
+          {/* Direct link to the live audit tool — admin-only, but exposed
+              publicly here so reviewers / the jury know the surface exists. */}
+          <div className="mt-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 rounded-xl border border-primary/20 bg-primary/5 p-4">
+            <FileSearch className="h-5 w-5 text-primary shrink-0" aria-hidden="true" />
+            <p className="text-sm text-muted-foreground flex-1">
+              {language === "fr"
+                ? "Le journal d'audit est exportable au format CSV signé SHA-256 depuis la console de gouvernance (accès administrateur d'institution requis)."
+                : language === "de"
+                ? "Das Audit-Log ist als SHA-256-signierte CSV-Datei aus der Governance-Konsole exportierbar (Institutions-Administratorzugang erforderlich)."
+                : "The audit log is exportable as a SHA-256-signed CSV from the governance console (institution admin access required)."}
+            </p>
+            <Button asChild variant="outline" size="sm" className="shrink-0">
+              <Link to="/app/governance/audit-search">
+                {language === "fr"
+                  ? "Ouvrir le journal"
+                  : language === "de"
+                  ? "Log öffnen"
+                  : "Open the log"}
+              </Link>
+            </Button>
+          </div>
         </section>
 
         {/* Contact */}

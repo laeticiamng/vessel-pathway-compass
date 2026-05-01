@@ -5,6 +5,8 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
+import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
+import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
 
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
@@ -72,7 +74,10 @@ export default function Protocol() {
           </p>
         </motion.section>
 
-        {/* Objectif clinique + population */}
+        {/* Protocol identity — 5-second read summary for jury / CHUV */}
+        <ProtocolIdentityCard />
+
+
         <section className="grid md:grid-cols-2 gap-5 mb-12">
           <Card icon={Target} title={t("pages.protocol.objective.title")} body={t("pages.protocol.objective.body")} />
           <Card icon={Users} title={t("pages.protocol.population.title")} body={t("pages.protocol.population.body")} />
@@ -193,7 +198,12 @@ export default function Protocol() {
           </div>
         </section>
 
-        {/* CTA */}
+        {/* Anti-overpromise — explicit list of what the platform does NOT claim */}
+        <div className="-mx-6 mb-8">
+          <AntiOverpromiseSection compact />
+        </div>
+
+
         <section className="text-center py-8">
           <h2 className="text-2xl font-bold mb-3">{t("pages.protocol.cta.title")}</h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">{t("pages.protocol.cta.subtitle")}</p>
