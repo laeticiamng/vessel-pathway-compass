@@ -611,44 +611,85 @@
     background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    /* Crisp, premium feel */
     letter-spacing: -0.015em;
-    /* Soft outer glow + subtle relief — light mode (discreet) */
-    filter:
-      drop-shadow(0 1px 0 hsl(210 40% 100% / 0.55))
-      drop-shadow(0 0 14px hsl(var(--neon-glow) / 0.18));
-    /* Tiny luminous edge via paint-order trick on supported browsers */
+    /* Single drop-shadow → ~3× cheaper to rasterize than the previous stack.
+       Promote to its own GPU layer so scrolling does not re-paint the halo. */
+    filter: drop-shadow(0 0 12px hsl(var(--neon-glow) / 0.2));
+    will-change: filter;
+    transform: translateZ(0);
+    /* Tiny luminous edge — only on engines that support text-stroke */
     paint-order: stroke fill;
     -webkit-text-stroke: 0.4px hsl(var(--neon-glow) / 0.18);
     transition: filter 600ms ease;
   }
   .hero-neon-text.hero-neon-soft {
-    filter: drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.12));
+    filter: drop-shadow(0 0 8px hsl(var(--neon-glow) / 0.12));
     -webkit-text-stroke: 0;
   }
   .hero-neon-text.hero-neon-strong {
-    filter:
-      drop-shadow(0 1px 0 hsl(210 40% 100% / 0.7))
-      drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.28));
+    filter: drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.26));
   }
 
-  /* Dark mode: vivid neon glow, cockpit / vascular imaging vibe.
-     We deliberately drop the text-stroke + overlay in dark to keep the
-     gradient saturated and the text legible (no double-outline artefact). */
+  /* Dark mode: single, GPU-friendly halo. No double outline, no triple
+     drop-shadow stack — keeps the cockpit vibe but won't tank scroll FPS. */
   .dark .hero-neon-text {
     background-image: var(--hero-gradient);
     -webkit-text-stroke: 0 !important;
     paint-order: normal;
-    filter: drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.28));
+    filter: drop-shadow(0 0 16px hsl(var(--neon-glow) / 0.26));
   }
   .dark .hero-neon-text.hero-neon-soft {
-    filter: drop-shadow(0 0 12px hsl(var(--neon-glow) / 0.18));
+    filter: drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.16));
   }
   .dark .hero-neon-text.hero-neon-strong {
-    filter:
-      drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.32))
-      drop-shadow(0 0 48px hsl(205 100% 70% / 0.14));
+    filter: drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.3));
   }
+
+  /* === Fallback: browsers WITHOUT -webkit-text-stroke support (Firefox <49,
+     older Edge, some embedded webviews). Without this, the gradient text
+     would render with no outline AND the relief filter would look broken.
+     We force a solid, AA-readable color and drop the glow entirely. */
+  @supports not (-webkit-text-stroke: 1px black) {
+    .hero-neon-text,
+    .dark .hero-neon-text {
+      background: none !important;
+      -webkit-background-clip: initial !important;
+      background-clip: initial !important;
+      -webkit-text-fill-color: currentColor !important;
+      color: hsl(var(--text-strong)) !important;
+      filter: none !important;
+      will-change: auto;
+      transform: none;
+    }
+    .dark .hero-neon-text {
+      color: hsl(var(--accent-cyan)) !important;
+    }
+  }
+
+  /* === Reinforced contrast mode: kill all halos & gradient masking,
+     render the headline as solid token color so contour and lisibilité
+     restent nets sur tous les écrans (mobile, low-DPI, projecteur…). */
+  .high-contrast .hero-neon-text,
+  .high-contrast.dark .hero-neon-text,
+  .high-contrast .dark .hero-neon-text {
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    background-clip: initial !important;
+    -webkit-text-fill-color: currentColor !important;
+    color: hsl(var(--contrast-strong)) !important;
+    -webkit-text-stroke: 0 !important;
+    paint-order: normal !important;
+    filter: none !important;
+    text-shadow: none !important;
+    will-change: auto;
+    transform: none;
+  }
+  .high-contrast.dark .hero-neon-text,
+  .high-contrast .dark .hero-neon-text {
+    color: hsl(var(--contrast-cyan)) !important;
+  }
+
+
 
 
   /* Respect reduced motion / high contrast preferences */
