@@ -1337,6 +1337,7 @@ export const de = {
       lastUpdated: "Zuletzt aktualisiert: März 2026",
       sections: [
         { heading: "Herausgeber", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, Frankreich\nKontakt: contact@emotionscare.com" },
+        { heading: "Berufliche Qualifikationen der Gründerin", body: "Dr. med. Laëticia Moto-Ngane, Ärztin (CH)\nGLN-Nummer: 7601009569944\nRegistrierung: MedReg — Plattform der Gesundheitsberufe (Schweizerische Eidgenossenschaft)\nÖffentlich überprüfbar unter https://www.healthregister.ch" },
         { heading: "Hosting", body: "Die Plattform wird in der Europäischen Union gehostet." },
         { heading: "Medizinischer Hinweis", body: "AquaMR Flow ist KEIN Medizinprodukt." },
         { heading: "Geistiges Eigentum", body: "Alle Rechte vorbehalten." },
