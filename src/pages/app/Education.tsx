@@ -16,6 +16,7 @@ import { BookOpen, Award, Clock, ArrowRight, Plus, CheckCircle2 } from "lucide-r
 import { SEOHead } from "@/components/SEOHead";
 import { toast } from "sonner";
 import CourseDetail from "@/components/education/CourseDetail";
+import { TenCommandments } from "@/components/vasculink/TenCommandments";
 
 const TRACK_EMOJI: Record<string, string> = {
   "low-field-mri": "🧲",
@@ -233,6 +234,9 @@ export default function Education() {
           </CardContent>
         </Card>
       </div>
+
+      {/* ESC Alignment — 10 Commandments */}
+      <TenCommandments />
 
       {/* Courses */}
       <div className="space-y-4">
