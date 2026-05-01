@@ -1210,6 +1210,7 @@ export const en = {
       title: "A complete vascular platform, in production",
       subtitle: "10 clinical modules, a locked L1 protocol, three languages and an architecture designed to target MDR / GDPR / IEC 62304 compliance.",
       available: "Available",
+      detailsCta: "See full details of the 10 modules",
       disclaimer: "All modules are accessible in the open beta. Research prototype — not certified as a medical device at this stage.",
       stats: [
         { value: "10", label: "Clinical modules" },

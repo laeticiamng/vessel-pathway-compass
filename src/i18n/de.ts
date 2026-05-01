@@ -1190,6 +1190,7 @@ export const de = {
       title: "Eine vollständige Gefäßplattform, im Einsatz",
       subtitle: "10 klinische Module, ein verriegeltes L1-Protokoll, drei Sprachen und eine Architektur, die auf MDR / DSGVO / IEC 62304 ausgerichtet ist.",
       available: "Verfügbar",
+      detailsCta: "Alle 10 Module im Detail ansehen",
       disclaimer: "Alle Module sind in der offenen Beta zugänglich. Forschungsprototyp — derzeit nicht als Medizinprodukt zertifiziert.",
       stats: [
         { value: "10", label: "Klinische Module" },
