@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-01T10:00:07.047Z_
+_Generated: 2026-05-01T10:00:37.276Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 
@@ -13,7 +13,7 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 | Keys missing in FR | 0 |
 | Keys missing in EN | 0 |
 | Keys missing in DE | 0 |
-| Orphan keys (defined, unused) | 51 |
+| Orphan keys (defined, unused) | 50 |
 | Public pages with hardcoded candidates | 2 (2 findings) |
 
 ## Missing keys — FR
@@ -30,7 +30,7 @@ _None ✅_
 
 ## Orphan keys (defined in FR dictionary but never referenced)
 
-_51 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
+_50 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
 
 ```
 common.appName
@@ -63,7 +63,6 @@ patientDetail.deleteDialog.deleting
 patientDetail.toastsDeleted
 patientDetail.toastsDeletedDesc
 patientDetail.trash.title
-home.nav.closeMenu
 analytics.period
 analytics.category
 vascscreen.riskFactors
