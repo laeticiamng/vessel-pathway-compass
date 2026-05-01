@@ -1258,6 +1258,46 @@ export const de = {
         { q: "Wie erfahre ich mehr oder beantrage Zugang?", a: "Sie können die Preisseite besuchen, die FAQ lesen oder das Team über die Kontaktseite erreichen." },
       ],
     },
+    complianceFaq: {
+      badge: "Compliance-ready",
+      title: "Compliance-FAQ — Auditierbarkeit, Nachvollziehbarkeit, Sicherheit",
+      subtitle: "Wie AquaMR Flow für ernsthafte klinische Nutzung konzipiert ist und was „keine behördliche Zulassung“ heute bedeutet.",
+      disclaimer: "Diese FAQ beschreibt die von AquaMR Flow angestrebte Compliance-Haltung. Sie stellt keine rechtliche, medizinische oder regulatorische Beratung dar und ersetzt keine institutionelle Due Diligence.",
+      items: [
+        {
+          q: "Was bedeutet „keine behördliche Zulassung“ für AquaMR Flow?",
+          a: "AquaMR Flow ist ein Forschungsprototyp in offener Beta. Er ist weder CE-gekennzeichnet als Medizinprodukt, noch FDA-zugelassen, noch Swissmedic-zertifiziert.\n\nKonkret bedeutet das:\n• Er stellt keine Diagnose und verschreibt keine Behandlung.\n• Jede Entscheidungsunterstützung (CI-AKI, Planung, digitaler Zwilling) muss von einer qualifizierten Ärztin oder einem Arzt bestätigt werden, die/der allein für den medizinischen Akt verantwortlich bleibt.\n• Klinische Nutzung findet im Rahmen von Forschung, Ausbildung oder Workflow-Organisation statt.\n\nDie Architektur ist darauf ausgelegt, langfristig MDR-/DSGVO-/IEC-62304-Konformität anzustreben — dieses Ziel ist derzeit jedoch nicht erreicht.",
+        },
+        {
+          q: "Wie wird die Auditierbarkeit sichergestellt?",
+          a: "Jede sensible Aktion (Lesen, Schreiben, Export, Score-Berechnung, Entscheidung) wird:\n• mit Zeitstempel versehen,\n• einem authentifizierten Nutzer zugeordnet,\n• in einem Backend-Anwendungsprotokoll erfasst,\n• einem Institutionsadministrator auf begründete Anfrage zugänglich gemacht.\n\nKritische Edge Functions erfordern ein gültiges JWT und prüfen Rollen serverseitig. Datenexporte erzeugen einen dedizierten Audit-Eintrag (wer, was, wann, Format, Umfang).",
+        },
+        {
+          q: "Wie wird die Nachvollziehbarkeit klinischer Entscheidungen gewährleistet?",
+          a: "Jede in der Plattform dokumentierte Entscheidung (Eingriffsplan, CI-AKI-Score, L1-Validierung, Registereintrag) speichert:\n• die pseudonymisierte Patientenkennung,\n• die verwendeten Eingangsparameter,\n• die Version des angewandten Modells oder der Formel,\n• die validierende Ärztin / den validierenden Arzt,\n• Datum und Uhrzeit (UTC).\n\nDamit lässt sich der genaue Entscheidungskontext im Rahmen einer retrospektiven Überprüfung oder eines institutionellen Audits rekonstruieren.",
+        },
+        {
+          q: "Was bedeutet „Security by Design“ in AquaMR Flow?",
+          a: "Bereits architekturell umgesetzte Prinzipien:\n• TLS-1.2+-Verschlüsselung in Transit, Verschlüsselung im Ruhezustand im Backend.\n• Row-Level Security aktiviert auf allen sensiblen Tabellen (Patienten, Fälle, PROMs, Audit).\n• Defense-in-Depth-Filterung: RLS + serverseitige `case_id`-Filter auf PROMs-Abfragen.\n• Getrennte Rollen (Behandler, Forscher, Administrator, Support).\n• Systematische Pseudonymisierung von Patientendaten vor jedem Benchmark oder aggregierten Export.\n• Soft-Delete mit 30-tägiger Karenzzeit und automatischer Bereinigung.\n• Keine Weitergabe von KI-Modellen, die auf identifizierbaren Patientendaten trainiert wurden.",
+        },
+        {
+          q: "Verlassen meine Patientendaten die EU oder die Schweiz?",
+          a: "Derzeit nutzt die Plattform eine von Lovable Cloud / Supabase gehostete Infrastruktur. Eine Migration in eine klinische HDS-Umgebung (EU/CH) ist vor jedem produktiven institutionellen Einsatz vorgesehen.\n\nFür Institutionen mit strengen Anforderungen (französische HDS, CH-Hosting) sind Daten­isolations- und Lokalisierungslösungen vor dem Deployment fallweise verhandelbar.",
+        },
+        {
+          q: "Wie steht es um DSGVO und nDSG?",
+          a: "Die Architektur strebt DSGVO- (EU) und nDSG-Konformität (Schweiz) an:\n• dokumentierte Rechtsgrundlage je Anwendungsfall (Forschung, Versorgung, Ausbildung),\n• Datenminimierung,\n• Auskunfts-, Berichtigungs- und Löschrechte werden unterstützt,\n• Verzeichnis der Verarbeitungstätigkeiten beim Anbieter,\n• identifizierte Auftragsverarbeiter (DPA auf Anfrage).\n\nEine vereinfachte DPIA wird Partnerinstitutionen vor jedem Pilotprojekt bereitgestellt.",
+        },
+        {
+          q: "Was passiert bei einem Sicherheitsvorfall?",
+          a: "Verfahren:\n1. Erkennung über Application-Monitoring und Backend-Alarme.\n2. Triage innerhalb von 24 Geschäftsstunden.\n3. Benachrichtigung der betroffenen Institutionen innerhalb der DSGVO-Fristen (72 h bei personenbezogenen Datenpannen).\n4. Dokumentierte Nachbereitung und gemeinsam getragene Korrekturmaßnahmen.\n\nDie Audit-Logs ermöglichen es, den genauen Umfang (Nutzer, Patienten, Aktionen) eines Vorfalls einzugrenzen.",
+        },
+        {
+          q: "Kann ich die Plattform vor einem klinischen Pilot auditieren?",
+          a: "Ja. Auf begründete Anfrage einer Institution stellen wir bereit:\n• ein Sicherheitsdossier (Architektur, RLS, Secrets-Management, Auftragsverarbeiter),\n• die geltenden regulatorischen Disclaimer,\n• die Liste der verriegelten L1-Endpunkte und die Version des anwendbaren klinischen Protokolls,\n• Zugang zu einer isolierten Testumgebung zur Verhaltensprüfung.\n\nVertiefte technische Audits (Pentests, Code-Review) können unter NDA organisiert werden.",
+        },
+      ],
+    },
     validation: {
       badge: "L1 klinisches Validierungsprotokoll",
       title: "Strukturierte klinische Validierung",

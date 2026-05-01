@@ -42,6 +42,7 @@ import {
   HomeFAQSection,
   homeFaqJsonLd,
 } from "@/components/landing/HomeSections";
+import { ComplianceFAQSection, complianceFaqJsonLd } from "@/components/landing/ComplianceFAQSection";
 import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
 import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
@@ -119,6 +120,7 @@ export default function Landing() {
           "Plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
       },
       homeFaqJsonLd,
+      complianceFaqJsonLd,
     ],
   };
 
@@ -453,6 +455,9 @@ export default function Landing() {
 
       {/* Home FAQ — French, optimized for SEO/GEO */}
       <HomeFAQSection />
+
+      {/* Compliance-ready FAQ */}
+      <ComplianceFAQSection />
 
       {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
 
