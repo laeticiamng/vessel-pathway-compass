@@ -70,6 +70,7 @@ const VascScreenResults = lazy(() => import("./pages/app/VascScreenResults"));
 const VascScreenDashboard = lazy(() => import("./pages/app/VascScreenDashboard"));
 const VascScreenAnalytics = lazy(() => import("./pages/app/VascScreenAnalytics"));
 const VascScreenStudy = lazy(() => import("./pages/app/VascScreenStudy"));
+const HeroNeonQa = lazy(() => import("./pages/dev/HeroNeonQa"));
 
 const queryClient = new QueryClient();
 
