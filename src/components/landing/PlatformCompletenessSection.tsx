@@ -121,9 +121,18 @@ export function PlatformCompletenessSection() {
           })}
         </motion.div>
 
-        <p className="mt-8 text-center text-xs text-muted-foreground italic max-w-2xl mx-auto">
-          {t("home.completeness.disclaimer")}
-        </p>
+        <div className="mt-8 flex flex-col items-center gap-3">
+          <Link
+            to="/modules"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+          >
+            {t("home.completeness.detailsCta")}
+            <span aria-hidden="true">→</span>
+          </Link>
+          <p className="text-center text-xs text-muted-foreground italic max-w-2xl mx-auto">
+            {t("home.completeness.disclaimer")}
+          </p>
+        </div>
       </div>
     </section>
   );
