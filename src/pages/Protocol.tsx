@@ -197,8 +197,13 @@ export default function Protocol() {
             </p>
           </div>
         </section>
+      </main>
 
-        {/* CTA */}
+      {/* Anti-overpromise — full-width, sits between protocol body and final CTA block */}
+      <AntiOverpromiseSection compact />
+
+      <main className="container mx-auto px-6 py-8 max-w-5xl">
+
         <section className="text-center py-8">
           <h2 className="text-2xl font-bold mb-3">{t("pages.protocol.cta.title")}</h2>
           <p className="text-muted-foreground mb-6 max-w-xl mx-auto">{t("pages.protocol.cta.subtitle")}</p>
