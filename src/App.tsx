@@ -106,6 +106,8 @@ const App = () => (
           <Route path="/securite-confidentialite" element={<SecurityPrivacy />} />
           <Route path="/protocol" element={<Protocol />} />
           <Route path="/modules" element={<Modules />} />
+          <Route path="/transparence" element={<Transparency />} />
+          <Route path="/transparency" element={<Navigate to="/transparence" replace />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
 
