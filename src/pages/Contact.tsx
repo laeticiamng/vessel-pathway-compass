@@ -9,8 +9,10 @@ import { ArrowLeft, HeartPulse, Mail, Send, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { SEOHead } from "@/components/SEOHead";
+import { useTranslation } from "@/i18n/context";
 
 export default function Contact() {
+  const { t } = useTranslation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -26,13 +28,13 @@ export default function Contact() {
         body: { name: name.trim(), email: email.trim(), message: message.trim() },
       });
       if (error) throw error;
-      toast.success("Message envoyé. Nous reviendrons vers vous rapidement.");
+      toast.success(t("contactPage.success"));
       setName("");
       setEmail("");
       setMessage("");
     } catch (err) {
       console.error("Contact form error:", err);
-      toast.error("Une erreur est survenue. Réessayez plus tard.");
+      toast.error(t("contactPage.error"));
     } finally {
       setSending(false);
     }
@@ -41,13 +43,13 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="Contact — Échanger avec l’équipe AquaMR Flow"
-        description="Contactez l’équipe AquaMR Flow pour toute question sur la plateforme, son périmètre, ses cas d’usage ou un éventuel accès."
+        title={t("contactPage.seo.title")}
+        description={t("contactPage.seo.description")}
         path="/contact"
       />
 
       <header className="border-b">
-        <nav className="container mx-auto flex items-center justify-between h-16 px-6" aria-label="Navigation principale">
+        <nav className="container mx-auto flex items-center justify-between h-16 px-6" aria-label={t("home.nav.mainAria")}>
           <Link to="/" className="flex items-center gap-2.5">
             <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-md">
               <HeartPulse className="h-5 w-5 text-primary-foreground" />
@@ -57,7 +59,7 @@ export default function Contact() {
           <Button asChild variant="ghost" size="sm">
             <Link to="/">
               <ArrowLeft className="h-4 w-4" />
-              Accueil
+              {t("contactPage.backHome")}
             </Link>
           </Button>
         </nav>
@@ -68,9 +70,9 @@ export default function Contact() {
           <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
             <Mail className="h-6 w-6 text-primary" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">Contact</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">{t("contactPage.title")}</h1>
           <p className="text-muted-foreground text-lg">
-            Une question sur AquaMR Flow ? Écrivez-nous, nous vous répondrons rapidement.
+            {t("contactPage.subtitle")}
           </p>
         </div>
 
@@ -87,34 +89,34 @@ export default function Contact() {
                 aria-hidden="true"
               />
               <div>
-                <Label htmlFor="contact-name">Nom</Label>
+                <Label htmlFor="contact-name">{t("contactPage.nameLabel")}</Label>
                 <Input
                   id="contact-name"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder="Votre nom"
+                  placeholder={t("contactPage.namePlaceholder")}
                 />
               </div>
               <div>
-                <Label htmlFor="contact-email">Email</Label>
+                <Label htmlFor="contact-email">{t("contactPage.emailLabel")}</Label>
                 <Input
                   id="contact-email"
                   type="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="vous@exemple.com"
+                  placeholder={t("contactPage.emailPlaceholder")}
                 />
               </div>
               <div>
-                <Label htmlFor="contact-message">Message</Label>
+                <Label htmlFor="contact-message">{t("contactPage.messageLabel")}</Label>
                 <Textarea
                   id="contact-message"
                   required
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Décrivez votre question ou votre demande…"
+                  placeholder={t("contactPage.messagePlaceholder")}
                   rows={6}
                 />
               </div>
@@ -122,12 +124,12 @@ export default function Contact() {
                 {sending ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
-                    Envoi…
+                    {t("contactPage.sending")}
                   </>
                 ) : (
                   <>
                     <Send className="h-4 w-4" />
-                    Envoyer le message
+                    {t("contactPage.send")}
                   </>
                 )}
               </Button>
@@ -136,20 +138,18 @@ export default function Contact() {
         </Card>
 
         <p className="mt-8 text-center text-sm text-muted-foreground">
-          Voir aussi :{" "}
+          {t("contactPage.seeAlso")}{" "}
           <Link to="/faq" className="text-primary hover:underline">FAQ</Link>{" "}•{" "}
-          <Link to="/securite-confidentialite" className="text-primary hover:underline">Sécurité et confidentialité</Link>{" "}•{" "}
-          <Link to="/pricing" className="text-primary hover:underline">Tarifs</Link>
+          <Link to="/securite-confidentialite" className="text-primary hover:underline">{t("contactPage.securityLink")}</Link>{" "}•{" "}
+          <Link to="/pricing" className="text-primary hover:underline">{t("contactPage.pricingLink")}</Link>
         </p>
       </main>
 
       <footer className="border-t py-8">
         <div className="container mx-auto px-6 text-center text-sm text-muted-foreground">
-          <Link to="/" className="hover:text-foreground">Accueil</Link>
+          <Link to="/" className="hover:text-foreground">{t("contactPage.backHome")}</Link>
           <span className="mx-2">•</span>
-          <Link to="/pricing" className="hover:text-foreground">Tarifs</Link>
-          <span className="mx-2">•</span>
-          <Link to="/faq" className="hover:text-foreground">FAQ</Link>
+          <Link to="/pricing" className="hover:text-foreground">{t("contactPage.pricingLink")}</Link>
         </div>
       </footer>
     </div>
