@@ -168,7 +168,12 @@ export default function WebVitalsAdmin() {
             p75 over the last 7 days vs the previous 7 days. Regression alert at &gt;{REGRESSION_THRESHOLD_PCT}%.
           </p>
         </div>
+        {wcag && <WCAGBadge light={wcag.light} dark={wcag.dark} variant="compact" />}
       </div>
+
+      {wcag && (
+        <WCAGBadge light={wcag.light} dark={wcag.dark} variant="full" />
+      )}
 
       {regressions.length > 0 && (
         <Alert variant="destructive">
