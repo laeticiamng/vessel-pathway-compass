@@ -357,11 +357,15 @@ export default function Landing() {
                 variants={fadeUp}
               >
                 <Link to={mod.path} className="group relative rounded-2xl border bg-card p-5 sm:p-7 card-hover shine-hover block h-full">
+                  <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
+                    <CheckCircle2 className="h-2.5 w-2.5" aria-hidden="true" />
+                    {t("home.completeness.available")}
+                  </span>
                   <div className="relative z-10">
                     <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors duration-300">
                       <mod.icon className="h-5 w-5 text-primary" />
                     </div>
-                    <h3 className="text-lg font-semibold mb-2.5">{mod.title}</h3>
+                    <h3 className="text-lg font-semibold mb-2.5 pr-20">{mod.title}</h3>
                     <p className="text-muted-foreground text-sm leading-relaxed">{mod.description}</p>
                     <span className="inline-flex items-center gap-1 mt-4 text-xs font-medium text-primary opacity-60 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {t("common.learnMore")} <ArrowRight className="h-3 w-3" />
