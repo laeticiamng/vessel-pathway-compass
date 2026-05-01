@@ -1792,6 +1792,48 @@ export const fr = {
         body: "<strong>VASCU-LINK n'est pas un substitut au Doppler.</strong> Le Doppler reste le test hémodynamique de première ligne. VASCU-LINK vise la question suivante : une cartographie angiographique 4-zéro peut-elle soutenir la décision pré-revascularisation sans recours immédiat à une imagerie injectée ou irradiante lourde ?",
       },
     },
+    pillars: {
+      title: "Signature 4-zéro VASCU-LINK",
+      description: "Quatre piliers chiffrés qui définissent le cockpit AquaMR. À notre connaissance, aucune modalité clinique de routine ne combine les quatre.",
+      items: {
+        radiation: {
+          pillar: "Zéro rayonnement ionisant",
+          target: "0 mSv par examen",
+          benchmark: "vs angio-TDM 5–15 mSv",
+          externality: "Exposition ionisante cumulée au long cours",
+        },
+        contrast: {
+          pillar: "Zéro produit de contraste injecté",
+          target: "0 g Gd · 0 mL iode",
+          benchmark: "vs IRM Gd ≈ 3,24 kg/site/an",
+          externality: "IRA induite chez l'IRC · rejet environnemental du contraste",
+        },
+        helium: {
+          pillar: "Zéro hélium",
+          target: "Halbach NdFeB recyclé (DEEE)",
+          benchmark: "vs IRM cryogénique standard à He",
+          externality: "Pénurie d'He · dépendance terres rares · empreinte carbone",
+        },
+        cost: {
+          pillar: "Coût radicalement réduit",
+          target: "BoM cible < 15 k€ (estimation, sans devis fournisseur formel)",
+          benchmark: "vs IRM 1,5–3 T : 1,5–5 M€ (70–225×)",
+          externality: "Barrière d'accès en pratique privée & contextes LMIC",
+        },
+      },
+    },
+    proximity: {
+      title: "Médecine vasculaire de proximité & équité d'accès",
+      description: "La signature 4-zéro — et la cible BoM < 15 k€ en particulier — existe pour sortir la décision angiographique des centres hospitaliers dépendants de l'hélium.",
+      privateTitle: "Cabinet vasculaire privé",
+      privateDesc: "Cartographie angiographique déployable en structure vasculaire ambulatoire, avec relais hospitalier.",
+      lmicTitle: "Pilote LMIC — post-thèse",
+      lmicDesc: "Lettres d'intention envisagées avec Sénégal · Maroc · Bénin (livrable WP5).",
+      photovoltaicTitle: "Site photovoltaïque",
+      photovoltaicDesc: "Sans hélium · aimant Halbach basse consommation · BoM compatible solaire < 15 k€.",
+      wp5Badge: "WP5 — équité & durabilité",
+      wp5Body: "LCA · QALY · pilote LMIC sont des <strong>livrables post-thèse</strong> ; le périmètre intra-thèse reste la cohorte prospective de validation prévue et la pré-soumission réglementaire européenne.",
+    },
   },
   pages: {
     common: {
