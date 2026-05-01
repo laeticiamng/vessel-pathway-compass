@@ -94,6 +94,7 @@ export const fr = {
   topBar: {
     searchPlaceholder: "Rechercher ou commande...",
     toggleTheme: "Changer le thème",
+    highContrast: "Activer/désactiver le contraste renforcé",
   },
 
   landing: {

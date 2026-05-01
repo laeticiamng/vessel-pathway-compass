@@ -8,6 +8,7 @@ import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/i18n/context";
 import { I18nMissOverlay } from "@/i18n/I18nDiagnostics";
 import { AuthProvider } from "./hooks/useAuth";
+import { HighContrastProvider } from "./hooks/useHighContrast";
 
 import Landing from "./pages/Landing";
 import Auth from "./pages/Auth";
@@ -83,6 +84,7 @@ function LazyFallback() {
 const App = () => (
   <LanguageProvider>
   <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="aquamr-flow-theme">
+    <HighContrastProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
@@ -175,6 +177,7 @@ const App = () => (
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
+    </HighContrastProvider>
   </ThemeProvider>
   </LanguageProvider>
 );

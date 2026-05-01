@@ -94,6 +94,7 @@ export const de = {
   topBar: {
     searchPlaceholder: "Suchen oder Befehl...",
     toggleTheme: "Thema wechseln",
+    highContrast: "Hoher Kontrast umschalten",
   },
 
   landing: {

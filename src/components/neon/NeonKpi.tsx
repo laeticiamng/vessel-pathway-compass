@@ -53,6 +53,7 @@ export function NeonKpi({
               loading="lazy"
               width={40}
               height={40}
+              data-neon-illustration=""
               className="h-7 w-7 object-contain [filter:brightness(0.42)_saturate(1.95)_contrast(1.28)] dark:[filter:none]"
             />
           ) : Icon ? (
