@@ -197,12 +197,12 @@ export default function Protocol() {
             </p>
           </div>
         </section>
-      </main>
 
-      {/* Anti-overpromise — full-width, sits between protocol body and final CTA block */}
-      <AntiOverpromiseSection compact />
+        {/* Anti-overpromise — explicit list of what the platform does NOT claim */}
+        <div className="-mx-6 mb-8">
+          <AntiOverpromiseSection compact />
+        </div>
 
-      <main className="container mx-auto px-6 py-8 max-w-5xl">
 
         <section className="text-center py-8">
           <h2 className="text-2xl font-bold mb-3">{t("pages.protocol.cta.title")}</h2>
