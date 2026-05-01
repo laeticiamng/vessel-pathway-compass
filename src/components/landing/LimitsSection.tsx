@@ -46,7 +46,9 @@ export function LimitsSection() {
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
           {SECTIONS.map(({ key, icon: Icon, resolvedInBeta }) => {
             const items = (t(`pages.limits.sections.${key}.items`) as unknown as string[]) ?? [];
-            const accent = resolvedInBeta ? "primary" : "warning";
+            const iconWrap = resolvedInBeta ? "bg-primary/10" : "bg-warning/10";
+            const iconColor = resolvedInBeta ? "text-primary" : "text-warning";
+            const bullet = resolvedInBeta ? "text-primary" : "text-warning";
             return (
               <article
                 key={key}
@@ -56,10 +58,8 @@ export function LimitsSection() {
               >
                 <header className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-3 min-w-0">
-                    <div
-                      className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 bg-${accent}/10`}
-                    >
-                      <Icon className={`h-5 w-5 text-${accent}`} aria-hidden="true" />
+                    <div className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 ${iconWrap}`}>
+                      <Icon className={`h-5 w-5 ${iconColor}`} aria-hidden="true" />
                     </div>
                     <h3 className="font-semibold text-base">
                       {t(`pages.limits.sections.${key}.title`)}
@@ -76,7 +76,7 @@ export function LimitsSection() {
                   {Array.isArray(items) &&
                     items.map((line, i) => (
                       <li key={i} className="flex gap-2">
-                        <span aria-hidden className={`shrink-0 text-${accent}`}>
+                        <span aria-hidden className={`shrink-0 ${bullet}`}>
                           {resolvedInBeta ? "✓" : "•"}
                         </span>
                         <span>{line}</span>
