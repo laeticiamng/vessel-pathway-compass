@@ -1319,6 +1319,62 @@ export const de = {
       security: "Sicherheit & Datenschutz",
       protocol: "Protokoll & Validierung",
     },
+    whatsNew: {
+      badge: "Neuigkeiten",
+      title: "Plattform-Changelog",
+      subtitle: "Aktuelle Verbesserungen, neue Module und Sicherheits-Upgrades, die während der offenen Beta veröffentlicht wurden.",
+      cta: "Alle 10 Module ansehen",
+      tagLabels: {
+        new: "Neu",
+        improved: "Verbessert",
+        fixed: "Behoben",
+        security: "Sicherheit",
+      },
+      entries: [
+        {
+          date: "2026-05-01",
+          version: "v0.9.0",
+          title: "Compliance-FAQ und dediziertes Modulverzeichnis",
+          description: "Neue transparente FAQ zu Auditierbarkeit, Rückverfolgbarkeit und dem Status „keine behördliche Zulassung\". Neue Seite /modules mit Details zu allen 10 klinischen Modulen, Voraussetzungen und Verfügbarkeit.",
+          tags: [{ label: "", type: "new" }, { label: "", type: "improved" }],
+        },
+        {
+          date: "2026-04-22",
+          version: "v0.8.0",
+          title: "Sektion „Plattform-Vollständigkeit\" und i18n-Härtung",
+          description: "Die Startseite zeigt nun die vollständige Plattform mit 10 Modulen und Kennzahlen. Vollständige FR/EN/DE-Synchronisation aller Modulnamen und klinischen Beschreibungen.",
+          tags: [{ label: "", type: "improved" }],
+        },
+        {
+          date: "2026-04-10",
+          version: "v0.7.2",
+          title: "Serverseitige Filterung bei PROMs-Abfragen",
+          description: "Defense-in-depth-Filterung nach case_id auf Patient-Outcomes-Endpunkten ergänzend zu bestehenden RLS-Richtlinien.",
+          tags: [{ label: "", type: "security" }],
+        },
+        {
+          date: "2026-03-28",
+          version: "v0.7.0",
+          title: "DICOM Fusion Viewer (Beta) und CI-AKI-Persistenz",
+          description: "Veröffentlichung des Fusion Viewer für DICOM-Bildgebung mit sicheren Speicherregeln. CI-AKI-Risikoberechnungen werden nun sitzungsübergreifend für eine longitudinale Nachverfolgung gespeichert.",
+          tags: [{ label: "", type: "new" }],
+        },
+        {
+          date: "2026-03-12",
+          version: "v0.6.5",
+          title: "Soft-Delete für Patienten mit 30-Tage-Karenzzeit",
+          description: "Einführung der weichen Löschung von Patienten mit manueller Kaskadenbereinigung zugehöriger Datensätze und automatisiertem Hintergrundjob für abgelaufene Einträge.",
+          tags: [{ label: "", type: "new" }, { label: "", type: "security" }],
+        },
+        {
+          date: "2026-02-25",
+          version: "v0.6.0",
+          title: "Digital Twin (vaskuläre Karte mit 18 Segmenten)",
+          description: "Erste Version des SVG-basierten Digital Twin mit 18 Segmenten und dynamischen Risikoschwellen, abgeleitet aus aktiven Risikofaktoren.",
+          tags: [{ label: "", type: "new" }],
+        },
+      ],
+    },
   },
   contactPage: {
     seo: {
