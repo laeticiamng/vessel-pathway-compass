@@ -174,16 +174,9 @@ export const fr = {
         "Accès par rôle : interventionnistes, stagiaires, administrateurs",
       ],
     },
-    socialProof: { title: "Conçu pour les spécialistes vasculaires — par des spécialistes vasculaires" },
-    testimonials: {
-      title: "Ce qu'en disent les premiers utilisateurs",
-      disclaimer: "Retours issus de notre programme prototype de recherche. Identités confidentielles à la demande des participants.",
-      items: [
-        { quote: "Le moteur CI-AKI nous a aidé à standardiser notre protocole d'épargne de contraste dans tout le laboratoire de cathétérisme. Nous avons maintenant une approche cohérente pour chaque patient IRC.", author: "Cardiologue interventionnel", role: "Hôpital universitaire, UE" },
-        { quote: "Le concept de visionneuse fusion est exactement ce dont nous avons besoin — pouvoir corréler l'ARM pré-procédurale avec l'IVUS intra-procédural dans une seule interface change le flux de travail.", author: "Radiologue interventionnel", role: "Centre vasculaire, CH" },
-        { quote: "En tant qu'interne, le laboratoire de simulation avec des scénarios de flux de travail non ionisant m'a aidé à comprendre les approches IVUS-first avant de les pratiquer en salle.", author: "Interne en cardiologie", role: "CHU, USA" },
-      ],
-    },
+    // Note: socialProof + testimonials sections were removed from the landing page
+    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Questions fréquentes",
       subtitle: "Tout ce que vous devez savoir sur AquaMR Flow.",

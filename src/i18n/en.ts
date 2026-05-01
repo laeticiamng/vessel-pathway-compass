@@ -179,18 +179,9 @@ export const en = {
         "Role-based access: interventionalists, trainees, administrators",
       ],
     },
-    socialProof: {
-      title: "Built for interventional specialists — by interventional specialists",
-    },
-    testimonials: {
-      title: "What Early Users Say",
-      disclaimer: "Feedback from our research prototype program. Identities kept confidential at participants' request.",
-      items: [
-        { quote: "The CI-AKI engine helped us standardize our contrast-sparing protocol across the cath lab. We now have a consistent approach for every CKD patient.", author: "Interventional Cardiologist", role: "University Hospital, EU" },
-        { quote: "The fusion viewer concept is exactly what we need — being able to correlate pre-procedural MRA with intraprocedural IVUS in one interface changes the workflow.", author: "Interventional Radiologist", role: "Vascular Center, CH" },
-        { quote: "As a fellow, the simulation lab with non-ionizing workflow scenarios helped me understand IVUS-first approaches before I started doing them in the lab.", author: "Cardiology Fellow", role: "Teaching Hospital, USA" },
-      ],
-    },
+    // Note: socialProof + testimonials sections were removed from the landing page
+    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Frequently Asked Questions",
       subtitle: "Everything you need to know about AquaMR Flow.",

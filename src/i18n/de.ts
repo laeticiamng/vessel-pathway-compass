@@ -178,16 +178,9 @@ export const de = {
         "Rollenbasierter Zugang: Ärzte, Assistenzärzte, Administratoren",
       ],
     },
-    socialProof: { title: "Entwickelt für Gefäßspezialisten — von Gefäßspezialisten" },
-    testimonials: {
-      title: "Was frühe Nutzer sagen",
-      disclaimer: "Feedback aus unserem Beta-Programm. Identitäten auf Wunsch der Teilnehmer vertraulich.",
-      items: [
-        { quote: "Die strukturierten KI-Berichte sparen mir mindestens 30 Minuten pro Fall. Früher habe ich alles diktiert — jetzt prüfe und bestätige ich. Das gehört zu meinem Arbeitsalltag.", author: "Gefäßchirurg", role: "Universitätsklinik, EU" },
-        { quote: "Ich nutze den digitalen Zwilling bei der Visite, um Assistenzärzten genau zu zeigen, wo die Läsionen sind und wie sie sich entwickelt haben. Das hat unsere Tafelskizzen ersetzt.", author: "Interventioneller Radiologe", role: "Privates Gefäßzentrum, CH" },
-        { quote: "Als Assistenzarzt im 3. Jahr haben mir das Simulationslabor und das Logbuch geholfen, meinen Fortschritt zu verfolgen und mich auf die Facharztprüfung vorzubereiten. Nichts anderes bot das.", author: "Assistenzarzt Gefäßchirurgie", role: "Lehrkrankenhaus, USA" },
-      ],
-    },
+    // Note: socialProof + testimonials sections were removed from the landing page
+    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Häufig gestellte Fragen",
       subtitle: "Alles, was Sie über AquaMR Flow wissen müssen.",
