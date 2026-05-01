@@ -104,6 +104,7 @@ export default function Research() {
         </div>
         <div className="flex gap-2 self-start sm:self-auto flex-wrap">
           <AuditPackButton />
+          <AuditDataExportButtons />
           <ResearchExportButton />
           <Button onClick={() => setDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
@@ -120,7 +121,12 @@ export default function Research() {
           <TabsTrigger value="power"><Calculator className="h-4 w-4 mr-1" /> Power</TabsTrigger>
           <TabsTrigger value="dsmb"><ShieldCheck className="h-4 w-4 mr-1" /> DSMB Charter</TabsTrigger>
           <TabsTrigger value="lca"><Leaf className="h-4 w-4 mr-1" /> LCA / QALY</TabsTrigger>
+          <TabsTrigger value="timeline"><CalendarClock className="h-4 w-4 mr-1" /> Timeline</TabsTrigger>
         </TabsList>
+
+        <TabsContent value="timeline">
+          <ADRTimeline />
+        </TabsContent>
 
         <TabsContent value="power">
           <PowerCalculation />
