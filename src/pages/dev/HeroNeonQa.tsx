@@ -25,7 +25,7 @@ export default function HeroNeonQa() {
   const force = params.get("force") === "1";
 
   const { theme, setTheme } = useTheme();
-  const { highContrast, toggleHighContrast } = useHighContrast();
+  const { highContrast, toggle: toggleHighContrast } = useHighContrast();
   const [reducedMotion, setReducedMotion] = useState(false);
   const [lazy, setLazy] = useState(true);
   const [focusable, setFocusable] = useState(false);
