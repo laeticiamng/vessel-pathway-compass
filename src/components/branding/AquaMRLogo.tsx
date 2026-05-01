@@ -25,7 +25,11 @@ export const AquaMRLogo = ({
   variant = "inline",
   size,
 }: AquaMRLogoProps) => {
+  // When `size` is explicit, use it. Otherwise let CSS classes (h-X w-X)
+  // override via the className prop — keeps existing call sites pixel-perfect.
   const px = size ?? (variant === "badge" ? 40 : 28);
+  const sizeStyle = size ? { width: px, height: px } : undefined;
+  const sizeClass = size ? "" : variant === "badge" ? "h-10 w-10" : "h-7 w-7";
   return (
     <img
       src={logoImg}
@@ -35,9 +39,10 @@ export const AquaMRLogo = ({
       height={px}
       className={cn(
         "object-contain select-none drop-shadow-[0_0_10px_hsl(188_100%_60%/0.35)]",
+        sizeClass,
         className,
       )}
-      style={{ width: px, height: px }}
+      style={sizeStyle}
     />
   );
 };
