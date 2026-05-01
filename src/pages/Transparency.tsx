@@ -577,6 +577,11 @@ export default function Transparency() {
           itemIcon={<CircleSlash className="h-4 w-4 text-warning shrink-0 mt-0.5" />}
         />
 
+        {/* Anti-overpromise — paired claim/limit table */}
+        <div className="-mx-4 sm:-mx-6 mt-12">
+          <AntiOverpromiseSection compact />
+        </div>
+
         {/* Audit */}
         <section
           aria-labelledby="audit-title"
