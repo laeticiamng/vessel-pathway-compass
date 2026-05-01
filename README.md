@@ -52,10 +52,10 @@ interventions, insufficient image quality, or when standard-of-care requires it.
 
 ---
 
-## AquaMR vs Vessel Pathway Compass vs VASCU-LINK
+## AquaMR vs AquaMR Flow vs VASCU-LINK
 
 - **AquaMR** — 4-zero angiographic imaging device concept.
-- **Vessel Pathway Compass** — clinical cockpit and pre-revascularization
+- **AquaMR Flow** — clinical cockpit and pre-revascularization
   decision platform.
 - **VASCU-LINK** — full translational chain combining AquaMR, Doppler, C4-i,
   PROMs, registry, simulation and preclinical guidance roadmap.

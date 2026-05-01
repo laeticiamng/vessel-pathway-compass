@@ -1573,7 +1573,7 @@ export const de = {
       l1Routing: "Macht den Patienten lesbar, klassifizierbar und steuerbar zu:",
       l1RoutingDest: "optimierte medikamentöse Therapie · Überwachung · Standardbildgebung · endovaskulär · chirurgisch",
       l1Fallback: "Bei unzureichender Bildqualität: dokumentierter Fallback auf Standardbildgebung (Angio-CT / Kontrast-MRA).",
-      decisionTitle: "ENTSCHEIDUNG — Vessel Pathway Compass-Cockpit",
+      decisionTitle: "ENTSCHEIDUNG — AquaMR Flow-Cockpit",
       decisionSub: "Patientenspezifischer Gefäß-Zwilling · multimodale Fusion · AquaMR Registry",
       decisionAdr: "15 dokumentierte ADR · Architektur darauf ausgelegt, MDR / DSGVO / IEC 62304-Konformität anzustreben (in diesem Stadium nicht zertifiziert)",
       decisionMigration: "Migration zu klinischem HDS-Hosting (EU/CH) geplant · unabhängiges DSMB & Data Access Committee",
