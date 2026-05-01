@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import logoImg from "@/assets/icons/aquamr-logo.png";
 
 interface AquaMRLogoProps {
   className?: string;
@@ -20,33 +21,26 @@ export const AquaMRLogo = ({ className, variant = "inline" }: AquaMRLogoProps) =
         )}
         aria-hidden="true"
       >
-        <DropletSnowflake className="h-5 w-5 text-primary-foreground" />
+        <img
+          src={logoImg}
+          alt=""
+          aria-hidden="true"
+          width={36}
+          height={36}
+          className="h-6 w-6 object-contain brightness-0 invert"
+        />
       </div>
     );
   }
 
-  return <DropletSnowflake className={cn("h-5 w-5 text-primary", className)} aria-hidden="true" />;
+  return (
+    <img
+      src={logoImg}
+      alt=""
+      aria-hidden="true"
+      width={20}
+      height={20}
+      className={cn("h-5 w-5 object-contain", className)}
+    />
+  );
 };
-
-const DropletSnowflake = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={1.6}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-  >
-    {/* Droplet outline */}
-    <path d="M12 2.5c3.5 4.2 6 7.6 6 11a6 6 0 1 1-12 0c0-3.4 2.5-6.8 6-11z" />
-    {/* Snowflake inside */}
-    <g transform="translate(12 14)" strokeWidth={1.2}>
-      <line x1="0" y1="-3.2" x2="0" y2="3.2" />
-      <line x1="-2.8" y1="-1.6" x2="2.8" y2="1.6" />
-      <line x1="-2.8" y1="1.6" x2="2.8" y2="-1.6" />
-      <line x1="-0.6" y1="-3.2" x2="0.6" y2="-3.2" />
-      <line x1="-0.6" y1="3.2" x2="0.6" y2="3.2" />
-    </g>
-  </svg>
-);
