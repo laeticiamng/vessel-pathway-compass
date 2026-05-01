@@ -103,14 +103,8 @@ export const de = {
       explore: "Funktionen",
     },
     hero: {
-      badge: "Die All-in-One-Plattform für Gefäßmedizin — jetzt als kostenlose Beta",
-      title: "AquaMR Flow",
-      headlinePre: "KI-gestützte klinische Plattform für",
-      headlineHighlight: "Gefäßmedizin",
-      subtitle: "Verwalten Sie Patienten, erstellen Sie KI-Berichte, verfolgen Sie Ergebnisse und arbeiten Sie mit Experten zusammen — eine sichere Plattform für Gefäßmedizin.",
-      cta: "Kostenlos testen — keine Kreditkarte",
-      secondary: "Pläne & Preise",
-      socialProof: "Kostenlose Beta — offen für Gefäßspezialisten weltweit",
+      // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
+      // have been replaced by the home.hero.* namespace. Only dashboardCaption remains here.
       dashboardCaption: "Das klinische Dashboard: Patientenübersicht, Risikoverteilung und Schnellzugriff auf alle Module.",
     },
     howItWorks: {
