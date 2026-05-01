@@ -2116,12 +2116,11 @@ export const de = {
           ],
         },
         usage: {
-          title: "Nutzungsgrenzen des kostenlosen Plans",
+          title: "Kostenloser Plan & Kontingente (nach der Beta)",
           items: [
-            "Maximal 3 KI-Berichte pro Tag.",
-            "Maximal 5 aktive Patientenakten.",
-            "Während der offenen Beta: Alle Funktionen sind ohne Kreditkarte zugänglich — Grenzen gelten nach dem offiziellen Start.",
-            "Gelöschte Patienten werden 30 Tage im Papierkorb aufbewahrt, bevor sie automatisch endgültig gelöscht werden.",
+            "Während der offenen Beta: Alle Funktionen sind kostenlos verfügbar, ohne Kreditkarte und ohne Kontingente — der 30-Tage-Papierkorb und das vollständige Audit-Trail sind bereits aktiv.",
+            "Nach dem offiziellen Start wird der kostenlose Plan auf 3 KI-Berichte pro Tag und 5 aktive Patientenakten begrenzt; diese Grenzen gelten heute nicht.",
+            "Während der Beta erstellte Konten behalten ihre Daten und ihren Verlauf beim Übergang in die stabile Version.",
           ],
         },
       },
