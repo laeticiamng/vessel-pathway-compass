@@ -13,6 +13,9 @@ import {
   Shield,
   ArrowRight,
   HeartPulse,
+} from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
+import {
   CheckCircle2,
   Menu,
   Sparkles,
