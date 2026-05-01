@@ -204,7 +204,7 @@ export const fr = {
     },
     about: {
       title: "Qui sommes-nous",
-      description: "AquaMR Flow est développé par EMOTIONSCARE, une entreprise de santé numérique basée à Amiens, en France. Fondée par des cliniciens et des ingénieurs, notre mission est d'offrir aux professionnels vasculaires une plateforme dédiée et moderne — conçue autour de leurs vrais workflows, pas de modèles génériques.",
+      description: "AquaMR Flow est développé par EMOTIONSCARE, une entreprise de santé numérique basée à Amiens, en France. Fondée par Laëticia Motongane, médecin assistante en médecine interne (parcours FMH, médecine vasculaire), notre mission est d'offrir aux professionnels vasculaires une plateforme dédiée et moderne — conçue autour de leurs vrais workflows, pas de modèles génériques.",
       foundedLine: "Fondée à Amiens, France — EMOTIONSCARE SASU",
       highlights: {
         clinical: {
