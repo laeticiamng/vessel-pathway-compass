@@ -30,6 +30,7 @@ import { L1SummaryCard } from "@/components/l1/L1SummaryCard";
 import { L1ExportActions } from "@/components/l1/L1ExportActions";
 import { AngiographicFunctionTrajectory } from "@/components/vasculink/AngiographicFunctionTrajectory";
 import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
+import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import {
   l1AssessmentInputSchema,
   signoffInputSchema,
@@ -523,6 +524,8 @@ export default function L1DecisionBoard() {
           </p>
         </div>
       </div>
+
+      <FourZeroPillars variant="compact" />
 
       <AngiographicFunctionTrajectory compact />
 

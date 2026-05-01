@@ -6,9 +6,10 @@ import { SEOHead } from "@/components/SEOHead";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Loader2, ShieldCheck, Package, GitBranch, FileCheck2 } from "lucide-react";
+import { Loader2, ShieldCheck, Package, GitBranch, FileCheck2, Flag } from "lucide-react";
 import { format } from "date-fns";
 import { IECTechnicalFileButton } from "@/components/governance/IECTechnicalFileButton";
+import { ThesisMilestones } from "@/components/vasculink/ThesisMilestones";
 
 interface SoftwareVersion { id: string; version: string; released_at: string; risk_class: string; release_notes: string | null; git_sha: string | null; }
 interface SoupComponent { id: string; name: string; version: string; license: string | null; cve_status: string; purpose: string | null; risk_assessment: string | null; }
@@ -101,6 +102,7 @@ export default function IEC62304() {
             <TabsTrigger value="versions"><GitBranch className="h-4 w-4 mr-1" /> Versions</TabsTrigger>
             <TabsTrigger value="soup"><Package className="h-4 w-4 mr-1" /> SOUP</TabsTrigger>
             <TabsTrigger value="algos"><FileCheck2 className="h-4 w-4 mr-1" /> Algorithmes</TabsTrigger>
+            <TabsTrigger value="milestones"><Flag className="h-4 w-4 mr-1" /> PhD Milestones</TabsTrigger>
           </TabsList>
 
           <TabsContent value="versions">
@@ -194,6 +196,10 @@ export default function IEC62304() {
                 </ul>
               </CardContent>
             </Card>
+          </TabsContent>
+
+          <TabsContent value="milestones">
+            <ThesisMilestones />
           </TabsContent>
         </Tabs>
       </div>

@@ -72,8 +72,8 @@ export function AngiographicFunctionTrajectory({ className, compact }: Props) {
       <CardHeader>
         <CardTitle className="text-base">VASCU-LINK translational trajectory</CardTitle>
         <CardDescription>
-          Reconstructing selected angiographic functions in a 4-zero chain — no ionizing
-          radiation, no injected contrast, no helium, reduced infrastructure footprint.
+          Reconstructing selected angiographic functions in a 4-zero chain — 0 mSv,
+          0 g Gd / 0 mL iodine, 0 helium, BoM target &lt; €15k for proximity vascular medicine.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -113,7 +113,7 @@ export function AngiographicFunctionTrajectory({ className, compact }: Props) {
         <p className="text-sm font-medium border-l-2 border-primary pl-3 italic">
           VASCU-LINK does not claim to replace conventional angiography during the thesis.
           It tests whether selected angiographic functions can be progressively reconstructed
-          in a 4-zero chain.
+          in a 4-zero chain: <strong>0 mSv · 0 Gd / 0 iodine · 0 helium · BoM target &lt; €15k</strong>.
         </p>
       </CardContent>
     </Card>

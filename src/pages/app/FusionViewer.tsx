@@ -89,10 +89,11 @@ export default function FusionViewer() {
         <div className="text-sm space-y-1">
           <p className="font-medium">AquaMR role in the 4-zero angiographic chain</p>
           <p className="text-muted-foreground">
-            AquaMR is the 4-zero imaging device of the VASCU-LINK trajectory: no
-            ionizing radiation, no injected contrast, no helium. The Fusion Viewer
-            renders multimodal correlation, while the L1 Decision Board consumes
-            AquaMR cartography to support pre-revascularization decisions.
+            AquaMR is the 4-zero imaging device of the VASCU-LINK trajectory:
+            <strong> 0 mSv</strong>, <strong>0 g Gd / 0 mL iodine</strong>,
+            <strong> 0 helium</strong>, <strong>BoM target &lt; €15k</strong>.
+            The Fusion Viewer renders multimodal correlation, while the L1 Decision Board
+            consumes AquaMR cartography to support pre-revascularization decisions.
           </p>
         </div>
       </div>
