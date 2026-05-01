@@ -200,24 +200,37 @@ function tryEvalJsonLdLiteral(body, source) {
 
   if (!trimmed.startsWith("{")) return { dynamic: true, snippet: trimmed.slice(0, 60) };
 
-  // Strip TS-only syntax that breaks JSON.parse, then replace any remaining
-  // dynamic expression with a literal placeholder string so the schema shape
-  // can still be checked even when the values are computed at runtime.
-  let jsonish = trimmed
-    .replace(/\/\/[^\n]*/g, "")
-    .replace(/\/\*[\s\S]*?\*\//g, "")
+  // Step 1 — strip ONLY block comments (line comments would corrupt URLs).
+  let jsonish = trimmed.replace(/\/\*[\s\S]*?\*\//g, "");
+
+  // Step 2 — TS-only syntax that JSON.parse cannot handle.
+  jsonish = jsonish
     .replace(/\bas\s+const\b/g, "")
     .replace(/\bas\s+[A-Za-z_$][\w$<>,\s|&\[\]]*?(?=[,)\]}])/g, "")
-    .replace(/`([^`${}]*)`/g, '"$1"')
+    .replace(/`([^`${}]*)`/g, '"$1"');
+
+  // Step 3 — JS object literal → JSON: quote keys, swap single quotes.
+  jsonish = jsonish
     .replace(/([{,]\s*)([A-Za-z_$][\w$]*|"[^"]+")\s*:/g, (_, p, k) =>
       `${p}${k.startsWith('"') ? k : `"${k}"`}:`)
     .replace(/'([^']*)'/g, '"$1"');
 
-  // Replace value-position function calls (foo(...) , bar.baz(...))
-  // and template-literal expressions with the placeholder "<expr>".
-  jsonish = jsonish
-    .replace(/(?<=[:\[,]\s*)[A-Za-z_$][\w$.]*\s*\([^()]*\)(?:\s*\.[A-Za-z_$][\w$]*\s*\([^()]*\))*/g, '"<expr>"')
-    .replace(/,(\s*[}\]])/g, "$1");
+  // Step 4 — replace any remaining dynamic expressions in value position
+  // with a literal placeholder so the schema *shape* can still be checked.
+  // Iteratively to handle arrow functions like `arr.map((x) => ({...}))`.
+  for (let pass = 0; pass < 6; pass++) {
+    const before = jsonish;
+    jsonish = jsonish
+      // arr.map((x,i) => ({...}))  →  ["<expr>"]
+      .replace(/[A-Za-z_$][\w$.]*\s*\.\s*[A-Za-z_$][\w$]*\s*\(\s*\([^)]*\)\s*=>\s*\(\s*\{[^{}]*\}\s*\)\s*\)/g, '["<expr>"]')
+      // foo(...) or foo.bar(...) without nested parens
+      .replace(/(?<=[:\[,]\s*)[A-Za-z_$][\w$.]*\s*\([^()]*\)(?:\s*\.[A-Za-z_$][\w$]*\s*\([^()]*\))*/g, '"<expr>"')
+      // bare identifier in value position (e.g. `name: someVar,`)
+      .replace(/(:\s*)([A-Za-z_$][\w$]*)(\s*[,}\]])/g, (m, a, id, b) =>
+        ["true","false","null"].includes(id) ? m : `${a}"<expr>"${b}`);
+    if (before === jsonish) break;
+  }
+  jsonish = jsonish.replace(/,(\s*[}\]])/g, "$1");
 
   try { return { dynamic: false, value: JSON.parse(jsonish), partial: true }; }
   catch (e) { return { dynamic: true, snippet: trimmed.slice(0, 60), parseError: e.message }; }
