@@ -72,37 +72,5 @@ export function ComplianceFAQSection() {
   );
 }
 
-/**
- * JSON-LD for the compliance FAQ (SEO/GEO).
- * Locale-static (EN) — metadata for crawlers.
- */
-export const complianceFaqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What does \"no regulatory approval\" mean for AquaMR Flow?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "AquaMR Flow is a research prototype, not a CE-marked or FDA-cleared medical device. It is not intended for unsupervised diagnosis or treatment. Every decision-support output requires confirmation by a qualified clinician.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How is auditability ensured?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Every clinical action (read, write, export, decision) is timestamped and attributable to an authenticated user. Logs are immutable in our backend and accessible to institution administrators upon request.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "How is data security designed in?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Encryption at rest and in transit, Row-Level Security on all sensitive tables, role-based access control, pseudonymization of patient data, and an architecture targeting GDPR / Swiss nFADP and IEC 62304 compliance.",
-      },
-    },
-  ],
-};
+/* JSON-LD moved to ./jsonLd.ts (pure data module). Re-exported for back-compat. */
+export { complianceFaqJsonLd } from "./jsonLd";
