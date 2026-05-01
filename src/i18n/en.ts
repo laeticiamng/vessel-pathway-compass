@@ -1,4 +1,16 @@
 export const en = {
+  // Brand hierarchy: program → platform → device
+  // VASCU-LINK is the doctoral program; AquaMR Flow is the SaaS platform that
+  // carries it; AquaMR is the low-field imaging device sitting inside.
+  branding: {
+    programName: "VASCU-LINK",
+    platformName: "AquaMR Flow Platform",
+    deviceName: "AquaMR",
+    tagline: "Rebuilding angiographic function with the 4-zero protocol",
+    footerExplain:
+      "VASCU-LINK is the doctoral program built on AquaMR Flow — a non-ionizing clinical platform integrating the AquaMR low-field imaging device.",
+  },
+
   // Common
   common: {
     appName: "AquaMR Flow",
@@ -1189,15 +1201,15 @@ export const en = {
 
   home: {
     seo: {
-      title: "AquaMR Flow | Non-ionizing workflow platform for vascular medicine",
-      description: "AquaMR Flow is a non-ionizing workflow platform for vascular medicine: planning, imaging, clinical simulation and a research registry.",
+      title: "VASCU-LINK — AquaMR Flow · Non-Ionizing Vascular Workflow",
+      description: "VASCU-LINK rebuilds angiographic function in 4-zero (0 mSv, 0 contrast, 0 helium). AquaMR Flow platform for proximity vascular medicine.",
     },
     nav: { mainAria: "Main navigation", simpleAria: "Navigation", openMenu: "Open menu" },
     misc: { scrollTop: "Scroll back to top" },
     hero: {
       betaBadge: "Open beta — full access free of charge",
-      title1: "Less contrast. Less radiation.",
-      title2: "More control over your vascular procedures.",
+      title1: "VASCU-LINK",
+      title2: "Rebuilding angiographic function with the 4-zero protocol",
       subtitle: "Complete platform: 10 clinical modules, locked L1 protocol, 3 languages, targeted MDR/GDPR compliance and green radiology. Planning, multimodal imaging, CI-AKI, digital twin, simulation and registry — in a single cockpit.",
       ctaPrimary: "Create a free account",
       ctaSecondary: "See how it works",

@@ -16,8 +16,12 @@ interface SEOHeadProps {
 const BASE_URL = "https://aquamr-flow.com";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
 const DEFAULT_OG_ALT =
-  "AquaMR Flow — vascular clinical platform: non-ionizing, contrast-sparing, evidence-based.";
+  "VASCU-LINK — AquaMR Flow Platform: non-ionizing, contrast-sparing vascular clinical workflow.";
 const TWITTER_HANDLE = "@aquamrflow";
+// Site brand suffix appended to non-home page titles. Uses VASCU-LINK so the
+// program name (recognizable on academic/clinical channels) leads.
+const BRAND_SUFFIX = "VASCU-LINK";
+const SITE_NAME = "VASCU-LINK · AquaMR Flow";
 
 /**
  * Truncate to a safe length for OG/Twitter previews.
@@ -40,7 +44,7 @@ export function SEOHead({
   imageAlt,
   type = "website",
 }: SEOHeadProps) {
-  const fullTitle = path === "/" ? title : `${title} | AquaMR Flow`;
+  const fullTitle = path === "/" ? title : `${title} | ${BRAND_SUFFIX}`;
   const safeTitle = clamp(fullTitle, 60);
   const safeDescription = clamp(description, 160);
   const canonicalUrl = `${BASE_URL}${path}`;
@@ -65,7 +69,7 @@ export function SEOHead({
       <meta property="og:description" content={safeDescription} />
       <meta property="og:url" content={canonicalUrl} />
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="AquaMR Flow" />
+      <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:image" content={resolvedImage} />
       <meta property="og:image:secure_url" content={resolvedImage} />
       <meta property="og:image:type" content="image/jpeg" />

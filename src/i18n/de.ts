@@ -1,4 +1,16 @@
 export const de = {
+  // Markenhierarchie: Programm → Plattform → Gerät
+  // VASCU-LINK ist das Doktoratsprogramm; AquaMR Flow ist die SaaS-Plattform,
+  // die es trägt; AquaMR ist das integrierte Niederfeld-Bildgebungsgerät.
+  branding: {
+    programName: "VASCU-LINK",
+    platformName: "AquaMR Flow Platform",
+    deviceName: "AquaMR",
+    tagline: "Angiographische Funktion in der 4-Null-Kette rekonstruieren",
+    footerExplain:
+      "VASCU-LINK ist das Doktoratsprogramm der nicht-ionisierenden klinischen AquaMR Flow-Plattform, die das AquaMR-Niederfeld-Bildgebungsgerät integriert.",
+  },
+
   common: {
     appName: "AquaMR Flow",
     loading: "Laden...",
@@ -1169,15 +1181,15 @@ export const de = {
 
   home: {
     seo: {
-      title: "AquaMR Flow | Nicht-ionisierende Workflow-Plattform für Gefäßmedizin",
-      description: "AquaMR Flow ist eine nicht-ionisierende Workflow-Plattform für die Gefäßmedizin: Planung, Bildgebung, klinische Simulation und Forschungsregister.",
+      title: "VASCU-LINK — AquaMR Flow · Nicht-ionisierender Workflow",
+      description: "VASCU-LINK rekonstruiert die angiographische Funktion in 4-Null (0 mSv, 0 KM, 0 Helium). AquaMR Flow-Plattform für wohnortnahe Gefäßmedizin.",
     },
     nav: { mainAria: "Hauptnavigation", simpleAria: "Navigation", openMenu: "Menü öffnen" },
     misc: { scrollTop: "Zurück nach oben" },
     hero: {
       betaBadge: "Offene Beta — voller Zugang kostenlos",
-      title1: "Weniger Kontrastmittel. Weniger Strahlung.",
-      title2: "Mehr Kontrolle über Ihre Gefäßeingriffe.",
+      title1: "VASCU-LINK",
+      title2: "Angiographische Funktion in der 4-Null-Kette rekonstruieren",
       subtitle: "Komplette Plattform: 10 klinische Module, verriegeltes L1-Protokoll, 3 Sprachen, gezielte MDR/DSGVO-Konformität und grüne Radiologie. Planung, multimodale Bildgebung, CI-AKI, digitaler Zwilling, Simulation und Register — in einem einzigen Cockpit.",
       ctaPrimary: "Kostenloses Konto erstellen",
       ctaSecondary: "So funktioniert es",
