@@ -497,4 +497,81 @@
   .dark [data-slot="card"] {
     border-color: hsl(var(--border-subtle));
   }
+
+  /* =====================================================================
+     Hero / Premium gradient headline — `NeonGradientText`
+     Cyan → teal → blue gradient with glow, glass relief & fine luminous edge.
+     Works in both light and dark mode (themed via tokens).
+     ===================================================================== */
+  .hero-neon-text {
+    /* Layered gradient: glossy highlight on top + main hero gradient */
+    background-image:
+      linear-gradient(180deg, hsl(0 0% 100% / 0.35) 0%, hsl(0 0% 100% / 0) 45%),
+      var(--hero-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    /* Crisp, premium feel */
+    letter-spacing: -0.015em;
+    /* Soft outer glow + subtle relief — light mode (discreet) */
+    filter:
+      drop-shadow(0 1px 0 hsl(210 40% 100% / 0.55))
+      drop-shadow(0 0 14px hsl(var(--neon-glow) / 0.18));
+    /* Tiny luminous edge via paint-order trick on supported browsers */
+    paint-order: stroke fill;
+    -webkit-text-stroke: 0.4px hsl(var(--neon-glow) / 0.18);
+    transition: filter 600ms ease;
+  }
+  .hero-neon-text.hero-neon-soft {
+    filter: drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.12));
+    -webkit-text-stroke: 0;
+  }
+  .hero-neon-text.hero-neon-strong {
+    filter:
+      drop-shadow(0 1px 0 hsl(210 40% 100% / 0.7))
+      drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.28));
+  }
+
+  /* Dark mode: vivid neon glow, cockpit / vascular imaging vibe */
+  .dark .hero-neon-text {
+    background-image:
+      linear-gradient(180deg, hsl(188 100% 92% / 0.45) 0%, hsl(0 0% 100% / 0) 50%),
+      var(--hero-gradient);
+    -webkit-text-stroke: 0.5px hsl(var(--neon-glow) / 0.45);
+    filter:
+      drop-shadow(0 0 1px hsl(188 100% 90% / 0.6))
+      drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.55))
+      drop-shadow(0 0 42px hsl(var(--neon-glow) / 0.28));
+  }
+  .dark .hero-neon-text.hero-neon-soft {
+    -webkit-text-stroke: 0;
+    filter:
+      drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.35))
+      drop-shadow(0 0 24px hsl(var(--neon-glow) / 0.18));
+  }
+  .dark .hero-neon-text.hero-neon-strong {
+    filter:
+      drop-shadow(0 0 2px hsl(188 100% 92% / 0.7))
+      drop-shadow(0 0 24px hsl(var(--neon-glow) / 0.7))
+      drop-shadow(0 0 60px hsl(var(--neon-glow) / 0.35))
+      drop-shadow(0 0 100px hsl(205 100% 70% / 0.18));
+  }
+
+  /* Respect reduced motion / high contrast preferences */
+  @media (prefers-reduced-motion: reduce), (prefers-contrast: more) {
+    .hero-neon-text,
+    .dark .hero-neon-text {
+      filter: none !important;
+      -webkit-text-stroke: 0 !important;
+    }
+  }
+
+  /* Glass surface helper, themed for both modes */
+  .surface-glass {
+    background: hsl(var(--surface-glass) / 0.7);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border: 1px solid hsl(var(--glass-border) / 0.35);
+  }
 }
