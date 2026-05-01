@@ -32,6 +32,7 @@ import {
 import { AboutSection } from "@/components/landing/AboutSection";
 import { LimitsSection } from "@/components/landing/LimitsSection";
 import { ValidationSection } from "@/components/landing/ValidationSection";
+import { PlatformCompletenessSection } from "@/components/landing/PlatformCompletenessSection";
 import { MedRegBadge } from "@/components/MedRegBadge";
 import {
   EnBrefSection,
@@ -287,7 +288,10 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* En bref — directly under hero */}
+      {/* Platform completeness — directly under hero */}
+      <PlatformCompletenessSection />
+
+      {/* En bref */}
       <EnBrefSection />
 
       {/* Audience */}
