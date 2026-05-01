@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { LanguageProvider } from "@/i18n/context";
+import { I18nMissOverlay } from "@/i18n/I18nDiagnostics";
 import { AuthProvider } from "./hooks/useAuth";
 
 import Landing from "./pages/Landing";
@@ -84,6 +85,7 @@ const App = () => (
         <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <CookieConsent />
+        {!import.meta.env.PROD && <I18nMissOverlay />}
         <Suspense fallback={<LazyFallback />}>
         <Routes>
           {/* Public */}
