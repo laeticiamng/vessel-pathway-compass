@@ -36,7 +36,7 @@ export default function FAQ() {
       />
 
       <header className="border-b">
-        <nav className="container mx-auto flex items-center justify-between h-16 px-6" aria-label="Navigation">
+        <nav className="container mx-auto flex items-center justify-between h-16 px-6" aria-label={t("home.nav.simpleAria") as string}>
           <Link to="/" className="flex items-center gap-2.5">
             <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-md">
               <HeartPulse className="h-5 w-5 text-primary-foreground" />
