@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "test:i18n": "vitest run src/i18n/__tests__/structures.test.ts",
+    "i18n:ci": "node scripts/i18n-ci-check.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
