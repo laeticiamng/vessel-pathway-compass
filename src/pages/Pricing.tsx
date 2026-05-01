@@ -160,11 +160,11 @@ export default function Pricing() {
                     {plan.key === "professional" ? (
                       <>
                         <div className="flex items-baseline gap-2">
-                          <span className="text-4xl font-bold text-success">Gratuit</span>
-                          <span className="text-sm text-muted-foreground">pendant la bêta</span>
+                          <span className="text-4xl font-bold text-success">{t("pricingExtras.free")}</span>
+                          <span className="text-sm text-muted-foreground">{t("pricingExtras.duringBeta")}</span>
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
-                          <span className="line-through">{plan.price}{plan.period}</span> au lancement officiel
+                          <span className="line-through">{plan.price}{plan.period}</span> {t("pricingExtras.atLaunch")}
                         </p>
                       </>
                     ) : (
