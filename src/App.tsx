@@ -59,6 +59,7 @@ const ComplianceHistory = lazy(() => import("./pages/app/ComplianceHistory"));
 const IEC62304 = lazy(() => import("./pages/app/IEC62304"));
 const InstitutionAdmin = lazy(() => import("./pages/app/InstitutionAdmin"));
 const ExportsAudit = lazy(() => import("./pages/app/ExportsAudit"));
+const HospitalAuditDashboard = lazy(() => import("./pages/app/HospitalAuditDashboard"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const VascScreen = lazy(() => import("./pages/app/VascScreen"));
 const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
@@ -162,6 +163,7 @@ const App = () => (
             <Route path="admin/system-health" element={<SystemHealth />} />
             <Route path="admin/web-vitals" element={<WebVitalsAdmin />} />
             <Route path="admin/institution" element={<InstitutionAdmin />} />
+            <Route path="admin/hospital-audit" element={<HospitalAuditDashboard />} />
             <Route path="admin/users" element={<UsersAdmin />} />
             <Route path="settings" element={<Settings />} />
           </Route>

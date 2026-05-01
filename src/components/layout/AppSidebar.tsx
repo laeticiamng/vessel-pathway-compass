@@ -101,6 +101,7 @@ export function AppSidebar() {
       { title: t("sidebar.iec62304") || "IEC 62304", url: "/app/governance/iec62304", icon: FileText },
       { title: t("sidebar.exportsAudit") || "Audit exports", url: "/app/governance/exports", icon: FileText },
       { title: t("sidebar.institution") || "Institution", url: "/app/admin/institution", icon: ShieldCheck },
+      { title: t("sidebar.hospitalAudit") || "Audit hôpital", url: "/app/admin/hospital-audit", icon: ClipboardList },
       { title: t("sidebar.systemHealth") || "Santé système", url: "/app/admin/system-health", icon: Activity },
       { title: "Web Vitals", url: "/app/admin/web-vitals", icon: LineChart },
       { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
