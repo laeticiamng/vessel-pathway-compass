@@ -1815,6 +1815,48 @@ export const en = {
         body: "<strong>VASCU-LINK is not a Doppler replacement.</strong> Doppler remains the first-line hemodynamic test. VASCU-LINK aims to address the next question: can a 4-zero angiographic map support pre-revascularization decision-making without immediate use of heavy injected or irradiating imaging?",
       },
     },
+    pillars: {
+      title: "VASCU-LINK 4-zero signature",
+      description: "Four quantified pillars defining the AquaMR cockpit. To our knowledge, no routine clinical modality combines all four.",
+      items: {
+        radiation: {
+          pillar: "Zero ionizing radiation",
+          target: "0 mSv per exam",
+          benchmark: "vs angio-CT 5–15 mSv",
+          externality: "Cumulative ionizing exposure on long-term follow-up",
+        },
+        contrast: {
+          pillar: "Zero injected contrast",
+          target: "0 g Gd · 0 mL iodine",
+          benchmark: "vs MRA Gd ≈ 3.24 kg/site/year",
+          externality: "CI-AKI in CKD patients · contrast environmental release",
+        },
+        helium: {
+          pillar: "Zero helium",
+          target: "Halbach NdFeB recycled (WEEE)",
+          benchmark: "vs standard MRI cryogenic He",
+          externality: "He depletion · rare-earth dependency · carbon footprint",
+        },
+        cost: {
+          pillar: "Radically reduced cost",
+          target: "BoM target < €15k (estimate, no formal vendor quote yet)",
+          benchmark: "vs 1.5–3 T MRI: €1.5–5 M (70–225×)",
+          externality: "Access barrier in private practice & LMIC settings",
+        },
+      },
+    },
+    proximity: {
+      title: "Proximity vascular medicine & equity of access",
+      description: "The 4-zero signature — and the BoM target < €15k in particular — exists to transfer angiographic decision-making out of helium-bound hospital centers.",
+      privateTitle: "Private vascular practice",
+      privateDesc: "Angiographic mapping deployable in ambulatory vascular structures with hospital backup.",
+      lmicTitle: "LMIC pilot — post-PhD",
+      lmicDesc: "Letters of intent envisioned with Senegal · Morocco · Benin (WP5 deliverable).",
+      photovoltaicTitle: "Photovoltaic site",
+      photovoltaicDesc: "No helium · low-power Halbach magnet · solar-compatible BoM < €15k.",
+      wp5Badge: "WP5 — equity & sustainability",
+      wp5Body: "LCA · QALY · LMIC pilot are <strong>post-thesis deliverables</strong>; the in-thesis scope remains the planned prospective validation cohort and the European regulatory pre-submission.",
+    },
   },
   pages: {
     common: {
