@@ -1339,6 +1339,62 @@ export const en = {
       security: "Security & privacy",
       protocol: "Protocol & Validation",
     },
+    whatsNew: {
+      badge: "What's new",
+      title: "Platform changelog",
+      subtitle: "Recent improvements, new modules and security upgrades shipped during the open beta.",
+      cta: "See all 10 modules",
+      tagLabels: {
+        new: "New",
+        improved: "Improved",
+        fixed: "Fixed",
+        security: "Security",
+      },
+      entries: [
+        {
+          date: "2026-05-01",
+          version: "v0.9.0",
+          title: "Compliance-ready FAQ & dedicated modules directory",
+          description: "New transparent FAQ on auditability, traceability and \"no regulatory approval\" status. Added a dedicated /modules page detailing the 10 clinical modules with prerequisites and availability.",
+          tags: [{ label: "", type: "new" }, { label: "", type: "improved" }],
+        },
+        {
+          date: "2026-04-22",
+          version: "v0.8.0",
+          title: "Platform completeness section & i18n hardening",
+          description: "Landing page now reflects the full 10-module platform with key figures. Full FR/EN/DE synchronization across all module names and clinical descriptions.",
+          tags: [{ label: "", type: "improved" }],
+        },
+        {
+          date: "2026-04-10",
+          version: "v0.7.2",
+          title: "Server-side filtering on PROMs queries",
+          description: "Added defense-in-depth case_id filtering on Patient Outcomes endpoints, beyond existing Row-Level Security policies.",
+          tags: [{ label: "", type: "security" }],
+        },
+        {
+          date: "2026-03-28",
+          version: "v0.7.0",
+          title: "DICOM Fusion Viewer (beta) & CI-AKI persistence",
+          description: "Released the Fusion Viewer for DICOM imaging with secure storage rules. CI-AKI risk calculations are now persisted across sessions for longitudinal tracking.",
+          tags: [{ label: "", type: "new" }],
+        },
+        {
+          date: "2026-03-12",
+          version: "v0.6.5",
+          title: "Patient soft-delete with 30-day grace period",
+          description: "Implemented soft-deletion for patients with manual cascade cleanup of associated records and an automated background job for expired entries.",
+          tags: [{ label: "", type: "new" }, { label: "", type: "security" }],
+        },
+        {
+          date: "2026-02-25",
+          version: "v0.6.0",
+          title: "Digital Twin (18-segment vascular map)",
+          description: "Initial release of the SVG-based 18-segment digital twin with dynamic risk thresholds derived from active risk factors.",
+          tags: [{ label: "", type: "new" }],
+        },
+      ],
+    },
   },
   contactPage: {
     seo: {

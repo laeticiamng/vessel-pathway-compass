@@ -43,6 +43,7 @@ import {
   homeFaqJsonLd,
 } from "@/components/landing/HomeSections";
 import { ComplianceFAQSection, complianceFaqJsonLd } from "@/components/landing/ComplianceFAQSection";
+import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
 import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
 import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
@@ -292,6 +293,9 @@ export default function Landing() {
 
       {/* Platform completeness — directly under hero */}
       <PlatformCompletenessSection />
+
+      {/* What's new — changelog */}
+      <WhatsNewSection />
 
       {/* En bref */}
       <EnBrefSection />
