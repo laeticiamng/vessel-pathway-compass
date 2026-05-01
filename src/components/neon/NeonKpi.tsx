@@ -41,7 +41,7 @@ export function NeonKpi({
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <span className="text-sm font-semibold text-foreground/90 tracking-wide">
+        <span className="text-sm font-semibold text-foreground tracking-wide">
           {label}
         </span>
         <div className={cn("neon-icon-ring", isViolet && "violet")}>
@@ -63,19 +63,19 @@ export function NeonKpi({
 
       <div className="flex items-baseline gap-1.5">
         {loading ? (
-          <div className="h-12 w-20 rounded-md bg-muted/50 animate-pulse" />
+          <div className="h-12 w-20 rounded-md bg-foreground/10 animate-pulse" />
         ) : (
           <>
             <span className={cn("neon-kpi-value", isViolet && "violet")}>{value}</span>
             {unit && (
-              <span className="text-lg font-semibold text-foreground/80">{unit}</span>
+              <span className="text-lg font-semibold text-foreground/90">{unit}</span>
             )}
           </>
         )}
       </div>
 
       {trend && (
-        <p className="text-xs text-foreground/75 -mt-2">{trend}</p>
+        <p className="text-xs text-muted-foreground -mt-2">{trend}</p>
       )}
     </div>
   );
