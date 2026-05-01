@@ -21,6 +21,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
@@ -113,12 +114,10 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader className="p-4">
         <NavLink to={session ? "/app" : "/"} className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-primary flex items-center justify-center">
-            <HeartPulse className="h-4 w-4 text-primary-foreground" />
-          </div>
+          <AquaMRLogo variant="badge" className="h-8 w-8 rounded-lg" />
           {!collapsed && (
             <span className="text-lg font-bold tracking-tight">
-              AquaMR Flow
+              AquaMR <span className="text-primary">Flow</span>
             </span>
           )}
         </NavLink>

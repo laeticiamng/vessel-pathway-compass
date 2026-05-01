@@ -5,7 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, HeartPulse, Mail, MessageCircle, BookOpen, Shield, Globe, Send, Loader2 } from "lucide-react";
+import { ArrowLeft, Mail, MessageCircle, BookOpen, Shield, Globe, Send, Loader2 } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { useTranslation, type Language } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -60,7 +61,7 @@ export default function Support() {
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
-            <HeartPulse className="h-5 w-5 text-primary" />
+            <AquaMRLogo />
             <span className="font-bold">AquaMR Flow</span>
           </Link>
           <DropdownMenu>

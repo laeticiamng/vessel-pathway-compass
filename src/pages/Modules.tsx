@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import {
   ArrowLeft,
   ArrowRight,
@@ -74,9 +75,7 @@ export default function Modules() {
           aria-label={t("home.nav.simpleAria") as string}
         >
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-md">
-              <HeartPulse className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <AquaMRLogo variant="badge" />
             <span className="text-xl font-bold tracking-tight">AquaMR Flow</span>
           </Link>
           <Button asChild variant="ghost" size="sm">

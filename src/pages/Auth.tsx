@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { HeartPulse, Globe, MailCheck } from "lucide-react";
+import { Globe, MailCheck } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { useToast } from "@/hooks/use-toast";
@@ -117,9 +118,7 @@ export default function Auth() {
       <div className="w-full max-w-md">
         <SEOHead title={t("seo.auth.title") as string} description={t("seo.auth.description") as string} path="/auth" noindex />
         <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-            <HeartPulse className="h-5 w-5 text-primary-foreground" />
-          </div>
+          <AquaMRLogo variant="badge" className="h-10 w-10" />
           <span className="text-2xl font-bold">AquaMR Flow</span>
         </Link>
 

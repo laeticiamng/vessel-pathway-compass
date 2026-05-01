@@ -1,7 +1,8 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle2, HeartPulse, ArrowRight, Loader2, AlertTriangle } from "lucide-react";
+import { CheckCircle2, ArrowRight, Loader2, AlertTriangle } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { useTranslation } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
 import { useSubscription } from "@/hooks/useSubscription";
@@ -118,7 +119,7 @@ export default function CheckoutSuccess() {
             </Button>
           </div>
           <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground pt-2">
-            <HeartPulse className="h-3.5 w-3.5" />
+            <AquaMRLogo className="h-3.5 w-3.5" />
             <span>AquaMR Flow Professional</span>
           </div>
         </CardContent>

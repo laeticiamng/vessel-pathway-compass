@@ -2,7 +2,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, HeartPulse, ArrowLeft, Loader2, Globe } from "lucide-react";
+import { CheckCircle2, ArrowLeft, Loader2, Globe } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { useTranslation, type Language } from "@/i18n/context";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SEOHead } from "@/components/SEOHead";
@@ -93,7 +94,7 @@ export default function Pricing() {
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
-            <HeartPulse className="h-5 w-5 text-primary" />
+            <AquaMRLogo />
             <span className="font-bold">AquaMR Flow</span>
           </Link>
           <DropdownMenu>
