@@ -81,7 +81,7 @@ describe("hero-neon — cross-browser rendering", () => {
   it("legacy browsers WITHOUT text-stroke: @supports fallback flattens the headline", () => {
     expect(css).toMatch(/@supports\s+not\s*\(-webkit-text-stroke[^)]*\)/);
     const fb = css.match(
-      /@supports\s+not\s*\(-webkit-text-stroke[^)]*\)\s*\{([\s\S]*?)\n\s*\}\n/,
+      /@supports\s+not\s*\(-webkit-text-stroke[^)]*\)\s*\{([\s\S]*?)\n {2}\}/,
     );
     expect(fb, "fallback @supports block must exist").toBeTruthy();
     expect(fb![1]).toMatch(/-webkit-text-fill-color\s*:\s*currentColor/);
