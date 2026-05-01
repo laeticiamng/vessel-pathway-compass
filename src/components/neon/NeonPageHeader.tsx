@@ -29,7 +29,7 @@ export function NeonPageHeader({
           {title}
         </h1>
         {subtitle && (
-          <p className="text-sm sm:text-base text-muted-foreground mt-2">
+          <p className="text-sm sm:text-base text-foreground/80 mt-2 leading-relaxed">
             {subtitle}
           </p>
         )}
