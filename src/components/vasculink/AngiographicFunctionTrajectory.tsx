@@ -1,6 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Compass, FlaskConical, Microscope, Telescope } from "lucide-react";
+import { useTranslation } from "@/i18n/context";
 
 export type TrajectoryStage = "L1" | "L2" | "L3" | "PostPhD";
 
@@ -11,48 +12,11 @@ export interface TrajectoryStep {
   status: "active" | "future" | "horizon";
 }
 
-const STEPS: TrajectoryStep[] = [
-  {
-    stage: "L1",
-    title: "See & Decide",
-    description:
-      "Validate 4-zero pre-revascularization mapping: make the patient readable, classifiable and orientable.",
-    status: "active",
-  },
-  {
-    stage: "L2",
-    title: "Simulate & Guide",
-    description:
-      "Explore non-ionizing guidance in phantom and simulation environments. No human intervention.",
-    status: "future",
-  },
-  {
-    stage: "L3",
-    title: "Preclinical Intervention",
-    description:
-      "Test preclinical feasibility of non-ionizing interventional trajectories. Non-human only.",
-    status: "future",
-  },
-  {
-    stage: "PostPhD",
-    title: "Selected 4-Zero Revascularization",
-    description:
-      "Long-term horizon: selected elective revascularizations in specialized ambulatory vascular structures with hospital backup.",
-    status: "horizon",
-  },
-];
-
 const STAGE_ICON: Record<TrajectoryStage, typeof Compass> = {
   L1: Compass,
   L2: FlaskConical,
   L3: Microscope,
   PostPhD: Telescope,
-};
-
-const STATUS_LABEL: Record<TrajectoryStep["status"], string> = {
-  active: "Active scope",
-  future: "Future scope",
-  horizon: "Long-term horizon",
 };
 
 const STATUS_VARIANT: Record<TrajectoryStep["status"], "default" | "secondary" | "outline"> = {
@@ -67,14 +31,26 @@ interface Props {
 }
 
 export function AngiographicFunctionTrajectory({ className, compact }: Props) {
+  const { t } = useTranslation();
+
+  const STEPS: TrajectoryStep[] = [
+    { stage: "L1", title: t("vasculink.trajectory.steps.L1.title") as string, description: t("vasculink.trajectory.steps.L1.desc") as string, status: "active" },
+    { stage: "L2", title: t("vasculink.trajectory.steps.L2.title") as string, description: t("vasculink.trajectory.steps.L2.desc") as string, status: "future" },
+    { stage: "L3", title: t("vasculink.trajectory.steps.L3.title") as string, description: t("vasculink.trajectory.steps.L3.desc") as string, status: "future" },
+    { stage: "PostPhD", title: t("vasculink.trajectory.steps.PostPhD.title") as string, description: t("vasculink.trajectory.steps.PostPhD.desc") as string, status: "horizon" },
+  ];
+
+  const STATUS_LABEL: Record<TrajectoryStep["status"], string> = {
+    active: t("vasculink.trajectory.status.active") as string,
+    future: t("vasculink.trajectory.status.future") as string,
+    horizon: t("vasculink.trajectory.status.horizon") as string,
+  };
+
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className="text-base">VASCU-LINK translational trajectory</CardTitle>
-        <CardDescription>
-          Reconstructing selected angiographic functions in a 4-zero chain — 0 mSv,
-          0 g Gd / 0 mL iodine, 0 helium, BoM target &lt; €15k for proximity vascular medicine.
-        </CardDescription>
+        <CardTitle className="text-base">{t("vasculink.trajectory.title")}</CardTitle>
+        <CardDescription>{t("vasculink.trajectory.subtitle")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div
@@ -110,11 +86,10 @@ export function AngiographicFunctionTrajectory({ className, compact }: Props) {
           })}
         </div>
 
-        <p className="text-sm font-medium border-l-2 border-primary pl-3 italic">
-          VASCU-LINK does not claim to replace conventional angiography during the thesis.
-          It tests whether selected angiographic functions can be progressively reconstructed
-          in a 4-zero chain: <strong>0 mSv · 0 Gd / 0 iodine · 0 helium · BoM target &lt; €15k</strong>.
-        </p>
+        <p
+          className="text-sm font-medium border-l-2 border-primary pl-3 italic"
+          dangerouslySetInnerHTML={{ __html: t("vasculink.trajectory.scopeStatement") as string }}
+        />
       </CardContent>
     </Card>
   );
