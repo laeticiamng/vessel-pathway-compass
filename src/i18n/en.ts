@@ -108,14 +108,8 @@ export const en = {
       explore: "Features",
     },
     hero: {
-      badge: "Non-ionizing vascular workflow platform — research prototype",
-      title: "AquaMR Flow",
-      headlinePre: "Non-Ionizing Workflow Platform for",
-      headlineHighlight: "Vascular & Interventional Medicine",
-      subtitle: "Procedure planning, multimodal imaging fusion, CI-AKI prevention, clinical simulation and research registry — one platform for contrast-sparing vascular workflows.",
-      cta: "Try Free — No Credit Card",
-      secondary: "See Plans & Pricing",
-      socialProof: "Research prototype — open to interventional specialists worldwide",
+      // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
+      // have been replaced by the home.hero.* namespace. Only dashboardCaption remains here.
       dashboardCaption: "The clinical dashboard: procedure overview, risk distribution and quick access to all modules.",
     },
     howItWorks: {
