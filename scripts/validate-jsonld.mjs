@@ -33,19 +33,24 @@ const STRICT =
 
 // -------------------------------------------------------------- 1) Helpers
 const REQUIRED_FIELDS = {
-  Organization:        ["@context", "@type", "name", "url"],
-  WebSite:             ["@context", "@type", "name", "url"],
-  SoftwareApplication: ["@context", "@type", "name", "applicationCategory"],
-  WebPage:             ["@type", "name"],
-  FAQPage:             ["@type", "mainEntity"],
-  BreadcrumbList:      ["@type", "itemListElement"],
-  Product:             ["@type", "name"],
-  ItemList:            ["@type", "itemListElement"],
-  MedicalGuideline:    ["@type", "name"],
-  Dataset:             ["@type", "name"],
-  ContactPage:         ["@type"],
-  PrivacyPolicy:       ["@type"],
-  CollectionPage:      ["@type"],
+  Organization:           ["@context", "@type", "name", "url"],
+  WebSite:                ["@context", "@type", "name", "url"],
+  SoftwareApplication:    ["@context", "@type", "name", "applicationCategory"],
+  WebPage:                ["@type", "name"],
+  FAQPage:                ["@type", "mainEntity"],
+  BreadcrumbList:         ["@type", "itemListElement"],
+  Product:                ["@type", "name"],
+  ItemList:               ["@type", "itemListElement"],
+  MedicalGuideline:       ["@type", "name"],
+  MedicalScholarlyArticle:["@type", "name"],
+  Dataset:                ["@type", "name"],
+  ContactPage:            ["@type"],
+  PrivacyPolicy:          ["@type"],
+  CollectionPage:         ["@type"],
+  ListItem:               ["@type", "position"],
+  Question:               ["@type", "name"],
+  Answer:                 ["@type", "text"],
+  Offer:                  ["@type"],
 };
 
 const errors = [];
