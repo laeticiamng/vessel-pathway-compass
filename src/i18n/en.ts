@@ -1451,6 +1451,7 @@ export const en = {
       },
     },
   },
+  contactPage: {
     seo: {
       title: "Contact — Talk to the AquaMR Flow team",
       description: "Contact the AquaMR Flow team for any question about the platform, its scope, its use cases or potential access.",
