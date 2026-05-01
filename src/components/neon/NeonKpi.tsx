@@ -68,14 +68,14 @@ export function NeonKpi({
           <>
             <span className={cn("neon-kpi-value", isViolet && "violet")}>{value}</span>
             {unit && (
-              <span className="text-lg font-semibold text-foreground/80">{unit}</span>
+              <span className="text-lg font-semibold text-foreground/90">{unit}</span>
             )}
           </>
         )}
       </div>
 
       {trend && (
-        <p className="text-xs text-foreground/75 -mt-2">{trend}</p>
+        <p className="text-xs text-muted-foreground -mt-2">{trend}</p>
       )}
     </div>
   );
