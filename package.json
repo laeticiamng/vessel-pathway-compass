@@ -11,8 +11,9 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:i18n": "vitest run src/i18n/__tests__/structures.test.ts",
-    "i18n:ci": "node scripts/i18n-ci-check.mjs"
+    "test:i18n": "vitest run src/i18n/__tests__/structures.test.ts src/i18n/__tests__/home-snapshot.test.tsx",
+    "i18n:ci": "node scripts/i18n-ci-check.mjs",
+    "i18n:audit": "node scripts/i18n-audit-report.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
