@@ -92,7 +92,15 @@ export function LimitsSection() {
 
         <div className="text-center mt-10 max-w-xl mx-auto">
           <h3 className="font-semibold mb-2">{t("pages.limits.ctaTitle")}</h3>
-          <p className="text-sm text-muted-foreground">{t("pages.limits.ctaDesc")}</p>
+          <p className="text-sm text-muted-foreground mb-5">{t("pages.limits.ctaDesc")}</p>
+          <Button asChild variant="outline" size="sm">
+            <Link to="/transparence">
+              <Scale className="h-4 w-4" />
+              {t("pages.limits.transparencyCta") as string ||
+                "Voir la page Transparence & Gouvernance"}
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
