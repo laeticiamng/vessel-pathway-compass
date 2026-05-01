@@ -85,6 +85,9 @@ function extractUsedKeys(files) {
   const dynamicPrefixes = new Set(); // for keys built via template like seo.legal.${section}.title
   for (const f of files) {
     if (f.endsWith("/i18n/fr.ts") || f.endsWith("/i18n/en.ts") || f.endsWith("/i18n/de.ts") || f.endsWith("/i18n/schema.ts")) continue;
+    // Skip test files — they intentionally exercise miss/fallback paths
+    // and contain unrelated `t(…)`-shaped assertions (e.g. assert(t.eq("en", …))).
+    if (/\.(test|spec)\.(ts|tsx)$/.test(f) || f.includes("/__tests__/") || f.includes("/test/")) continue;
     const code = readFileSync(f, "utf8");
     const rel = relative(ROOT, f).replaceAll("\\", "/");
     let m;
