@@ -41,7 +41,7 @@ export function NeonKpi({
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <span className="text-sm font-semibold text-foreground/90 tracking-wide">
+        <span className="text-sm font-semibold text-foreground tracking-wide">
           {label}
         </span>
         <div className={cn("neon-icon-ring", isViolet && "violet")}>
