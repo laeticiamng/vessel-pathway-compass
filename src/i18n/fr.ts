@@ -377,6 +377,7 @@ export const fr = {
       generated: "Générés",
       cmeCredits: "Crédits FMC",
       simulations: "Simulations",
+      total: "au total",
     },
     moduleDesc: {
       procedurePlanner: "Recommandations de flux de travail avec sélection de modalité et stratégies d'épargne de contraste.",
