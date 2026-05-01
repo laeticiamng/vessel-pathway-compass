@@ -417,4 +417,34 @@
     color: hsl(var(--destructive));
     background: hsl(var(--destructive) / 0.1);
   }
+
+  /* ===== Readability helpers ===== */
+  /* Text on hero / dark photographic backgrounds: always near-white +
+     subtle shadow so contrast holds regardless of underlying color */
+  .text-on-hero {
+    color: hsl(var(--text-on-hero));
+    text-shadow: 0 1px 2px hsl(0 0% 0% / 0.5);
+  }
+  .text-on-hero-soft {
+    color: hsl(var(--text-on-hero-soft));
+    text-shadow: 0 1px 2px hsl(0 0% 0% / 0.45);
+  }
+  .text-disclaimer {
+    color: hsl(var(--text-disclaimer));
+  }
+
+  /* Improve placeholder readability across the app */
+  ::placeholder {
+    color: hsl(var(--muted-foreground)) !important;
+    opacity: 0.85;
+  }
+  .dark ::placeholder {
+    opacity: 0.75;
+  }
+
+  /* Stronger card border in dark for separation */
+  .dark .card,
+  .dark [data-slot="card"] {
+    border-color: hsl(var(--border-subtle));
+  }
 }
