@@ -139,12 +139,28 @@ export default function Dashboard() {
         path="/app"
         noindex
       />
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold">{t("dashboard.title")}</h1>
-        <p className="text-muted-foreground text-sm mt-1">{t("dashboard.welcome")}</p>
-      </div>
+      <NeonPageHeader
+        title={t("dashboard.title") as string}
+        subtitle={t("dashboard.welcome") as string}
+      />
 
       {stats && <OnboardingChecklist stats={stats} />}
+
+      {/* KPI grid — AquaMR Flow signature */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 stagger-in">
+        {statCards.map((stat) => (
+          <NeonKpi
+            key={stat.label}
+            label={stat.label as string}
+            value={stat.value}
+            unit={(stat as any).unit}
+            icon={stat.icon}
+            variant={stat.variant}
+            trend={stat.trend as string}
+            loading={statsLoading}
+          />
+        ))}
+      </div>
 
       {/* Quick Actions */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 stagger-in">
@@ -168,31 +184,6 @@ export default function Dashboard() {
       <AngiographicFunctionTrajectory />
 
       <ScientificSafetyBox />
-
-      {/* Stats */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 stagger-in">
-        {statCards.map((stat) => (
-          <Card key={stat.label} className="card-hover">
-            <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.label}</CardTitle>
-              <div className={`h-8 w-8 rounded-lg ${stat.color} flex items-center justify-center`}>
-                <stat.icon className="h-4 w-4" />
-              </div>
-            </CardHeader>
-            <CardContent>
-              {statsLoading ? (
-                <Skeleton className="h-8 w-16" />
-              ) : (
-                <div className="text-3xl font-bold tracking-tight">{stat.value}</div>
-              )}
-              <p className="text-xs text-muted-foreground mt-1.5 flex items-center gap-1">
-                <TrendingUp className="h-3 w-3 text-success" />
-                {stat.trend}
-              </p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
 
       {/* Eco-Impact Summary */}
       <Card className="border-emerald-500/20">
