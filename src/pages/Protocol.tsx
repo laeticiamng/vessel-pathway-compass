@@ -5,6 +5,8 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
+import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
+import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
 
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
