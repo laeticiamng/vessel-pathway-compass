@@ -308,7 +308,7 @@ export default function Landing() {
             <h2 className="text-3xl md:text-4xl font-bold mb-3">VASCU-LINK scientific architecture</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Three concentric circles · 4-zero angiographic function · proximity vascular medicine.
-              Doctoral protocol of Dr Laëticia Motongane (proposed direction Pr Lucia Mazzolai, CHUV/Lausanne).
+              Doctoral protocol of Dr Laëticia Motongane (academic partnership in negotiation).
             </p>
           </div>
           <FourZeroPillars />

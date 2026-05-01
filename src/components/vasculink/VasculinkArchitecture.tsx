@@ -32,7 +32,7 @@ export function VasculinkArchitecture({ className }: { className?: string }) {
             <Badge variant="default" className="text-[10px]">Mandatory PhD core</Badge>
           </div>
           <p className="text-xs text-muted-foreground italic">
-            Circle 1 · Prospective validation on CHUV/Lausanne main cohort (n ≈ 250 analysable)
+            Circle 1 · Planned prospective validation cohort (n ≈ 250 analysable, partner site to be confirmed)
           </p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
             {[
