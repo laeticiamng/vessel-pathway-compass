@@ -185,10 +185,6 @@ const CONTENT: Record<Language, Content> = {
   },
 };
 
-function ICON_INDUSTRIAL_DE_FALLBACK() {
-  return ICONS[4];
-}
-
 export function AntiOverpromiseSection({ compact = false }: { compact?: boolean }) {
   const { language } = useTranslation();
   const c = CONTENT[language] ?? CONTENT.en;
