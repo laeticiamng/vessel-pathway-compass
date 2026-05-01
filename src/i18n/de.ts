@@ -192,11 +192,11 @@ export const de = {
     complianceFaq: {
       badge: "Compliance-ready",
       title: "Compliance-FAQ — Auditierbarkeit, Nachvollziehbarkeit, Sicherheit",
-      subtitle: "Wie AquaMR Flow für ernsthafte klinische Nutzung konzipiert ist und was „keine behördliche Zulassung" heute bedeutet.",
+      subtitle: "Wie AquaMR Flow für ernsthafte klinische Nutzung konzipiert ist und was „keine behördliche Zulassung“ heute bedeutet.",
       disclaimer: "Diese FAQ beschreibt die von AquaMR Flow angestrebte Compliance-Haltung. Sie stellt keine rechtliche, medizinische oder regulatorische Beratung dar und ersetzt keine institutionelle Due Diligence.",
       items: [
         {
-          q: "Was bedeutet „keine behördliche Zulassung" für AquaMR Flow?",
+          q: "Was bedeutet „keine behördliche Zulassung“ für AquaMR Flow?",
           a: "AquaMR Flow ist ein Forschungsprototyp in offener Beta. Er ist weder CE-gekennzeichnet als Medizinprodukt, noch FDA-zugelassen, noch Swissmedic-zertifiziert.\n\nKonkret bedeutet das:\n• Er stellt keine Diagnose und verschreibt keine Behandlung.\n• Jede Entscheidungsunterstützung (CI-AKI, Planung, digitaler Zwilling) muss von einer qualifizierten Ärztin oder einem Arzt bestätigt werden, die/der allein für den medizinischen Akt verantwortlich bleibt.\n• Klinische Nutzung findet im Rahmen von Forschung, Ausbildung oder Workflow-Organisation statt.\n\nDie Architektur ist darauf ausgelegt, langfristig MDR-/DSGVO-/IEC-62304-Konformität anzustreben — dieses Ziel ist derzeit jedoch nicht erreicht.",
         },
         {
@@ -208,7 +208,7 @@ export const de = {
           a: "Jede in der Plattform dokumentierte Entscheidung (Eingriffsplan, CI-AKI-Score, L1-Validierung, Registereintrag) speichert:\n• die pseudonymisierte Patientenkennung,\n• die verwendeten Eingangsparameter,\n• die Version des angewandten Modells oder der Formel,\n• die validierende Ärztin / den validierenden Arzt,\n• Datum und Uhrzeit (UTC).\n\nDamit lässt sich der genaue Entscheidungskontext im Rahmen einer retrospektiven Überprüfung oder eines institutionellen Audits rekonstruieren.",
         },
         {
-          q: "Was bedeutet „Security by Design" in AquaMR Flow?",
+          q: "Was bedeutet „Security by Design“ in AquaMR Flow?",
           a: "Bereits architekturell umgesetzte Prinzipien:\n• TLS-1.2+-Verschlüsselung in Transit, Verschlüsselung im Ruhezustand im Backend.\n• Row-Level Security aktiviert auf allen sensiblen Tabellen (Patienten, Fälle, PROMs, Audit).\n• Defense-in-Depth-Filterung: RLS + serverseitige `case_id`-Filter auf PROMs-Abfragen.\n• Getrennte Rollen (Behandler, Forscher, Administrator, Support).\n• Systematische Pseudonymisierung von Patientendaten vor jedem Benchmark oder aggregierten Export.\n• Soft-Delete mit 30-tägiger Karenzzeit und automatischer Bereinigung.\n• Keine Weitergabe von KI-Modellen, die auf identifizierbaren Patientendaten trainiert wurden.",
         },
         {
