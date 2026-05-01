@@ -181,17 +181,21 @@ function tryEvalJsonLdLiteral(body, source) {
   let trimmed = body.trim().replace(/,\s*$/, "");
 
   // (b) Resolve a single bare identifier by looking up
-  //     `const <name> = { ... };` earlier in the same source file.
+  //     `const <name> = { ... }` (with balanced braces) earlier in the source.
   const idMatch = /^([A-Za-z_$][\w$]*)\s*$/.exec(trimmed);
   if (idMatch) {
     const name = idMatch[1];
-    // Match `const name = { ... };` (allowing TS annotations and `as const`).
-    const re = new RegExp(
-      `\\bconst\\s+${name}\\b[^=]*=\\s*(\\{[\\s\\S]*?\\})\\s*(?:as\\s+const)?\\s*;`,
-    );
-    const m = re.exec(source);
-    if (m) trimmed = m[1];
-    else return { dynamic: true, snippet: name };
+    const decl = new RegExp(`\\bconst\\s+${name}\\b[^=]*=\\s*\\{`).exec(source);
+    if (!decl) return { dynamic: true, snippet: name };
+    const start = decl.index + decl[0].length - 1; // position of `{`
+    let depth = 0, i = start, end = -1;
+    for (; i < source.length; i++) {
+      const c = source[i];
+      if (c === "{") depth++;
+      else if (c === "}") { depth--; if (depth === 0) { end = i; break; } }
+    }
+    if (end === -1) return { dynamic: true, snippet: name };
+    trimmed = source.slice(start, end + 1);
   }
 
   if (!trimmed.startsWith("{")) return { dynamic: true, snippet: trimmed.slice(0, 60) };
