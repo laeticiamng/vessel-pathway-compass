@@ -447,8 +447,7 @@ export default function Landing() {
 
       {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
 
-      {/* Current limitations — full transparency */}
-      <LimitsSection />
+      {/* LimitsSection retirée ici — déjà rendue plus haut, juste après VASCU-LINK */}
 
       {/* About */}
       <AboutSection />
