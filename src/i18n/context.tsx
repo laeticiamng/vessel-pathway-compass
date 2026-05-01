@@ -25,15 +25,18 @@ interface I18nContextType {
   /**
    * Resolve a translation key.
    *
-   * - `t("foo.bar")` → string (legacy, unchanged).
-   * - `t("foo.items", "array")` → returns the value if it IS an array,
+   * - `t("foo.bar")` → string (legacy, unchanged — `key` returned if missing).
+   * - `t<FaqItem[]>("foo.items", "array")` → returns the value if it IS an array,
    *   otherwise an empty array AND the call is logged via `onMiss`.
-   * - `t("foo.bar", "object")` → same contract for plain objects.
+   * - `t<MyShape>("foo.bar", "object")` → same contract for plain objects.
    *
    * This guarantees consumers NEVER receive a dotted-path string when they
    * destructure `.map()` / `Object.keys()`, eliminating silent crash bugs.
    */
-  t: <T = unknown>(key: string, expected?: Expected) => T;
+  t: {
+    (key: string): string;
+    <T>(key: string, expected: Expected): T;
+  };
   /** Last 50 misses, for the dev-only diagnostic overlay. */
   misses: I18nMissResult[];
 }
@@ -97,30 +100,30 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const t = useCallback(
-    <T,>(key: string, expected?: Expected): T => {
+    ((key: string, expected?: Expected): unknown => {
       const raw = getRawNestedValue(dictionaries[language], key);
 
       // 1) Missing entirely
       if (raw === undefined || raw === null) {
         recordMiss({ locale: language, key, reason: "missing", expected, actual: "undefined" });
-        if (expected) return emptyForExpected(expected) as T;
-        return key as unknown as T; // legacy string fallback
+        if (expected) return emptyForExpected(expected);
+        return key; // legacy string fallback
       }
 
-      // 2) No expectation given → preserve historical behaviour (return as-is)
+      // 2) No expectation given → preserve historical behaviour (return as-is, typed as string by overload)
       if (!expected) {
-        return raw as T;
+        return raw;
       }
 
       // 3) Shape contract enforced
       if (matchesExpected(raw, expected)) {
-        return raw as T;
+        return raw;
       }
 
       const actualType = Array.isArray(raw) ? "array" : typeof raw;
       recordMiss({ locale: language, key, reason: "shape-mismatch", expected, actual: actualType });
-      return emptyForExpected(expected) as T;
-    },
+      return emptyForExpected(expected);
+    }) as I18nContextType["t"],
     [language, recordMiss]
   );
 
