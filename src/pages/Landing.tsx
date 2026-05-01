@@ -120,7 +120,7 @@ export default function Landing() {
           "Plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
       },
       homeFaqJsonLd,
-    ],
+      complianceFaqJsonLd,
   };
 
   return (
