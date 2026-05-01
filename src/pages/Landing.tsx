@@ -39,6 +39,9 @@ import {
   HomeFAQSection,
   homeFaqJsonLd,
 } from "@/components/landing/HomeSections";
+import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
+import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
+import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -295,8 +298,24 @@ export default function Landing() {
         <HowItWorksFRSection />
       </div>
 
-      {/* Cas d’usage */}
+      {/* Cas d'usage */}
       <UseCasesSection />
+
+      {/* VASCU-LINK scientific architecture (3 concentric circles) */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6 max-w-6xl space-y-6">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">VASCU-LINK scientific architecture</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Three concentric circles · 4-zero angiographic function · proximity vascular medicine.
+              Doctoral protocol of Dr Laëticia Motongane (proposed direction Pr Lucia Mazzolai, CHUV/Lausanne).
+            </p>
+          </div>
+          <FourZeroPillars />
+          <VasculinkArchitecture />
+          <ProximityMedicineCard />
+        </div>
+      </section>
 
       {/* Limites actuelles */}
       <LimitsSection />

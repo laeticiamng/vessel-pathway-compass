@@ -525,6 +525,8 @@ export default function L1DecisionBoard() {
         </div>
       </div>
 
+      <FourZeroPillars variant="compact" />
+
       <AngiographicFunctionTrajectory compact />
 
       <ScientificSafetyBox />
