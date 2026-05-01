@@ -27,7 +27,7 @@ export function DSMBCharter({ className }: { className?: string }) {
           DSMB charter · independent oversight model
         </CardTitle>
         <CardDescription>
-          Data Safety Monitoring Board structure and stop/continue triggers for the CHUV cohort.
+          Data Safety Monitoring Board structure and stop/continue triggers for the planned prospective cohort.
           Acts in parallel with the Data Access Committee for registry queries.
         </CardDescription>
       </CardHeader>

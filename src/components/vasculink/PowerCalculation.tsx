@@ -7,7 +7,7 @@ import { Calculator, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 /**
- * Statistical power calculation for the CHUV main cohort.
+ * Statistical power calculation for the planned prospective main cohort.
  * Primary endpoint: clinico-physiological concordance (C4-i v11.1).
  *
  * Approximation: one-sample test of a single proportion vs a non-inferiority
@@ -16,7 +16,7 @@ import { Button } from "@/components/ui/button";
  *   n = ((Z_{1-α/2} + Z_{1-β})² · π₀ · (1 - π₀)) / δ²
  *
  * Then divided by (1 - dropout) to obtain the target enrolment.
- * Final sample size to be confirmed by CHUV biostatistics unit.
+ * Final sample size to be confirmed by an independent biostatistics unit.
  */
 function inverseNormalCDF(p: number): number {
   // Beasley-Springer-Moro approximation
@@ -71,7 +71,7 @@ export function PowerCalculation({ className }: { className?: string }) {
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
           <Calculator className="h-4 w-4 text-primary" />
-          Power calculation · CHUV cohort (interactive)
+          Power calculation · prospective main cohort (interactive)
         </CardTitle>
         <CardDescription>
           One-sample non-inferiority test of a single proportion (normal approximation).
@@ -113,7 +113,7 @@ export function PowerCalculation({ className }: { className?: string }) {
         </div>
 
         <p className="text-[10px] text-muted-foreground italic">
-          Final sample size to be confirmed by CHUV biostatistics unit; recalibration possible
+          Final sample size to be confirmed by an independent biostatistics unit; recalibration possible
           after blinded interim review (≈ M24, before J3).
         </p>
       </CardContent>

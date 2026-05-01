@@ -47,7 +47,7 @@ export function ProximityMedicineCard({ className }: { className?: string }) {
           <Badge variant="default" className="text-[10px] mb-2">WP5 — equity & sustainability</Badge>
           <p className="text-xs">
             LCA · QALY · LMIC pilot are <strong>post-thesis deliverables</strong>; the in-thesis
-            scope remains the CHUV/Lausanne main cohort and the European regulatory pre-submission.
+            scope remains the planned prospective validation cohort and the European regulatory pre-submission.
           </p>
         </div>
       </CardContent>
