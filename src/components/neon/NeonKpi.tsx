@@ -63,7 +63,7 @@ export function NeonKpi({
 
       <div className="flex items-baseline gap-1.5">
         {loading ? (
-          <div className="h-12 w-20 rounded-md bg-muted/50 animate-pulse" />
+          <div className="h-12 w-20 rounded-md bg-foreground/10 animate-pulse" />
         ) : (
           <>
             <span className={cn("neon-kpi-value", isViolet && "violet")}>{value}</span>
