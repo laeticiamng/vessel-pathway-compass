@@ -26,6 +26,42 @@ AquaMR Flow is a clinical software cockpit for contrast-sparing and non-ionizing
 
 ---
 
+## Scientific Positioning
+
+VASCU-LINK is **not designed as a Doppler replacement**. Doppler remains the
+first-line hemodynamic examination.
+
+The platform explores whether selected angiographic functions can be
+progressively reconstructed in a **4-zero chain**:
+
+- no ionizing radiation,
+- no injected iodinated or gadolinium contrast,
+- no helium,
+- radically reduced infrastructure and ecological footprint.
+
+The translational sequence is:
+
+1. **L1 — See & Decide**: pre-revascularization mapping and decision.
+2. **L2 — Simulate & Guide**: phantom / simulation guidance.
+3. **L3 — Preclinical Intervention**: non-human intervention feasibility.
+4. **Post-PhD — Selected 4-Zero Revascularization**: long-term horizon only.
+
+The platform does not perform or autonomously recommend human revascularization.
+Conventional angiography remains mandatory for emergencies, complex high-risk
+interventions, insufficient image quality, or when standard-of-care requires it.
+
+---
+
+## AquaMR vs Vessel Pathway Compass vs VASCU-LINK
+
+- **AquaMR** — 4-zero angiographic imaging device concept.
+- **Vessel Pathway Compass** — clinical cockpit and pre-revascularization
+  decision platform.
+- **VASCU-LINK** — full translational chain combining AquaMR, Doppler, C4-i,
+  PROMs, registry, simulation and preclinical guidance roadmap.
+
+---
+
 ## VASCU-LINK L1 flow
 
 The **L1 Decision Board** (`/app/l1-decision-board`) is the central pre-revascularization

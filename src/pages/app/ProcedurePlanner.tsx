@@ -28,6 +28,7 @@ import { useTranslation } from "@/i18n/context";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UsageLimitBanner } from "@/components/UsageLimitBanner";
 import { SEOHead } from "@/components/SEOHead";
+import { ModalityPositioningMatrix } from "@/components/vasculink/ModalityPositioningMatrix";
 
 interface AiOutput {
   id: string;
@@ -265,6 +266,8 @@ export default function ProcedurePlanner() {
           <p className="text-muted-foreground mt-1">{t("procedurePlanner.disclaimer.body")}</p>
         </div>
       </div>
+
+      <ModalityPositioningMatrix />
 
       {!user && (
         <div className="p-4 rounded-xl bg-info/10 border border-info/30 text-center">
