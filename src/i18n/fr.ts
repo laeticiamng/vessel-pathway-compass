@@ -1319,6 +1319,62 @@ export const fr = {
       security: "Sécurité et confidentialité",
       protocol: "Protocole & Validation",
     },
+    whatsNew: {
+      badge: "Nouveautés",
+      title: "Journal des évolutions",
+      subtitle: "Améliorations récentes, nouveaux modules et renforcements de sécurité livrés pendant la bêta ouverte.",
+      cta: "Voir les 10 modules en détail",
+      tagLabels: {
+        new: "Nouveau",
+        improved: "Amélioré",
+        fixed: "Corrigé",
+        security: "Sécurité",
+      },
+      entries: [
+        {
+          date: "2026-05-01",
+          version: "v0.9.0",
+          title: "FAQ « compliance-ready » et répertoire dédié des modules",
+          description: "Nouvelle FAQ transparente sur l'auditabilité, la traçabilité et le statut « sans approbation réglementaire ». Ajout d'une page /modules dédiée détaillant les 10 modules cliniques avec prérequis et disponibilité.",
+          tags: [{ label: "", type: "new" }, { label: "", type: "improved" }],
+        },
+        {
+          date: "2026-04-22",
+          version: "v0.8.0",
+          title: "Section « Plateforme complète » et durcissement i18n",
+          description: "La page d'accueil reflète désormais la plateforme complète à 10 modules avec chiffres clés. Synchronisation complète FR/EN/DE de tous les noms de modules et descriptions cliniques.",
+          tags: [{ label: "", type: "improved" }],
+        },
+        {
+          date: "2026-04-10",
+          version: "v0.7.2",
+          title: "Filtrage côté serveur sur les requêtes PROMs",
+          description: "Ajout d'un filtrage case_id en défense en profondeur sur les endpoints Patient Outcomes, au-delà des politiques RLS existantes.",
+          tags: [{ label: "", type: "security" }],
+        },
+        {
+          date: "2026-03-28",
+          version: "v0.7.0",
+          title: "Fusion Viewer DICOM (bêta) et persistance CI-AKI",
+          description: "Sortie du Fusion Viewer pour l'imagerie DICOM avec règles de stockage sécurisées. Les calculs de risque CI-AKI sont désormais persistés entre sessions pour un suivi longitudinal.",
+          tags: [{ label: "", type: "new" }],
+        },
+        {
+          date: "2026-03-12",
+          version: "v0.6.5",
+          title: "Soft-delete patient avec délai de grâce de 30 jours",
+          description: "Mise en place de la suppression douce des patients avec nettoyage manuel en cascade des enregistrements associés et tâche planifiée automatique pour les entrées expirées.",
+          tags: [{ label: "", type: "new" }, { label: "", type: "security" }],
+        },
+        {
+          date: "2026-02-25",
+          version: "v0.6.0",
+          title: "Jumeau numérique (carte vasculaire à 18 segments)",
+          description: "Première version du jumeau numérique SVG à 18 segments avec seuils de risque dynamiques dérivés des facteurs de risque actifs.",
+          tags: [{ label: "", type: "new" }],
+        },
+      ],
+    },
   },
   contactPage: {
     seo: {
