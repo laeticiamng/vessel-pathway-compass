@@ -58,9 +58,11 @@ export function C4iAssessmentPanel({
         <CardTitle className="flex items-center gap-2 text-base">
           <Network className="h-4 w-4 text-primary" />
           C4-i & PROMs
+          <span className="ml-auto text-[10px] font-mono text-muted-foreground">framework v11.1</span>
         </CardTitle>
         <CardDescription>
-          Clinical–imaging concordance (C4-i) and patient-reported outcome measures.
+          Clinical–imaging concordance (C4-i v11.1, recalibrated on external validation cohort)
+          and patient-reported outcome measures (WIQ · VascuQol-6 · 6-MWT, in English per protocol).
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
