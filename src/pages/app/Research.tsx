@@ -5,6 +5,9 @@ import { Badge } from "@/components/ui/badge";
 import { FileText, Plus, Users, Database, Download, BarChart3, Loader2 } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
+import { PowerCalculation } from "@/components/vasculink/PowerCalculation";
+import { DSMBCharter } from "@/components/vasculink/DSMBCharter";
+import { LCAQALYFramework } from "@/components/vasculink/LCAQALYFramework";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -94,6 +97,12 @@ export default function Research() {
       </div>
 
       <ScientificSafetyBox />
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <PowerCalculation />
+        <DSMBCharter />
+      </div>
+      <LCAQALYFramework />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>
