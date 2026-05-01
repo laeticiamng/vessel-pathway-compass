@@ -1,7 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import dashboardPreview from "@/assets/dashboard-preview.jpg";
-// Card import removed — testimonials section deleted
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, type Language } from "@/i18n/context";
@@ -12,33 +11,79 @@ import {
   Globe,
   Shield,
   ArrowRight,
-  HeartPulse,
   CheckCircle2,
   Menu,
   Sparkles,
   ChevronUp,
 } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
-// FAQSection + HowItWorksSection legacy retirés (doublons)
-import { AboutSection } from "@/components/landing/AboutSection";
-import { LimitsSection } from "@/components/landing/LimitsSection";
-import { ValidationSection } from "@/components/landing/ValidationSection";
-import { PlatformCompletenessSection } from "@/components/landing/PlatformCompletenessSection";
 import { MedRegBadge } from "@/components/MedRegBadge";
-import {
-  EnBrefSection,
-  AudienceSection,
-  HowItWorksFRSection,
-  UseCasesSection,
-  HomeFAQSection,
-  homeFaqJsonLd,
-} from "@/components/landing/HomeSections";
-import { ComplianceFAQSection, complianceFaqJsonLd } from "@/components/landing/ComplianceFAQSection";
-import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
-import { InteractiveDemoSection } from "@/components/landing/InteractiveDemoSection";
-import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
-import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
-import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
+// JSON-LD: pure data module, no React component side-effects
+import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
+
+/* -------------------------------------------------------------------------
+ * Above-the-fold (eager): PlatformCompletenessSection — anchor target of
+ * the desktop/mobile nav, must be ready immediately for #platform-complete.
+ * ----------------------------------------------------------------------- */
+import { PlatformCompletenessSection } from "@/components/landing/PlatformCompletenessSection";
+
+/* -------------------------------------------------------------------------
+ * Below-the-fold sections — lazy-loaded to shrink the initial JS bundle.
+ * Each chunk is fetched on-demand as the user scrolls.
+ * ----------------------------------------------------------------------- */
+const WhatsNewSection = lazy(() =>
+  import("@/components/landing/WhatsNewSection").then((m) => ({ default: m.WhatsNewSection }))
+);
+const InteractiveDemoSection = lazy(() =>
+  import("@/components/landing/InteractiveDemoSection").then((m) => ({ default: m.InteractiveDemoSection }))
+);
+const EnBrefSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.EnBrefSection }))
+);
+const AudienceSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.AudienceSection }))
+);
+const HowItWorksFRSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.HowItWorksFRSection }))
+);
+const UseCasesSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.UseCasesSection }))
+);
+const HomeFAQSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.HomeFAQSection }))
+);
+const ComplianceFAQSection = lazy(() =>
+  import("@/components/landing/ComplianceFAQSection").then((m) => ({ default: m.ComplianceFAQSection }))
+);
+const ValidationSection = lazy(() =>
+  import("@/components/landing/ValidationSection").then((m) => ({ default: m.ValidationSection }))
+);
+const LimitsSection = lazy(() =>
+  import("@/components/landing/LimitsSection").then((m) => ({ default: m.LimitsSection }))
+);
+const AboutSection = lazy(() =>
+  import("@/components/landing/AboutSection").then((m) => ({ default: m.AboutSection }))
+);
+const VasculinkArchitecture = lazy(() =>
+  import("@/components/vasculink/VasculinkArchitecture").then((m) => ({ default: m.VasculinkArchitecture }))
+);
+const FourZeroPillars = lazy(() =>
+  import("@/components/vasculink/FourZeroPillars").then((m) => ({ default: m.FourZeroPillars }))
+);
+const ProximityMedicineCard = lazy(() =>
+  import("@/components/vasculink/ProximityMedicineCard").then((m) => ({ default: m.ProximityMedicineCard }))
+);
+
+// Lightweight skeleton placeholder rendered while a lazy section loads.
+const SectionFallback = () => (
+  <div className="py-20" aria-hidden="true">
+    <div className="container mx-auto px-6 max-w-4xl">
+      <div className="h-8 w-2/3 mx-auto rounded-md bg-muted/40 animate-pulse mb-4" />
+      <div className="h-4 w-1/2 mx-auto rounded-md bg-muted/30 animate-pulse" />
+    </div>
+  </div>
+);
+
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
