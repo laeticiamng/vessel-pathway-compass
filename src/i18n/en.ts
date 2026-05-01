@@ -2150,6 +2150,7 @@ export const en = {
       ctaTitle: "A question about these limitations?",
       ctaDesc: "The team responds directly, with no middleman. Any feedback on prototype scope is valuable for the thesis framing.",
       resolvedBadge: "Resolved in beta",
+      transparencyCta: "See the Transparency & Governance page",
     },
   },
 
