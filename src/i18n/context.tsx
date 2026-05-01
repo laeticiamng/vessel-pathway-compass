@@ -27,7 +27,9 @@ if (!globalI18n[I18N_CONTEXT_KEY]) {
 
 function getNestedValue(obj: any, path: string): any {
   const val = path.split(".").reduce((acc, part) => acc?.[part], obj);
-  if (typeof val === "string" || Array.isArray(val)) return val;
+  if (val === undefined || val === null) return path;
+  // Return strings, arrays and plain objects as-is so callers can render rich structures.
+  if (typeof val === "string" || typeof val === "object") return val;
   return path;
 }
 
