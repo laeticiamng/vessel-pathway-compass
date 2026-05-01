@@ -1176,7 +1176,7 @@ export const fr = {
       betaBadge: "Bêta ouverte — accès complet gratuit",
       title1: "Moins de contraste. Moins de radiation.",
       title2: "Plus de contrôle sur vos procédures vasculaires.",
-      subtitle: "AquaMR Flow centralise planification, imagerie multimodale, stratification CI-AKI et registre — pour les équipes vasculaires qui veulent structurer leurs workflows non ionisants.",
+      subtitle: "Plateforme complète : 10 modules cliniques, protocole L1 verrouillé, 3 langues, conformité MDR/RGPD ciblée et radiologie verte. Planification, imagerie multimodale, CI-AKI, jumeau numérique, simulation et registre — dans un seul cockpit.",
       ctaPrimary: "Créer un compte gratuit",
       ctaSecondary: "Voir comment ça marche",
       perkNoCard: "Sans carte bancaire",
