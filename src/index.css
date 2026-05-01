@@ -423,7 +423,13 @@
     box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.75), 0 8px 18px -14px hsl(var(--contrast-cyan) / 0.35);
   }
   .dark .neon-icon-ring {
-    box-shadow: inset 0 0 12px hsl(188 95% 58% / 0.15), 0 0 12px hsl(188 95% 58% / 0.15);
+    border-color: hsl(188 95% 58% / 0.32);
+    background: linear-gradient(180deg, hsl(188 60% 18% / 0.55), hsl(222 47% 9% / 0.65));
+    color: hsl(188 100% 82%);
+    box-shadow:
+      inset 0 1px 0 hsl(188 95% 70% / 0.12),
+      inset 0 0 14px hsl(188 95% 58% / 0.18),
+      0 0 16px -2px hsl(188 95% 58% / 0.22);
   }
   .neon-icon-ring.violet {
     border-color: hsl(var(--contrast-violet) / 0.4);
@@ -431,7 +437,25 @@
     color: hsl(var(--contrast-violet));
   }
   .dark .neon-icon-ring.violet {
-    box-shadow: inset 0 0 12px hsl(270 85% 68% / 0.15), 0 0 12px hsl(270 85% 68% / 0.15);
+    border-color: hsl(270 85% 68% / 0.38);
+    background: linear-gradient(180deg, hsl(270 55% 22% / 0.55), hsl(222 47% 9% / 0.65));
+    color: hsl(280 95% 88%);
+    box-shadow:
+      inset 0 1px 0 hsl(280 95% 80% / 0.12),
+      inset 0 0 14px hsl(270 85% 68% / 0.18),
+      0 0 16px -2px hsl(270 85% 68% / 0.22);
+  }
+  /* Illustrated PNGs inside icon ring — invert/tint in dark mode so they don't
+     create a bright white plate against the deep background. */
+  .dark .neon-icon-ring img[data-neon-illustration] {
+    filter: brightness(0) saturate(100%)
+      invert(86%) sepia(48%) saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
+    opacity: 0.92;
+  }
+  .dark .neon-icon-ring.violet img[data-neon-illustration] {
+    filter: brightness(0) saturate(100%)
+      invert(82%) sepia(28%) saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
+    opacity: 0.92;
   }
 
   .neon-divider {
