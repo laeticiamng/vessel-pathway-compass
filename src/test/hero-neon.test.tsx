@@ -80,14 +80,21 @@ describe("hero-neon — cross-browser rendering", () => {
 
   it("legacy browsers WITHOUT text-stroke: @supports fallback flattens the headline", () => {
     expect(css).toMatch(/@supports\s+not\s*\(-webkit-text-stroke[^)]*\)/);
-    const fb = css.match(
-      /@supports\s+not\s*\(-webkit-text-stroke[^)]*\)\s*\{([\s\S]*?)\n {2}\}/,
-    );
-    expect(fb, "fallback @supports block must exist").toBeTruthy();
-    expect(fb![1]).toMatch(/-webkit-text-fill-color\s*:\s*currentColor/);
-    expect(fb![1]).toMatch(/filter\s*:\s*none/);
-    expect(fb![1]).toMatch(/color\s*:\s*hsl\(var\(--text-strong\)\)/);
-    expect(fb![1]).toMatch(/color\s*:\s*hsl\(var\(--accent-cyan\)\)/);
+    // Walk the @supports block by tracking braces (handles nested rules).
+    const start = css.search(/@supports\s+not\s*\(-webkit-text-stroke[^)]*\)\s*\{/);
+    expect(start).toBeGreaterThan(-1);
+    const openIdx = css.indexOf("{", start);
+    let depth = 1;
+    let i = openIdx + 1;
+    for (; i < css.length && depth > 0; i++) {
+      if (css[i] === "{") depth++;
+      else if (css[i] === "}") depth--;
+    }
+    const body = css.slice(openIdx + 1, i - 1);
+    expect(body).toMatch(/-webkit-text-fill-color\s*:\s*currentColor/);
+    expect(body).toMatch(/filter\s*:\s*none/);
+    expect(body).toMatch(/color\s*:\s*hsl\(var\(--text-strong\)\)/);
+    expect(body).toMatch(/color\s*:\s*hsl\(var\(--accent-cyan\)\)/);
   });
 
   it("high-contrast (light + dark): flat, no halo, no stroke", () => {
