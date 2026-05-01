@@ -42,7 +42,7 @@ const REQUIRED_FIELDS = {
   Product:                ["@type", "name"],
   ItemList:               ["@type", "itemListElement"],
   MedicalGuideline:       ["@type", "name"],
-  MedicalScholarlyArticle:["@type", "name"],
+  MedicalScholarlyArticle:["@type"],  // name|headline (loose: Google accepts either)
   Dataset:                ["@type", "name"],
   ContactPage:            ["@type"],
   PrivacyPolicy:          ["@type"],
