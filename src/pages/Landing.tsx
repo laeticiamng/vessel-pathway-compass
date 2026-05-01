@@ -43,10 +43,6 @@ import {
   homeFaqJsonLd,
 } from "@/components/landing/HomeSections";
 import { ComplianceFAQSection, complianceFaqJsonLd } from "@/components/landing/ComplianceFAQSection";
-const _suppressDup = null as unknown;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const __dup = {
-} from "@/components/landing/HomeSections";
 import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
 import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
