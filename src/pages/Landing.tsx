@@ -298,6 +298,9 @@ export default function Landing() {
       {/* What's new — changelog */}
       <WhatsNewSection />
 
+      {/* Interactive demo — guided 4-screen walkthrough */}
+      <InteractiveDemoSection />
+
       {/* En bref */}
       <EnBrefSection />
 
