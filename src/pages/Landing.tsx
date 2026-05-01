@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import dashboardPreview from "@/assets/dashboard-preview.jpg";
 // Card import removed — testimonials section deleted
