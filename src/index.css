@@ -386,14 +386,19 @@
   .neon-kpi-value {
     @apply text-4xl sm:text-5xl font-bold tracking-tight tabular-nums;
     font-feature-settings: 'tnum';
+    /* Light mode: deep ink with subtle cyan tint, fully legible */
+    color: hsl(200 60% 18%);
+    text-shadow: 0 1px 0 hsl(0 0% 100% / 0.6);
+  }
+  .neon-kpi-value.violet {
+    color: hsl(270 55% 30%);
   }
   .dark .neon-kpi-value {
-    color: hsl(188 100% 82%);                   /* brighter, AAA on #06101F */
-    text-shadow: 0 0 14px hsl(188 95% 58% / 0.28); /* softer glow → less halo */
+    color: hsl(188 100% 82%);
+    text-shadow: 0 0 14px hsl(188 95% 58% / 0.28);
   }
-  .neon-kpi-value.violet { }
   .dark .neon-kpi-value.violet {
-    color: hsl(280 95% 88%);                    /* brighter, AAA on #06101F */
+    color: hsl(280 95% 88%);
     text-shadow: 0 0 14px hsl(270 85% 68% / 0.28);
   }
 
