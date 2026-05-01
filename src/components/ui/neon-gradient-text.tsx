@@ -1,50 +1,44 @@
 import { cn } from "@/lib/utils";
 import { ElementType, ReactNode, useEffect, useRef, useState } from "react";
+import { recordHeroNeonEvent } from "@/lib/heroNeonMetrics";
+
+/**
+ * Tunable IntersectionObserver options for the hero-neon component.
+ * Exported so visual-regression tests can assert the strategy directly.
+ *
+ * Strategy:
+ *   • `rootMargin` is **viewport-relative** (`25%`) so the observer fires
+ *     earlier on tall mobile screens (where 25% of vh ≈ 200px) than on
+ *     desktop (where 25% of vh ≈ 250px). A fixed pixel margin would
+ *     under-trigger on small phones and over-trigger on 4K displays.
+ *   • Multiple `threshold`s catch fast flick-scroll where the headline
+ *     would otherwise skip past the single 0.05 sample window without
+ *     ever being reported as visible (= halo flicker).
+ */
+export const HERO_NEON_IO_OPTIONS: IntersectionObserverInit = {
+  rootMargin: "25% 0px 25% 0px",
+  threshold: [0, 0.05, 0.25],
+};
 
 interface NeonGradientTextProps {
   children: ReactNode;
-  /** Visual intensity of the glow */
   intensity?: "soft" | "medium" | "strong";
-  /** Render as a different element (default: span) */
   as?: ElementType;
   className?: string;
-  /**
-   * Enables the lazy-load behavior:
-   *   • renders a premium shimmer skeleton until the headline scrolls
-   *     into view AND the first frame is painted
-   *   • drops the GPU-expensive halo when the element is offscreen,
-   *     restoring full effects only while visible
-   * Defaults to true. Disable for tests/SSR.
-   */
+  /** When false, effects are active immediately (skip skeleton + IO). */
   lazy?: boolean;
-  /** Optional accessible label, useful when children are visually decorative. */
+  /** Accessible label for screen readers. Use when children is decorative. */
   ariaLabel?: string;
-  /**
-   * If true, the element is exposed to keyboard focus (tabIndex=0) with a
-   * visible focus ring matching the active theme. Use on interactive
-   * headlines (linked hero CTA, anchor target, etc.). Default false.
-   */
+  /** When true, element is keyboard-focusable with a strong focus ring. */
   focusable?: boolean;
+  /**
+   * Mark as purely decorative — element is hidden from the accessibility
+   * tree (`aria-hidden="true"`). Use when an adjacent semantic element
+   * already conveys the same text to screen readers.
+   */
+  decorative?: boolean;
 }
 
-/**
- * Premium futuristic gradient headline (cyan → teal → light blue).
- *
- * Performance:
- *   • Lazy halo: effects are activated only after the element is in
- *     viewport (IntersectionObserver) — saves GPU on long landing pages
- *     and on low-power mobile devices.
- *   • Reduced motion: when the user has `prefers-reduced-motion: reduce`,
- *     the component automatically suspends the halo while scrolling and
- *     restores it after the scroll settles. The reinforced-contrast
- *     style is left untouched — those rules already guarantee a flat,
- *     readable headline.
- *
- * Accessibility:
- *   • Keyboard navigation: when `focusable`, the element is tabbable and
- *     gets a strong focus ring in light, dark and high-contrast modes.
- *   • Screen readers: pass `ariaLabel` if children are purely decorative.
- */
 export function NeonGradientText({
   children,
   intensity = "medium",
@@ -53,14 +47,16 @@ export function NeonGradientText({
   lazy = true,
   ariaLabel,
   focusable = false,
+  decorative = false,
 }: NeonGradientTextProps) {
   const ref = useRef<HTMLElement | null>(null);
-  // Effects start "off" so the very first paint shows the skeleton instead
-  // of an unstyled-text flash. They turn on after the element is visible.
   const [active, setActive] = useState(!lazy);
   const [scrolling, setScrolling] = useState(false);
+  const skeletonStartRef = useRef<number>(
+    typeof performance !== "undefined" ? performance.now() : 0,
+  );
 
-  // Lazy-load: activate effects only when the element enters the viewport.
+  // Lazy activation via IntersectionObserver tuned for mobile-first.
   useEffect(() => {
     if (!lazy) return;
     const el = ref.current;
@@ -68,25 +64,32 @@ export function NeonGradientText({
       setActive(true);
       return;
     }
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            // Wait one frame so the skeleton-to-text crossfade is smooth
-            requestAnimationFrame(() => setActive(true));
-            io.disconnect();
-            break;
-          }
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          // Two-frame debounce → guarantees the skeleton→effects swap
+          // lands on a real paint frame, no flash on fast flick-scroll.
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              setActive(true);
+              const now =
+                typeof performance !== "undefined" ? performance.now() : 0;
+              recordHeroNeonEvent({
+                kind: "skeleton-to-active",
+                value: Math.max(0, now - skeletonStartRef.current),
+              });
+            });
+          });
+          io.disconnect();
+          break;
         }
-      },
-      { rootMargin: "120px 0px", threshold: 0.05 },
-    );
+      }
+    }, HERO_NEON_IO_OPTIONS);
     io.observe(el);
     return () => io.disconnect();
   }, [lazy]);
 
-  // Reduced-motion users: pause the halo while scrolling, restore it after
-  // a short idle window. Saves repeated GPU rasterization on cheap mobiles.
+  // Pause halo while scrolling for users with reduced-motion preference.
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -105,10 +108,25 @@ export function NeonGradientText({
     };
   }, []);
 
+  // ARIA wiring:
+  //  • decorative → hide the whole element from SR
+  //  • skeleton → mark as busy + hidden so SR doesn't read placeholder
+  const isSkeleton = !active;
+  const ariaHidden = decorative || isSkeleton ? true : undefined;
+  const ariaBusy = isSkeleton ? true : undefined;
+  // Mirror text into aria-label when the parent is purely a string and no
+  // explicit label is given — preserves a clean SR announcement once the
+  // skeleton lifts (we still hide the skeleton itself via aria-hidden).
+  const computedLabel =
+    ariaLabel ??
+    (typeof children === "string" && !decorative ? children : undefined);
+
   return (
     <Tag
       ref={ref as never}
-      aria-label={ariaLabel}
+      aria-label={computedLabel}
+      aria-hidden={ariaHidden || undefined}
+      aria-busy={ariaBusy || undefined}
       tabIndex={focusable ? 0 : undefined}
       data-hero-neon=""
       data-hero-neon-active={active ? "true" : "false"}
@@ -117,7 +135,6 @@ export function NeonGradientText({
         "hero-neon-text",
         intensity === "soft" && "hero-neon-soft",
         intensity === "strong" && "hero-neon-strong",
-        // Skeleton placeholder until activated — premium shimmer
         !active && "hero-neon-skeleton",
         focusable && "hero-neon-focusable",
         className,

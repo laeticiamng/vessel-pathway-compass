@@ -612,9 +612,15 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.015em;
-    /* Single drop-shadow → ~3× cheaper to rasterize than the previous stack.
-       Promote to its own GPU layer so scrolling does not re-paint the halo. */
-    filter: drop-shadow(0 0 12px hsl(var(--neon-glow) / 0.2));
+    /* Generous line-box + bottom padding so descenders (g, p, é, ç) and
+       accents NEVER get clipped by the drop-shadow rasterization box.
+       Without this, `inline-block` + filter cropped the bottom of letters
+       on long French titles like "procédures vasculaires". */
+    line-height: 1.18;
+    padding: 0.05em 0.08em 0.18em;
+    /* Single, soft drop-shadow → cheap to rasterize. Reduced opacity vs
+       previous version to remove the cyan "blue bleed" on the right side. */
+    filter: drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.16));
     will-change: filter;
     transform: translateZ(0);
     /* Tiny luminous edge — only on engines that support text-stroke */
@@ -627,22 +633,23 @@
     -webkit-text-stroke: 0;
   }
   .hero-neon-text.hero-neon-strong {
-    filter: drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.26));
+    filter: drop-shadow(0 0 14px hsl(var(--neon-glow) / 0.2));
   }
 
   /* Dark mode: single, GPU-friendly halo. No double outline, no triple
-     drop-shadow stack — keeps the cockpit vibe but won't tank scroll FPS. */
+     drop-shadow stack — keeps the cockpit vibe but won't tank scroll FPS.
+     Halo opacities tuned down so long titles stay clean on the right edge. */
   .dark .hero-neon-text {
     background-image: var(--hero-gradient);
     -webkit-text-stroke: 0 !important;
     paint-order: normal;
-    filter: drop-shadow(0 0 16px hsl(var(--neon-glow) / 0.26));
+    filter: drop-shadow(0 0 12px hsl(var(--neon-glow) / 0.2));
   }
   .dark .hero-neon-text.hero-neon-soft {
-    filter: drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.16));
+    filter: drop-shadow(0 0 8px hsl(var(--neon-glow) / 0.14));
   }
   .dark .hero-neon-text.hero-neon-strong {
-    filter: drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.3));
+    filter: drop-shadow(0 0 16px hsl(var(--neon-glow) / 0.24));
   }
 
   /* === Fallback: browsers WITHOUT -webkit-text-stroke support (Firefox <49,

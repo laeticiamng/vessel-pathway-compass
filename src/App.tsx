@@ -70,6 +70,7 @@ const VascScreenResults = lazy(() => import("./pages/app/VascScreenResults"));
 const VascScreenDashboard = lazy(() => import("./pages/app/VascScreenDashboard"));
 const VascScreenAnalytics = lazy(() => import("./pages/app/VascScreenAnalytics"));
 const VascScreenStudy = lazy(() => import("./pages/app/VascScreenStudy"));
+const HeroNeonQa = lazy(() => import("./pages/dev/HeroNeonQa"));
 
 const queryClient = new QueryClient();
 
@@ -113,6 +114,7 @@ const App = () => (
           <Route path="/transparency" element={<Navigate to="/transparence" replace />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+          <Route path="/dev/hero-neon" element={<HeroNeonQa />} />
 
           {/* Semi-public: visible with content gate */}
           <Route path="/app" element={<PublicAppRoute />}>
