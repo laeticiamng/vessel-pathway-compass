@@ -1,7 +1,6 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import dashboardPreview from "@/assets/dashboard-preview.jpg";
-// Card import removed — testimonials section deleted
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation, type Language } from "@/i18n/context";
@@ -12,33 +11,79 @@ import {
   Globe,
   Shield,
   ArrowRight,
-  HeartPulse,
   CheckCircle2,
   Menu,
   Sparkles,
   ChevronUp,
 } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
-// FAQSection + HowItWorksSection legacy retirés (doublons)
-import { AboutSection } from "@/components/landing/AboutSection";
-import { LimitsSection } from "@/components/landing/LimitsSection";
-import { ValidationSection } from "@/components/landing/ValidationSection";
-import { PlatformCompletenessSection } from "@/components/landing/PlatformCompletenessSection";
 import { MedRegBadge } from "@/components/MedRegBadge";
-import {
-  EnBrefSection,
-  AudienceSection,
-  HowItWorksFRSection,
-  UseCasesSection,
-  HomeFAQSection,
-  homeFaqJsonLd,
-} from "@/components/landing/HomeSections";
-import { ComplianceFAQSection, complianceFaqJsonLd } from "@/components/landing/ComplianceFAQSection";
-import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
-import { InteractiveDemoSection } from "@/components/landing/InteractiveDemoSection";
-import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
-import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
-import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
+// JSON-LD: pure data module, no React component side-effects
+import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
+
+/* -------------------------------------------------------------------------
+ * Above-the-fold (eager): PlatformCompletenessSection — anchor target of
+ * the desktop/mobile nav, must be ready immediately for #platform-complete.
+ * ----------------------------------------------------------------------- */
+import { PlatformCompletenessSection } from "@/components/landing/PlatformCompletenessSection";
+
+/* -------------------------------------------------------------------------
+ * Below-the-fold sections — lazy-loaded to shrink the initial JS bundle.
+ * Each chunk is fetched on-demand as the user scrolls.
+ * ----------------------------------------------------------------------- */
+const WhatsNewSection = lazy(() =>
+  import("@/components/landing/WhatsNewSection").then((m) => ({ default: m.WhatsNewSection }))
+);
+const InteractiveDemoSection = lazy(() =>
+  import("@/components/landing/InteractiveDemoSection").then((m) => ({ default: m.InteractiveDemoSection }))
+);
+const EnBrefSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.EnBrefSection }))
+);
+const AudienceSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.AudienceSection }))
+);
+const HowItWorksFRSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.HowItWorksFRSection }))
+);
+const UseCasesSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.UseCasesSection }))
+);
+const HomeFAQSection = lazy(() =>
+  import("@/components/landing/HomeSections").then((m) => ({ default: m.HomeFAQSection }))
+);
+const ComplianceFAQSection = lazy(() =>
+  import("@/components/landing/ComplianceFAQSection").then((m) => ({ default: m.ComplianceFAQSection }))
+);
+const ValidationSection = lazy(() =>
+  import("@/components/landing/ValidationSection").then((m) => ({ default: m.ValidationSection }))
+);
+const LimitsSection = lazy(() =>
+  import("@/components/landing/LimitsSection").then((m) => ({ default: m.LimitsSection }))
+);
+const AboutSection = lazy(() =>
+  import("@/components/landing/AboutSection").then((m) => ({ default: m.AboutSection }))
+);
+const VasculinkArchitecture = lazy(() =>
+  import("@/components/vasculink/VasculinkArchitecture").then((m) => ({ default: m.VasculinkArchitecture }))
+);
+const FourZeroPillars = lazy(() =>
+  import("@/components/vasculink/FourZeroPillars").then((m) => ({ default: m.FourZeroPillars }))
+);
+const ProximityMedicineCard = lazy(() =>
+  import("@/components/vasculink/ProximityMedicineCard").then((m) => ({ default: m.ProximityMedicineCard }))
+);
+
+// Lightweight skeleton placeholder rendered while a lazy section loads.
+const SectionFallback = () => (
+  <div className="py-20" aria-hidden="true">
+    <div className="container mx-auto px-6 max-w-4xl">
+      <div className="h-8 w-2/3 mx-auto rounded-md bg-muted/40 animate-pulse mb-4" />
+      <div className="h-4 w-1/2 mx-auto rounded-md bg-muted/30 animate-pulse" />
+    </div>
+  </div>
+);
+
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
@@ -259,107 +304,100 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Platform completeness — directly under hero */}
+      {/* Platform completeness — directly under hero (eager, anchor target) */}
       <PlatformCompletenessSection />
 
-      {/* What's new — changelog */}
-      <WhatsNewSection />
+      {/* Below-the-fold: every section is code-split + lazy-loaded.
+          A single Suspense boundary keeps the perceived flow smooth. */}
+      <Suspense fallback={<SectionFallback />}>
+        {/* What's new — changelog */}
+        <WhatsNewSection />
 
-      {/* Interactive demo — guided 4-screen walkthrough */}
-      <InteractiveDemoSection />
+        {/* Interactive demo — guided 4-screen walkthrough */}
+        <InteractiveDemoSection />
 
-      {/* En bref */}
-      <EnBrefSection />
+        {/* En bref */}
+        <EnBrefSection />
 
-      {/* Audience */}
-      <AudienceSection />
+        {/* Audience */}
+        <AudienceSection />
 
-      {/* Comment ça marche (anchor target for hero CTA) */}
-      <div id="comment-ca-marche" className="scroll-mt-20">
-        <HowItWorksFRSection />
-      </div>
-
-      {/* Cas d'usage */}
-      <UseCasesSection />
-
-      {/* VASCU-LINK scientific architecture (3 concentric circles) */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6 max-w-6xl space-y-6">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("home.vasculink.title")}</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              {t("home.vasculink.subtitle")}
-            </p>
-          </div>
-          <FourZeroPillars />
-          <VasculinkArchitecture />
-          <ProximityMedicineCard />
+        {/* Comment ça marche (anchor target for hero CTA) */}
+        <div id="comment-ca-marche" className="scroll-mt-20">
+          <HowItWorksFRSection />
         </div>
-      </section>
 
-      {/* Validation clinique — niveau protocole */}
-      <ValidationSection />
+        {/* Cas d'usage */}
+        <UseCasesSection />
 
-      {/* Limites actuelles */}
-      <LimitsSection />
-
-      {/* Legacy stepper supprimé — doublon de HowItWorksFRSection */}
-
-      {/* Modules détaillés : section déplacée — détails complets sur /modules.
-          La grille des 10 modules est rendue par PlatformCompletenessSection ci-dessus. */}
-
-      {/* Trust */}
-      <section className="py-24 bg-muted/40">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
-            >
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-6 w-6 text-primary" />
-              </div>
-              <h2 className="text-3xl font-bold mb-4">{t("landing.trust.title")}</h2>
-              <p className="text-muted-foreground text-lg">
-                {t("landing.trust.subtitle")}
+        {/* VASCU-LINK scientific architecture (3 concentric circles) */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-6 max-w-6xl space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("home.vasculink.title")}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {t("home.vasculink.subtitle")}
               </p>
-            </motion.div>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {Array.isArray(trustSignals) && trustSignals.map((signal, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.4 }}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-card border card-hover"
-                >
-                  <CheckCircle2 className="h-5 w-5 text-success shrink-0 mt-0.5" />
-                  <span className="text-sm">{signal}</span>
-                </motion.div>
-              ))}
+            </div>
+            <FourZeroPillars />
+            <VasculinkArchitecture />
+            <ProximityMedicineCard />
+          </div>
+        </section>
+
+        {/* Validation clinique — niveau protocole */}
+        <ValidationSection />
+
+        {/* Limites actuelles */}
+        <LimitsSection />
+
+        {/* Trust */}
+        <section className="py-24 bg-muted/40">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center mb-12"
+              >
+                <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <h2 className="text-3xl font-bold mb-4">{t("landing.trust.title")}</h2>
+                <p className="text-muted-foreground text-lg">
+                  {t("landing.trust.subtitle")}
+                </p>
+              </motion.div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {Array.isArray(trustSignals) && trustSignals.map((signal, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.4 }}
+                    className="flex items-start gap-3 p-4 rounded-xl bg-card border card-hover"
+                  >
+                    <CheckCircle2 className="h-5 w-5 text-success shrink-0 mt-0.5" />
+                    <span className="text-sm">{signal}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Témoignages retirés : non vérifiables, contraires à la stratégie social-proof transparente. */}
+        {/* Home FAQ — French, optimized for SEO/GEO */}
+        <HomeFAQSection />
 
-      {/* Home FAQ — French, optimized for SEO/GEO */}
-      <HomeFAQSection />
+        {/* Compliance-ready FAQ */}
+        <ComplianceFAQSection />
 
-      {/* Compliance-ready FAQ */}
-      <ComplianceFAQSection />
-
-      {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
-
-      {/* LimitsSection retirée ici — déjà rendue plus haut, juste après VASCU-LINK */}
-
-      {/* About */}
-      <AboutSection />
+        {/* About */}
+        <AboutSection />
+      </Suspense>
 
       {/* CTA */}
       <section className="py-24 relative overflow-hidden">
