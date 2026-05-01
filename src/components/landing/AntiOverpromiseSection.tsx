@@ -168,7 +168,7 @@ const CONTENT: Record<Language, Content> = {
         insteadSays: "Nützlich, wo Doppler oder ABI nicht ausreichen.",
       },
       {
-        icon: ICON_INDUSTRIAL_DE_FALLBACK(),
+        icon: ICONS[4],
         notClaim: "Industriell bereit zu sein.",
         insteadSays: "Gestufter Doktoratsnachweis, kein fertiges Produkt.",
       },
