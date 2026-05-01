@@ -12,7 +12,7 @@
  *   • src/index.css, tailwind.config.ts (where tokens are defined)
  *   • src/components/neon/* (controlled neon components)
  *   • src/integrations/supabase/* (auto-generated)
- *   • **/__tests__/**
+ *   • test files (__tests__ folders, *.test.tsx)
  *
  * Usage:
  *   node scripts/check-design-system.mjs [--fix-suggest]
