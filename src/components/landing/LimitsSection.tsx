@@ -30,7 +30,6 @@ export function LimitsSection() {
         <div className="max-w-2xl mx-auto text-center mb-12">
           <div className="inline-flex items-center gap-2 rounded-full border border-warning/30 bg-warning/10 px-3 py-1 text-xs font-medium text-warning mb-4">
             <AlertTriangle className="h-3.5 w-3.5" />
-            {t("pages.faq.items") /* keeps key tree warm — noop */ ? null : null}
             <span>{t("pages.limits.subtitle")}</span>
           </div>
           <h2 id="limits-title" className="text-3xl md:text-4xl font-bold mb-3">
