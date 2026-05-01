@@ -225,6 +225,8 @@ export default function Research() {
           ))}
         </div>
       )}
+        </TabsContent>
+      </Tabs>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
