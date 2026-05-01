@@ -192,6 +192,41 @@
       hsl(210 100% 78%) 100%
     );
     --surface-glass: 222 45% 9%;
+
+    /* === Dark-mode glow / halo tokens (single source of truth) ===
+       Refactored from inline magic numbers. Keep these in sync — the
+       `dark-mode-tokens.test.ts` regression test fails if any consumer
+       rule hardcodes a value instead of referencing one of these. */
+    /* Hero-neon halo (drop-shadow radius + opacity) */
+    --neon-halo-radius: 12px;
+    --neon-halo-opacity: 0.20;
+    --neon-halo-radius-soft: 8px;
+    --neon-halo-opacity-soft: 0.14;
+    --neon-halo-radius-strong: 16px;
+    --neon-halo-opacity-strong: 0.24;
+    /* Mobile-tightened halo (reduced bloom on small screens) */
+    --neon-halo-radius-mobile: 6px;
+    --neon-halo-opacity-mobile: 0.14;
+    --neon-halo-radius-mobile-soft: 4px;
+    --neon-halo-opacity-mobile-soft: 0.10;
+    --neon-halo-radius-mobile-strong: 9px;
+    --neon-halo-opacity-mobile-strong: 0.18;
+    /* Icon-ring inner + outer glow */
+    --neon-ring-glow-inner: 14px;
+    --neon-ring-glow-outer: 16px;
+    --neon-ring-glow-inner-mobile: 8px;
+    --neon-ring-glow-outer-mobile: 8px;
+    --neon-ring-glow-opacity-inner: 0.18;
+    --neon-ring-glow-opacity-outer: 0.22;
+    --neon-ring-glow-opacity-inner-mobile: 0.12;
+    --neon-ring-glow-opacity-outer-mobile: 0.16;
+    /* Illustration tint filter (PNG + data-neon-illustration SVG) */
+    --neon-tint-cyan: brightness(0) saturate(100%) invert(86%) sepia(48%)
+      saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
+    --neon-tint-violet: brightness(0) saturate(100%) invert(82%) sepia(28%)
+      saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
+    --neon-tint-opacity: 0.92;
+    --neon-tint-opacity-mobile: 0.98;
   }
 }
 
@@ -428,8 +463,8 @@
     color: hsl(188 100% 82%);
     box-shadow:
       inset 0 1px 0 hsl(188 95% 70% / 0.12),
-      inset 0 0 14px hsl(188 95% 58% / 0.18),
-      0 0 16px -2px hsl(188 95% 58% / 0.22);
+      inset 0 0 var(--neon-ring-glow-inner) hsl(188 95% 58% / var(--neon-ring-glow-opacity-inner)),
+      0 0 var(--neon-ring-glow-outer) -2px hsl(188 95% 58% / var(--neon-ring-glow-opacity-outer));
   }
   .neon-icon-ring.violet {
     border-color: hsl(var(--contrast-violet) / 0.4);
@@ -442,8 +477,8 @@
     color: hsl(280 95% 88%);
     box-shadow:
       inset 0 1px 0 hsl(280 95% 80% / 0.12),
-      inset 0 0 14px hsl(270 85% 68% / 0.18),
-      0 0 16px -2px hsl(270 85% 68% / 0.22);
+      inset 0 0 var(--neon-ring-glow-inner) hsl(270 85% 68% / var(--neon-ring-glow-opacity-inner)),
+      0 0 var(--neon-ring-glow-outer) -2px hsl(270 85% 68% / var(--neon-ring-glow-opacity-outer));
   }
   /* === Dark-mode illustration tint ===
      Applies to ALL raster illustrations (PNG/JPG via <img>) inside icon
@@ -453,15 +488,13 @@
      `data-neon-keep-color`. */
   .dark .neon-icon-ring img:not([data-neon-keep-color]),
   .dark .neon-icon-ring svg[data-neon-illustration]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(86%) sepia(48%) saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
-    opacity: 0.92;
+    filter: var(--neon-tint-cyan);
+    opacity: var(--neon-tint-opacity);
   }
   .dark .neon-icon-ring.violet img:not([data-neon-keep-color]),
   .dark .neon-icon-ring.violet svg[data-neon-illustration]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(82%) sepia(28%) saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
-    opacity: 0.92;
+    filter: var(--neon-tint-violet);
+    opacity: var(--neon-tint-opacity);
   }
   /* Generic dark-mode tint for any signature illustration (PNG or SVG)
      placed OUTSIDE an icon ring (cards, hero, modules…). The
@@ -469,13 +502,18 @@
      remain in their original palette (logos, photographs, charts). */
   .dark img[data-neon-illustration]:not([data-neon-keep-color]),
   .dark svg[data-neon-illustration]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(86%) sepia(48%) saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
-    opacity: 0.92;
+    filter: var(--neon-tint-cyan);
+    opacity: var(--neon-tint-opacity);
   }
   .dark [data-neon-illustration][data-neon-tone="violet"]:not([data-neon-keep-color]) {
-    filter: brightness(0) saturate(100%)
-      invert(82%) sepia(28%) saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
+    filter: var(--neon-tint-violet);
+  }
+  /* Belt-and-suspenders: explicit opt-out always wins, even against
+     more-specific selectors above. Tested by `dark-mode-keep-color`
+     Playwright spec. */
+  .dark [data-neon-keep-color],
+  .dark .neon-icon-ring [data-neon-keep-color] {
+    filter: none !important;
   }
 
   .neon-divider {
@@ -687,13 +725,13 @@
     background-image: var(--hero-gradient);
     -webkit-text-stroke: 0 !important;
     paint-order: normal;
-    filter: drop-shadow(0 0 12px hsl(var(--neon-glow) / 0.2));
+    filter: drop-shadow(0 0 var(--neon-halo-radius) hsl(var(--neon-glow) / var(--neon-halo-opacity)));
   }
   .dark .hero-neon-text.hero-neon-soft {
-    filter: drop-shadow(0 0 8px hsl(var(--neon-glow) / 0.14));
+    filter: drop-shadow(0 0 var(--neon-halo-radius-soft) hsl(var(--neon-glow) / var(--neon-halo-opacity-soft)));
   }
   .dark .hero-neon-text.hero-neon-strong {
-    filter: drop-shadow(0 0 16px hsl(var(--neon-glow) / 0.24));
+    filter: drop-shadow(0 0 var(--neon-halo-radius-strong) hsl(var(--neon-glow) / var(--neon-halo-opacity-strong)));
   }
 
   /* === Fallback: browsers WITHOUT -webkit-text-stroke support (Firefox <49,
@@ -848,32 +886,36 @@
      tighten icon-ring inner glow so the cards don't bloom. */
   @media (max-width: 640px) {
     .dark .hero-neon-text {
-      filter: drop-shadow(0 0 6px hsl(var(--neon-glow) / 0.14));
+      filter: drop-shadow(0 0 var(--neon-halo-radius-mobile) hsl(var(--neon-glow) / var(--neon-halo-opacity-mobile)));
       letter-spacing: -0.01em;
+      /* Bump base brightness slightly so glyph edges stay sharp on
+         high-DPR phone screens. Target font-size floor 16px enforced by
+         consumers (asserted in `dark-mode-icons` Playwright spec). */
+      font-weight: 700;
     }
     .dark .hero-neon-text.hero-neon-soft {
-      filter: drop-shadow(0 0 4px hsl(var(--neon-glow) / 0.10));
+      filter: drop-shadow(0 0 var(--neon-halo-radius-mobile-soft) hsl(var(--neon-glow) / var(--neon-halo-opacity-mobile-soft)));
     }
     .dark .hero-neon-text.hero-neon-strong {
-      filter: drop-shadow(0 0 9px hsl(var(--neon-glow) / 0.18));
+      filter: drop-shadow(0 0 var(--neon-halo-radius-mobile-strong) hsl(var(--neon-glow) / var(--neon-halo-opacity-mobile-strong)));
     }
     .dark .neon-icon-ring {
       box-shadow:
         inset 0 1px 0 hsl(188 95% 70% / 0.10),
-        inset 0 0 8px hsl(188 95% 58% / 0.12),
-        0 0 8px -2px hsl(188 95% 58% / 0.16);
+        inset 0 0 var(--neon-ring-glow-inner-mobile) hsl(188 95% 58% / var(--neon-ring-glow-opacity-inner-mobile)),
+        0 0 var(--neon-ring-glow-outer-mobile) -2px hsl(188 95% 58% / var(--neon-ring-glow-opacity-outer-mobile));
     }
     .dark .neon-icon-ring.violet {
       box-shadow:
         inset 0 1px 0 hsl(280 95% 80% / 0.10),
-        inset 0 0 8px hsl(270 85% 68% / 0.12),
-        0 0 8px -2px hsl(270 85% 68% / 0.16);
+        inset 0 0 var(--neon-ring-glow-inner-mobile) hsl(270 85% 68% / var(--neon-ring-glow-opacity-inner-mobile)),
+        0 0 var(--neon-ring-glow-outer-mobile) -2px hsl(270 85% 68% / var(--neon-ring-glow-opacity-outer-mobile));
     }
     /* Reduce illustration tint opacity loss on mobile (small icons need
        more luminance to stay legible at arm's length). */
     .dark .neon-icon-ring img:not([data-neon-keep-color]),
     .dark .neon-icon-ring svg[data-neon-illustration]:not([data-neon-keep-color]) {
-      opacity: 0.98;
+      opacity: var(--neon-tint-opacity-mobile);
     }
   }
 
