@@ -1,4 +1,6 @@
-import { AlertTriangle, Stethoscope, Cpu, Gauge, ShieldAlert, CheckCircle2 } from "lucide-react";
+import { AlertTriangle, Stethoscope, Cpu, Gauge, ShieldAlert, CheckCircle2, ArrowRight, Scale } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/i18n/context";
 
 type SectionKey = "regulatory" | "clinical" | "technical" | "usage";
