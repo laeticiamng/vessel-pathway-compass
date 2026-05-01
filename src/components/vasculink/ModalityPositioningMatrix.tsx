@@ -1,69 +1,26 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
+import { useTranslation } from "@/i18n/context";
 
-interface Row {
-  fn: string;
+interface RowDef {
+  key: string;
+  rowKey: string;
   doppler: string;
   vasculink: string;
   angiography: string;
 }
 
-const ROWS: Row[] = [
-  {
-    fn: "Hemodynamic flow assessment",
-    doppler: "Strong",
-    vasculink: "Integrated",
-    angiography: "Limited / direct procedural",
-  },
-  {
-    fn: "Global lesion mapping",
-    doppler: "Variable / operator-dependent",
-    vasculink: "Core objective",
-    angiography: "Strong",
-  },
-  {
-    fn: "Pre-revascularization decision",
-    doppler: "Partial",
-    vasculink: "Core objective",
-    angiography: "Strong",
-  },
-  {
-    fn: "Procedural guidance",
-    doppler: "No",
-    vasculink: "L2 / L3 only — non-human",
-    angiography: "Yes",
-  },
-  {
-    fn: "Human revascularization",
-    doppler: "No",
-    vasculink: "Not during thesis",
-    angiography: "Yes",
-  },
-  {
-    fn: "Ionizing radiation",
-    doppler: "No",
-    vasculink: "No",
-    angiography: "Usually yes",
-  },
-  {
-    fn: "Injected contrast",
-    doppler: "No",
-    vasculink: "No",
-    angiography: "Usually yes",
-  },
-  {
-    fn: "Deployment in proximity",
-    doppler: "Strong",
-    vasculink: "Target",
-    angiography: "Limited / heavy infrastructure",
-  },
-  {
-    fn: "Ecological footprint",
-    doppler: "Low",
-    vasculink: "Core design principle",
-    angiography: "Higher infrastructure burden",
-  },
+const ROWS: RowDef[] = [
+  { key: "hemodynamic",        rowKey: "hemodynamic",        doppler: "strong",            vasculink: "integrated",      angiography: "limitedDirect" },
+  { key: "global-lesion",      rowKey: "globalLesion",       doppler: "variableOperator",  vasculink: "coreObjective",   angiography: "strong" },
+  { key: "pre-revasc",         rowKey: "preRevasc",          doppler: "partial",           vasculink: "coreObjective",   angiography: "strong" },
+  { key: "procedural-guidance",rowKey: "proceduralGuidance", doppler: "no",                vasculink: "l2l3NonHuman",    angiography: "yes" },
+  { key: "human-revasc",       rowKey: "humanRevasc",        doppler: "no",                vasculink: "notDuringThesis", angiography: "yes" },
+  { key: "radiation",          rowKey: "radiation",          doppler: "no",                vasculink: "no",              angiography: "usuallyYes" },
+  { key: "contrast",           rowKey: "contrast",           doppler: "no",                vasculink: "no",              angiography: "usuallyYes" },
+  { key: "proximity",          rowKey: "proximity",          doppler: "strong",            vasculink: "target",          angiography: "limitedHeavy" },
+  { key: "ecological",         rowKey: "ecological",         doppler: "low",               vasculink: "coreDesign",      angiography: "higherBurden" },
 ];
 
 interface Props {
@@ -71,32 +28,33 @@ interface Props {
 }
 
 export function ModalityPositioningMatrix({ className }: Props) {
+  const { t } = useTranslation();
+  const tr = (k: string) => t(`vasculink.matrix.${k}`) as string;
+
   return (
     <Card className={className}>
       <CardHeader>
-        <CardTitle className="text-base">Doppler vs VASCU-LINK L1 vs conventional angiography</CardTitle>
-        <CardDescription>
-          Where each modality fits in the pre-revascularization decision chain.
-        </CardDescription>
+        <CardTitle className="text-base">{tr("title")}</CardTitle>
+        <CardDescription>{tr("subtitle")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="min-w-[180px]">Function</TableHead>
-                <TableHead>Doppler</TableHead>
-                <TableHead>VASCU-LINK L1</TableHead>
-                <TableHead>Conventional angiography</TableHead>
+                <TableHead className="min-w-[180px]">{tr("headers.function")}</TableHead>
+                <TableHead>{tr("headers.doppler")}</TableHead>
+                <TableHead>{tr("headers.vasculink")}</TableHead>
+                <TableHead>{tr("headers.angiography")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {ROWS.map((row) => (
-                <TableRow key={row.fn} data-testid={`matrix-row-${row.fn.replace(/\s+/g, "-").toLowerCase()}`}>
-                  <TableCell className="font-medium text-sm">{row.fn}</TableCell>
-                  <TableCell className="text-sm text-muted-foreground">{row.doppler}</TableCell>
-                  <TableCell className="text-sm">{row.vasculink}</TableCell>
-                  <TableCell className="text-sm text-muted-foreground">{row.angiography}</TableCell>
+                <TableRow key={row.key} data-testid={`matrix-row-${row.key}`}>
+                  <TableCell className="font-medium text-sm">{tr(`rows.${row.rowKey}`)}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{tr(`values.${row.doppler}`)}</TableCell>
+                  <TableCell className="text-sm">{tr(`values.${row.vasculink}`)}</TableCell>
+                  <TableCell className="text-sm text-muted-foreground">{tr(`values.${row.angiography}`)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -104,13 +62,11 @@ export function ModalityPositioningMatrix({ className }: Props) {
         </div>
 
         <div className="rounded-xl border border-primary/30 bg-primary/5 p-4 space-y-2">
-          <Badge variant="default" className="text-[10px]">Why not Doppler / why not angiography</Badge>
-          <p className="text-sm">
-            <strong>VASCU-LINK is not a Doppler replacement.</strong> Doppler remains the
-            first-line hemodynamic test. VASCU-LINK aims to address the next question:
-            can a 4-zero angiographic map support pre-revascularization decision-making
-            without immediate use of heavy injected or irradiating imaging?
-          </p>
+          <Badge variant="default" className="text-[10px]">{tr("footer.badge")}</Badge>
+          <p
+            className="text-sm"
+            dangerouslySetInnerHTML={{ __html: tr("footer.body") }}
+          />
         </div>
       </CardContent>
     </Card>
