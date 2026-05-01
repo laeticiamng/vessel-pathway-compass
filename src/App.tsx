@@ -113,6 +113,7 @@ const App = () => (
           <Route path="/transparency" element={<Navigate to="/transparence" replace />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+          <Route path="/dev/hero-neon" element={<HeroNeonQa />} />
 
           {/* Semi-public: visible with content gate */}
           <Route path="/app" element={<PublicAppRoute />}>
