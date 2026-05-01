@@ -189,6 +189,46 @@ export const fr = {
         { q: "Que signifie 'flux de travail non ionisant' ?", a: "Les flux de travail non ionisants utilisent des modalités d'imagerie qui ne produisent pas de radiation ionisante — comme l'IRM, l'IVUS, l'OCT et l'échographie — au lieu de la fluoroscopie et du scanner. AquaMR Flow aide à planifier et exécuter ces approches d'épargne de contraste et sans radiation." },
       ],
     },
+    complianceFaq: {
+      badge: "Compliance-ready",
+      title: "FAQ Compliance — auditabilité, traçabilité, sécurité",
+      subtitle: "Comment AquaMR Flow est conçu pour une utilisation clinique sérieuse, et ce que signifie aujourd'hui « pas d'approbation réglementaire ».",
+      disclaimer: "Cette FAQ décrit la posture de conformité visée par AquaMR Flow. Elle ne constitue pas un avis juridique, médical ou réglementaire et ne remplace pas la due diligence institutionnelle.",
+      items: [
+        {
+          q: "Que signifie « pas d'approbation réglementaire » pour AquaMR Flow ?",
+          a: "AquaMR Flow est un prototype de recherche en bêta ouverte. Il n'est ni marqué CE comme dispositif médical, ni autorisé par la FDA, ni homologué Swissmedic.\n\nConcrètement :\n• Il n'établit pas de diagnostic et ne prescrit pas de traitement.\n• Toute aide à la décision (CI-AKI, planning, jumeau numérique) doit être confirmée par un clinicien qualifié, qui reste seul responsable de l'acte médical.\n• Les usages cliniques s'inscrivent dans un cadre de recherche, de formation ou d'aide à l'organisation des workflows.\n\nL'architecture est conçue pour viser à terme la conformité MDR / RGPD / IEC 62304, mais cet objectif n'est pas atteint à ce stade.",
+        },
+        {
+          q: "Comment l'auditabilité est-elle assurée ?",
+          a: "Chaque action sensible (lecture, écriture, export, calcul de score, décision) est :\n• horodatée,\n• rattachée à un utilisateur authentifié,\n• tracée dans un journal applicatif côté backend,\n• consultable par un administrateur d'institution sur demande motivée.\n\nLes Edge Functions critiques exigent un JWT valide et vérifient les rôles côté serveur. Les exports de données génèrent une entrée d'audit dédiée (qui, quoi, quand, format, périmètre).",
+        },
+        {
+          q: "Comment la traçabilité des décisions cliniques est-elle gérée ?",
+          a: "Toute décision documentée dans la plateforme (plan de procédure, score CI-AKI, validation L1, ajout au registre) conserve :\n• l'identifiant pseudonymisé du patient,\n• les paramètres d'entrée utilisés,\n• la version du modèle ou de la formule appliquée,\n• le clinicien ayant validé,\n• la date et l'heure UTC.\n\nCela permet, en cas de relecture rétrospective ou d'audit institutionnel, de reconstituer le contexte exact d'une décision.",
+        },
+        {
+          q: "Qu'est-ce que la « sécurité by design » dans AquaMR Flow ?",
+          a: "Les principes appliqués dès l'architecture :\n• Chiffrement TLS 1.2+ en transit, chiffrement au repos côté backend.\n• Row-Level Security activée sur toutes les tables sensibles (patients, cas, PROMs, audit).\n• Filtrage défense-en-profondeur : RLS + filtres `case_id` côté serveur sur les requêtes PROMs.\n• Rôles séparés (clinicien, chercheur, administrateur, support).\n• Pseudonymisation systématique des données patient avant tout benchmark ou export agrégé.\n• Soft-delete avec délai de grâce de 30 jours et purge automatique.\n• Pas de partage de modèles d'IA entraînés sur des données patient identifiables.",
+        },
+        {
+          q: "Mes données patient sortent-elles de l'Union européenne ou de la Suisse ?",
+          a: "Aujourd'hui, la plateforme s'appuie sur une infrastructure hébergée par Lovable Cloud / Supabase. Une migration vers un hébergement clinique HDS (UE/CH) est prévue avant tout usage en production institutionnelle.\n\nPour les institutions soumises à des contraintes strictes (HDS France, hébergement CH), un dispositif d'isolation et de localisation des données est négociable au cas par cas avant déploiement.",
+        },
+        {
+          q: "Quelle est la posture vis-à-vis du RGPD et de la nLPD ?",
+          a: "L'architecture vise la conformité RGPD (UE) et nLPD (Suisse) :\n• base légale documentée par usage (recherche, soin, formation),\n• minimisation des données collectées,\n• droits d'accès, rectification, effacement supportés,\n• registre des traitements maintenu côté éditeur,\n• sous-traitants identifiés (DPA disponible sur demande).\n\nUne DPIA simplifiée est fournie aux institutions partenaires avant tout pilote.",
+        },
+        {
+          q: "Que se passe-t-il en cas d'incident de sécurité ?",
+          a: "Procédure :\n1. Détection via monitoring applicatif et alertes backend.\n2. Triage en moins de 24 h ouvrées.\n3. Notification aux institutions concernées dans les délais RGPD (72 h pour les violations de données personnelles).\n4. Post-mortem documenté et mesures correctives partagées.\n\nLes journaux d'audit permettent de circonscrire le périmètre exact (utilisateurs, patients, actions) impacté par un incident.",
+        },
+        {
+          q: "Puis-je auditer la plateforme avant un pilote clinique ?",
+          a: "Oui. Sur demande motivée d'une institution, nous fournissons :\n• un dossier de sécurité (architecture, RLS, gestion des secrets, sous-traitants),\n• les disclaimers réglementaires en vigueur,\n• la liste des endpoints L1 verrouillés et la version du protocole clinique applicable,\n• un accès à un environnement de test isolé pour vérifier le comportement.\n\nLes audits techniques approfondis (pentests, revue de code) peuvent être organisés sous NDA.",
+        },
+      ],
+    },
     about: {
       title: "Qui sommes-nous",
       description: "AquaMR Flow est développé par EMOTIONSCARE, une entreprise de santé numérique basée à Amiens, en France. Fondée par Laëticia Motongane, médecin assistante en médecine interne (parcours FMH, médecine vasculaire), notre mission est d'offrir aux professionnels vasculaires une plateforme dédiée et moderne — conçue autour de leurs vrais workflows, pas de modèles génériques.",
