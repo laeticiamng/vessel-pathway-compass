@@ -300,7 +300,7 @@ export default function Landing() {
                 decoding="async"
               />
             </div>
-            <p className="mt-4 text-sm text-primary-foreground/40 italic">
+            <p className="mt-4 text-sm text-on-hero-soft italic">
               {t("landing.hero.dashboardCaption")}
             </p>
           </motion.div>
