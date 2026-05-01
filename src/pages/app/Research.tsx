@@ -2,12 +2,15 @@ import ResearchExportButton from "@/components/research/ResearchExportButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Plus, Users, Database, Download, BarChart3, Loader2 } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FileText, Plus, Users, Download, BarChart3, Loader2, Calculator, ShieldCheck, Leaf, FolderOpen } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { PowerCalculation } from "@/components/vasculink/PowerCalculation";
 import { DSMBCharter } from "@/components/vasculink/DSMBCharter";
 import { LCAQALYFramework } from "@/components/vasculink/LCAQALYFramework";
+import { DSMBExportButton } from "@/components/vasculink/DSMBExportButton";
+import { AuditPackButton } from "@/components/vasculink/AuditPackButton";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,8 +20,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+
 
 export default function Research() {
   const { t } = useTranslation();
@@ -75,6 +80,14 @@ export default function Research() {
   });
 
   const activeStudies = studies.filter((s) => s.status !== "draft").length;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialTab = searchParams.get("tab") ?? "studies";
+  const [tab, setTab] = useState(initialTab);
+  useEffect(() => {
+    const next = new URLSearchParams(searchParams);
+    if (tab === "studies") next.delete("tab"); else next.set("tab", tab);
+    setSearchParams(next, { replace: true });
+  }, [tab]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-6 max-w-6xl">
@@ -87,7 +100,8 @@ export default function Research() {
           </h1>
           <p className="text-muted-foreground mt-1">{t("research.subtitle")}</p>
         </div>
-        <div className="flex gap-2 self-start sm:self-auto">
+        <div className="flex gap-2 self-start sm:self-auto flex-wrap">
+          <AuditPackButton />
           <ResearchExportButton />
           <Button onClick={() => setDialogOpen(true)}>
             <Plus className="h-4 w-4 mr-2" />
@@ -98,32 +112,50 @@ export default function Research() {
 
       <ScientificSafetyBox />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <PowerCalculation />
-        <DSMBCharter />
-      </div>
-      <LCAQALYFramework />
+      <Tabs value={tab} onValueChange={setTab} className="space-y-4">
+        <TabsList className="flex-wrap h-auto">
+          <TabsTrigger value="studies"><FolderOpen className="h-4 w-4 mr-1" /> Studies</TabsTrigger>
+          <TabsTrigger value="power"><Calculator className="h-4 w-4 mr-1" /> Power</TabsTrigger>
+          <TabsTrigger value="dsmb"><ShieldCheck className="h-4 w-4 mr-1" /> DSMB Charter</TabsTrigger>
+          <TabsTrigger value="lca"><Leaf className="h-4 w-4 mr-1" /> LCA / QALY</TabsTrigger>
+        </TabsList>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">{t("research.stats.activeStudies")}</p>
-            <p className="text-3xl font-bold mt-1">{activeStudies}</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">{t("research.stats.eligiblePatients")}</p>
-            <p className="text-3xl font-bold mt-1">—</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="pt-6">
-            <p className="text-sm text-muted-foreground">{t("research.stats.dataExports")}</p>
-            <p className="text-3xl font-bold mt-1">{exportCount}</p>
-          </CardContent>
-        </Card>
-      </div>
+        <TabsContent value="power">
+          <PowerCalculation />
+        </TabsContent>
+
+        <TabsContent value="dsmb" className="space-y-4">
+          <div className="flex justify-end">
+            <DSMBExportButton />
+          </div>
+          <DSMBCharter />
+        </TabsContent>
+
+        <TabsContent value="lca">
+          <LCAQALYFramework />
+        </TabsContent>
+
+        <TabsContent value="studies" className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-sm text-muted-foreground">{t("research.stats.activeStudies")}</p>
+                <p className="text-3xl font-bold mt-1">{activeStudies}</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-sm text-muted-foreground">{t("research.stats.eligiblePatients")}</p>
+                <p className="text-3xl font-bold mt-1">—</p>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardContent className="pt-6">
+                <p className="text-sm text-muted-foreground">{t("research.stats.dataExports")}</p>
+                <p className="text-3xl font-bold mt-1">{exportCount}</p>
+              </CardContent>
+            </Card>
+          </div>
 
       {isLoading ? (
         <div className="flex justify-center py-8"><Loader2 className="h-6 w-6 animate-spin text-muted-foreground" /></div>
@@ -193,6 +225,8 @@ export default function Research() {
           ))}
         </div>
       )}
+        </TabsContent>
+      </Tabs>
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         <DialogContent>
