@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-01T09:54:16.597Z_
+_Generated: 2026-05-01T10:00:37.276Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 
@@ -8,12 +8,12 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 
 | Metric | Count |
 |---|---:|
-| Translation keys referenced from code | 1236 |
+| Translation keys referenced from code | 1250 |
 | Dynamic key prefixes detected | 33 |
 | Keys missing in FR | 0 |
 | Keys missing in EN | 0 |
 | Keys missing in DE | 0 |
-| Orphan keys (defined, unused) | 78 |
+| Orphan keys (defined, unused) | 50 |
 | Public pages with hardcoded candidates | 2 (2 findings) |
 
 ## Missing keys — FR
@@ -30,7 +30,7 @@ _None ✅_
 
 ## Orphan keys (defined in FR dictionary but never referenced)
 
-_78 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
+_50 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
 
 ```
 common.appName
@@ -41,32 +41,6 @@ common.submit
 common.viewAll
 common.signUp
 common.upload
-command.dashboard
-command.procedurePlanner
-command.fusionViewer
-command.patients
-command.digitalTwin
-command.ciAkiEngine
-command.simulation
-command.registry
-command.education
-command.research
-command.analytics
-command.settings
-command.vascscreen
-landing.hero.badge
-landing.hero.title
-landing.hero.headlinePre
-landing.hero.headlineHighlight
-landing.hero.subtitle
-landing.hero.cta
-landing.hero.secondary
-landing.hero.socialProof
-landing.socialProof.title
-landing.testimonials.title
-landing.testimonials.disclaimer
-landing.testimonials.items
-landing.footer.contact
 auth.checkEmailDesc
 dashboard.quickActions.newCase
 dashboard.quickActions.education
@@ -91,8 +65,6 @@ patientDetail.toastsDeletedDesc
 patientDetail.trash.title
 analytics.period
 analytics.category
-seo.landing.title
-seo.landing.description
 vascscreen.riskFactors
 vascscreen.abiGuide
 vascscreen.study

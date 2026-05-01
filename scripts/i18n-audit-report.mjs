@@ -120,6 +120,16 @@ function extractUsedKeys(files) {
       const prefix = m[1].split("${")[0].replace(/\.$/, "");
       if (prefix.length > 1) dynamicPrefixes.add(prefix);
     }
+    // Indirect references via `key: "namespace.path"` (used by config-driven
+    // surfaces like CommandPalette, navigation arrays, …). We require the
+    // value to look like a dotted i18n path (≥1 dot, no slashes, no spaces)
+    // so we don't sweep up unrelated keys.
+    const KEY_FIELD_RE = /\bkey\s*:\s*["'`]([a-zA-Z][\w]*(?:\.[\w]+)+)["'`]/g;
+    while ((m = KEY_FIELD_RE.exec(code)) !== null) {
+      const key = m[1];
+      if (!used.has(key)) used.set(key, new Set());
+      used.get(key).add(rel + " (key:)");
+    }
   }
   return { used, dynamicPrefixes };
 }

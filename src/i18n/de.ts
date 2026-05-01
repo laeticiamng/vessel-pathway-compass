@@ -103,14 +103,8 @@ export const de = {
       explore: "Funktionen",
     },
     hero: {
-      badge: "Die All-in-One-Plattform für Gefäßmedizin — jetzt als kostenlose Beta",
-      title: "AquaMR Flow",
-      headlinePre: "KI-gestützte klinische Plattform für",
-      headlineHighlight: "Gefäßmedizin",
-      subtitle: "Verwalten Sie Patienten, erstellen Sie KI-Berichte, verfolgen Sie Ergebnisse und arbeiten Sie mit Experten zusammen — eine sichere Plattform für Gefäßmedizin.",
-      cta: "Kostenlos testen — keine Kreditkarte",
-      secondary: "Pläne & Preise",
-      socialProof: "Kostenlose Beta — offen für Gefäßspezialisten weltweit",
+      // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
+      // have been replaced by the home.hero.* namespace. Only dashboardCaption remains here.
       dashboardCaption: "Das klinische Dashboard: Patientenübersicht, Risikoverteilung und Schnellzugriff auf alle Module.",
     },
     howItWorks: {
@@ -184,16 +178,9 @@ export const de = {
         "Rollenbasierter Zugang: Ärzte, Assistenzärzte, Administratoren",
       ],
     },
-    socialProof: { title: "Entwickelt für Gefäßspezialisten — von Gefäßspezialisten" },
-    testimonials: {
-      title: "Was frühe Nutzer sagen",
-      disclaimer: "Feedback aus unserem Beta-Programm. Identitäten auf Wunsch der Teilnehmer vertraulich.",
-      items: [
-        { quote: "Die strukturierten KI-Berichte sparen mir mindestens 30 Minuten pro Fall. Früher habe ich alles diktiert — jetzt prüfe und bestätige ich. Das gehört zu meinem Arbeitsalltag.", author: "Gefäßchirurg", role: "Universitätsklinik, EU" },
-        { quote: "Ich nutze den digitalen Zwilling bei der Visite, um Assistenzärzten genau zu zeigen, wo die Läsionen sind und wie sie sich entwickelt haben. Das hat unsere Tafelskizzen ersetzt.", author: "Interventioneller Radiologe", role: "Privates Gefäßzentrum, CH" },
-        { quote: "Als Assistenzarzt im 3. Jahr haben mir das Simulationslabor und das Logbuch geholfen, meinen Fortschritt zu verfolgen und mich auf die Facharztprüfung vorzubereiten. Nichts anderes bot das.", author: "Assistenzarzt Gefäßchirurgie", role: "Lehrkrankenhaus, USA" },
-      ],
-    },
+    // Note: socialProof + testimonials sections were removed from the landing page
+    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Häufig gestellte Fragen",
       subtitle: "Alles, was Sie über AquaMR Flow wissen müssen.",
@@ -243,7 +230,7 @@ export const de = {
       notMedicalDevice: "Klinische Entscheidungsunterstützung — kein Medizinprodukt.",
       product: "Produkt",
       legal: "Rechtliches",
-      contact: "Kontakt & Support",
+      // contact: removed — no longer rendered in the footer (handled via dedicated nav).
       rights: "Alle Rechte vorbehalten.",
       skipToContent: "Zum Inhalt springen",
     },
@@ -1187,7 +1174,7 @@ export const de = {
       title: "AquaMR Flow | Nicht-ionisierende Workflow-Plattform für Gefäßmedizin",
       description: "AquaMR Flow ist eine nicht-ionisierende Workflow-Plattform für die Gefäßmedizin: Planung, Bildgebung, klinische Simulation und Forschungsregister.",
     },
-    nav: { mainAria: "Hauptnavigation", simpleAria: "Navigation" },
+    nav: { mainAria: "Hauptnavigation", simpleAria: "Navigation", openMenu: "Menü öffnen" },
     misc: { scrollTop: "Zurück nach oben" },
     hero: {
       betaBadge: "Offene Beta — voller Zugang kostenlos",
@@ -1624,10 +1611,7 @@ export const de = {
     },
   },
   seo: {
-    landing: {
-      title: "AquaMR Flow — Nicht-ionisierende vaskuläre Workflow-Plattform",
-      description: "Prozedurplanung, multimodale Bildfusion, CI-AKI-Prävention, klinische Simulation und Forschungsregister für kontrastmittelsparende vaskuläre Workflows.",
-    },
+    // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
       title: "Preise — AquaMR Flow Pläne",
       description: "Vergleichen Sie AquaMR Flow Pläne: Kostenloser Einzelplan, Professionell für 99 €/Monat und individuelle Institutionspreise. Alle Funktionen kostenlos während der Beta.",

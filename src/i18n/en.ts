@@ -108,14 +108,8 @@ export const en = {
       explore: "Features",
     },
     hero: {
-      badge: "Non-ionizing vascular workflow platform — research prototype",
-      title: "AquaMR Flow",
-      headlinePre: "Non-Ionizing Workflow Platform for",
-      headlineHighlight: "Vascular & Interventional Medicine",
-      subtitle: "Procedure planning, multimodal imaging fusion, CI-AKI prevention, clinical simulation and research registry — one platform for contrast-sparing vascular workflows.",
-      cta: "Try Free — No Credit Card",
-      secondary: "See Plans & Pricing",
-      socialProof: "Research prototype — open to interventional specialists worldwide",
+      // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
+      // have been replaced by the home.hero.* namespace. Only dashboardCaption remains here.
       dashboardCaption: "The clinical dashboard: procedure overview, risk distribution and quick access to all modules.",
     },
     howItWorks: {
@@ -185,18 +179,9 @@ export const en = {
         "Role-based access: interventionalists, trainees, administrators",
       ],
     },
-    socialProof: {
-      title: "Built for interventional specialists — by interventional specialists",
-    },
-    testimonials: {
-      title: "What Early Users Say",
-      disclaimer: "Feedback from our research prototype program. Identities kept confidential at participants' request.",
-      items: [
-        { quote: "The CI-AKI engine helped us standardize our contrast-sparing protocol across the cath lab. We now have a consistent approach for every CKD patient.", author: "Interventional Cardiologist", role: "University Hospital, EU" },
-        { quote: "The fusion viewer concept is exactly what we need — being able to correlate pre-procedural MRA with intraprocedural IVUS in one interface changes the workflow.", author: "Interventional Radiologist", role: "Vascular Center, CH" },
-        { quote: "As a fellow, the simulation lab with non-ionizing workflow scenarios helped me understand IVUS-first approaches before I started doing them in the lab.", author: "Cardiology Fellow", role: "Teaching Hospital, USA" },
-      ],
-    },
+    // Note: socialProof + testimonials sections were removed from the landing page
+    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Frequently Asked Questions",
       subtitle: "Everything you need to know about AquaMR Flow.",
@@ -246,7 +231,7 @@ export const en = {
       notMedicalDevice: "Clinical decision support — not a medical device.",
       product: "Product",
       legal: "Legal",
-      contact: "Contact & Support",
+      // contact: removed — no longer rendered in the footer (handled via dedicated nav).
       rights: "All rights reserved.",
       skipToContent: "Skip to content",
     },
@@ -1205,7 +1190,7 @@ export const en = {
       title: "AquaMR Flow | Non-ionizing workflow platform for vascular medicine",
       description: "AquaMR Flow is a non-ionizing workflow platform for vascular medicine: planning, imaging, clinical simulation and a research registry.",
     },
-    nav: { mainAria: "Main navigation", simpleAria: "Navigation" },
+    nav: { mainAria: "Main navigation", simpleAria: "Navigation", openMenu: "Open menu" },
     misc: { scrollTop: "Scroll back to top" },
     hero: {
       betaBadge: "Open beta — full access free of charge",
@@ -1646,10 +1631,7 @@ export const en = {
   },
 
   seo: {
-    landing: {
-      title: "AquaMR Flow — Non-Ionizing Vascular Workflow Platform",
-      description: "Procedure planning, multimodal imaging fusion, CI-AKI prevention, clinical simulation and research registry for contrast-sparing vascular workflows.",
-    },
+    // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
       title: "Pricing — AquaMR Flow Plans",
       description: "Compare AquaMR Flow plans: Free Individual, $99/mo Professional, and custom Institution pricing. All features free during beta.",

@@ -103,14 +103,8 @@ export const fr = {
       explore: "Fonctionnalités",
     },
     hero: {
-      badge: "Plateforme de flux de travail vasculaire non ionisant — prototype de recherche",
-      title: "AquaMR Flow",
-      headlinePre: "Plateforme de Flux de Travail Non Ionisant pour la",
-      headlineHighlight: "Médecine Vasculaire & Interventionnelle",
-      subtitle: "Planification de procédure, fusion d'imagerie multimodale, prévention CI-AKI, simulation clinique et registre de recherche — une plateforme pour les flux de travail vasculaires d'épargne de contraste.",
-      cta: "Essayer gratuitement — sans carte bancaire",
-      secondary: "Voir les tarifs",
-      socialProof: "Prototype de recherche — ouvert aux spécialistes interventionnels du monde entier",
+      // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
+      // have been replaced by the home.hero.* namespace. Only dashboardCaption remains here.
       dashboardCaption: "Le tableau de bord clinique : vue d'ensemble des procédures, distribution des risques et accès rapide à tous les modules.",
     },
     howItWorks: {
@@ -180,16 +174,9 @@ export const fr = {
         "Accès par rôle : interventionnistes, stagiaires, administrateurs",
       ],
     },
-    socialProof: { title: "Conçu pour les spécialistes vasculaires — par des spécialistes vasculaires" },
-    testimonials: {
-      title: "Ce qu'en disent les premiers utilisateurs",
-      disclaimer: "Retours issus de notre programme prototype de recherche. Identités confidentielles à la demande des participants.",
-      items: [
-        { quote: "Le moteur CI-AKI nous a aidé à standardiser notre protocole d'épargne de contraste dans tout le laboratoire de cathétérisme. Nous avons maintenant une approche cohérente pour chaque patient IRC.", author: "Cardiologue interventionnel", role: "Hôpital universitaire, UE" },
-        { quote: "Le concept de visionneuse fusion est exactement ce dont nous avons besoin — pouvoir corréler l'ARM pré-procédurale avec l'IVUS intra-procédural dans une seule interface change le flux de travail.", author: "Radiologue interventionnel", role: "Centre vasculaire, CH" },
-        { quote: "En tant qu'interne, le laboratoire de simulation avec des scénarios de flux de travail non ionisant m'a aidé à comprendre les approches IVUS-first avant de les pratiquer en salle.", author: "Interne en cardiologie", role: "CHU, USA" },
-      ],
-    },
+    // Note: socialProof + testimonials sections were removed from the landing page
+    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Questions fréquentes",
       subtitle: "Tout ce que vous devez savoir sur AquaMR Flow.",
@@ -239,7 +226,7 @@ export const fr = {
       notMedicalDevice: "Aide à la décision clinique — ce n'est pas un dispositif médical.",
       product: "Produit",
       legal: "Juridique",
-      contact: "Contact & Support",
+      // contact: removed — no longer rendered in the footer (handled via dedicated nav).
       rights: "Tous droits réservés.",
       skipToContent: "Aller au contenu",
     },
@@ -1183,7 +1170,7 @@ export const fr = {
       title: "AquaMR Flow | Plateforme de workflow non ionisant pour la médecine vasculaire",
       description: "AquaMR Flow est une plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
     },
-    nav: { mainAria: "Navigation principale", simpleAria: "Navigation" },
+    nav: { mainAria: "Navigation principale", simpleAria: "Navigation", openMenu: "Ouvrir le menu" },
     misc: { scrollTop: "Revenir en haut de la page" },
     hero: {
       betaBadge: "Bêta ouverte — accès complet gratuit",
@@ -1620,10 +1607,7 @@ export const fr = {
     },
   },
   seo: {
-    landing: {
-      title: "AquaMR Flow — Plateforme de Flux de Travail Vasculaire Non Ionisant",
-      description: "Planification de procédure, fusion d'imagerie multimodale, prévention CI-AKI, simulation clinique et registre de recherche pour les flux de travail vasculaires d'épargne de contraste.",
-    },
+    // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
       title: "Tarifs — Plans AquaMR Flow",
       description: "Comparez les plans AquaMR Flow : Individuel gratuit, Professionnel à 99 €/mois et tarif Institution sur mesure. Toutes les fonctionnalités gratuites pendant la bêta.",
