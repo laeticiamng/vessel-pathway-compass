@@ -1,0 +1,270 @@
+{
+  "generated": "2026-05-01T12:39:34.698309Z",
+  "wcag_levels": {
+    "AA": 4.5,
+    "AA_large": 3.0,
+    "AAA": 7.0
+  },
+  "light": {
+    "rows": [
+      {
+        "fg": "foreground",
+        "bg": "background",
+        "role": "Body text",
+        "ratio": 16.66,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-strong",
+        "bg": "background",
+        "role": "Headings",
+        "ratio": 17.41,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-default",
+        "bg": "background",
+        "role": "Body",
+        "ratio": 14.66,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-secondary",
+        "bg": "background",
+        "role": "Secondary text",
+        "ratio": 6.23,
+        "grade": "AA",
+        "large": false
+      },
+      {
+        "fg": "text-disclaimer",
+        "bg": "background",
+        "role": "Disclaimer",
+        "ratio": 7.81,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "muted-foreground",
+        "bg": "background",
+        "role": "Muted body",
+        "ratio": 6.23,
+        "grade": "AA",
+        "large": false
+      },
+      {
+        "fg": "foreground",
+        "bg": "card",
+        "role": "Body on card",
+        "ratio": 17.88,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-secondary",
+        "bg": "card",
+        "role": "Secondary on card",
+        "ratio": 6.68,
+        "grade": "AA",
+        "large": false
+      },
+      {
+        "fg": "muted-foreground",
+        "bg": "card",
+        "role": "Muted on card",
+        "ratio": 6.68,
+        "grade": "AA",
+        "large": false
+      },
+      {
+        "fg": "primary",
+        "bg": "background",
+        "role": "Primary accent text",
+        "ratio": 3.51,
+        "grade": "AA-large",
+        "large": false
+      },
+      {
+        "fg": "primary-foreground",
+        "bg": "primary",
+        "role": "Primary button label",
+        "ratio": 3.77,
+        "grade": "AA-large",
+        "large": false
+      },
+      {
+        "fg": "destructive",
+        "bg": "background",
+        "role": "Destructive accent text",
+        "ratio": 4.47,
+        "grade": "AA-large",
+        "large": false
+      },
+      {
+        "fg": "foreground",
+        "bg": "muted",
+        "role": "Body on muted",
+        "ratio": 15.53,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-secondary",
+        "bg": "surface-raised",
+        "role": "Secondary on raised",
+        "ratio": 6.68,
+        "grade": "AA",
+        "large": false
+      }
+    ],
+    "summary": {
+      "total": 14,
+      "AAA": 6,
+      "AA": 8,
+      "FAIL": 0,
+      "failing": []
+    }
+  },
+  "dark": {
+    "rows": [
+      {
+        "fg": "foreground",
+        "bg": "background",
+        "role": "Body text",
+        "ratio": 18.03,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-strong",
+        "bg": "background",
+        "role": "Headings",
+        "ratio": 18.88,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-default",
+        "bg": "background",
+        "role": "Body",
+        "ratio": 17.61,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-secondary",
+        "bg": "background",
+        "role": "Secondary text",
+        "ratio": 12.62,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-disclaimer",
+        "bg": "background",
+        "role": "Disclaimer",
+        "ratio": 11.31,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "muted-foreground",
+        "bg": "background",
+        "role": "Muted body",
+        "ratio": 12.62,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "foreground",
+        "bg": "card",
+        "role": "Body on card",
+        "ratio": 16.95,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-secondary",
+        "bg": "card",
+        "role": "Secondary on card",
+        "ratio": 11.87,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "muted-foreground",
+        "bg": "card",
+        "role": "Muted on card",
+        "ratio": 11.87,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "primary",
+        "bg": "background",
+        "role": "Primary accent text",
+        "ratio": 12.23,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "primary-foreground",
+        "bg": "primary",
+        "role": "Primary button label",
+        "ratio": 12.07,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "destructive",
+        "bg": "background",
+        "role": "Destructive accent text",
+        "ratio": 5.49,
+        "grade": "AA",
+        "large": false
+      },
+      {
+        "fg": "foreground",
+        "bg": "muted",
+        "role": "Body on muted",
+        "ratio": 15.44,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "text-secondary",
+        "bg": "surface-raised",
+        "role": "Secondary on raised",
+        "ratio": 11.42,
+        "grade": "AAA",
+        "large": false
+      },
+      {
+        "fg": "neon-kpi-cyan",
+        "bg": "background",
+        "role": "KPI cyan value",
+        "ratio": 15.8,
+        "grade": "AAA",
+        "large": true
+      },
+      {
+        "fg": "neon-kpi-violet",
+        "bg": "background",
+        "role": "KPI violet value",
+        "ratio": 12.95,
+        "grade": "AAA",
+        "large": true
+      }
+    ],
+    "summary": {
+      "total": 16,
+      "AAA": 15,
+      "AA": 1,
+      "FAIL": 0,
+      "failing": []
+    }
+  }
+}
