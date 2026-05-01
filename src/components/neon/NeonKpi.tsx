@@ -53,10 +53,10 @@ export function NeonKpi({
               loading="lazy"
               width={40}
               height={40}
-              className="h-7 w-7 object-contain [filter:brightness(0.55)_saturate(1.6)_contrast(1.15)] dark:[filter:none]"
+              className="h-7 w-7 object-contain [filter:brightness(0.42)_saturate(1.95)_contrast(1.28)] dark:[filter:none]"
             />
           ) : Icon ? (
-            <Icon className="h-5 w-5" strokeWidth={1.75} />
+            <Icon className="h-5 w-5 shrink-0" strokeWidth={2} />
           ) : null}
         </div>
       </div>
@@ -68,14 +68,14 @@ export function NeonKpi({
           <>
             <span className={cn("neon-kpi-value", isViolet && "violet")}>{value}</span>
             {unit && (
-              <span className="text-lg font-semibold text-foreground/90">{unit}</span>
+              <span className="text-lg font-semibold text-foreground">{unit}</span>
             )}
           </>
         )}
       </div>
 
       {trend && (
-        <p className="text-xs text-muted-foreground -mt-2">{trend}</p>
+        <p className="text-xs text-foreground/80 -mt-2">{trend}</p>
       )}
     </div>
   );

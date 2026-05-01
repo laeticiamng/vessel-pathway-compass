@@ -92,6 +92,14 @@
       hsl(210 95% 50%) 100%
     );
     --surface-glass: 210 40% 99%;
+
+    /* Reinforced light-mode contrast for dashboard icons/KPIs */
+    --contrast-strong: 205 58% 16%;
+    --contrast-cyan: 193 92% 28%;
+    --contrast-cyan-surface: 192 75% 93%;
+    --contrast-violet: 270 58% 32%;
+    --contrast-violet-surface: 272 70% 95%;
+    --contrast-border: 206 34% 70%;
   }
 
   .dark {
@@ -364,8 +372,12 @@
   /* ===== AquaMR Flow neon system (works in light & dark) ===== */
   .neon-card {
     @apply relative rounded-2xl bg-card border transition-all duration-300;
-    border-color: hsl(200 30% 82%);
-    box-shadow: 0 1px 2px hsl(200 40% 20% / 0.04), 0 4px 14px -8px hsl(200 50% 30% / 0.08);
+    border-color: hsl(var(--contrast-border));
+    background: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--surface-subtle)) 100%);
+    box-shadow:
+      0 1px 2px hsl(200 40% 20% / 0.05),
+      0 10px 28px -14px hsl(200 55% 24% / 0.16),
+      inset 0 1px 0 hsl(0 0% 100% / 0.7);
   }
   .dark .neon-card {
     background:
@@ -388,12 +400,11 @@
   .neon-kpi-value {
     @apply text-4xl sm:text-5xl font-bold tracking-tight tabular-nums;
     font-feature-settings: 'tnum';
-    /* Light mode: deep ink with subtle cyan tint, fully legible */
-    color: hsl(200 60% 18%);
-    text-shadow: 0 1px 0 hsl(0 0% 100% / 0.6);
+    color: hsl(var(--contrast-strong));
+    text-shadow: 0 1px 0 hsl(0 0% 100% / 0.8);
   }
   .neon-kpi-value.violet {
-    color: hsl(270 55% 30%);
+    color: hsl(var(--contrast-violet));
   }
   .dark .neon-kpi-value {
     color: hsl(188 100% 82%);
@@ -406,17 +417,18 @@
 
   .neon-icon-ring {
     @apply h-10 w-10 rounded-xl flex items-center justify-center border;
-    border-color: hsl(var(--primary) / 0.4);
-    background: hsl(var(--primary) / 0.08);
-    color: hsl(var(--primary));
+    border-color: hsl(var(--contrast-cyan) / 0.45);
+    background: linear-gradient(180deg, hsl(var(--contrast-cyan-surface)), hsl(0 0% 100% / 0.96));
+    color: hsl(var(--contrast-cyan));
+    box-shadow: inset 0 1px 0 hsl(0 0% 100% / 0.75), 0 8px 18px -14px hsl(var(--contrast-cyan) / 0.35);
   }
   .dark .neon-icon-ring {
     box-shadow: inset 0 0 12px hsl(188 95% 58% / 0.15), 0 0 12px hsl(188 95% 58% / 0.15);
   }
   .neon-icon-ring.violet {
-    border-color: hsl(var(--accent) / 0.4);
-    background: hsl(var(--accent) / 0.08);
-    color: hsl(var(--accent));
+    border-color: hsl(var(--contrast-violet) / 0.4);
+    background: linear-gradient(180deg, hsl(var(--contrast-violet-surface)), hsl(0 0% 100% / 0.96));
+    color: hsl(var(--contrast-violet));
   }
   .dark .neon-icon-ring.violet {
     box-shadow: inset 0 0 12px hsl(270 85% 68% / 0.15), 0 0 12px hsl(270 85% 68% / 0.15);
@@ -493,7 +505,9 @@
   @media (prefers-reduced-motion: reduce), (prefers-contrast: more) {
     .neon-kpi-value,
     .dark .neon-kpi-value,
+    .neon-card,
     .dark .neon-card,
+    .neon-icon-ring,
     .dark .neon-icon-ring {
       text-shadow: none !important;
       box-shadow: none !important;
@@ -817,9 +831,9 @@
 
   /* NeonIcon teal variant */
   .neon-icon-ring.teal {
-    border-color: hsl(var(--accent-teal) / 0.45);
-    background: hsl(var(--accent-teal) / 0.08);
-    color: hsl(var(--accent-teal));
+    border-color: hsl(var(--accent-teal) / 0.5);
+    background: linear-gradient(180deg, hsl(176 70% 92%), hsl(0 0% 100% / 0.96));
+    color: hsl(176 85% 26%);
   }
   .dark .neon-icon-ring.teal {
     box-shadow: inset 0 0 12px hsl(var(--accent-teal) / 0.18), 0 0 12px hsl(var(--accent-teal) / 0.18);
