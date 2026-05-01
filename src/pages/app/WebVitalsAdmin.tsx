@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Navigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { SEOHead } from "@/components/SEOHead";
+import { WCAGBadge, type WCAGStats } from "@/components/a11y/WCAGBadge";
 import { Activity, AlertTriangle, CheckCircle2, TrendingUp, TrendingDown } from "lucide-react";
 import {
   ResponsiveContainer,
