@@ -99,10 +99,15 @@ export default function Landing() {
       <nav className="fixed top-0 w-full z-50 glass-strong" aria-label={t("home.nav.mainAria")}>
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-md">
-              <HeartPulse className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold tracking-tight">AquaMR Flow</span>
+            <AquaMRLogo variant="badge" />
+            <span className="flex flex-col leading-none">
+              <span className="text-xl font-bold tracking-tight">
+                AquaMR <span className="text-primary">Flow</span>
+              </span>
+              <span className="hidden sm:inline text-[10px] font-medium tracking-[0.18em] text-muted-foreground/80 mt-0.5">
+                VASCULAR CLINICAL PLATFORM
+              </span>
+            </span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
             <a href="#platform-complete" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -385,7 +390,7 @@ export default function Landing() {
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <HeartPulse className="h-5 w-5 text-primary" />
+                <AquaMRLogo />
                 <span className="font-semibold">AquaMR Flow</span>
               </div>
               <p className="text-sm text-muted-foreground">{t("landing.footer.tagline")}</p>
