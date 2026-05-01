@@ -5,7 +5,7 @@ import { useTranslation } from "@/i18n/context";
 
 /**
  * Reproduction React du schéma SVG VASCU-LINK v7 — architecture en
- * trois cercles concentriques + cockpit Vessel Pathway Compass.
+ * trois cercles concentriques + cockpit AquaMR Flow.
  */
 export function VasculinkArchitecture({ className }: { className?: string }) {
   const { t } = useTranslation();

@@ -1569,7 +1569,7 @@ export const fr = {
       l1Routing: "Rend le patient lisible, classable et orientable vers :",
       l1RoutingDest: "traitement médical optimisé · surveillance · imagerie standard · endovasculaire · chirurgical",
       l1Fallback: "Si qualité d'image insuffisante : repli documenté vers imagerie standard (angio-TDM / ARM avec contraste).",
-      decisionTitle: "DÉCISION — Cockpit Vessel Pathway Compass",
+      decisionTitle: "DÉCISION — Cockpit AquaMR Flow",
       decisionSub: "Jumeau vasculaire patient-spécifique · fusion multimodale · Registre AquaMR",
       decisionAdr: "15 ADR documentés · architecture conçue pour viser conformité MDR / RGPD / IEC 62304 (non certifiée à ce stade)",
       decisionMigration: "Migration prévue vers hébergement clinique HDS (UE/CH) · DSMB indépendant & Comité d'accès aux données",
