@@ -9,11 +9,6 @@ import { SEOHead } from "@/components/SEOHead";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  Brain,
-  Activity,
-  LineChart,
-  BookOpen,
-  FlaskConical,
   Globe,
   Shield,
   ArrowRight,
@@ -22,11 +17,6 @@ import {
   Menu,
   Sparkles,
   ChevronUp,
-  ClipboardList,
-  Stethoscope,
-  Calculator,
-  FileText,
-  Link2,
 } from "lucide-react";
 // FAQSection + HowItWorksSection legacy retirés (doublons)
 import { AboutSection } from "@/components/landing/AboutSection";
@@ -48,28 +38,6 @@ import { InteractiveDemoSection } from "@/components/landing/InteractiveDemoSect
 import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
 import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: "easeOut" as const },
-  }),
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
-
-const primaryIcons = [Brain, HeartPulse, Calculator, Activity, FlaskConical, LineChart];
-const primaryKeys = ["procedurePlanner", "fusionViewer", "ciAkiEngine", "twin", "simulation", "registry"] as const;
-const primaryPaths = ["/app/procedure-planner", "/app/fusion-viewer", "/app/ci-aki-engine", "/app/digital-twin", "/app/simulation", "/app/registry"];
-
-const secondaryIcons = [BookOpen, FileText, Stethoscope, Link2];
-const secondaryKeys = ["education", "research", "analytics", "fhir"] as const;
-const secondaryPaths = ["/app/education", "/app/research", "/app/analytics", "/app/patients"];
 
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
