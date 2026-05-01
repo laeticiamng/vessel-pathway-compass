@@ -111,6 +111,7 @@ export default function WebVitalsAdmin() {
       .catch(() => {});
   }, []);
 
+  const analysis = useMemo(() => {
     if (!data) return null;
     const now = Date.now();
     const week = 7 * 24 * 3600_000;
