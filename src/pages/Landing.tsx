@@ -294,6 +294,9 @@ export default function Landing() {
       {/* Platform completeness — directly under hero */}
       <PlatformCompletenessSection />
 
+      {/* What's new — changelog */}
+      <WhatsNewSection />
+
       {/* En bref */}
       <EnBrefSection />
 
