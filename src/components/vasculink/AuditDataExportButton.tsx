@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import {
   ADRS, DSMB_MEMBERS, DSMB_TRIGGERS, LCA_STAGES, QALY_PARAMS, POWER_DEFAULTS,
 } from "@/lib/vasculink/adr-data";
+import { useTranslation } from "@/i18n/context";
 
 /** Build a single CSV string with multiple tagged sections. */
 export function buildAuditCsv(now: Date = new Date()): string {
@@ -67,6 +68,7 @@ function download(filename: string, mime: string, content: string) {
 }
 
 export function AuditDataExportButtons({ className }: { className?: string }) {
+  const { t } = useTranslation();
   const date = new Date().toISOString().slice(0, 10);
   return (
     <div className={`flex gap-2 ${className ?? ""}`}>
@@ -76,9 +78,9 @@ export function AuditDataExportButtons({ className }: { className?: string }) {
         onClick={() => {
           try {
             download(`audit-pack-${date}.csv`, "text/csv", buildAuditCsv());
-            toast.success("CSV exported");
+            toast.success(t("vasculink.audit.csvSuccess"));
           } catch (e: unknown) {
-            toast.error(e instanceof Error ? e.message : "Export failed");
+            toast.error(e instanceof Error ? e.message : t("vasculink.audit.exportFailed"));
           }
         }}
       >
@@ -90,9 +92,9 @@ export function AuditDataExportButtons({ className }: { className?: string }) {
         onClick={() => {
           try {
             download(`audit-pack-${date}.json`, "application/json", buildAuditJson());
-            toast.success("JSON exported");
+            toast.success(t("vasculink.audit.jsonSuccess"));
           } catch (e: unknown) {
-            toast.error(e instanceof Error ? e.message : "Export failed");
+            toast.error(e instanceof Error ? e.message : t("vasculink.audit.exportFailed"));
           }
         }}
       >
