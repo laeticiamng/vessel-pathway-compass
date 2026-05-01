@@ -53,6 +53,7 @@ export function NeonModuleTile({
             loading="lazy"
             width={80}
             height={80}
+            data-neon-illustration=""
             className={cn(
               "h-12 w-12 sm:h-14 sm:w-14 object-contain",
               "[filter:brightness(0.42)_saturate(1.95)_contrast(1.28)] dark:[filter:none]"
