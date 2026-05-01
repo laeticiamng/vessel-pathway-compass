@@ -56,7 +56,7 @@ export default function Support() {
         description={t("seo.support.description") as string}
         path="/support"
       />
-      <nav className="border-b">
+      <nav className="border-b" aria-label={t("home.nav.simpleAria") as string}>
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
