@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import dashboardPreview from "@/assets/dashboard-preview.jpg";
 // Card import removed — testimonials section deleted
@@ -9,11 +9,6 @@ import { SEOHead } from "@/components/SEOHead";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
-  Brain,
-  Activity,
-  LineChart,
-  BookOpen,
-  FlaskConical,
   Globe,
   Shield,
   ArrowRight,
@@ -22,11 +17,6 @@ import {
   Menu,
   Sparkles,
   ChevronUp,
-  ClipboardList,
-  Stethoscope,
-  Calculator,
-  FileText,
-  Link2,
 } from "lucide-react";
 // FAQSection + HowItWorksSection legacy retirés (doublons)
 import { AboutSection } from "@/components/landing/AboutSection";
@@ -49,28 +39,6 @@ import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitect
 import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.08, duration: 0.5, ease: "easeOut" as const },
-  }),
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.08 } },
-};
-
-const primaryIcons = [Brain, HeartPulse, Calculator, Activity, FlaskConical, LineChart];
-const primaryKeys = ["procedurePlanner", "fusionViewer", "ciAkiEngine", "twin", "simulation", "registry"] as const;
-const primaryPaths = ["/app/procedure-planner", "/app/fusion-viewer", "/app/ci-aki-engine", "/app/digital-twin", "/app/simulation", "/app/registry"];
-
-const secondaryIcons = [BookOpen, FileText, Stethoscope, Link2];
-const secondaryKeys = ["education", "research", "analytics", "fhir"] as const;
-const secondaryPaths = ["/app/education", "/app/research", "/app/analytics", "/app/patients"];
-
 export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -83,21 +51,10 @@ export default function Landing() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const primaryModules = primaryKeys.map((key, i) => ({
-    icon: primaryIcons[i],
-    title: t(`landing.modules.${key}.title`),
-    description: t(`landing.modules.${key}.desc`),
-    path: primaryPaths[i],
-  }));
-
-  const secondaryModules = secondaryKeys.map((key, i) => ({
-    icon: secondaryIcons[i],
-    title: t(`landing.modules.${key}.title`),
-    description: t(`landing.modules.${key}.desc`),
-    path: secondaryPaths[i],
-  }));
-
-  const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
+  const trustSignals = useMemo<string[]>(
+    () => (t("landing.trust.signals") as unknown as string[]) || [],
+    [t]
+  );
 
   // JSON-LD: minimal, non-risky structured data (WebPage + SoftwareApplication + FAQPage)
   const structuredData = {
@@ -148,7 +105,7 @@ export default function Landing() {
             <span className="text-xl font-bold tracking-tight">AquaMR Flow</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#modules" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#platform-complete" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.explore")}
             </a>
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -184,7 +141,7 @@ export default function Landing() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 mt-8">
-                <a href="#modules" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                <a href="#platform-complete" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.explore")}
                 </a>
                 <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
@@ -282,7 +239,11 @@ export default function Landing() {
                 src={dashboardPreview}
                 alt={t("home.hero.dashboardAlt")}
                 className="w-full h-auto"
-                loading="lazy"
+                width={1920}
+                height={1088}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
               />
             </div>
             <p className="mt-4 text-sm text-primary-foreground/40 italic">
@@ -338,88 +299,8 @@ export default function Landing() {
 
       {/* Legacy stepper supprimé — doublon de HowItWorksFRSection */}
 
-      {/* Modules */}
-      <section id="modules" className="py-24 bg-background scroll-mt-20">
-        <div className="container mx-auto px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">{t("landing.modules.title")}</h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">
-              {t("landing.modules.subtitle")}
-            </p>
-          </motion.div>
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-5"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-          >
-            {primaryModules.map((mod, i) => (
-              <motion.div
-                key={i}
-                custom={i}
-                variants={fadeUp}
-              >
-                <Link to={mod.path} className="group relative rounded-2xl border bg-card p-5 sm:p-7 card-hover shine-hover block h-full">
-                  <span className="absolute top-3 right-3 inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary">
-                    <CheckCircle2 className="h-2.5 w-2.5" aria-hidden="true" />
-                    {t("home.completeness.available")}
-                  </span>
-                  <div className="relative z-10">
-                    <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/15 transition-colors duration-300">
-                      <mod.icon className="h-5 w-5 text-primary" />
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2.5 pr-20">{mod.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">{mod.description}</p>
-                    <span className="inline-flex items-center gap-1 mt-4 text-xs font-medium text-primary opacity-60 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {t("common.learnMore")} <ArrowRight className="h-3 w-3" />
-                    </span>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Secondary modules — compact */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="text-center mt-16 mb-8"
-          >
-            <h3 className="text-2xl font-bold mb-2">{t("landing.modules.moreTitle")}</h3>
-            <p className="text-muted-foreground text-base max-w-lg mx-auto">
-              {t("landing.modules.moreSubtitle")}
-            </p>
-          </motion.div>
-          <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl mx-auto"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-          >
-            {secondaryModules.map((mod, i) => (
-              <motion.div key={i} custom={i} variants={fadeUp}>
-                <Link to={mod.path} className="group flex flex-col items-center text-center rounded-xl border bg-card p-5 card-hover block h-full">
-                  <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary/15 transition-colors duration-300">
-                    <mod.icon className="h-4 w-4 text-primary" />
-                  </div>
-                  <h4 className="text-sm font-semibold mb-1">{mod.title}</h4>
-                  <p className="text-muted-foreground text-xs leading-relaxed">{mod.description}</p>
-                </Link>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* Modules détaillés : section déplacée — détails complets sur /modules.
+          La grille des 10 modules est rendue par PlatformCompletenessSection ci-dessus. */}
 
       {/* Trust */}
       <section className="py-24 bg-muted/40">
@@ -513,7 +394,7 @@ export default function Landing() {
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <a href="#modules" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
+                <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
                 <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
                 <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
