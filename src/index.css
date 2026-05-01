@@ -305,4 +305,92 @@
     max-width: 100vw;
     overflow-x: hidden;
   }
+
+  /* ===== AquaMR Flow neon system (works in light & dark) ===== */
+  .neon-card {
+    @apply relative rounded-2xl bg-card border border-border/60 transition-all duration-300;
+  }
+  .dark .neon-card {
+    background:
+      linear-gradient(180deg, hsl(222 45% 9% / 0.9), hsl(222 47% 6% / 0.9));
+    border-color: hsl(188 95% 58% / 0.18);
+    box-shadow:
+      inset 0 1px 0 hsl(188 95% 70% / 0.06),
+      0 1px 2px hsl(0 0% 0% / 0.4);
+  }
+  .neon-card:hover {
+    border-color: hsl(var(--primary) / 0.5);
+    box-shadow: var(--shadow-card-hover);
+  }
+  .dark .neon-card.neon-violet { border-color: hsl(270 85% 68% / 0.25); }
+  .dark .neon-card.neon-violet:hover {
+    border-color: hsl(270 85% 68% / 0.6);
+    box-shadow: var(--shadow-glow-violet);
+  }
+
+  .neon-kpi-value {
+    @apply text-4xl sm:text-5xl font-bold tracking-tight tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+  .dark .neon-kpi-value {
+    color: hsl(188 100% 75%);
+    text-shadow: 0 0 18px hsl(188 95% 58% / 0.5);
+  }
+  .neon-kpi-value.violet { }
+  .dark .neon-kpi-value.violet {
+    color: hsl(280 90% 80%);
+    text-shadow: 0 0 18px hsl(270 85% 68% / 0.5);
+  }
+
+  .neon-icon-ring {
+    @apply h-10 w-10 rounded-xl flex items-center justify-center border;
+    border-color: hsl(var(--primary) / 0.4);
+    background: hsl(var(--primary) / 0.08);
+    color: hsl(var(--primary));
+  }
+  .dark .neon-icon-ring {
+    box-shadow: inset 0 0 12px hsl(188 95% 58% / 0.15), 0 0 12px hsl(188 95% 58% / 0.15);
+  }
+  .neon-icon-ring.violet {
+    border-color: hsl(var(--accent) / 0.4);
+    background: hsl(var(--accent) / 0.08);
+    color: hsl(var(--accent));
+  }
+  .dark .neon-icon-ring.violet {
+    box-shadow: inset 0 0 12px hsl(270 85% 68% / 0.15), 0 0 12px hsl(270 85% 68% / 0.15);
+  }
+
+  .neon-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.4), transparent);
+  }
+
+  .neon-bg {
+    background: hsl(var(--background));
+  }
+  .dark .neon-bg {
+    background:
+      radial-gradient(1200px 600px at 10% -10%, hsl(188 95% 58% / 0.06), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, hsl(270 85% 68% / 0.06), transparent 60%),
+      hsl(222 47% 5%);
+  }
+
+  .neon-pill-low {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border;
+    border-color: hsl(var(--success) / 0.5);
+    color: hsl(var(--success));
+    background: hsl(var(--success) / 0.08);
+  }
+  .neon-pill-mod {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border;
+    border-color: hsl(var(--warning) / 0.5);
+    color: hsl(var(--warning));
+    background: hsl(var(--warning) / 0.08);
+  }
+  .neon-pill-high {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold border;
+    border-color: hsl(var(--destructive) / 0.55);
+    color: hsl(var(--destructive));
+    background: hsl(var(--destructive) / 0.1);
+  }
 }
