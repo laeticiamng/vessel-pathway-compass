@@ -1528,6 +1528,30 @@ export const fr = {
       patients: "patients",
     },
   },
+  vasculink: {
+    trajectory: {
+      title: "Trajectoire translationnelle VASCU-LINK",
+      subtitle: "Reconstruction de fonctions angiographiques sélectionnées dans une chaîne 4-zéro — 0 mSv, 0 g Gd / 0 mL d'iode, 0 hélium, BoM cible < 15 k€ pour une médecine vasculaire de proximité.",
+      scopeStatement: "VASCU-LINK ne prétend pas remplacer l'angiographie conventionnelle pendant la thèse. Elle teste si certaines fonctions angiographiques peuvent être progressivement reconstruites dans une chaîne 4-zéro : <strong>0 mSv · 0 Gd / 0 iode · 0 hélium · BoM cible < 15 k€</strong>.",
+      status: {
+        active: "Périmètre actif",
+        future: "Périmètre futur",
+        horizon: "Horizon long terme",
+      },
+      steps: {
+        L1: { title: "Voir & Décider", desc: "Valider la cartographie pré-revascularisation 4-zéro : rendre le patient lisible, classifiable et orientable." },
+        L2: { title: "Simuler & Guider", desc: "Explorer le guidage non ionisant en environnements fantôme et simulation. Aucune intervention humaine." },
+        L3: { title: "Intervention préclinique", desc: "Tester la faisabilité préclinique de trajectoires interventionnelles non ionisantes. Non-humain uniquement." },
+        PostPhD: { title: "Revascularisation 4-zéro sélective", desc: "Horizon long terme : revascularisations électives sélectionnées dans des structures vasculaires ambulatoires spécialisées avec backup hospitalier." },
+      },
+    },
+    safety: {
+      ambitionTitle: "Ambition stratégique",
+      ambitionBody: "VASCU-LINK vise à ouvrir une voie long terme vers des interventions vasculaires 4-zéro sélectives : <strong>0 mSv</strong>, <strong>0 g Gd / 0 mL d'iode</strong>, <strong>0 hélium</strong>, et une <strong>BoM cible < 15 k€</strong> — pour permettre une médecine vasculaire de proximité hors des centres hospitaliers dépendants de l'hélium.",
+      boundaryTitle: "Limite scientifique",
+      boundaryBody: "La thèse ne réalise aucune revascularisation humaine. L1 valide la cartographie et la décision. L2/L3 restent en simulation ou en préclinique. L'angiographie conventionnelle reste obligatoire pour les urgences, les interventions complexes à haut risque, en cas de qualité d'image insuffisante, ou lorsque le standard de soin l'exige.",
+    },
+  },
   pages: {
     common: {
       backHome: "Accueil",

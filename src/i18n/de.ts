@@ -1532,6 +1532,30 @@ export const de = {
       patients: "Patienten",
     },
   },
+  vasculink: {
+    trajectory: {
+      title: "VASCU-LINK translationale Trajektorie",
+      subtitle: "Rekonstruktion ausgewählter angiographischer Funktionen in einer 4-Null-Kette — 0 mSv, 0 g Gd / 0 mL Jod, 0 Helium, BoM-Ziel < 15 000 € für eine wohnortnahe vaskuläre Medizin.",
+      scopeStatement: "VASCU-LINK beansprucht nicht, die konventionelle Angiographie während der Doktorarbeit zu ersetzen. Es wird geprüft, ob ausgewählte angiographische Funktionen schrittweise in einer 4-Null-Kette rekonstruiert werden können: <strong>0 mSv · 0 Gd / 0 Jod · 0 Helium · BoM-Ziel < 15 000 €</strong>.",
+      status: {
+        active: "Aktiver Umfang",
+        future: "Zukünftiger Umfang",
+        horizon: "Langfristiger Horizont",
+      },
+      steps: {
+        L1: { title: "Sehen & Entscheiden", desc: "Validierung der 4-Null-Kartierung vor Revaskularisation: den Patienten lesbar, klassifizierbar und orientierbar machen." },
+        L2: { title: "Simulieren & Führen", desc: "Erforschung nicht-ionisierender Führung in Phantom- und Simulationsumgebungen. Keine humane Intervention." },
+        L3: { title: "Präklinische Intervention", desc: "Test der präklinischen Machbarkeit nicht-ionisierender interventioneller Trajektorien. Nur nicht-human." },
+        PostPhD: { title: "Selektive 4-Null-Revaskularisation", desc: "Langfristiger Horizont: ausgewählte elektive Revaskularisationen in spezialisierten ambulanten vaskulären Strukturen mit Krankenhaus-Backup." },
+      },
+    },
+    safety: {
+      ambitionTitle: "Strategische Ambition",
+      ambitionBody: "VASCU-LINK zielt darauf ab, einen langfristigen Weg zu ausgewählten 4-Null-Gefäßinterventionen zu eröffnen: <strong>0 mSv</strong>, <strong>0 g Gd / 0 mL Jod</strong>, <strong>0 Helium</strong> und ein <strong>BoM-Ziel < 15 000 €</strong> — um eine wohnortnahe vaskuläre Medizin außerhalb heliumabhängiger Krankenhauszentren zu ermöglichen.",
+      boundaryTitle: "Wissenschaftliche Grenze",
+      boundaryBody: "Die Doktorarbeit führt keine humane Revaskularisation durch. L1 validiert Kartierung und Entscheidungsfindung. L2/L3 bleiben simuliert oder präklinisch. Die konventionelle Angiographie bleibt obligatorisch für Notfälle, komplexe Hochrisiko-Interventionen, unzureichende Bildqualität oder wenn der Behandlungsstandard dies erfordert.",
+    },
+  },
   pages: {
     common: {
       backHome: "Startseite",

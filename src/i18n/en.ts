@@ -1551,6 +1551,30 @@ export const en = {
       patients: "patients",
     },
   },
+  vasculink: {
+    trajectory: {
+      title: "VASCU-LINK translational trajectory",
+      subtitle: "Reconstructing selected angiographic functions in a 4-zero chain — 0 mSv, 0 g Gd / 0 mL iodine, 0 helium, BoM target < €15k for proximity vascular medicine.",
+      scopeStatement: "VASCU-LINK does not claim to replace conventional angiography during the thesis. It tests whether selected angiographic functions can be progressively reconstructed in a 4-zero chain: <strong>0 mSv · 0 Gd / 0 iodine · 0 helium · BoM target < €15k</strong>.",
+      status: {
+        active: "Active scope",
+        future: "Future scope",
+        horizon: "Long-term horizon",
+      },
+      steps: {
+        L1: { title: "See & Decide", desc: "Validate 4-zero pre-revascularization mapping: make the patient readable, classifiable and orientable." },
+        L2: { title: "Simulate & Guide", desc: "Explore non-ionizing guidance in phantom and simulation environments. No human intervention." },
+        L3: { title: "Preclinical Intervention", desc: "Test preclinical feasibility of non-ionizing interventional trajectories. Non-human only." },
+        PostPhD: { title: "Selected 4-Zero Revascularization", desc: "Long-term horizon: selected elective revascularizations in specialized ambulatory vascular structures with hospital backup." },
+      },
+    },
+    safety: {
+      ambitionTitle: "Strategic ambition",
+      ambitionBody: "VASCU-LINK aims to open a long-term pathway toward selected 4-zero vascular interventions: <strong>0 mSv</strong>, <strong>0 g Gd / 0 mL iodine</strong>, <strong>0 helium</strong>, and a <strong>BoM target < €15k</strong> — to enable proximity vascular medicine outside helium-bound hospital centers.",
+      boundaryTitle: "Scientific boundary",
+      boundaryBody: "The thesis does not perform human revascularization. L1 validates mapping and decision-making. L2/L3 remain simulated or preclinical. Conventional angiography remains mandatory for emergencies, complex high-risk interventions, insufficient image quality, or when standard-of-care requires it.",
+    },
+  },
   pages: {
     common: {
       backHome: "Home",
