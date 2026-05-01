@@ -43,15 +43,15 @@ export function NeonModuleTile({
       <div>
         <h3
           className={cn(
-            "text-lg sm:text-xl font-semibold tracking-tight",
-            "dark:[text-shadow:0_0_18px_hsl(var(--primary)/0.35)]",
-            isViolet && "dark:[text-shadow:0_0_18px_hsl(var(--accent)/0.35)]"
+            "text-lg sm:text-xl font-semibold tracking-tight text-foreground",
+            "dark:[text-shadow:0_0_10px_hsl(var(--primary)/0.18)]",
+            isViolet && "dark:[text-shadow:0_0_10px_hsl(var(--accent)/0.18)]"
           )}
         >
           {title}
         </h3>
         {description && (
-          <p className="text-xs text-muted-foreground mt-1.5 max-w-[22ch] mx-auto">
+          <p className="text-sm text-foreground/75 mt-1.5 max-w-[24ch] mx-auto leading-relaxed">
             {description}
           </p>
         )}
