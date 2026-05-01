@@ -1174,7 +1174,7 @@ export const de = {
       title: "AquaMR Flow | Nicht-ionisierende Workflow-Plattform für Gefäßmedizin",
       description: "AquaMR Flow ist eine nicht-ionisierende Workflow-Plattform für die Gefäßmedizin: Planung, Bildgebung, klinische Simulation und Forschungsregister.",
     },
-    nav: { mainAria: "Hauptnavigation", simpleAria: "Navigation", openMenu: "Menü öffnen", closeMenu: "Menü schließen" },
+    nav: { mainAria: "Hauptnavigation", simpleAria: "Navigation", openMenu: "Menü öffnen" },
     misc: { scrollTop: "Zurück nach oben" },
     hero: {
       betaBadge: "Offene Beta — voller Zugang kostenlos",
