@@ -1,20 +1,26 @@
-import { AlertTriangle, Stethoscope, Cpu, Gauge, ShieldAlert } from "lucide-react";
+import { AlertTriangle, Stethoscope, Cpu, Gauge, ShieldAlert, CheckCircle2 } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
 
+type SectionKey = "regulatory" | "clinical" | "technical" | "usage";
+
 type Section = {
-  key: "regulatory" | "clinical" | "technical" | "usage";
+  key: SectionKey;
   icon: typeof AlertTriangle;
+  /** Marked as "already addressed during the open beta" (visual emphasis). */
+  resolvedInBeta?: boolean;
 };
 
 const SECTIONS: Section[] = [
   { key: "regulatory", icon: ShieldAlert },
   { key: "clinical", icon: Stethoscope },
   { key: "technical", icon: Cpu },
-  { key: "usage", icon: Gauge },
+  { key: "usage", icon: Gauge, resolvedInBeta: true },
 ];
 
 /**
  * Public-facing transparency section listing the prototype's current limitations.
+ * Items already addressed during the open beta are visually distinguished from
+ * structural / regulatory limits that remain.
  * Fully translated via `pages.limits.*` (FR/EN/DE).
  */
 export function LimitsSection() {
@@ -38,26 +44,41 @@ export function LimitsSection() {
         </div>
 
         <div className="grid md:grid-cols-2 gap-5 max-w-5xl mx-auto">
-          {SECTIONS.map(({ key, icon: Icon }) => {
+          {SECTIONS.map(({ key, icon: Icon, resolvedInBeta }) => {
             const items = (t(`pages.limits.sections.${key}.items`) as unknown as string[]) ?? [];
+            const accent = resolvedInBeta ? "primary" : "warning";
             return (
               <article
                 key={key}
-                className="rounded-2xl border bg-card p-6 flex flex-col gap-3"
+                className={`rounded-2xl border bg-card p-6 flex flex-col gap-3 ${
+                  resolvedInBeta ? "border-primary/30" : ""
+                }`}
               >
-                <header className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-xl bg-warning/10 flex items-center justify-center">
-                    <Icon className="h-5 w-5 text-warning" />
+                <header className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div
+                      className={`h-10 w-10 rounded-xl flex items-center justify-center shrink-0 bg-${accent}/10`}
+                    >
+                      <Icon className={`h-5 w-5 text-${accent}`} aria-hidden="true" />
+                    </div>
+                    <h3 className="font-semibold text-base">
+                      {t(`pages.limits.sections.${key}.title`)}
+                    </h3>
                   </div>
-                  <h3 className="font-semibold text-base">
-                    {t(`pages.limits.sections.${key}.title`)}
-                  </h3>
+                  {resolvedInBeta && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-semibold text-primary shrink-0">
+                      <CheckCircle2 className="h-2.5 w-2.5" aria-hidden="true" />
+                      {t("pages.limits.resolvedBadge")}
+                    </span>
+                  )}
                 </header>
                 <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
                   {Array.isArray(items) &&
                     items.map((line, i) => (
                       <li key={i} className="flex gap-2">
-                        <span aria-hidden className="text-warning shrink-0">•</span>
+                        <span aria-hidden className={`shrink-0 text-${accent}`}>
+                          {resolvedInBeta ? "✓" : "•"}
+                        </span>
                         <span>{line}</span>
                       </li>
                     ))}
@@ -75,3 +96,4 @@ export function LimitsSection() {
     </section>
   );
 }
+
