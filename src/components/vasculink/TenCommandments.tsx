@@ -3,8 +3,8 @@ import { ScrollText } from "lucide-react";
 
 /**
  * Mapping of the 10 gestures to Mazzolai/Lanzi/Rodriguez-Palomares
- * "10 Commandments for PAD" (Eur Heart J 2025) and ESC 2024 PAD Guidelines
- * (Mazzolai chair). Used to anchor education / academy modules.
+ * "10 Commandments for PAD" (Eur Heart J 2025) and ESC 2024 PAD Guidelines.
+ * Used to anchor education / academy modules.
  */
 const COMMANDMENTS: { n: number; gesture: string; mapping: string }[] = [
   { n: 1, gesture: "Identify symptomatic PAD early", mapping: "Structured Doppler + ABI/TBI in L1" },
@@ -29,7 +29,7 @@ export function TenCommandments({ className }: { className?: string }) {
         </CardTitle>
         <CardDescription>
           Mapping of the 10 platform gestures to Mazzolai / Lanzi / Rodriguez-Palomares
-          (Eur Heart J 2025) and ESC 2024 PAD Guidelines (Mazzolai chair).
+          (Eur Heart J 2025) and ESC 2024 PAD Guidelines.
         </CardDescription>
       </CardHeader>
       <CardContent>
