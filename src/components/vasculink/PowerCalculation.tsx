@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calculator, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/i18n/context";
 
 /**
  * Statistical power calculation for the planned prospective main cohort.
@@ -44,6 +45,7 @@ function inverseNormalCDF(p: number): number {
 const DEFAULTS = { pi0: 0.80, delta: 0.10, alpha: 0.05, power: 0.80, dropout: 0.20 };
 
 export function PowerCalculation({ className }: { className?: string }) {
+  const { t } = useTranslation();
   const [pi0, setPi0] = useState(DEFAULTS.pi0);
   const [delta, setDelta] = useState(DEFAULTS.delta);
   const [alpha, setAlpha] = useState(DEFAULTS.alpha);
@@ -71,51 +73,45 @@ export function PowerCalculation({ className }: { className?: string }) {
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
           <Calculator className="h-4 w-4 text-primary" />
-          Power calculation · prospective main cohort (interactive)
+          {t("power.title")}
         </CardTitle>
-        <CardDescription>
-          One-sample non-inferiority test of a single proportion (normal approximation).
-          Adjust parameters to recompute the required analysable n and target enrolment.
-        </CardDescription>
+        <CardDescription>{t("power.description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-          <Field label="π₀ (expected)" id="pi0" value={pi0} onChange={setPi0} step={0.01} min={0.01} max={0.99} />
-          <Field label="δ (margin)"    id="delta" value={delta} onChange={setDelta} step={0.01} min={0.01} max={0.5} />
-          <Field label="α (two-sided)" id="alpha" value={alpha} onChange={setAlpha} step={0.01} min={0.001} max={0.2} />
-          <Field label="1 − β (power)" id="power" value={power} onChange={setPower} step={0.05} min={0.5} max={0.99} />
-          <Field label="Dropouts"      id="dropout" value={dropout} onChange={setDropout} step={0.05} min={0} max={0.6} />
+          <Field label={t("power.pi0")} id="pi0" value={pi0} onChange={setPi0} step={0.01} min={0.01} max={0.99} />
+          <Field label={t("power.delta")} id="delta" value={delta} onChange={setDelta} step={0.01} min={0.01} max={0.5} />
+          <Field label={t("power.alpha")} id="alpha" value={alpha} onChange={setAlpha} step={0.01} min={0.001} max={0.2} />
+          <Field label={t("power.powerLabel")} id="power" value={power} onChange={setPower} step={0.05} min={0.5} max={0.99} />
+          <Field label={t("power.dropouts")} id="dropout" value={dropout} onChange={setDropout} step={0.05} min={0} max={0.6} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-          <Result label="Required analysable n" value={valid ? `≈ ${nAnalysable}` : "—"} highlight />
-          <Result label="Target enrolment (with dropouts)" value={valid ? `≈ ${nEnrolment}` : "—"} highlight />
+          <Result label={t("power.nAnalysable")} value={valid ? `≈ ${nAnalysable}` : "—"} highlight />
+          <Result label={t("power.nEnrolment")} value={valid ? `≈ ${nEnrolment}` : "—"} highlight />
         </div>
 
         <div className="rounded-lg border p-3 bg-muted/30 space-y-2">
-          <p className="text-xs font-semibold">Secondary endpoints (descriptive, no inflation correction)</p>
+          <p className="text-xs font-semibold">{t("power.secondary")}</p>
           <ul className="text-[11px] text-muted-foreground space-y-1 list-disc pl-4">
-            <li>WIQ / VascuQol-6 / 6-MWT trajectory across visits</li>
-            <li>Subgroup analyses: CKD (eGFR &lt; 30), diabetes, BMI &gt; 35</li>
-            <li>Image-quality failure rate (fallback to angio-CT / contrast MRA)</li>
+            <li>{t("power.secondary1")}</li>
+            <li>{t("power.secondary2")}</li>
+            <li>{t("power.secondary3")}</li>
           </ul>
         </div>
 
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex flex-wrap gap-2">
-            <Badge variant="outline" className="text-[10px]">Single-arm prospective</Badge>
-            <Badge variant="outline" className="text-[10px]">Pre-registration: ClinicalTrials.gov (planned J1)</Badge>
-            <Badge variant="outline" className="text-[10px]">SAP frozen before unblinding</Badge>
+            <Badge variant="outline" className="text-[10px]">{t("power.badge1")}</Badge>
+            <Badge variant="outline" className="text-[10px]">{t("power.badge2")}</Badge>
+            <Badge variant="outline" className="text-[10px]">{t("power.badge3")}</Badge>
           </div>
           <Button variant="outline" size="sm" onClick={reset}>
-            <RotateCcw className="h-3 w-3 mr-1" /> Reset defaults
+            <RotateCcw className="h-3 w-3 mr-1" /> {t("power.reset")}
           </Button>
         </div>
 
-        <p className="text-[10px] text-muted-foreground italic">
-          Final sample size to be confirmed by an independent biostatistics unit; recalibration possible
-          after blinded interim review (≈ M24, before J3).
-        </p>
+        <p className="text-[10px] text-muted-foreground italic">{t("power.footnote")}</p>
       </CardContent>
     </Card>
   );

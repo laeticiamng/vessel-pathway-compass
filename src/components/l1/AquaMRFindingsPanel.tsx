@@ -15,6 +15,7 @@ import { AlertTriangle, ImagePlus } from "lucide-react";
 import { z } from "zod";
 import { aquaMrFindingsSchema } from "@/lib/l1/schemas";
 import { ImageQuality } from "@/lib/l1/types";
+import { useTranslation } from "@/i18n/context";
 
 export type AquaMRFindings = z.infer<typeof aquaMrFindingsSchema>;
 
@@ -30,16 +31,17 @@ function parseNumber(input: string): number | undefined {
   return Number.isFinite(v) ? v : undefined;
 }
 
-const QUALITY_LABEL: Record<ImageQuality, string> = {
-  unknown: "Unknown",
-  interpretable: "Interpretable",
-  limited: "Limited",
-  non_interpretable: "Non-interpretable",
-};
-
 export function AquaMRFindingsPanel({ value, onChange, disabled }: Props) {
+  const { t } = useTranslation();
   const update = <K extends keyof AquaMRFindings>(key: K, v: AquaMRFindings[K]) =>
     onChange({ ...value, [key]: v });
+
+  const QUALITY_LABEL: Record<ImageQuality, string> = {
+    unknown: t("l1.aquaMR.qualityUnknown"),
+    interpretable: t("l1.aquaMR.qualityInterpretable"),
+    limited: t("l1.aquaMR.qualityLimited"),
+    non_interpretable: t("l1.aquaMR.qualityNonInterpretable"),
+  };
 
   const nonInterp = value.image_quality === "non_interpretable";
 
@@ -48,21 +50,19 @@ export function AquaMRFindingsPanel({ value, onChange, disabled }: Props) {
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <ImagePlus className="h-4 w-4 text-primary" />
-          AquaMR cartography
+          {t("l1.aquaMR.title")}
           {nonInterp && (
             <Badge variant="destructive" className="ml-2">
               <AlertTriangle className="h-3 w-3 mr-1" />
-              Standard imaging required
+              {t("l1.aquaMR.standardImagingRequired")}
             </Badge>
           )}
         </CardTitle>
-        <CardDescription>
-          4-zero contrast-free cartography. Document interpretability before any L1 reading.
-        </CardDescription>
+        <CardDescription>{t("l1.aquaMR.description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="l1-image-quality">Image quality</Label>
+          <Label htmlFor="l1-image-quality">{t("l1.aquaMR.imageQuality")}</Label>
           <Select
             value={value.image_quality}
             onValueChange={(v) => update("image_quality", v as ImageQuality)}
@@ -80,26 +80,23 @@ export function AquaMRFindingsPanel({ value, onChange, disabled }: Props) {
             </SelectContent>
           </Select>
           {nonInterp && (
-            <p className="text-xs text-destructive">
-              AquaMR is non-interpretable. The decision board will recommend
-              fallback to standard-of-care imaging (angio-CT / contrast MRA).
-            </p>
+            <p className="text-xs text-destructive">{t("l1.aquaMR.nonInterpWarning")}</p>
           )}
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="l1-segment-target">Target segment</Label>
+            <Label htmlFor="l1-segment-target">{t("l1.aquaMR.segmentTarget")}</Label>
             <Input
               id="l1-segment-target"
-              placeholder="e.g. SFA-mid, popliteal-P3, BTK-AT"
+              placeholder={t("l1.aquaMR.segmentPlaceholder")}
               value={value.segment_target ?? ""}
               onChange={(e) => update("segment_target", e.target.value)}
               disabled={disabled || nonInterp}
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="l1-stenosis">Max stenosis %</Label>
+            <Label htmlFor="l1-stenosis">{t("l1.aquaMR.maxStenosis")}</Label>
             <Input
               id="l1-stenosis"
               type="number"
@@ -113,7 +110,7 @@ export function AquaMRFindingsPanel({ value, onChange, disabled }: Props) {
 
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="l1-lesion-length">Lesion length (mm)</Label>
+            <Label htmlFor="l1-lesion-length">{t("l1.aquaMR.lesionLength")}</Label>
             <Input
               id="l1-lesion-length"
               type="number"
@@ -124,7 +121,7 @@ export function AquaMRFindingsPanel({ value, onChange, disabled }: Props) {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="l1-runoff">Runoff score (0-10)</Label>
+            <Label htmlFor="l1-runoff">{t("l1.aquaMR.runoffScore")}</Label>
             <Input
               id="l1-runoff"
               type="number"
@@ -139,7 +136,7 @@ export function AquaMRFindingsPanel({ value, onChange, disabled }: Props) {
 
         <div className="grid grid-cols-2 gap-4 items-end">
           <div className="space-y-2">
-            <Label htmlFor="l1-confidence">Confidence (0–1)</Label>
+            <Label htmlFor="l1-confidence">{t("l1.aquaMR.confidence")}</Label>
             <Input
               id="l1-confidence"
               type="number"
@@ -157,16 +154,16 @@ export function AquaMRFindingsPanel({ value, onChange, disabled }: Props) {
               onCheckedChange={(checked) => update("occlusion", checked)}
               disabled={disabled || nonInterp}
             />
-            <Label htmlFor="l1-occlusion">Occlusion present</Label>
+            <Label htmlFor="l1-occlusion">{t("l1.aquaMR.occlusion")}</Label>
           </div>
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="l1-aqua-notes">AquaMR notes</Label>
+          <Label htmlFor="l1-aqua-notes">{t("l1.aquaMR.notes")}</Label>
           <Textarea
             id="l1-aqua-notes"
             rows={2}
-            placeholder="Reading caveats, motion, segment gaps, calcified shadows…"
+            placeholder={t("l1.aquaMR.notesPlaceholder")}
             value={value.notes ?? ""}
             onChange={(e) => update("notes", e.target.value)}
             disabled={disabled}

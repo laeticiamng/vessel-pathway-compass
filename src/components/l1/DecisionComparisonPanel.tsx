@@ -14,6 +14,7 @@ import {
   RevascularizationDecision,
 } from "@/lib/l1/types";
 import { ComputedDecision } from "@/lib/l1/decision";
+import { useTranslation } from "@/i18n/context";
 
 interface Props {
   before: RevascularizationDecision | null;
@@ -24,28 +25,12 @@ interface Props {
   disabled?: boolean;
 }
 
-const DECISION_LABEL: Record<RevascularizationDecision, string> = {
-  medical_optimized: "Medical therapy optimized",
-  surveillance: "Surveillance",
-  standard_imaging: "Standard imaging",
-  endovascular_discussion: "Endovascular — discussion",
-  surgical_discussion: "Surgical — discussion",
-};
-
 const DELTA_VARIANT: Record<ComputedDecision["delta"], "secondary" | "default" | "outline" | "destructive"> = {
   unchanged: "secondary",
   escalation: "default",
   de_escalation: "outline",
   reclassification: "outline",
   insufficient_image_quality: "destructive",
-};
-
-const DELTA_LABEL: Record<ComputedDecision["delta"], string> = {
-  unchanged: "Unchanged",
-  escalation: "Escalation",
-  de_escalation: "De-escalation",
-  reclassification: "Reclassification",
-  insufficient_image_quality: "Image insufficient — fallback",
 };
 
 const DELTA_ICON: Record<ComputedDecision["delta"], typeof MoveUp> = {
@@ -61,11 +46,15 @@ function DecisionSelect({
   value,
   onChange,
   disabled,
+  decisionLabel,
+  placeholder,
 }: {
   id: string;
   value: RevascularizationDecision | null;
   onChange: (v: RevascularizationDecision | null) => void;
   disabled?: boolean;
+  decisionLabel: Record<RevascularizationDecision, string>;
+  placeholder: string;
 }) {
   return (
     <Select
@@ -74,12 +63,12 @@ function DecisionSelect({
       disabled={disabled}
     >
       <SelectTrigger id={id}>
-        <SelectValue placeholder="Select decision…" />
+        <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
         {REVASCULARIZATION_DECISIONS.map((d) => (
           <SelectItem key={d} value={d}>
-            {DECISION_LABEL[d]}
+            {decisionLabel[d]}
           </SelectItem>
         ))}
       </SelectContent>
@@ -95,6 +84,24 @@ export function DecisionComparisonPanel({
   onChangeAfter,
   disabled,
 }: Props) {
+  const { t } = useTranslation();
+
+  const DECISION_LABEL: Record<RevascularizationDecision, string> = {
+    medical_optimized: t("l1.decision.medical"),
+    surveillance: t("l1.decision.surveillance"),
+    standard_imaging: t("l1.decision.standardImaging"),
+    endovascular_discussion: t("l1.decision.endovascular"),
+    surgical_discussion: t("l1.decision.surgical"),
+  };
+
+  const DELTA_LABEL: Record<ComputedDecision["delta"], string> = {
+    unchanged: t("l1.decision.unchanged"),
+    escalation: t("l1.decision.escalation"),
+    de_escalation: t("l1.decision.deEscalation"),
+    reclassification: t("l1.decision.reclassification"),
+    insufficient_image_quality: t("l1.decision.insufficient"),
+  };
+
   const Icon = DELTA_ICON[computed.delta];
 
   return (
@@ -102,34 +109,35 @@ export function DecisionComparisonPanel({
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <GitCompareArrows className="h-4 w-4 text-primary" />
-          Decision pre-revascularization
+          {t("l1.decision.title")}
         </CardTitle>
-        <CardDescription>
-          Compare the strategy before and after AquaMR. L1 does not treat — it makes the
-          patient legible, classable and routable.
-        </CardDescription>
+        <CardDescription>{t("l1.decision.description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-end">
           <div className="space-y-2">
-            <Label htmlFor="l1-decision-before">Before AquaMR</Label>
+            <Label htmlFor="l1-decision-before">{t("l1.decision.before")}</Label>
             <DecisionSelect
               id="l1-decision-before"
               value={before}
               onChange={onChangeBefore}
               disabled={disabled}
+              decisionLabel={DECISION_LABEL}
+              placeholder={t("l1.decision.selectPlaceholder")}
             />
           </div>
           <div className="hidden md:flex justify-center pb-2">
             <ArrowRight className="h-5 w-5 text-muted-foreground" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="l1-decision-after">After AquaMR</Label>
+            <Label htmlFor="l1-decision-after">{t("l1.decision.after")}</Label>
             <DecisionSelect
               id="l1-decision-after"
               value={after}
               onChange={onChangeAfter}
               disabled={disabled}
+              decisionLabel={DECISION_LABEL}
+              placeholder={t("l1.decision.selectPlaceholder")}
             />
           </div>
         </div>
@@ -142,14 +150,12 @@ export function DecisionComparisonPanel({
             </Badge>
             {computed.recommendedStrategy && (
               <span className="text-sm text-muted-foreground">
-                Recommended: <strong>{DECISION_LABEL[computed.recommendedStrategy]}</strong>
+                {t("l1.decision.recommended")} <strong>{DECISION_LABEL[computed.recommendedStrategy]}</strong>
               </span>
             )}
           </div>
           {computed.requiresStandardImaging && (
-            <p className="text-xs text-destructive">
-              Standard imaging required: AquaMR cartography is insufficient for L1 reading.
-            </p>
+            <p className="text-xs text-destructive">{t("l1.decision.standardRequired")}</p>
           )}
           {computed.failureReason && (
             <p className="text-xs text-muted-foreground">{computed.failureReason}</p>

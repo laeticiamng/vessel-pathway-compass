@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, PenLine, ShieldCheck } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { SignoffStatus } from "@/lib/l1/types";
+import { useTranslation } from "@/i18n/context";
 
 interface Props {
   summary: string;
@@ -16,14 +17,6 @@ interface Props {
   isSigning?: boolean;
 }
 
-const STATUS_LABEL: Record<SignoffStatus, string> = {
-  draft: "Draft",
-  pending_signoff: "Pending sign-off",
-  signed: "Signed",
-  cosigned: "Cosigned",
-  rejected: "Rejected",
-};
-
 export function L1SummaryCard({
   summary,
   signoffStatus,
@@ -33,26 +26,33 @@ export function L1SummaryCard({
   disabled,
   isSigning,
 }: Props) {
+  const { t } = useTranslation();
   const isSigned = signoffStatus === "signed" || signoffStatus === "cosigned";
+
+  const STATUS_LABEL: Record<SignoffStatus, string> = {
+    draft: t("l1.summary.statusDraft"),
+    pending_signoff: t("l1.summary.statusPending"),
+    signed: t("l1.summary.statusSigned"),
+    cosigned: t("l1.summary.statusCosigned"),
+    rejected: t("l1.summary.statusRejected"),
+  };
+
   return (
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2 text-base">
           <ShieldCheck className="h-4 w-4 text-primary" />
-          L1 clinician summary & sign-off
+          {t("l1.summary.title")}
         </CardTitle>
-        <CardDescription>
-          L1 ne traite pas — L1 rend le patient lisible, classable et orientable.
-          No human revascularization is performed during the doctoral protocol.
-        </CardDescription>
+        <CardDescription>{t("l1.summary.description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="l1-summary">Clinician summary</Label>
+          <Label htmlFor="l1-summary">{t("l1.summary.label")}</Label>
           <Textarea
             id="l1-summary"
             rows={5}
-            placeholder="Synthesis: fragility, cartography quality, decision impact, next step…"
+            placeholder={t("l1.summary.placeholder")}
             value={summary}
             onChange={(e) => onChangeSummary(e.target.value)}
             disabled={disabled || isSigned}
@@ -67,7 +67,7 @@ export function L1SummaryCard({
           </Badge>
           {signedAt && (
             <span className="text-xs text-muted-foreground">
-              Signed at {new Date(signedAt).toLocaleString()}
+              {t("l1.summary.signedAt")} {new Date(signedAt).toLocaleString()}
             </span>
           )}
         </div>
@@ -82,7 +82,7 @@ export function L1SummaryCard({
           ) : (
             <PenLine className="h-4 w-4 mr-2" />
           )}
-          {isSigned ? "Signed" : "Sign L1 assessment"}
+          {isSigned ? t("l1.summary.signed") : t("l1.summary.sign")}
         </Button>
       </CardContent>
     </Card>
