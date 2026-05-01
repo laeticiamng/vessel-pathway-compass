@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { FileText, Plus, Users, Database, Download, BarChart3, Loader2, Calculator, ShieldCheck, Leaf, FolderOpen } from "lucide-react";
+import { FileText, Plus, Users, Download, BarChart3, Loader2, Calculator, ShieldCheck, Leaf, FolderOpen } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { PowerCalculation } from "@/components/vasculink/PowerCalculation";
