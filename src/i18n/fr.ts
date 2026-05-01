@@ -1431,6 +1431,7 @@ export const fr = {
       },
     },
   },
+  contactPage: {
     seo: {
       title: "Contact — Échanger avec l'équipe AquaMR Flow",
       description: "Contactez l'équipe AquaMR Flow pour toute question sur la plateforme, son périmètre, ses cas d'usage ou un éventuel accès.",
