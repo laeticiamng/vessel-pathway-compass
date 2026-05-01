@@ -156,11 +156,16 @@ async function* walk(dir) {
 }
 
 function extractJsonLdLiterals(source) {
-  // Find every `jsonLd={...}` JSX prop and try to balance braces.
+  // Find every `jsonLd={...}` JSX prop and balance braces.
+  // Strict: must NOT be preceded by `const|let|var` (those are declarations,
+  // not JSX attributes) and must be at a word boundary.
   const out = [];
-  const re = /jsonLd\s*=\s*\{/g;
+  const re = /(?<![\w$])jsonLd\s*=\s*\{/g;
   let m;
   while ((m = re.exec(source))) {
+    // Reject `const jsonLd = {` style declarations.
+    const back = source.slice(Math.max(0, m.index - 12), m.index);
+    if (/\b(const|let|var)\s+$/.test(back)) continue;
     let depth = 1, i = m.index + m[0].length;
     while (i < source.length && depth > 0) {
       const c = source[i];
