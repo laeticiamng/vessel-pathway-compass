@@ -200,20 +200,26 @@ function tryEvalJsonLdLiteral(body, source) {
 
   if (!trimmed.startsWith("{")) return { dynamic: true, snippet: trimmed.slice(0, 60) };
 
-  // Strip TS-only syntax that breaks JSON.parse:
-  //  - line / block comments
-  //  - `as const`, `as <Type>` casts
-  //  - template-string concatenations like `${BASE_URL}/x` → keep raw text
-  const jsonish = trimmed
+  // Strip TS-only syntax that breaks JSON.parse, then replace any remaining
+  // dynamic expression with a literal placeholder string so the schema shape
+  // can still be checked even when the values are computed at runtime.
+  let jsonish = trimmed
     .replace(/\/\/[^\n]*/g, "")
     .replace(/\/\*[\s\S]*?\*\//g, "")
     .replace(/\bas\s+const\b/g, "")
     .replace(/\bas\s+[A-Za-z_$][\w$<>,\s|&\[\]]*?(?=[,)\]}])/g, "")
     .replace(/`([^`${}]*)`/g, '"$1"')
-    .replace(/([{,]\s*)([A-Za-z_$][\w$]*)\s*:/g, '$1"$2":')
-    .replace(/'([^']*)'/g, '"$1"')
+    .replace(/([{,]\s*)([A-Za-z_$][\w$]*|"[^"]+")\s*:/g, (_, p, k) =>
+      `${p}${k.startsWith('"') ? k : `"${k}"`}:`)
+    .replace(/'([^']*)'/g, '"$1"');
+
+  // Replace value-position function calls (foo(...) , bar.baz(...))
+  // and template-literal expressions with the placeholder "<expr>".
+  jsonish = jsonish
+    .replace(/(?<=[:\[,]\s*)[A-Za-z_$][\w$.]*\s*\([^()]*\)(?:\s*\.[A-Za-z_$][\w$]*\s*\([^()]*\))*/g, '"<expr>"')
     .replace(/,(\s*[}\]])/g, "$1");
-  try { return { dynamic: false, value: JSON.parse(jsonish) }; }
+
+  try { return { dynamic: false, value: JSON.parse(jsonish), partial: true }; }
   catch (e) { return { dynamic: true, snippet: trimmed.slice(0, 60), parseError: e.message }; }
 }
 
