@@ -634,25 +634,22 @@
 
   /* Dark mode: vivid neon glow, cockpit / vascular imaging vibe.
      We deliberately drop the text-stroke + overlay in dark to keep the
-     gradient saturated and the text legible. */
+     gradient saturated and the text legible (no double-outline artefact). */
   .dark .hero-neon-text {
     background-image: var(--hero-gradient);
-    -webkit-text-stroke: 0;
-    filter:
-      drop-shadow(0 0 14px hsl(var(--neon-glow) / 0.4))
-      drop-shadow(0 0 36px hsl(var(--neon-glow) / 0.22));
+    -webkit-text-stroke: 0 !important;
+    paint-order: normal;
+    filter: drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.28));
   }
   .dark .hero-neon-text.hero-neon-soft {
-    filter:
-      drop-shadow(0 0 10px hsl(var(--neon-glow) / 0.25))
-      drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.12));
+    filter: drop-shadow(0 0 12px hsl(var(--neon-glow) / 0.18));
   }
   .dark .hero-neon-text.hero-neon-strong {
     filter:
-      drop-shadow(0 0 18px hsl(var(--neon-glow) / 0.45))
-      drop-shadow(0 0 48px hsl(var(--neon-glow) / 0.22))
-      drop-shadow(0 0 90px hsl(205 100% 70% / 0.12));
+      drop-shadow(0 0 22px hsl(var(--neon-glow) / 0.32))
+      drop-shadow(0 0 48px hsl(205 100% 70% / 0.14));
   }
+
 
   /* Respect reduced motion / high contrast preferences */
   @media (prefers-reduced-motion: reduce), (prefers-contrast: more) {
