@@ -120,7 +120,24 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!--
+        SSR-visible H1 + intro for crawlers that do not execute JS
+        (Googlebot, Bingbot, social scrapers, screen readers on slow JS).
+        Replaced by the React tree on hydration.
+      -->
+      <noscript>
+        <style>.no-js-banner{padding:2rem;font-family:system-ui,sans-serif;max-width:720px;margin:0 auto;color:#06101F}</style>
+        <div class="no-js-banner">
+          <h1>AquaMR Flow — Non-Ionizing Vascular Workflow Platform</h1>
+          <p>AquaMR Flow combines procedure planning, multimodal imaging fusion, CI-AKI prevention, clinical simulation and an outcomes registry for non-ionizing, contrast-sparing vascular care. Please enable JavaScript to use the application.</p>
+        </div>
+      </noscript>
+      <div aria-hidden="false" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
+        <h1>AquaMR Flow — Non-Ionizing Vascular Workflow Platform</h1>
+        <p>Plan, fuse and de-risk vascular procedures with AquaMR Flow: non-ionizing imaging, multimodal fusion, CI-AKI prevention, clinical simulation, and an outcomes registry — built for vascular and interventional teams.</p>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
