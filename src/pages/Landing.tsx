@@ -20,6 +20,7 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { MedRegBadge } from "@/components/MedRegBadge";
 import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
 import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
@@ -241,9 +242,13 @@ export default function Landing() {
       </nav>
       </header>
 
+      {/* 4-zero signature strip — sticky directly under the header.
+          Strategic core of the dossier (0 mSv · 0 contrast · 0 helium · BoM <€15k). */}
+      <FourZeroBanner />
+
       <main id="main-content">
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+      {/* Hero — top padding accounts for fixed header (h-16) + 4-zero banner (~3.5rem). */}
+      <section className="relative pt-44 pb-20 md:pt-56 md:pb-32 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_hsl(220_70%_50%_/_0.18),_transparent_60%)]" />
         {/* Dot grid overlay for depth */}
@@ -275,8 +280,11 @@ export default function Landing() {
               <span className="mx-2 text-on-hero/60" aria-hidden="true">·</span>
               <span>{t("home.hero.title2")}</span>
             </p>
-            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-6 leading-relaxed">
               {t("home.hero.subtitle")}
+            </p>
+            <p className="text-sm md:text-base italic text-on-hero/90 max-w-3xl mx-auto mb-10 leading-relaxed border-l-2 border-white/40 pl-4 text-left sm:text-center sm:border-l-0 sm:pl-0">
+              {t("home.hero.translationalAmbition")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
@@ -343,7 +351,7 @@ export default function Landing() {
         <AudienceSection />
 
         {/* Comment ça marche (anchor target for hero CTA) */}
-        <div id="comment-ca-marche" className="scroll-mt-20">
+        <div id="comment-ca-marche" className="scroll-mt-32">
           <HowItWorksFRSection />
         </div>
 

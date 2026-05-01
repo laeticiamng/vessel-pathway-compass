@@ -75,7 +75,7 @@ export function PlatformCompletenessSection() {
     <section
       id="platform-complete"
       aria-labelledby="platform-complete-title"
-      className="py-12 sm:py-16 md:py-20 bg-background scroll-mt-20 border-y border-border/40"
+      className="py-12 sm:py-16 md:py-20 bg-background scroll-mt-32 border-y border-border/40"
     >
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         {/* Header */}

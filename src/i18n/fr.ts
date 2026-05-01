@@ -1200,6 +1200,7 @@ export const fr = {
       title1: "VASCU-LINK",
       title2: "Reconstruire la fonction angiographique en 4-zéro",
       subtitle: "Plateforme complète : 10 modules cliniques, protocole L1 verrouillé, 3 langues, conformité MDR/RGPD ciblée et radiologie verte. Planification, imagerie multimodale, CI-AKI, jumeau numérique, simulation et registre — dans un seul cockpit.",
+      translationalAmbition: "Tester si une partie de la fonction angiographique — cartographier, décider, planifier, guider, traiter — peut être progressivement reconstruite en 4-zéro.",
       ctaPrimary: "Créer un compte gratuit",
       ctaSecondary: "Voir comment ça marche",
       perkNoCard: "Sans carte bancaire",
@@ -1207,6 +1208,11 @@ export const fr = {
       perkGdpr: "Données pseudonymisées, RGPD",
       disclaimer: "Prototype de recherche — pas un dispositif médical. Toute aide à la décision nécessite la confirmation d'un clinicien.",
       dashboardAlt: "Tableau de bord clinique AquaMR Flow montrant les statistiques patients, la distribution des risques et la vue d'ensemble des modules",
+    },
+    fourZeroBanner: {
+      title: "Cockpit vasculaire 4-zéro",
+      pillars: "0 mSv · 0 contraste · 0 hélium · BoM cible < 15 k€ · matériaux recyclés & biosourcés",
+      ariaLabel: "Signature 4-zéro du cockpit vasculaire VASCU-LINK",
     },
     completeness: {
       badge: "Plateforme livrée",
