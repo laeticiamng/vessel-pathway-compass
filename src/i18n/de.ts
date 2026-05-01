@@ -2187,40 +2187,6 @@ export const de = {
   },
 
   // ============= VASCU-LINK architecture =============
-  vasculink: {
-    arch: {
-      title: "VASCU-LINK — Von der Diagnose zur Geste",
-      description: "Drei konzentrische Kreise · 4-Null angiographische Funktion · vaskuläre Nahversorgung.",
-      cockpitBanner: "4-Null vaskuläres Cockpit · 0 mSv · 0 Gd / 0 Jod · 0 Helium · BoM-Ziel < 15 k€ · recycelte / biobasierte Materialien",
-      l1Title: "L1 — DIAGNOSTIZIEREN",
-      l1Badge: "Verpflichtender PhD-Kern",
-      l1Caption: "Kreis 1 · Geplante prospektive Validierungskohorte (n ≈ 250 auswertbar, Partner-Standort zu bestätigen)",
-      l1Item1Title: "Niederfeld-AquaMR-MRA",
-      l1Item1Sub: "Halbach NdFeB recycelt + KI",
-      l1Item2Title: "Strukturierter Doppler",
-      l1Item2Sub: "+ ABI/TBI/vernetzte Oximetrie",
-      l1Item3Title: "C4-i-Stratifikation v11.1",
-      l1Item3Sub: "Klinisch-physiologische Diskordanz",
-      l1Item4Title: "Vaskuläre PROMs (EN)",
-      l1Item4Sub: "WIQ · VascuQol-6 · 6-MWT",
-      l1Routing: "Macht den Patienten lesbar, klassifizierbar und steuerbar zu:",
-      l1RoutingDest: "optimierte medikamentöse Therapie · Überwachung · Standardbildgebung · endovaskulär · chirurgisch",
-      l1Fallback: "Bei unzureichender Bildqualität: dokumentierter Fallback auf Standardbildgebung (Angio-CT / Kontrast-MRA).",
-      decisionTitle: "ENTSCHEIDUNG — Vessel Pathway Compass-Cockpit",
-      decisionSub: "Patientenspezifischer Gefäß-Zwilling · multimodale Fusion · AquaMR Registry",
-      decisionAdr: "15 dokumentierte ADR · Architektur darauf ausgelegt, MDR / DSGVO / IEC 62304-Konformität anzustreben (in diesem Stadium nicht zertifiziert)",
-      decisionMigration: "Migration zu klinischem HDS-Hosting (EU/CH) geplant · unabhängiges DSMB & Data Access Committee",
-      l2Title: "L2 — FÜHREN",
-      l2Badge: "Bedingte PhD-Erweiterung",
-      l2Caption: "Kreis 2 · Phantom-/Simulationsdemonstration · Akzeptanz & Usability gemessen (M42)",
-      l2Item1: "Echtzeit-Echo-MR-Fusion",
-      l2Item2: "MR-sicheres Instrumenten-Tracking",
-      l2Item3: "Geführte Punktion — Phantom/simuliert",
-      l3Title: "L3 — POST-PHD-VISION (präklinisch)",
-      l3Badge: "Langzeit-Horizont",
-      l3Desc: "Kreis 3 — Streng präklinischer interventioneller PoC (Tiermodell / Kadaver). Keine humane Anwendung innerhalb der Doktorarbeit.",
-    },
-  },
 
   // ============= Power calculation =============
   power: {

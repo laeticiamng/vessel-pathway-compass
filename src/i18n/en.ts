@@ -2219,40 +2219,6 @@ export const en = {
   },
 
   // ============= VASCU-LINK architecture =============
-  vasculink: {
-    arch: {
-      title: "VASCU-LINK — From diagnosis to gesture",
-      description: "Three concentric circles · 4-zero angiographic function · proximity vascular medicine.",
-      cockpitBanner: "4-zero vascular cockpit · 0 mSv · 0 Gd / 0 iodine · 0 helium · BoM target < €15k · recycled / bio-sourced materials",
-      l1Title: "L1 — DIAGNOSE",
-      l1Badge: "Mandatory PhD core",
-      l1Caption: "Circle 1 · Planned prospective validation cohort (n ≈ 250 analysable, partner site to be confirmed)",
-      l1Item1Title: "Low-field AquaMR MRA",
-      l1Item1Sub: "Halbach NdFeB recycled + AI",
-      l1Item2Title: "Structured Doppler",
-      l1Item2Sub: "+ ABI/TBI/connected oximetry",
-      l1Item3Title: "C4-i stratification v11.1",
-      l1Item3Sub: "Clinico-physiological discordance",
-      l1Item4Title: "Vascular PROMs (EN)",
-      l1Item4Sub: "WIQ · VascuQol-6 · 6-MWT",
-      l1Routing: "Makes the patient legible, classifiable and routable to:",
-      l1RoutingDest: "optimized medical therapy · surveillance · standard imaging · endovascular · surgical",
-      l1Fallback: "If image quality insufficient: documented fallback to standard imaging (angio-CT / contrast MRA).",
-      decisionTitle: "DECISION — Vessel Pathway Compass cockpit",
-      decisionSub: "Patient-specific vascular twin · multimodal fusion · AquaMR Registry",
-      decisionAdr: "15 documented ADR · architecture designed to target MDR / GDPR / IEC 62304 conformity (not certified at this stage)",
-      decisionMigration: "Migration planned to clinical HDS hosting (EU/CH) · independent DSMB & Data Access Committee",
-      l2Title: "L2 — GUIDE",
-      l2Badge: "Conditional PhD extension",
-      l2Caption: "Circle 2 · Phantom / simulated demonstration · acceptability & usability measured (M42)",
-      l2Item1: "Real-time echo-MR fusion",
-      l2Item2: "MR-safe instrument tracking",
-      l2Item3: "Guided puncture — phantom/simulated",
-      l3Title: "L3 — POST-PHD VISION (preclinical)",
-      l3Badge: "Long-term horizon",
-      l3Desc: "Circle 3 — Strictly preclinical interventional PoC (animal model / cadaver). No human application within the thesis.",
-    },
-  },
 
   // ============= Power calculation =============
   power: {
