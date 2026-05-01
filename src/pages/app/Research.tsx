@@ -2,12 +2,15 @@ import ResearchExportButton from "@/components/research/ResearchExportButton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Plus, Users, Database, Download, BarChart3, Loader2 } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { FileText, Plus, Users, Database, Download, BarChart3, Loader2, Calculator, ShieldCheck, Leaf, FolderOpen } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { ScientificSafetyBox } from "@/components/vasculink/ScientificSafetyBox";
 import { PowerCalculation } from "@/components/vasculink/PowerCalculation";
 import { DSMBCharter } from "@/components/vasculink/DSMBCharter";
 import { LCAQALYFramework } from "@/components/vasculink/LCAQALYFramework";
+import { DSMBExportButton } from "@/components/vasculink/DSMBExportButton";
+import { AuditPackButton } from "@/components/vasculink/AuditPackButton";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -17,8 +20,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+
 
 export default function Research() {
   const { t } = useTranslation();
