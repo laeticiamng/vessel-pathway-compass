@@ -81,6 +81,13 @@ export default {
         "surface-raised": "hsl(var(--surface-raised))",
         "border-subtle": "hsl(var(--border-subtle))",
         "border-strong": "hsl(var(--border-strong))",
+        /* Hero / neon signature tokens (themed light & dark) */
+        "accent-cyan": "hsl(var(--accent-cyan))",
+        "accent-teal": "hsl(var(--accent-teal))",
+        "accent-blue": "hsl(var(--accent-blue))",
+        "neon-glow": "hsl(var(--neon-glow))",
+        "glass-border": "hsl(var(--glass-border))",
+        "surface-glass": "hsl(var(--surface-glass))",
       },
       borderRadius: {
         lg: "var(--radius)",
