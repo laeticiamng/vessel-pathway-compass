@@ -44,6 +44,7 @@ import {
 } from "@/components/landing/HomeSections";
 import { ComplianceFAQSection, complianceFaqJsonLd } from "@/components/landing/ComplianceFAQSection";
 import { WhatsNewSection } from "@/components/landing/WhatsNewSection";
+import { InteractiveDemoSection } from "@/components/landing/InteractiveDemoSection";
 import { VasculinkArchitecture } from "@/components/vasculink/VasculinkArchitecture";
 import { FourZeroPillars } from "@/components/vasculink/FourZeroPillars";
 import { ProximityMedicineCard } from "@/components/vasculink/ProximityMedicineCard";
@@ -296,6 +297,9 @@ export default function Landing() {
 
       {/* What's new — changelog */}
       <WhatsNewSection />
+
+      {/* Interactive demo — guided 4-screen walkthrough */}
+      <InteractiveDemoSection />
 
       {/* En bref */}
       <EnBrefSection />
