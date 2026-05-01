@@ -2139,17 +2139,17 @@ export const en = {
           ],
         },
         usage: {
-          title: "Free plan usage limits",
+          title: "Free plan & quotas (post-beta)",
           items: [
-            "Maximum 3 AI reports generated per day.",
-            "Maximum 5 active patient records.",
-            "During the open beta: every feature is accessible without a credit card — limits will apply after official launch.",
-            "Deleted patients are kept for 30 days in the trash before automatic permanent deletion.",
+            "During the open beta: every feature is available for free, without a credit card and without quotas — the 30-day trash and full audit trail are already active.",
+            "After official launch, the free plan will be limited to 3 AI reports per day and 5 active patient records; these limits do not apply today.",
+            "Accounts created during the beta keep their data and history when moving to the stable version.",
           ],
         },
       },
       ctaTitle: "A question about these limitations?",
       ctaDesc: "The team responds directly, with no middleman. Any feedback on prototype scope is valuable for the thesis framing.",
+      resolvedBadge: "Resolved in beta",
     },
   },
 

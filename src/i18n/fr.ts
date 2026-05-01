@@ -2116,17 +2116,17 @@ export const fr = {
           ],
         },
         usage: {
-          title: "Limites d'usage du plan gratuit",
+          title: "Plan gratuit & quotas (post-bêta)",
           items: [
-            "3 rapports IA générés par jour maximum.",
-            "5 dossiers patients actifs maximum.",
-            "Pendant la bêta ouverte : toutes les fonctionnalités sont accessibles sans carte bancaire — les limites s'appliqueront après le lancement officiel.",
-            "Les patients supprimés sont conservés 30 jours en corbeille avant suppression définitive automatique.",
+            "Pendant la bêta ouverte : toutes les fonctionnalités sont accessibles gratuitement, sans carte bancaire et sans quota — la corbeille (30 jours) et l'audit complet sont déjà actifs.",
+            "Après le lancement officiel, le plan gratuit sera limité à 3 rapports IA par jour et 5 dossiers patients actifs ; ces limites ne s'appliquent pas aujourd'hui.",
+            "Les comptes créés pendant la bêta conservent leurs données et leur historique au passage en version stable.",
           ],
         },
       },
       ctaTitle: "Une question sur ces limites ?",
       ctaDesc: "L'équipe répond directement, sans intermédiaire. Toute remarque sur la portée du prototype est précieuse pour le cadrage de la thèse.",
+      resolvedBadge: "Résolu en bêta",
     },
   },
   seo: {
