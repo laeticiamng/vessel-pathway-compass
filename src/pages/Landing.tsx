@@ -30,6 +30,7 @@ import {
 } from "lucide-react";
 // FAQSection + HowItWorksSection legacy retirés (doublons)
 import { AboutSection } from "@/components/landing/AboutSection";
+import { LimitsSection } from "@/components/landing/LimitsSection";
 import {
   EnBrefSection,
   AudienceSection,
@@ -445,6 +446,9 @@ export default function Landing() {
       <HomeFAQSection />
 
       {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
+
+      {/* Current limitations — full transparency */}
+      <LimitsSection />
 
       {/* About */}
       <AboutSection />
