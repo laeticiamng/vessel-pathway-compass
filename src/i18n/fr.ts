@@ -1471,7 +1471,7 @@ export const fr = {
           items: [
             "Pas de revascularisation autonome : la plateforme ne déclenche jamais d'action invasive.",
             "Les questionnaires cliniques (VascuQoL-6, CIVIQ-14) restent en anglais — version validée scientifiquement.",
-            "Cohorte de validation CHUV en cours (n≈250, jalons J1-J5) — résultats non encore publiés.",
+            "Cohorte de validation prospective prévue (n≈250, jalons J1-J5) — partenariat académique en cours de négociation, résultats non encore publiés.",
             "Le moteur CI-AKI utilise des modèles publiés mais doit être recalibré sur la population locale.",
           ],
         },
@@ -1818,7 +1818,7 @@ export const fr = {
         "ADR-012": { title: "Fallback documenté vers imagerie standard si qualité insuffisante", rationale: "Sécurité patient > ambition 4-zéro · auditable dans la timeline du cas." },
         "ADR-013": { title: "DSMB indépendant + Data Access Committee", rationale: "Requis avant toute transition L2 phantom-vers-humain · supervision externe." },
         "ADR-014": { title: "Cible BoM < 15 k€ comme 4ème pilier (sans devis fournisseur)", rationale: "Estimation d'ingénierie · devis fournisseurs formels attendus au jalon M06 (J1)." },
-        "ADR-015": { title: "AquaMR Registry · cohorte n ≈ 250 analysables (CHUV)", rationale: "Calibré pour le critère principal de concordance · cf. calcul de puissance." },
+        "ADR-015": { title: "AquaMR Registry · cohorte n ≈ 250 analysables (site partenaire à confirmer)", rationale: "Calibré pour le critère principal de concordance · cf. calcul de puissance." },
       },
     },
   },
