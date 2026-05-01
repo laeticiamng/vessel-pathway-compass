@@ -56,7 +56,7 @@ describe("DSMB Charter PDF", () => {
   });
 
   it("ends with placeholder citations", () => {
-    expect(text).toContain("DSMB-CHUV-2025-01");
+    expect(text).toContain("DSMB-CHARTER-2025-01");
     expect(text).toContain("CER-VD");
   });
 });
