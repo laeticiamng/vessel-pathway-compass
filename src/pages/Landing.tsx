@@ -261,7 +261,7 @@ export default function Landing() {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-6 max-w-4xl mx-auto">
               {t("home.hero.title1")}{" "}
-              <NeonGradientText intensity="medium" className="inline-block">
+              <NeonGradientText intensity="strong" className="inline-block">
                 {t("home.hero.title2")}
               </NeonGradientText>
             </h1>
