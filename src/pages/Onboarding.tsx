@@ -28,6 +28,7 @@ import {
   Check,
   SkipForward,
 } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 
 const ROLES = ["physician", "trainee", "expert_reviewer", "hospital_admin", "research_lead"] as const;
 const SPECIALTIES = [
@@ -150,9 +151,7 @@ export default function Onboarding() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background px-4 py-6 sm:p-6">
       <Link to="/" className="flex items-center gap-2 mb-6">
-        <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center">
-          <HeartPulse className="h-5 w-5 text-primary-foreground" />
-        </div>
+        <AquaMRLogo variant="badge" />
         <span className="text-xl font-bold">AquaMR Flow</span>
       </Link>
       <div className="w-full max-w-lg space-y-6">

@@ -5,7 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, HeartPulse, Mail, Send, Loader2 } from "lucide-react";
+import { ArrowLeft, Mail, Send, Loader2 } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { SEOHead } from "@/components/SEOHead";
@@ -51,9 +52,7 @@ export default function Contact() {
       <header className="border-b">
         <nav className="container mx-auto flex items-center justify-between h-16 px-6" aria-label={t("home.nav.mainAria")}>
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="h-9 w-9 rounded-xl bg-primary flex items-center justify-center shadow-md">
-              <HeartPulse className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <AquaMRLogo variant="badge" />
             <span className="text-xl font-bold tracking-tight">AquaMR Flow</span>
           </Link>
           <Button asChild variant="ghost" size="sm">

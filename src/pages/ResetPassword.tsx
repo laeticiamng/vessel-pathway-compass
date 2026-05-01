@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { HeartPulse } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "@/i18n/context";
@@ -70,9 +70,7 @@ export default function ResetPassword() {
       <div className="min-h-screen flex items-center justify-center bg-background px-4 py-6 sm:p-6">
         <div className="w-full max-w-md">
           <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-            <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-              <HeartPulse className="h-5 w-5 text-primary-foreground" />
-            </div>
+            <AquaMRLogo variant="badge" className="h-10 w-10" />
             <span className="text-2xl font-bold">AquaMR Flow</span>
           </Link>
           <Card>
@@ -95,9 +93,7 @@ export default function ResetPassword() {
     <div className="min-h-screen flex items-center justify-center bg-background px-4 py-6 sm:p-6">
       <div className="w-full max-w-md">
         <Link to="/" className="flex items-center justify-center gap-2 mb-8">
-          <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
-            <HeartPulse className="h-5 w-5 text-primary-foreground" />
-          </div>
+          <AquaMRLogo variant="badge" className="h-10 w-10" />
           <span className="text-2xl font-bold">AquaMR Flow</span>
         </Link>
 

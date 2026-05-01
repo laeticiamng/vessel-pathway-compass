@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, HeartPulse, Globe } from "lucide-react";
+import { ArrowLeft, Globe } from "lucide-react";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { useTranslation, type Language } from "@/i18n/context";
 import { SEOHead } from "@/components/SEOHead";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -27,7 +28,7 @@ export default function Legal() {
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
           <Link to="/" className="flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" />
-            <HeartPulse className="h-5 w-5 text-primary" />
+            <AquaMRLogo />
             <span className="font-bold">AquaMR Flow</span>
           </Link>
           <DropdownMenu>
