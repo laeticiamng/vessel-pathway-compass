@@ -354,6 +354,9 @@ export default function Landing() {
         {/* Limites actuelles */}
         <LimitsSection />
 
+        {/* Anti-overpromise — what the platform does NOT claim to do */}
+        <AntiOverpromiseSection />
+
         {/* Trust */}
         <section className="py-24 bg-muted/40">
           <div className="container mx-auto px-6">
