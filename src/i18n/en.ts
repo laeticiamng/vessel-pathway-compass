@@ -213,6 +213,14 @@ export const en = {
       title: "Who We Are",
       description: "AquaMR Flow is developed by EMOTIONSCARE, a health-tech company based in Amiens, France. Founded by Laëticia Motongane, internal medicine resident (FMH track, vascular medicine), our mission is to advance non-ionizing, contrast-sparing vascular workflows — built around real interventional needs, not generic healthcare templates.",
       foundedLine: "Founded in Amiens, France — EMOTIONSCARE SASU",
+      medreg: {
+        label: "Listed on the Swiss healthcare professionals registry",
+        identity: "Dr Laëticia Moto-Ngane, MD (Switzerland)",
+        gln: "GLN 7601009569944",
+        registry: "MedReg — Healthcare Professions Platform (Swiss Confederation)",
+        verifyLink: "Verify on MedReg",
+        short: "Dr Laëticia Moto-Ngane, MD (CH) · GLN 7601009569944 · MedReg",
+      },
       highlights: {
         clinical: {
           title: "Built by Clinicians",
