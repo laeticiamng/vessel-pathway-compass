@@ -23,7 +23,7 @@
     --secondary-foreground: 220 25% 20%;
 
     --muted: 220 15% 94%;
-    --muted-foreground: 220 10% 50%;
+    --muted-foreground: 220 14% 38%;  /* WCAG AA on white */
 
     --accent: 190 50% 38%;
     --accent-foreground: 0 0% 100%;
@@ -31,9 +31,21 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 91%;
-    --input: 220 15% 90%;
+    --border: 220 15% 88%;
+    --input: 220 15% 86%;
     --ring: 195 65% 42%;
+
+    /* === Semantic text tokens (use these in components) === */
+    --text-strong: 220 30% 8%;     /* near-black, headings on light */
+    --text-default: 220 25% 15%;   /* body text */
+    --text-secondary: 220 14% 38%; /* secondary text, captions */
+    --text-disclaimer: 220 14% 32%;/* disclaimers - must stay readable */
+    --text-on-hero: 210 25% 96%;   /* text over hero gradient (dark always) */
+    --text-on-hero-soft: 210 20% 82%; /* soft text over hero - still AA */
+    --surface-subtle: 220 20% 99%;
+    --surface-raised: 0 0% 100%;
+    --border-subtle: 220 15% 92%;
+    --border-strong: 220 15% 78%;
 
     --radius: 0.75rem;
 
@@ -69,35 +81,47 @@
   .dark {
     /* Deep midnight blue background, AquaMR Flow inspired */
     --background: 222 47% 5%;
-    --foreground: 195 30% 96%;
+    --foreground: 210 25% 96%;        /* near-white, AAA on dark bg */
 
-    --card: 222 45% 8%;
-    --card-foreground: 195 25% 95%;
+    --card: 222 45% 9%;
+    --card-foreground: 210 25% 96%;
 
-    --popover: 222 45% 8%;
-    --popover-foreground: 195 25% 95%;
+    --popover: 222 45% 9%;
+    --popover-foreground: 210 25% 96%;
 
     /* Vivid neon cyan as primary signature color */
     --primary: 188 95% 58%;
-    --primary-foreground: 222 47% 6%;
+    --primary-foreground: 222 47% 6%; /* dark text on cyan button */
     --primary-glow: 188 100% 70%;
 
-    --secondary: 222 35% 14%;
-    --secondary-foreground: 195 25% 92%;
+    --secondary: 222 35% 16%;
+    --secondary-foreground: 210 25% 94%;
 
-    --muted: 222 35% 12%;
-    --muted-foreground: 215 20% 60%;
+    --muted: 222 35% 13%;
+    --muted-foreground: 215 22% 78%;  /* WAS 60% — now AA on #06101F */
 
     /* Neon violet accent (modules, education) */
     --accent: 270 85% 68%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62% 45%;
+    --destructive: 0 75% 62%;          /* brighter red for dark bg */
     --destructive-foreground: 0 0% 100%;
 
-    --border: 222 35% 18%;
-    --input: 222 35% 16%;
+    --border: 222 30% 22%;             /* slightly lighter to separate cards */
+    --input: 222 35% 18%;
     --ring: 188 95% 58%;
+
+    /* === Semantic text tokens (dark) === */
+    --text-strong: 210 30% 98%;
+    --text-default: 210 25% 94%;
+    --text-secondary: 215 22% 78%;
+    --text-disclaimer: 215 22% 72%;    /* still readable on near-black */
+    --text-on-hero: 210 25% 96%;
+    --text-on-hero-soft: 210 22% 84%;
+    --surface-subtle: 222 45% 7%;
+    --surface-raised: 222 45% 11%;
+    --border-subtle: 222 30% 18%;
+    --border-strong: 222 25% 32%;
 
     --sidebar-background: 222 50% 6%;
     --sidebar-foreground: 195 20% 75%;
@@ -392,5 +416,35 @@
     border-color: hsl(var(--destructive) / 0.55);
     color: hsl(var(--destructive));
     background: hsl(var(--destructive) / 0.1);
+  }
+
+  /* ===== Readability helpers ===== */
+  /* Text on hero / dark photographic backgrounds: always near-white +
+     subtle shadow so contrast holds regardless of underlying color */
+  .text-on-hero {
+    color: hsl(var(--text-on-hero));
+    text-shadow: 0 1px 2px hsl(0 0% 0% / 0.5);
+  }
+  .text-on-hero-soft {
+    color: hsl(var(--text-on-hero-soft));
+    text-shadow: 0 1px 2px hsl(0 0% 0% / 0.45);
+  }
+  .text-disclaimer {
+    color: hsl(var(--text-disclaimer));
+  }
+
+  /* Improve placeholder readability across the app */
+  ::placeholder {
+    color: hsl(var(--muted-foreground)) !important;
+    opacity: 0.85;
+  }
+  .dark ::placeholder {
+    opacity: 0.75;
+  }
+
+  /* Stronger card border in dark for separation */
+  .dark .card,
+  .dark [data-slot="card"] {
+    border-color: hsl(var(--border-subtle));
   }
 }

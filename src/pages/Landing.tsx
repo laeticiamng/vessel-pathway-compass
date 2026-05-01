@@ -246,19 +246,19 @@ export default function Landing() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 mb-8 backdrop-blur-sm max-w-[90vw]">
-              <Sparkles className="h-3.5 w-3.5 text-primary-foreground/80" />
-              <span className="text-sm font-medium text-primary-foreground/80">
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/15 px-4 py-1.5 mb-8 backdrop-blur-sm max-w-[90vw]">
+              <Sparkles className="h-3.5 w-3.5 text-on-hero" />
+              <span className="text-sm font-semibold text-on-hero">
                 {t("home.hero.betaBadge")}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-[1.1] mb-6 max-w-4xl mx-auto">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-6 max-w-4xl mx-auto">
               {t("home.hero.title1")}{" "}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, hsl(220 80% 70%), hsl(165 60% 60%))" }}>
+              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, hsl(188 100% 75%), hsl(165 80% 65%))" }}>
                 {t("home.hero.title2")}
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg md:text-xl text-on-hero-soft max-w-2xl mx-auto mb-10 leading-relaxed">
               {t("home.hero.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -268,16 +268,16 @@ export default function Landing() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="text-base px-8 h-12 border-primary-foreground/40 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 backdrop-blur-sm">
+              <Button asChild variant="outline" size="lg" className="text-base px-8 h-12 border-2 border-white/60 bg-white/15 text-white hover:bg-white/25 hover:border-white/80 backdrop-blur-md font-semibold">
                 <a href="#comment-ca-marche">{t("home.hero.ctaSecondary")}</a>
               </Button>
             </div>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-primary-foreground/70">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-on-hero font-medium">
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> {t("home.hero.perkNoCard")}</span>
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> {t("home.hero.perkBetaAccess")}</span>
               <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> {t("home.hero.perkGdpr")}</span>
             </div>
-            <p className="mt-6 text-xs text-primary-foreground/50 max-w-xl mx-auto leading-relaxed">
+            <p className="mt-6 text-sm text-on-hero-soft max-w-xl mx-auto leading-relaxed">
               {t("home.hero.disclaimer")}
             </p>
           </motion.div>
@@ -300,7 +300,7 @@ export default function Landing() {
                 decoding="async"
               />
             </div>
-            <p className="mt-4 text-sm text-primary-foreground/40 italic">
+            <p className="mt-4 text-sm text-on-hero-soft italic">
               {t("landing.hero.dashboardCaption")}
             </p>
           </motion.div>

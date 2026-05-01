@@ -70,6 +70,17 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        /* Semantic text & surface tokens — use these for readable copy */
+        "text-strong": "hsl(var(--text-strong))",
+        "text-default": "hsl(var(--text-default))",
+        "text-secondary": "hsl(var(--text-secondary))",
+        "text-disclaimer": "hsl(var(--text-disclaimer))",
+        "text-on-hero": "hsl(var(--text-on-hero))",
+        "text-on-hero-soft": "hsl(var(--text-on-hero-soft))",
+        "surface-subtle": "hsl(var(--surface-subtle))",
+        "surface-raised": "hsl(var(--surface-raised))",
+        "border-subtle": "hsl(var(--border-subtle))",
+        "border-strong": "hsl(var(--border-strong))",
       },
       borderRadius: {
         lg: "var(--radius)",
