@@ -103,14 +103,8 @@ export const fr = {
       explore: "Fonctionnalités",
     },
     hero: {
-      badge: "Plateforme de flux de travail vasculaire non ionisant — prototype de recherche",
-      title: "AquaMR Flow",
-      headlinePre: "Plateforme de Flux de Travail Non Ionisant pour la",
-      headlineHighlight: "Médecine Vasculaire & Interventionnelle",
-      subtitle: "Planification de procédure, fusion d'imagerie multimodale, prévention CI-AKI, simulation clinique et registre de recherche — une plateforme pour les flux de travail vasculaires d'épargne de contraste.",
-      cta: "Essayer gratuitement — sans carte bancaire",
-      secondary: "Voir les tarifs",
-      socialProof: "Prototype de recherche — ouvert aux spécialistes interventionnels du monde entier",
+      // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
+      // have been replaced by the home.hero.* namespace. Only dashboardCaption remains here.
       dashboardCaption: "Le tableau de bord clinique : vue d'ensemble des procédures, distribution des risques et accès rapide à tous les modules.",
     },
     howItWorks: {
