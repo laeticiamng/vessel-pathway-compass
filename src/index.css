@@ -842,7 +842,41 @@
     }
   }
 
-  /* === Respect reduced motion / high contrast preferences ===
+  /* === Mobile dark-mode readability pass ===
+     Small screens show neon halos as smudge — reduce glow radius/opacity,
+     bump base color toward `--text-strong` for sharper glyph edges, and
+     tighten icon-ring inner glow so the cards don't bloom. */
+  @media (max-width: 640px) {
+    .dark .hero-neon-text {
+      filter: drop-shadow(0 0 6px hsl(var(--neon-glow) / 0.14));
+      letter-spacing: -0.01em;
+    }
+    .dark .hero-neon-text.hero-neon-soft {
+      filter: drop-shadow(0 0 4px hsl(var(--neon-glow) / 0.10));
+    }
+    .dark .hero-neon-text.hero-neon-strong {
+      filter: drop-shadow(0 0 9px hsl(var(--neon-glow) / 0.18));
+    }
+    .dark .neon-icon-ring {
+      box-shadow:
+        inset 0 1px 0 hsl(188 95% 70% / 0.10),
+        inset 0 0 8px hsl(188 95% 58% / 0.12),
+        0 0 8px -2px hsl(188 95% 58% / 0.16);
+    }
+    .dark .neon-icon-ring.violet {
+      box-shadow:
+        inset 0 1px 0 hsl(280 95% 80% / 0.10),
+        inset 0 0 8px hsl(270 85% 68% / 0.12),
+        0 0 8px -2px hsl(270 85% 68% / 0.16);
+    }
+    /* Reduce illustration tint opacity loss on mobile (small icons need
+       more luminance to stay legible at arm's length). */
+    .dark .neon-icon-ring img,
+    .dark .neon-icon-ring svg:not([data-neon-keep-color]),
+    .dark .neon-icon-ring [data-neon-illustration] {
+      opacity: 0.98;
+    }
+  }
      - Kill skeleton shimmer
      - Strip residual halos so a settled view is perfectly static */
   @media (prefers-reduced-motion: reduce) {
