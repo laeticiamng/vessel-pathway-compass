@@ -253,49 +253,8 @@ export function UseCasesSection() {
   );
 }
 
-/* =========================================================================
-   LIMITES ACTUELLES
-   ======================================================================= */
-export function LimitsSection() {
-  return (
-    <section aria-labelledby="limits-title" className="py-20 bg-background">
-      <div className="container mx-auto px-6">
-        <div className="max-w-3xl mx-auto rounded-2xl border bg-card/60 p-8">
-          <div className="flex items-start gap-4">
-            <div className="h-11 w-11 rounded-xl bg-muted flex items-center justify-center shrink-0">
-              <AlertTriangle className="h-5 w-5 text-muted-foreground" />
-            </div>
-            <div>
-              <h2 id="limits-title" className="text-2xl md:text-3xl font-bold mb-3">
-                Limites actuelles
-              </h2>
-              <ul className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-                <li>Le contenu visible sur cette page décrit un prototype de recherche.</li>
-                <li>
-                  Le cadre exact d’usage clinique, réglementaire et opérationnel doit être précisé dans les pages
-                  dédiées.
-                </li>
-                <li>
-                  Les informations présentées ici ont pour but d’expliquer le produit, pas de formuler des promesses
-                  non vérifiées.
-                </li>
-              </ul>
-              <div className="mt-5 flex flex-wrap gap-3 text-sm">
-                <Link to="/securite-confidentialite" className="text-primary hover:underline">
-                  Sécurité et confidentialité
-                </Link>
-                <span className="text-muted-foreground/50">•</span>
-                <Link to="/legal/notice" className="text-primary hover:underline">
-                  Mentions légales
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+/* LimitsSection a été déplacé vers src/components/landing/LimitsSection.tsx
+   (i18n FR/EN/DE complet, structure enrichie en 4 catégories). */
 
 /* =========================================================================
    FAQ HOMEPAGE
