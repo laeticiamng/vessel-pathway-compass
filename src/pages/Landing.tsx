@@ -22,6 +22,7 @@ import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
+import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
 
 /* -------------------------------------------------------------------------
  * Above-the-fold (eager): PlatformCompletenessSection — anchor target of
@@ -108,6 +109,8 @@ export default function Landing() {
   );
 
   // JSON-LD: minimal, non-risky structured data (WebPage + SoftwareApplication + FAQPage)
+  // Brand hierarchy is encoded explicitly: VASCU-LINK is the program name,
+  // AquaMR Flow Platform is the SaaS that ships it.
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -115,19 +118,20 @@ export default function Landing() {
         "@type": "WebPage",
         "@id": "https://aquamr-flow.com/#webpage",
         url: "https://aquamr-flow.com/",
-        name: "AquaMR Flow — Plateforme de workflow non ionisant pour la médecine vasculaire",
+        name: "VASCU-LINK — AquaMR Flow · Workflow vasculaire non ionisant",
         description:
-          "AquaMR Flow est une plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
+          "VASCU-LINK reconstruit la fonction angiographique en 4-zéro (0 mSv, 0 contraste, 0 hélium). Plateforme AquaMR Flow pour la cartographie pré-revascularisation, la décision clinique et le guidage préclinique.",
         inLanguage: "fr",
       },
       {
         "@type": "SoftwareApplication",
-        name: "AquaMR Flow",
+        name: "VASCU-LINK (AquaMR Flow Platform)",
+        alternateName: ["AquaMR Flow", "VASCU-LINK"],
         applicationCategory: "HealthApplication",
         operatingSystem: "Web",
         url: "https://aquamr-flow.com",
         description:
-          "Plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
+          "VASCU-LINK reconstruit la fonction angiographique en 4-zéro : 0 mSv, 0 contraste, 0 hélium. Plateforme AquaMR Flow pour la cartographie pré-revascularisation, la décision clinique et le guidage préclinique. Intègre le dispositif d'imagerie bas champ AquaMR.",
       },
       homeFaqJsonLd,
       complianceFaqJsonLd,
@@ -153,10 +157,10 @@ export default function Landing() {
             <AquaMRLogo variant="badge" />
             <span className="flex flex-col leading-none">
               <span className="text-xl font-bold tracking-tight">
-                AquaMR <span className="text-primary">Flow</span>
+                {t("branding.programName")}
               </span>
               <span className="hidden sm:inline text-[10px] font-medium tracking-[0.18em] text-muted-foreground/80 mt-0.5">
-                VASCULAR CLINICAL PLATFORM
+                {t("branding.platformName")}
               </span>
             </span>
           </Link>
@@ -165,7 +169,7 @@ export default function Landing() {
               {t("landing.nav.explore")}
             </a>
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {t("landing.nav.pricing")}
+              {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
             </Link>
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.signIn")}
@@ -202,7 +206,7 @@ export default function Landing() {
                   {t("landing.nav.explore")}
                 </a>
                 <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
-                  {t("landing.nav.pricing")}
+                  {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
                 </Link>
                 <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
@@ -259,13 +263,19 @@ export default function Landing() {
                 {t("home.hero.betaBadge")}
               </span>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-6 max-w-4xl mx-auto">
-              {t("home.hero.title1")}{" "}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-on-hero leading-[1.05] mb-4 tracking-tight">
               <NeonGradientText intensity="strong" className="inline-block">
-                {t("home.hero.title2")}
+                {t("home.hero.title1")}
               </NeonGradientText>
             </h1>
-            <p className="text-lg md:text-xl text-on-hero-soft max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-base md:text-xl font-semibold text-on-hero leading-snug mb-3 max-w-3xl mx-auto">
+              <span className="uppercase tracking-[0.18em] text-on-hero/90">
+                {t("branding.platformName")}
+              </span>
+              <span className="mx-2 text-on-hero/60" aria-hidden="true">·</span>
+              <span>{t("home.hero.title2")}</span>
+            </p>
+            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-10 leading-relaxed">
               {t("home.hero.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -441,18 +451,28 @@ export default function Landing() {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 mb-8">
             <div>
-              <div className="flex items-center gap-2 mb-4">
+              <div className="flex items-center gap-2 mb-3">
                 <AquaMRLogo />
-                <span className="font-semibold">AquaMR Flow</span>
+                <span className="flex flex-col leading-tight">
+                  <span className="font-semibold">{t("branding.programName")}</span>
+                  <span className="text-[10px] font-medium tracking-[0.18em] text-muted-foreground/80 uppercase">
+                    {t("branding.platformName")}
+                  </span>
+                </span>
               </div>
               <p className="text-sm text-muted-foreground">{t("landing.footer.tagline")}</p>
-              <p className="text-xs text-muted-foreground/70 mt-1">{t("landing.footer.notMedicalDevice")}</p>
+              <p className="text-xs text-muted-foreground/80 mt-3 leading-relaxed">
+                {t("branding.footerExplain")}
+              </p>
+              <p className="text-xs text-muted-foreground/70 mt-2">{t("landing.footer.notMedicalDevice")}</p>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
-                <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
+                <Link to="/pricing" className="hover:text-foreground transition-colors">
+                  {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
+                </Link>
                 <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
                 <Link to="/contact" className="hover:text-foreground transition-colors">{t("contactPage.title")}</Link>

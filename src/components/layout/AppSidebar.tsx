@@ -118,8 +118,13 @@ export function AppSidebar() {
         <NavLink to={session ? "/app" : "/"} className="flex items-center gap-2">
           <AquaMRLogo variant="badge" className="h-8 w-8 rounded-lg" />
           {!collapsed && (
-            <span className="text-lg font-bold tracking-tight">
-              AquaMR <span className="text-primary">Flow</span>
+            <span className="flex flex-col leading-none">
+              <span className="text-lg font-bold tracking-tight">
+                {t("branding.programName")}
+              </span>
+              <span className="text-[9px] font-medium tracking-[0.18em] text-muted-foreground/80 uppercase mt-0.5">
+                {t("branding.platformName")}
+              </span>
             </span>
           )}
         </NavLink>

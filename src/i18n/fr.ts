@@ -1,4 +1,16 @@
 export const fr = {
+  // Hiérarchie de marque : programme → plateforme → dispositif
+  // VASCU-LINK est le programme doctoral ; AquaMR Flow est la plateforme SaaS
+  // qui le porte ; AquaMR est le dispositif d'imagerie bas champ intégré.
+  branding: {
+    programName: "VASCU-LINK",
+    platformName: "AquaMR Flow Platform",
+    deviceName: "AquaMR",
+    tagline: "Reconstruire la fonction angiographique en 4-zéro",
+    footerExplain:
+      "VASCU-LINK est le programme doctoral porté par AquaMR Flow, plateforme clinique non irradiante intégrant le dispositif d'imagerie AquaMR.",
+  },
+
   common: {
     appName: "AquaMR Flow",
     loading: "Chargement...",
@@ -100,6 +112,7 @@ export const fr = {
   landing: {
     nav: {
       pricing: "Tarifs",
+      access: "Accès",
       signIn: "Se connecter",
       explore: "Fonctionnalités",
     },
@@ -243,6 +256,14 @@ export const fr = {
     mostPopular: "Le plus populaire",
     currentPlan: "Votre plan",
     managePlan: "Gérer l'abonnement",
+    researchPhase: {
+      pageTitle: "Accès institutionnel — VASCU-LINK",
+      pageDescription: "VASCU-LINK est en validation académique. Contactez l'équipe pour un accès institutionnel, un partenariat clinique ou une évaluation pilote — pas de plan commercial pendant la validation prospective.",
+      title: "Institutional Access — Research Phase",
+      body: "VASCU-LINK est en phase de validation académique au CHUV / Lausanne. Pour un accès institutionnel, un partenariat clinique ou une évaluation pilote, contactez l'équipe.",
+      cta: "Contact for institutional access",
+      disclaimer: "Pas de plan commercial public pendant la phase de validation prospective.",
+    },
     plans: {
       individual: {
         name: "Individuel",
@@ -1169,15 +1190,15 @@ export const fr = {
 
   home: {
     seo: {
-      title: "AquaMR Flow | Plateforme de workflow non ionisant pour la médecine vasculaire",
-      description: "AquaMR Flow est une plateforme de workflow non ionisant pour la médecine vasculaire : planification, imagerie, simulation clinique et registre de recherche.",
+      title: "VASCU-LINK — AquaMR Flow · Workflow vasculaire non ionisant",
+      description: "VASCU-LINK reconstruit la fonction angiographique en 4-zéro (0 mSv, 0 contraste, 0 hélium). Plateforme AquaMR Flow pour la médecine vasculaire de proximité.",
     },
     nav: { mainAria: "Navigation principale", simpleAria: "Navigation", openMenu: "Ouvrir le menu" },
     misc: { scrollTop: "Revenir en haut de la page" },
     hero: {
       betaBadge: "Bêta ouverte — accès complet gratuit",
-      title1: "Moins de contraste. Moins de radiation.",
-      title2: "Plus de contrôle sur vos procédures vasculaires.",
+      title1: "VASCU-LINK",
+      title2: "Reconstruire la fonction angiographique en 4-zéro",
       subtitle: "Plateforme complète : 10 modules cliniques, protocole L1 verrouillé, 3 langues, conformité MDR/RGPD ciblée et radiologie verte. Planification, imagerie multimodale, CI-AKI, jumeau numérique, simulation et registre — dans un seul cockpit.",
       ctaPrimary: "Créer un compte gratuit",
       ctaSecondary: "Voir comment ça marche",
