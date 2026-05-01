@@ -17,7 +17,7 @@ import { describe, it, expect, beforeAll } from "vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { render, screen } from "@testing-library/react";
-import { NeonGradientText } from "@/components/ui/neon-gradient-text";
+import { NeonGradientText, HERO_NEON_IO_OPTIONS } from "@/components/ui/neon-gradient-text";
 
 let css = "";
 
@@ -175,5 +175,35 @@ describe("hero-neon — keyboard focus & a11y", () => {
     const el = screen.getByText("Title");
     expect(el.getAttribute("data-hero-neon-active")).toBe("true");
     expect(el.className).not.toMatch(/hero-neon-skeleton/);
+  });
+
+  it("decorative=true hides the element from screen readers", () => {
+    render(
+      <NeonGradientText decorative lazy={false}>
+        Decoration
+      </NeonGradientText>,
+    );
+    const el = screen.getByText("Decoration");
+    expect(el.getAttribute("aria-hidden")).toBe("true");
+  });
+
+  it("skeleton state announces aria-busy + aria-hidden", () => {
+    // lazy=true defaults to active=false on first paint → skeleton
+    render(<NeonGradientText lazy>Loading title</NeonGradientText>);
+    const el = screen.getByText("Loading title");
+    expect(el.getAttribute("data-hero-neon-active")).toBe("false");
+    expect(el.getAttribute("aria-busy")).toBe("true");
+    expect(el.getAttribute("aria-hidden")).toBe("true");
+  });
+
+  it("CSS guards descenders with line-height + bottom padding", () => {
+    const body = ruleBody(".hero-neon-text");
+    expect(body).toMatch(/line-height\s*:\s*1\.18/);
+    expect(body).toMatch(/padding\s*:\s*0\.05em\s+0\.08em\s+0\.18em/);
+  });
+
+  it("IntersectionObserver options are viewport-relative", () => {
+    expect(HERO_NEON_IO_OPTIONS.rootMargin).toMatch(/%/);
+    expect(Array.isArray(HERO_NEON_IO_OPTIONS.threshold)).toBe(true);
   });
 });
