@@ -304,107 +304,100 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Platform completeness — directly under hero */}
+      {/* Platform completeness — directly under hero (eager, anchor target) */}
       <PlatformCompletenessSection />
 
-      {/* What's new — changelog */}
-      <WhatsNewSection />
+      {/* Below-the-fold: every section is code-split + lazy-loaded.
+          A single Suspense boundary keeps the perceived flow smooth. */}
+      <Suspense fallback={<SectionFallback />}>
+        {/* What's new — changelog */}
+        <WhatsNewSection />
 
-      {/* Interactive demo — guided 4-screen walkthrough */}
-      <InteractiveDemoSection />
+        {/* Interactive demo — guided 4-screen walkthrough */}
+        <InteractiveDemoSection />
 
-      {/* En bref */}
-      <EnBrefSection />
+        {/* En bref */}
+        <EnBrefSection />
 
-      {/* Audience */}
-      <AudienceSection />
+        {/* Audience */}
+        <AudienceSection />
 
-      {/* Comment ça marche (anchor target for hero CTA) */}
-      <div id="comment-ca-marche" className="scroll-mt-20">
-        <HowItWorksFRSection />
-      </div>
-
-      {/* Cas d'usage */}
-      <UseCasesSection />
-
-      {/* VASCU-LINK scientific architecture (3 concentric circles) */}
-      <section className="py-20 bg-muted/30">
-        <div className="container mx-auto px-6 max-w-6xl space-y-6">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("home.vasculink.title")}</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              {t("home.vasculink.subtitle")}
-            </p>
-          </div>
-          <FourZeroPillars />
-          <VasculinkArchitecture />
-          <ProximityMedicineCard />
+        {/* Comment ça marche (anchor target for hero CTA) */}
+        <div id="comment-ca-marche" className="scroll-mt-20">
+          <HowItWorksFRSection />
         </div>
-      </section>
 
-      {/* Validation clinique — niveau protocole */}
-      <ValidationSection />
+        {/* Cas d'usage */}
+        <UseCasesSection />
 
-      {/* Limites actuelles */}
-      <LimitsSection />
-
-      {/* Legacy stepper supprimé — doublon de HowItWorksFRSection */}
-
-      {/* Modules détaillés : section déplacée — détails complets sur /modules.
-          La grille des 10 modules est rendue par PlatformCompletenessSection ci-dessus. */}
-
-      {/* Trust */}
-      <section className="py-24 bg-muted/40">
-        <div className="container mx-auto px-6">
-          <div className="max-w-3xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-12"
-            >
-              <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <Shield className="h-6 w-6 text-primary" />
-              </div>
-              <h2 className="text-3xl font-bold mb-4">{t("landing.trust.title")}</h2>
-              <p className="text-muted-foreground text-lg">
-                {t("landing.trust.subtitle")}
+        {/* VASCU-LINK scientific architecture (3 concentric circles) */}
+        <section className="py-20 bg-muted/30">
+          <div className="container mx-auto px-6 max-w-6xl space-y-6">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3">{t("home.vasculink.title")}</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                {t("home.vasculink.subtitle")}
               </p>
-            </motion.div>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {Array.isArray(trustSignals) && trustSignals.map((signal, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.06, duration: 0.4 }}
-                  className="flex items-start gap-3 p-4 rounded-xl bg-card border card-hover"
-                >
-                  <CheckCircle2 className="h-5 w-5 text-success shrink-0 mt-0.5" />
-                  <span className="text-sm">{signal}</span>
-                </motion.div>
-              ))}
+            </div>
+            <FourZeroPillars />
+            <VasculinkArchitecture />
+            <ProximityMedicineCard />
+          </div>
+        </section>
+
+        {/* Validation clinique — niveau protocole */}
+        <ValidationSection />
+
+        {/* Limites actuelles */}
+        <LimitsSection />
+
+        {/* Trust */}
+        <section className="py-24 bg-muted/40">
+          <div className="container mx-auto px-6">
+            <div className="max-w-3xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="text-center mb-12"
+              >
+                <div className="h-12 w-12 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <Shield className="h-6 w-6 text-primary" />
+                </div>
+                <h2 className="text-3xl font-bold mb-4">{t("landing.trust.title")}</h2>
+                <p className="text-muted-foreground text-lg">
+                  {t("landing.trust.subtitle")}
+                </p>
+              </motion.div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {Array.isArray(trustSignals) && trustSignals.map((signal, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.06, duration: 0.4 }}
+                    className="flex items-start gap-3 p-4 rounded-xl bg-card border card-hover"
+                  >
+                    <CheckCircle2 className="h-5 w-5 text-success shrink-0 mt-0.5" />
+                    <span className="text-sm">{signal}</span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Témoignages retirés : non vérifiables, contraires à la stratégie social-proof transparente. */}
+        {/* Home FAQ — French, optimized for SEO/GEO */}
+        <HomeFAQSection />
 
-      {/* Home FAQ — French, optimized for SEO/GEO */}
-      <HomeFAQSection />
+        {/* Compliance-ready FAQ */}
+        <ComplianceFAQSection />
 
-      {/* Compliance-ready FAQ */}
-      <ComplianceFAQSection />
-
-      {/* FAQSection legacy retirée — doublon de HomeFAQSection */}
-
-      {/* LimitsSection retirée ici — déjà rendue plus haut, juste après VASCU-LINK */}
-
-      {/* About */}
-      <AboutSection />
+        {/* About */}
+        <AboutSection />
+      </Suspense>
 
       {/* CTA */}
       <section className="py-24 relative overflow-hidden">
