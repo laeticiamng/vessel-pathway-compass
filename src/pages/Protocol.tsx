@@ -74,7 +74,10 @@ export default function Protocol() {
           </p>
         </motion.section>
 
-        {/* Objectif clinique + population */}
+        {/* Protocol identity — 5-second read summary for jury / CHUV */}
+        <ProtocolIdentityCard />
+
+
         <section className="grid md:grid-cols-2 gap-5 mb-12">
           <Card icon={Target} title={t("pages.protocol.objective.title")} body={t("pages.protocol.objective.body")} />
           <Card icon={Users} title={t("pages.protocol.population.title")} body={t("pages.protocol.population.body")} />
