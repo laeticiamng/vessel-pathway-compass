@@ -30,6 +30,7 @@ const Contact = lazy(() => import("./pages/Contact"));
 const SecurityPrivacy = lazy(() => import("./pages/SecurityPrivacy"));
 const Protocol = lazy(() => import("./pages/Protocol"));
 const Modules = lazy(() => import("./pages/Modules"));
+const Transparency = lazy(() => import("./pages/Transparency"));
 const Dashboard = lazy(() => import("./pages/app/Dashboard"));
 const ProcedurePlanner = lazy(() => import("./pages/app/ProcedurePlanner"));
 const L1DecisionBoard = lazy(() => import("./pages/app/L1DecisionBoard"));
