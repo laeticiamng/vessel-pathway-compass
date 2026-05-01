@@ -31,6 +31,7 @@ import {
 // FAQSection + HowItWorksSection legacy retirés (doublons)
 import { AboutSection } from "@/components/landing/AboutSection";
 import { LimitsSection } from "@/components/landing/LimitsSection";
+import { ValidationSection } from "@/components/landing/ValidationSection";
 import { MedRegBadge } from "@/components/MedRegBadge";
 import {
   EnBrefSection,
@@ -315,6 +316,9 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Validation clinique — niveau protocole */}
+      <ValidationSection />
+
       {/* Limites actuelles */}
       <LimitsSection />
 
@@ -490,6 +494,7 @@ export default function Landing() {
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <a href="#modules" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
                 <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
+                <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
                 <Link to="/contact" className="hover:text-foreground transition-colors">{t("contactPage.title")}</Link>
                 <Link to="/securite-confidentialite" className="hover:text-foreground transition-colors">{t("home.footerNav.security")}</Link>
