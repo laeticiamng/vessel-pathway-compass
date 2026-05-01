@@ -93,15 +93,22 @@ function extractUsedKeys(files) {
     if (/\.(test|spec)\.(ts|tsx)$/.test(f) || f.includes("/__tests__/") || f.includes("/test/")) continue;
     const code = readFileSync(f, "utf8");
     const rel = relative(ROOT, f).replaceAll("\\", "/");
+    const codeLines = code.split("\n");
+    const isCommentLine = (idx) => {
+      const ln = codeLines[code.slice(0, idx).split("\n").length - 1] ?? "";
+      return /^\s*(\/\/|\*|\/\*)/.test(ln);
+    };
     let m;
     T_LITERAL_RE.lastIndex = 0;
     while ((m = T_LITERAL_RE.exec(code)) !== null) {
+      if (isCommentLine(m.index)) continue;
       const key = m[1];
       if (!used.has(key)) used.set(key, new Set());
       used.get(key).add(rel);
     }
     T_TEMPLATE_RE.lastIndex = 0;
     while ((m = T_TEMPLATE_RE.exec(code)) !== null) {
+      if (isCommentLine(m.index)) continue;
       const key = m[1];
       if (!used.has(key)) used.set(key, new Set());
       used.get(key).add(rel);
