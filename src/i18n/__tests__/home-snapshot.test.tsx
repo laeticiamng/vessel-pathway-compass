@@ -16,7 +16,7 @@
 
 import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
-import { I18nProvider, useTranslation, type Language } from "@/i18n/context";
+import { LanguageProvider, useTranslation, type Language } from "@/i18n/context";
 
 // Soft ceilings tuned for the actual homepage layout. Crossing them is a
 // signal — not necessarily a bug — to review for overflow / wrapping.
@@ -79,9 +79,9 @@ function collect(language: Language) {
   // Pre-set localStorage so the provider boots in the right language.
   window.localStorage.setItem("language", language);
   render(
-    <I18nProvider>
+    <LanguageProvider>
       <HomeStringsHarness onReady={(d) => (captured = d)} />
-    </I18nProvider>,
+    </LanguageProvider>,
   );
   return captured;
 }
