@@ -305,16 +305,6 @@ export function HomeFAQSection() {
   );
 }
 
-/* =========================================================================
-   JSON-LD for Home FAQ (SEO/GEO)
-   Note: kept locale-static (FR) since it's metadata for crawlers.
-   ======================================================================= */
-export const homeFaqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    { "@type": "Question", name: "Qu'est-ce qu'AquaMR Flow ?", acceptedAnswer: { "@type": "Answer", text: "AquaMR Flow est une plateforme web qui aide à structurer la planification, l'imagerie, la simulation et la recherche autour des procédures vasculaires." } },
-    { "@type": "Question", name: "À qui s'adresse la plateforme ?", acceptedAnswer: { "@type": "Answer", text: "Aux équipes impliquées dans la préparation, la coordination et l'analyse des procédures vasculaires." } },
-    { "@type": "Question", name: "Quels problèmes le produit cherche-t-il à résoudre ?", acceptedAnswer: { "@type": "Answer", text: "La fragmentation des outils et le manque de traçabilité des données entre la préparation, la procédure et le suivi." } },
-  ],
-};
+/* JSON-LD moved to ./jsonLd.ts (pure data module, no React deps).
+   Re-exported here for backwards compatibility. */
+export { homeFaqJsonLd } from "./jsonLd";
