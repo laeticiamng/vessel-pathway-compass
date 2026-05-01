@@ -377,6 +377,7 @@ export const de = {
       generated: "Generiert",
       cmeCredits: "CME-Punkte",
       simulations: "Simulationen",
+      total: "gesamt",
     },
     moduleDesc: {
       procedurePlanner: "Workflow-Empfehlungen mit Modalitätsauswahl und kontrastmittelsparenden Strategien.",
