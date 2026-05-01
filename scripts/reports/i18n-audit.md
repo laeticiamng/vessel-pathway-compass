@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-01T09:53:09.327Z_
+_Generated: 2026-05-01T09:53:31.734Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 
@@ -8,12 +8,12 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 
 | Metric | Count |
 |---|---:|
-| Translation keys referenced from code | 1233 |
+| Translation keys referenced from code | 1238 |
 | Dynamic key prefixes detected | 33 |
 | Keys missing in FR | 2 |
 | Keys missing in EN | 2 |
 | Keys missing in DE | 2 |
-| Orphan keys (defined, unused) | 83 |
+| Orphan keys (defined, unused) | 78 |
 | Public pages with hardcoded candidates | 2 (2 findings) |
 
 ## Missing keys — FR
@@ -21,25 +21,25 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 | Key | Reason | Used in |
 |---|---|---|
 | `foo.bar` | absent | src/i18n/context.tsx |
-| `en` | absent | src/pages/app/VascScreenDashboard.tsx |
+| `foo.items` | absent | src/i18n/context.tsx |
 
 ## Missing keys — EN
 
 | Key | Reason | Used in |
 |---|---|---|
 | `foo.bar` | absent | src/i18n/context.tsx |
-| `en` | absent | src/pages/app/VascScreenDashboard.tsx |
+| `foo.items` | absent | src/i18n/context.tsx |
 
 ## Missing keys — DE
 
 | Key | Reason | Used in |
 |---|---|---|
 | `foo.bar` | absent | src/i18n/context.tsx |
-| `en` | absent | src/pages/app/VascScreenDashboard.tsx |
+| `foo.items` | absent | src/i18n/context.tsx |
 
 ## Orphan keys (defined in FR dictionary but never referenced)
 
-_83 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
+_78 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
 
 ```
 common.appName
@@ -98,11 +98,6 @@ patientDetail.deleteDialog.deleting
 patientDetail.toastsDeleted
 patientDetail.toastsDeletedDesc
 patientDetail.trash.title
-home.enBref.items
-home.audience.items
-home.howItWorks.steps
-home.useCases.items
-home.faq.items
 analytics.period
 analytics.category
 seo.landing.title
