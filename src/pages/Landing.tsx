@@ -159,7 +159,7 @@ export default function Landing() {
             <span className="text-xl font-bold tracking-tight">AquaMR Flow</span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
-            <a href="#modules" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#platform-complete" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.explore")}
             </a>
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
@@ -195,7 +195,7 @@ export default function Landing() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 mt-8">
-                <a href="#modules" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                <a href="#platform-complete" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.explore")}
                 </a>
                 <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
@@ -448,7 +448,7 @@ export default function Landing() {
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
-                <a href="#modules" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
+                <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
                 <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
                 <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
