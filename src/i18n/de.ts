@@ -1792,6 +1792,48 @@ export const de = {
         body: "<strong>VASCU-LINK ist kein Ersatz für den Doppler.</strong> Der Doppler bleibt der hämodynamische Test der ersten Wahl. VASCU-LINK richtet sich an die nächste Frage: Kann eine 4-Null-Angiographiekarte die Entscheidung vor der Revaskularisation unterstützen, ohne sofort auf aufwändige injizierte oder strahlenbelastende Bildgebung zurückzugreifen?",
       },
     },
+    pillars: {
+      title: "VASCU-LINK 4-Null-Signatur",
+      description: "Vier quantifizierte Säulen, die das AquaMR-Cockpit definieren. Nach unserem Wissen kombiniert keine klinische Routinemodalität alle vier.",
+      items: {
+        radiation: {
+          pillar: "Null ionisierende Strahlung",
+          target: "0 mSv pro Untersuchung",
+          benchmark: "vs Angio-CT 5–15 mSv",
+          externality: "Kumulative ionisierende Belastung in der Langzeitnachsorge",
+        },
+        contrast: {
+          pillar: "Null injiziertes Kontrastmittel",
+          target: "0 g Gd · 0 mL Jod",
+          benchmark: "vs MRA Gd ≈ 3,24 kg/Standort/Jahr",
+          externality: "CI-AKI bei CKD-Patienten · Umweltfreisetzung von Kontrastmitteln",
+        },
+        helium: {
+          pillar: "Null Helium",
+          target: "Halbach NdFeB recycelt (WEEE)",
+          benchmark: "vs Standard-MRT mit kryogenem He",
+          externality: "He-Verknappung · Abhängigkeit von Seltenen Erden · CO₂-Fußabdruck",
+        },
+        cost: {
+          pillar: "Radikal reduzierte Kosten",
+          target: "BoM-Ziel < 15 k€ (Schätzung, noch kein formelles Lieferantenangebot)",
+          benchmark: "vs 1,5–3 T MRT: 1,5–5 Mio. € (70–225×)",
+          externality: "Zugangsbarriere in privaten Praxen & LMIC-Settings",
+        },
+      },
+    },
+    proximity: {
+      title: "Wohnortnahe vaskuläre Medizin & Zugangsgerechtigkeit",
+      description: "Die 4-Null-Signatur — und insbesondere das BoM-Ziel < 15 k€ — soll angiographische Entscheidungen aus heliumgebundenen Krankenhauszentren herausführen.",
+      privateTitle: "Private Gefäßpraxis",
+      privateDesc: "Angiographische Kartierung, einsetzbar in ambulanten Gefäßstrukturen mit Krankenhaus-Backup.",
+      lmicTitle: "LMIC-Pilot — Post-PhD",
+      lmicDesc: "Absichtserklärungen geplant mit Senegal · Marokko · Benin (WP5-Lieferung).",
+      photovoltaicTitle: "Photovoltaik-Standort",
+      photovoltaicDesc: "Ohne Helium · stromsparender Halbach-Magnet · solarkompatibles BoM < 15 k€.",
+      wp5Badge: "WP5 — Gerechtigkeit & Nachhaltigkeit",
+      wp5Body: "LCA · QALY · LMIC-Pilot sind <strong>Post-Thesis-Lieferungen</strong>; der Umfang innerhalb der Thesis bleibt die geplante prospektive Validierungskohorte und die europäische regulatorische Voreinreichung.",
+    },
   },
   pages: {
     common: {
