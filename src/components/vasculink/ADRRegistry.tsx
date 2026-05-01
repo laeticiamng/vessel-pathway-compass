@@ -45,8 +45,8 @@ const statusVariant: Record<ADRStatus, "default" | "secondary" | "outline"> = {
 };
 
 export function ADRRegistry({ className }: { className?: string }) {
-  const { t, lang } = useTranslation();
-  const dateFmt = new Intl.DateTimeFormat(lang === "fr" ? "fr-FR" : lang === "de" ? "de-DE" : "en-GB",
+  const { t, language } = useTranslation();
+  const dateFmt = new Intl.DateTimeFormat(language === "fr" ? "fr-FR" : language === "de" ? "de-DE" : "en-GB",
     { year: "numeric", month: "short", day: "2-digit" });
 
   return (
