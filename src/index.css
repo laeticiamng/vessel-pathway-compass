@@ -725,13 +725,13 @@
     background-image: var(--hero-gradient);
     -webkit-text-stroke: 0 !important;
     paint-order: normal;
-    filter: drop-shadow(0 0 12px hsl(var(--neon-glow) / 0.2));
+    filter: drop-shadow(0 0 var(--neon-halo-radius) hsl(var(--neon-glow) / var(--neon-halo-opacity)));
   }
   .dark .hero-neon-text.hero-neon-soft {
-    filter: drop-shadow(0 0 8px hsl(var(--neon-glow) / 0.14));
+    filter: drop-shadow(0 0 var(--neon-halo-radius-soft) hsl(var(--neon-glow) / var(--neon-halo-opacity-soft)));
   }
   .dark .hero-neon-text.hero-neon-strong {
-    filter: drop-shadow(0 0 16px hsl(var(--neon-glow) / 0.24));
+    filter: drop-shadow(0 0 var(--neon-halo-radius-strong) hsl(var(--neon-glow) / var(--neon-halo-opacity-strong)));
   }
 
   /* === Fallback: browsers WITHOUT -webkit-text-stroke support (Firefox <49,
