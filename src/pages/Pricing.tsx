@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, ArrowLeft, Loader2, Globe } from "lucide-react";
+import { CheckCircle2, ArrowLeft, Loader2, Globe, ShieldCheck, Mail } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { useTranslation, type Language } from "@/i18n/context";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
@@ -11,11 +11,90 @@ import { useSubscription, STRIPE_PLANS } from "@/hooks/useSubscription";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
+import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
 
 const planKeys = ["individual", "professional", "institution"] as const;
 
-export default function Pricing() {
+function PricingNav() {
   const { t, language, setLanguage } = useTranslation();
+  return (
+    <nav className="border-b" aria-label={t("home.nav.simpleAria") as string}>
+      <div className="container mx-auto flex items-center justify-between h-16 px-6">
+        <Link to="/" className="flex items-center gap-2">
+          <ArrowLeft className="h-4 w-4" />
+          <AquaMRLogo />
+          <span className="flex flex-col leading-tight">
+            <span className="font-bold">{t("branding.programName")}</span>
+            <span className="text-[10px] font-medium tracking-[0.18em] text-muted-foreground/80 uppercase">
+              {t("branding.platformName")}
+            </span>
+          </span>
+        </Link>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="sm" className="gap-1.5">
+              <Globe className="h-4 w-4" />
+              {language.toUpperCase()}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {(["en", "fr", "de"] as Language[]).map((lang) => (
+              <DropdownMenuItem key={lang} onClick={() => setLanguage(lang)} className={language === lang ? "font-semibold" : ""}>
+                {lang === "en" ? "English" : lang === "fr" ? "Français" : "Deutsch"}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </nav>
+  );
+}
+
+function ResearchPhasePricing() {
+  const { t } = useTranslation();
+  return (
+    <div className="min-h-screen bg-background">
+      <SEOHead
+        title={t("pricing.researchPhase.pageTitle") as string}
+        description={t("pricing.researchPhase.pageDescription") as string}
+        path="/pricing"
+      />
+      <PricingNav />
+      <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
+        <div className="max-w-2xl mx-auto">
+          <div className="rounded-2xl border bg-card p-8 sm:p-10 shadow-sm">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-11 w-11 rounded-xl bg-primary/10 flex items-center justify-center">
+                <ShieldCheck className="h-5 w-5 text-primary" />
+              </div>
+              <Badge variant="outline" className="font-medium">
+                {t("branding.programName")}
+              </Badge>
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+              {t("pricing.researchPhase.title")}
+            </h1>
+            <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-8">
+              {t("pricing.researchPhase.body")}
+            </p>
+            <Button asChild size="lg" className="w-full sm:w-auto">
+              <Link to="/contact">
+                <Mail className="h-4 w-4 mr-2" />
+                {t("pricing.researchPhase.cta")}
+              </Link>
+            </Button>
+            <p className="text-xs text-muted-foreground/80 mt-8 italic">
+              {t("pricing.researchPhase.disclaimer")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CommercialPricing() {
+  const { t } = useTranslation();
   const { session } = useAuth();
   const navigate = useNavigate();
   const { currentPlan, subscribed, openPortal, createCheckout } = useSubscription();
@@ -28,7 +107,7 @@ export default function Pricing() {
     price: t(`pricing.plans.${key}.price`),
     period: t(`pricing.plans.${key}.period`),
     description: t(`pricing.plans.${key}.desc`),
-    features: (t(`pricing.plans.${key}.features`) as any) as string[],
+    features: t<string[]>(`pricing.plans.${key}.features`, "array"),
     cta: t(`pricing.plans.${key}.cta`),
     popular: key === "professional",
   }));
@@ -43,7 +122,6 @@ export default function Pricing() {
       return;
     }
     if (planKey === "individual") {
-      // Free tier — already accessible after signup
       navigate("/app");
       return;
     }
@@ -51,8 +129,9 @@ export default function Pricing() {
     setCheckoutLoading(planKey);
     try {
       await createCheckout(STRIPE_PLANS.professional.price_id);
-    } catch (err: any) {
-      toast({ title: t("auth.error"), description: err.message, variant: "destructive" });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      toast({ title: t("auth.error"), description: message, variant: "destructive" });
     } finally {
       setCheckoutLoading(null);
     }
@@ -61,8 +140,9 @@ export default function Pricing() {
   const handleManage = async () => {
     try {
       await openPortal();
-    } catch (err: any) {
-      toast({ title: t("auth.error"), description: err.message, variant: "destructive" });
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : String(err);
+      toast({ title: t("auth.error"), description: message, variant: "destructive" });
     }
   };
 
@@ -76,7 +156,6 @@ export default function Pricing() {
       if (currentPlan === "individual" && !subscribed) return { href: undefined, onClick: undefined, label: t("pricing.currentPlan"), disabled: true };
       return { href: "/app", onClick: undefined, label };
     }
-    // professional
     if (subscribed && currentPlan === "professional") {
       return { href: undefined, onClick: handleManage, label: t("pricing.managePlan") };
     }
@@ -90,33 +169,9 @@ export default function Pricing() {
         description={t("seo.pricing.description") as string}
         path="/pricing"
       />
-      <nav className="border-b" aria-label={t("home.nav.simpleAria") as string}>
-        <div className="container mx-auto flex items-center justify-between h-16 px-6">
-          <Link to="/" className="flex items-center gap-2">
-            <ArrowLeft className="h-4 w-4" />
-            <AquaMRLogo />
-            <span className="font-bold">AquaMR Flow</span>
-          </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="gap-1.5">
-                <Globe className="h-4 w-4" />
-                {language.toUpperCase()}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              {(["en", "fr", "de"] as const).map((lang) => (
-                <DropdownMenuItem key={lang} onClick={() => setLanguage(lang)} className={language === lang ? "font-semibold" : ""}>
-                  {lang === "en" ? "English" : lang === "fr" ? "Français" : "Deutsch"}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </nav>
+      <PricingNav />
 
       <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-        {/* Beta highlight banner */}
         <div className="max-w-3xl mx-auto mb-8 sm:mb-10 rounded-2xl border-2 border-success/30 bg-success/5 px-4 sm:px-6 py-4 sm:py-5 text-center">
           <p className="text-base sm:text-lg font-semibold text-success mb-1">{t("pricing.betaBannerTitle")}</p>
           <p className="text-sm text-muted-foreground">{t("pricing.betaBannerDesc")}</p>
@@ -196,7 +251,7 @@ export default function Pricing() {
                       className="w-full"
                       variant={plan.popular ? "default" : "outline"}
                       onClick={action.onClick}
-                      disabled={checkoutLoading === plan.key || (action as any).disabled}
+                      disabled={checkoutLoading === plan.key || (action as { disabled?: boolean }).disabled}
                     >
                       {checkoutLoading === plan.key ? (
                         <><Loader2 className="h-4 w-4 animate-spin mr-2" /> {t("common.loading")}</>
@@ -213,4 +268,8 @@ export default function Pricing() {
       </div>
     </div>
   );
+}
+
+export default function Pricing() {
+  return PUBLIC_PRICING_ENABLED ? <CommercialPricing /> : <ResearchPhasePricing />;
 }

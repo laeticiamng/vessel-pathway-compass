@@ -22,6 +22,7 @@ import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
+import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
 
 /* -------------------------------------------------------------------------
  * Above-the-fold (eager): PlatformCompletenessSection — anchor target of
@@ -168,7 +169,7 @@ export default function Landing() {
               {t("landing.nav.explore")}
             </a>
             <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {t("landing.nav.pricing")}
+              {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
             </Link>
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.signIn")}
@@ -205,7 +206,7 @@ export default function Landing() {
                   {t("landing.nav.explore")}
                 </a>
                 <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
-                  {t("landing.nav.pricing")}
+                  {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
                 </Link>
                 <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
@@ -469,7 +470,9 @@ export default function Landing() {
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
-                <Link to="/pricing" className="hover:text-foreground transition-colors">{t("landing.nav.pricing")}</Link>
+                <Link to="/pricing" className="hover:text-foreground transition-colors">
+                  {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
+                </Link>
                 <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
                 <Link to="/contact" className="hover:text-foreground transition-colors">{t("contactPage.title")}</Link>

@@ -112,6 +112,7 @@ export const fr = {
   landing: {
     nav: {
       pricing: "Tarifs",
+      access: "Accès",
       signIn: "Se connecter",
       explore: "Fonctionnalités",
     },
@@ -255,6 +256,14 @@ export const fr = {
     mostPopular: "Le plus populaire",
     currentPlan: "Votre plan",
     managePlan: "Gérer l'abonnement",
+    researchPhase: {
+      pageTitle: "Accès institutionnel — VASCU-LINK",
+      pageDescription: "VASCU-LINK est en validation académique. Contactez l'équipe pour un accès institutionnel, un partenariat clinique ou une évaluation pilote — pas de plan commercial pendant la validation prospective.",
+      title: "Institutional Access — Research Phase",
+      body: "VASCU-LINK est en phase de validation académique au CHUV / Lausanne. Pour un accès institutionnel, un partenariat clinique ou une évaluation pilote, contactez l'équipe.",
+      cta: "Contact for institutional access",
+      disclaimer: "Pas de plan commercial public pendant la phase de validation prospective.",
+    },
     plans: {
       individual: {
         name: "Individuel",
