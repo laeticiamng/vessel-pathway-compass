@@ -83,21 +83,32 @@ export default function Landing() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const primaryModules = primaryKeys.map((key, i) => ({
-    icon: primaryIcons[i],
-    title: t(`landing.modules.${key}.title`),
-    description: t(`landing.modules.${key}.desc`),
-    path: primaryPaths[i],
-  }));
+  const primaryModules = useMemo(
+    () =>
+      primaryKeys.map((key, i) => ({
+        icon: primaryIcons[i],
+        title: t(`landing.modules.${key}.title`),
+        description: t(`landing.modules.${key}.desc`),
+        path: primaryPaths[i],
+      })),
+    [t]
+  );
 
-  const secondaryModules = secondaryKeys.map((key, i) => ({
-    icon: secondaryIcons[i],
-    title: t(`landing.modules.${key}.title`),
-    description: t(`landing.modules.${key}.desc`),
-    path: secondaryPaths[i],
-  }));
+  const secondaryModules = useMemo(
+    () =>
+      secondaryKeys.map((key, i) => ({
+        icon: secondaryIcons[i],
+        title: t(`landing.modules.${key}.title`),
+        description: t(`landing.modules.${key}.desc`),
+        path: secondaryPaths[i],
+      })),
+    [t]
+  );
 
-  const trustSignals: string[] = (t("landing.trust.signals") as any) || [];
+  const trustSignals = useMemo<string[]>(
+    () => (t("landing.trust.signals") as unknown as string[]) || [],
+    [t]
+  );
 
   // JSON-LD: minimal, non-risky structured data (WebPage + SoftwareApplication + FAQPage)
   const structuredData = {
