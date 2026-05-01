@@ -692,7 +692,116 @@
 
 
 
-  /* Respect reduced motion / high contrast preferences */
+  /* === Lazy-load: when the headline is offscreen OR not yet activated by
+     the IntersectionObserver, drop the GPU-expensive halo entirely. */
+  [data-hero-neon][data-hero-neon-active="false"] {
+    filter: none !important;
+    will-change: auto !important;
+    transform: none !important;
+  }
+
+  /* === Scroll-pause: while the user is actively scrolling AND has
+     `prefers-reduced-motion: reduce`, suspend the halo so frame budget
+     stays available for layout. The reinforced-contrast rules below
+     remain authoritative — they keep the headline flat and readable. */
+  [data-hero-neon][data-hero-neon-scrolling="true"] {
+    filter: none !important;
+    transition: none !important;
+  }
+
+  /* === Premium skeleton: shimmering placeholder shown until the lazy
+     observer activates effects. Avoids the unstyled-text flash on
+     first paint and shortens perceived load time on mobile. */
+  .hero-neon-skeleton {
+    /* Mask the text while the shimmer plays underneath */
+    color: transparent !important;
+    -webkit-text-fill-color: transparent !important;
+    background:
+      linear-gradient(
+        100deg,
+        hsl(var(--muted) / 0.7) 0%,
+        hsl(var(--muted) / 0.95) 30%,
+        hsl(var(--accent-cyan) / 0.35) 50%,
+        hsl(var(--muted) / 0.95) 70%,
+        hsl(var(--muted) / 0.7) 100%
+      ) !important;
+    background-size: 250% 100% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    animation: hero-neon-shimmer 1.6s ease-in-out infinite;
+    border-radius: 6px;
+  }
+  .dark .hero-neon-skeleton {
+    background:
+      linear-gradient(
+        100deg,
+        hsl(222 35% 14% / 0.85) 0%,
+        hsl(222 35% 18% / 0.95) 30%,
+        hsl(188 95% 58% / 0.45) 50%,
+        hsl(222 35% 18% / 0.95) 70%,
+        hsl(222 35% 14% / 0.85) 100%
+      ) !important;
+    background-size: 250% 100% !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+  }
+  @keyframes hero-neon-shimmer {
+    0% { background-position: 100% 0%; }
+    100% { background-position: -100% 0%; }
+  }
+
+  /* === Keyboard focus: visible ring in light, dark and high-contrast.
+     Uses :focus-visible only — never trapped on mouse clicks. */
+  .hero-neon-focusable {
+    outline: none;
+    border-radius: 6px;
+  }
+  .hero-neon-focusable:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 4px;
+    box-shadow: 0 0 0 4px hsl(var(--ring) / 0.25);
+  }
+  .dark .hero-neon-focusable:focus-visible {
+    outline-color: hsl(188 95% 70%);
+    box-shadow: 0 0 0 4px hsl(188 95% 70% / 0.3);
+  }
+  .high-contrast .hero-neon-focusable:focus-visible {
+    outline: 3px solid hsl(var(--contrast-strong));
+    outline-offset: 4px;
+    box-shadow: none;
+  }
+  .high-contrast.dark .hero-neon-focusable:focus-visible,
+  .high-contrast .dark .hero-neon-focusable:focus-visible {
+    outline-color: hsl(var(--contrast-cyan));
+  }
+
+  /* === Firefox: `-webkit-text-stroke` ignored → the relief disappears
+     but the gradient masking still works. Compensate with a tiny
+     `text-shadow` for letter-edge crispness. */
+  @-moz-document url-prefix() {
+    .hero-neon-text {
+      text-shadow: 0 0 1px hsl(var(--neon-glow) / 0.35);
+    }
+    .dark .hero-neon-text {
+      text-shadow: 0 0 1px hsl(var(--neon-glow) / 0.5);
+    }
+    .high-contrast .hero-neon-text,
+    .high-contrast .dark .hero-neon-text {
+      text-shadow: none;
+    }
+  }
+
+  /* === Respect reduced motion / high contrast preferences ===
+     - Kill skeleton shimmer
+     - Strip residual halos so a settled view is perfectly static */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-neon-skeleton {
+      animation: none !important;
+    }
+    [data-hero-neon] {
+      transition: none !important;
+    }
+  }
   @media (prefers-reduced-motion: reduce), (prefers-contrast: more) {
     .hero-neon-text,
     .dark .hero-neon-text {
@@ -700,6 +809,7 @@
       -webkit-text-stroke: 0 !important;
     }
   }
+
 
   /* Glass surface helper, themed for both modes */
   .surface-glass {
