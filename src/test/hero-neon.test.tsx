@@ -188,12 +188,28 @@ describe("hero-neon — keyboard focus & a11y", () => {
   });
 
   it("skeleton state announces aria-busy + aria-hidden", () => {
-    // lazy=true defaults to active=false on first paint → skeleton
-    render(<NeonGradientText lazy>Loading title</NeonGradientText>);
-    const el = screen.getByText("Loading title");
-    expect(el.getAttribute("data-hero-neon-active")).toBe("false");
-    expect(el.getAttribute("aria-busy")).toBe("true");
-    expect(el.getAttribute("aria-hidden")).toBe("true");
+    // Force the skeleton path by stubbing IntersectionObserver to a noop
+    // that never fires entries (simulates "not yet visible").
+    const originalIO = (globalThis as { IntersectionObserver?: unknown }).IntersectionObserver;
+    class NoopIO {
+      observe() {}
+      disconnect() {}
+      unobserve() {}
+      takeRecords() { return []; }
+      root = null;
+      rootMargin = "";
+      thresholds = [];
+    }
+    (globalThis as { IntersectionObserver?: unknown }).IntersectionObserver = NoopIO;
+    try {
+      render(<NeonGradientText lazy>Loading title</NeonGradientText>);
+      const el = screen.getByText("Loading title");
+      expect(el.getAttribute("data-hero-neon-active")).toBe("false");
+      expect(el.getAttribute("aria-busy")).toBe("true");
+      expect(el.getAttribute("aria-hidden")).toBe("true");
+    } finally {
+      (globalThis as { IntersectionObserver?: unknown }).IntersectionObserver = originalIO;
+    }
   });
 
   it("CSS guards descenders with line-height + bottom padding", () => {
