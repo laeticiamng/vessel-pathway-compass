@@ -446,26 +446,26 @@
       0 0 16px -2px hsl(270 85% 68% / 0.22);
   }
   /* === Dark-mode illustration tint ===
-     Applies to BOTH PNG and inline SVG illustrations inside icon rings,
-     not just those marked [data-neon-illustration]. This kills any
-     leftover white plate from raw line-art assets. */
-  .dark .neon-icon-ring img,
-  .dark .neon-icon-ring svg:not([data-neon-keep-color]),
-  .dark .neon-icon-ring [data-neon-illustration] {
+     Applies to ALL raster illustrations (PNG/JPG via <img>) inside icon
+     rings, plus any inline SVG explicitly marked with
+     `data-neon-illustration`. Lucide / `currentColor` SVGs are spared so
+     their themed stroke keeps working. Opt out a specific asset with
+     `data-neon-keep-color`. */
+  .dark .neon-icon-ring img:not([data-neon-keep-color]),
+  .dark .neon-icon-ring svg[data-neon-illustration]:not([data-neon-keep-color]) {
     filter: brightness(0) saturate(100%)
       invert(86%) sepia(48%) saturate(420%) hue-rotate(155deg) brightness(105%) contrast(101%);
     opacity: 0.92;
   }
-  .dark .neon-icon-ring.violet img,
-  .dark .neon-icon-ring.violet svg:not([data-neon-keep-color]),
-  .dark .neon-icon-ring.violet [data-neon-illustration] {
+  .dark .neon-icon-ring.violet img:not([data-neon-keep-color]),
+  .dark .neon-icon-ring.violet svg[data-neon-illustration]:not([data-neon-keep-color]) {
     filter: brightness(0) saturate(100%)
       invert(82%) sepia(28%) saturate(680%) hue-rotate(232deg) brightness(104%) contrast(101%);
     opacity: 0.92;
   }
-  /* Generic dark-mode tint for any signature illustration (PNG/SVG)
-     placed outside an icon ring (cards, hero, modules…). The
-     `[data-neon-keep-color]` opt-out preserves brand assets that must
+  /* Generic dark-mode tint for any signature illustration (PNG or SVG)
+     placed OUTSIDE an icon ring (cards, hero, modules…). The
+     `data-neon-keep-color` opt-out preserves brand assets that must
      remain in their original palette (logos, photographs, charts). */
   .dark img[data-neon-illustration]:not([data-neon-keep-color]),
   .dark svg[data-neon-illustration]:not([data-neon-keep-color]) {
