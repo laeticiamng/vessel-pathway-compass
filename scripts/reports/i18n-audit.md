@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-01T09:53:48.156Z_
+_Generated: 2026-05-01T09:54:16.597Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 
@@ -8,34 +8,25 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 
 | Metric | Count |
 |---|---:|
-| Translation keys referenced from code | 1238 |
+| Translation keys referenced from code | 1236 |
 | Dynamic key prefixes detected | 33 |
-| Keys missing in FR | 2 |
-| Keys missing in EN | 2 |
-| Keys missing in DE | 2 |
+| Keys missing in FR | 0 |
+| Keys missing in EN | 0 |
+| Keys missing in DE | 0 |
 | Orphan keys (defined, unused) | 78 |
 | Public pages with hardcoded candidates | 2 (2 findings) |
 
 ## Missing keys — FR
 
-| Key | Reason | Used in |
-|---|---|---|
-| `foo.bar` | absent | src/i18n/context.tsx |
-| `foo.items` | absent | src/i18n/context.tsx |
+_None ✅_
 
 ## Missing keys — EN
 
-| Key | Reason | Used in |
-|---|---|---|
-| `foo.bar` | absent | src/i18n/context.tsx |
-| `foo.items` | absent | src/i18n/context.tsx |
+_None ✅_
 
 ## Missing keys — DE
 
-| Key | Reason | Used in |
-|---|---|---|
-| `foo.bar` | absent | src/i18n/context.tsx |
-| `foo.items` | absent | src/i18n/context.tsx |
+_None ✅_
 
 ## Orphan keys (defined in FR dictionary but never referenced)
 
