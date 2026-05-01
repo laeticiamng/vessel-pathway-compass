@@ -100,10 +100,10 @@ export default function Dashboard() {
   });
 
   const statCards = [
-    { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, icon: HeartPulse, trend: `${stats?.totalCases ?? 0} ${t("dashboard.stats.total") ?? "total"}`, variant: "cyan" as const },
-    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, icon: Brain, trend: t("dashboard.stats.generated") as string, variant: "cyan" as const, unit: "/day" },
-    { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, icon: LineChart, trend: t("dashboard.stats.registryEntries") as string, variant: "cyan" as const },
-    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, icon: LayoutGrid, trend: t("dashboard.stats.completed") as string, variant: "violet" as const },
+    { label: t("dashboard.stats.activeCases"), value: stats?.activeCases ?? 0, image: aquaIcons.activeCases, trend: `${stats?.totalCases ?? 0} ${t("dashboard.stats.total") ?? "total"}`, variant: "cyan" as const },
+    { label: t("dashboard.stats.aiReports"), value: stats?.aiReports ?? 0, image: aquaIcons.aiReports, trend: t("dashboard.stats.generated") as string, variant: "cyan" as const, unit: "/day" },
+    { label: t("dashboard.stats.outcomes"), value: stats?.outcomes ?? 0, image: aquaIcons.outcomes, trend: t("dashboard.stats.registryEntries") as string, variant: "cyan" as const },
+    { label: t("dashboard.stats.simulations"), value: stats?.simulations ?? 0, image: aquaIcons.modules, trend: t("dashboard.stats.completed") as string, variant: "violet" as const },
   ];
 
   const quickActions = [
@@ -154,7 +154,7 @@ export default function Dashboard() {
             label={stat.label as string}
             value={stat.value}
             unit={(stat as any).unit}
-            icon={stat.icon}
+            image={stat.image}
             variant={stat.variant}
             trend={stat.trend as string}
             loading={statsLoading}
@@ -266,25 +266,25 @@ export default function Dashboard() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 stagger-in">
         <NeonModuleTile
           title={t("sidebar.procedurePlanner") as string}
-          icon={Brain}
+          image={aquaIcons.procedurePlanner}
           to="/app/procedure-planner"
           variant="cyan"
         />
         <NeonModuleTile
           title={t("sidebar.digitalTwin") as string}
-          icon={Activity}
+          image={aquaIcons.digitalTwin}
           to="/app/digital-twin"
           variant="cyan"
         />
         <NeonModuleTile
           title={t("sidebar.registry") as string}
-          icon={BarChart3}
+          image={aquaIcons.registry}
           to="/app/registry"
           variant="cyan"
         />
         <NeonModuleTile
           title={t("sidebar.education") as string}
-          icon={BookOpen}
+          image={aquaIcons.education}
           to="/app/education"
           variant="violet"
         />
