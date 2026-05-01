@@ -1,0 +1,22 @@
+name: i18n consistency
+
+on:
+  pull_request:
+    paths:
+      - "src/**"
+      - "scripts/check-i18n.mjs"
+      - ".github/workflows/check-i18n.yml"
+  push:
+    branches: [main]
+
+jobs:
+  check-i18n:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      # Pure-Node script with no external deps; no install needed.
+      - name: Run i18n key consistency check
+        run: node scripts/check-i18n.mjs
