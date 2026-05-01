@@ -16,8 +16,9 @@ export function ScientificSafetyBox({ className }: Props) {
           </div>
           <p className="text-sm text-muted-foreground">
             VASCU-LINK aims to open a long-term pathway toward selected 4-zero
-            vascular interventions: no ionizing radiation, no injected contrast,
-            no helium, reduced infrastructure footprint.
+            vascular interventions: <strong>0 mSv</strong>, <strong>0 g Gd / 0 mL iodine</strong>,
+            <strong> 0 helium</strong>, and a <strong>BoM target &lt; €15k</strong> — to enable
+            proximity vascular medicine outside helium-bound hospital centers.
           </p>
         </div>
         <div className="space-y-2">
