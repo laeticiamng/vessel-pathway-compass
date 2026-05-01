@@ -19,7 +19,7 @@ export function buildDsmbDoc(now: Date = new Date()): jsPDF {
   doc.setFontSize(9);
   doc.setTextColor(100);
   doc.text(`Generated: ${ts}`, 14, 24);
-  doc.text("Independent Data Safety Monitoring Board · CHUV cohort", 14, 29);
+  doc.text("Independent Data Safety Monitoring Board · prospective main cohort", 14, 29);
 
   doc.setFontSize(11);
   doc.setTextColor(0);
@@ -62,7 +62,7 @@ export function buildDsmbDoc(now: Date = new Date()): jsPDF {
   doc.setFontSize(8);
   doc.setTextColor(120);
   doc.text(
-    "Placeholder citations: [DSMB-CHUV-2025-01] · [SAP-AquaMR-v1] · [CER-VD-PB_2025-XXXXX]",
+    "Placeholder citations: [DSMB-CHARTER-2025-01] · [SAP-AquaMR-v1] · [ETHICS-COMMITTEE-PB_2025-XXXXX]",
     14, pageH - 12
   );
   return doc;
@@ -91,7 +91,7 @@ export function buildAuditPackDoc(now: Date = new Date()): jsPDF {
     startY: 76,
     body: [
       ["1.", "Architecture Decision Records (15)", "p. 2"],
-      ["2.", "Power calculation · CHUV cohort", "p. 3"],
+      ["2.", "Power calculation · prospective main cohort", "p. 3"],
       ["3.", "DSMB charter", "p. 4"],
       ["4.", "LCA + QALY framework", "p. 5"],
       ["5.", "Placeholder citations", "p. 6"],
@@ -115,7 +115,7 @@ export function buildAuditPackDoc(now: Date = new Date()): jsPDF {
   // 2. Power
   doc.addPage();
   doc.setFontSize(14);
-  doc.text("2. Power calculation — CHUV main cohort", 14, 18);
+  doc.text("2. Power calculation — prospective main cohort", 14, 18);
   doc.setFontSize(9);
   doc.text("Primary endpoint: clinico-physiological concordance (C4-i v11.1).", 14, 26);
   doc.text("Test: one-sample non-inferiority on a single proportion (normal approximation).", 14, 31);
@@ -185,8 +185,8 @@ export function buildAuditPackDoc(now: Date = new Date()): jsPDF {
     "[5] IEC 62304:2006/AMD1:2015 - Medical device software - Software life cycle processes.",
     "[6] EU MDR 2017/745 - Regulation on medical devices.",
     "[7] GDPR - Regulation (EU) 2016/679.",
-    "[8] CHUV Biostatistics Unit - internal SAP draft v0.1 (placeholder).",
-    "[9] CER-VD protocol number - to be assigned (placeholder).",
+    "[8] Independent biostatistics unit - internal SAP draft v0.1 (placeholder).",
+    "[9] Ethics committee protocol number - to be assigned (placeholder).",
     "[10] ClinicalTrials.gov registration - planned at J1 (placeholder).",
   ];
   let y = 28;
