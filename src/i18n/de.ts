@@ -117,49 +117,45 @@ export const de = {
       ],
     },
     modules: {
-      title: "Alles, was Sie brauchen — in einer Plattform",
-      subtitle: "Sechs Kernmodule für Ihren klinischen Alltag.",
-      moreTitle: "Und noch mehr",
-      moreSubtitle: "Zusätzliche Werkzeuge für Ergebnisse, Leistung und Interoperabilität.",
-      ai: {
-        title: "Klinischer KI-Assistent",
-        desc: "Erstellen Sie strukturierte klinische Berichte, Differentialdiagnosen und Behandlungspfade — immer von Ihnen überprüft und bestätigt.",
+      title: "Vollständige nicht-ionisierende Workflow-Plattform",
+      subtitle: "Sechs Kernmodule für kontrastsparende, strahlungsfreie Gefäß-Workflows.",
+      moreTitle: "Plattform-Werkzeuge",
+      moreSubtitle: "Register, Forschung, Ausbildung und Analytik für Ihre Praxis.",
+      procedurePlanner: {
+        title: "Eingriffsplaner",
+        desc: "Workflow-Empfehlungen mit Modalitätenauswahl — IVUS-first, OCT-Saline, kontrastfreie MRA — stets von Ihnen bestätigt.",
+      },
+      fusionViewer: {
+        title: "Fusion Viewer",
+        desc: "Multimodale Bildfusion über MRT, IVUS, OCT und Ultraschall mit synchronisierten Messungen und Annotationen.",
+      },
+      ciAkiEngine: {
+        title: "CI-AKI-Präventions-Engine",
+        desc: "eGFR-basierte Risikostratifizierung mit Vorschlägen zu kontrastsparenden Strategien — Standard, Ultra-Low oder Zero-Contrast IVUS-first.",
       },
       twin: {
         title: "AquaMR Digital Twin",
-        desc: "Visualisieren Sie die Gefäßanatomie jedes Patienten über die Zeit mit interaktiven Karten, Läsionsverfolgung und Szenarioplanung.",
-      },
-      registry: {
-        title: "AquaMR Registry",
-        desc: "Erfassen und vergleichen Sie Patientenergebnisse für pAVK, Aorten-, Karotis-, Venen- und Thromboembolie-Fälle — anonymisiertes Benchmarking inklusive.",
-      },
-      education: {
-        title: "Zertifizierung & CME",
-        desc: "Durchlaufen Sie Kompetenzpfade mit Lektionen, Quiz, betreuten Logbüchern und digitalen Abzeichen.",
+        desc: "Patientenspezifische Gefäßmodellierung mit Längsschnitt-Zeitleiste, Messverfolgung und Eingriffshistorie.",
       },
       simulation: {
-        title: "Klinisches Simulationslabor",
-        desc: "Trainieren Sie Entscheidungsfindung mit realistischen Verzweigungsfällen und erhalten Sie KI-Feedback zu Ihrer Leistung.",
+        title: "Eingriffs-Simulationslabor",
+        desc: "Trainieren Sie Workflow-Entscheidungen mit realistischen Verzweigungsfällen für Koronar-, Peripher-, Nieren- und Karotis-Eingriffe.",
       },
-      network: {
-        title: "Expertennetzwerk",
-        desc: "Diskutieren Sie anonymisierte Fälle mit Kollegen, holen Sie Expertenmeinungen ein und finden Sie Mentoren über Fachgrenzen hinweg.",
+      registry: {
+        title: "AquaMR Register",
+        desc: "Erfassen Sie Kontrastmittelvolumen, vermiedene Strahlung, AKI-Ergebnisse und Eingriffserfolg mit datenschutzfreundlichem Benchmarking.",
       },
-      outcomes: {
-        title: "Patientenergebnisse (PROMs)",
-        desc: "Erfassen Sie validierte vaskuläre Fragebögen (VascuQoL-6, CIVIQ-14) als wöchentliche digitale Formulare mit Trendvisualisierung.",
+      education: {
+        title: "AquaMR Academy",
+        desc: "Konzepte zur Niederfeld-MRT, kontrastfreie MRA, IVUS-geführte Zero-Contrast-PCI und simulationsverknüpfte Lernpfade.",
       },
-      performance: {
-        title: "Klinische Leistung",
-        desc: "KPIs auf einen Blick: 30-Tage-Komplikationsrate, mittlere Zeit bis zum Eingriff, Restenose-Rate — verglichen mit europäischen Benchmarks.",
+      research: {
+        title: "Forschungs-Hub",
+        desc: "Studien entwerfen, Kohorten verwalten und de-identifizierte Datensätze für nicht-ionisierende Workflow-Forschung exportieren.",
       },
-      riskCalc: {
-        title: "Risikorechner",
-        desc: "Interaktive SCORE2-, Wells-TVT- und ABI-Interpretationstools mit Sofortergebnissen und Therapieempfehlungen.",
-      },
-      researchExport: {
-        title: "Forschungsexport",
-        desc: "Erstellen Sie anonymisierte aggregierte Datensatzzusammenfassungen für Registereinreichungen — keine individuellen Patientendaten.",
+      analytics: {
+        title: "Programm-Analytik",
+        desc: "Zero-Contrast-Fallrate, geschätzt vermiedenes Kontrastmittel, geschätzt vermiedene Strahlung — Dashboards für Institution und Behandler.",
       },
       fhir: {
         title: "FHIR-Interoperabilität",
