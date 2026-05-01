@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Calculator, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/i18n/context";
 
 /**
  * Statistical power calculation for the planned prospective main cohort.
