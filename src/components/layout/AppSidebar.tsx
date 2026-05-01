@@ -21,6 +21,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
+import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
