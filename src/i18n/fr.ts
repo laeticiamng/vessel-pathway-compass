@@ -226,7 +226,7 @@ export const fr = {
       notMedicalDevice: "Aide à la décision clinique — ce n'est pas un dispositif médical.",
       product: "Produit",
       legal: "Juridique",
-      contact: "Contact & Support",
+      // contact: removed — no longer rendered in the footer (handled via dedicated nav).
       rights: "Tous droits réservés.",
       skipToContent: "Aller au contenu",
     },
@@ -1607,10 +1607,7 @@ export const fr = {
     },
   },
   seo: {
-    landing: {
-      title: "AquaMR Flow — Plateforme de Flux de Travail Vasculaire Non Ionisant",
-      description: "Planification de procédure, fusion d'imagerie multimodale, prévention CI-AKI, simulation clinique et registre de recherche pour les flux de travail vasculaires d'épargne de contraste.",
-    },
+    // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
       title: "Tarifs — Plans AquaMR Flow",
       description: "Comparez les plans AquaMR Flow : Individuel gratuit, Professionnel à 99 €/mois et tarif Institution sur mesure. Toutes les fonctionnalités gratuites pendant la bêta.",
