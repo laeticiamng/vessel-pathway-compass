@@ -262,24 +262,48 @@ export default function Dashboard() {
 
       <ModalityPositioningMatrix />
 
-      {/* Module Grid */}
+      {/* Hero module tiles — AquaMR Flow signature row */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 stagger-in">
+        <NeonModuleTile
+          title={t("sidebar.procedurePlanner") as string}
+          icon={Brain}
+          to="/app/procedure-planner"
+          variant="cyan"
+        />
+        <NeonModuleTile
+          title={t("sidebar.digitalTwin") as string}
+          icon={Activity}
+          to="/app/digital-twin"
+          variant="cyan"
+        />
+        <NeonModuleTile
+          title={t("sidebar.registry") as string}
+          icon={BarChart3}
+          to="/app/registry"
+          variant="cyan"
+        />
+        <NeonModuleTile
+          title={t("sidebar.education") as string}
+          icon={BookOpen}
+          to="/app/education"
+          variant="violet"
+        />
+      </div>
+
+      {/* Secondary modules */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 stagger-in">
         {[
-          { title: t("sidebar.procedurePlanner"), desc: t("dashboard.moduleDesc.procedurePlanner"), icon: Brain, path: "/app/procedure-planner" },
           { title: t("sidebar.fusionViewer"), desc: t("dashboard.moduleDesc.fusionViewer"), icon: Image, path: "/app/fusion-viewer" },
           { title: t("sidebar.ciAkiEngine"), desc: t("dashboard.moduleDesc.ciAkiEngine"), icon: Calculator, path: "/app/ci-aki-engine" },
-          { title: t("sidebar.digitalTwin"), desc: t("dashboard.moduleDesc.twin"), icon: Activity, path: "/app/digital-twin" },
           { title: t("sidebar.simulationLab"), desc: t("dashboard.moduleDesc.simulation"), icon: FlaskConical, path: "/app/simulation" },
-          { title: t("sidebar.registry"), desc: t("dashboard.moduleDesc.registry"), icon: LineChart, path: "/app/registry" },
-          { title: t("sidebar.education"), desc: t("dashboard.moduleDesc.education"), icon: BookOpen, path: "/app/education" },
-          { title: t("sidebar.analytics"), desc: t("dashboard.moduleDesc.analytics"), icon: BarChart3, path: "/app/analytics" },
+          { title: t("sidebar.analytics"), desc: t("dashboard.moduleDesc.analytics"), icon: LineChart, path: "/app/analytics" },
           { title: t("sidebar.researchHub"), desc: t("dashboard.moduleDesc.research"), icon: FileText, path: "/app/research" },
         ].map((mod) => (
-          <Link key={mod.title} to={mod.path}>
-            <Card className="card-hover shine-hover cursor-pointer h-full group">
+          <Link key={mod.title as string} to={mod.path}>
+            <Card className="neon-card card-hover shine-hover cursor-pointer h-full group">
               <CardHeader className="flex flex-row items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/15 transition-colors duration-200">
-                  <mod.icon className="h-5 w-5 text-primary" />
+                <div className="neon-icon-ring shrink-0">
+                  <mod.icon className="h-5 w-5" strokeWidth={1.75} />
                 </div>
                 <div className="relative z-10 flex-1 min-w-0">
                   <CardTitle className="text-base">{mod.title}</CardTitle>
