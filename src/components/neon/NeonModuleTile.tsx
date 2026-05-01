@@ -4,7 +4,10 @@ import { cn } from "@/lib/utils";
 
 interface NeonModuleTileProps {
   title: string;
-  icon: LucideIcon;
+  /** Optional Lucide icon (used as fallback if no image is supplied). */
+  icon?: LucideIcon;
+  /** Optional illustrated PNG/SVG (preferred — AquaMR Flow signature artwork). */
+  image?: string;
   to: string;
   variant?: "cyan" | "violet";
   description?: string;
@@ -13,10 +16,14 @@ interface NeonModuleTileProps {
 /**
  * Large illustrated module tile (Procedure Planner / Digital Twin /
  * Registry / Education) — bottom row of the AquaMR Flow dashboard.
+ *
+ * If `image` is provided, it renders the AquaMR Flow signature illustration;
+ * otherwise it falls back to the Lucide `icon`.
  */
 export function NeonModuleTile({
   title,
   icon: Icon,
+  image,
   to,
   variant = "cyan",
   description,
@@ -38,7 +45,19 @@ export function NeonModuleTile({
             : "border-primary/40 text-primary bg-primary/5"
         )}
       >
-        <Icon className="h-9 w-9 sm:h-10 sm:w-10" strokeWidth={1.5} />
+        {image ? (
+          <img
+            src={image}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            width={80}
+            height={80}
+            className="h-12 w-12 sm:h-14 sm:w-14 object-contain"
+          />
+        ) : Icon ? (
+          <Icon className="h-9 w-9 sm:h-10 sm:w-10" strokeWidth={1.5} />
+        ) : null}
       </div>
       <div>
         <h3

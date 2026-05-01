@@ -5,7 +5,10 @@ interface NeonKpiProps {
   label: string;
   value: React.ReactNode;
   unit?: string;
-  icon: LucideIcon;
+  /** Optional Lucide icon (used as fallback if no image is supplied). */
+  icon?: LucideIcon;
+  /** Optional illustrated PNG/SVG (preferred — AquaMR Flow signature artwork). */
+  image?: string;
   variant?: "cyan" | "violet";
   trend?: string;
   loading?: boolean;
@@ -14,7 +17,7 @@ interface NeonKpiProps {
 
 /**
  * AquaMR Flow KPI card.
- * Large neon-glow value, minimalist icon ring, optional trend caption.
+ * Large neon-glow value, minimalist icon ring (or signature illustration), optional trend caption.
  * Reusable across Dashboard, Patients, Registry, Analytics, etc.
  */
 export function NeonKpi({
@@ -22,6 +25,7 @@ export function NeonKpi({
   value,
   unit,
   icon: Icon,
+  image,
   variant = "cyan",
   trend,
   loading,
@@ -41,7 +45,19 @@ export function NeonKpi({
           {label}
         </span>
         <div className={cn("neon-icon-ring", isViolet && "violet")}>
-          <Icon className="h-5 w-5" strokeWidth={1.75} />
+          {image ? (
+            <img
+              src={image}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              width={40}
+              height={40}
+              className="h-7 w-7 object-contain"
+            />
+          ) : Icon ? (
+            <Icon className="h-5 w-5" strokeWidth={1.75} />
+          ) : null}
         </div>
       </div>
 
