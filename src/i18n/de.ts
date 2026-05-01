@@ -2126,6 +2126,7 @@ export const de = {
       },
       ctaTitle: "Eine Frage zu diesen Einschränkungen?",
       ctaDesc: "Das Team antwortet direkt, ohne Mittelsmann. Jedes Feedback zum Prototyp-Umfang ist wertvoll für die Einordnung der Doktorarbeit.",
+      resolvedBadge: "In der Beta gelöst",
     },
   },
   seo: {
