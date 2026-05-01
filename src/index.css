@@ -6,11 +6,12 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 25% 10%;
+    /* Pearled blue-white background — premium clinical light mode */
+    --background: 210 40% 98%;
+    --foreground: 222 35% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 25% 10%;
+    --card: 210 40% 99.5%;
+    --card-foreground: 222 35% 12%;
 
     --popover: 0 0% 100%;
     --popover-foreground: 220 25% 10%;
