@@ -14,6 +14,7 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation, type Language } from "@/i18n/context";
 import { motion } from "framer-motion";
+import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
 
 /* ============================================================================
  * Transparency & Governance
