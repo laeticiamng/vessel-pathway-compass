@@ -102,6 +102,7 @@ export function AppSidebar() {
       { title: t("sidebar.exportsAudit") || "Audit exports", url: "/app/governance/exports", icon: FileText },
       { title: t("sidebar.institution") || "Institution", url: "/app/admin/institution", icon: ShieldCheck },
       { title: t("sidebar.systemHealth") || "Santé système", url: "/app/admin/system-health", icon: Activity },
+      { title: "Web Vitals", url: "/app/admin/web-vitals", icon: LineChart },
       { title: t("sidebar.settings"), url: "/app/settings", icon: Settings },
     ] : []),
   ];
