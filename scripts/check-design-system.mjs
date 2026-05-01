@@ -127,7 +127,15 @@ const byRule = errors.reduce((acc, e) => {
   return acc;
 }, {});
 
-console.error(`\n✗ design-system check failed — ${errors.length} violation(s)\n`);
+// Strict mode = fail the build. Otherwise: report-only (warnings).
+// Strict is enabled with --strict, DESIGN_SYSTEM_STRICT=1, or CI=true.
+const strict =
+  process.argv.includes("--strict") ||
+  process.env.DESIGN_SYSTEM_STRICT === "1" ||
+  process.env.CI === "true";
+
+const head = strict ? "✗ design-system check failed" : "⚠ design-system warnings";
+console.error(`\n${head} — ${errors.length} violation(s)\n`);
 for (const [rule, items] of Object.entries(byRule)) {
   console.error(`  ▸ ${rule} — ${items[0].label}  (${items.length})`);
   for (const it of items.slice(0, 8)) {
@@ -138,4 +146,18 @@ for (const [rule, items] of Object.entries(byRule)) {
 }
 console.error("Tip: replace hardcoded colors with semantic tokens (text-foreground, bg-card, …)");
 console.error("     low-opacity text → use text-foreground/70 minimum, or text-muted-foreground.");
-process.exit(1);
+
+// Always emit a JSON report for CI dashboards.
+try {
+  const fs = await import("node:fs");
+  fs.mkdirSync("dist", { recursive: true });
+  fs.writeFileSync("dist/design-system-report.json", JSON.stringify({
+    total: errors.length,
+    byRule: Object.fromEntries(Object.entries(byRule).map(([k,v]) => [k, v.length])),
+    items: errors,
+    generatedAt: new Date().toISOString(),
+    strict,
+  }, null, 2));
+} catch {}
+
+process.exit(strict ? 1 : 0);
