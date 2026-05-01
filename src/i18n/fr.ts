@@ -2126,6 +2126,7 @@ export const fr = {
       },
       ctaTitle: "Une question sur ces limites ?",
       ctaDesc: "L'équipe répond directement, sans intermédiaire. Toute remarque sur la portée du prototype est précieuse pour le cadrage de la thèse.",
+      resolvedBadge: "Résolu en bêta",
     },
   },
   seo: {
