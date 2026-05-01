@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-01T10:35:59.724Z_
+_Generated: 2026-05-01T10:40:12.767Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 
@@ -8,29 +8,47 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 
 | Metric | Count |
 |---|---:|
-| Translation keys referenced from code | 1343 |
+| Translation keys referenced from code | 1348 |
 | Dynamic key prefixes detected | 35 |
-| Keys missing in FR | 0 |
-| Keys missing in EN | 0 |
-| Keys missing in DE | 0 |
-| Orphan keys (defined, unused) | 50 |
+| Keys missing in FR | 5 |
+| Keys missing in EN | 5 |
+| Keys missing in DE | 5 |
+| Orphan keys (defined, unused) | 55 |
 | Public pages with hardcoded candidates | 2 (2 findings) |
 
 ## Missing keys — FR
 
-_None ✅_
+| Key | Reason | Used in |
+|---|---|---|
+| `home.complianceFaq.items` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.badge` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.title` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.subtitle` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.disclaimer` | absent | src/components/landing/ComplianceFAQSection.tsx |
 
 ## Missing keys — EN
 
-_None ✅_
+| Key | Reason | Used in |
+|---|---|---|
+| `home.complianceFaq.items` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.badge` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.title` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.subtitle` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.disclaimer` | absent | src/components/landing/ComplianceFAQSection.tsx |
 
 ## Missing keys — DE
 
-_None ✅_
+| Key | Reason | Used in |
+|---|---|---|
+| `home.complianceFaq.items` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.badge` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.title` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.subtitle` | absent | src/components/landing/ComplianceFAQSection.tsx |
+| `home.complianceFaq.disclaimer` | absent | src/components/landing/ComplianceFAQSection.tsx |
 
 ## Orphan keys (defined in FR dictionary but never referenced)
 
-_50 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
+_55 keys are present in the dictionary but no `t("…")` call references them. Some may be intentional (placeholders for upcoming features) — review before pruning._
 
 ```
 common.appName
@@ -41,6 +59,11 @@ common.submit
 common.viewAll
 common.signUp
 common.upload
+landing.complianceFaq.badge
+landing.complianceFaq.title
+landing.complianceFaq.subtitle
+landing.complianceFaq.disclaimer
+landing.complianceFaq.items
 auth.checkEmailDesc
 dashboard.quickActions.newCase
 dashboard.quickActions.education
