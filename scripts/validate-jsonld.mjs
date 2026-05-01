@@ -173,22 +173,44 @@ function extractJsonLdLiterals(source) {
   return out;
 }
 
-function tryEvalJsonLdLiteral(body) {
-  // The literal can be: a JS object literal, an identifier reference (variable),
-  // or an expression. We only attempt to JSON.parse object-literals that happen
-  // to be valid JSON. Otherwise we record it as "dynamic" (skipped from schema
-  // validation but still counted for coverage).
-  const trimmed = body.trim().replace(/,\s*$/, "");
-  // Quick filter: must start with `{`
+function tryEvalJsonLdLiteral(body, source) {
+  // The literal can be:
+  //  (a) an inline JS object literal,
+  //  (b) an identifier reference (e.g. `jsonLd={structuredData}`),
+  //  (c) any other expression (function call, spread, etc.).
+  let trimmed = body.trim().replace(/,\s*$/, "");
+
+  // (b) Resolve a single bare identifier by looking up
+  //     `const <name> = { ... };` earlier in the same source file.
+  const idMatch = /^([A-Za-z_$][\w$]*)\s*$/.exec(trimmed);
+  if (idMatch) {
+    const name = idMatch[1];
+    // Match `const name = { ... };` (allowing TS annotations and `as const`).
+    const re = new RegExp(
+      `\\bconst\\s+${name}\\b[^=]*=\\s*(\\{[\\s\\S]*?\\})\\s*(?:as\\s+const)?\\s*;`,
+    );
+    const m = re.exec(source);
+    if (m) trimmed = m[1];
+    else return { dynamic: true, snippet: name };
+  }
+
   if (!trimmed.startsWith("{")) return { dynamic: true, snippet: trimmed.slice(0, 60) };
-  // Replace simple JS object syntax with JSON: unquoted keys & single quotes.
-  // This is heuristic, but works for our generated JSON-LD literals.
+
+  // Strip TS-only syntax that breaks JSON.parse:
+  //  - line / block comments
+  //  - `as const`, `as <Type>` casts
+  //  - template-string concatenations like `${BASE_URL}/x` → keep raw text
   const jsonish = trimmed
-    .replace(/([{,]\s*)([A-Za-z_$][\w$]*)\s*:/g, '$1"$2":')   // key: → "key":
-    .replace(/'([^']*)'/g, '"$1"')                            // 'x' → "x"
-    .replace(/,(\s*[}\]])/g, "$1");                           // trailing commas
+    .replace(/\/\/[^\n]*/g, "")
+    .replace(/\/\*[\s\S]*?\*\//g, "")
+    .replace(/\bas\s+const\b/g, "")
+    .replace(/\bas\s+[A-Za-z_$][\w$<>,\s|&\[\]]*?(?=[,)\]}])/g, "")
+    .replace(/`([^`${}]*)`/g, '"$1"')
+    .replace(/([{,]\s*)([A-Za-z_$][\w$]*)\s*:/g, '$1"$2":')
+    .replace(/'([^']*)'/g, '"$1"')
+    .replace(/,(\s*[}\]])/g, "$1");
   try { return { dynamic: false, value: JSON.parse(jsonish) }; }
-  catch { return { dynamic: true, snippet: trimmed.slice(0, 60) }; }
+  catch (e) { return { dynamic: true, snippet: trimmed.slice(0, 60), parseError: e.message }; }
 }
 
 const pageCoverage = []; // { file, types[] }
@@ -202,7 +224,7 @@ async function checkSourceTree() {
     const literals = extractJsonLdLiterals(src);
     for (const lit of literals) {
       const rel = relative(ROOT, file);
-      const r = tryEvalJsonLdLiteral(lit.body);
+      const r = tryEvalJsonLdLiteral(lit.body, src);
       if (r.dynamic) {
         record("warning", rel, `Dynamic jsonLd expression — not statically validated (${r.snippet}…)`);
         pageCoverage.push({ file: rel, types: ["<dynamic>"] });
