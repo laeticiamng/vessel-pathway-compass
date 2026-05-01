@@ -61,6 +61,9 @@ const ValidationSection = lazy(() =>
 const LimitsSection = lazy(() =>
   import("@/components/landing/LimitsSection").then((m) => ({ default: m.LimitsSection }))
 );
+const AntiOverpromiseSection = lazy(() =>
+  import("@/components/landing/AntiOverpromiseSection").then((m) => ({ default: m.AntiOverpromiseSection }))
+);
 const AboutSection = lazy(() =>
   import("@/components/landing/AboutSection").then((m) => ({ default: m.AboutSection }))
 );
