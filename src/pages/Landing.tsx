@@ -18,6 +18,8 @@ import {
 } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { MedRegBadge } from "@/components/MedRegBadge";
+import { NeonGradientText } from "@/components/ui/neon-gradient-text";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
 
@@ -183,6 +185,7 @@ export default function Landing() {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
+            <ThemeToggle />
             <Button asChild size="sm" className="shadow-md">
               <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
             </Button>
@@ -220,6 +223,10 @@ export default function Landing() {
                     ))}
                   </div>
                 </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-muted-foreground">{t("topBar.toggleTheme")}</span>
+                  <ThemeToggle />
+                </div>
                 <Button asChild className="mt-2" onClick={() => setMobileOpen(false)}>
                   <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
                 </Button>
@@ -254,9 +261,9 @@ export default function Landing() {
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-6 max-w-4xl mx-auto">
               {t("home.hero.title1")}{" "}
-              <span className="bg-clip-text text-transparent" style={{ backgroundImage: "linear-gradient(135deg, hsl(188 100% 75%), hsl(165 80% 65%))" }}>
+              <NeonGradientText intensity="strong" className="inline-block">
                 {t("home.hero.title2")}
-              </span>
+              </NeonGradientText>
             </h1>
             <p className="text-lg md:text-xl text-on-hero-soft max-w-2xl mx-auto mb-10 leading-relaxed">
               {t("home.hero.subtitle")}
