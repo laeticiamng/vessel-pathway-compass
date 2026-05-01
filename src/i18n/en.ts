@@ -98,6 +98,7 @@ export const en = {
   topBar: {
     searchPlaceholder: "Search or command...",
     toggleTheme: "Toggle theme",
+    highContrast: "Toggle high contrast",
   },
 
   // Landing
