@@ -8,7 +8,7 @@ export const fr = {
     deviceName: "AquaMR",
     tagline: "Reconstruire la fonction angiographique en 4-zéro",
     footerExplain:
-      "VASCU-LINK est le programme doctoral porté par AquaMR Flow, plateforme clinique non irradiante intégrant le dispositif d'imagerie AquaMR.",
+      "VASCU-LINK est le programme doctoral porté par AquaMR Flow, plateforme clinique non irradiante intégrant le dispositif d'imagerie bas champ AquaMR.",
   },
 
   common: {

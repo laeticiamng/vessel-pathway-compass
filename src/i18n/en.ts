@@ -8,7 +8,7 @@ export const en = {
     deviceName: "AquaMR",
     tagline: "Reconstructing angiographic function in 4-zero",
     footerExplain:
-      "VASCU-LINK is the doctoral program built on AquaMR Flow — a non-ionizing clinical platform integrating the AquaMR low-field imaging device.",
+      "VASCU-LINK is the doctoral program carried by AquaMR Flow, a non-ionizing clinical platform integrating the AquaMR low-field imaging device.",
   },
 
   // Common
