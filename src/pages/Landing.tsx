@@ -20,6 +20,8 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { MedRegBadge } from "@/components/MedRegBadge";
 import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
+import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
 import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
@@ -168,8 +170,14 @@ export default function Landing() {
             <a href="#platform-complete" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.explore")}
             </a>
-            <Link to="/pricing" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
+            </Link>
+            <Link to="/why" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {t("landing.nav.why")}
+            </Link>
+            <Link to="/trajectory" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {t("landing.nav.trajectory")}
             </Link>
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.signIn")}
@@ -205,8 +213,14 @@ export default function Landing() {
                 <a href="#platform-complete" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.explore")}
                 </a>
-                <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
+                </Link>
+                <Link to="/why" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("landing.nav.why")}
+                </Link>
+                <Link to="/trajectory" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("landing.nav.trajectory")}
                 </Link>
                 <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
@@ -240,6 +254,8 @@ export default function Landing() {
         </div>
       </nav>
       </header>
+
+      <FourZeroBanner />
 
       <main id="main-content">
       {/* Hero */}
@@ -275,8 +291,11 @@ export default function Landing() {
               <span className="mx-2 text-on-hero/60" aria-hidden="true">·</span>
               <span>{t("home.hero.title2")}</span>
             </p>
-            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-4 leading-relaxed">
               {t("home.hero.subtitle")}
+            </p>
+            <p className="text-sm md:text-base text-on-hero-soft/90 max-w-2xl mx-auto mb-10 italic leading-relaxed">
+              {t("home.hero.translationalAmbition")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
@@ -470,9 +489,11 @@ export default function Landing() {
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
-                <Link to="/pricing" className="hover:text-foreground transition-colors">
+                <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="hover:text-foreground transition-colors">
                   {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
                 </Link>
+                <Link to="/why" className="hover:text-foreground transition-colors">{t("landing.nav.why")}</Link>
+                <Link to="/trajectory" className="hover:text-foreground transition-colors">{t("landing.nav.trajectory")}</Link>
                 <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
                 <Link to="/contact" className="hover:text-foreground transition-colors">{t("contactPage.title")}</Link>
@@ -513,6 +534,8 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+
+      <RegulatoryDisclaimer />
 
       {/* Scroll to top */}
       <AnimatePresence>

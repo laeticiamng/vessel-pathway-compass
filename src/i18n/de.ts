@@ -115,6 +115,8 @@ export const de = {
       access: "Zugang",
       signIn: "Anmelden",
       explore: "Funktionen",
+      why: "Warum",
+      trajectory: "Trajektorie",
     },
     hero: {
       // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
@@ -1200,6 +1202,7 @@ export const de = {
       title1: "VASCU-LINK",
       title2: "Angiographische Funktion in der 4-Null-Kette rekonstruieren",
       subtitle: "Komplette Plattform: 10 klinische Module, verriegeltes L1-Protokoll, 3 Sprachen, gezielte MDR/DSGVO-Konformität und grüne Radiologie. Planung, multimodale Bildgebung, CI-AKI, digitaler Zwilling, Simulation und Register — in einem einzigen Cockpit.",
+      translationalAmbition: "Prüfen, ob ein Teil der angiographischen Funktion — kartieren, entscheiden, planen, führen, behandeln — schrittweise im 4-Null-Modus rekonstruiert werden kann.",
       ctaPrimary: "Kostenloses Konto erstellen",
       ctaSecondary: "So funktioniert es",
       perkNoCard: "Keine Kreditkarte erforderlich",

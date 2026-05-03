@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
+import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 
 const planKeys = ["individual", "professional", "institution"] as const;
 
@@ -57,7 +58,7 @@ function ResearchPhasePricing() {
       <SEOHead
         title={t("pricing.researchPhase.pageTitle") as string}
         description={t("pricing.researchPhase.pageDescription") as string}
-        path="/pricing"
+        path="/access"
       />
       <PricingNav />
       <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
@@ -89,6 +90,7 @@ function ResearchPhasePricing() {
           </div>
         </div>
       </div>
+      <RegulatoryDisclaimer />
     </div>
   );
 }

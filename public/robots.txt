@@ -46,4 +46,7 @@ Disallow: /onboarding
 Disallow: /reset-password
 Disallow: /checkout/
 
+# Note: a custom production domain is not yet active. Update Sitemap, canonical
+# (index.html) and robots Sitemap directive once the final domain is live.
+
 Sitemap: https://aquamr-flow.com/sitemap.xml
