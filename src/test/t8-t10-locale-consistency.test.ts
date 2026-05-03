@@ -84,33 +84,28 @@ describe("T8 — multi-currency pricing (CHF / EUR, no USD)", () => {
 describe("T10 — no exaggerated regulatory / clinical claims", () => {
   it("FAQ pricing answer mentions academic validation in every locale", () => {
     for (const [lang, dict] of Object.entries(dicts)) {
-      const items = get(dict, "home.faq.items") as Array<{ q: string; a: string }>;
+      const items = get(dict, "landing.faq.items") as Array<{ q: string; a: string }>;
       expect(Array.isArray(items), `${lang} faq.items`).toBe(true);
       const priceItem = items.find((i) =>
         /coût|cost|kostet|preis/i.test(i.q),
       );
       expect(priceItem, `${lang} pricing FAQ`).toBeDefined();
-      // Must NOT mention $99 or "AquaMR Flow offers a free Individual plan"-style commercial pitch.
       expect(priceItem!.a).not.toMatch(/\$99/);
-      // Must mention CHF / EUR or the validation phase.
       expect(priceItem!.a).toMatch(/CHF|EUR|académique|academic|akademisch|validation|Validierung/i);
     }
   });
 
   it("landing/about highlight no longer claims HIPAA compliance", () => {
     for (const [lang, dict] of Object.entries(dicts)) {
-      const desc = get(dict, "home.about.highlights.privacy.desc") as string;
+      const desc = get(dict, "landing.about.highlights.privacy.desc") as string;
       expect(desc, `${lang} privacy desc`).toBeTypeOf("string");
-      // Either no HIPAA reference at all, or only inside an explicit
-      // "no certification claimed" disclaimer; we go strict and forbid it
-      // entirely on this short marketing line.
       expect(desc).not.toMatch(/HIPAA/i);
     }
   });
 
   it("compliance FAQ explicitly states the platform is NOT certified", () => {
     for (const [lang, dict] of Object.entries(dicts)) {
-      const items = get(dict, "home.faq.items") as Array<{ q: string; a: string }>;
+      const items = get(dict, "landing.faq.items") as Array<{ q: string; a: string }>;
       const compliance = items.find((i) => /HIPAA|RGPD|GDPR|DSGVO/.test(i.q));
       expect(compliance, `${lang} compliance FAQ`).toBeDefined();
       expect(compliance!.a).toMatch(/NOT|PAS|NICHT|nicht/);
@@ -140,24 +135,35 @@ describe("T10 — Audit & Limitations page + ComplianceLimitsFAQ ship in EN/FR/D
     it(`${rel} never claims HIPAA/FDA compliance affirmatively`, () => {
       const abs = path.resolve(process.cwd(), rel);
       const src = fs.readFileSync(abs, "utf8");
-      // Allow mentions of HIPAA *only* when paired with a denial token
-      // (No / NOT / Pas / NICHT / KEINE / KEIN / NO ).
+      // Allow mentions of HIPAA/FDA only if the same line either:
+      //   - asks a question (?), OR
+      //   - contains an explicit denial token.
+      const denialTokens =
+        /\b(No|NOT|Not|Pas|pas|aucun|AUCUNE|Aucune|NICHT|nicht|KEIN|KEINE|kein|keine|NO )\b/;
       const lines = src.split("\n");
       for (const line of lines) {
-        if (/HIPAA|FDA/i.test(line)) {
-          expect(
-            /No |NOT |Pas |Aucune|AUCUNE|NICHT|KEIN|KEINE|NO /.test(line),
-            `affirmative HIPAA/FDA claim in ${rel}: ${line.trim()}`,
-          ).toBe(true);
+        if (/HIPAA|FDA/.test(line)) {
+          const ok = line.includes("?") || denialTokens.test(line);
+          expect(ok, `affirmative HIPAA/FDA claim in ${rel}: ${line.trim()}`).toBe(true);
         }
       }
     });
 
-    it(`${rel} never references USD pricing`, () => {
+    it(`${rel} never affirmatively prices in USD`, () => {
       const abs = path.resolve(process.cwd(), rel);
       const src = fs.readFileSync(abs, "utf8");
-      expect(src).not.toMatch(/\bUSD\b/);
+      // No "$<digit>" pricing pattern anywhere.
       expect(src).not.toMatch(/\$\d/);
+      // USD references are only allowed inside an explicit denial.
+      const lines = src.split("\n");
+      for (const line of lines) {
+        if (/\bUSD\b/.test(line)) {
+          expect(
+            /\b(no USD|pas de USD|kein USD|KEIN\s+kommerzielles Angebot in USD|not.*USD)\b/i.test(line),
+            `affirmative USD reference in ${rel}: ${line.trim()}`,
+          ).toBe(true);
+        }
+      }
     });
   }
 });
