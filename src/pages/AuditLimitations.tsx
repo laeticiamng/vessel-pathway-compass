@@ -5,6 +5,8 @@ import { SEOHead } from "@/components/SEOHead";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 import { ComplianceLimitsFAQ } from "@/components/landing/ComplianceLimitsFAQ";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
+import { AuditLimitationsPdfButton } from "@/components/audit/AuditLimitationsPdfButton";
+import { ContentVersionBadge } from "@/components/audit/ContentVersionBadge";
 
 /* ============================================================================
  * /audit-limitations — single source of truth for what VASCU-LINK does and
