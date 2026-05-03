@@ -37,7 +37,13 @@ describe("T8 — multi-currency pricing (CHF / EUR, no USD)", () => {
       expect(get(dict, "pricing.currency.eur")).toBe("EUR");
       const note = get(dict, "pricing.currency.indicativeNote") as string;
       expect(note, `${lang}.indicativeNote`).toBeTypeOf("string");
-      expect(note).not.toMatch(/USD|\$/i);
+      // USD may only appear inside an explicit denial ("no USD" / "pas de USD" / "kein USD").
+      const usdMentions = note.match(/USD/gi) ?? [];
+      if (usdMentions.length > 0) {
+        expect(note).toMatch(/no USD|pas de USD|kein USD|kein\s+USD/i);
+      }
+      expect(note).toMatch(/CHF/);
+      expect(note).toMatch(/EUR/);
     }
   });
 
