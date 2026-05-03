@@ -21,7 +21,10 @@ export function ProtectedRoute() {
     enabled: !!user,
   });
 
-  if (loading || profileLoading) {
+  // Wait for both auth and (if logged in) profile to settle before deciding.
+  // Without this guard a slow network can briefly redirect to /onboarding
+  // before the actual profile row arrives.
+  if (loading || (!!user && profileLoading)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
@@ -33,7 +36,11 @@ export function ProtectedRoute() {
     return <Navigate to="/auth" replace />;
   }
 
-  if (profile && !profile.onboarding_completed) {
+  // Only redirect to onboarding when we have a definitive answer that it
+  // hasn't been completed. If the profile fetch failed (profile === null
+  // / undefined and not loading) we fall through to the app to avoid
+  // trapping users in an onboarding loop.
+  if (profile && profile.onboarding_completed === false) {
     return <Navigate to="/onboarding" replace />;
   }
 
