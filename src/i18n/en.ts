@@ -11,6 +11,15 @@ export const en = {
       "VASCU-LINK is the doctoral program built on AquaMR Flow — a non-ionizing clinical platform integrating the AquaMR low-field imaging device.",
   },
 
+  // Regulatory disclaimer rendered at the foot of every page (and inline on
+  // auth/onboarding) so the research-software status is impossible to miss.
+  regulatoryDisclaimer: {
+    line1: "VASCU-LINK / AquaMR Flow — Research software in academic validation.",
+    line2: "Architecture designed to target MDR / GDPR / IEC 62304 / ISO 14971 — not certified at this stage.",
+    line3: "Not for clinical use outside approved research protocols.",
+    ariaLabel: "Regulatory disclaimer",
+  },
+
   // Common
   common: {
     appName: "AquaMR Flow",

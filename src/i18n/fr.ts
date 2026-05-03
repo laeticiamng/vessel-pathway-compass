@@ -11,6 +11,16 @@ export const fr = {
       "VASCU-LINK est le programme doctoral porté par AquaMR Flow, plateforme clinique non irradiante intégrant le dispositif d'imagerie AquaMR.",
   },
 
+  // Mention réglementaire affichée en pied de chaque page (et en ligne sur
+  // auth / onboarding) pour que le statut « logiciel de recherche » soit
+  // impossible à manquer.
+  regulatoryDisclaimer: {
+    line1: "VASCU-LINK / AquaMR Flow — Logiciel de recherche en validation académique.",
+    line2: "Architecture conçue pour viser MDR / RGPD / IEC 62304 / ISO 14971 — non certifiée à ce stade.",
+    line3: "Pas d'usage clinique en dehors de protocoles de recherche approuvés.",
+    ariaLabel: "Mention réglementaire",
+  },
+
   common: {
     appName: "AquaMR Flow",
     loading: "Chargement...",

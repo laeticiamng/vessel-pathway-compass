@@ -11,6 +11,15 @@ export const de = {
       "VASCU-LINK ist das Doktoratsprogramm der nicht-ionisierenden klinischen AquaMR Flow-Plattform, die das AquaMR-Niederfeld-Bildgebungsgerät integriert.",
   },
 
+  // Regulatorischer Hinweis am Fuß jeder Seite (und inline auf Auth/Onboarding),
+  // damit der Forschungssoftware-Status unübersehbar bleibt.
+  regulatoryDisclaimer: {
+    line1: "VASCU-LINK / AquaMR Flow — Forschungssoftware in akademischer Validierung.",
+    line2: "Architektur ausgerichtet auf MDR / DSGVO / IEC 62304 / ISO 14971 — derzeit nicht zertifiziert.",
+    line3: "Keine klinische Anwendung außerhalb genehmigter Forschungsprotokolle.",
+    ariaLabel: "Regulatorischer Hinweis",
+  },
+
   common: {
     appName: "AquaMR Flow",
     loading: "Laden...",
