@@ -1202,6 +1202,7 @@ export const fr = {
       title1: "VASCU-LINK",
       title2: "Reconstruire la fonction angiographique en 4-zéro",
       subtitle: "Plateforme complète : 10 modules cliniques, protocole L1 verrouillé, 3 langues, conformité MDR/RGPD ciblée et radiologie verte. Planification, imagerie multimodale, CI-AKI, jumeau numérique, simulation et registre — dans un seul cockpit.",
+      translationalAmbition: "Tester si une partie de la fonction angiographique — cartographier, décider, planifier, guider, traiter — peut être progressivement reconstruite en 4-zéro.",
       ctaPrimary: "Créer un compte gratuit",
       ctaSecondary: "Voir comment ça marche",
       perkNoCard: "Sans carte bancaire",
