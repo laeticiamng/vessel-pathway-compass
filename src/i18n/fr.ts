@@ -112,9 +112,13 @@ export const fr = {
   landing: {
     nav: {
       pricing: "Tarifs",
+    nav: {
+      pricing: "Tarifs",
       access: "Accès",
       signIn: "Se connecter",
       explore: "Fonctionnalités",
+      why: "Pourquoi",
+      trajectory: "Trajectoire",
     },
     hero: {
       // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)

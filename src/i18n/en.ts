@@ -120,6 +120,8 @@ export const en = {
       access: "Access",
       signIn: "Sign In",
       explore: "Features",
+      why: "Why",
+      trajectory: "Trajectory",
     },
     hero: {
       // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
