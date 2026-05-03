@@ -112,7 +112,7 @@ export const de = {
   landing: {
     nav: {
       pricing: "Preise",
-      access: "Zugang",
+      access: "Preise",
       signIn: "Anmelden",
       explore: "Funktionen",
       why: "Warum",
