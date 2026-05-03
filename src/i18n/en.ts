@@ -117,7 +117,7 @@ export const en = {
   landing: {
     nav: {
       pricing: "Pricing",
-      access: "Access",
+      access: "Pricing",
       signIn: "Sign In",
       explore: "Features",
       why: "Why",

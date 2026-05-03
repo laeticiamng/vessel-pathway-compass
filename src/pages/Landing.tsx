@@ -286,18 +286,16 @@ export default function Landing() {
                 {t("home.hero.betaBadge")}
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-on-hero leading-[1.05] mb-4 tracking-tight">
-              <NeonGradientText intensity="strong" className="inline-block">
+            <p className="text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-on-hero/80 mb-3">
+              <NeonGradientText intensity="soft" className="inline-block">
                 {t("home.hero.title1")}
               </NeonGradientText>
-            </h1>
-            <p className="text-base md:text-xl font-semibold text-on-hero leading-snug mb-3 max-w-3xl mx-auto">
-              <span className="uppercase tracking-[0.18em] text-on-hero/90">
-                {t("branding.platformName")}
-              </span>
-              <span className="mx-2 text-on-hero/60" aria-hidden="true">·</span>
-              <span>{t("home.hero.title2")}</span>
+              <span className="mx-2 text-on-hero/40" aria-hidden="true">·</span>
+              <span>{t("branding.platformName")}</span>
             </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-4 tracking-tight max-w-4xl mx-auto">
+              {t("home.hero.title2")}
+            </h1>
             <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-4 leading-relaxed">
               {t("home.hero.subtitle")}
             </p>
