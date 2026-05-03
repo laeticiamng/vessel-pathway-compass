@@ -6,7 +6,7 @@ export const de = {
     programName: "VASCU-LINK",
     platformName: "AquaMR Flow Platform",
     deviceName: "AquaMR",
-    tagline: "Angiographische Funktion in der 4-Null-Kette rekonstruieren",
+    tagline: "Die angiographische Funktion in 4-Null neu aufbauen",
     footerExplain:
       "VASCU-LINK ist das Doktoratsprogramm der nicht-ionisierenden klinischen AquaMR Flow-Plattform, die das AquaMR-Niederfeld-Bildgebungsgerät integriert.",
   },
@@ -1198,7 +1198,7 @@ export const de = {
     hero: {
       betaBadge: "Offene Beta — voller Zugang kostenlos",
       title1: "VASCU-LINK",
-      title2: "Angiographische Funktion in der 4-Null-Kette rekonstruieren",
+      title2: "Die angiographische Funktion in 4-Null neu aufbauen",
       subtitle: "Komplette Plattform: 10 klinische Module, verriegeltes L1-Protokoll, 3 Sprachen, gezielte MDR/DSGVO-Konformität und grüne Radiologie. Planung, multimodale Bildgebung, CI-AKI, digitaler Zwilling, Simulation und Register — in einem einzigen Cockpit.",
       ctaPrimary: "Kostenloses Konto erstellen",
       ctaSecondary: "So funktioniert es",

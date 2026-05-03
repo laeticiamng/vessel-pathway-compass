@@ -6,7 +6,7 @@ export const en = {
     programName: "VASCU-LINK",
     platformName: "AquaMR Flow Platform",
     deviceName: "AquaMR",
-    tagline: "Rebuilding angiographic function with the 4-zero protocol",
+    tagline: "Reconstructing angiographic function in 4-zero",
     footerExplain:
       "VASCU-LINK is the doctoral program built on AquaMR Flow — a non-ionizing clinical platform integrating the AquaMR low-field imaging device.",
   },
@@ -1218,7 +1218,7 @@ export const en = {
     hero: {
       betaBadge: "Open beta — full access free of charge",
       title1: "VASCU-LINK",
-      title2: "Rebuilding angiographic function with the 4-zero protocol",
+      title2: "Reconstructing angiographic function in 4-zero",
       subtitle: "Complete platform: 10 clinical modules, locked L1 protocol, 3 languages, targeted MDR/GDPR compliance and green radiology. Planning, multimodal imaging, CI-AKI, digital twin, simulation and registry — in a single cockpit.",
       ctaPrimary: "Create a free account",
       ctaSecondary: "See how it works",
