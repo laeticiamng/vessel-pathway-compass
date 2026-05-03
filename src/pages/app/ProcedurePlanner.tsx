@@ -386,6 +386,27 @@ export default function ProcedurePlanner() {
                         </div>
                         <p className="text-xs text-muted-foreground">{t("procedurePlanner.output.clinicianRequiredDesc")}</p>
                       </div>
+                      <div className="rounded-lg border border-border bg-muted/30 p-3 text-xs text-muted-foreground space-y-2">
+                        <p className="font-medium text-foreground">
+                          {t("procedurePlanner.output.limitsLinkTitle")}
+                        </p>
+                        <p>{t("procedurePlanner.output.limitsLinkDesc")}</p>
+                        <div className="flex flex-wrap gap-3 pt-1">
+                          <Link
+                            to="/audit-limitations"
+                            className="text-primary hover:underline inline-flex items-center gap-1"
+                            data-testid="evidence-link-audit-limitations"
+                          >
+                            → {t("procedurePlanner.output.openAuditLimits")}
+                          </Link>
+                          <Link
+                            to="/audit-limitations#compliance-limits-faq"
+                            className="text-primary hover:underline inline-flex items-center gap-1"
+                          >
+                            → {t("procedurePlanner.output.openComplianceFaq")}
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </TabsContent>
                 </Tabs>
