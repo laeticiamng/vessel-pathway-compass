@@ -151,10 +151,28 @@ const CONTENT: Record<Language, Content> = {
 export default function AuditLimitations() {
   const { language } = useTranslation();
   const c = CONTENT[language] ?? CONTENT.en;
+  const version = getContentVersion("audit-limitations");
+  const auditJsonLd = graphJsonLd([
+    medicalWebPageJsonLd({
+      name: c.seoTitle,
+      description: c.seoDescription,
+      path: "/audit-limitations",
+      lastReviewed: version?.updatedAt,
+    }),
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Audit & Limitations", path: "/audit-limitations" },
+    ]),
+  ]);
 
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title={c.seoTitle} description={c.seoDescription} path="/audit-limitations" />
+      <SEOHead
+        title={c.seoTitle}
+        description={c.seoDescription}
+        path="/audit-limitations"
+        jsonLd={auditJsonLd}
+      />
 
       <nav className="border-b">
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
