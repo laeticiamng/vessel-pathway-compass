@@ -273,6 +273,12 @@ export const en = {
       cta: "Contact for institutional access",
       disclaimer: "No public commercial plan during the prospective validation phase.",
     },
+    currency: {
+      label: "Currency",
+      chf: "CHF",
+      eur: "EUR",
+      indicativeNote: "Indicative post-launch tariff — billing in CHF or EUR (no USD).",
+    },
     plans: {
       individual: {
         name: "Individual",
