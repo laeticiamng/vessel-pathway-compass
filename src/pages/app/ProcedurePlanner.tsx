@@ -23,7 +23,7 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "@/i18n/context";
 import { useSubscription } from "@/hooks/useSubscription";
 import { UsageLimitBanner } from "@/components/UsageLimitBanner";
