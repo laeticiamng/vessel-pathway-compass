@@ -132,15 +132,15 @@ describe("i18n consistency — en/fr/de Evidence & Rationale strings", () => {
     }
   });
 
-  it("clinician-confirmation wording is present across locales", () => {
+  it("limits link description signals decision-support / non-medical-device posture", () => {
     const patterns = {
-      en: /clinician|interventionalist|reviewed/i,
-      fr: /clinicien|clinique/i,
-      de: /Klinik|Bestätigung/i,
+      en: /decision support|not.*medical device|research/i,
+      fr: /aide à la décision|n['’]est pas un dispositif|recherche/i,
+      de: /Entscheidungsunterstützung|kein.*Medizinprodukt|Forschung/i,
     } as const;
     for (const lang of ["en", "fr", "de"] as const) {
-      const v = get(dicts[lang], "procedurePlanner.output.clinicianRequiredDesc") as string;
-      expect(v, `${lang} clinician wording`).toMatch(patterns[lang]);
+      const v = get(dicts[lang], "procedurePlanner.output.limitsLinkDesc") as string;
+      expect(v, `${lang} limitsLinkDesc posture`).toMatch(patterns[lang]);
     }
   });
 
