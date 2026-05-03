@@ -199,9 +199,10 @@ export const fr = {
       items: [
         { q: "Qu'est-ce que AquaMR Flow ?", a: "AquaMR Flow est une plateforme de flux de travail vasculaire non ionisant qui combine la planification de procédure, la fusion d'imagerie multimodale, la prévention CI-AKI, la simulation clinique et un registre de recherche pour les flux de travail interventionnels d'épargne de contraste." },
         { q: "À qui s'adresse AquaMR Flow ?", a: "AquaMR Flow est conçu pour les cardiologues interventionnels, les radiologues interventionnels, les médecins vasculaires, les chercheurs cliniques et les internes en spécialités interventionnelles." },
-        { q: "Combien ça coûte ?", a: "AquaMR Flow propose un plan Individuel gratuit, un plan Professionnel à 99 $/mois et des tarifs Institution sur mesure. Toutes les fonctionnalités sont actuellement disponibles pendant la phase de prototype de recherche." },
+        { q: "Combien ça coûte ?", a: "VASCU-LINK est actuellement en validation académique : il n'existe pas d'offre commerciale. L'accès institutionnel, les partenariats cliniques et les pilotes sont négociés sur demande. La grille indicative post-lancement sera libellée en CHF / EUR (pas de facturation en USD)." },
+        { q: "Êtes-vous conformes RGPD ou HIPAA ?", a: "L'architecture est conçue pour viser les exigences RGPD et nLPD suisse (chiffrement en transit et au repos, journaux d'audit, RLS, pseudonymisation). La plateforme n'est PAS certifiée à ce stade et la conformité HIPAA n'est pas revendiquée. Chaque déploiement institutionnel bénéficie d'une DPIA simplifiée avant tout pilote." },
         { q: "Est-ce un dispositif médical ?", a: "Non. AquaMR Flow est un prototype de recherche et une plateforme de flux de travail clinique. Ce n'est pas un dispositif médical certifié. Toutes les sorties d'aide à la décision nécessitent la confirmation du clinicien avant utilisation clinique." },
-        { q: "Mes données sont-elles sécurisées ?", a: "Oui. Toutes les données sont chiffrées au repos et en transit. La plateforme est conçue en conformité RGPD, HIPAA et nLPD suisse, avec des pistes d'audit complètes et un contrôle d'accès par rôle." },
+        { q: "Mes données sont-elles sécurisées ?", a: "Toutes les données sont chiffrées au repos et en transit. L'architecture est conçue pour viser les exigences RGPD et nLPD suisse, avec pistes d'audit et contrôle d'accès par rôle. La plateforme n'est pas encore certifiée — la posture de sécurité est documentée et partagée avec les institutions partenaires sur demande." },
         { q: "Que signifie 'flux de travail non ionisant' ?", a: "Les flux de travail non ionisants utilisent des modalités d'imagerie qui ne produisent pas de radiation ionisante — comme l'IRM, l'IVUS, l'OCT et l'échographie — au lieu de la fluoroscopie et du scanner. AquaMR Flow aide à planifier et exécuter ces approches d'épargne de contraste et sans radiation." },
       ],
     },
@@ -282,8 +283,8 @@ export const fr = {
       },
       professional: {
         name: "Professionnel",
-        price: "99 €",
-        period: "/mois",
+        price: "CHF 99 / 99 €",
+        period: "/mois (indicatif post-lancement)",
         desc: "Pour les médecins vasculaires en exercice",
         features: [
           "Assistant IA illimité",

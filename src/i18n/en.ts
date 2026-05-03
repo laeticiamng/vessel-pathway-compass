@@ -204,9 +204,10 @@ export const en = {
       items: [
         { q: "What is AquaMR Flow?", a: "AquaMR Flow is a non-ionizing vascular workflow platform that combines procedure planning, multimodal imaging fusion, CI-AKI prevention, clinical simulation and a research registry for contrast-sparing interventional workflows." },
         { q: "Who is AquaMR Flow for?", a: "AquaMR Flow is designed for interventional cardiologists, interventional radiologists, vascular medicine physicians, clinical researchers and trainees in interventional specialties." },
-        { q: "How much does it cost?", a: "AquaMR Flow offers a free Individual plan, a Professional plan at $99/month, and custom Institution pricing. All features are currently available during the research prototype phase." },
+        { q: "How much does it cost?", a: "VASCU-LINK is currently in academic validation: there is no commercial offer. Institutional access, clinical partnerships and pilot evaluations are negotiated on request. Indicative post-launch pricing will be denominated in CHF / EUR (no USD billing)." },
+        { q: "Is AquaMR Flow GDPR or HIPAA compliant?", a: "The architecture is designed to target GDPR and Swiss nFADP requirements (encryption in transit and at rest, audit logs, RLS, pseudonymization). The platform is NOT certified at this stage and HIPAA compliance is not claimed. Each institutional deployment receives a simplified DPIA before any pilot." },
         { q: "Is AquaMR Flow a medical device?", a: "No. AquaMR Flow is a research prototype and clinical workflow platform. It is not a certified medical device. All decision support outputs require clinician confirmation before clinical use." },
-        { q: "Is my data secure?", a: "Yes. All data is encrypted at rest and in transit. The platform is designed with GDPR, HIPAA, and Swiss nFADP compliance in mind, with full audit trails and role-based access control." },
+        { q: "Is my data secure?", a: "All data is encrypted at rest and in transit. The architecture is designed to target GDPR and Swiss nFADP requirements, with audit trails and role-based access control. The platform is not yet certified — security posture is documented and shared with partner institutions on request." },
         { q: "What does 'non-ionizing workflow' mean?", a: "Non-ionizing workflows use imaging modalities that do not produce ionizing radiation — such as MRI, IVUS, OCT, and ultrasound — instead of fluoroscopy and CT. AquaMR Flow helps plan and execute these contrast-sparing, radiation-free approaches." },
       ],
     },
@@ -288,8 +289,8 @@ export const en = {
       },
       professional: {
         name: "Professional",
-        price: "$99",
-        period: "/month",
+        price: "CHF 99 / €99",
+        period: "/month (post-launch, indicative)",
         desc: "For practicing interventional physicians",
         features: [
           "Unlimited AI Assistant",
@@ -2355,7 +2356,7 @@ export const en = {
     // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
       title: "Pricing — AquaMR Flow Plans",
-      description: "Compare AquaMR Flow plans: Free Individual, $99/mo Professional, and custom Institution pricing. All features free during beta.",
+      description: "Compare VASCU-LINK access tiers: Free Individual, Professional (CHF 99 / €99 indicative post-launch), and custom Institution access. All features free during research validation phase.",
     },
     support: {
       title: "Support & FAQ — AquaMR Flow",

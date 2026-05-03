@@ -199,9 +199,10 @@ export const de = {
       items: [
         { q: "Was ist AquaMR Flow?", a: "AquaMR Flow ist eine All-in-One-Plattform für Gefäßmedizin. Sie vereint Patientenmanagement, KI-gestützte Berichte, Ergebnisverfolgung, Fortbildung, Simulation und Expertennetzwerk in einem Tool." },
         { q: "Für wen ist es gedacht?", a: "Gefäßchirurgen, Angiologen, interventionelle Radiologen, Assistenzärzte und Krankenhausabteilungen der Gefäßmedizin." },
-        { q: "Was kostet es?", a: "Während der kostenlosen Beta sind alle Funktionen ohne Kosten verfügbar. Nach dem Launch: kostenloser Einzelplan, Professional-Plan für 99 $/Monat und individuelle Institutionspreise." },
+        { q: "Was kostet es?", a: "VASCU-LINK befindet sich aktuell in akademischer Validierung: es gibt kein kommerzielles Angebot. Institutioneller Zugang, klinische Partnerschaften und Pilotbewertungen werden auf Anfrage verhandelt. Indikative Preise nach dem Launch werden in CHF / EUR ausgewiesen (keine USD-Abrechnung)." },
+        { q: "Sind Sie DSGVO- oder HIPAA-konform?", a: "Die Architektur ist darauf ausgelegt, DSGVO- und Schweizer nDSG-Anforderungen zu erfüllen (Verschlüsselung in Übertragung und Ruhezustand, Audit-Logs, RLS, Pseudonymisierung). Die Plattform ist derzeit NICHT zertifiziert, und HIPAA-Konformität wird nicht beansprucht. Jede institutionelle Bereitstellung erhält vor jedem Pilotprojekt eine vereinfachte DPIA." },
         { q: "Ist es ein Medizinprodukt?", a: "Nein. AquaMR Flow ist ein klinisches Dokumentations- und Workflow-Tool. Kein zertifiziertes Medizinprodukt. Alle KI-Ausgaben erfordern Ihre Überprüfung." },
-        { q: "Sind meine Daten sicher?", a: "Ja. Alle Daten werden verschlüsselt, pseudonymisiert und mit vollständigen Audit-Trails gespeichert. Die Plattform ist auf DSGVO, HIPAA und Schweizer nDSG ausgelegt." },
+        { q: "Sind meine Daten sicher?", a: "Alle Daten werden verschlüsselt in Übertragung und Ruhezustand gespeichert. Die Architektur ist darauf ausgelegt, DSGVO- und Schweizer nDSG-Anforderungen zu erfüllen, mit Audit-Trails und rollenbasierter Zugriffskontrolle. Die Plattform ist noch nicht zertifiziert — die Sicherheitsposition ist dokumentiert und wird Partnerinstitutionen auf Anfrage geteilt." },
         { q: "Kann mein Team es nutzen?", a: "Auf jeden Fall. Der Institutionsplan unterstützt Teams mit gemeinsamen Registern, Analysen und rollenbasierten Berechtigungen." },
       ],
     },
@@ -282,8 +283,8 @@ export const de = {
       },
       professional: {
         name: "Professionell",
-        price: "99 €",
-        period: "/Monat",
+        price: "CHF 99 / 99 €",
+        period: "/Monat (indikativ nach dem Launch)",
         desc: "Für praktizierende Gefäßmediziner",
         features: [
           "Unbegrenzter KI-Assistent",
