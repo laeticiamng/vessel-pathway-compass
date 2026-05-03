@@ -115,6 +115,8 @@ export const de = {
       access: "Zugang",
       signIn: "Anmelden",
       explore: "Funktionen",
+      why: "Warum",
+      trajectory: "Trajektorie",
     },
     hero: {
       // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
