@@ -1,52 +1,165 @@
-# AquaMR Flow — robots.txt
+# VASCU-LINK · AquaMR Flow — robots.txt
+# Goal: maximize crawl on public marketing/trust pages, block authenticated
+# admin / patient / governance / checkout / dev surfaces, allow modern AI
+# search bots that respect the policy. Update Sitemap when the production
+# domain changes.
 
+# ---------- Classic search engines ----------
 User-agent: Googlebot
 Allow: /
+Disallow: /app/admin
+Disallow: /app/admin/
+Disallow: /app/governance
+Disallow: /app/governance/
 Disallow: /app/patients
+Disallow: /app/patients/
+Disallow: /app/network
+Disallow: /app/logbook
 Disallow: /app/settings
+Disallow: /app/vascscreen
+Disallow: /app/vascscreen/
 Disallow: /onboarding
 Disallow: /reset-password
 Disallow: /checkout/
+Disallow: /dev/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /app/admin
+Disallow: /app/admin/
+Disallow: /app/governance
+Disallow: /app/governance/
+Disallow: /app/patients
+Disallow: /app/patients/
+Disallow: /app/network
+Disallow: /app/logbook
+Disallow: /app/settings
+Disallow: /app/vascscreen
+Disallow: /app/vascscreen/
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
+Disallow: /dev/
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /app/admin
+Disallow: /app/governance
 Disallow: /app/patients
 Disallow: /app/settings
 Disallow: /onboarding
 Disallow: /reset-password
 Disallow: /checkout/
+Disallow: /dev/
 
+# ---------- Social previews ----------
 User-agent: Twitterbot
 Allow: /
 
 User-agent: facebookexternalhit
 Allow: /
 
-# AI search crawlers
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+# ---------- Generative / AI search bots ----------
+# We allow generative engines to read public marketing/trust content so they
+# can correctly summarize and cite VASCU-LINK. Authenticated app surfaces
+# stay disallowed everywhere.
 User-agent: OAI-SearchBot
 Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: GPTBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: *
-Allow: /
+Disallow: /app/admin
+Disallow: /app/governance
 Disallow: /app/patients
 Disallow: /app/settings
 Disallow: /onboarding
 Disallow: /reset-password
 Disallow: /checkout/
+Disallow: /dev/
 
-# Note: a custom production domain is not yet active. Update Sitemap, canonical
-# (index.html) and robots Sitemap directive once the final domain is live.
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /app/admin
+Disallow: /app/governance
+Disallow: /app/patients
+Disallow: /app/settings
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
+Disallow: /dev/
+
+User-agent: GPTBot
+Allow: /
+Disallow: /app/admin
+Disallow: /app/governance
+Disallow: /app/patients
+Disallow: /app/settings
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
+Disallow: /dev/
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /app/admin
+Disallow: /app/governance
+Disallow: /app/patients
+Disallow: /app/settings
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
+Disallow: /dev/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /app/admin
+Disallow: /app/governance
+Disallow: /app/patients
+Disallow: /app/settings
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
+Disallow: /dev/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /app/admin
+Disallow: /app/governance
+Disallow: /app/patients
+Disallow: /app/settings
+
+# Block the bulk-scraping CommonCrawl bot (used to train models without
+# a query/response loop). Generative *search* bots above stay allowed.
+User-agent: CCBot
+Disallow: /
+
+# ---------- Default ----------
+User-agent: *
+Allow: /
+Disallow: /app/admin
+Disallow: /app/admin/
+Disallow: /app/governance
+Disallow: /app/governance/
+Disallow: /app/patients
+Disallow: /app/patients/
+Disallow: /app/network
+Disallow: /app/logbook
+Disallow: /app/settings
+Disallow: /app/vascscreen
+Disallow: /app/vascscreen/
+Disallow: /onboarding
+Disallow: /reset-password
+Disallow: /checkout/
+Disallow: /dev/
+
+# Note: a custom production domain is not yet active. Update Sitemap, the
+# canonical (index.html) and any absolute hreflangs once the final domain
+# is live.
 
 Sitemap: https://aquamr-flow.com/sitemap.xml

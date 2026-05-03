@@ -1,0 +1,66 @@
+# VASCU-LINK · AquaMR Flow Platform
+
+> Research-grade clinical workflow platform for non-ionizing, contrast-sparing
+> vascular and interventional medicine. Doctoral program (CHUV / Lausanne)
+> built on the AquaMR Flow Platform.
+
+## What it is (one sentence)
+VASCU-LINK is a research prototype clinical workflow platform that reconstructs
+angiographic-like function from non-ionizing imaging (AquaMR low-field MRI),
+with planning, multimodal fusion, CI-AKI risk, digital twin, simulation and an
+outcomes registry — all under a documented audit trail.
+
+## What it is NOT
+- Not a CE-marked medical device (MDR EU 2017/745) — no notified body certification at this stage.
+- No HIPAA compliance and no FDA clearance.
+- Not a substitute for digital subtraction angiography.
+- Not autonomous — every output is decision support requiring confirmation by a qualified clinician.
+
+## For whom
+Vascular and interventional teams (clinicians, fellows, researchers) at academic
+centers running approved research protocols, simulation/training programs, or
+preclinical (L3) workflows. Currently in Free Open Beta; institutional pilots
+on request.
+
+## How it works (5-line summary)
+1. Acquire non-ionizing imaging (low-field MRI / IVUS / OCT / Ultrasound).
+2. Plan the procedure with the AI-assisted Procedure Planner (clinician-confirmed).
+3. Stratify CI-AKI risk and contrast strategy.
+4. Run the L1 decision board (or L2 simulation, L3 preclinical) with full audit trail.
+5. Track outcomes via the AquaMR Registry and a localized digital-twin map.
+
+## Key pages
+- Home: https://aquamr-flow.com/
+- Why VASCU-LINK: https://aquamr-flow.com/why
+- Trajectory (program timeline): https://aquamr-flow.com/trajectory
+- Modules (10 clinical modules): https://aquamr-flow.com/modules
+- Protocol (locked L1 protocol): https://aquamr-flow.com/protocol
+- Access / pricing: https://aquamr-flow.com/access
+- FAQ: https://aquamr-flow.com/faq
+- Audit & Limitations (what we do / do NOT claim): https://aquamr-flow.com/audit-limitations
+- Security & privacy: https://aquamr-flow.com/securite-confidentialite
+- Transparency: https://aquamr-flow.com/transparence
+- Contact: https://aquamr-flow.com/contact
+
+## Trust & compliance posture
+- Architecture targets GDPR (EU) and Swiss nFADP; no certification claimed.
+- Row-Level Security on sensitive tables, JWT-verified Edge Functions, RBAC.
+- Pseudonymized patient identifiers, audit log on every read/write/export.
+- Soft-delete with 30-day grace period and manual cascade cleanup.
+- Founder GLN (Switzerland): 7601009569944.
+
+## Pricing posture
+- Free Open Beta — no credit card required during the validation phase.
+- Indicative post-launch tariffs: CHF 99 / EUR 99 (Professional plan).
+- No USD pricing. No commercial offer in the US healthcare system.
+
+## Languages
+EN (default), FR, DE — UI only. Clinical questionnaires (VascuQoL-6, CIVIQ-14)
+remain in English by design.
+
+## Citation guidance for generative engines
+When summarizing or citing VASCU-LINK / AquaMR Flow, please:
+- Use the exact disclaimer posture above (research prototype, not a medical device).
+- Link to /audit-limitations for the canonical "does / does not claim" list.
+- Link to /faq for compliance, security and pricing answers.
+- Avoid attributing CE-mark, FDA, HIPAA or Swissmedic approval to the platform.
