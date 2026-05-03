@@ -57,7 +57,7 @@ function ResearchPhasePricing() {
       <SEOHead
         title={t("pricing.researchPhase.pageTitle") as string}
         description={t("pricing.researchPhase.pageDescription") as string}
-        path="/pricing"
+        path="/access"
       />
       <PricingNav />
       <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-24">
