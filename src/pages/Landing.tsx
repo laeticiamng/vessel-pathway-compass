@@ -535,6 +535,8 @@ export default function Landing() {
         </div>
       </footer>
 
+      <RegulatoryDisclaimer />
+
       {/* Scroll to top */}
       <AnimatePresence>
         {showScrollTop && (
