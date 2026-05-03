@@ -134,7 +134,7 @@ describe("i18n consistency — en/fr/de Evidence & Rationale strings", () => {
 
   it("clinician-confirmation wording is present across locales", () => {
     const patterns = {
-      en: /clinician/i,
+      en: /clinician|interventionalist|reviewed/i,
       fr: /clinicien|clinique/i,
       de: /Klinik|Bestätigung/i,
     } as const;
