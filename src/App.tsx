@@ -17,6 +17,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
 import { CookieConsent } from "./components/CookieConsent";
+import { RegulatoryDisclaimer } from "./components/RegulatoryDisclaimer";
 
 // Lazy-loaded routes
 const Pricing = lazy(() => import("./pages/Pricing"));
@@ -175,6 +176,9 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
+        {/* Global pre-MDR research-software notice — rendered on every route
+            so the disclaimer is impossible to miss (per T6 of the alignment plan). */}
+        <RegulatoryDisclaimer />
       </BrowserRouter>
         </AuthProvider>
       </TooltipProvider>
