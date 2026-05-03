@@ -16,6 +16,7 @@ import { useTranslation, type Language } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Separator } from "@/components/ui/separator";
+import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 
 export default function Auth() {
   const { session } = useAuth();
@@ -330,6 +331,7 @@ export default function Auth() {
         </Card>
         )}
       </div>
+      <RegulatoryDisclaimer />
     </div>
   );
 }

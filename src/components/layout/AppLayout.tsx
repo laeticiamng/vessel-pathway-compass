@@ -15,6 +15,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -95,6 +96,7 @@ export function AppLayout() {
           <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto neon-bg">
             <Outlet />
           </main>
+          <RegulatoryDisclaimer />
         </div>
       </div>
       <CommandPalette open={commandOpen} onOpenChange={setCommandOpen} />

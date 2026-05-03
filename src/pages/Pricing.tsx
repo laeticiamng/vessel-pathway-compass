@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
+import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 
 const planKeys = ["individual", "professional", "institution"] as const;
 
@@ -89,6 +90,7 @@ function ResearchPhasePricing() {
           </div>
         </div>
       </div>
+      <RegulatoryDisclaimer />
     </div>
   );
 }
