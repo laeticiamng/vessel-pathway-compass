@@ -10,6 +10,7 @@ import { ArrowLeft, HelpCircle } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation } from "@/i18n/context";
+import { ContentVersionBadge } from "@/components/audit/ContentVersionBadge";
 
 type FaqItem = { q: string; a: string };
 
@@ -72,6 +73,10 @@ export default function FAQ() {
             </AccordionItem>
           ))}
         </Accordion>
+
+        <div className="mt-10">
+          <ContentVersionBadge contentId="faq" />
+        </div>
 
         <section aria-labelledby="faq-next-title" className="mt-16 rounded-2xl border bg-card p-8 text-center">
           <h2 id="faq-next-title" className="text-xl font-semibold mb-3">
