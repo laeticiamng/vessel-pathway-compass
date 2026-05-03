@@ -32,6 +32,8 @@ const SecurityPrivacy = lazy(() => import("./pages/SecurityPrivacy"));
 const Protocol = lazy(() => import("./pages/Protocol"));
 const Modules = lazy(() => import("./pages/Modules"));
 const Transparency = lazy(() => import("./pages/Transparency"));
+const WhyVascuLink = lazy(() => import("./pages/WhyVascuLink"));
+const Trajectory = lazy(() => import("./pages/Trajectory"));
 const Dashboard = lazy(() => import("./pages/app/Dashboard"));
 const ProcedurePlanner = lazy(() => import("./pages/app/ProcedurePlanner"));
 const L1DecisionBoard = lazy(() => import("./pages/app/L1DecisionBoard"));
@@ -98,7 +100,10 @@ const App = () => (
         <Routes>
           {/* Public */}
           <Route path="/" element={<Landing />} />
-          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/pricing" element={<Navigate to="/access" replace />} />
+          <Route path="/access" element={<Pricing />} />
+          <Route path="/why" element={<WhyVascuLink />} />
+          <Route path="/trajectory" element={<Trajectory />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/onboarding" element={<Onboarding />} />
