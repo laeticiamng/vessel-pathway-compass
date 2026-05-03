@@ -211,8 +211,14 @@ export default function Landing() {
                 <a href="#platform-complete" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.explore")}
                 </a>
-                <Link to="/pricing" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
+                </Link>
+                <Link to="/why" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("landing.nav.why")}
+                </Link>
+                <Link to="/trajectory" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("landing.nav.trajectory")}
                 </Link>
                 <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
