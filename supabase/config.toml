@@ -1,31 +1,35 @@
 project_id = "julrbfxpmrysodtnvizb"
 
 [functions.ai-clinical-assistant]
-verify_jwt = false
+verify_jwt = true
 
 [functions.check-subscription]
-verify_jwt = false
+verify_jwt = true
 
 [functions.cleanup-deleted-patients]
+# Triggered by cron with CRON_SECRET — no user JWT available.
 verify_jwt = false
 
 [functions.contact-form]
+# Public marketing form — anonymous visitors must be able to submit.
 verify_jwt = false
 
 [functions.create-checkout]
-verify_jwt = false
+verify_jwt = true
 
 [functions.customer-portal]
-verify_jwt = false
+verify_jwt = true
 
 [functions.stripe-webhook]
+# Called by Stripe servers; signature is verified inside the function.
 verify_jwt = false
 
 [functions.verify-checkout-session]
-verify_jwt = false
+verify_jwt = true
 
 [functions.export-user-data]
-verify_jwt = false
+verify_jwt = true
 
 [functions.lifecycle-enforcer]
+# Triggered by cron with CRON_SECRET — no user JWT available.
 verify_jwt = false
