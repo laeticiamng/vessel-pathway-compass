@@ -491,7 +491,7 @@ export const de = {
       limitsLinkTitle: "Grenzen & klinische Bestätigung",
       limitsLinkDesc: "Ausgaben sind Entscheidungsunterstützung innerhalb eines genehmigten Forschungsprotokolls — VASCU-LINK ist kein CE-zertifiziertes Medizinprodukt. Prüfen Sie die Grenzen der Plattform vor dem Handeln.",
       openAuditLimits: "Audit & Grenzen öffnen",
-      openComplianceFaq: "„Was wir NICHT beanspruchen" lesen",
+      openComplianceFaq: "„Was wir NICHT beanspruchen“ lesen",
       copyEHR: "In KIS kopieren",
       copied: "Kopiert",
       copiedDesc: "Plan als Klartext kopiert (KIS-Format)",
