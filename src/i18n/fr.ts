@@ -225,7 +225,7 @@ export const fr = {
         },
         privacy: {
           title: "Confidentialité d'abord",
-          desc: "Données pseudonymisées, traçabilité complète et conformité RGPD, HIPAA et nLPD suisse dès le premier jour.",
+          desc: "Données pseudonymisées, traçabilité complète et architecture conçue pour viser RGPD et nLPD suisse dès le premier jour (aucune certification revendiquée).",
         },
         community: {
           title: "Communauté en croissance",

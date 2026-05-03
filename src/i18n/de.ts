@@ -225,7 +225,7 @@ export const de = {
         },
         privacy: {
           title: "Datenschutz zuerst",
-          desc: "Pseudonymisierte Daten, vollständige Audit-Trails und DSGVO-, HIPAA- und nDSG-Konformität von Tag eins.",
+          desc: "Pseudonymisierte Daten, vollständige Audit-Trails und eine Architektur, die DSGVO und Schweizer nDSG von Tag eins anvisiert (keine Zertifizierung beansprucht).",
         },
         community: {
           title: "Wachsende Gemeinschaft",

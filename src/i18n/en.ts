@@ -230,7 +230,7 @@ export const en = {
         },
         privacy: {
           title: "Privacy First",
-          desc: "Pseudonymized data, full audit trails, and compliance with GDPR, HIPAA and Swiss nFADP from day one.",
+          desc: "Pseudonymized data, full audit trails, and an architecture designed to target GDPR and Swiss nFADP from day one (no certification claimed).",
         },
         community: {
           title: "Growing Community",
