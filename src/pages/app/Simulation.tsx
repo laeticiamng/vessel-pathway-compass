@@ -16,6 +16,7 @@ import { FlaskConical, Play, Timer, Pencil, Plus, Trophy, Clock, CheckCircle2, X
 import { SEOHead } from "@/components/SEOHead";
 import { toast } from "sonner";
 import SimulationRunner from "@/components/simulation/SimulationRunner";
+import { ResearchPreviewBadge } from "@/components/ResearchPreviewBadge";
 
 interface Simulation {
   id: string;
@@ -169,9 +170,10 @@ export default function Simulation() {
       <SEOHead title={t("seo.simulation.title") as string} description={t("seo.simulation.description") as string} path="/app/simulation" noindex />
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3 flex-wrap">
             <FlaskConical className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
             {t("simulation.title")}
+            <ResearchPreviewBadge stage="research-preview" />
           </h1>
           <p className="text-muted-foreground mt-1">{t("simulation.subtitle")}</p>
         </div>
