@@ -11,6 +11,7 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation } from "@/i18n/context";
 import { ContentVersionBadge } from "@/components/audit/ContentVersionBadge";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, graphJsonLd } from "@/lib/seo/schemas";
 
 type FaqItem = { q: string; a: string };
 
@@ -18,15 +19,26 @@ export default function FAQ() {
   const { t } = useTranslation();
   const faqs = (t("pages.faq.items") as unknown as FaqItem[]) ?? [];
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
+  const faqJsonLd = graphJsonLd([
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "FAQ", path: "/faq" },
+    ]),
+    medicalWebPageJsonLd({
+      name: "FAQ — VASCU-LINK",
+      description: "Frequently asked questions about the VASCU-LINK research prototype.",
+      path: "/faq",
+    }),
+  ]);
 
   return (
     <div className="min-h-screen bg-background">
