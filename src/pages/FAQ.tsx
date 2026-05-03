@@ -10,6 +10,7 @@ import { ArrowLeft, HelpCircle } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation } from "@/i18n/context";
+import { ContentVersionBadge } from "@/components/audit/ContentVersionBadge";
 
 type FaqItem = { q: string; a: string };
 
