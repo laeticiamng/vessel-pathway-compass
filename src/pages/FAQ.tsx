@@ -74,6 +74,10 @@ export default function FAQ() {
           ))}
         </Accordion>
 
+        <div className="mt-10">
+          <ContentVersionBadge contentId="faq" />
+        </div>
+
         <section aria-labelledby="faq-next-title" className="mt-16 rounded-2xl border bg-card p-8 text-center">
           <h2 id="faq-next-title" className="text-xl font-semibold mb-3">
             {t("pages.faq.cantFindTitle")}
