@@ -482,9 +482,11 @@ export default function Landing() {
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
                 <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
-                <Link to="/pricing" className="hover:text-foreground transition-colors">
+                <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="hover:text-foreground transition-colors">
                   {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
                 </Link>
+                <Link to="/why" className="hover:text-foreground transition-colors">{t("landing.nav.why")}</Link>
+                <Link to="/trajectory" className="hover:text-foreground transition-colors">{t("landing.nav.trajectory")}</Link>
                 <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
                 <Link to="/contact" className="hover:text-foreground transition-colors">{t("contactPage.title")}</Link>
