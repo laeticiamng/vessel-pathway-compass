@@ -1222,6 +1222,7 @@ export const en = {
       title1: "VASCU-LINK",
       title2: "Rebuilding angiographic function with the 4-zero protocol",
       subtitle: "Complete platform: 10 clinical modules, locked L1 protocol, 3 languages, targeted MDR/GDPR compliance and green radiology. Planning, multimodal imaging, CI-AKI, digital twin, simulation and registry — in a single cockpit.",
+      translationalAmbition: "Testing whether part of the angiographic function — mapping, deciding, planning, guiding, treating — can be progressively reconstructed in 4-zero.",
       ctaPrimary: "Create a free account",
       ctaSecondary: "See how it works",
       perkNoCard: "No credit card required",
