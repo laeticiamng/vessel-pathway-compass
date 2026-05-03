@@ -17,6 +17,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
 import { CookieConsent } from "./components/CookieConsent";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 
 // Lazy-loaded routes
 const Pricing = lazy(() => import("./pages/Pricing"));
@@ -88,6 +89,7 @@ function LazyFallback() {
 }
 
 const App = () => (
+  <ErrorBoundary>
   <LanguageProvider>
   <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="aquamr-flow-theme">
     <HighContrastProvider>
@@ -124,7 +126,7 @@ const App = () => (
           <Route path="/transparency" element={<Navigate to="/transparence" replace />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
-          <Route path="/dev/hero-neon" element={<HeroNeonQa />} />
+          {!import.meta.env.PROD && <Route path="/dev/hero-neon" element={<HeroNeonQa />} />}
 
           {/* Semi-public: visible with content gate */}
           <Route path="/app" element={<PublicAppRoute />}>
@@ -193,6 +195,7 @@ const App = () => (
     </HighContrastProvider>
   </ThemeProvider>
   </LanguageProvider>
+  </ErrorBoundary>
 );
 
 export default App;

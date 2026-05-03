@@ -1,67 +1,82 @@
-import { Component, ErrorInfo, ReactNode } from "react";
-import { Button } from "@/components/ui/button";
-import { AlertTriangle } from "lucide-react";
+import { Component, type ReactNode } from "react";
+
+/**
+ * Global ErrorBoundary — last-line defense against a runtime crash in any
+ * lazy-loaded route taking down the whole shell.
+ *
+ * Intentionally minimal: we don't want this file to depend on Tailwind classes
+ * or i18n, because if those are the source of the crash the boundary itself
+ * would also fail.
+ */
+interface State {
+  error: Error | null;
+}
 
 interface Props {
   children: ReactNode;
 }
 
-interface State {
-  hasError: boolean;
-  error: Error | null;
-}
-
 export class ErrorBoundary extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = { hasError: false, error: null };
-  }
+  state: State = { error: null };
 
   static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+    return { error };
   }
 
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error("[ErrorBoundary] Uncaught error:", error, errorInfo);
+  componentDidCatch(error: Error, info: unknown) {
+    // Logged here so it surfaces in the browser console + any future Sentry hook.
+    // eslint-disable-next-line no-console
+    console.error("[ErrorBoundary] Captured runtime error:", error, info);
   }
 
-  handleReset = () => {
-    this.setState({ hasError: false, error: null });
-    window.location.href = "/";
+  private handleReload = () => {
+    this.setState({ error: null });
+    if (typeof window !== "undefined") window.location.assign("/");
   };
 
   render() {
-    if (this.state.hasError) {
+    if (this.state.error) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-background p-6">
-          <div className="text-center max-w-md space-y-4">
-            <div className="mx-auto w-12 h-12 rounded-full bg-destructive/10 flex items-center justify-center">
-              <AlertTriangle className="h-6 w-6 text-destructive" />
-            </div>
-            <h1 className="text-xl font-semibold">Something went wrong / Une erreur est survenue / Ein Fehler ist aufgetreten</h1>
-            <p className="text-muted-foreground text-sm">
-              An unexpected error occurred. Please try refreshing the page or return to the home page.
-              <br />
-              Une erreur inattendue s'est produite. Veuillez rafraîchir la page ou retourner à l'accueil.
-              <br />
-              Ein unerwarteter Fehler ist aufgetreten. Bitte laden Sie die Seite neu oder kehren Sie zur Startseite zurück.
+        <div
+          role="alert"
+          style={{
+            minHeight: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "2rem",
+            fontFamily: "system-ui, sans-serif",
+            background: "hsl(210 40% 98%)",
+            color: "hsl(222 47% 11%)",
+          }}
+        >
+          <div style={{ maxWidth: 480, textAlign: "center" }}>
+            <h1 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12 }}>
+              Something went wrong.
+            </h1>
+            <p style={{ fontSize: 14, opacity: 0.8, marginBottom: 24 }}>
+              The application hit an unexpected error. Returning to the home page usually
+              fixes it. If the problem persists, please contact support.
             </p>
-            {process.env.NODE_ENV === "development" && this.state.error && (
-              <pre className="text-xs text-left bg-muted p-3 rounded-lg overflow-auto max-h-32 text-destructive">
-                {this.state.error.message}
-              </pre>
-            )}
-            <div className="flex gap-3 justify-center">
-              <Button variant="outline" onClick={() => window.location.reload()}>
-                Refresh / Actualiser / Aktualisieren
-              </Button>
-              <Button onClick={this.handleReset}>Home / Accueil / Startseite</Button>
-            </div>
+            <button
+              type="button"
+              onClick={this.handleReload}
+              style={{
+                background: "hsl(210 80% 45%)",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: 8,
+                border: 0,
+                cursor: "pointer",
+                fontWeight: 600,
+              }}
+            >
+              Return to home
+            </button>
           </div>
         </div>
       );
     }
-
     return this.props.children;
   }
 }
