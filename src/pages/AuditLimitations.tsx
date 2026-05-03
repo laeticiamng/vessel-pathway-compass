@@ -178,6 +178,12 @@ export default function AuditLimitations() {
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
             {c.intro}
           </p>
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+            <AuditLimitationsPdfButton content={c} />
+          </div>
+          <div className="mt-6 max-w-2xl mx-auto text-left">
+            <ContentVersionBadge contentId="audit-limitations" />
+          </div>
         </header>
 
         <div className="grid gap-6 md:grid-cols-2">
