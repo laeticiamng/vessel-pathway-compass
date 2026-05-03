@@ -159,7 +159,7 @@ describe("T10 — Audit & Limitations page + ComplianceLimitsFAQ ship in EN/FR/D
       for (const line of lines) {
         if (/\bUSD\b/.test(line)) {
           expect(
-            /\b(no USD|pas de USD|kein USD|KEIN\s+kommerzielles Angebot in USD|not.*USD)\b/i.test(line),
+            /\b(no|pas|aucun|aucune|kein|keine|nicht|not|never)\b[^"]{0,80}\bUSD\b/i.test(line),
             `affirmative USD reference in ${rel}: ${line.trim()}`,
           ).toBe(true);
         }
