@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, graphJsonLd } from "@/lib/seo/schemas";
 import { useTranslation, type Language } from "@/i18n/context";
 import { motion } from "framer-motion";
 import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
@@ -501,24 +502,26 @@ export default function Transparency() {
   const { language, t } = useTranslation();
   const c = CONTENT[language] ?? CONTENT.en;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    name: c.seoTitle,
-    description: c.seoDescription,
-    inLanguage: language,
-    url: "https://aquamr-flow.com/transparence",
-    isPartOf: {
-      "@type": "WebSite",
-      name: "AquaMR Flow",
-      url: "https://aquamr-flow.com",
-    },
-  };
+  const jsonLd = graphJsonLd([
+    medicalWebPageJsonLd({
+      name: c.seoTitle,
+      description: c.seoDescription,
+      path: "/transparence",
+    }),
+    breadcrumbJsonLd([
+      { name: "Home", path: "/" },
+      { name: "Transparency", path: "/transparence" },
+    ]),
+  ]);
 
   return (
     <div className="min-h-screen bg-background">
-      <SEOHead title={c.seoTitle} description={c.seoDescription} path="/transparence" />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <SEOHead
+        title={c.seoTitle}
+        description={c.seoDescription}
+        path="/transparence"
+        jsonLd={jsonLd}
+      />
 
       <header className="border-b">
         <nav

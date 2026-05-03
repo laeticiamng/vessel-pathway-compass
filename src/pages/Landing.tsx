@@ -24,6 +24,7 @@ import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
+import { organizationJsonLd, founderPersonJsonLd, breadcrumbJsonLd } from "@/lib/seo/schemas";
 import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
 
 /* -------------------------------------------------------------------------
@@ -138,6 +139,9 @@ export default function Landing() {
         description:
           "VASCU-LINK reconstruit la fonction angiographique en 4-zéro : 0 mSv, 0 contraste, 0 hélium. Plateforme AquaMR Flow pour la cartographie pré-revascularisation, la décision clinique et le guidage préclinique. Intègre le dispositif d'imagerie bas champ AquaMR.",
       },
+      organizationJsonLd,
+      founderPersonJsonLd,
+      breadcrumbJsonLd([{ name: "Home", path: "/" }]),
       homeFaqJsonLd,
       complianceFaqJsonLd,
     ],
