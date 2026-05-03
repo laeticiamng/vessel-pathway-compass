@@ -255,6 +255,8 @@ export default function Landing() {
       </nav>
       </header>
 
+      <FourZeroBanner />
+
       <main id="main-content">
       {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
@@ -289,8 +291,11 @@ export default function Landing() {
               <span className="mx-2 text-on-hero/60" aria-hidden="true">·</span>
               <span>{t("home.hero.title2")}</span>
             </p>
-            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-4 leading-relaxed">
               {t("home.hero.subtitle")}
+            </p>
+            <p className="text-sm md:text-base text-on-hero-soft/90 max-w-2xl mx-auto mb-10 italic leading-relaxed">
+              {t("home.hero.translationalAmbition")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
