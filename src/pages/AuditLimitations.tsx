@@ -8,6 +8,8 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { AuditLimitationsPdfButton } from "@/components/audit/AuditLimitationsPdfButton";
 import { ContentVersionBadge } from "@/components/audit/ContentVersionBadge";
 import { ChangelogExportButton } from "@/components/audit/ChangelogExportButton";
+import { breadcrumbJsonLd, medicalWebPageJsonLd, graphJsonLd } from "@/lib/seo/schemas";
+import { getContentVersion } from "@/lib/contentVersions";
 
 /* ============================================================================
  * /audit-limitations — single source of truth for what VASCU-LINK does and
