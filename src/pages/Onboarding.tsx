@@ -29,6 +29,7 @@ import {
   SkipForward,
 } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
+import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 
 const ROLES = ["physician", "trainee", "expert_reviewer", "hospital_admin", "research_lead"] as const;
 const SPECIALTIES = [
@@ -327,6 +328,7 @@ export default function Onboarding() {
             )}
           </div>
         </div>
+        <RegulatoryDisclaimer variant="compact" className="mt-4" />
       </div>
     </div>
   );
