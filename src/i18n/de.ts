@@ -197,7 +197,7 @@ export const de = {
       items: [
         { q: "Was ist AquaMR Flow?", a: "AquaMR Flow ist eine All-in-One-Plattform für Gefäßmedizin. Sie vereint Patientenmanagement, KI-gestützte Berichte, Ergebnisverfolgung, Fortbildung, Simulation und Expertennetzwerk in einem Tool." },
         { q: "Für wen ist es gedacht?", a: "Gefäßchirurgen, Angiologen, interventionelle Radiologen, Assistenzärzte und Krankenhausabteilungen der Gefäßmedizin." },
-        { q: "Was kostet es?", a: "Während der kostenlosen Beta sind alle Funktionen ohne Kosten verfügbar. Nach dem Launch: kostenloser Einzelplan, Professional-Plan für 99 $/Monat und individuelle Institutionspreise." },
+        { q: "Was kostet es?", a: "VASCU-LINK befindet sich in der akademischen Validierungsphase. Während dieser Phase gibt es keinen öffentlichen kommerziellen Tarif. Für institutionellen Zugang, klinische Partnerschaften oder Pilotbewertungen wenden Sie sich an das Team." },
         { q: "Ist es ein Medizinprodukt?", a: "Nein. AquaMR Flow ist ein klinisches Dokumentations- und Workflow-Tool. Kein zertifiziertes Medizinprodukt. Alle KI-Ausgaben erfordern Ihre Überprüfung." },
         { q: "Sind meine Daten sicher?", a: "Ja. Alle Daten werden verschlüsselt, pseudonymisiert und mit vollständigen Audit-Trails gespeichert. Die Plattform ist auf DSGVO, HIPAA und Schweizer nDSG ausgelegt." },
         { q: "Kann mein Team es nutzen?", a: "Auf jeden Fall. Der Institutionsplan unterstützt Teams mit gemeinsamen Registern, Analysen und rollenbasierten Berechtigungen." },
