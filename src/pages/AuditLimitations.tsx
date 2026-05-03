@@ -7,6 +7,7 @@ import { ComplianceLimitsFAQ } from "@/components/landing/ComplianceLimitsFAQ";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { AuditLimitationsPdfButton } from "@/components/audit/AuditLimitationsPdfButton";
 import { ContentVersionBadge } from "@/components/audit/ContentVersionBadge";
+import { ChangelogExportButton } from "@/components/audit/ChangelogExportButton";
 
 /* ============================================================================
  * /audit-limitations — single source of truth for what VASCU-LINK does and
@@ -180,6 +181,7 @@ export default function AuditLimitations() {
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
             <AuditLimitationsPdfButton content={c} />
+            <ChangelogExportButton contentId="audit-limitations" />
           </div>
           <div className="mt-6 max-w-2xl mx-auto text-left">
             <ContentVersionBadge contentId="audit-limitations" />
