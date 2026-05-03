@@ -69,6 +69,9 @@ const LimitsSection = lazy(() =>
 const AntiOverpromiseSection = lazy(() =>
   import("@/components/landing/AntiOverpromiseSection").then((m) => ({ default: m.AntiOverpromiseSection }))
 );
+const ComplianceLimitsFAQ = lazy(() =>
+  import("@/components/landing/ComplianceLimitsFAQ").then((m) => ({ default: m.ComplianceLimitsFAQ }))
+);
 const AboutSection = lazy(() =>
   import("@/components/landing/AboutSection").then((m) => ({ default: m.AboutSection }))
 );
@@ -392,6 +395,9 @@ export default function Landing() {
 
         {/* Anti-overpromise — what the platform does NOT claim to do */}
         <AntiOverpromiseSection />
+
+        {/* Compliance-ready FAQ — limits & honesty (T10) */}
+        <ComplianceLimitsFAQ />
 
         {/* Trust */}
         <section className="py-24 bg-muted/40">
