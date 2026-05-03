@@ -112,8 +112,6 @@ export const fr = {
   landing: {
     nav: {
       pricing: "Tarifs",
-    nav: {
-      pricing: "Tarifs",
       access: "Accès",
       signIn: "Se connecter",
       explore: "Fonctionnalités",
