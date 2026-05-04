@@ -1696,7 +1696,7 @@ export const de = {
         { q: "Ist AquaMR Flow ein Medizinprodukt?", a: "Nein. Es ist ein Entscheidungsunterstützungstool. Alle KI-Ausgaben erfordern eine ärztliche Überprüfung." },
         { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
         { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
-        { q: "Was passiert während der kostenlosen Beta?", a: "Während der Beta sind alle Funktionen kostenlos verfügbar. Wir informieren Sie bevor eine Abrechnung beginnt." },
+        { q: "Was passiert während der akademischen Validierungsphase?", a: "Während der Validierungsphase erfolgt der Modulzugang im Rahmen des Forschungsprotokolls ohne Abrechnung. Die Bedingungen nach der Validierung werden vor jeder Änderung kommuniziert." },
         { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie contact@emotionscare.com. Löschung innerhalb von 30 Tagen." },
       ],
     },
