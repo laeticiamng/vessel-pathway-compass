@@ -2001,6 +2001,18 @@ export type Database = {
         Args: { _reason: string; _target_user_id: string }
         Returns: Json
       }
+      get_ai_audit_evidence_history: {
+        Args: { _evidence_id: string }
+        Returns: {
+          confirmed_at: string
+          evidence_id: string
+          evidence_version: string
+          id: string
+          is_self: boolean
+          note: string
+          user_display_name: string
+        }[]
+      }
       get_quiz_for_learner: { Args: { _quiz_id: string }; Returns: Json }
       has_role: {
         Args: {
