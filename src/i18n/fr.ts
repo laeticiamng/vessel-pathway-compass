@@ -1789,6 +1789,8 @@ export const fr = {
       decisionAdr: "15 ADR documentés · architecture conçue pour viser conformité MDR / RGPD / IEC 62304 (non certifiée à ce stade)",
       decisionMigration: "Migration prévue vers hébergement clinique HDS (UE/CH) · DSMB indépendant & Comité d'accès aux données",
       followUpLoop: "Suivi longitudinal → nouvelle cartographie si évolution clinique",
+      feedbackLoopTitle: "Boucle de rétroaction · Décision → suivi longitudinal L1",
+      feedbackLoopDesc: "Chaque décision clinique alimente un cycle de re-cartographie : toute évolution (aggravation des symptômes, chute de l'IPS, post-revascularisation) repasse en L1 pour une carte AquaMR actualisée et une lecture du risque mise à jour.",
       l2Title: "L2 — GUIDE : faisabilité en simulation",
       l2Badge: "Extension conditionnelle",
       l2Caption: "Fantôme / modèle simulé · acceptabilité & utilisabilité mesurées (M42)",
