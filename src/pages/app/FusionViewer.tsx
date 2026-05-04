@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ResearchPreviewBadge } from "@/components/ResearchPreviewBadge";
+import { AIAuditCard } from "@/components/AIAuditCard";
 
 export default function FusionViewer() {
   const { t } = useTranslation();
@@ -99,6 +100,8 @@ export default function FusionViewer() {
           </p>
         </div>
       </div>
+
+      <AIAuditCard />
 
       <ScientificSafetyBox />
 
