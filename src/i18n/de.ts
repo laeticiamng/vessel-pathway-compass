@@ -275,23 +275,23 @@ export const de = {
     },
     plans: {
       individual: {
-        name: "Einzelperson",
-        price: "Kostenlos",
-        period: "für immer",
-        desc: "Für einzelne Ärzte, die die Plattform erkunden",
+        name: "Einzel-Prüfarzt",
+        price: "Kontrollierter Zugang",
+        period: "Validierungsphase",
+        desc: "Für einzelne Kliniker, die dem Forschungsprotokoll beitreten",
         features: [
-          "Klinischer KI-Assistent (begrenzt)",
+          "Klinischer KI-Assistent (kontrolliert)",
           "5 Patientenfälle",
           "Zugang zum AquaMR Academy",
           "Zugang zum Community-Forum",
         ],
-        cta: "Kostenlos starten",
+        cta: "Protokoll beitreten",
       },
       professional: {
-        name: "Professionell",
+        name: "Klinischer Prüfarzt",
         price: "CHF 99 / 99 €",
-        period: "/Monat (indikativ nach dem Launch)",
-        desc: "Für praktizierende Gefäßmediziner",
+        period: "/Monat (indikativ, nach Validierung)",
+        desc: "Für Gefäßmediziner, die an der Validierungsphase beteiligt sind",
         features: [
           "Unbegrenzter KI-Assistent",
           "Unbegrenzte Patientenfälle",
@@ -301,7 +301,7 @@ export const de = {
           "Zugang zum Simulationslabor",
           "Expertenkonsultationen (5/Monat)",
         ],
-        cta: "Kostenloser Beta-Zugang",
+        cta: "Prüfärzte-Zugang anfragen",
       },
       institution: {
         name: "Einrichtung",
