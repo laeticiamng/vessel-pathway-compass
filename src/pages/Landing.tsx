@@ -174,20 +174,17 @@ export default function Landing() {
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
+            <Link to="/protocol" className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
+              {t("home.footerNav.protocol")}
+            </Link>
             <a href="#platform-complete" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.explore")}
             </a>
-            <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
-            </Link>
             <Link to="/why" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.why")}
             </Link>
             <Link to="/trajectory" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.trajectory")}
-            </Link>
-            <Link to="/protocol" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {t("home.footerNav.protocol")}
             </Link>
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.signIn")}
