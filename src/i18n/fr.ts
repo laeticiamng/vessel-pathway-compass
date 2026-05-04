@@ -1329,7 +1329,7 @@ export const fr = {
       items: [
         {
           q: "Que signifie « pas d'approbation réglementaire » pour AquaMR Flow ?",
-          a: "AquaMR Flow est un prototype de recherche en bêta ouverte. Il n'est ni marqué CE comme dispositif médical, ni autorisé par la FDA, ni homologué Swissmedic.\n\nConcrètement :\n• Il n'établit pas de diagnostic et ne prescrit pas de traitement.\n• Toute aide à la décision (CI-AKI, planning, jumeau numérique) doit être confirmée par un clinicien qualifié, qui reste seul responsable de l'acte médical.\n• Les usages cliniques s'inscrivent dans un cadre de recherche, de formation ou d'aide à l'organisation des workflows.\n\nL'architecture est conçue pour viser à terme la conformité MDR / RGPD / IEC 62304, mais cet objectif n'est pas atteint à ce stade.",
+          a: "AquaMR Flow est un prototype de recherche en phase de validation académique. Il n'est ni marqué CE comme dispositif médical, ni autorisé par la FDA, ni homologué Swissmedic.\n\nConcrètement :\n• Il n'établit pas de diagnostic et ne prescrit pas de traitement.\n• Toute aide à la décision (CI-AKI, planning, jumeau numérique) doit être confirmée par un clinicien qualifié, qui reste seul responsable de l'acte médical.\n• Les usages cliniques s'inscrivent dans un cadre de recherche, de formation ou d'aide à l'organisation des workflows.\n\nL'architecture est conçue pour viser à terme la conformité MDR / RGPD / IEC 62304, mais cet objectif n'est pas atteint à ce stade.",
         },
         {
           q: "Comment l'auditabilité est-elle assurée ?",
@@ -1385,7 +1385,7 @@ export const fr = {
     whatsNew: {
       badge: "Nouveautés",
       title: "Journal des évolutions",
-      subtitle: "Améliorations récentes, nouveaux modules et renforcements de sécurité livrés pendant la bêta ouverte.",
+      subtitle: "Améliorations récentes, nouveaux modules et renforcements de sécurité livrés pendant la phase de validation académique.",
       cta: "Voir les 10 modules en détail",
       tagLabels: {
         new: "Nouveau",
@@ -2551,7 +2551,7 @@ export const fr = {
         traceability: { title: "Traçabilité", desc: "Les opérations sensibles (lecture PHI, export, suppression) font l'objet d'un journal d'audit immuable consultable par les administrateurs." },
       },
       scopeTitle: "Périmètre du prototype",
-      scopeP1: "AquaMR Flow est aujourd'hui un prototype de recherche en bêta ouverte. Les fonctionnalités, le périmètre exact des traitements et les engagements opérationnels sont susceptibles d'évoluer.",
+      scopeP1: "AquaMR Flow est aujourd'hui un prototype de recherche en phase de validation académique. Les fonctionnalités, le périmètre exact des traitements et les engagements opérationnels sont susceptibles d'évoluer.",
       scopeP2: "Pour toute information précise sur le traitement des données, le responsable de traitement et les droits associés (accès, rectification, effacement, portabilité), se référer aux mentions légales et à la politique de confidentialité.",
       nextTitle: "Pour aller plus loin",
       nextDesc: "Consulter les pages dédiées ou contacter l'équipe pour toute question.",

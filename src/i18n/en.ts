@@ -196,7 +196,7 @@ export const en = {
       ],
     },
     // Note: socialProof + testimonials sections were removed from the landing page
-    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // (the project rule forbids fake/anonymous social proof during the academic validation phase).
     // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Frequently Asked Questions",
@@ -1349,7 +1349,7 @@ export const en = {
       items: [
         {
           q: "What does \"no regulatory approval\" mean for AquaMR Flow?",
-          a: "AquaMR Flow is a research prototype in open beta. It is not CE-marked as a medical device, not FDA-cleared and not Swissmedic-approved.\n\nIn practice:\n• It does not establish a diagnosis and does not prescribe a treatment.\n• Any decision support (CI-AKI, planning, digital twin) must be confirmed by a qualified clinician, who remains solely responsible for the medical act.\n• Clinical use takes place within a research, training or workflow-organization framework.\n\nThe architecture is designed to eventually target MDR / GDPR / IEC 62304 compliance, but this objective is not achieved at this stage.",
+          a: "AquaMR Flow is a research prototype in academic validation phase. It is not CE-marked as a medical device, not FDA-cleared and not Swissmedic-approved.\n\nIn practice:\n• It does not establish a diagnosis and does not prescribe a treatment.\n• Any decision support (CI-AKI, planning, digital twin) must be confirmed by a qualified clinician, who remains solely responsible for the medical act.\n• Clinical use takes place within a research, training or workflow-organization framework.\n\nThe architecture is designed to eventually target MDR / GDPR / IEC 62304 compliance, but this objective is not achieved at this stage.",
         },
         {
           q: "How is auditability ensured?",
