@@ -100,6 +100,9 @@ export default function FusionViewer() {
         </div>
       </div>
 
+      <AIAuditCard />
+      </div>
+
       <ScientificSafetyBox />
 
       <div className="grid sm:grid-cols-3 gap-4">

@@ -13,6 +13,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import VascularMap, { VASCULAR_SEGMENTS } from "@/components/digital-twin/VascularMap";
 import SegmentDetail from "@/components/digital-twin/SegmentDetail";
+import { ProbastBadge } from "@/components/ProbastBadge";
 
 export default function DigitalTwin() {
   const { t } = useTranslation();
@@ -137,11 +138,12 @@ export default function DigitalTwin() {
     <div className="space-y-6 max-w-6xl">
       <SEOHead title={t("seo.digitalTwin.title") as string} description={t("seo.digitalTwin.description") as string} path="/app/digital-twin" noindex />
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
+        <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3 flex-wrap">
           <HeartPulse className="h-6 w-6 sm:h-8 sm:w-8 text-primary shrink-0" />
           {t("digitalTwin.title")}
         </h1>
         <p className="text-muted-foreground mt-1">{t("digitalTwin.subtitle")}</p>
+        <div className="mt-3"><ProbastBadge /></div>
       </div>
 
       {/* Patient selector */}
