@@ -239,9 +239,9 @@ export const en = {
       },
     },
     cta: {
-      title: "Ready to Transform Your Vascular Workflow?",
-      subtitle: "Join interventional specialists exploring non-ionizing, contrast-sparing approaches — free during prototype phase.",
-      button: "Create Free Account",
+      title: "Read the research protocol",
+      subtitle: "The full L1 protocol, the statistical analysis plan and the compliance annexes are available to scientific committees, juries and academic partners.",
+      button: "Open the protocol",
     },
     footer: {
       tagline: "The non-ionizing vascular workflow platform for interventional specialists.",
