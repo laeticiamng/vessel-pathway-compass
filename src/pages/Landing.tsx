@@ -21,6 +21,7 @@ import { MedRegBadge } from "@/components/MedRegBadge";
 import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
+import { HomeIntroVideoSection } from "@/components/landing/HomeIntroVideoSection";
 import { ComplianceBanner } from "@/components/ComplianceBanner";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
