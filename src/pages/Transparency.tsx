@@ -75,7 +75,7 @@ const CONTENT: Record<Language, Content> = {
     seoDescription:
       "Ce qui est disponible en prototype, ce qui est structurellement limité, et comment vérifier chaque affirmation. Beta ouverte, traçabilité par défaut.",
     hero: {
-      eyebrow: "Open Beta — sans dispositif médical certifié",
+      eyebrow: "Phase de validation académique — sans dispositif médical certifié",
       title: "Transparence & Gouvernance",
       subtitle:
         "Nous publions ici, sans embellissement, ce que la plateforme fait réellement aujourd'hui, ce qu'elle ne fait pas, et où vous pouvez vérifier par vous-même.",
@@ -217,7 +217,7 @@ const CONTENT: Record<Language, Content> = {
     seoDescription:
       "What the prototype actually ships today, what is structurally out of scope, and how to verify every claim. Open beta, audit by default.",
     hero: {
-      eyebrow: "Open Beta — not a certified medical device",
+      eyebrow: "Academic validation phase — not a certified medical device",
       title: "Transparency & Governance",
       subtitle:
         "We publish here, without polish, what the platform really does today, what it does not, and where you can check for yourself.",
@@ -358,7 +358,7 @@ const CONTENT: Record<Language, Content> = {
     seoDescription:
       "Was der Prototyp heute liefert, was strukturell ausgeschlossen ist und wie Sie jede Aussage überprüfen. Offene Beta, Audit standardmässig.",
     hero: {
-      eyebrow: "Offene Beta — kein zertifiziertes Medizinprodukt",
+      eyebrow: "Akademische Validierungsphase — kein zertifiziertes Medizinprodukt",
       title: "Transparenz & Governance",
       subtitle:
         "Wir veröffentlichen hier ohne Schönfärbung, was die Plattform heute wirklich tut, was nicht, und wo Sie es selbst überprüfen können.",
