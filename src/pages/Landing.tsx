@@ -205,8 +205,8 @@ export default function Landing() {
               </DropdownMenuContent>
             </DropdownMenu>
             <ThemeToggle />
-            <Button asChild size="sm" className="shadow-md">
-              <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
+            <Button asChild size="sm" variant="outline" className="shadow-sm">
+              <Link to="/protocol">{t("home.footerNav.protocol")}</Link>
             </Button>
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
