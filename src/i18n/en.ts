@@ -2629,8 +2629,8 @@ export const en = {
   seo: {
     // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
-      title: "Pricing — AquaMR Flow Plans",
-      description: "Compare VASCU-LINK access tiers: Free Individual, Professional (CHF 99 / €99 indicative post-launch), and custom Institution access. All features free during research validation phase.",
+      title: "Institutional access — VASCU-LINK",
+      description: "Compare VASCU-LINK access tiers: individual investigator, clinical investigator and custom institutional access. All modules accessible under the research protocol during the academic validation phase.",
     },
     support: {
       title: "Support & FAQ — AquaMR Flow",
