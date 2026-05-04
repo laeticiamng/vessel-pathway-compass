@@ -127,7 +127,7 @@ export const de = {
       title: "So funktioniert's",
       subtitle: "Starten Sie in wenigen Minuten — keine Installation, kein komplexes Setup.",
       steps: [
-        { title: "Kostenloses Konto erstellen", desc: "Registrieren Sie sich in 30 Sekunden mit E-Mail oder Google. Keine Kreditkarte nötig." },
+        { title: "Prüfärzte-Konto erstellen", desc: "Registrieren Sie sich in 30 Sekunden mit E-Mail oder Google im Rahmen des Forschungsprotokolls." },
         { title: "Ersten Patienten anlegen", desc: "Erstellen Sie einen pseudonymisierten Patientenfall und beginnen Sie mit KI-gestützten Berichten." },
         { title: "Alle Module entdecken", desc: "Simulationen, Fortbildung, AquaMR Registry und Expertenkonsultationen — alles an einem Ort." },
       ],
