@@ -31,6 +31,31 @@ export interface ContentVersion {
 }
 
 export const CONTENT_VERSIONS: Record<string, ContentVersion> = {
+  protocol: {
+    id: "protocol",
+    version: "1.2.0",
+    updatedAt: "2026-05-04",
+    changelog: [
+      {
+        version: "1.2.0",
+        date: "2026-05-04",
+        summary:
+          "Added automated completeness checklist, public versioning card, role-aware access audit log and 8-question compliance-ready Q&A.",
+      },
+      {
+        version: "1.1.0",
+        date: "2026-05-03",
+        summary:
+          "Added protocol identity card (5-second jury read) and explicit safety fallback to standard imaging if AquaMR quality is insufficient.",
+      },
+      {
+        version: "1.0.0",
+        date: "2026-04-15",
+        summary:
+          "Initial publication of the L1 research protocol: objective, population, design, comparators, endpoints, statistical plan, safety triggers, limits, regulatory disclaimers.",
+      },
+    ],
+  },
   "audit-limitations": {
     id: "audit-limitations",
     version: "1.1.0",
