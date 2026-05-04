@@ -1,30 +1,32 @@
 import { Link } from "react-router-dom";
-import { Sparkles, ArrowRight } from "lucide-react";
+import { FlaskConical, ArrowRight } from "lucide-react";
 import { useTranslation, type Language } from "@/i18n/context";
 
 const COPY: Record<Language, { eyebrow: string; message: string; cta: string }> = {
   en: {
-    eyebrow: "Open beta",
-    message: "Full access to all 10 modules — free, no credit card",
-    cta: "Get started",
+    eyebrow: "Research protocol · L1",
+    message:
+      "Prospective study — diagnostic concordance AquaMR vs CT angiography in frail PAD",
+    cta: "Read the protocol",
   },
   fr: {
-    eyebrow: "Bêta ouverte",
-    message: "Accès complet aux 10 modules — gratuit, sans carte bancaire",
-    cta: "Commencer",
+    eyebrow: "Protocole de recherche · L1",
+    message:
+      "Étude prospective — concordance diagnostique AquaMR vs angio-CT en AOMI fragile",
+    cta: "Lire le protocole",
   },
   de: {
-    eyebrow: "Offene Beta",
-    message: "Voller Zugang zu allen 10 Modulen — kostenlos, ohne Kreditkarte",
-    cta: "Loslegen",
+    eyebrow: "Forschungsprotokoll · L1",
+    message:
+      "Prospektive Studie — diagnostische Konkordanz AquaMR vs CT-Angiographie bei fragiler pAVK",
+    cta: "Protokoll lesen",
   },
 };
 
 /**
- * Top announcement banner on the landing.
- * Replaces the previous jargon-heavy "4-zero" headline with a single, plain-language
- * value message + clear CTA. The "4-zero / BoM" technical signature now lives only
- * deeper on the page (FourZeroPillars) for the audience that actually understands it.
+ * Top institutional banner. Replaces the previous commercial "free, no credit card"
+ * message with the research protocol identity, so any thesis chair or scientific
+ * reviewer landing on the homepage immediately sees the academic context.
  */
 export function FourZeroBanner() {
   const { language } = useTranslation();
@@ -35,18 +37,18 @@ export function FourZeroBanner() {
       role="note"
       aria-label={copy.eyebrow}
       className="sticky top-16 z-40 w-full text-white shadow-md"
-      style={{ background: "linear-gradient(90deg, #1F8A70 0%, #196B58 100%)" }}
+      style={{ background: "linear-gradient(90deg, #0F4C81 0%, #0B3A66 100%)" }}
     >
       <div className="container mx-auto px-6 py-2 flex items-center justify-center gap-x-3 gap-y-1 text-center flex-wrap">
-        <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] bg-white/15 rounded-full px-2.5 py-0.5">
-          <Sparkles className="h-3 w-3" aria-hidden="true" />
+        <span className="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.18em] bg-white/20 rounded-full px-2.5 py-0.5">
+          <FlaskConical className="h-3 w-3" aria-hidden="true" />
           {copy.eyebrow}
         </span>
-        <span className="text-xs sm:text-sm text-white/95 font-medium">
+        <span className="text-xs sm:text-sm text-white font-medium">
           {copy.message}
         </span>
         <Link
-          to="/auth?mode=signup"
+          to="/protocol"
           className="inline-flex items-center gap-1 text-xs sm:text-sm font-semibold underline-offset-2 hover:underline"
         >
           {copy.cta}
