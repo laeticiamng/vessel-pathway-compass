@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_audit_confirmations: {
+        Row: {
+          confirmed_at: string
+          created_at: string
+          evidence_id: string
+          evidence_version: string
+          id: string
+          note: string | null
+          user_id: string
+        }
+        Insert: {
+          confirmed_at?: string
+          created_at?: string
+          evidence_id: string
+          evidence_version: string
+          id?: string
+          note?: string | null
+          user_id: string
+        }
+        Update: {
+          confirmed_at?: string
+          created_at?: string
+          evidence_id?: string
+          evidence_version?: string
+          id?: string
+          note?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       ai_outputs: {
         Row: {
           created_at: string
