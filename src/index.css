@@ -140,8 +140,8 @@
     --text-default: 210 28% 95%;       /* 16.1:1 */
     --text-secondary: 215 22% 82%;     /* 9.4:1 — was 78%, raised for body */
     --text-disclaimer: 215 22% 78%;    /* 7.5:1 — readable disclaimer */
-    --text-on-hero: 210 25% 97%;
-    --text-on-hero-soft: 210 22% 88%;
+    --text-on-hero: 0 0% 100%;
+    --text-on-hero-soft: 210 30% 94%;
     --surface-subtle: 222 45% 7%;
     --surface-raised: 222 45% 11%;
     --border-subtle: 222 30% 18%;
