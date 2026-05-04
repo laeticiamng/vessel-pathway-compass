@@ -1718,7 +1718,7 @@ export const en = {
         { q: "Is AquaMR Flow a medical device?", a: "No. AquaMR Flow is a clinical decision support tool. All AI outputs require review by a qualified clinician before clinical action." },
         { q: "How is patient data protected?", a: "All patient data is pseudonymized. We use row-level security, encryption at rest and in transit, and maintain comprehensive audit trails." },
         { q: "Can I export my data?", a: "Yes. You can export patient data, measurements, and reports in CSV and PDF formats from the relevant sections." },
-        { q: "What happens during the free beta?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
+        { q: "What happens during the academic validation phase?", a: "During the validation phase, module access is supervised by the research protocol, with no billing. Post-validation access terms will be communicated before any change." },
         { q: "How do I delete my account?", a: "Contact contact@emotionscare.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
       ],
     },
