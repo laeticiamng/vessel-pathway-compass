@@ -253,7 +253,7 @@ export const de = {
     title: "Pläne & Preise",
     betaBadge: "🎉 Beta läuft — kostenloser Zugriff auf alle Funktionen",
     betaBannerTitle: "🚀 Alle Funktionen sind während der Beta kostenlos",
-    betaBannerDesc: "Keine Kreditkarte erforderlich. Kein Zeitlimit. Entdecken Sie jedes Modul kostenlos — Preise gelten nach dem offiziellen Start.",
+    betaBannerDesc: "Akademische Validierungsphase läuft. Alle Module sind zugänglich; Preisbedingungen werden nach dem offiziellen Start festgelegt.",
     subtitle: "Vom einzelnen Arzt bis zur großen Einrichtung — finden Sie den passenden Plan für Ihre Gefäßpraxis.",
     betaNote: "Während der Beta sind kostenpflichtige Funktionen ohne Abrechnung nutzbar; die angezeigten Preise gelten zum offiziellen Start.",
     mostPopular: "Am beliebtesten",
@@ -1525,7 +1525,7 @@ export const de = {
     previewBanner: "Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
     title: "Möchten Sie dieses Modul nutzen?",
     subtitle: "Erstellen Sie in 30 Sekunden ein kostenloses Konto, um alle Funktionen zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
-    createAccount: "Kostenloses Konto erstellen — keine Kreditkarte",
+    createAccount: "Konto erstellen",
     signIn: "Ich habe bereits ein Konto",
     benefits: [
       "KI-gestützte klinische Berichte",
@@ -2590,7 +2590,7 @@ export const de = {
         usage: {
           title: "Kostenloser Plan & Kontingente (nach der Beta)",
           items: [
-            "Während der offenen Beta: Alle Funktionen sind kostenlos verfügbar, ohne Kreditkarte und ohne Kontingente — der 30-Tage-Papierkorb und das vollständige Audit-Trail sind bereits aktiv.",
+            "Während der akademischen Validierungsphase: Alle Funktionen sind ohne Kontingente verfügbar — der 30-Tage-Papierkorb und das vollständige Audit-Trail sind bereits aktiv.",
             "Nach dem offiziellen Start wird der kostenlose Plan auf 3 KI-Berichte pro Tag und 5 aktive Patientenakten begrenzt; diese Grenzen gelten heute nicht.",
             "Während der Beta erstellte Konten behalten ihre Daten und ihren Verlauf beim Übergang in die stabile Version.",
           ],

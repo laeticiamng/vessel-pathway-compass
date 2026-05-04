@@ -132,7 +132,7 @@ export const en = {
       title: "How It Works",
       subtitle: "Get started in minutes — no installation, no complex setup.",
       steps: [
-        { title: "Create Your Free Account", desc: "Sign up in 30 seconds with your email or Google account. No credit card needed." },
+        { title: "Create Your Account", desc: "Sign up in 30 seconds with your email or Google account." },
         { title: "Plan Your First Procedure", desc: "Use the Procedure Planner to select modalities and generate a contrast-sparing workflow." },
         { title: "Explore the Platform", desc: "Access the Fusion Viewer, CI-AKI Engine, Simulation Lab, Registry and Academy — all in one place." },
       ],
@@ -259,7 +259,7 @@ export const en = {
     title: "Plans & Pricing",
     betaBadge: "🎉 Beta ongoing — free access to all features",
     betaBannerTitle: "🚀 All features are free during the beta",
-    betaBannerDesc: "No credit card required. No time limit. Explore every module at no cost — pricing will apply after public launch.",
+    betaBannerDesc: "Academic validation phase in progress. All modules are accessible; pricing terms will be defined after the official launch.",
     subtitle: "From individual physicians to large institutions — find the right plan for your interventional practice.",
     betaNote: "During beta, paid features are available without billing; listed prices apply when public launch starts.",
     mostPopular: "Most Popular",
@@ -1545,7 +1545,7 @@ export const en = {
     previewBanner: "You're browsing as a guest — sign in to unlock all features",
     title: "Want to use this module?",
     subtitle: "Create a free account in 30 seconds to access all features, save your data and track your progress.",
-    createAccount: "Create Free Account — No Credit Card",
+    createAccount: "Create Account",
     signIn: "I Already Have an Account",
     benefits: [
       "AI-assisted clinical reports",
