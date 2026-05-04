@@ -200,7 +200,7 @@ export const fr = {
       items: [
         { q: "Qu'est-ce que AquaMR Flow ?", a: "AquaMR Flow est une plateforme de flux de travail vasculaire non ionisant qui combine la planification de procédure, la fusion d'imagerie multimodale, la prévention CI-AKI, la simulation clinique et un registre de recherche pour les flux de travail interventionnels d'épargne de contraste." },
         { q: "À qui s'adresse AquaMR Flow ?", a: "AquaMR Flow est conçu pour les cardiologues interventionnels, les radiologues interventionnels, les médecins vasculaires, les chercheurs cliniques et les internes en spécialités interventionnelles." },
-        { q: "Combien ça coûte ?", a: "VASCU-LINK est actuellement en validation académique : il n'existe pas d'offre commerciale. L'accès institutionnel, les partenariats cliniques et les pilotes sont négociés sur demande. La grille indicative post-lancement sera libellée en CHF / EUR (pas de facturation en USD)." },
+        { q: "Combien ça coûte ?", a: "VASCU-LINK est en validation académique : il n'existe ni offre commerciale, ni grille publique. L'accès institutionnel, les partenariats cliniques et les pilotes sont négociés au cas par cas dans le cadre encadré du protocole de recherche." },
         { q: "Êtes-vous conformes RGPD ou HIPAA ?", a: "L'architecture est conçue pour viser les exigences RGPD et nLPD suisse (chiffrement en transit et au repos, journaux d'audit, RLS, pseudonymisation). La plateforme n'est PAS certifiée à ce stade et la conformité HIPAA n'est pas revendiquée. Chaque déploiement institutionnel bénéficie d'une DPIA simplifiée avant tout pilote." },
         { q: "Est-ce un dispositif médical ?", a: "Non. AquaMR Flow est un prototype de recherche et une plateforme de flux de travail clinique. Ce n'est pas un dispositif médical certifié. Toutes les sorties d'aide à la décision nécessitent la confirmation du clinicien avant utilisation clinique." },
         { q: "Mes données sont-elles sécurisées ?", a: "Toutes les données sont chiffrées au repos et en transit. L'architecture est conçue pour viser les exigences RGPD et nLPD suisse, avec pistes d'audit et contrôle d'accès par rôle. La plateforme n'est pas encore certifiée — la posture de sécurité est documentée et partagée avec les institutions partenaires sur demande." },
@@ -269,10 +269,10 @@ export const fr = {
       disclaimer: "Pas de plan commercial public pendant la phase de validation prospective.",
     },
     currency: {
-      label: "Devise",
-      chf: "CHF",
-      eur: "EUR",
-      indicativeNote: "Tarif indicatif post-lancement — facturation en CHF ou EUR (pas de USD).",
+      label: "Accès",
+      chf: "Encadré",
+      eur: "Encadré",
+      indicativeNote: "Aucune grille publique pendant la phase de validation académique — accès institutionnel encadré, négocié au cas par cas.",
     },
     plans: {
       individual: {
@@ -290,8 +290,8 @@ export const fr = {
       },
       professional: {
         name: "Investigateur clinique",
-        price: "CHF 99 / 99 €",
-        period: "/mois (indicatif post-validation)",
+        price: "Accès encadré",
+        period: "phase de validation",
         desc: "Pour les médecins vasculaires impliqués dans la phase de validation",
         features: [
           "Assistant IA illimité",

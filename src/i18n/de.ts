@@ -200,7 +200,7 @@ export const de = {
       items: [
         { q: "Was ist AquaMR Flow?", a: "AquaMR Flow ist eine All-in-One-Plattform für Gefäßmedizin. Sie vereint Patientenmanagement, KI-gestützte Berichte, Ergebnisverfolgung, Fortbildung, Simulation und Expertennetzwerk in einem Tool." },
         { q: "Für wen ist es gedacht?", a: "Gefäßchirurgen, Angiologen, interventionelle Radiologen, Assistenzärzte und Krankenhausabteilungen der Gefäßmedizin." },
-        { q: "Was kostet es?", a: "VASCU-LINK befindet sich aktuell in akademischer Validierung: es gibt kein kommerzielles Angebot. Institutioneller Zugang, klinische Partnerschaften und Pilotbewertungen werden auf Anfrage verhandelt. Indikative Preise nach dem Launch werden in CHF / EUR ausgewiesen (keine USD-Abrechnung)." },
+        { q: "Was kostet es?", a: "VASCU-LINK befindet sich in akademischer Validierung: es gibt weder ein kommerzielles Angebot noch öffentliche Preise. Institutioneller Zugang, klinische Partnerschaften und Pilotbewertungen werden im Rahmen des kontrollierten Forschungsprotokolls fallweise verhandelt." },
         { q: "Sind Sie DSGVO- oder HIPAA-konform?", a: "Die Architektur ist darauf ausgelegt, DSGVO- und Schweizer nDSG-Anforderungen zu erfüllen (Verschlüsselung in Übertragung und Ruhezustand, Audit-Logs, RLS, Pseudonymisierung). Die Plattform ist derzeit NICHT zertifiziert, und HIPAA-Konformität wird nicht beansprucht. Jede institutionelle Bereitstellung erhält vor jedem Pilotprojekt eine vereinfachte DPIA." },
         { q: "Ist es ein Medizinprodukt?", a: "Nein. AquaMR Flow ist ein klinisches Dokumentations- und Workflow-Tool. Kein zertifiziertes Medizinprodukt. Alle KI-Ausgaben erfordern Ihre Überprüfung." },
         { q: "Sind meine Daten sicher?", a: "Alle Daten werden verschlüsselt in Übertragung und Ruhezustand gespeichert. Die Architektur ist darauf ausgelegt, DSGVO- und Schweizer nDSG-Anforderungen zu erfüllen, mit Audit-Trails und rollenbasierter Zugriffskontrolle. Die Plattform ist noch nicht zertifiziert — die Sicherheitsposition ist dokumentiert und wird Partnerinstitutionen auf Anfrage geteilt." },
@@ -269,10 +269,10 @@ export const de = {
       disclaimer: "Kein öffentlicher kommerzieller Plan während der prospektiven Validierungsphase.",
     },
     currency: {
-      label: "Währung",
-      chf: "CHF",
-      eur: "EUR",
-      indicativeNote: "Indikative Tarife nach dem Launch — Abrechnung in CHF oder EUR (kein USD).",
+      label: "Zugang",
+      chf: "Kontrolliert",
+      eur: "Kontrolliert",
+      indicativeNote: "Keine öffentlichen Preise während der akademischen Validierungsphase — kontrollierter institutioneller Zugang, fallweise verhandelt.",
     },
     plans: {
       individual: {
@@ -290,8 +290,8 @@ export const de = {
       },
       professional: {
         name: "Klinischer Prüfarzt",
-        price: "CHF 99 / 99 €",
-        period: "/Monat (indikativ, nach Validierung)",
+        price: "Kontrollierter Zugang",
+        period: "Validierungsphase",
         desc: "Für Gefäßmediziner, die an der Validierungsphase beteiligt sind",
         features: [
           "Unbegrenzter KI-Assistent",

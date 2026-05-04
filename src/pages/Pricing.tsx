@@ -13,13 +13,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
-import {
-  defaultCurrencyForLanguage,
-  formatIndicativePrice,
-  SUPPORTED_CURRENCIES,
-  type Currency,
-} from "@/lib/pricing";
-
 const planKeys = ["individual", "professional", "institution"] as const;
 
 function PricingNav() {
@@ -102,20 +95,17 @@ function ResearchPhasePricing() {
 }
 
 function CommercialPricing() {
-  const { t, language } = useTranslation();
+  const { t } = useTranslation();
   const { session } = useAuth();
   const navigate = useNavigate();
   const { currentPlan, subscribed, openPortal, createCheckout } = useSubscription();
   const { toast } = useToast();
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
-  const [currency, setCurrency] = useState<Currency>(() => defaultCurrencyForLanguage(language));
-
-  const formattedProPrice = formatIndicativePrice(99, currency, language);
 
   const plans = planKeys.map((key) => ({
     key,
     name: t(`pricing.plans.${key}.name`),
-    price: key === "professional" ? formattedProPrice : t(`pricing.plans.${key}.price`),
+    price: t(`pricing.plans.${key}.price`),
     period: t(`pricing.plans.${key}.period`),
     description: t(`pricing.plans.${key}.desc`),
     features: t<string[]>(`pricing.plans.${key}.features`, "array"),
@@ -196,29 +186,7 @@ function CommercialPricing() {
           </p>
           <p className="text-sm text-muted-foreground/90 mt-3 max-w-xl mx-auto">{t("pricing.betaNote")}</p>
 
-          {/* Currency switcher — CHF / EUR (no USD) */}
-          <div
-            className="mt-6 inline-flex items-center gap-2 rounded-full border bg-card/60 p-1"
-            role="radiogroup"
-            aria-label={t("pricing.currency.label") as string}
-          >
-            {SUPPORTED_CURRENCIES.map((c) => (
-              <button
-                key={c}
-                role="radio"
-                aria-checked={currency === c}
-                onClick={() => setCurrency(c)}
-                className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${
-                  currency === c
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t(`pricing.currency.${c.toLowerCase()}`)}
-              </button>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground/80 mt-2 max-w-xl mx-auto italic">
+          <p className="text-xs text-muted-foreground/80 mt-4 max-w-xl mx-auto italic">
             {t("pricing.currency.indicativeNote")}
           </p>
         </div>

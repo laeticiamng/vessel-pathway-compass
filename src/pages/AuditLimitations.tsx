@@ -56,7 +56,7 @@ const CONTENT: Record<Language, Content> = {
       "NOT a substitute for digital subtraction angiography — AquaMR Flow targets specific functions, not 1:1 replacement.",
       "NOT a clinical decision-maker — every output is decision support inside an approved research protocol.",
       "NO human revascularisation is performed via the platform during the doctoral phase (L3 covers preclinical work only).",
-      "NO commercial offer in USD — indicative post-launch tariffs are denominated in CHF or EUR.",
+      "NO public commercial offer — supervised institutional access only, negotiated case by case within the research protocol.",
     ],
     traceTitle: "How traceability is enforced",
     trace: [
@@ -94,7 +94,7 @@ const CONTENT: Record<Language, Content> = {
       "PAS un substitut à l'angiographie de soustraction numérique — AquaMR Flow vise des fonctions ciblées, pas un remplacement 1:1.",
       "PAS un décideur clinique — chaque sortie est une aide à la décision dans un protocole de recherche approuvé.",
       "AUCUNE revascularisation humaine via la plateforme pendant la phase doctorale (L3 = préclinique uniquement).",
-      "PAS d'offre commerciale en USD — les tarifs indicatifs post-lancement sont libellés en CHF ou EUR.",
+      "PAS d'offre commerciale publique — uniquement un accès institutionnel encadré, négocié au cas par cas dans le cadre du protocole de recherche.",
     ],
     traceTitle: "Comment la traçabilité est assurée",
     trace: [
@@ -132,7 +132,7 @@ const CONTENT: Record<Language, Content> = {
       "KEIN Ersatz für digitale Subtraktionsangiographie — AquaMR Flow zielt auf bestimmte Funktionen, nicht auf 1:1-Ersatz.",
       "KEIN klinischer Entscheider — jede Ausgabe ist Entscheidungsunterstützung innerhalb eines genehmigten Forschungsprotokolls.",
       "KEINE humane Revaskularisation über die Plattform während der Doktoratsphase (L3 = nur präklinisch).",
-      "KEIN kommerzielles Angebot in USD — indikative Tarife nach dem Launch werden in CHF oder EUR ausgewiesen.",
+      "KEIN öffentliches kommerzielles Angebot — nur kontrollierter institutioneller Zugang, fallweise im Rahmen des Forschungsprotokolls verhandelt.",
     ],
     traceTitle: "Wie Nachvollziehbarkeit gewährleistet wird",
     trace: [

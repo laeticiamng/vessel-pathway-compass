@@ -1,20 +1,19 @@
 /**
  * T8 / T10 multi-locale integrity test.
  *
- * Verifies that the editorial decisions taken in tickets T8 (CHF/EUR pricing,
- * no USD) and T10 (no HIPAA / no MDR / no FDA claims, explicit research-phase
- * positioning) are present and consistent across en/fr/de — including the
- * /audit-limitations page and the ComplianceLimitsFAQ landing section.
+ * T8 has been superseded: the platform no longer surfaces CHF/EUR (or any)
+ * public pricing during the academic-validation phase. The currency block
+ * is now a neutral "supervised access" descriptor, and the Professional
+ * plan label is institutional. This test enforces that no monetary token
+ * (USD, CHF, EUR, $, €) leaks into the public pricing surface.
+ *
+ * T10: no HIPAA / no MDR / no FDA affirmative claims.
  */
 
 import { describe, it, expect } from "vitest";
 import { en } from "@/i18n/en";
 import { fr } from "@/i18n/fr";
 import { de } from "@/i18n/de";
-import {
-  formatIndicativePrice,
-  defaultCurrencyForLanguage,
-} from "@/lib/pricing";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -29,60 +28,38 @@ function get(obj: unknown, p: string): unknown {
   }, obj);
 }
 
-describe("T8 — multi-currency pricing (CHF / EUR, no USD)", () => {
-  it("exposes a CHF + EUR currency switcher in every locale", () => {
+const MONETARY_TOKEN = /\b(USD|CHF|EUR)\b|\$|€/;
+
+describe("T8 (superseded) — no monetary tokens on the public pricing surface", () => {
+  it("currency block is institutional in every locale (no USD/CHF/EUR/$/€)", () => {
     for (const [lang, dict] of Object.entries(dicts)) {
-      expect(get(dict, "pricing.currency.label"), `${lang}.pricing.currency.label`).toBeTypeOf("string");
-      expect(get(dict, "pricing.currency.chf")).toBe("CHF");
-      expect(get(dict, "pricing.currency.eur")).toBe("EUR");
+      const label = get(dict, "pricing.currency.label") as string;
       const note = get(dict, "pricing.currency.indicativeNote") as string;
-      expect(note, `${lang}.indicativeNote`).toBeTypeOf("string");
-      // USD may only appear inside an explicit denial ("no USD" / "pas de USD" / "kein USD").
-      const usdMentions = note.match(/USD/gi) ?? [];
-      if (usdMentions.length > 0) {
-        expect(note).toMatch(/no USD|pas de USD|kein USD|kein\s+USD/i);
+      const chf = get(dict, "pricing.currency.chf") as string;
+      const eur = get(dict, "pricing.currency.eur") as string;
+
+      for (const [k, v] of Object.entries({ label, note, chf, eur })) {
+        expect(v, `${lang}.pricing.currency.${k} type`).toBeTypeOf("string");
+        expect(v, `${lang}.pricing.currency.${k} monetary leak`).not.toMatch(
+          MONETARY_TOKEN,
+        );
       }
-      expect(note).toMatch(/CHF/);
-      expect(note).toMatch(/EUR/);
     }
   });
 
-  it("Professional plan price string never references USD", () => {
+  it("Professional plan price/period strings carry no monetary token", () => {
     for (const [lang, dict] of Object.entries(dicts)) {
       const price = get(dict, "pricing.plans.professional.price") as string;
+      const period = get(dict, "pricing.plans.professional.period") as string;
       expect(price, `${lang} professional price`).toBeTypeOf("string");
-      expect(price).not.toMatch(/\$|USD/);
-      expect(price).toMatch(/CHF|€|EUR/);
-    }
-  });
-
-  it("formats the indicative 99 price with locale-aware currency formatting", () => {
-    // Each locale × currency must produce a non-empty, currency-tagged string.
-    for (const lang of ["en", "fr", "de"] as const) {
-      for (const cur of ["CHF", "EUR"] as const) {
-        const out = formatIndicativePrice(99, cur, lang);
-        expect(out.length, `${lang}/${cur}`).toBeGreaterThan(0);
-        // No fractional digits (whole-unit rounding).
-        expect(out).not.toMatch(/[.,]\d{2}\b/);
-      }
-    }
-    // Default currency mapping: de → CHF, others → EUR.
-    expect(defaultCurrencyForLanguage("de")).toBe("CHF");
-    expect(defaultCurrencyForLanguage("fr")).toBe("EUR");
-    expect(defaultCurrencyForLanguage("en")).toBe("EUR");
-  });
-
-  it("rounds prices to the nearest whole unit", () => {
-    for (const cur of ["CHF", "EUR"] as const) {
-      const out = formatIndicativePrice(98.7, cur, "en");
-      expect(out).toMatch(/99/);
-      expect(out).not.toMatch(/98/);
+      expect(price).not.toMatch(MONETARY_TOKEN);
+      expect(period).not.toMatch(MONETARY_TOKEN);
     }
   });
 });
 
 describe("T10 — no exaggerated regulatory / clinical claims", () => {
-  it("FAQ pricing answer mentions academic validation in every locale", () => {
+  it("FAQ pricing answer references the academic validation phase, not pricing", () => {
     for (const [lang, dict] of Object.entries(dicts)) {
       const items = get(dict, "landing.faq.items") as Array<{ q: string; a: string }>;
       expect(Array.isArray(items), `${lang} faq.items`).toBe(true);
@@ -90,8 +67,12 @@ describe("T10 — no exaggerated regulatory / clinical claims", () => {
         /coût|cost|kostet|preis/i.test(i.q),
       );
       expect(priceItem, `${lang} pricing FAQ`).toBeDefined();
-      expect(priceItem!.a).not.toMatch(/\$99/);
-      expect(priceItem!.a).toMatch(/CHF|EUR|académique|academic|akademisch|validation|Validierung/i);
+      expect(priceItem!.a, `${lang} FAQ no monetary token`).not.toMatch(
+        MONETARY_TOKEN,
+      );
+      expect(priceItem!.a).toMatch(
+        /académique|academic|akademisch|validation|Validierung|protoco/i,
+      );
     }
   });
 
@@ -114,10 +95,6 @@ describe("T10 — no exaggerated regulatory / clinical claims", () => {
 });
 
 describe("T10 — Audit & Limitations page + ComplianceLimitsFAQ ship in EN/FR/DE", () => {
-  // These two components hold their own EN/FR/DE content tables (not in the
-  // shared dictionary) — we parse them as text to guarantee the three locales
-  // are present and that no localized block accidentally ships USD or HIPAA
-  // affirmative claims.
   const files = [
     "src/components/landing/ComplianceLimitsFAQ.tsx",
     "src/pages/AuditLimitations.tsx",
@@ -135,9 +112,6 @@ describe("T10 — Audit & Limitations page + ComplianceLimitsFAQ ship in EN/FR/D
     it(`${rel} never claims HIPAA/FDA compliance affirmatively`, () => {
       const abs = path.resolve(process.cwd(), rel);
       const src = fs.readFileSync(abs, "utf8");
-      // Allow mentions of HIPAA/FDA only if the same line either:
-      //   - asks a question (?), OR
-      //   - contains an explicit denial token.
       const denialTokens =
         /\b(No|NOT|Not|Pas|pas|aucun|AUCUNE|Aucune|NICHT|nicht|KEIN|KEINE|kein|keine|NO )\b/;
       const lines = src.split("\n");
@@ -152,9 +126,7 @@ describe("T10 — Audit & Limitations page + ComplianceLimitsFAQ ship in EN/FR/D
     it(`${rel} never affirmatively prices in USD`, () => {
       const abs = path.resolve(process.cwd(), rel);
       const src = fs.readFileSync(abs, "utf8");
-      // No "$<digit>" pricing pattern anywhere.
       expect(src).not.toMatch(/\$\d/);
-      // USD references are only allowed inside an explicit denial.
       const lines = src.split("\n");
       for (const line of lines) {
         if (/\bUSD\b/.test(line)) {
