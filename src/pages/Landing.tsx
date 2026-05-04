@@ -21,6 +21,7 @@ import { MedRegBadge } from "@/components/MedRegBadge";
 import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
+import { ComplianceBanner } from "@/components/ComplianceBanner";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
@@ -270,6 +271,7 @@ export default function Landing() {
       </header>
 
       <FourZeroBanner />
+      <ComplianceBanner />
 
       <main id="main-content">
       {/* Hero */}
