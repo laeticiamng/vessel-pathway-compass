@@ -2605,8 +2605,8 @@ export const fr = {
   seo: {
     // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
-      title: "Tarifs — Plans AquaMR Flow",
-      description: "Comparez les plans AquaMR Flow : Individuel gratuit, Professionnel à 99 €/mois et tarif Institution sur mesure. Toutes les fonctionnalités gratuites pendant la bêta.",
+      title: "Accès institutionnel — VASCU-LINK",
+      description: "Comparez les niveaux d'accès VASCU-LINK : investigateur individuel, investigateur clinique et accès institutionnel sur mesure. Tous les modules sont accessibles dans le cadre du protocole pendant la phase de validation académique.",
     },
     support: {
       title: "Support & FAQ — AquaMR Flow",
