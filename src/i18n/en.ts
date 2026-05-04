@@ -257,11 +257,11 @@ export const en = {
   // Pricing
   pricing: {
     title: "Plans & Pricing",
-    betaBadge: "🎉 Beta ongoing — free access to all features",
-    betaBannerTitle: "🚀 All features are free during the beta",
-    betaBannerDesc: "Academic validation phase in progress. All modules are accessible; pricing terms will be defined after the official launch.",
-    subtitle: "From individual physicians to large institutions — find the right plan for your interventional practice.",
-    betaNote: "During beta, paid features are available without billing; listed prices apply when public launch starts.",
+    betaBadge: "Academic validation phase — supervised institutional access",
+    betaBannerTitle: "Academic validation phase — supervised access to the clinical modules",
+    betaBannerDesc: "Prospective study in progress. Module access is open to investigators and partner institutions under the research protocol.",
+    subtitle: "Supervised access for clinicians, hospital teams and institutions partnering on the research protocol.",
+    betaNote: "During the validation phase, modules are made available under the research protocol, with no billing.",
     mostPopular: "Most Popular",
     currentPlan: "Your Plan",
     managePlan: "Manage Plan",
