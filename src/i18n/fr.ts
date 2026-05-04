@@ -2024,7 +2024,7 @@ export const fr = {
       featuresLabel: "Fonctionnalités principales",
       prerequisitesLabel: "Prérequis",
       openCta: "Ouvrir le module",
-      ctaSignup: "Créer un compte gratuit",
+      ctaSignup: "Créer un compte investigateur",
       ctaProtocol: "Voir le protocole clinique",
       footerDisclaimer: "AquaMR Flow est un prototype de recherche — pas un dispositif médical certifié à ce stade. Toute aide à la décision affichée par un module nécessite la confirmation d'un clinicien.",
       legend: { aria: "Légende des statuts de disponibilité" },
