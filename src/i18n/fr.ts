@@ -1254,7 +1254,7 @@ export const fr = {
       subtitle: "10 modules cliniques, un protocole L1 verrouillé, trois langues et une architecture conçue pour viser la conformité MDR / RGPD / IEC 62304.",
       available: "Disponible",
       detailsCta: "Voir le détail des 10 modules",
-      disclaimer: "Les modules sont accessibles dans la bêta ouverte. Prototype de recherche — non certifié comme dispositif médical à ce stade.",
+      disclaimer: "Les modules sont accessibles pendant la phase de validation académique. Prototype de recherche — non certifié comme dispositif médical à ce stade.",
       stats: [
         { value: "10", label: "Modules cliniques" },
         { value: "3", label: "Langues (FR · EN · DE)" },
