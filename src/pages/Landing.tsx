@@ -186,6 +186,9 @@ export default function Landing() {
             <Link to="/trajectory" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.trajectory")}
             </Link>
+            <Link to="/protocol" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              {t("home.footerNav.protocol")}
+            </Link>
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.signIn")}
             </Link>
@@ -228,6 +231,9 @@ export default function Landing() {
                 </Link>
                 <Link to="/trajectory" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.trajectory")}
+                </Link>
+                <Link to="/protocol" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("home.footerNav.protocol")}
                 </Link>
                 <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}

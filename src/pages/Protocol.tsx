@@ -7,18 +7,26 @@ import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
 import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
 import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
+import { ProtocolCompletenessChecklist } from "@/components/landing/ProtocolCompletenessChecklist";
+import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningCard";
+import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
+import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
 
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
 
+interface QAItem { q: string; a: string }
+
 export default function Protocol() {
   const { t } = useTranslation();
+  const { logQA } = useProtocolAccessAudit();
 
   const endpoints = (t("pages.protocol.endpoints.rows") as unknown as EndpointRow[]) ?? [];
   const comparators = (t("pages.protocol.comparators.items") as unknown as ListItem[]) ?? [];
   const limits = (t("pages.protocol.limits.items") as unknown as string[]) ?? [];
   const lines = (t("pages.protocol.scope.lines") as unknown as ListItem[]) ?? [];
   const safetyTriggers = (t("pages.protocol.safety.triggers") as unknown as string[]) ?? [];
+  const qaItems = (t("pages.protocol.qa.items") as unknown as QAItem[]) ?? [];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -76,6 +84,12 @@ export default function Protocol() {
 
         {/* Protocol identity — 5-second read summary for jury / CHUV */}
         <ProtocolIdentityCard />
+
+        {/* Versioning, status and editorial history (publicly visible) */}
+        <ProtocolVersioningCard />
+
+        {/* Automated completeness audit (real-time, locale-aware) */}
+        <ProtocolCompletenessChecklist />
 
 
         <section className="grid md:grid-cols-2 gap-5 mb-12">
@@ -197,6 +211,11 @@ export default function Protocol() {
             </p>
           </div>
         </section>
+
+        {/* Compliance-ready Q&A for scientific committee review */}
+        <ProtocolQASection
+          onItemOpen={(i) => logQA(i, qaItems[i]?.q)}
+        />
 
         {/* Anti-overpromise — explicit list of what the platform does NOT claim */}
         <div className="-mx-6 mb-8">

@@ -2274,6 +2274,55 @@ export const de = {
         contact: "Team kontaktieren",
         backHome: "Zurück zur Startseite",
       },
+      completeness: {
+        title: "Vollständigkeitsprüfung des Protokolls",
+        intro: "Automatische Echtzeit-Prüfung der 8 obligatorischen Abschnitte des Forschungsprotokolls. Score rechts. Jeder fehlende oder unzureichende Abschnitt wird ausdrücklich gekennzeichnet.",
+        alertError: "{count} kritische(r) Abschnitt(e) fehlen oder unvollständig — muss vor Präsentation im wissenschaftlichen Komitee korrigiert werden.",
+        alertWarn: "{count} Abschnitt(e) zu erweitern — nicht blockierend, aber für ein Dossier auf institutionellem Niveau empfohlen.",
+      },
+      versioning: {
+        title: "Versionierung und Historie des Protokolls",
+        statusResearch: "Forschung — kein zertifiziertes Medizinprodukt",
+        lastUpdated: "Zuletzt aktualisiert:",
+      },
+      qa: {
+        title: "Institutionelle Fragen & Antworten",
+        subtitle: "Compliance-ready Abschnitt, vorbereitet für die Prüfung durch ein wissenschaftliches Komitee. Jede Konsultation wird für authentifizierte Nutzer protokolliert (Governance-Audit).",
+        items: [
+          {
+            q: "Wozu ein neues Mapping-Werkzeug, wenn CT- und MR-Angiographie bereits existieren?",
+            a: "VASCU-LINK ersetzt keine Referenzbildgebung. Es positioniert sich als intermediäres Mapping-Werkzeug, ohne jodhaltiges Kontrastmittel oder Strahlung, gedacht für gebrechliche Populationen (CKD, Diabetes, Polymorbidität), bei denen wiederholte CT-Angiographien klinisch belastend sind. Der Doppler bleibt die First-Line-Grundlage; CT-Angio / kontrastmittelverstärkte MRA bleibt die Referenz vor jeder Revaskularisationsmaßnahme."
+          },
+          {
+            q: "Wie ist der aktuelle regulatorische Status des Geräts?",
+            a: "Nicht zertifizierter Forschungsprototyp. Keine CE-Kennzeichnung, keine FDA-Zulassung. Jede Nutzung erfolgt ausschließlich im Rahmen eines Protokolls, das von einer zuständigen Ethikkommission genehmigt wurde (in der Schweiz: kantonale Ethikkommission). Die Hypothese der regulatorischen Klassifikation (Klasse IIa, MDR-Pfad mit klinischer Validierung) ist mit einer benannten Stelle formal zu bestätigen."
+          },
+          {
+            q: "Was passiert, wenn die VASCU-LINK-Aufnahmequalität bei einem Patienten unzureichend ist?",
+            a: "Eine Sicherheits-Fallback-Regel ist kodifiziert: Qualitätsscore < 3/5, größere Diskordanz zum Standard-Doppler, geplante interventionelle Indikation, akute Symptome oder dokumentierte komplexe Anatomie lösen einen obligatorischen und nachvollziehbaren Fallback auf die Referenzbildgebung aus (CT-Angio, kontrastmittelverstärkte MRA oder DSA je nach Indikation). Keine therapeutische Entscheidung wird allein auf Basis einer VASCU-LINK-Aufnahme unzureichender Qualität getroffen."
+          },
+          {
+            q: "Wie unterscheiden Sie klinisch validiert von präklinisch?",
+            a: "Drei explizite Ebenen: L1 (Diagnose) — der einzige Bereich mit prospektiver klinischer Validierung am Menschen in der Doktorarbeit; L2 (Guide) — beschränkt auf Simulation und anatomische Gefäßphantome, keine Anwendung am Menschen; L3 (Treat) — streng präklinisch (ex vivo / Tier). Im doktoralen Protokoll wird keine Revaskularisation am Menschen durchgeführt."
+          },
+          {
+            q: "Wie werden Patientendaten geschützt?",
+            a: "Systematische Pseudonymisierung bei Einschluss, rollenbasierte Zugriffskontrolle (RBAC) mit RLS auf Datenbankebene, Verschlüsselung in Transit und im Ruhezustand, Zugriffsprotokollierung (governance_events). Aktuelles EU-CH-Hosting konform mit DSGVO/nDSG; dediziertes HDS/EU-CH-Hosting für die multizentrische Phase geplant. Eine vereinfachte DSFA (DPIA) ist für institutionelle Piloten verfügbar."
+          },
+          {
+            q: "Wie sieht der statistische Hauptplan und die Begründung der Stichprobengröße aus?",
+            a: "Primärer Endpunkt: linear gewichtetes κ für die segmentale Stenose-Klassifikation (4 Klassen), Ziel κ ≥ 0,75 (untere Grenze 95 %-KI ≥ 0,60). n = 144 einzuschließende Patienten (120 auswertbar); α = 0,05 zweiseitig, Power = 0,90, Donner-&-Eliasziw-Methode mit Intra-Patienten-Cluster-Adjustierung (GEE). Hauptanalyse Per-Protocol, ITT in Sensitivität mit multipler Imputation (5 Imputationen, FCS). Futility-Analyse bei n=50 (O'Brien-Fleming, kein α-Verbrauch)."
+          },
+          {
+            q: "Welche Nachvollziehbarkeit bieten Sie bei Audits oder Prüfungen durch eine benannte Stelle?",
+            a: "Jede sensible Aktion wird protokolliert (audit_logs, governance_events, case_revisions). Jeder Export (PDF, IEC-62304-Akte, DSFA, DSGVO-Verarbeitungsverzeichnis) wird signiert und mit einem SHA-256-Manifest zeitgestempelt (export_manifests). Klinische Fälle verfügen über einen Case-Replay-Mechanismus. Die Architektur zielt auf IEC 62304 (Software-Lebenszyklus) und MDR Anhang XIV (klinische Bewertung)."
+          },
+          {
+            q: "Was tun Sie bei einem unerwünschten Ereignis oder Modelldrift?",
+            a: "Ein ADR-Register (Adverse Drug/Device Reactions) ist in die Plattform integriert, mit Timeline und klinischen Signoffs. Performance-Drifts werden über compliance_snapshots überwacht und würden ein Einfrieren der betroffenen Version, eine DSMB-Benachrichtigung und die Aussetzung des Einschlusses bis zur Untersuchung auslösen. Die DSMB-Charta ist veröffentlicht."
+          }
+        ],
+      },
     },
     faq: {
       seoTitle: "FAQ — Häufig gestellte Fragen zu AquaMR Flow",
