@@ -186,29 +186,7 @@ function CommercialPricing() {
           </p>
           <p className="text-sm text-muted-foreground/90 mt-3 max-w-xl mx-auto">{t("pricing.betaNote")}</p>
 
-          {/* Currency switcher — CHF / EUR (no USD) */}
-          <div
-            className="mt-6 inline-flex items-center gap-2 rounded-full border bg-card/60 p-1"
-            role="radiogroup"
-            aria-label={t("pricing.currency.label") as string}
-          >
-            {SUPPORTED_CURRENCIES.map((c) => (
-              <button
-                key={c}
-                role="radio"
-                aria-checked={currency === c}
-                onClick={() => setCurrency(c)}
-                className={`px-3 py-1 text-xs font-semibold rounded-full transition-colors ${
-                  currency === c
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {t(`pricing.currency.${c.toLowerCase()}`)}
-              </button>
-            ))}
-          </div>
-          <p className="text-xs text-muted-foreground/80 mt-2 max-w-xl mx-auto italic">
+          <p className="text-xs text-muted-foreground/80 mt-4 max-w-xl mx-auto italic">
             {t("pricing.currency.indicativeNote")}
           </p>
         </div>
