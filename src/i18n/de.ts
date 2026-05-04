@@ -2588,25 +2588,25 @@ export const de = {
           ],
         },
         usage: {
-          title: "Kostenloser Plan & Kontingente (nach der Beta)",
+          title: "Kontrollierter Zugang & Kontingente (nach Validierung)",
           items: [
-            "Während der akademischen Validierungsphase: Alle Funktionen sind ohne Kontingente verfügbar — der 30-Tage-Papierkorb und das vollständige Audit-Trail sind bereits aktiv.",
-            "Nach dem offiziellen Start wird der kostenlose Plan auf 3 KI-Berichte pro Tag und 5 aktive Patientenakten begrenzt; diese Grenzen gelten heute nicht.",
-            "Während der Beta erstellte Konten behalten ihre Daten und ihren Verlauf beim Übergang in die stabile Version.",
+            "Während der akademischen Validierungsphase: Alle Module sind im Rahmen des Forschungsprotokolls ohne Kontingente verfügbar — der 30-Tage-Papierkorb und das vollständige Audit-Trail sind bereits aktiv.",
+            "Nach der akademischen Validierung wird der kontrollierte Zugang auf 3 KI-Berichte pro Tag und 5 aktive Patientenakten begrenzt; diese Grenzen gelten heute nicht.",
+            "Während der Validierungsphase erstellte Konten behalten ihre Daten und ihren Verlauf beim Übergang in die stabile Version.",
           ],
         },
       },
       ctaTitle: "Eine Frage zu diesen Einschränkungen?",
       ctaDesc: "Das Team antwortet direkt, ohne Mittelsmann. Jedes Feedback zum Prototyp-Umfang ist wertvoll für die Einordnung der Doktorarbeit.",
-      resolvedBadge: "In der Beta gelöst",
+      resolvedBadge: "In der Validierungsphase gelöst",
       transparencyCta: "Zur Seite Transparenz & Governance",
     },
   },
   seo: {
     // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
-      title: "Preise — AquaMR Flow Pläne",
-      description: "Vergleichen Sie AquaMR Flow Pläne: Kostenloser Einzelplan, Professionell für 99 €/Monat und individuelle Institutionspreise. Alle Funktionen kostenlos während der Beta.",
+      title: "Institutioneller Zugang — VASCU-LINK",
+      description: "Vergleichen Sie die VASCU-LINK Zugangsstufen: Einzel-Prüfarzt, klinischer Prüfarzt und individueller institutioneller Zugang. Alle Module sind während der akademischen Validierungsphase im Rahmen des Forschungsprotokolls zugänglich.",
     },
     support: {
       title: "Support & FAQ — AquaMR Flow",
