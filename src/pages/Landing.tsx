@@ -25,7 +25,7 @@ import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
 import { organizationJsonLd, founderPersonJsonLd, breadcrumbJsonLd } from "@/lib/seo/schemas";
-import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
+
 
 /* -------------------------------------------------------------------------
  * Above-the-fold (eager): PlatformCompletenessSection — anchor target of
