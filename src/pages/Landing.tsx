@@ -287,39 +287,50 @@ export default function Landing() {
                 {t("home.hero.betaBadge")}
               </span>
             </div>
-            <p className="text-xs md:text-sm font-semibold uppercase tracking-[0.22em] text-on-hero/80 mb-3">
+            <p className="text-sm md:text-base font-semibold uppercase tracking-[0.22em] text-on-hero mb-4">
               <NeonGradientText intensity="soft" className="inline-block">
                 {t("home.hero.title1")}
               </NeonGradientText>
-              <span className="mx-2 text-on-hero/40" aria-hidden="true">·</span>
+              <span className="mx-2 text-on-hero-soft" aria-hidden="true">·</span>
               <span>{t("branding.platformName")}</span>
             </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-4 tracking-tight max-w-4xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-5 tracking-tight max-w-4xl mx-auto">
               {t("home.hero.title2")}
             </h1>
-            <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-4 leading-relaxed">
+            <p className="text-base md:text-lg text-on-hero max-w-2xl mx-auto mb-4 leading-relaxed">
               {t("home.hero.subtitle")}
             </p>
             <p className="text-sm md:text-base text-on-hero-soft max-w-2xl mx-auto mb-10 italic leading-relaxed">
               {t("home.hero.translationalAmbition")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
-                <Link to="/protocol">
+              <Button
+                asChild
+                size="lg"
+                className="text-base px-8 h-12 shadow-lg shadow-primary/25 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <Link to="/protocol" aria-label={t("home.hero.ctaPrimary") as string}>
                   {t("home.hero.ctaPrimary")}
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="text-base px-8 h-12 border-2 border-white/60 bg-white/15 text-white hover:bg-white/25 hover:border-white/80 backdrop-blur-md font-semibold">
-                <a href="#comment-ca-marche">{t("home.hero.ctaSecondary")}</a>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="text-base px-8 h-12 border-2 border-white bg-white/10 text-white hover:bg-white/20 backdrop-blur-md font-semibold focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                <a href="#comment-ca-marche" aria-label={t("home.hero.ctaSecondary") as string}>
+                  {t("home.hero.ctaSecondary")}
+                </a>
               </Button>
             </div>
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-on-hero font-medium">
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> {t("home.hero.perkNoCard")}</span>
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> {t("home.hero.perkBetaAccess")}</span>
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" /> {t("home.hero.perkGdpr")}</span>
-            </div>
-            <p className="mt-6 text-sm text-on-hero-soft max-w-xl mx-auto leading-relaxed">
+            <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-on-hero font-medium list-none p-0">
+              <li className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" aria-hidden="true" /> {t("home.hero.perkNoCard")}</li>
+              <li className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" aria-hidden="true" /> {t("home.hero.perkBetaAccess")}</li>
+              <li className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4" aria-hidden="true" /> {t("home.hero.perkGdpr")}</li>
+            </ul>
+            <p className="mt-6 text-sm md:text-base text-on-hero-soft max-w-xl mx-auto leading-relaxed">
               {t("home.hero.disclaimer")}
             </p>
           </motion.div>
