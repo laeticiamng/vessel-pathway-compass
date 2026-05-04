@@ -521,7 +521,7 @@ export default function Landing() {
           <div className="border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex flex-col items-center sm:items-start gap-2">
               <p className="text-sm text-muted-foreground">
-                © {new Date().getFullYear()} EMOTIONSCARE SASU — Amiens, France. {t("landing.footer.rights")}
+                © {new Date().getFullYear()} {t("landing.footer.rights")}
               </p>
               <MedRegBadge variant="compact" />
             </div>
