@@ -117,6 +117,7 @@ export const fr = {
       explore: "Fonctionnalités",
       why: "Pourquoi",
       trajectory: "Trajectoire",
+      aboutAquaMR: "À propos d'AquaMR",
     },
     hero: {
       // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
