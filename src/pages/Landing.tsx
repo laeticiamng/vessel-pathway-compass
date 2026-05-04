@@ -350,6 +350,9 @@ export default function Landing() {
       </section>
 
       {/* Platform completeness — directly under hero (eager, anchor target) */}
+      {/* Research protocol highlight — institutional priority for thesis reviewers */}
+      <ProtocolHighlightBanner />
+
       <PlatformCompletenessSection />
 
       {/* Below-the-fold: every section is code-split + lazy-loaded.
