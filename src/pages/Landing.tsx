@@ -369,6 +369,9 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* Programme video — 30s motion brief, sits right under the hero */}
+      <HomeIntroVideoSection />
+
       {/* Platform completeness — directly under hero (eager, anchor target) */}
       {/* Research protocol highlight — institutional priority for thesis reviewers */}
       <ProtocolHighlightBanner />
