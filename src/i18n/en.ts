@@ -2297,6 +2297,55 @@ export const en = {
         contact: "Contact the team",
         backHome: "Back to home",
       },
+      completeness: {
+        title: "Protocol completeness audit",
+        intro: "Real-time automated check of the 8 mandatory sections of the research protocol. Score on the right. Any missing or insufficient section is flagged explicitly.",
+        alertError: "{count} critical section(s) missing or incomplete — must be fixed before presentation to the scientific committee.",
+        alertWarn: "{count} section(s) to enrich — non-blocking, but recommended for an institutional-grade dossier.",
+      },
+      versioning: {
+        title: "Protocol versioning and history",
+        statusResearch: "Research — not a certified medical device",
+        lastUpdated: "Last updated:",
+      },
+      qa: {
+        title: "Institutional Q&A",
+        subtitle: "Compliance-ready section prepared for a scientific committee review. Each consultation is logged for authenticated users (governance audit trail).",
+        items: [
+          {
+            q: "Why a new mapping tool when CT angiography and MR angiography already exist?",
+            a: "VASCU-LINK does not replace reference imaging. It is positioned as an intermediate mapping tool, without iodinated contrast or radiation, intended for frail populations (CKD, diabetes, polymorbidities) for whom repeating a CT angiography is clinically costly. Doppler remains the first-line foundation; CT angio / contrast MRA remains the reference before any revascularisation procedure."
+          },
+          {
+            q: "What is the current regulatory status of the device?",
+            a: "Uncertified research prototype. No CE marking, no FDA clearance. Any use is performed exclusively under a protocol approved by a competent ethics committee (in Switzerland: cantonal ethics commission). The regulatory classification hypothesis (class IIa, MDR clinical-validation pathway) remains to be formally confirmed with a notified body."
+          },
+          {
+            q: "What happens if the VASCU-LINK acquisition quality is insufficient for a given patient?",
+            a: "A safety-fallback rule is codified: quality score < 3/5, major discordance with standard Doppler, planned interventional indication, acute symptoms or documented complex anatomy trigger a mandatory and traced fallback to reference imaging (CT angio, contrast MRA or DSA depending on indication). No therapeutic decision is taken solely on the basis of an insufficient-quality VASCU-LINK acquisition."
+          },
+          {
+            q: "How do you distinguish what is clinically validated from what is still preclinical?",
+            a: "Three explicit levels: L1 (Diagnose) — the only scope undergoing prospective human clinical validation in the thesis; L2 (Guide) — restricted to simulation and anatomical vascular phantoms, no human use; L3 (Treat) — strictly preclinical (ex vivo / animal). No human revascularisation is performed in the doctoral protocol."
+          },
+          {
+            q: "How is patient data protected?",
+            a: "Systematic pseudonymisation at inclusion, role-based access control (RBAC) with database-level RLS, encryption in transit and at rest, access logging (governance_events). Current EU-CH hosting compliant with GDPR/nFADP; dedicated HDS/EU-CH hosting planned for the multicentre phase. A simplified DPIA is available for institutional pilots."
+          },
+          {
+            q: "What is the main statistical plan and the sample-size justification?",
+            a: "Primary endpoint: linearly weighted κ on segmental stenosis classification (4 classes), target κ ≥ 0.75 (lower bound 95% CI ≥ 0.60). n = 144 patients to enrol (120 evaluable); α = 0.05 two-sided, power = 0.90, Donner & Eliasziw method with intra-patient cluster adjustment (GEE). Primary analysis Per-Protocol, ITT in sensitivity with multiple imputation (5 imputations, FCS). Futility analysis planned at n=50 (O'Brien-Fleming, no α spending on efficacy)."
+          },
+          {
+            q: "What traceability do you offer in case of audit or notified-body review?",
+            a: "Every sensitive action is logged (audit_logs, governance_events, case_revisions). Every export (PDF, IEC 62304 file, DPIA, GDPR processing register) is signed and time-stamped with a SHA-256 manifest (export_manifests). Clinical cases have a case-replay mechanism (replay the decision with original context). The architecture targets IEC 62304 (software life cycle) and MDR Annex XIV (clinical evaluation) requirements."
+          },
+          {
+            q: "What do you do in case of an adverse event or model drift?",
+            a: "An ADR (Adverse Drug/Device Reactions) registry is integrated into the platform with timeline and clinical signoffs. Performance drifts are monitored by compliance_snapshots and would trigger a freeze of the affected version, DSMB notification and suspension of enrolment pending investigation. The DSMB charter is published."
+          }
+        ],
+      },
     },
     faq: {
       seoTitle: "FAQ — Frequently asked questions about AquaMR Flow",
