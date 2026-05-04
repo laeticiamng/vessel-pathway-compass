@@ -223,6 +223,15 @@ interface ConfirmationRecord {
   confirmed_at: string;
 }
 
+interface HistoryEntry {
+  id: string;
+  evidence_version: string;
+  confirmed_at: string;
+  note: string | null;
+  user_display_name: string;
+  is_self: boolean;
+}
+
 interface Props {
   className?: string;
 }
@@ -230,6 +239,8 @@ interface Props {
 export function AIAuditCard({ className = "" }: Props) {
   const { language } = useTranslation();
   const { user } = useAuth();
+  const { hasRole, isLoading: rolesLoading } = useUserRoles();
+  const canConfirm = hasRole(["physician", "expert_reviewer", "admin", "super_admin"]);
   const copy = COPY[language] ?? COPY.en;
 
   const [filter, setFilter] = useState<FilterValue>("all");
@@ -237,6 +248,9 @@ export function AIAuditCard({ className = "" }: Props) {
   const [openConfirm, setOpenConfirm] = useState<string | null>(null);
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [openHistory, setOpenHistory] = useState<string | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
 
   // Load existing user confirmations
   useEffect(() => {
