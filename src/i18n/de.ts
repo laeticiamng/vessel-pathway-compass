@@ -1519,7 +1519,7 @@ export const de = {
   pricingExtras: {
     free: "Kontrollierter Zugang",
     duringBeta: "während der Validierungsphase",
-    atLaunch: "beim offiziellen Start",
+    atLaunch: "nach der akademischen Validierung",
   },
   contentGate: {
     previewBanner: "Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
