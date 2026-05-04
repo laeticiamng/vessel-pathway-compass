@@ -55,8 +55,15 @@ interface PanelCopy {
   noteSubmit: string;
   noteCancel: string;
   signedInRequired: string;
+  unauthorized: string;
   confirmSuccess: string;
   confirmError: string;
+  historyCta: string;
+  historyTitle: string;
+  historyEmpty: string;
+  historyLoading: string;
+  historyClose: string;
+  historySelf: string;
   fields: EvidenceField[];
 }
 
