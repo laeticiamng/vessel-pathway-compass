@@ -464,7 +464,7 @@ export default function Landing() {
               {t("landing.cta.subtitle")}
             </p>
             <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/20">
-              <Link to="/auth?mode=signup">
+              <Link to="/protocol">
                 {t("landing.cta.button")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
