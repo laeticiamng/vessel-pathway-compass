@@ -1405,7 +1405,7 @@ export const en = {
     whatsNew: {
       badge: "What's new",
       title: "Platform changelog",
-      subtitle: "Recent improvements, new modules and security upgrades shipped during the open beta.",
+      subtitle: "Recent improvements, new modules and security upgrades shipped during the academic validation phase.",
       cta: "See all 10 modules",
       tagLabels: {
         new: "New",
