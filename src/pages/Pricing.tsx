@@ -13,13 +13,6 @@ import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
-import {
-  defaultCurrencyForLanguage,
-  formatIndicativePrice,
-  SUPPORTED_CURRENCIES,
-  type Currency,
-} from "@/lib/pricing";
-
 const planKeys = ["individual", "professional", "institution"] as const;
 
 function PricingNav() {
@@ -102,20 +95,17 @@ function ResearchPhasePricing() {
 }
 
 function CommercialPricing() {
-  const { t, language } = useTranslation();
+  const { t } = useTranslation();
   const { session } = useAuth();
   const navigate = useNavigate();
   const { currentPlan, subscribed, openPortal, createCheckout } = useSubscription();
   const { toast } = useToast();
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
-  const [currency, setCurrency] = useState<Currency>(() => defaultCurrencyForLanguage(language));
-
-  const formattedProPrice = formatIndicativePrice(99, currency, language);
 
   const plans = planKeys.map((key) => ({
     key,
     name: t(`pricing.plans.${key}.name`),
-    price: key === "professional" ? formattedProPrice : t(`pricing.plans.${key}.price`),
+    price: t(`pricing.plans.${key}.price`),
     period: t(`pricing.plans.${key}.period`),
     description: t(`pricing.plans.${key}.desc`),
     features: t<string[]>(`pricing.plans.${key}.features`, "array"),
