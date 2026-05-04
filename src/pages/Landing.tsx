@@ -25,13 +25,14 @@ import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
 import { organizationJsonLd, founderPersonJsonLd, breadcrumbJsonLd } from "@/lib/seo/schemas";
-import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
+
 
 /* -------------------------------------------------------------------------
  * Above-the-fold (eager): PlatformCompletenessSection — anchor target of
  * the desktop/mobile nav, must be ready immediately for #platform-complete.
  * ----------------------------------------------------------------------- */
 import { PlatformCompletenessSection } from "@/components/landing/PlatformCompletenessSection";
+import { ProtocolHighlightBanner } from "@/components/landing/ProtocolHighlightBanner";
 
 /* -------------------------------------------------------------------------
  * Below-the-fold sections — lazy-loaded to shrink the initial JS bundle.
@@ -174,20 +175,17 @@ export default function Landing() {
             </span>
           </Link>
           <div className="hidden md:flex items-center gap-8">
+            <Link to="/protocol" className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
+              {t("home.footerNav.protocol")}
+            </Link>
             <a href="#platform-complete" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.explore")}
             </a>
-            <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
-            </Link>
             <Link to="/why" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.why")}
             </Link>
             <Link to="/trajectory" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.trajectory")}
-            </Link>
-            <Link to="/protocol" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              {t("home.footerNav.protocol")}
             </Link>
             <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               {t("landing.nav.signIn")}
@@ -208,8 +206,8 @@ export default function Landing() {
               </DropdownMenuContent>
             </DropdownMenu>
             <ThemeToggle />
-            <Button asChild size="sm" className="shadow-md">
-              <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
+            <Button asChild size="sm" variant="outline" className="shadow-sm">
+              <Link to="/protocol">{t("home.footerNav.protocol")}</Link>
             </Button>
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
@@ -220,20 +218,17 @@ export default function Landing() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 mt-8">
+                <Link to="/protocol" className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("home.footerNav.protocol")}
+                </Link>
                 <a href="#platform-complete" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.explore")}
                 </a>
-                <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
-                  {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
-                </Link>
                 <Link to="/why" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.why")}
                 </Link>
                 <Link to="/trajectory" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.trajectory")}
-                </Link>
-                <Link to="/protocol" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
-                  {t("home.footerNav.protocol")}
                 </Link>
                 <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
@@ -258,8 +253,8 @@ export default function Landing() {
                   <span className="text-sm text-muted-foreground">{t("topBar.toggleTheme")}</span>
                   <ThemeToggle />
                 </div>
-                <Button asChild className="mt-2" onClick={() => setMobileOpen(false)}>
-                  <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
+                <Button asChild variant="outline" className="mt-2" onClick={() => setMobileOpen(false)}>
+                  <Link to="/protocol">{t("home.footerNav.protocol")}</Link>
                 </Button>
               </div>
             </SheetContent>
@@ -310,7 +305,7 @@ export default function Landing() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
-                <Link to="/auth?mode=signup">
+                <Link to="/protocol">
                   {t("home.hero.ctaPrimary")}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -355,6 +350,9 @@ export default function Landing() {
       </section>
 
       {/* Platform completeness — directly under hero (eager, anchor target) */}
+      {/* Research protocol highlight — institutional priority for thesis reviewers */}
+      <ProtocolHighlightBanner />
+
       <PlatformCompletenessSection />
 
       {/* Below-the-fold: every section is code-split + lazy-loaded.
@@ -470,7 +468,7 @@ export default function Landing() {
               {t("landing.cta.subtitle")}
             </p>
             <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/20">
-              <Link to="/auth?mode=signup">
+              <Link to="/protocol">
                 {t("landing.cta.button")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -502,15 +500,11 @@ export default function Landing() {
             <div>
               <h4 className="font-semibold text-sm mb-3">{t("landing.footer.product")}</h4>
               <nav aria-label={t("home.footerNav.productAria")} className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <Link to="/protocol" className="hover:text-foreground transition-colors font-semibold text-foreground">{t("home.footerNav.protocol")}</Link>
                 <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
-                <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="hover:text-foreground transition-colors">
-                  {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
-                </Link>
                 <Link to="/why" className="hover:text-foreground transition-colors">{t("landing.nav.why")}</Link>
                 <Link to="/trajectory" className="hover:text-foreground transition-colors">{t("landing.nav.trajectory")}</Link>
-                <Link to="/protocol" className="hover:text-foreground transition-colors">{t("home.footerNav.protocol")}</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
-                <Link to="/contact" className="hover:text-foreground transition-colors">{t("contactPage.title")}</Link>
                 <Link to="/securite-confidentialite" className="hover:text-foreground transition-colors">{t("home.footerNav.security")}</Link>
               </nav>
             </div>

@@ -234,9 +234,9 @@ export const de = {
       },
     },
     cta: {
-      title: "Bereit, Ihre Gefäßpraxis zu vereinfachen?",
-      subtitle: "Schließen Sie sich Gefäßspezialisten an, die die Plattform bereits erkunden — kostenlos während der Beta.",
-      button: "Kostenloses Konto erstellen",
+      title: "Forschungsprotokoll einsehen",
+      subtitle: "Das vollständige L1-Protokoll, der statistische Analyseplan und die Compliance-Anhänge stehen wissenschaftlichen Komitees, Prüfungsjurys und akademischen Partnern zur Verfügung.",
+      button: "Zum Protokoll",
     },
     footer: {
       tagline: "Die klinische Plattform für Fachleute der Gefäßmedizin.",
@@ -1214,8 +1214,8 @@ export const de = {
       title2: "Die Plattform für Gefäß-Workflows ohne Strahlung und Kontrastmittel",
       subtitle: "Eine Web-Plattform für Gefäßteams: Eingriffe planen, Bildgebung fusionieren, Nierenrisiko antizipieren und Ergebnisse verfolgen — ohne Röntgen, ohne Jodkontrast.",
       translationalAmbition: "Eine mit Klinikerinnen und Klinikern gebaute Forschungsplattform. Ziel: Kartierung, Entscheidung, Planung, Führung und Behandlung schrittweise in einer nicht-ionisierenden Kette rekonstruieren.",
-      ctaPrimary: "Kostenlos starten — 30 Sekunden",
-      ctaSecondary: "2-Minuten Produkt-Tour ansehen",
+      ctaPrimary: "Forschungsprotokoll lesen",
+      ctaSecondary: "Wissenschaftliche Architektur ansehen",
       perkNoCard: "Keine Kreditkarte",
       perkBetaAccess: "Alle 10 Module freigeschaltet",
       perkGdpr: "DSGVO-konform, pseudonymisierte Daten",

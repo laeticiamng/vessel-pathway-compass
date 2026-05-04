@@ -234,9 +234,9 @@ export const fr = {
       },
     },
     cta: {
-      title: "Prêt à simplifier votre pratique vasculaire ?",
-      subtitle: "Rejoignez les spécialistes vasculaires qui explorent déjà la plateforme — gratuit pendant la bêta.",
-      button: "Créer un compte gratuit",
+      title: "Consulter le protocole de recherche",
+      subtitle: "Le protocole L1 complet, le plan statistique et les annexes de conformité sont accessibles aux comités scientifiques, jurys et partenaires académiques.",
+      button: "Accéder au protocole",
     },
     footer: {
       tagline: "La plateforme clinique conçue pour les professionnels de la médecine vasculaire.",
@@ -1214,8 +1214,8 @@ export const fr = {
       title2: "La plateforme de workflow vasculaire sans rayons ni produit de contraste",
       subtitle: "Une plateforme web pour les équipes vasculaires : planifier les procédures, fusionner l'imagerie, anticiper le risque rénal et suivre les résultats — sans rayons X, sans iode.",
       translationalAmbition: "Une plateforme de recherche construite avec les cliniciens. Objectif : reconstruire progressivement cartographie, décision, planification, guidage et traitement dans une chaîne non-ionisante.",
-      ctaPrimary: "Commencer gratuitement — 30 secondes",
-      ctaSecondary: "Voir la visite produit (2 min)",
+      ctaPrimary: "Lire le protocole de recherche",
+      ctaSecondary: "Voir l'architecture scientifique",
       perkNoCard: "Sans carte bancaire",
       perkBetaAccess: "Les 10 modules débloqués",
       perkGdpr: "RGPD, données pseudonymisées",

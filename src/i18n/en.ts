@@ -239,9 +239,9 @@ export const en = {
       },
     },
     cta: {
-      title: "Ready to Transform Your Vascular Workflow?",
-      subtitle: "Join interventional specialists exploring non-ionizing, contrast-sparing approaches — free during prototype phase.",
-      button: "Create Free Account",
+      title: "Read the research protocol",
+      subtitle: "The full L1 protocol, the statistical analysis plan and the compliance annexes are available to scientific committees, juries and academic partners.",
+      button: "Open the protocol",
     },
     footer: {
       tagline: "The non-ionizing vascular workflow platform for interventional specialists.",
@@ -1234,8 +1234,8 @@ export const en = {
       title2: "The vascular workflow platform without radiation or contrast injection",
       subtitle: "One web platform for vascular teams to plan procedures, fuse imaging, anticipate kidney risk and track outcomes — without X-rays, without iodinated contrast.",
       translationalAmbition: "A research platform built with clinicians. Goal: progressively reconstruct mapping, decision, planning, guidance and treatment in a non-ionizing chain.",
-      ctaPrimary: "Start free — 30 seconds",
-      ctaSecondary: "See a 2-min product tour",
+      ctaPrimary: "Read the research protocol",
+      ctaSecondary: "See the scientific architecture",
       perkNoCard: "No credit card",
       perkBetaAccess: "All 10 modules unlocked",
       perkGdpr: "GDPR-aligned, pseudonymized data",
