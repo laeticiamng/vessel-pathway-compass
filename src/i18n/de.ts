@@ -2404,6 +2404,7 @@ export const de = {
         },
       },
     },
+    faq: {
       seoTitle: "FAQ — Häufig gestellte Fragen zu AquaMR Flow",
       seoDescription: "Antworten auf häufige Fragen zu AquaMR Flow: was es ist, für wen es gedacht ist, Einschränkungen des Prototyps, Sicherheit, Zugang und Preise.",
       title: "Häufig gestellte Fragen",

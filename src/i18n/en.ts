@@ -2427,6 +2427,7 @@ export const en = {
         },
       },
     },
+    faq: {
       seoTitle: "FAQ — Frequently asked questions about AquaMR Flow",
       seoDescription: "Answers to frequently asked questions about AquaMR Flow: what it is, who it's for, prototype limitations, security, access and pricing.",
       title: "Frequently asked questions",
