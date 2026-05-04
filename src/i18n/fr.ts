@@ -251,11 +251,11 @@ export const fr = {
 
   pricing: {
     title: "Plans et tarifs",
-    betaBadge: "🎉 Bêta en cours — accès gratuit à toutes les fonctionnalités",
-    betaBannerTitle: "🚀 Toutes les fonctionnalités sont gratuites pendant la bêta",
-    betaBannerDesc: "Phase de validation académique en cours. Tous les modules sont accessibles ; les modalités tarifaires seront définies après le lancement officiel.",
-    subtitle: "Du médecin individuel aux grandes institutions — trouvez le plan adapté à votre pratique vasculaire.",
-    betaNote: "Pendant la bêta, les fonctionnalités payantes sont accessibles sans facturation. Les tarifs affichés s'appliqueront au lancement officiel.",
+    betaBadge: "Phase de validation académique — accès institutionnel encadré",
+    betaBannerTitle: "Phase de validation académique — accès encadré aux modules cliniques",
+    betaBannerDesc: "Étude prospective en cours. L'accès aux modules est ouvert aux investigateurs et établissements partenaires dans le cadre du protocole de recherche.",
+    subtitle: "Accès encadré pour cliniciens, équipes hospitalières et institutions partenaires du protocole de recherche.",
+    betaNote: "Pendant la phase de validation, les modules sont accessibles dans le cadre du protocole de recherche, sans facturation.",
     mostPopular: "Le plus populaire",
     currentPlan: "Votre plan",
     managePlan: "Gérer l'abonnement",
