@@ -1274,7 +1274,7 @@ export const en = {
       subtitle: "10 clinical modules, a locked L1 protocol, three languages and an architecture designed to target MDR / GDPR / IEC 62304 compliance.",
       available: "Available",
       detailsCta: "See full details of the 10 modules",
-      disclaimer: "All modules are accessible in the open beta. Research prototype — not certified as a medical device at this stage.",
+      disclaimer: "All modules are accessible during the academic validation phase. Research prototype — not certified as a medical device at this stage.",
       stats: [
         { value: "10", label: "Clinical modules" },
         { value: "3", label: "Languages (EN · FR · DE)" },
