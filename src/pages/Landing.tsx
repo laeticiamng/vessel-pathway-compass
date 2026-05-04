@@ -304,7 +304,7 @@ export default function Landing() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button asChild size="lg" className="text-base px-8 h-12 shadow-lg shadow-primary/25">
-                <Link to="/auth?mode=signup">
+                <Link to="/protocol">
                   {t("home.hero.ctaPrimary")}
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
