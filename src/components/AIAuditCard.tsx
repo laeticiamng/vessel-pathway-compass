@@ -8,12 +8,15 @@ import {
   Download,
   ShieldCheck,
   Loader2,
+  History,
+  Lock,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { useTranslation, type Language } from "@/i18n/context";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRoles } from "@/hooks/useUserRoles";
 import { toast } from "sonner";
 
 type EvidenceStatus = "validated" | "in-progress" | "planned";
@@ -52,8 +55,15 @@ interface PanelCopy {
   noteSubmit: string;
   noteCancel: string;
   signedInRequired: string;
+  unauthorized: string;
   confirmSuccess: string;
   confirmError: string;
+  historyCta: string;
+  historyTitle: string;
+  historyEmpty: string;
+  historyLoading: string;
+  historyClose: string;
+  historySelf: string;
   fields: EvidenceField[];
 }
 
@@ -114,8 +124,15 @@ const COPY: Record<Language, PanelCopy> = {
     noteSubmit: "Confirm",
     noteCancel: "Cancel",
     signedInRequired: "Sign in to confirm evidence rows.",
+    unauthorized: "Only clinicians or expert reviewers can confirm evidence.",
     confirmSuccess: "Evidence confirmed and logged.",
     confirmError: "Could not save confirmation.",
+    historyCta: "View history",
+    historyTitle: "Confirmation history",
+    historyEmpty: "No confirmations yet.",
+    historyLoading: "Loading history…",
+    historyClose: "Close",
+    historySelf: "you",
     fields: FIELDS_EN,
   },
   fr: {
@@ -141,8 +158,15 @@ const COPY: Record<Language, PanelCopy> = {
     noteSubmit: "Confirmer",
     noteCancel: "Annuler",
     signedInRequired: "Connectez-vous pour confirmer les lignes d'évidence.",
+    unauthorized: "Seuls cliniciens ou experts reviewers peuvent confirmer une évidence.",
     confirmSuccess: "Évidence confirmée et journalisée.",
     confirmError: "Impossible d'enregistrer la confirmation.",
+    historyCta: "Voir l'historique",
+    historyTitle: "Historique des confirmations",
+    historyEmpty: "Aucune confirmation pour l'instant.",
+    historyLoading: "Chargement de l'historique…",
+    historyClose: "Fermer",
+    historySelf: "vous",
     fields: FIELDS_FR,
   },
   de: {
@@ -168,8 +192,15 @@ const COPY: Record<Language, PanelCopy> = {
     noteSubmit: "Bestätigen",
     noteCancel: "Abbrechen",
     signedInRequired: "Bitte anmelden, um Evidenzzeilen zu bestätigen.",
+    unauthorized: "Nur Klinikerinnen oder Expert-Reviewer können Evidenz bestätigen.",
     confirmSuccess: "Evidenz bestätigt und protokolliert.",
     confirmError: "Bestätigung konnte nicht gespeichert werden.",
+    historyCta: "Verlauf anzeigen",
+    historyTitle: "Bestätigungsverlauf",
+    historyEmpty: "Noch keine Bestätigungen.",
+    historyLoading: "Verlauf wird geladen…",
+    historyClose: "Schliessen",
+    historySelf: "Sie",
     fields: FIELDS_DE,
   },
 };
@@ -192,6 +223,15 @@ interface ConfirmationRecord {
   confirmed_at: string;
 }
 
+interface HistoryEntry {
+  id: string;
+  evidence_version: string;
+  confirmed_at: string;
+  note: string | null;
+  user_display_name: string;
+  is_self: boolean;
+}
+
 interface Props {
   className?: string;
 }
@@ -199,6 +239,8 @@ interface Props {
 export function AIAuditCard({ className = "" }: Props) {
   const { language } = useTranslation();
   const { user } = useAuth();
+  const { hasRole, isLoading: rolesLoading } = useUserRoles();
+  const canConfirm = hasRole(["physician", "expert_reviewer", "admin", "super_admin"]);
   const copy = COPY[language] ?? COPY.en;
 
   const [filter, setFilter] = useState<FilterValue>("all");
@@ -206,6 +248,9 @@ export function AIAuditCard({ className = "" }: Props) {
   const [openConfirm, setOpenConfirm] = useState<string | null>(null);
   const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [openHistory, setOpenHistory] = useState<string | null>(null);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [historyLoading, setHistoryLoading] = useState(false);
 
   // Load existing user confirmations
   useEffect(() => {
@@ -279,6 +324,10 @@ export function AIAuditCard({ className = "" }: Props) {
       toast.error(copy.signedInRequired);
       return;
     }
+    if (!canConfirm) {
+      toast.error(copy.unauthorized);
+      return;
+    }
     setSubmitting(true);
     const { data, error } = await supabase
       .from("ai_audit_confirmations")
@@ -292,7 +341,7 @@ export function AIAuditCard({ className = "" }: Props) {
       .single();
     setSubmitting(false);
     if (error || !data) {
-      toast.error(copy.confirmError);
+      toast.error(error?.code === "42501" ? copy.unauthorized : copy.confirmError);
       return;
     }
     setConfirmations((prev) => ({
@@ -302,6 +351,19 @@ export function AIAuditCard({ className = "" }: Props) {
     setOpenConfirm(null);
     setNote("");
     toast.success(copy.confirmSuccess);
+  };
+
+  const loadHistory = async (evidenceId: string) => {
+    setOpenHistory(evidenceId);
+    setHistory([]);
+    setHistoryLoading(true);
+    const { data, error } = await supabase.rpc(
+      "get_ai_audit_evidence_history" as never,
+      { _evidence_id: evidenceId } as never
+    );
+    setHistoryLoading(false);
+    if (error || !data) return;
+    setHistory(data as unknown as HistoryEntry[]);
   };
 
   const filterButton = (value: FilterValue, label: string, count: number) => (
@@ -457,22 +519,85 @@ export function AIAuditCard({ className = "" }: Props) {
                     </div>
                   </div>
                 ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (!user) {
-                        toast.error(copy.signedInRequired);
-                        return;
-                      }
-                      setOpenConfirm(f.id);
-                      setNote("");
-                    }}
-                    data-testid={`ai-audit-confirm-cta-${f.id}`}
-                    className="inline-flex items-center gap-1.5 text-[11px] font-medium text-primary hover:underline"
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      disabled={!user || (!rolesLoading && !canConfirm)}
+                      onClick={() => {
+                        if (!user) {
+                          toast.error(copy.signedInRequired);
+                          return;
+                        }
+                        if (!canConfirm) {
+                          toast.error(copy.unauthorized);
+                          return;
+                        }
+                        setOpenConfirm(f.id);
+                        setNote("");
+                      }}
+                      data-testid={`ai-audit-confirm-cta-${f.id}`}
+                      title={!canConfirm && user ? copy.unauthorized : undefined}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-medium text-primary hover:underline disabled:text-muted-foreground disabled:no-underline disabled:cursor-not-allowed"
+                    >
+                      {!canConfirm && user ? (
+                        <Lock className="h-3.5 w-3.5" aria-hidden />
+                      ) : (
+                        <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
+                      )}
+                      {!canConfirm && user ? copy.unauthorized : copy.confirmCta}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => loadHistory(f.id)}
+                      data-testid={`ai-audit-history-cta-${f.id}`}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground hover:text-foreground hover:underline"
+                    >
+                      <History className="h-3.5 w-3.5" aria-hidden />
+                      {copy.historyCta}
+                    </button>
+                  </div>
+                )}
+                {openHistory === f.id && (
+                  <div
+                    data-testid={`ai-audit-history-panel-${f.id}`}
+                    className="mt-3 rounded-md border border-border/60 bg-muted/30 p-3"
                   >
-                    <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
-                    {copy.confirmCta}
-                  </button>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        {copy.historyTitle}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setOpenHistory(null);
+                          setHistory([]);
+                        }}
+                        className="text-[11px] text-muted-foreground hover:text-foreground"
+                      >
+                        {copy.historyClose}
+                      </button>
+                    </div>
+                    {historyLoading ? (
+                      <p className="text-[11px] text-muted-foreground">{copy.historyLoading}</p>
+                    ) : history.length === 0 ? (
+                      <p className="text-[11px] text-muted-foreground italic">{copy.historyEmpty}</p>
+                    ) : (
+                      <ul className="space-y-1.5">
+                        {history.map((h) => (
+                          <li key={h.id} className="text-[11px] text-foreground/90 flex flex-wrap gap-x-2">
+                            <time dateTime={h.confirmed_at} className="font-mono text-muted-foreground">
+                              {h.confirmed_at.slice(0, 16).replace("T", " ")}
+                            </time>
+                            <span className="font-medium">
+                              {h.is_self ? copy.historySelf : h.user_display_name}
+                            </span>
+                            <span className="text-muted-foreground">v{h.evidence_version}</span>
+                            {h.note && <span className="text-muted-foreground italic">— {h.note}</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 )}
               </div>
             </li>
