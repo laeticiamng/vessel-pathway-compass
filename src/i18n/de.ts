@@ -1524,7 +1524,7 @@ export const de = {
   contentGate: {
     previewBanner: "Sie browsen als Gast — melden Sie sich an, um alle Funktionen freizuschalten",
     title: "Möchten Sie dieses Modul nutzen?",
-    subtitle: "Erstellen Sie in 30 Sekunden ein kostenloses Konto, um alle Funktionen zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
+    subtitle: "Erstellen Sie in 30 Sekunden ein Prüfärzte-Konto, um die Module im Rahmen des Forschungsprotokolls zu nutzen, Daten zu speichern und Ihren Fortschritt zu verfolgen.",
     createAccount: "Konto erstellen",
     signIn: "Ich habe bereits ein Konto",
     benefits: [
