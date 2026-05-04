@@ -226,6 +226,9 @@ export default function Protocol() {
         {/* Compliance Annexes — references, limits, RGPD/nLPD, security, ADR/DSMB, traceability */}
         <ComplianceAnnexesSection />
 
+        {/* Exportable audit log (CSV/PDF) — governance roles only */}
+        <ProtocolAuditLogExporter />
+
         {/* Anti-overpromise — explicit list of what the platform does NOT claim */}
         <div className="-mx-6 mb-8">
           <AntiOverpromiseSection compact />
