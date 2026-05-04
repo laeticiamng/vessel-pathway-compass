@@ -519,22 +519,85 @@ export function AIAuditCard({ className = "" }: Props) {
                     </div>
                   </div>
                 ) : (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      if (!user) {
-                        toast.error(copy.signedInRequired);
-                        return;
-                      }
-                      setOpenConfirm(f.id);
-                      setNote("");
-                    }}
-                    data-testid={`ai-audit-confirm-cta-${f.id}`}
-                    className="inline-flex items-center gap-1.5 text-[11px] font-medium text-primary hover:underline"
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      disabled={!user || (!rolesLoading && !canConfirm)}
+                      onClick={() => {
+                        if (!user) {
+                          toast.error(copy.signedInRequired);
+                          return;
+                        }
+                        if (!canConfirm) {
+                          toast.error(copy.unauthorized);
+                          return;
+                        }
+                        setOpenConfirm(f.id);
+                        setNote("");
+                      }}
+                      data-testid={`ai-audit-confirm-cta-${f.id}`}
+                      title={!canConfirm && user ? copy.unauthorized : undefined}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-medium text-primary hover:underline disabled:text-muted-foreground disabled:no-underline disabled:cursor-not-allowed"
+                    >
+                      {!canConfirm && user ? (
+                        <Lock className="h-3.5 w-3.5" aria-hidden />
+                      ) : (
+                        <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
+                      )}
+                      {!canConfirm && user ? copy.unauthorized : copy.confirmCta}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => loadHistory(f.id)}
+                      data-testid={`ai-audit-history-cta-${f.id}`}
+                      className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground hover:text-foreground hover:underline"
+                    >
+                      <History className="h-3.5 w-3.5" aria-hidden />
+                      {copy.historyCta}
+                    </button>
+                  </div>
+                )}
+                {openHistory === f.id && (
+                  <div
+                    data-testid={`ai-audit-history-panel-${f.id}`}
+                    className="mt-3 rounded-md border border-border/60 bg-muted/30 p-3"
                   >
-                    <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
-                    {copy.confirmCta}
-                  </button>
+                    <div className="flex items-center justify-between mb-2">
+                      <p className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                        {copy.historyTitle}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setOpenHistory(null);
+                          setHistory([]);
+                        }}
+                        className="text-[11px] text-muted-foreground hover:text-foreground"
+                      >
+                        {copy.historyClose}
+                      </button>
+                    </div>
+                    {historyLoading ? (
+                      <p className="text-[11px] text-muted-foreground">{copy.historyLoading}</p>
+                    ) : history.length === 0 ? (
+                      <p className="text-[11px] text-muted-foreground italic">{copy.historyEmpty}</p>
+                    ) : (
+                      <ul className="space-y-1.5">
+                        {history.map((h) => (
+                          <li key={h.id} className="text-[11px] text-foreground/90 flex flex-wrap gap-x-2">
+                            <time dateTime={h.confirmed_at} className="font-mono text-muted-foreground">
+                              {h.confirmed_at.slice(0, 16).replace("T", " ")}
+                            </time>
+                            <span className="font-medium">
+                              {h.is_self ? copy.historySelf : h.user_display_name}
+                            </span>
+                            <span className="text-muted-foreground">v{h.evidence_version}</span>
+                            {h.note && <span className="text-muted-foreground italic">— {h.note}</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
                 )}
               </div>
             </li>
