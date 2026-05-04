@@ -251,11 +251,11 @@ export const de = {
 
   pricing: {
     title: "Pläne & Preise",
-    betaBadge: "🎉 Beta läuft — kostenloser Zugriff auf alle Funktionen",
-    betaBannerTitle: "🚀 Alle Funktionen sind während der Beta kostenlos",
-    betaBannerDesc: "Akademische Validierungsphase läuft. Alle Module sind zugänglich; Preisbedingungen werden nach dem offiziellen Start festgelegt.",
-    subtitle: "Vom einzelnen Arzt bis zur großen Einrichtung — finden Sie den passenden Plan für Ihre Gefäßpraxis.",
-    betaNote: "Während der Beta sind kostenpflichtige Funktionen ohne Abrechnung nutzbar; die angezeigten Preise gelten zum offiziellen Start.",
+    betaBadge: "Akademische Validierungsphase — kontrollierter institutioneller Zugang",
+    betaBannerTitle: "Akademische Validierungsphase — kontrollierter Zugang zu den klinischen Modulen",
+    betaBannerDesc: "Prospektive Studie läuft. Der Modulzugang ist für Prüfärzte und Partnerinstitutionen im Rahmen des Forschungsprotokolls geöffnet.",
+    subtitle: "Kontrollierter Zugang für Kliniker, Krankenhausteams und Partnerinstitutionen des Forschungsprotokolls.",
+    betaNote: "Während der Validierungsphase werden die Module im Rahmen des Forschungsprotokolls ohne Abrechnung bereitgestellt.",
     mostPopular: "Am beliebtesten",
     currentPlan: "Ihr Plan",
     managePlan: "Abo verwalten",
