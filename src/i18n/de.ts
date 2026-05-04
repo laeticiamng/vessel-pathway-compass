@@ -117,6 +117,7 @@ export const de = {
       explore: "Funktionen",
       why: "Warum",
       trajectory: "Trajektorie",
+      aboutAquaMR: "Über AquaMR",
     },
     hero: {
       // Note: legacy keys (badge/title/headlinePre/headlineHighlight/subtitle/cta/secondary/socialProof)
@@ -3058,5 +3059,63 @@ export const de = {
     badge3: "SAP vor Entblindung eingefroren",
     reset: "Auf Standard zurücksetzen",
     footnote: "Endgültige Stichprobengröße wird durch eine unabhängige Biostatistik-Einheit bestätigt; Rekalibration nach verblindeter Zwischenauswertung möglich (≈ M24, vor J3).",
+  },
+  aboutAquaMR: {
+    seoTitle: "Über AquaMR — physisches Objekt, Prinzip, Fertigung & Machbarkeit",
+    seoDescription: "AquaMR ist der experimentelle Hardware-Kern von VASCU-LINK: ein Niederfeld-MR-Prototyp für die unteren Extremitäten, der eine vaskuläre Vorrevaskularisations-Karte ohne ionisierende Strahlung und ohne injiziertes Kontrastmittel liefern soll. Forschungsprototyp — noch nicht gebaut.",
+    kicker: "Forschungsprototyp · Machbarkeitsstudie läuft",
+    title: "Was AquaMR wirklich ist",
+    intro:
+      "AquaMR ist der experimentelle Hardware-Kern von VASCU-LINK: ein Niederfeld-MR-Prototyp für die unteren Extremitäten, dessen Ziel es ist, eine vaskuläre Vorrevaskularisations-Kartierung ohne ionisierende Strahlung und ohne injiziertes Kontrastmittel zu erstellen. Diese Seite beschreibt das Objekt, die Physik, die Fertigung, die Bildgebungskette und die Machbarkeits-Leitplanken — wortgetreu aus der Doktoratsakte.",
+    diagramAlt:
+      "VASCU-LINK Architektur-Diagramm: drei konzentrische Schichten (L1 Diagnose, Entscheidungs-Cockpit, L2 Guide, L3 präklinische Vision) unter der vaskulären 4-Null-Cockpit-Signatur.",
+    diagramCaption:
+      "VASCU-LINK Architektur — AquaMR sitzt in L1 (Diagnose) als Niederfeld-Bildgebungskern; die Plattform schichtet Entscheidungsunterstützung, simulierte Führung und präklinische Vision darüber.",
+    sectionsHeading: "Fünf Abschnitte zur Beschreibung des Objekts",
+    sections: [
+      {
+        title: "Definition des Objekts",
+        body: "AquaMR ist der experimentelle Hardware-Kern von VASCU-LINK: ein Niederfeld-MR-Prototyp für die unteren Extremitäten, dessen Ziel die vaskuläre Vorrevaskularisations-Kartierung ohne ionisierende Strahlung und ohne injiziertes Kontrastmittel ist.",
+      },
+      {
+        title: "Physikalisches Prinzip",
+        body: "Konventionelle MRT beruht auf einem B0-Feld, HF-Anregung, gradientenbasierter räumlicher Kodierung und Bildrekonstruktion. Unterschied zur klinischen 1,5–3 T-MRT: das Feld. AquaMR arbeitet im niedrigen Feld (typischerweise 0,05–0,2 T) erzeugt durch Permanentmagnet-Halbach-Anordnungen — ohne Kryotechnik, ohne Helium. Kompromiss: niedrigeres SNR — erfordert Hardware-Optimierung, angepasste Sequenzen und algorithmische Rekonstruktion.",
+      },
+      {
+        title: "v0-Prototyp — Fertigung",
+        body: "(i) Halbach-Magnet aus recycelten NdFeB (WEEE-Strom) + Ferrit-Shim-Stücke; (ii) HF- und Gradienten-Kupferspulen; (iii) Gehäuse aus biobasiertem PLA / FSC-Holz; (iv) Open-Source-Konsole (MaRCoS / Red Pitaya); (v) COTS-HF-/Gradienten-Elektronik, T°/EMI/Sicherheits-Sensoren, leichte Abschirmung. Theoretisches BoM-Ziel < 15 k€ — durch Lieferantenangebote zu validieren.",
+      },
+      {
+        title: "Vaskuläre Bildgebungskette",
+        body: "Nicht kontrastierte vaskuläre Sequenzen (TOF / QISS), angepasst an das Niederfeld, gepaart mit einer dedizierten KI-Kette (k-Raum-Entrauschen, Super-Resolution, EMI-Unterdrückung). Diese Kette ersetzt nicht die klinische Validierung; sie macht das Niederfeld-Signal interpretierbar und mit Standardbildgebung vergleichbar.",
+      },
+      {
+        title: "Machbarkeit & Leitplanken",
+        body: "Vorgegebene Go-/No-Go-Validierung: T1 NMR-Signal am Phantom · T2 Fluss-/Statikkontrast · T3 diagnostische Übereinstimmung mit Standardreferenz. Dokumentierte Pivots bei Fehlschlag: günstige Neumagnete, verstärktes Shimming, Hochfahren auf 0,1 T oder experimenteller Rückgriff auf einen 0,55 T-Klinikscanner. Keine humane interventionelle Anwendung während der Promotion.",
+      },
+    ],
+    signature:
+      "L1 setzt nicht voraus, dass AquaMR bereits als klinisches Gerät existiert; L1 prüft präzise die Hardware-, Bild- und klinische Machbarkeit des diagnostischen Kerns.",
+    hierarchy: {
+      title: "Nomenklatur-Hierarchie",
+      subtitle: "Wie Gerät, Kette, Cockpit, Plattform und Programm zusammenhängen.",
+      colComponent: "Komponente",
+      colRole: "Rolle",
+      rows: [
+        { component: "AquaMR", role: "Niederfeld-Bildgebungs-Hardware" },
+        { component: "TOF / QISS + KI", role: "Akquisitions- und Rekonstruktions-Engine" },
+        { component: "Doppler + ABI / TBI + PROMs + C4-i", role: "Zugehörige klinische Daten" },
+        { component: "Vessel Pathway Compass", role: "Entscheidungs-Cockpit (Software)" },
+        { component: "AquaMR Flow Platform", role: "Software-Umgebung, die alles integriert" },
+        { component: "VASCU-LINK", role: "Vollständiges Doktoratsprogramm (Gerät + Kette + Cockpit + Plattform + Protokoll)" },
+      ],
+    },
+    cta: {
+      title: "Lesen Sie das Protokoll hinter dem Objekt",
+      subtitle: "AquaMR ist ein Element einer abgestuften wissenschaftlichen Trajektorie. Weiter mit dem Protokoll, der L1 → L2 → L3 → post-PhD-Trajektorie oder der klinischen Begründung.",
+      protocol: "Protokoll lesen",
+      trajectory: "Trajektorie ansehen",
+      why: "Warum VASCU-LINK",
+    },
   },
 };
