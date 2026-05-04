@@ -300,7 +300,7 @@ export default function Landing() {
             <p className="text-base md:text-lg text-on-hero-soft max-w-2xl mx-auto mb-4 leading-relaxed">
               {t("home.hero.subtitle")}
             </p>
-            <p className="text-sm md:text-base text-on-hero-soft/90 max-w-2xl mx-auto mb-10 italic leading-relaxed">
+            <p className="text-sm md:text-base text-on-hero-soft max-w-2xl mx-auto mb-10 italic leading-relaxed">
               {t("home.hero.translationalAmbition")}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
