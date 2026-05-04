@@ -269,10 +269,10 @@ export const fr = {
       disclaimer: "Pas de plan commercial public pendant la phase de validation prospective.",
     },
     currency: {
-      label: "Devise",
-      chf: "CHF",
-      eur: "EUR",
-      indicativeNote: "Tarif indicatif post-lancement — facturation en CHF ou EUR (pas de USD).",
+      label: "Accès",
+      chf: "Encadré",
+      eur: "Encadré",
+      indicativeNote: "Aucune grille publique pendant la phase de validation académique — accès institutionnel encadré, négocié au cas par cas.",
     },
     plans: {
       individual: {
@@ -290,8 +290,8 @@ export const fr = {
       },
       professional: {
         name: "Investigateur clinique",
-        price: "CHF 99 / 99 €",
-        period: "/mois (indicatif post-validation)",
+        price: "Accès encadré",
+        period: "phase de validation",
         desc: "Pour les médecins vasculaires impliqués dans la phase de validation",
         features: [
           "Assistant IA illimité",

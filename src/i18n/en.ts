@@ -275,10 +275,10 @@ export const en = {
       disclaimer: "No public commercial plan during the prospective validation phase.",
     },
     currency: {
-      label: "Currency",
-      chf: "CHF",
-      eur: "EUR",
-      indicativeNote: "Indicative post-launch tariff — billing in CHF or EUR (no USD).",
+      label: "Access",
+      chf: "Supervised",
+      eur: "Supervised",
+      indicativeNote: "No public pricing during the academic validation phase — supervised institutional access negotiated case by case.",
     },
     plans: {
       individual: {
@@ -296,8 +296,8 @@ export const en = {
       },
       professional: {
         name: "Clinical investigator",
-        price: "CHF 99 / €99",
-        period: "/month (indicative, post-validation)",
+        price: "Supervised access",
+        period: "validation phase",
         desc: "For vascular physicians involved in the validation phase",
         features: [
           "Unlimited AI Assistant",

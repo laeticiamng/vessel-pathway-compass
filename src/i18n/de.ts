@@ -269,10 +269,10 @@ export const de = {
       disclaimer: "Kein öffentlicher kommerzieller Plan während der prospektiven Validierungsphase.",
     },
     currency: {
-      label: "Währung",
-      chf: "CHF",
-      eur: "EUR",
-      indicativeNote: "Indikative Tarife nach dem Launch — Abrechnung in CHF oder EUR (kein USD).",
+      label: "Zugang",
+      chf: "Kontrolliert",
+      eur: "Kontrolliert",
+      indicativeNote: "Keine öffentlichen Preise während der akademischen Validierungsphase — kontrollierter institutioneller Zugang, fallweise verhandelt.",
     },
     plans: {
       individual: {
@@ -290,8 +290,8 @@ export const de = {
       },
       professional: {
         name: "Klinischer Prüfarzt",
-        price: "CHF 99 / 99 €",
-        period: "/Monat (indikativ, nach Validierung)",
+        price: "Kontrollierter Zugang",
+        period: "Validierungsphase",
         desc: "Für Gefäßmediziner, die an der Validierungsphase beteiligt sind",
         features: [
           "Unbegrenzter KI-Assistent",
