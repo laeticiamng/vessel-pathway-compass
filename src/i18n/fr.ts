@@ -2017,10 +2017,10 @@ export const fr = {
     },
     modules: {
       seoTitle: "Modules cliniques — AquaMR Flow",
-      seoDescription: "Détail des 10 modules d'AquaMR Flow : fonctionnalités, prérequis et statut de disponibilité. Plateforme vasculaire non ionisante, prototype de recherche en bêta ouverte.",
+      seoDescription: "Détail des 10 modules de VASCU-LINK : fonctionnalités, prérequis et statut de disponibilité. Plateforme vasculaire non ionisante, prototype de recherche en phase de validation académique.",
       heroBadge: "10 modules livrés",
-      heroTitle: "Modules cliniques d'AquaMR Flow",
-      heroSubtitle: "Chaque module est documenté avec ses fonctionnalités principales, ses prérequis cliniques et techniques, et son statut de disponibilité dans la bêta ouverte.",
+      heroTitle: "Modules cliniques de VASCU-LINK",
+      heroSubtitle: "Chaque module est documenté avec ses fonctionnalités principales, ses prérequis cliniques et techniques, et son statut de disponibilité dans la phase de validation académique.",
       featuresLabel: "Fonctionnalités principales",
       prerequisitesLabel: "Prérequis",
       openCta: "Ouvrir le module",
