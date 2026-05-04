@@ -196,7 +196,7 @@ export const en = {
       ],
     },
     // Note: socialProof + testimonials sections were removed from the landing page
-    // (the project rule forbids fake/anonymous social proof during the open beta).
+    // (the project rule forbids fake/anonymous social proof during the academic validation phase).
     // Keys pruned to keep the dictionary aligned with the actual UI surface.
     faq: {
       title: "Frequently Asked Questions",
@@ -281,23 +281,23 @@ export const en = {
     },
     plans: {
       individual: {
-        name: "Individual",
-        price: "Free",
-        period: "forever",
-        desc: "For individual physicians exploring the platform",
+        name: "Individual investigator",
+        price: "Supervised access",
+        period: "validation phase",
+        desc: "For individual clinicians joining the research protocol",
         features: [
-          "AI Clinical Assistant (limited)",
+          "AI Clinical Assistant (supervised)",
           "5 patient cases",
           "Education hub access",
           "Community forum access",
         ],
-        cta: "Start Free",
+        cta: "Join the protocol",
       },
       professional: {
-        name: "Professional",
+        name: "Clinical investigator",
         price: "CHF 99 / €99",
-        period: "/month (post-launch, indicative)",
-        desc: "For practicing interventional physicians",
+        period: "/month (indicative, post-validation)",
+        desc: "For vascular physicians involved in the validation phase",
         features: [
           "Unlimited AI Assistant",
           "Unlimited patient cases",
@@ -307,7 +307,7 @@ export const en = {
           "Simulation lab access",
           "Expert consultations (5/mo)",
         ],
-        cta: "Free beta access",
+        cta: "Request investigator access",
       },
       institution: {
         name: "Institution",
@@ -1018,7 +1018,7 @@ export const en = {
       title: "Plan & Billing",
       desc: "Manage your subscription and billing details",
       currentPlan: "Current plan",
-      free: "Free",
+      free: "Supervised access",
       viewPlans: "View Plans",
       renewsOn: "Renews on",
     },
@@ -1274,7 +1274,7 @@ export const en = {
       subtitle: "10 clinical modules, a locked L1 protocol, three languages and an architecture designed to target MDR / GDPR / IEC 62304 compliance.",
       available: "Available",
       detailsCta: "See full details of the 10 modules",
-      disclaimer: "All modules are accessible in the open beta. Research prototype — not certified as a medical device at this stage.",
+      disclaimer: "All modules are accessible during the academic validation phase. Research prototype — not certified as a medical device at this stage.",
       stats: [
         { value: "10", label: "Clinical modules" },
         { value: "3", label: "Languages (EN · FR · DE)" },
@@ -1349,7 +1349,7 @@ export const en = {
       items: [
         {
           q: "What does \"no regulatory approval\" mean for AquaMR Flow?",
-          a: "AquaMR Flow is a research prototype in open beta. It is not CE-marked as a medical device, not FDA-cleared and not Swissmedic-approved.\n\nIn practice:\n• It does not establish a diagnosis and does not prescribe a treatment.\n• Any decision support (CI-AKI, planning, digital twin) must be confirmed by a qualified clinician, who remains solely responsible for the medical act.\n• Clinical use takes place within a research, training or workflow-organization framework.\n\nThe architecture is designed to eventually target MDR / GDPR / IEC 62304 compliance, but this objective is not achieved at this stage.",
+          a: "AquaMR Flow is a research prototype in academic validation phase. It is not CE-marked as a medical device, not FDA-cleared and not Swissmedic-approved.\n\nIn practice:\n• It does not establish a diagnosis and does not prescribe a treatment.\n• Any decision support (CI-AKI, planning, digital twin) must be confirmed by a qualified clinician, who remains solely responsible for the medical act.\n• Clinical use takes place within a research, training or workflow-organization framework.\n\nThe architecture is designed to eventually target MDR / GDPR / IEC 62304 compliance, but this objective is not achieved at this stage.",
         },
         {
           q: "How is auditability ensured?",
@@ -1405,7 +1405,7 @@ export const en = {
     whatsNew: {
       badge: "What's new",
       title: "Platform changelog",
-      subtitle: "Recent improvements, new modules and security upgrades shipped during the open beta.",
+      subtitle: "Recent improvements, new modules and security upgrades shipped during the academic validation phase.",
       cta: "See all 10 modules",
       tagLabels: {
         new: "New",
@@ -1537,9 +1537,9 @@ export const en = {
     error: "Something went wrong. Please try again later.",
   },
   pricingExtras: {
-    free: "Free",
-    duringBeta: "during the beta",
-    atLaunch: "at official launch",
+    free: "Supervised access",
+    duringBeta: "during the validation phase",
+    atLaunch: "after academic validation",
   },
   contentGate: {
     previewBanner: "You're browsing as a guest — sign in to unlock all features",
@@ -1718,7 +1718,7 @@ export const en = {
         { q: "Is AquaMR Flow a medical device?", a: "No. AquaMR Flow is a clinical decision support tool. All AI outputs require review by a qualified clinician before clinical action." },
         { q: "How is patient data protected?", a: "All patient data is pseudonymized. We use row-level security, encryption at rest and in transit, and maintain comprehensive audit trails." },
         { q: "Can I export my data?", a: "Yes. You can export patient data, measurements, and reports in CSV and PDF formats from the relevant sections." },
-        { q: "What happens during the free beta?", a: "During the beta period, all features are available for free. We will notify you before any billing begins." },
+        { q: "What happens during the academic validation phase?", a: "During the validation phase, module access is supervised by the research protocol, with no billing. Post-validation access terms will be communicated before any change." },
         { q: "How do I delete my account?", a: "Contact contact@emotionscare.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
       ],
     },
@@ -1768,13 +1768,13 @@ export const en = {
     },
   },
   premiumGate: {
-    title: "Professional Feature",
-    desc: "This feature requires a Professional subscription.",
-    featureDesc: "{{feature}} requires a Professional subscription.",
-    betaNote: "During beta, all features are available. Upgrade to keep access after beta.",
-    upgrade: "Upgrade to Professional",
-    limitReached: "You've reached the free limit for {{feature}}. Upgrade to Professional for unlimited access.",
-    limitNear: "You've used {{current}} of {{limit}} free {{feature}}. Upgrade for unlimited access.",
+    title: "Supervised-access module",
+    desc: "This module requires investigator access under the research protocol.",
+    featureDesc: "{{feature}} requires investigator access under the research protocol.",
+    betaNote: "During the validation phase, modules are accessible under the research protocol. Request investigator access to keep using them after the validation phase.",
+    upgrade: "Request investigator access",
+    limitReached: "You've reached the supervised-access limit for {{feature}}. Request investigator access for extended use.",
+    limitNear: "You've used {{current}} of {{limit}} {{feature}} under supervised access. Request investigator access for extended use.",
     features: {
       aiReports: "AI reports",
       patients: "patients",
@@ -2040,14 +2040,14 @@ export const en = {
     },
     modules: {
       seoTitle: "Clinical modules — AquaMR Flow",
-      seoDescription: "Detailed view of AquaMR Flow's 10 modules: features, prerequisites and availability status. Non-ionizing vascular platform, research prototype in open beta.",
+      seoDescription: "Detailed view of AquaMR Flow's 10 modules: features, prerequisites and availability status. Non-ionizing vascular platform, research prototype in academic validation phase.",
       heroBadge: "10 modules shipped",
       heroTitle: "AquaMR Flow clinical modules",
-      heroSubtitle: "Each module is documented with its core features, clinical and technical prerequisites, and its availability status in the open beta.",
+      heroSubtitle: "Each module is documented with its core features, clinical and technical prerequisites, and its availability status in the academic validation phase.",
       featuresLabel: "Core features",
       prerequisitesLabel: "Prerequisites",
       openCta: "Open module",
-      ctaSignup: "Create a free account",
+      ctaSignup: "Create an investigator account",
       ctaProtocol: "View clinical protocol",
       footerDisclaimer: "AquaMR Flow is a research prototype — not a certified medical device at this stage. Any decision support displayed by a module requires clinician confirmation.",
       legend: { aria: "Availability status legend" },
@@ -2574,7 +2574,7 @@ export const en = {
         traceability: { title: "Traceability", desc: "Sensitive operations (PHI reads, exports, deletions) are recorded in an immutable audit log accessible to administrators." },
       },
       scopeTitle: "Prototype scope",
-      scopeP1: "AquaMR Flow is currently a research prototype in open beta. Features, the exact scope of processing and operational commitments are subject to change.",
+      scopeP1: "AquaMR Flow is currently a research prototype in academic validation phase. Features, the exact scope of processing and operational commitments are subject to change.",
       scopeP2: "For precise information on data processing, the data controller and associated rights (access, rectification, erasure, portability), please refer to the legal notices and privacy policy.",
       nextTitle: "Going further",
       nextDesc: "Browse the dedicated pages or contact the team for any question.",
@@ -2611,17 +2611,17 @@ export const en = {
           ],
         },
         usage: {
-          title: "Free plan & quotas (post-beta)",
+          title: "Supervised access & quotas (post-validation)",
           items: [
-            "During the open beta: every feature is available for free, without a credit card and without quotas — the 30-day trash and full audit trail are already active.",
-            "After official launch, the free plan will be limited to 3 AI reports per day and 5 active patient records; these limits do not apply today.",
-            "Accounts created during the beta keep their data and history when moving to the stable version.",
+            "During the academic validation phase: every module is accessible without quotas under the research protocol — the 30-day trash and full audit trail are already active.",
+            "After academic validation, supervised access will be limited to 3 AI reports per day and 5 active patient records; these limits do not apply today.",
+            "Accounts created during the validation phase keep their data and history when moving to the stable version.",
           ],
         },
       },
       ctaTitle: "A question about these limitations?",
       ctaDesc: "The team responds directly, with no middleman. Any feedback on prototype scope is valuable for the thesis framing.",
-      resolvedBadge: "Resolved in beta",
+      resolvedBadge: "Resolved during validation",
       transparencyCta: "See the Transparency & Governance page",
     },
   },
@@ -2629,8 +2629,8 @@ export const en = {
   seo: {
     // landing: removed — replaced by `home.seo.{title,description}` (used by Landing.tsx).
     pricing: {
-      title: "Pricing — AquaMR Flow Plans",
-      description: "Compare VASCU-LINK access tiers: Free Individual, Professional (CHF 99 / €99 indicative post-launch), and custom Institution access. All features free during research validation phase.",
+      title: "Institutional access — VASCU-LINK",
+      description: "Compare VASCU-LINK access tiers: individual investigator, clinical investigator and custom institutional access. All modules accessible under the research protocol during the academic validation phase.",
     },
     support: {
       title: "Support & FAQ — AquaMR Flow",

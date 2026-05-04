@@ -75,7 +75,7 @@ const CONTENT: Record<Language, Content> = {
     seoDescription:
       "Ce qui est disponible en prototype, ce qui est structurellement limité, et comment vérifier chaque affirmation. Beta ouverte, traçabilité par défaut.",
     hero: {
-      eyebrow: "Open Beta — sans dispositif médical certifié",
+      eyebrow: "Phase de validation académique — sans dispositif médical certifié",
       title: "Transparence & Gouvernance",
       subtitle:
         "Nous publions ici, sans embellissement, ce que la plateforme fait réellement aujourd'hui, ce qu'elle ne fait pas, et où vous pouvez vérifier par vous-même.",
@@ -155,10 +155,10 @@ const CONTENT: Record<Language, Content> = {
             "Nous refusons par principe d'afficher de la social proof inventée ou non vérifiable (logos d'hôpitaux, citations anonymes, chiffres d'utilisateurs gonflés).",
         },
         {
-          title: "Limites du plan gratuit",
+          title: "Limites de l'accès encadré",
           desc:
-            "3 rapports IA par jour et 5 patients maximum sur le tier gratuit. Pendant la Beta ouverte, l'ensemble est accessible sans carte bancaire — annoncé clairement sur la page Tarifs.",
-          proofs: [{ label: "Voir Tarifs", href: "/pricing", kind: "internal" }],
+            "3 rapports IA par jour et 5 patients maximum en accès encadré post-validation. Pendant la phase de validation académique, les modules sont accessibles dans le cadre du protocole — précisé sur la page Accès institutionnel.",
+          proofs: [{ label: "Voir l'accès institutionnel", href: "/pricing", kind: "internal" }],
         },
         {
           title: "Hébergement et résidence des données",
@@ -173,7 +173,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "Pas de support 24/7",
           desc:
-            "Support par email avec réponse en jours ouvrés. Aucun SLA contractuel pendant la Beta ouverte.",
+            "Support par email avec réponse en jours ouvrés. Aucun SLA contractuel pendant la phase de validation académique.",
         },
       ],
     },
@@ -188,9 +188,9 @@ const CONTENT: Record<Language, Content> = {
             "Cette page est statique : tout son contenu est lisible dans le bundle JavaScript livré au navigateur. Aucune affirmation cachée côté serveur.",
         },
         {
-          title: "2. Créer un compte de test gratuit",
+          title: "2. Créer un compte investigateur de test",
           desc:
-            "Sans carte bancaire pendant la Beta ouverte. Vous pouvez parcourir les 10 modules, créer un patient fictif et observer les journaux d'audit générés.",
+            "Compte sans facturation pendant la phase de validation académique. Vous pouvez parcourir les 10 modules, créer un patient fictif et observer les journaux d'audit générés.",
         },
         {
           title: "3. Exporter votre journal d'audit",
@@ -217,7 +217,7 @@ const CONTENT: Record<Language, Content> = {
     seoDescription:
       "What the prototype actually ships today, what is structurally out of scope, and how to verify every claim. Open beta, audit by default.",
     hero: {
-      eyebrow: "Open Beta — not a certified medical device",
+      eyebrow: "Academic validation phase — not a certified medical device",
       title: "Transparency & Governance",
       subtitle:
         "We publish here, without polish, what the platform really does today, what it does not, and where you can check for yourself.",
@@ -297,10 +297,10 @@ const CONTENT: Record<Language, Content> = {
             "We refuse by principle to display invented or unverifiable social proof (hospital logos, anonymous quotes, inflated user counts).",
         },
         {
-          title: "Free plan limits",
+          title: "Supervised-access limits",
           desc:
-            "3 AI reports per day and 5 patients max on the free tier. During the open beta, everything is free without a credit card — clearly stated on the Pricing page.",
-          proofs: [{ label: "See pricing", href: "/pricing", kind: "internal" }],
+            "3 AI reports per day and 5 patients max on supervised access after validation. During the academic validation phase, modules are accessible under the research protocol — clearly stated on the Institutional access page.",
+          proofs: [{ label: "See institutional access", href: "/pricing", kind: "internal" }],
         },
         {
           title: "Data hosting and residency",
@@ -315,7 +315,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "No 24/7 support",
           desc:
-            "Email support with replies on business days. No contractual SLA during the open beta.",
+            "Email support with replies on business days. No contractual SLA during the academic validation phase.",
         },
       ],
     },
@@ -329,9 +329,9 @@ const CONTENT: Record<Language, Content> = {
             "This page is static: all its content is readable in the JavaScript bundle shipped to the browser. No hidden server-side claims.",
         },
         {
-          title: "2. Create a free test account",
+          title: "2. Create an investigator test account",
           desc:
-            "No credit card during the open beta. You can browse the 10 modules, create a fake patient and observe the audit logs generated.",
+            "Account with no billing during the academic validation phase. You can browse the 10 modules, create a fake patient and observe the audit logs generated.",
         },
         {
           title: "3. Export your audit log",
@@ -358,7 +358,7 @@ const CONTENT: Record<Language, Content> = {
     seoDescription:
       "Was der Prototyp heute liefert, was strukturell ausgeschlossen ist und wie Sie jede Aussage überprüfen. Offene Beta, Audit standardmässig.",
     hero: {
-      eyebrow: "Offene Beta — kein zertifiziertes Medizinprodukt",
+      eyebrow: "Akademische Validierungsphase — kein zertifiziertes Medizinprodukt",
       title: "Transparenz & Governance",
       subtitle:
         "Wir veröffentlichen hier ohne Schönfärbung, was die Plattform heute wirklich tut, was nicht, und wo Sie es selbst überprüfen können.",
@@ -438,10 +438,10 @@ const CONTENT: Record<Language, Content> = {
             "Wir lehnen aus Prinzip erfundene oder nicht überprüfbare Social Proof ab (Klinik-Logos, anonyme Zitate, aufgeblähte Nutzerzahlen).",
         },
         {
-          title: "Limits des kostenlosen Plans",
+          title: "Limits des kontrollierten Zugangs",
           desc:
-            "3 KI-Berichte pro Tag und maximal 5 Patientinnen und Patienten im kostenlosen Tarif. Während der offenen Beta ist alles ohne Kreditkarte zugänglich — klar auf der Preisseite ausgewiesen.",
-          proofs: [{ label: "Preise ansehen", href: "/pricing", kind: "internal" }],
+            "3 KI-Berichte pro Tag und maximal 5 Patientinnen und Patienten im kontrollierten Zugang nach der Validierung. Während der akademischen Validierungsphase sind die Module im Rahmen des Forschungsprotokolls zugänglich — auf der Seite Institutioneller Zugang ausgewiesen.",
+          proofs: [{ label: "Institutionellen Zugang ansehen", href: "/pricing", kind: "internal" }],
         },
         {
           title: "Hosting und Datenstandort",
@@ -456,7 +456,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "Kein 24/7-Support",
           desc:
-            "E-Mail-Support mit Antworten an Werktagen. Kein vertraglicher SLA während der offenen Beta.",
+            "E-Mail-Support mit Antworten an Werktagen. Kein vertraglicher SLA während der akademischen Validierungsphase.",
         },
       ],
     },
@@ -470,9 +470,9 @@ const CONTENT: Record<Language, Content> = {
             "Diese Seite ist statisch: ihr gesamter Inhalt ist im an den Browser ausgelieferten JavaScript-Bundle lesbar. Keine versteckten serverseitigen Aussagen.",
         },
         {
-          title: "2. Kostenlosen Testaccount erstellen",
+          title: "2. Prüfärzte-Testaccount erstellen",
           desc:
-            "Keine Kreditkarte während der offenen Beta. Sie können die 10 Module durchsuchen, eine fiktive Patientenakte anlegen und die generierten Audit-Logs beobachten.",
+            "Konto ohne Abrechnung während der akademischen Validierungsphase. Sie können die 10 Module durchsuchen, eine fiktive Patientenakte anlegen und die generierten Audit-Logs beobachten.",
         },
         {
           title: "3. Audit-Log exportieren",
