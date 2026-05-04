@@ -234,9 +234,9 @@ export const de = {
       },
     },
     cta: {
-      title: "Bereit, Ihre Gefäßpraxis zu vereinfachen?",
-      subtitle: "Schließen Sie sich Gefäßspezialisten an, die die Plattform bereits erkunden — kostenlos während der Beta.",
-      button: "Kostenloses Konto erstellen",
+      title: "Forschungsprotokoll einsehen",
+      subtitle: "Das vollständige L1-Protokoll, der statistische Analyseplan und die Compliance-Anhänge stehen wissenschaftlichen Komitees, Prüfungsjurys und akademischen Partnern zur Verfügung.",
+      button: "Zum Protokoll",
     },
     footer: {
       tagline: "Die klinische Plattform für Fachleute der Gefäßmedizin.",
