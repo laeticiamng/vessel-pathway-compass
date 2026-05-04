@@ -155,10 +155,10 @@ const CONTENT: Record<Language, Content> = {
             "Nous refusons par principe d'afficher de la social proof inventée ou non vérifiable (logos d'hôpitaux, citations anonymes, chiffres d'utilisateurs gonflés).",
         },
         {
-          title: "Limites du plan gratuit",
+          title: "Limites de l'accès encadré",
           desc:
-            "3 rapports IA par jour et 5 patients maximum sur le tier gratuit. Pendant la Beta ouverte, l'ensemble est accessible sans carte bancaire — annoncé clairement sur la page Tarifs.",
-          proofs: [{ label: "Voir Tarifs", href: "/pricing", kind: "internal" }],
+            "3 rapports IA par jour et 5 patients maximum en accès encadré post-validation. Pendant la phase de validation académique, les modules sont accessibles dans le cadre du protocole — précisé sur la page Accès institutionnel.",
+          proofs: [{ label: "Voir l'accès institutionnel", href: "/pricing", kind: "internal" }],
         },
         {
           title: "Hébergement et résidence des données",
@@ -173,7 +173,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "Pas de support 24/7",
           desc:
-            "Support par email avec réponse en jours ouvrés. Aucun SLA contractuel pendant la Beta ouverte.",
+            "Support par email avec réponse en jours ouvrés. Aucun SLA contractuel pendant la phase de validation académique.",
         },
       ],
     },
