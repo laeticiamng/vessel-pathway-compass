@@ -275,23 +275,23 @@ export const fr = {
     },
     plans: {
       individual: {
-        name: "Individuel",
-        price: "Gratuit",
-        period: "pour toujours",
-        desc: "Pour les médecins individuels découvrant la plateforme",
+        name: "Investigateur individuel",
+        price: "Accès encadré",
+        period: "phase de validation",
+        desc: "Pour les cliniciens individuels rejoignant le protocole de recherche",
         features: [
-          "Assistant clinique IA (limité)",
+          "Assistant clinique IA (encadré)",
           "5 dossiers patients",
           "Accès au AquaMR Academy",
           "Accès au forum communautaire",
         ],
-        cta: "Commencer gratuitement",
+        cta: "Rejoindre le protocole",
       },
       professional: {
-        name: "Professionnel",
+        name: "Investigateur clinique",
         price: "CHF 99 / 99 €",
-        period: "/mois (indicatif post-lancement)",
-        desc: "Pour les médecins vasculaires en exercice",
+        period: "/mois (indicatif post-validation)",
+        desc: "Pour les médecins vasculaires impliqués dans la phase de validation",
         features: [
           "Assistant IA illimité",
           "Dossiers patients illimités",
@@ -301,7 +301,7 @@ export const fr = {
           "Accès au labo de simulation",
           "Consultations d'experts (5/mois)",
         ],
-        cta: "Accès bêta gratuit",
+        cta: "Demander l'accès investigateur",
       },
       institution: {
         name: "Établissement",
