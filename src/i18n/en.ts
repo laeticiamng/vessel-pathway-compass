@@ -2346,8 +2346,87 @@ export const en = {
           }
         ],
       },
+      complianceBadge: {
+        title: "Compliance & completeness",
+        statusOk: "Compliant — ready for scientific committee review",
+        statusWarn: "Compliant with reservations — sections to enrich",
+        statusError: "Non-compliant — critical sections missing",
+        scoreLabel: "Overall score",
+        ok: "OK",
+        warn: "To enrich",
+        error: "Critical",
+        export: "Export (audit)",
+        exportAria: "Export the compliance snapshot as JSON for audit archive",
+        signedOut: "The Compliance & completeness badge is reserved for authenticated users (traceable audit). Sign in to view and export it.",
+      },
+      annexes: {
+        title: "Compliance annexes",
+        subtitle: "References, protocol limits and traceable elements (GDPR/nFADP, security, ADR/DSMB) to support scientific committee review.",
+        references: {
+          title: "Normative references",
+          items: [
+            "Regulation (EU) 2017/745 (MDR) — Annex I (general requirements) and Annex XIV (clinical evaluation)",
+            "IEC 62304:2006/AMD1:2015 — Medical device software, life-cycle processes",
+            "ISO 14971:2019 — Application of risk management to medical devices",
+            "ISO 27001:2022 — Information security management system",
+            "GDPR (EU) 2016/679 and Swiss nFADP (FF 2020 7397) — Data protection",
+            "Declaration of Helsinki (2024 revision) and Swiss HRA/HRO — Human research",
+          ],
+        },
+        limits: {
+          title: "Explicit protocol limits",
+          items: [
+            "Single-centre study in initial phase; external generalisability to be validated in multicentre",
+            "No formal sub-analysis of stenoses < 50%",
+            "Inter-operator variability assessed but limited to 3 experienced senior operators",
+            "No economic analysis (cost-effectiveness) planned in the doctoral protocol",
+            "Model not tested in children or pregnant women (excluded from target population)",
+          ],
+        },
+        privacy: {
+          title: "Data protection (GDPR / nFADP)",
+          items: [
+            "Pseudonymisation at inclusion; re-identification key stored separately (vault)",
+            "Legal basis: written informed consent (art. 6.1.a GDPR; art. 6 nFADP)",
+            "Simplified DPIA available for institutional pilots",
+            "Patient rights (access, rectification, withdrawal) handled within 30 days",
+            "EU-CH hosting; HDS migration planned for multicentre phase",
+            "Processing register (art. 30 GDPR) maintained and exportable",
+          ],
+        },
+        security: {
+          title: "Technical security",
+          items: [
+            "Row-Level Security (RLS) at the database level for every sensitive table",
+            "Application RBAC (roles: medical, trainee, admin, research_lead)",
+            "TLS 1.3 encryption in transit, AES-256 at rest",
+            "Mandatory MFA for admin and research_lead roles",
+            "Immutable logging (audit_logs, governance_events) with 7-year rotation",
+            "Annual penetration tests planned before multicentre phase",
+          ],
+        },
+        adr: {
+          title: "Vigilance & DSMB",
+          items: [
+            "Integrated ADR registry: report within 24 h for any serious event",
+            "DSMB charter published; independent composition (3 external experts)",
+            "DSMB meetings scheduled at n=50 (futility) and n=100 (interim safety)",
+            "Automatic freeze criteria: ≥ 2 related SAEs or κ drift > 0.15",
+            "Swissmedic notification for serious events per ClinO regulation",
+          ],
+        },
+        traceability: {
+          title: "Traceability & audit",
+          items: [
+            "Case-replay: full reconstitution of a decision from original context",
+            "Signed SHA-256 manifest for every regulatory export (export_manifests)",
+            "Semantic versioning of the protocol and public changelog",
+            "Time-stamped, exportable compliance snapshots (JSON) for audit archive",
+            "15-year retention of source data (Swiss HRA compliance)",
+          ],
+        },
+      },
     },
-    faq: {
       seoTitle: "FAQ — Frequently asked questions about AquaMR Flow",
       seoDescription: "Answers to frequently asked questions about AquaMR Flow: what it is, who it's for, prototype limitations, security, access and pricing.",
       title: "Frequently asked questions",

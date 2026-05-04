@@ -2323,8 +2323,87 @@ export const fr = {
           }
         ],
       },
+      complianceBadge: {
+        title: "Conformité & complétude",
+        statusOk: "Conforme — prêt pour revue par le comité scientifique",
+        statusWarn: "Conforme avec réserves — sections à enrichir",
+        statusError: "Non conforme — sections critiques manquantes",
+        scoreLabel: "Score global",
+        ok: "OK",
+        warn: "À enrichir",
+        error: "Critique",
+        export: "Exporter (audit)",
+        exportAria: "Exporter le snapshot de conformité au format JSON pour archive d'audit",
+        signedOut: "Le badge Conformité & complétude est réservé aux utilisateurs authentifiés (audit traçable). Connectez-vous pour le consulter et l'exporter.",
+      },
+      annexes: {
+        title: "Annexes de conformité",
+        subtitle: "Références, limites du protocole et éléments traçables (RGPD/nLPD, sécurité, ADR/DSMB) pour soutenir la revue du comité scientifique.",
+        references: {
+          title: "Références normatives",
+          items: [
+            "Règlement (UE) 2017/745 (MDR) — Annexe I (exigences générales) et Annexe XIV (évaluation clinique)",
+            "IEC 62304:2006/AMD1:2015 — Logiciels de dispositifs médicaux, processus du cycle de vie",
+            "ISO 14971:2019 — Application de la gestion des risques aux dispositifs médicaux",
+            "ISO 27001:2022 — Système de management de la sécurité de l'information",
+            "RGPD (UE) 2016/679 et nLPD suisse (FF 2020 7397) — Protection des données",
+            "Déclaration d'Helsinki (révision 2024) et loi suisse LRH/ORH — Recherche sur l'être humain",
+          ],
+        },
+        limits: {
+          title: "Limites explicites du protocole",
+          items: [
+            "Étude monocentrique en phase initiale ; généralisabilité externe à valider en multicentrique",
+            "Pas d'évaluation des sténoses < 50 % en sous-analyse statistique formelle",
+            "Variabilité inter-opérateur évaluée mais limitée à 3 opérateurs séniors expérimentés",
+            "Pas d'analyse économique (coût-efficacité) prévue dans le protocole doctoral",
+            "Modèle non testé chez l'enfant et la femme enceinte (exclus de la population cible)",
+          ],
+        },
+        privacy: {
+          title: "Protection des données (RGPD / nLPD)",
+          items: [
+            "Pseudonymisation à l'inclusion ; clé de réidentification stockée séparément (vault)",
+            "Base légale : consentement éclairé écrit (art. 6.1.a RGPD ; art. 6 nLPD)",
+            "DPIA simplifiée disponible pour les pilotes institutionnels",
+            "Droits patient (accès, rectification, retrait) traités sous 30 jours",
+            "Hébergement UE-CH ; migration HDS prévue pour la phase multicentrique",
+            "Registre des traitements (art. 30 RGPD) maintenu et exportable",
+          ],
+        },
+        security: {
+          title: "Sécurité technique",
+          items: [
+            "RLS (Row-Level Security) au niveau base de données pour chaque table sensible",
+            "RBAC applicatif (rôles : medical, trainee, admin, research_lead)",
+            "Chiffrement TLS 1.3 en transit, AES-256 au repos",
+            "MFA obligatoire pour les rôles admin et research_lead",
+            "Journalisation immuable (audit_logs, governance_events) avec rotation 7 ans",
+            "Tests d'intrusion annuels prévus avant phase multicentrique",
+          ],
+        },
+        adr: {
+          title: "Vigilance & DSMB",
+          items: [
+            "Registre ADR intégré : déclaration en moins de 24 h pour tout événement grave",
+            "Charte DSMB publiée ; composition indépendante (3 experts externes)",
+            "Réunions DSMB programmées à n=50 (futilité) et n=100 (sécurité intermédiaire)",
+            "Critères de freeze automatique : ≥ 2 SAE liés ou dérive κ > 0,15",
+            "Notification swissmedic en cas d'événement grave conformément à l'OClin",
+          ],
+        },
+        traceability: {
+          title: "Traçabilité & audit",
+          items: [
+            "Case-replay : reconstitution complète d'une décision à partir du contexte d'origine",
+            "Manifest SHA-256 signé pour chaque export réglementaire (export_manifests)",
+            "Versionnement sémantique du protocole et changelog public",
+            "Compliance snapshots horodatés et exportables (JSON) pour archive d'audit",
+            "Conservation 15 ans des données sources (conformité LRH suisse)",
+          ],
+        },
+      },
     },
-    faq: {
       seoTitle: "FAQ — Questions fréquentes sur AquaMR Flow",
       seoDescription: "Réponses aux questions fréquentes sur AquaMR Flow : ce que c'est, à qui ça s'adresse, limites du prototype, sécurité, accès et tarifs.",
       title: "Questions fréquentes",

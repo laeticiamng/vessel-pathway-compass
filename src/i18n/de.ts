@@ -2323,8 +2323,87 @@ export const de = {
           }
         ],
       },
+      complianceBadge: {
+        title: "Konformität & Vollständigkeit",
+        statusOk: "Konform — bereit für Prüfung durch das wissenschaftliche Komitee",
+        statusWarn: "Konform mit Vorbehalten — Abschnitte zu erweitern",
+        statusError: "Nicht konform — kritische Abschnitte fehlen",
+        scoreLabel: "Gesamtscore",
+        ok: "OK",
+        warn: "Zu erweitern",
+        error: "Kritisch",
+        export: "Exportieren (Audit)",
+        exportAria: "Konformitäts-Snapshot als JSON für Audit-Archiv exportieren",
+        signedOut: "Das Konformitäts- & Vollständigkeits-Badge ist authentifizierten Nutzern vorbehalten (nachvollziehbares Audit). Melden Sie sich an, um es einzusehen und zu exportieren.",
+      },
+      annexes: {
+        title: "Konformitäts-Anhänge",
+        subtitle: "Referenzen, Protokollgrenzen und nachvollziehbare Elemente (DSGVO/nDSG, Sicherheit, ADR/DSMB) zur Unterstützung der Prüfung durch das wissenschaftliche Komitee.",
+        references: {
+          title: "Normative Referenzen",
+          items: [
+            "Verordnung (EU) 2017/745 (MDR) — Anhang I (allgemeine Anforderungen) und Anhang XIV (klinische Bewertung)",
+            "IEC 62304:2006/AMD1:2015 — Software für Medizinprodukte, Lebenszyklusprozesse",
+            "ISO 14971:2019 — Anwendung des Risikomanagements auf Medizinprodukte",
+            "ISO 27001:2022 — Managementsystem für Informationssicherheit",
+            "DSGVO (EU) 2016/679 und Schweizer nDSG (BBl 2020 7639) — Datenschutz",
+            "Deklaration von Helsinki (Revision 2024) und Schweizer HFG/KlinV — Humanforschung",
+          ],
+        },
+        limits: {
+          title: "Explizite Protokollgrenzen",
+          items: [
+            "Monozentrische Studie in der Initialphase; externe Generalisierbarkeit multizentrisch zu validieren",
+            "Keine formale Subanalyse für Stenosen < 50 %",
+            "Inter-Operator-Variabilität bewertet, aber auf 3 erfahrene Senior-Operateure begrenzt",
+            "Keine ökonomische Analyse (Kosten-Wirksamkeit) im doktoralen Protokoll vorgesehen",
+            "Modell nicht getestet bei Kindern oder Schwangeren (aus der Zielpopulation ausgeschlossen)",
+          ],
+        },
+        privacy: {
+          title: "Datenschutz (DSGVO / nDSG)",
+          items: [
+            "Pseudonymisierung bei Einschluss; Re-Identifikationsschlüssel separat gespeichert (Vault)",
+            "Rechtsgrundlage: schriftliche Einwilligung nach Aufklärung (Art. 6.1.a DSGVO; Art. 6 nDSG)",
+            "Vereinfachte DSFA verfügbar für institutionelle Piloten",
+            "Patientenrechte (Auskunft, Berichtigung, Widerruf) innerhalb von 30 Tagen bearbeitet",
+            "EU-CH-Hosting; HDS-Migration für die multizentrische Phase geplant",
+            "Verarbeitungsverzeichnis (Art. 30 DSGVO) gepflegt und exportierbar",
+          ],
+        },
+        security: {
+          title: "Technische Sicherheit",
+          items: [
+            "Row-Level Security (RLS) auf Datenbankebene für jede sensible Tabelle",
+            "Anwendungs-RBAC (Rollen: medical, trainee, admin, research_lead)",
+            "TLS-1.3-Verschlüsselung im Transit, AES-256 im Ruhezustand",
+            "Obligatorische MFA für Admin- und research_lead-Rollen",
+            "Unveränderliche Protokollierung (audit_logs, governance_events) mit 7-Jahres-Rotation",
+            "Jährliche Penetrationstests vor der multizentrischen Phase geplant",
+          ],
+        },
+        adr: {
+          title: "Vigilanz & DSMB",
+          items: [
+            "Integriertes ADR-Register: Meldung innerhalb 24 h für jedes schwerwiegende Ereignis",
+            "DSMB-Charta veröffentlicht; unabhängige Zusammensetzung (3 externe Experten)",
+            "DSMB-Sitzungen geplant bei n=50 (Futility) und n=100 (Interim-Sicherheit)",
+            "Automatische Freeze-Kriterien: ≥ 2 verbundene SAEs oder κ-Drift > 0,15",
+            "Swissmedic-Meldung bei schwerwiegenden Ereignissen gemäß KlinV",
+          ],
+        },
+        traceability: {
+          title: "Nachvollziehbarkeit & Audit",
+          items: [
+            "Case-Replay: vollständige Rekonstruktion einer Entscheidung aus Originalkontext",
+            "Signiertes SHA-256-Manifest für jeden regulatorischen Export (export_manifests)",
+            "Semantische Versionierung des Protokolls und öffentliches Changelog",
+            "Zeitgestempelte, exportierbare Konformitäts-Snapshots (JSON) für Audit-Archiv",
+            "15-Jahre-Aufbewahrung der Quelldaten (Schweizer HFG-Konformität)",
+          ],
+        },
+      },
     },
-    faq: {
       seoTitle: "FAQ — Häufig gestellte Fragen zu AquaMR Flow",
       seoDescription: "Antworten auf häufige Fragen zu AquaMR Flow: was es ist, für wen es gedacht ist, Einschränkungen des Prototyps, Sicherheit, Zugang und Preise.",
       title: "Häufig gestellte Fragen",
