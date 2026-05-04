@@ -1812,6 +1812,8 @@ export const en = {
       decisionAdr: "15 documented ADR · architecture designed to target MDR / GDPR / IEC 62304 conformity (not certified at this stage)",
       decisionMigration: "Migration planned to clinical HDS hosting (EU/CH) · independent DSMB & Data Access Committee",
       followUpLoop: "Longitudinal follow-up → new mapping if clinical evolution",
+      feedbackLoopTitle: "Feedback loop · Decision → L1 longitudinal follow-up",
+      feedbackLoopDesc: "Each clinical decision feeds back into a re-mapping cycle: any clinical change (worsening symptoms, ABI shift, post-revascularization) re-enters L1 for an updated AquaMR map and an updated risk read.",
       l2Title: "L2 — GUIDE: feasibility in simulation",
       l2Badge: "Conditional extension",
       l2Caption: "Phantom / simulated model · acceptability & usability measured (M42)",

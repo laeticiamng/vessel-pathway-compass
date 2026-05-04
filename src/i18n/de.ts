@@ -1789,6 +1789,8 @@ export const de = {
       decisionAdr: "15 dokumentierte ADR · Architektur darauf ausgelegt, MDR / DSGVO / IEC 62304-Konformität anzustreben (in diesem Stadium nicht zertifiziert)",
       decisionMigration: "Migration zu klinischem HDS-Hosting (EU/CH) geplant · unabhängiges DSMB & Data Access Committee",
       followUpLoop: "Longitudinale Verlaufskontrolle → neue Kartierung bei klinischer Veränderung",
+      feedbackLoopTitle: "Rückkopplungsschleife · Entscheidung → longitudinale L1-Nachsorge",
+      feedbackLoopDesc: "Jede klinische Entscheidung speist einen Re-Mapping-Zyklus: jede Veränderung (Symptomverschlechterung, ABI-Abfall, nach Revaskularisation) tritt erneut in L1 ein für eine aktualisierte AquaMR-Karte und eine neu gelesene Risikoeinschätzung.",
       l2Title: "L2 — FÜHREN: Machbarkeit in der Simulation",
       l2Badge: "Bedingte Erweiterung",
       l2Caption: "Phantom / simuliertes Modell · Akzeptanz & Usability gemessen (M42)",
