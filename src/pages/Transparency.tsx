@@ -297,10 +297,10 @@ const CONTENT: Record<Language, Content> = {
             "We refuse by principle to display invented or unverifiable social proof (hospital logos, anonymous quotes, inflated user counts).",
         },
         {
-          title: "Free plan limits",
+          title: "Supervised-access limits",
           desc:
-            "3 AI reports per day and 5 patients max on the free tier. During the open beta, everything is free without a credit card — clearly stated on the Pricing page.",
-          proofs: [{ label: "See pricing", href: "/pricing", kind: "internal" }],
+            "3 AI reports per day and 5 patients max on supervised access after validation. During the academic validation phase, modules are accessible under the research protocol — clearly stated on the Institutional access page.",
+          proofs: [{ label: "See institutional access", href: "/pricing", kind: "internal" }],
         },
         {
           title: "Data hosting and residency",
@@ -315,7 +315,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "No 24/7 support",
           desc:
-            "Email support with replies on business days. No contractual SLA during the open beta.",
+            "Email support with replies on business days. No contractual SLA during the academic validation phase.",
         },
       ],
     },
