@@ -470,9 +470,9 @@ const CONTENT: Record<Language, Content> = {
             "Diese Seite ist statisch: ihr gesamter Inhalt ist im an den Browser ausgelieferten JavaScript-Bundle lesbar. Keine versteckten serverseitigen Aussagen.",
         },
         {
-          title: "2. Kostenlosen Testaccount erstellen",
+          title: "2. Prüfärzte-Testaccount erstellen",
           desc:
-            "Keine Kreditkarte während der offenen Beta. Sie können die 10 Module durchsuchen, eine fiktive Patientenakte anlegen und die generierten Audit-Logs beobachten.",
+            "Konto ohne Abrechnung während der akademischen Validierungsphase. Sie können die 10 Module durchsuchen, eine fiktive Patientenakte anlegen und die generierten Audit-Logs beobachten.",
         },
         {
           title: "3. Audit-Log exportieren",
