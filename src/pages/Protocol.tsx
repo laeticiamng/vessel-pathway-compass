@@ -10,6 +10,8 @@ import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSect
 import { ProtocolCompletenessChecklist } from "@/components/landing/ProtocolCompletenessChecklist";
 import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningCard";
 import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
+import { ComplianceAnnexesSection } from "@/components/landing/ComplianceAnnexesSection";
+import { ComplianceBadge } from "@/components/landing/ComplianceBadge";
 import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
 
 type ListItem = { title: string; desc: string };
@@ -87,6 +89,9 @@ export default function Protocol() {
 
         {/* Versioning, status and editorial history (publicly visible) */}
         <ProtocolVersioningCard />
+
+        {/* Compliance & completeness badge — authenticated users only, exportable for audit */}
+        <ComplianceBadge />
 
         {/* Automated completeness audit (real-time, locale-aware) */}
         <ProtocolCompletenessChecklist />
@@ -216,6 +221,9 @@ export default function Protocol() {
         <ProtocolQASection
           onItemOpen={(i) => logQA(i, qaItems[i]?.q)}
         />
+
+        {/* Compliance Annexes — references, limits, RGPD/nLPD, security, ADR/DSMB, traceability */}
+        <ComplianceAnnexesSection />
 
         {/* Anti-overpromise — explicit list of what the platform does NOT claim */}
         <div className="-mx-6 mb-8">
