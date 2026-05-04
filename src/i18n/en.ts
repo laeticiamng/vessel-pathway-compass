@@ -281,23 +281,23 @@ export const en = {
     },
     plans: {
       individual: {
-        name: "Individual",
-        price: "Free",
-        period: "forever",
-        desc: "For individual physicians exploring the platform",
+        name: "Individual investigator",
+        price: "Supervised access",
+        period: "validation phase",
+        desc: "For individual clinicians joining the research protocol",
         features: [
-          "AI Clinical Assistant (limited)",
+          "AI Clinical Assistant (supervised)",
           "5 patient cases",
           "Education hub access",
           "Community forum access",
         ],
-        cta: "Start Free",
+        cta: "Join the protocol",
       },
       professional: {
-        name: "Professional",
+        name: "Clinical investigator",
         price: "CHF 99 / €99",
-        period: "/month (post-launch, indicative)",
-        desc: "For practicing interventional physicians",
+        period: "/month (indicative, post-validation)",
+        desc: "For vascular physicians involved in the validation phase",
         features: [
           "Unlimited AI Assistant",
           "Unlimited patient cases",
@@ -307,7 +307,7 @@ export const en = {
           "Simulation lab access",
           "Expert consultations (5/mo)",
         ],
-        cta: "Free beta access",
+        cta: "Request investigator access",
       },
       institution: {
         name: "Institution",
