@@ -143,10 +143,30 @@ export function VasculinkArchitecture({ className }: { className?: string }) {
           </div>
         </div>
 
-        {/* Boucle de suivi */}
-        <div className="flex items-center justify-center gap-2 text-xs text-primary font-medium">
-          <RotateCcw className="h-3.5 w-3.5" />
-          <span className="italic">{t("vasculink.arch.followUpLoop")}</span>
+        {/* Boucle de feedback longitudinal — visuelle, remonte vers L1 */}
+        <div className="relative my-2" aria-label={t("vasculink.arch.followUpLoop")}>
+          <div className="rounded-xl border-2 border-dashed border-primary/50 bg-primary/5 px-4 py-3 flex items-center gap-3">
+            <div className="flex-shrink-0 rounded-full bg-primary/15 p-2">
+              <RotateCcw className="h-4 w-4 text-primary" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[11px] font-bold uppercase tracking-wider text-primary">
+                {t("vasculink.arch.feedbackLoopTitle")}
+              </p>
+              <p className="text-xs text-foreground/80 leading-snug mt-0.5">
+                {t("vasculink.arch.feedbackLoopDesc")}
+              </p>
+            </div>
+            <div className="flex-shrink-0 hidden sm:flex items-center gap-1 text-primary">
+              <span className="text-[10px] font-mono uppercase tracking-wider">L1</span>
+              <ArrowDown className="h-3.5 w-3.5 rotate-180" />
+            </div>
+          </div>
+          {/* Rail vertical symbolisant le retour vers L1 (haut du schéma) */}
+          <div
+            aria-hidden
+            className="absolute -left-1 top-0 bottom-0 w-0.5 bg-gradient-to-t from-primary/10 via-primary/40 to-primary/10"
+          />
         </div>
 
         <div className="flex justify-center"><ArrowDown className="h-5 w-5 text-warning" /></div>
