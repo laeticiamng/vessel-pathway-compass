@@ -8,12 +8,15 @@ import {
   Download,
   ShieldCheck,
   Loader2,
+  History,
+  Lock,
 } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import { useTranslation, type Language } from "@/i18n/context";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRoles } from "@/hooks/useUserRoles";
 import { toast } from "sonner";
 
 type EvidenceStatus = "validated" | "in-progress" | "planned";
