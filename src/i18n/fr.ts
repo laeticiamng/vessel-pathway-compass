@@ -127,7 +127,7 @@ export const fr = {
       title: "Comment ça marche",
       subtitle: "Démarrez en quelques minutes — aucune installation, aucune configuration complexe.",
       steps: [
-        { title: "Créez votre compte gratuit", desc: "Inscrivez-vous en 30 secondes avec votre e-mail ou Google. Sans carte bancaire." },
+        { title: "Créez votre compte", desc: "Inscrivez-vous en 30 secondes avec votre e-mail ou votre compte Google." },
         { title: "Planifiez votre première procédure", desc: "Utilisez le Planificateur de Procédure pour sélectionner les modalités et générer un flux de travail d'épargne de contraste." },
         { title: "Explorez la plateforme", desc: "Accédez à la Visionneuse Fusion, au Moteur CI-AKI, au Labo de Simulation, au Registre et à l'Académie — tout au même endroit." },
       ],
@@ -253,7 +253,7 @@ export const fr = {
     title: "Plans et tarifs",
     betaBadge: "🎉 Bêta en cours — accès gratuit à toutes les fonctionnalités",
     betaBannerTitle: "🚀 Toutes les fonctionnalités sont gratuites pendant la bêta",
-    betaBannerDesc: "Sans carte bancaire. Sans limite de temps. Explorez tous les modules gratuitement — les tarifs s'appliqueront après le lancement officiel.",
+    betaBannerDesc: "Phase de validation académique en cours. Tous les modules sont accessibles ; les modalités tarifaires seront définies après le lancement officiel.",
     subtitle: "Du médecin individuel aux grandes institutions — trouvez le plan adapté à votre pratique vasculaire.",
     betaNote: "Pendant la bêta, les fonctionnalités payantes sont accessibles sans facturation. Les tarifs affichés s'appliqueront au lancement officiel.",
     mostPopular: "Le plus populaire",
@@ -1524,8 +1524,8 @@ export const fr = {
   contentGate: {
     previewBanner: "Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",
     title: "Envie d'utiliser ce module ?",
-    subtitle: "Créez un compte gratuit en 30 secondes pour accéder à toutes les fonctionnalités, sauvegarder vos données et suivre votre progression.",
-    createAccount: "Créer un compte gratuit — sans carte bancaire",
+    subtitle: "Créez un compte en 30 secondes pour accéder à toutes les fonctionnalités, sauvegarder vos données et suivre votre progression.",
+    createAccount: "Créer un compte",
     signIn: "J'ai déjà un compte",
     benefits: [
       "Rapports cliniques assistés par IA",
@@ -2590,7 +2590,7 @@ export const fr = {
         usage: {
           title: "Plan gratuit & quotas (post-bêta)",
           items: [
-            "Pendant la bêta ouverte : toutes les fonctionnalités sont accessibles gratuitement, sans carte bancaire et sans quota — la corbeille (30 jours) et l'audit complet sont déjà actifs.",
+            "Pendant la phase de validation académique : toutes les fonctionnalités sont accessibles sans quota — la corbeille (30 jours) et l'audit complet sont déjà actifs.",
             "Après le lancement officiel, le plan gratuit sera limité à 3 rapports IA par jour et 5 dossiers patients actifs ; ces limites ne s'appliquent pas aujourd'hui.",
             "Les comptes créés pendant la bêta conservent leurs données et leur historique au passage en version stable.",
           ],
