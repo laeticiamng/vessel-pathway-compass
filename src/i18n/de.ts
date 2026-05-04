@@ -2402,6 +2402,97 @@ export const de = {
             "15-Jahre-Aufbewahrung der Quelldaten (Schweizer HFG-Konformität)",
           ],
         },
+        accessDisclaimer: "Der Zugang zu bestimmten Anhängen ist rollenbasiert eingeschränkt (Arzt, Trainee, Admin, Research Lead, Super Admin). Jede Konsultation wird im Audit-Log erfasst, um die Konformität mit institutionellen Anforderungen sicherzustellen.",
+        checking: "Zugriffsrechte werden geprüft…",
+        restrictedDisclaimer: "Die technischen Details dieses Anhangs sind autorisierten Rollen vorbehalten — gemäß rollenbasierter Zugriffskontrolle (RBAC) und der von der institutionellen Governance geforderten Funktionstrennung.",
+        tiers: {
+          public: "Öffentlich",
+          authenticated: "Authentifiziert",
+          clinical: "Klinisch",
+          research: "Forschung",
+          governance: "Governance",
+        },
+        restrictedRule: {
+          signedOut: "Anmeldung erforderlich, um diesen Anhang einzusehen.",
+          authenticated: "Authentifizierung erforderlich.",
+          clinical: "Vorbehalten für klinische Rollen (Arzt, Trainee, Expert Reviewer, Hospital Admin) sowie Research/Admin.",
+          research: "Vorbehalten für Research Lead, Admin und Super Admin.",
+          governance: "Vorbehalten für Admin und Super Admin (Governance).",
+        },
+        referencesLibrary: {
+          title: "Referenzbibliothek — Aussage → benanntes Dokument",
+          subtitle: "Jede Aussage des Protokolls ist explizit mit einem oder mehreren benannten Dokumenten verknüpft (Norm, Verordnung, akademische Referenz). Nicht-öffentliche Quellen sind als Platzhalter „auf Anfrage verfügbar“ gekennzeichnet — für volle Transparenz gegenüber dem Komitee.",
+          placeholder: "auf Anfrage verfügbar",
+          claims: [
+            {
+              claim: "VASCU-LINK ist als intermediäres Mapping-Werkzeug positioniert, ohne jodhaltiges Kontrastmittel und ohne Strahlung.",
+              refs: [
+                { citationKey: "MDR-2017-745", document: "Verordnung (EU) 2017/745 — Anhang I §14 (Strahlung)", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+                { citationKey: "ESVS-2024-PAD", document: "ESVS Clinical Practice Guidelines on Asymptomatic LEAD and Intermittent Claudication (2024)", url: null },
+              ],
+            },
+            {
+              claim: "Aktueller regulatorischer Status ist „nicht zertifizierter Forschungsprototyp“.",
+              refs: [
+                { citationKey: "MDR-Art-5", document: "MDR Art. 5(5) — Ausnahme Gesundheitseinrichtung / Forschung", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+                { citationKey: "KlinV-CH", document: "Schweizer Verordnung über klinische Versuche (KlinV, SR 810.305)", url: null },
+              ],
+            },
+            {
+              claim: "Eine Sicherheits-Fallback-Regel leitet bei unzureichender Qualität auf die Referenzbildgebung um.",
+              refs: [
+                { citationKey: "ISO-14971-2019", document: "ISO 14971:2019 — Risikomanagement für Medizinprodukte", url: null },
+                { citationKey: "VASCU-SOP-Quality-v1.2", document: "VASCU-LINK Qualitäts-SOP — Fallback-Regeln (intern)", url: null },
+              ],
+            },
+            {
+              claim: "Primärer Endpunkt: linear gewichtetes κ für die segmentale Klassifikation (4 Klassen), Ziel κ ≥ 0,75.",
+              refs: [
+                { citationKey: "Cohen-1968", document: "Cohen J. — Weighted kappa (Psychological Bulletin, 1968)", url: null },
+                { citationKey: "Donner-Eliasziw-1992", document: "Donner & Eliasziw — Sample size for κ statistics (Stat Med, 1992)", url: null },
+                { citationKey: "VASCU-SAP-v1.0", document: "Statistical Analysis Plan VASCU-LINK v1.0 (signiert)", url: null },
+              ],
+            },
+            {
+              claim: "Pseudonymisierung bei Einschluss, RBAC, RLS, unveränderliche Protokollierung.",
+              refs: [
+                { citationKey: "GDPR-Art-32", document: "DSGVO Art. 32 — Sicherheit der Verarbeitung", url: "https://gdpr-info.eu/art-32-gdpr/" },
+                { citationKey: "nDSG-2023", document: "Schweizer nDSG (BBl 2020 7639)", url: null },
+                { citationKey: "ISO-27001-2022", document: "ISO/IEC 27001:2022 — ISMS", url: null },
+              ],
+            },
+            {
+              claim: "Nachvollziehbarkeit: audit_logs, governance_events, case_revisions, SHA-256 export_manifests.",
+              refs: [
+                { citationKey: "IEC-62304-2015", document: "IEC 62304:2006/AMD1:2015 — Software-Lebenszyklus für Medizinprodukte", url: null },
+                { citationKey: "MDR-Annex-XIV", document: "MDR Anhang XIV — Klinische Bewertung", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+              ],
+            },
+            {
+              claim: "Vigilanz: ADR-Register, DSMB-Charta, Swissmedic-Meldung bei schwerwiegenden Ereignissen.",
+              refs: [
+                { citationKey: "KlinV-Art-37", document: "KlinV Art. 37 — Meldung unerwünschter Ereignisse", url: null },
+                { citationKey: "DSMB-Charter-v1.0", document: "VASCU-LINK DSMB-Charta v1.0", url: null },
+              ],
+            },
+          ],
+        },
+      },
+      auditLog: {
+        title: "Audit-Log — Protokoll- & Q&A-Zugriffe",
+        subtitle: "Erfasst Konsultationen des Forschungsprotokolls und der institutionellen Q&A-Sektion mit Rolle, Zeitstempel und Version. Exportierbar für die Prüfung durch das wissenschaftliche Komitee.",
+        signedOut: "Melden Sie sich an, um das Audit-Log einzusehen (Governance-Rollen vorbehalten).",
+        restrictedTitle: "Eingeschränkter Zugriff",
+        restrictedDisclaimer: "Das Audit-Log ist Admin-, Super-Admin-, Hospital-Admin- und Research-Lead-Rollen vorbehalten — gemäß der von der institutionellen Governance geforderten Funktionstrennung.",
+        statTotal: "Gesamt",
+        statViews: "Protokoll-Aufrufe",
+        statQa: "Q&A-Aufrufe",
+        exportCsv: "CSV exportieren",
+        exportPdf: "PDF exportieren",
+        pdfTitle: "VASCU-LINK Audit-Log — Protokoll & Q&A",
+        pdfGenerated: "Erstellt am",
+        pdfFooter: "Vertrauliches Dokument — für die Prüfung durch das wissenschaftliche Komitee. 7-Jahre-Aufbewahrung (audit_logs / governance_events).",
+        disclaimer: "Exporte enthalten pseudonymisierte Kennungen (User-UUID) und Rolle. Keine Patientendaten enthalten. DSGVO-/nDSG-konform.",
       },
     },
     faq: {

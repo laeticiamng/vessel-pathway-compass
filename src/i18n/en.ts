@@ -2425,6 +2425,97 @@ export const en = {
             "15-year retention of source data (Swiss HRA compliance)",
           ],
         },
+        accessDisclaimer: "Access to certain annexes is restricted by role (physician, trainee, admin, research lead, super admin). Each consultation is recorded in the audit log to ensure compliance with institutional requirements.",
+        checking: "Checking access rights…",
+        restrictedDisclaimer: "Technical detail of this annex is reserved for authorised roles, in line with role-based access control (RBAC) and the separation of duties required by institutional governance.",
+        tiers: {
+          public: "Public",
+          authenticated: "Authenticated",
+          clinical: "Clinical",
+          research: "Research",
+          governance: "Governance",
+        },
+        restrictedRule: {
+          signedOut: "Sign-in required to view this annex.",
+          authenticated: "Authentication required.",
+          clinical: "Reserved for clinical roles (physician, trainee, expert reviewer, hospital admin) and research/admin.",
+          research: "Reserved for research lead, admin and super admin roles.",
+          governance: "Reserved for admin and super admin roles (governance).",
+        },
+        referencesLibrary: {
+          title: "References library — claim → named document",
+          subtitle: "Each protocol claim is explicitly linked to one or more named documents (standard, regulation, academic reference). Non-public sources are flagged as 'available on request' placeholders for full transparency to the committee.",
+          placeholder: "available on request",
+          claims: [
+            {
+              claim: "VASCU-LINK is positioned as an intermediate mapping tool, without iodinated contrast or radiation.",
+              refs: [
+                { citationKey: "MDR-2017-745", document: "Regulation (EU) 2017/745 — Annex I §14 (radiation)", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+                { citationKey: "ESVS-2024-PAD", document: "ESVS Clinical Practice Guidelines on Asymptomatic LEAD and Intermittent Claudication (2024)", url: null },
+              ],
+            },
+            {
+              claim: "Current regulatory status is 'uncertified research prototype'.",
+              refs: [
+                { citationKey: "MDR-Art-5", document: "MDR Art. 5(5) — health institution / research exemption", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+                { citationKey: "ClinO-CH", document: "Swiss Clinical Trials Ordinance (ClinO, RS 810.305)", url: null },
+              ],
+            },
+            {
+              claim: "A safety-fallback rule routes to reference imaging when quality is insufficient.",
+              refs: [
+                { citationKey: "ISO-14971-2019", document: "ISO 14971:2019 — Risk management for medical devices", url: null },
+                { citationKey: "VASCU-SOP-Quality-v1.2", document: "VASCU-LINK quality SOP — fallback rules (internal)", url: null },
+              ],
+            },
+            {
+              claim: "Primary endpoint: linearly weighted κ on segmental classification (4 classes), target κ ≥ 0.75.",
+              refs: [
+                { citationKey: "Cohen-1968", document: "Cohen J. — Weighted kappa (Psychological Bulletin, 1968)", url: null },
+                { citationKey: "Donner-Eliasziw-1992", document: "Donner & Eliasziw — Sample size for κ statistics (Stat Med, 1992)", url: null },
+                { citationKey: "VASCU-SAP-v1.0", document: "Statistical Analysis Plan VASCU-LINK v1.0 (signed)", url: null },
+              ],
+            },
+            {
+              claim: "Pseudonymisation at inclusion, RBAC, RLS, immutable logging.",
+              refs: [
+                { citationKey: "GDPR-Art-32", document: "GDPR art. 32 — security of processing", url: "https://gdpr-info.eu/art-32-gdpr/" },
+                { citationKey: "nFADP-2023", document: "Swiss nFADP (FF 2020 7397)", url: null },
+                { citationKey: "ISO-27001-2022", document: "ISO/IEC 27001:2022 — ISMS", url: null },
+              ],
+            },
+            {
+              claim: "Traceability: audit_logs, governance_events, case_revisions, SHA-256 export_manifests.",
+              refs: [
+                { citationKey: "IEC-62304-2015", document: "IEC 62304:2006/AMD1:2015 — Medical device software life cycle", url: null },
+                { citationKey: "MDR-Annex-XIV", document: "MDR Annex XIV — Clinical evaluation", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+              ],
+            },
+            {
+              claim: "Vigilance: ADR registry, DSMB charter, Swissmedic notification for serious events.",
+              refs: [
+                { citationKey: "ClinO-Art-37", document: "ClinO art. 37 — adverse event reporting", url: null },
+                { citationKey: "DSMB-Charter-v1.0", document: "VASCU-LINK DSMB charter v1.0", url: null },
+              ],
+            },
+          ],
+        },
+      },
+      auditLog: {
+        title: "Audit log — protocol & Q&A access",
+        subtitle: "Tracks consultations of the research protocol and the institutional Q&A section, with role, timestamp and version. Exportable for scientific committee review.",
+        signedOut: "Sign in to view the audit log (reserved for governance roles).",
+        restrictedTitle: "Restricted access",
+        restrictedDisclaimer: "The audit log is reserved for admin, super admin, hospital admin and research lead roles, in line with the separation of duties required by institutional governance.",
+        statTotal: "Total",
+        statViews: "Protocol views",
+        statQa: "Q&A reads",
+        exportCsv: "Export CSV",
+        exportPdf: "Export PDF",
+        pdfTitle: "VASCU-LINK audit log — Protocol & Q&A",
+        pdfGenerated: "Generated on",
+        pdfFooter: "Confidential document — for scientific committee review. 7-year retention (audit_logs / governance_events).",
+        disclaimer: "Exports contain pseudonymised identifiers (user UUID) and role. No patient data is included. GDPR/nFADP compliant.",
       },
     },
     faq: {

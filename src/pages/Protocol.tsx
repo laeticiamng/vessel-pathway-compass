@@ -12,6 +12,7 @@ import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningC
 import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
 import { ComplianceAnnexesSection } from "@/components/landing/ComplianceAnnexesSection";
 import { ComplianceBadge } from "@/components/landing/ComplianceBadge";
+import { ProtocolAuditLogExporter } from "@/components/landing/ProtocolAuditLogExporter";
 import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
 
 type ListItem = { title: string; desc: string };
@@ -224,6 +225,9 @@ export default function Protocol() {
 
         {/* Compliance Annexes — references, limits, RGPD/nLPD, security, ADR/DSMB, traceability */}
         <ComplianceAnnexesSection />
+
+        {/* Exportable audit log (CSV/PDF) — governance roles only */}
+        <ProtocolAuditLogExporter />
 
         {/* Anti-overpromise — explicit list of what the platform does NOT claim */}
         <div className="-mx-6 mb-8">

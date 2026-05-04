@@ -2402,6 +2402,97 @@ export const fr = {
             "Conservation 15 ans des données sources (conformité LRH suisse)",
           ],
         },
+        accessDisclaimer: "L'accès à certaines annexes est restreint par rôle (médecin, trainee, admin, research lead, super admin). La consultation est tracée dans le journal d'audit pour assurer la conformité aux exigences institutionnelles.",
+        checking: "Vérification des droits d'accès…",
+        restrictedDisclaimer: "Le détail technique de cette annexe est réservé aux rôles habilités, conformément à la politique d'accès basée sur les rôles (RBAC) et à la séparation des fonctions exigée par la gouvernance institutionnelle.",
+        tiers: {
+          public: "Public",
+          authenticated: "Authentifié",
+          clinical: "Clinique",
+          research: "Recherche",
+          governance: "Gouvernance",
+        },
+        restrictedRule: {
+          signedOut: "Connexion requise pour consulter cette annexe.",
+          authenticated: "Authentification requise.",
+          clinical: "Réservé aux rôles cliniques (médecin, trainee, expert reviewer, hospital admin) et recherche/admin.",
+          research: "Réservé aux rôles research lead, admin et super admin.",
+          governance: "Réservé aux rôles admin et super admin (gouvernance).",
+        },
+        referencesLibrary: {
+          title: "Bibliothèque de références — claim → document nommé",
+          subtitle: "Chaque affirmation du protocole est explicitement reliée à un ou plusieurs documents nommés (norme, règlement, référence académique). Les sources non publiques sont marquées comme placeholder « disponible sur demande » pour transparence vis-à-vis du comité.",
+          placeholder: "disponible sur demande",
+          claims: [
+            {
+              claim: "VASCU-LINK est positionné comme outil de cartographie intermédiaire, sans contraste iodé ni irradiation.",
+              refs: [
+                { citationKey: "MDR-2017-745", document: "Règlement (UE) 2017/745 — Annexe I §14 (rayonnements)", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+                { citationKey: "ESVS-2024-PAD", document: "ESVS Clinical Practice Guidelines on the Management of Asymptomatic LEAD and Intermittent Claudication (2024)", url: null },
+              ],
+            },
+            {
+              claim: "Le statut réglementaire actuel est « prototype de recherche non certifié ».",
+              refs: [
+                { citationKey: "MDR-Art-5", document: "MDR Art. 5(5) — exemption établissement de santé / recherche", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+                { citationKey: "OClin-CH", document: "Ordonnance suisse sur les essais cliniques (OClin, RS 810.305)", url: null },
+              ],
+            },
+            {
+              claim: "Une règle de bascule sécurité oriente vers l'imagerie de référence en cas de qualité insuffisante.",
+              refs: [
+                { citationKey: "ISO-14971-2019", document: "ISO 14971:2019 — Application de la gestion des risques aux DM", url: null },
+                { citationKey: "VASCU-SOP-Quality-v1.2", document: "SOP qualité VASCU-LINK — règles de fallback (interne)", url: null },
+              ],
+            },
+            {
+              claim: "Endpoint principal : κ pondéré linéairement sur la classification segmentaire (4 classes), cible κ ≥ 0,75.",
+              refs: [
+                { citationKey: "Cohen-1968", document: "Cohen J. — Weighted kappa (Psychological Bulletin, 1968)", url: null },
+                { citationKey: "Donner-Eliasziw-1992", document: "Donner & Eliasziw — Sample size for κ statistics (Stat Med, 1992)", url: null },
+                { citationKey: "VASCU-SAP-v1.0", document: "Statistical Analysis Plan VASCU-LINK v1.0 (signé)", url: null },
+              ],
+            },
+            {
+              claim: "Pseudonymisation à l'inclusion, RBAC, RLS, journalisation immuable.",
+              refs: [
+                { citationKey: "GDPR-Art-32", document: "RGPD art. 32 — sécurité du traitement", url: "https://gdpr-info.eu/art-32-gdpr/" },
+                { citationKey: "nLPD-2023", document: "nLPD suisse (FF 2020 7397)", url: null },
+                { citationKey: "ISO-27001-2022", document: "ISO/IEC 27001:2022 — SMSI", url: null },
+              ],
+            },
+            {
+              claim: "Traçabilité : audit_logs, governance_events, case_revisions, export_manifests SHA-256.",
+              refs: [
+                { citationKey: "IEC-62304-2015", document: "IEC 62304:2006/AMD1:2015 — Cycle de vie logiciel DM", url: null },
+                { citationKey: "MDR-Annex-XIV", document: "MDR Annexe XIV — Évaluation clinique", url: "https://eur-lex.europa.eu/eli/reg/2017/745/oj" },
+              ],
+            },
+            {
+              claim: "Vigilance : registre ADR, charte DSMB, notification swissmedic en cas d'événement grave.",
+              refs: [
+                { citationKey: "OClin-Art-37", document: "OClin art. 37 — déclaration des événements indésirables", url: null },
+                { citationKey: "DSMB-Charter-v1.0", document: "Charte DSMB VASCU-LINK v1.0", url: null },
+              ],
+            },
+          ],
+        },
+      },
+      auditLog: {
+        title: "Journal d'audit — accès au protocole et Q&A",
+        subtitle: "Consultation des consultations du protocole de recherche et de la section Q&A institutionnelle, avec rôle, horodatage et version. Exportable pour la revue par le comité scientifique.",
+        signedOut: "Connectez-vous pour consulter le journal d'audit (réservé aux rôles de gouvernance).",
+        restrictedTitle: "Accès restreint",
+        restrictedDisclaimer: "Le journal d'audit est réservé aux rôles admin, super admin, hospital admin et research lead, conformément à la séparation des fonctions exigée par la gouvernance institutionnelle.",
+        statTotal: "Total",
+        statViews: "Vues protocole",
+        statQa: "Q&A consultées",
+        exportCsv: "Export CSV",
+        exportPdf: "Export PDF",
+        pdfTitle: "Journal d'audit VASCU-LINK — Protocole & Q&A",
+        pdfGenerated: "Généré le",
+        pdfFooter: "Document confidentiel — destiné à la revue par le comité scientifique. Conservation 7 ans (audit_logs / governance_events).",
+        disclaimer: "Les exports contiennent des identifiants pseudonymisés (UUID utilisateur) et le rôle. Aucune donnée patient n'est incluse. Conformité RGPD/nLPD.",
       },
     },
     faq: {

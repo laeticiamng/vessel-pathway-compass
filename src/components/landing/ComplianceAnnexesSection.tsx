@@ -1,30 +1,35 @@
-import { BookMarked, ShieldCheck, FileWarning, Database, Activity, ScrollText } from "lucide-react";
+import { BookMarked, ShieldCheck, FileWarning, Database, Activity, ScrollText, Lock, EyeOff } from "lucide-react";
 import { useTranslation } from "@/i18n/context";
+import { useUserRoles } from "@/hooks/useUserRoles";
+import { ANNEX_ACCESS, canAccessTier, type AccessTier } from "@/lib/annexAccess";
+import { ReferencesLibrary } from "./ReferencesLibrary";
 
 /**
  * Compliance Annexes — institutional appendix for scientific committee review.
  *
- * Lists references, protocol limits, and traceable elements (RGPD/nLPD,
- * security, ADR/DSMB) so a CHUV-grade reviewer can find chain-of-evidence
- * in a single place.
+ * Content is gated by role using the ANNEX_ACCESS matrix:
+ *   - References & limits: public
+ *   - Privacy (RGPD/nLPD): any authenticated
+ *   - Security: research_lead / admin
+ *   - ADR/DSMB: clinical roles + research/admin
+ *   - Traceability: admin only
+ *
+ * Restricted blocks render a clear placeholder with the access rule and
+ * a compliance disclaimer instead of the actual content.
  */
 export function ComplianceAnnexesSection() {
   const { t } = useTranslation();
+  const { roles, isAuthenticated, isLoading } = useUserRoles();
 
-  const references = (t("pages.protocol.annexes.references.items") as unknown as string[]) ?? [];
-  const limits = (t("pages.protocol.annexes.limits.items") as unknown as string[]) ?? [];
-  const privacy = (t("pages.protocol.annexes.privacy.items") as unknown as string[]) ?? [];
-  const security = (t("pages.protocol.annexes.security.items") as unknown as string[]) ?? [];
-  const adr = (t("pages.protocol.annexes.adr.items") as unknown as string[]) ?? [];
-  const traceability = (t("pages.protocol.annexes.traceability.items") as unknown as string[]) ?? [];
+  const get = <T,>(k: string): T => t(k) as unknown as T;
 
-  const blocks: { icon: React.ElementType; title: string; items: string[] }[] = [
-    { icon: BookMarked, title: t("pages.protocol.annexes.references.title") as string, items: references },
-    { icon: FileWarning, title: t("pages.protocol.annexes.limits.title") as string, items: limits },
-    { icon: Database, title: t("pages.protocol.annexes.privacy.title") as string, items: privacy },
-    { icon: ShieldCheck, title: t("pages.protocol.annexes.security.title") as string, items: security },
-    { icon: Activity, title: t("pages.protocol.annexes.adr.title") as string, items: adr },
-    { icon: ScrollText, title: t("pages.protocol.annexes.traceability.title") as string, items: traceability },
+  const blocks: { icon: React.ElementType; id: string }[] = [
+    { icon: BookMarked, id: "references" },
+    { icon: FileWarning, id: "limits" },
+    { icon: Database, id: "privacy" },
+    { icon: ShieldCheck, id: "security" },
+    { icon: Activity, id: "adr" },
+    { icon: ScrollText, id: "traceability" },
   ];
 
   return (
@@ -44,26 +49,102 @@ export function ComplianceAnnexesSection() {
         <p className="text-sm text-muted-foreground ml-12 leading-relaxed">
           {t("pages.protocol.annexes.subtitle")}
         </p>
+        <p className="text-xs text-muted-foreground/80 ml-12 mt-2 italic">
+          {t("pages.protocol.annexes.accessDisclaimer")}
+        </p>
       </header>
 
       <div className="grid md:grid-cols-2 gap-4">
-        {blocks.map((b, i) => (
-          <article key={i} className="rounded-xl border bg-card p-4">
-            <div className="flex items-center gap-2 mb-3">
-              <b.icon className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
-              <h3 className="text-sm font-semibold">{b.title}</h3>
-            </div>
-            <ul className="space-y-1.5" role="list">
-              {b.items.map((item, j) => (
-                <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
-                  <span className="text-primary mt-0.5 shrink-0">•</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
+        {blocks.map((b) => {
+          const access = ANNEX_ACCESS.find((a) => a.id === b.id)!;
+          const allowed = canAccessTier(access.tier, { isAuthenticated, roles });
+          const title = get<string>(`pages.protocol.annexes.${b.id}.title`);
+          const items = get<string[]>(`pages.protocol.annexes.${b.id}.items`) ?? [];
+
+          return (
+            <article key={b.id} className="rounded-xl border bg-card p-4">
+              <header className="flex items-center gap-2 mb-3">
+                <b.icon className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
+                <h3 className="text-sm font-semibold flex-1">{title}</h3>
+                <TierBadge tier={access.tier} t={t} />
+              </header>
+
+              {allowed ? (
+                <ul className="space-y-1.5" role="list">
+                  {items.map((item, j) => (
+                    <li key={j} className="flex items-start gap-2 text-xs text-muted-foreground leading-relaxed">
+                      <span className="text-primary mt-0.5 shrink-0">•</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <RestrictedPlaceholder tier={access.tier} t={t} isAuthenticated={isAuthenticated} isLoading={isLoading} />
+              )}
+            </article>
+          );
+        })}
       </div>
+
+      {/* Dedicated references library — claims → named documents */}
+      <ReferencesLibrary />
     </section>
+  );
+}
+
+function TierBadge({ tier, t }: { tier: AccessTier; t: (k: string) => unknown }) {
+  const label = String(t(`pages.protocol.annexes.tiers.${tier}`));
+  const cls =
+    tier === "public"
+      ? "border-success/40 bg-success/10 text-success"
+      : tier === "authenticated"
+        ? "border-primary/40 bg-primary/10 text-primary"
+        : tier === "clinical"
+          ? "border-blue-500/40 bg-blue-500/10 text-blue-700 dark:text-blue-400"
+          : tier === "research"
+            ? "border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400"
+            : "border-destructive/40 bg-destructive/10 text-destructive";
+  return (
+    <span className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${cls}`}>
+      {tier !== "public" && <Lock className="h-2.5 w-2.5" aria-hidden="true" />}
+      {label}
+    </span>
+  );
+}
+
+function RestrictedPlaceholder({
+  tier,
+  t,
+  isAuthenticated,
+  isLoading,
+}: {
+  tier: AccessTier;
+  t: (k: string) => unknown;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}) {
+  if (isLoading) {
+    return (
+      <div className="rounded-md border border-dashed bg-muted/30 p-3 text-xs text-muted-foreground">
+        {String(t("pages.protocol.annexes.checking"))}
+      </div>
+    );
+  }
+  const ruleKey = isAuthenticated
+    ? `pages.protocol.annexes.restrictedRule.${tier}`
+    : "pages.protocol.annexes.restrictedRule.signedOut";
+
+  return (
+    <div className="rounded-md border border-dashed border-muted-foreground/30 bg-muted/20 p-3">
+      <div className="flex items-start gap-2">
+        <EyeOff className="h-3.5 w-3.5 text-muted-foreground mt-0.5 shrink-0" aria-hidden="true" />
+        <div>
+          <p className="text-xs font-medium text-foreground/80">{String(t(ruleKey))}</p>
+          <p className="text-[11px] text-muted-foreground mt-1.5 italic leading-relaxed">
+            {String(t("pages.protocol.annexes.restrictedDisclaimer"))}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
