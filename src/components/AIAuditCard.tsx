@@ -324,6 +324,10 @@ export function AIAuditCard({ className = "" }: Props) {
       toast.error(copy.signedInRequired);
       return;
     }
+    if (!canConfirm) {
+      toast.error(copy.unauthorized);
+      return;
+    }
     setSubmitting(true);
     const { data, error } = await supabase
       .from("ai_audit_confirmations")
@@ -337,7 +341,7 @@ export function AIAuditCard({ className = "" }: Props) {
       .single();
     setSubmitting(false);
     if (error || !data) {
-      toast.error(copy.confirmError);
+      toast.error(error?.code === "42501" ? copy.unauthorized : copy.confirmError);
       return;
     }
     setConfirmations((prev) => ({
@@ -347,6 +351,19 @@ export function AIAuditCard({ className = "" }: Props) {
     setOpenConfirm(null);
     setNote("");
     toast.success(copy.confirmSuccess);
+  };
+
+  const loadHistory = async (evidenceId: string) => {
+    setOpenHistory(evidenceId);
+    setHistory([]);
+    setHistoryLoading(true);
+    const { data, error } = await supabase.rpc(
+      "get_ai_audit_evidence_history" as never,
+      { _evidence_id: evidenceId } as never
+    );
+    setHistoryLoading(false);
+    if (error || !data) return;
+    setHistory(data as unknown as HistoryEntry[]);
   };
 
   const filterButton = (value: FilterValue, label: string, count: number) => (
