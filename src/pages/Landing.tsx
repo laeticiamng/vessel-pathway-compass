@@ -32,6 +32,7 @@ import { PUBLIC_PRICING_ENABLED } from "@/lib/featureFlags";
  * the desktop/mobile nav, must be ready immediately for #platform-complete.
  * ----------------------------------------------------------------------- */
 import { PlatformCompletenessSection } from "@/components/landing/PlatformCompletenessSection";
+import { ProtocolHighlightBanner } from "@/components/landing/ProtocolHighlightBanner";
 
 /* -------------------------------------------------------------------------
  * Below-the-fold sections — lazy-loaded to shrink the initial JS bundle.
