@@ -201,6 +201,17 @@ src/
 
 ---
 
+## Recent Additions (v2.1 — CHUV pre-submission)
+
+- **Home intro video** — 30s Remotion-rendered teaser (`public/vascu-link-intro.mp4`) integrated via `src/components/landing/HomeIntroVideoSection.tsx` (EN/FR/DE).
+- **AI Audit Card** — versioned, source-linked evidence panel with validated/pending filter, one-click PDF export, clinician confirmation workflow + per-row history (role-gated to clinician/reviewer, audit-logged).
+- **PROBAST Badge** — methodological risk-of-bias indicator on the Digital Twin, fully localized EN/FR/DE with visual regression coverage.
+- **T12 public pages** — Protocol, Methodology, SAP, DMP, Incidental Findings, Audit Limitations, Trajectory, Why VASCU-LINK, About AquaMR with validated `ResearchProject` JSON-LD and route-matched SEO.
+- **Pricing removed** — institutional/research access only (`VITE_PUBLIC_PRICING_ENABLED=false`); regulatory disclaimer mounted globally.
+- **E2E coverage** — Playwright specs for T12 pages, footer i18n navigation, ProBAST visual regression, AI Audit PDF generation.
+
+---
+
 ## Roadmap
 
 - [ ] DICOM viewer integration (cornerstone.js)
