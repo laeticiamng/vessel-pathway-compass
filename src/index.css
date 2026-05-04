@@ -41,8 +41,8 @@
     --text-default: 220 25% 15%;   /* body text */
     --text-secondary: 220 14% 38%; /* secondary text, captions */
     --text-disclaimer: 220 14% 32%;/* disclaimers - must stay readable */
-    --text-on-hero: 210 25% 96%;   /* text over hero gradient (dark always) */
-    --text-on-hero-soft: 210 20% 82%; /* soft text over hero - still AA */
+    --text-on-hero: 0 0% 100%;       /* text over hero gradient — pure white for max contrast */
+    --text-on-hero-soft: 210 30% 94%;/* soft text over hero — boosted for AAA on dark hero */
     --surface-subtle: 220 20% 99%;
     --surface-raised: 0 0% 100%;
     --border-subtle: 220 15% 92%;
