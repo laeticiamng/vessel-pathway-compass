@@ -438,10 +438,10 @@ const CONTENT: Record<Language, Content> = {
             "Wir lehnen aus Prinzip erfundene oder nicht überprüfbare Social Proof ab (Klinik-Logos, anonyme Zitate, aufgeblähte Nutzerzahlen).",
         },
         {
-          title: "Limits des kostenlosen Plans",
+          title: "Limits des kontrollierten Zugangs",
           desc:
-            "3 KI-Berichte pro Tag und maximal 5 Patientinnen und Patienten im kostenlosen Tarif. Während der offenen Beta ist alles ohne Kreditkarte zugänglich — klar auf der Preisseite ausgewiesen.",
-          proofs: [{ label: "Preise ansehen", href: "/pricing", kind: "internal" }],
+            "3 KI-Berichte pro Tag und maximal 5 Patientinnen und Patienten im kontrollierten Zugang nach der Validierung. Während der akademischen Validierungsphase sind die Module im Rahmen des Forschungsprotokolls zugänglich — auf der Seite Institutioneller Zugang ausgewiesen.",
+          proofs: [{ label: "Institutionellen Zugang ansehen", href: "/pricing", kind: "internal" }],
         },
         {
           title: "Hosting und Datenstandort",
@@ -456,7 +456,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "Kein 24/7-Support",
           desc:
-            "E-Mail-Support mit Antworten an Werktagen. Kein vertraglicher SLA während der offenen Beta.",
+            "E-Mail-Support mit Antworten an Werktagen. Kein vertraglicher SLA während der akademischen Validierungsphase.",
         },
       ],
     },
