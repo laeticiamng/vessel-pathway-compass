@@ -7,6 +7,10 @@ import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
 import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
 import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
+import { ProtocolCompletenessChecklist } from "@/components/landing/ProtocolCompletenessChecklist";
+import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningCard";
+import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
+import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
 
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
