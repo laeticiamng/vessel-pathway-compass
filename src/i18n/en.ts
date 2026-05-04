@@ -1018,7 +1018,7 @@ export const en = {
       title: "Plan & Billing",
       desc: "Manage your subscription and billing details",
       currentPlan: "Current plan",
-      free: "Free",
+      free: "Supervised access",
       viewPlans: "View Plans",
       renewsOn: "Renews on",
     },
@@ -1537,9 +1537,9 @@ export const en = {
     error: "Something went wrong. Please try again later.",
   },
   pricingExtras: {
-    free: "Free",
-    duringBeta: "during the beta",
-    atLaunch: "at official launch",
+    free: "Supervised access",
+    duringBeta: "during the validation phase",
+    atLaunch: "after academic validation",
   },
   contentGate: {
     previewBanner: "You're browsing as a guest — sign in to unlock all features",

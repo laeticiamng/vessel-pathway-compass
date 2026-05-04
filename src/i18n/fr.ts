@@ -999,7 +999,7 @@ export const fr = {
       title: "Plan & Facturation",
       desc: "Gérez votre abonnement et vos informations de facturation",
       currentPlan: "Plan actuel",
-      free: "Gratuit",
+      free: "Accès encadré",
       viewPlans: "Voir les plans",
       renewsOn: "Renouvellement le",
     },
@@ -1517,9 +1517,9 @@ export const fr = {
     error: "Une erreur est survenue. Réessayez plus tard.",
   },
   pricingExtras: {
-    free: "Gratuit",
-    duringBeta: "pendant la bêta",
-    atLaunch: "au lancement officiel",
+    free: "Accès encadré",
+    duringBeta: "pendant la phase de validation",
+    atLaunch: "après la validation académique",
   },
   contentGate: {
     previewBanner: "Vous naviguez en mode invité — connectez-vous pour accéder à toutes les fonctionnalités",

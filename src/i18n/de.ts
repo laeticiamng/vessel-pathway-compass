@@ -999,7 +999,7 @@ export const de = {
       title: "Plan & Abrechnung",
       desc: "Verwalten Sie Ihr Abonnement und Ihre Rechnungsdaten",
       currentPlan: "Aktueller Plan",
-      free: "Kostenlos",
+      free: "Kontrollierter Zugang",
       viewPlans: "Pläne ansehen",
       renewsOn: "Verlängerung am",
     },
@@ -1517,8 +1517,8 @@ export const de = {
     error: "Etwas ist schiefgelaufen. Bitte später erneut versuchen.",
   },
   pricingExtras: {
-    free: "Kostenlos",
-    duringBeta: "während der Beta",
+    free: "Kontrollierter Zugang",
+    duringBeta: "während der Validierungsphase",
     atLaunch: "beim offiziellen Start",
   },
   contentGate: {
