@@ -2588,11 +2588,11 @@ export const fr = {
           ],
         },
         usage: {
-          title: "Plan gratuit & quotas (post-bêta)",
+          title: "Accès encadré & quotas (post-validation)",
           items: [
-            "Pendant la phase de validation académique : toutes les fonctionnalités sont accessibles sans quota — la corbeille (30 jours) et l'audit complet sont déjà actifs.",
-            "Après le lancement officiel, le plan gratuit sera limité à 3 rapports IA par jour et 5 dossiers patients actifs ; ces limites ne s'appliquent pas aujourd'hui.",
-            "Les comptes créés pendant la bêta conservent leurs données et leur historique au passage en version stable.",
+            "Pendant la phase de validation académique : les modules sont accessibles sans quota dans le cadre du protocole — la corbeille (30 jours) et l'audit complet sont déjà actifs.",
+            "Après la validation académique, l'accès encadré sera limité à 3 rapports IA par jour et 5 dossiers patients actifs ; ces limites ne s'appliquent pas aujourd'hui.",
+            "Les comptes créés pendant la phase de validation conservent leurs données et leur historique au passage en version stable.",
           ],
         },
       },
