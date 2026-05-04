@@ -85,6 +85,12 @@ export default function Protocol() {
         {/* Protocol identity — 5-second read summary for jury / CHUV */}
         <ProtocolIdentityCard />
 
+        {/* Versioning, status and editorial history (publicly visible) */}
+        <ProtocolVersioningCard />
+
+        {/* Automated completeness audit (real-time, locale-aware) */}
+        <ProtocolCompletenessChecklist />
+
 
         <section className="grid md:grid-cols-2 gap-5 mb-12">
           <Card icon={Target} title={t("pages.protocol.objective.title")} body={t("pages.protocol.objective.body")} />
@@ -205,6 +211,11 @@ export default function Protocol() {
             </p>
           </div>
         </section>
+
+        {/* Compliance-ready Q&A for scientific committee review */}
+        <ProtocolQASection
+          onItemOpen={(i) => logQA(i, qaItems[i]?.q)}
+        />
 
         {/* Anti-overpromise — explicit list of what the platform does NOT claim */}
         <div className="-mx-6 mb-8">
