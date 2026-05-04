@@ -188,9 +188,9 @@ const CONTENT: Record<Language, Content> = {
             "Cette page est statique : tout son contenu est lisible dans le bundle JavaScript livré au navigateur. Aucune affirmation cachée côté serveur.",
         },
         {
-          title: "2. Créer un compte de test gratuit",
+          title: "2. Créer un compte investigateur de test",
           desc:
-            "Sans carte bancaire pendant la Beta ouverte. Vous pouvez parcourir les 10 modules, créer un patient fictif et observer les journaux d'audit générés.",
+            "Compte sans facturation pendant la phase de validation académique. Vous pouvez parcourir les 10 modules, créer un patient fictif et observer les journaux d'audit générés.",
         },
         {
           title: "3. Exporter votre journal d'audit",
