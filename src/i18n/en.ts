@@ -2574,7 +2574,7 @@ export const en = {
         traceability: { title: "Traceability", desc: "Sensitive operations (PHI reads, exports, deletions) are recorded in an immutable audit log accessible to administrators." },
       },
       scopeTitle: "Prototype scope",
-      scopeP1: "AquaMR Flow is currently a research prototype in open beta. Features, the exact scope of processing and operational commitments are subject to change.",
+      scopeP1: "AquaMR Flow is currently a research prototype in academic validation phase. Features, the exact scope of processing and operational commitments are subject to change.",
       scopeP2: "For precise information on data processing, the data controller and associated rights (access, rectification, erasure, portability), please refer to the legal notices and privacy policy.",
       nextTitle: "Going further",
       nextDesc: "Browse the dedicated pages or contact the team for any question.",
