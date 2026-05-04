@@ -3058,4 +3058,62 @@ export const fr = {
     reset: "Réinitialiser",
     footnote: "La taille d'échantillon finale sera confirmée par une unité de biostatistiques indépendante ; recalibration possible après revue intermédiaire en aveugle (≈ M24, avant J3).",
   },
+  aboutAquaMR: {
+    seoTitle: "À propos d'AquaMR — objet physique, principe, fabrication & faisabilité",
+    seoDescription: "AquaMR est le noyau matériel expérimental de VASCU-LINK : un prototype d'imagerie MR bas champ dédié aux membres inférieurs, dont l'objectif est de produire une cartographie vasculaire pré-revascularisation sans rayonnement ionisant et sans contraste injecté. Prototype recherche — pas encore construit.",
+    kicker: "Prototype de recherche · étude de faisabilité en cours",
+    title: "Ce qu'est réellement AquaMR",
+    intro:
+      "AquaMR est le noyau matériel expérimental de VASCU-LINK : un prototype d'imagerie MR bas champ, dédié aux membres inférieurs, dont l'objectif est de produire une cartographie vasculaire pré-revascularisation sans rayonnement ionisant et sans contraste injecté. Cette page décrit l'objet, la physique, la fabrication, la chaîne d'imagerie et les garde-fous de faisabilité — verbatim depuis le dossier doctoral.",
+    diagramAlt:
+      "Schéma d'architecture VASCU-LINK : trois cercles concentriques (L1 Diagnose, cockpit Décision, L2 Guide, L3 vision préclinique) sous la signature cockpit vasculaire 4-zéro.",
+    diagramCaption:
+      "Architecture VASCU-LINK — AquaMR est le noyau d'imagerie bas champ situé dans L1 (Diagnose) ; la plateforme empile la décision, le guidage simulé et la vision préclinique au-dessus.",
+    sectionsHeading: "Cinq sections décrivant l'objet",
+    sections: [
+      {
+        title: "Définition de l'objet",
+        body: "AquaMR est le noyau matériel expérimental de VASCU-LINK : un prototype d'imagerie MR bas champ, dédié aux membres inférieurs, dont l'objectif est de produire une cartographie vasculaire pré-revascularisation sans rayonnement ionisant et sans contraste injecté.",
+      },
+      {
+        title: "Principe physique",
+        body: "L'IRM repose sur un champ B0, une excitation RF, un encodage spatial par gradients et une reconstruction d'image. Différence avec l'IRM hospitalière 1,5–3 T : le champ. AquaMR fonctionne en champ bas (typiquement 0,05–0,2 T) produit par des aimants permanents en assemblage Halbach — sans cryogénie, sans hélium. Compromis : SNR plus faible, ce qui impose une optimisation matérielle, une acquisition adaptée et une reconstruction algorithmique.",
+      },
+      {
+        title: "Fabrication du prototype v0",
+        body: "(i) Aimant Halbach à base de NdFeB recyclés (filière DEEE) + pièces de ferrite pour la correction de champ ; (ii) bobines RF et de gradients en cuivre ; (iii) châssis en PLA biosourcé / bois FSC ; (iv) console open-source MaRCoS / Red Pitaya ; (v) électronique RF/gradients COTS, capteurs T°/EMI/sécurité, blindage léger. BoM cible théorique < 15 k€ — à valider par devis fournisseurs.",
+      },
+      {
+        title: "Chaîne d'imagerie vasculaire",
+        body: "Séquences vasculaires non contrastées (TOF / QISS) adaptées au bas champ, couplées à une chaîne IA dédiée (débruitage k-space, super-résolution, suppression EMI). Cette chaîne ne remplace pas la validation clinique ; elle rend le signal bas champ interprétable et comparable à l'imagerie standard pour la question diagnostique posée.",
+      },
+      {
+        title: "Faisabilité & garde-fous",
+        body: "Validation Go/No-Go pré-spécifiée : J1 signal RMN sur fantôme · J2 contraste flux/statique · J3 concordance diagnostique vs référence standard. Pivots documentés en cas d'échec : aimants neufs économiques, shimming renforcé, montée à 0,1 T, bascule expérimentale vers un scanner hospitalier 0,55 T. Aucune application humaine interventionnelle pendant la thèse.",
+      },
+    ],
+    signature:
+      "L1 ne suppose pas qu'AquaMR existe déjà comme dispositif clinique ; L1 teste précisément la faisabilité matérielle, image et clinique du noyau diagnostique.",
+    hierarchy: {
+      title: "Hiérarchie de nomenclature",
+      subtitle: "Comment le dispositif, la chaîne, le cockpit, la plateforme et le programme s'articulent.",
+      colComponent: "Composant",
+      colRole: "Rôle",
+      rows: [
+        { component: "AquaMR", role: "Dispositif matériel d'imagerie bas champ" },
+        { component: "TOF / QISS + IA", role: "Moteur d'acquisition et de reconstruction" },
+        { component: "Doppler + ABI / TBI + PROMs + C4-i", role: "Données cliniques associées" },
+        { component: "Vessel Pathway Compass", role: "Cockpit logiciel décisionnel" },
+        { component: "AquaMR Flow Platform", role: "Environnement logiciel intégrant l'ensemble" },
+        { component: "VASCU-LINK", role: "Programme doctoral complet (dispositif + chaîne + cockpit + plateforme + protocole)" },
+      ],
+    },
+    cta: {
+      title: "Lire le protocole derrière l'objet",
+      subtitle: "AquaMR n'est qu'une pièce d'une trajectoire scientifique graduée. Poursuivez avec le protocole, la trajectoire L1 → L2 → L3 → post-PhD, ou la justification clinique.",
+      protocol: "Lire le protocole",
+      trajectory: "Voir la trajectoire",
+      why: "Pourquoi VASCU-LINK",
+    },
+  },
 };
