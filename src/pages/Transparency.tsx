@@ -329,9 +329,9 @@ const CONTENT: Record<Language, Content> = {
             "This page is static: all its content is readable in the JavaScript bundle shipped to the browser. No hidden server-side claims.",
         },
         {
-          title: "2. Create a free test account",
+          title: "2. Create an investigator test account",
           desc:
-            "No credit card during the open beta. You can browse the 10 modules, create a fake patient and observe the audit logs generated.",
+            "Account with no billing during the academic validation phase. You can browse the 10 modules, create a fake patient and observe the audit logs generated.",
         },
         {
           title: "3. Export your audit log",
