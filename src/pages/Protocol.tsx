@@ -15,14 +15,18 @@ import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
 
+interface QAItem { q: string; a: string }
+
 export default function Protocol() {
   const { t } = useTranslation();
+  const { logQA } = useProtocolAccessAudit();
 
   const endpoints = (t("pages.protocol.endpoints.rows") as unknown as EndpointRow[]) ?? [];
   const comparators = (t("pages.protocol.comparators.items") as unknown as ListItem[]) ?? [];
   const limits = (t("pages.protocol.limits.items") as unknown as string[]) ?? [];
   const lines = (t("pages.protocol.scope.lines") as unknown as ListItem[]) ?? [];
   const safetyTriggers = (t("pages.protocol.safety.triggers") as unknown as string[]) ?? [];
+  const qaItems = (t("pages.protocol.qa.items") as unknown as QAItem[]) ?? [];
 
   const jsonLd = {
     "@context": "https://schema.org",
