@@ -12,6 +12,7 @@ import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningC
 import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
 import { ComplianceAnnexesSection } from "@/components/landing/ComplianceAnnexesSection";
 import { ComplianceBadge } from "@/components/landing/ComplianceBadge";
+import { ProtocolAuditLogExporter } from "@/components/landing/ProtocolAuditLogExporter";
 import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
 
 type ListItem = { title: string; desc: string };
