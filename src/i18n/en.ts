@@ -2611,11 +2611,11 @@ export const en = {
           ],
         },
         usage: {
-          title: "Free plan & quotas (post-beta)",
+          title: "Supervised access & quotas (post-validation)",
           items: [
-            "During the open beta: every feature is available for free, without a credit card and without quotas — the 30-day trash and full audit trail are already active.",
-            "After official launch, the free plan will be limited to 3 AI reports per day and 5 active patient records; these limits do not apply today.",
-            "Accounts created during the beta keep their data and history when moving to the stable version.",
+            "During the academic validation phase: every module is accessible without quotas under the research protocol — the 30-day trash and full audit trail are already active.",
+            "After academic validation, supervised access will be limited to 3 AI reports per day and 5 active patient records; these limits do not apply today.",
+            "Accounts created during the validation phase keep their data and history when moving to the stable version.",
           ],
         },
       },
