@@ -217,20 +217,17 @@ export default function Landing() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
               <div className="flex flex-col gap-6 mt-8">
+                <Link to="/protocol" className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors" onClick={() => setMobileOpen(false)}>
+                  {t("home.footerNav.protocol")}
+                </Link>
                 <a href="#platform-complete" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.explore")}
                 </a>
-                <Link to={PUBLIC_PRICING_ENABLED ? "/pricing" : "/access"} className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
-                  {PUBLIC_PRICING_ENABLED ? t("landing.nav.pricing") : t("landing.nav.access")}
-                </Link>
                 <Link to="/why" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.why")}
                 </Link>
                 <Link to="/trajectory" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.trajectory")}
-                </Link>
-                <Link to="/protocol" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
-                  {t("home.footerNav.protocol")}
                 </Link>
                 <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
@@ -255,8 +252,8 @@ export default function Landing() {
                   <span className="text-sm text-muted-foreground">{t("topBar.toggleTheme")}</span>
                   <ThemeToggle />
                 </div>
-                <Button asChild className="mt-2" onClick={() => setMobileOpen(false)}>
-                  <Link to="/auth?mode=signup">{t("common.getStarted")}</Link>
+                <Button asChild variant="outline" className="mt-2" onClick={() => setMobileOpen(false)}>
+                  <Link to="/protocol">{t("home.footerNav.protocol")}</Link>
                 </Button>
               </div>
             </SheetContent>
