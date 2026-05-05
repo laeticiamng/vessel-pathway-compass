@@ -213,9 +213,6 @@ export default function Landing() {
               </DropdownMenuContent>
             </DropdownMenu>
             <ThemeToggle />
-            <Button asChild size="sm" variant="outline" className="shadow-sm">
-              <Link to="/protocol">{t("home.footerNav.protocol")}</Link>
-            </Button>
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
