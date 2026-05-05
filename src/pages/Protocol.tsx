@@ -7,6 +7,7 @@ import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
 import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
 import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
+import { NonInferioritySection } from "@/components/landing/NonInferioritySection";
 import { ProtocolCompletenessChecklist } from "@/components/landing/ProtocolCompletenessChecklist";
 import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningCard";
 import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
@@ -96,6 +97,9 @@ export default function Protocol() {
 
         {/* Automated completeness audit (real-time, locale-aware) */}
         <ProtocolCompletenessChecklist />
+
+        {/* Methodological framing — concordance / pragmatic non-inferiority */}
+        <NonInferioritySection compact />
 
 
         <section className="grid md:grid-cols-2 gap-5 mb-12">

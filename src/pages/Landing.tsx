@@ -22,6 +22,7 @@ import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
 import { HomeIntroVideoSection } from "@/components/landing/HomeIntroVideoSection";
+import { NonInferioritySection } from "@/components/landing/NonInferioritySection";
 import { ComplianceBanner } from "@/components/ComplianceBanner";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
@@ -377,6 +378,9 @@ export default function Landing() {
       <ProtocolHighlightBanner />
 
       <PlatformCompletenessSection />
+
+      {/* Methodological framing — concordance / pragmatic non-inferiority */}
+      <NonInferioritySection />
 
       {/* Below-the-fold: every section is code-split + lazy-loaded.
           A single Suspense boundary keeps the perceived flow smooth. */}
