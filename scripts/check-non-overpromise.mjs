@@ -105,6 +105,8 @@ function scanFile(file) {
     const line = lines[i];
     if (!line.trim() || line.trim().startsWith("//") || line.trim().startsWith("*")) continue;
     for (const sentence of splitSentences(line)) {
+      // Skip questions — they pose, not claim.
+      if (/[?？]\s*["'`]?\s*,?\s*$/.test(sentence)) continue;
       for (const re of PATTERNS) {
         const m = sentence.match(re);
         if (!m) continue;
