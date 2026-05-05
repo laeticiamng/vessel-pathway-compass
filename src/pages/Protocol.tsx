@@ -11,6 +11,7 @@ import { NonInferioritySection } from "@/components/landing/NonInferioritySectio
 import { ProtocolCompletenessChecklist } from "@/components/landing/ProtocolCompletenessChecklist";
 import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningCard";
 import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
+import { ProtocolNonSuperiorityFAQ } from "@/components/landing/ProtocolNonSuperiorityFAQ";
 import { ComplianceAnnexesSection } from "@/components/landing/ComplianceAnnexesSection";
 import { ComplianceBadge } from "@/components/landing/ComplianceBadge";
 import { ProtocolAuditLogExporter } from "@/components/landing/ProtocolAuditLogExporter";
@@ -100,6 +101,9 @@ export default function Protocol() {
 
         {/* Methodological framing — concordance / pragmatic non-inferiority */}
         <NonInferioritySection compact />
+
+        {/* Short FAQ — concordance vs superiority, Doppler-first, safety fallback */}
+        <ProtocolNonSuperiorityFAQ />
 
 
         <section className="grid md:grid-cols-2 gap-5 mb-12">

@@ -23,6 +23,7 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
 import { HomeIntroVideoSection } from "@/components/landing/HomeIntroVideoSection";
 import { NonInferioritySection } from "@/components/landing/NonInferioritySection";
+import { AboveHeroFramingLine } from "@/components/landing/AboveHeroFramingLine";
 import { ComplianceBanner } from "@/components/ComplianceBanner";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
@@ -274,6 +275,7 @@ export default function Landing() {
 
       <FourZeroBanner />
       <ComplianceBanner />
+      <AboveHeroFramingLine />
 
       <main id="main-content">
       {/* Hero */}
