@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-05T21:44:49.027Z",
+  "generatedAt": "2026-05-05T21:45:36.147Z",
   "locales": {
     "en": [
       {
@@ -105,6 +105,162 @@
               "Beta pages: Federated Learning, AI Safety, Wearables, AR Training",
               "Generic Lovable README",
               "SCORE2, Wells DVT, ABI calculators (replaced by CI-AKI Engine)"
+            ]
+          }
+        ]
+      }
+    ],
+    "fr": [
+      {
+        "version": "2.2.0",
+        "codename": "Cadrage méthodologique et garde-fous anti-survente",
+        "date": "2026-05-05",
+        "summary": "Renforce la clarté académique pour la soumission CHUV : VASCU-LINK / AquaMR Flow est positionné comme une étude de concordance diagnostique avec rationnel pragmatique de non-infériorité, et non comme une revendication de supériorité face à l'IRM / angio-CT / artériographie hospitalière.",
+        "sections": [
+          {
+            "title": "Cadrage méthodologique",
+            "items": [
+              "Concordance diagnostique avec rationnel pragmatique de non-infériorité — aucune revendication de supériorité face à l'IRM / angio-CT / artériographie hospitalière.",
+              "Règle Doppler-first explicite : l'écho-Doppler reste l'examen hémodynamique de première ligne.",
+              "Filet de sécurité obligatoire : si la cartographie AquaMR n'est pas interprétable, le board L1 recommande l'imagerie standard.",
+              "Le périmètre L1 est restreint au See & Decide (cartographie pré-revascularisation) ; aucune revascularisation humaine autonome."
+            ]
+          },
+          {
+            "title": "Ajouté",
+            "items": [
+              "NonInferioritySection sur la landing et le protocole (EN/FR/DE).",
+              "AboveHeroFramingLine — bandeau prototype de recherche au-dessus du hero d'accueil.",
+              "ProtocolNonSuperiorityFAQ — 4 questions/réponses sur /protocol.",
+              "Vidéo de présentation (teaser Remotion 30 s) via HomeIntroVideoSection.",
+              "AI Audit Card — preuves versionnées, historique de confirmation cliniciens, export PDF.",
+              "Badge PROBAST sur le Digital Twin (EN/FR/DE) + régression visuelle.",
+              "Pages publiques T12 avec JSON-LD ResearchProject validé."
+            ]
+          },
+          {
+            "title": "Modifié",
+            "items": [
+              "Tarification publique retirée — accès institutionnel/recherche uniquement.",
+              "Disclaimer réglementaire monté globalement."
+            ]
+          },
+          {
+            "title": "Garde-fous",
+            "items": [
+              "npm run check:overpromise — détecte les formulations marketing de supériorité/remplacement.",
+              "npm run check:release — vérifie que CHANGELOG, README et appVersion.ts s'accordent sur la version + la date.",
+              "npm run check:prepublish enchaîne overpromise + i18n + cohérence de version.",
+              "Confirmation des preuves restreinte aux rôles clinicien/relecteur avec couverture audit-log."
+            ]
+          },
+          {
+            "title": "Sécurité",
+            "items": [
+              "EXECUTE restreint sur la fonction trigger SECURITY DEFINER ; invocation non authentifiée bloquée (linter Supabase au vert)."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "2.0.0",
+        "codename": "Rebrand AquaMR Flow",
+        "date": "2026-03-20",
+        "summary": "Rebrand complet de Vascular Atlas vers AquaMR Flow — plateforme de workflow vasculaire non ionisante et économe en produit de contraste.",
+        "sections": [
+          {
+            "title": "Ajouté",
+            "items": [
+              "Procedure Planner (IVUS-first, OCT-saline, ARM sans contraste).",
+              "Fusion Viewer (IRM / IVUS / OCT / Échographie) prêt pour DICOM.",
+              "CI-AKI Prevention Engine (stratification basée DFG).",
+              "Design system premium dark-first medtech.",
+              "Badges « Prototype de recherche » sur tous les modules cliniques."
+            ]
+          },
+          {
+            "title": "Modifié",
+            "items": [
+              "Navigation restructurée : workflow clinique à plat + section plateforme repliable.",
+              "Branding / SEO / i18n mis à jour pour AquaMR Flow."
+            ]
+          }
+        ]
+      }
+    ],
+    "de": [
+      {
+        "version": "2.2.0",
+        "codename": "Methodischer Rahmen & Anti-Überversprechen-Schutz",
+        "date": "2026-05-05",
+        "summary": "Stärkt die akademische Klarheit für die CHUV-Einreichung: VASCU-LINK / AquaMR Flow wird als diagnostische Konkordanzstudie mit pragmatischer Nicht-Unterlegenheits-Rationale positioniert, nicht als Überlegenheitsanspruch gegenüber MRT / CTA / Katheter-Angiographie im Krankenhaus.",
+        "sections": [
+          {
+            "title": "Methodischer Rahmen",
+            "items": [
+              "Diagnostische Konkordanz mit pragmatischer Nicht-Unterlegenheits-Rationale — kein Überlegenheitsanspruch gegenüber Krankenhaus-MRT / CTA / Katheter-Angiographie.",
+              "Doppler-First-Regel bleibt explizit: Duplex-Sonographie bleibt erste hämodynamische Untersuchung.",
+              "Verpflichtender Sicherheitsrückfall: Ist die AquaMR-Kartographie nicht interpretierbar, empfiehlt das L1-Board Standardbildgebung.",
+              "L1-Umfang beschränkt auf See & Decide (prä-revaskularisations-Kartographie); keine autonome humane Revaskularisation."
+            ]
+          },
+          {
+            "title": "Hinzugefügt",
+            "items": [
+              "NonInferioritySection auf Landing und Protokoll (EN/FR/DE).",
+              "AboveHeroFramingLine — Forschungsprototyp-Banner über dem Home-Hero.",
+              "ProtocolNonSuperiorityFAQ — 4 Q&A auf /protocol.",
+              "Vorstellungsvideo (30 s Remotion-Teaser) via HomeIntroVideoSection.",
+              "AI Audit Card — versionierte Evidenz, Kliniker-Bestätigungshistorie, PDF-Export.",
+              "PROBAST-Badge auf dem Digital Twin (EN/FR/DE) + visuelle Regression.",
+              "Öffentliche T12-Seiten mit validiertem ResearchProject JSON-LD."
+            ]
+          },
+          {
+            "title": "Geändert",
+            "items": [
+              "Öffentliche Preisgestaltung entfernt — nur institutioneller/Forschungszugang.",
+              "Regulatorischer Disclaimer global eingebunden."
+            ]
+          },
+          {
+            "title": "Schutzmaßnahmen",
+            "items": [
+              "npm run check:overpromise — markiert marketinglastige Überlegenheits-/Ersatzformulierungen.",
+              "npm run check:release — prüft, dass CHANGELOG, README und appVersion.ts in Version + Datum übereinstimmen.",
+              "npm run check:prepublish verkettet overpromise + i18n + Versionskonsistenz.",
+              "Rollenbasierte Evidenzbestätigung (Kliniker/Reviewer) mit Audit-Log-Abdeckung."
+            ]
+          },
+          {
+            "title": "Sicherheit",
+            "items": [
+              "EXECUTE auf der SECURITY DEFINER Trigger-Funktion eingeschränkt; nicht authentifizierter Aufruf blockiert (Supabase-Linter sauber)."
+            ]
+          }
+        ]
+      },
+      {
+        "version": "2.0.0",
+        "codename": "AquaMR Flow Rebrand",
+        "date": "2026-03-20",
+        "summary": "Vollständiges Rebranding von Vascular Atlas zu AquaMR Flow — nicht-ionisierende, kontrastmittelsparende vaskuläre Workflow-Plattform.",
+        "sections": [
+          {
+            "title": "Hinzugefügt",
+            "items": [
+              "Procedure Planner (IVUS-first, OCT-saline, kontrastfreie MRA).",
+              "Fusion Viewer (MRT / IVUS / OCT / Ultraschall) DICOM-fähig.",
+              "CI-AKI Prevention Engine (eGFR-basierte Stratifizierung).",
+              "Premium-Dark-First-Medtech-Designsystem.",
+              "„Forschungsprototyp\"-Badges auf allen klinischen Modulen."
+            ]
+          },
+          {
+            "title": "Geändert",
+            "items": [
+              "Navigation neu strukturiert: flacher klinischer Workflow + zusammenklappbarer Plattform-Bereich.",
+              "Branding / SEO / i18n auf AquaMR Flow aktualisiert."
             ]
           }
         ]
