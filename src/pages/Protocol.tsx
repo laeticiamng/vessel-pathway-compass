@@ -7,6 +7,7 @@ import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
 import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
 import { AntiOverpromiseSection } from "@/components/landing/AntiOverpromiseSection";
+import { NonInferioritySection } from "@/components/landing/NonInferioritySection";
 import { ProtocolCompletenessChecklist } from "@/components/landing/ProtocolCompletenessChecklist";
 import { ProtocolVersioningCard } from "@/components/landing/ProtocolVersioningCard";
 import { ProtocolQASection } from "@/components/landing/ProtocolQASection";
