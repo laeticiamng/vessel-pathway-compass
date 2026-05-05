@@ -19,6 +19,8 @@
     "changelog:build": "node scripts/build-changelog.mjs",
     "check:overpromise": "node scripts/check-non-overpromise.mjs",
     "check:release": "node scripts/check-version-consistency.mjs && node scripts/build-changelog.mjs",
+    "test:visual": "playwright test e2e/visual-regression.spec.ts --project=chromium",
+    "test:visual:update": "playwright test e2e/visual-regression.spec.ts --project=chromium --update-snapshots",
     "check:prepublish": "npm run check:overpromise && npm run i18n:ci && npm run check:release"
   },
   "dependencies": {
