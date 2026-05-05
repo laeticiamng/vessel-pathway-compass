@@ -3,7 +3,8 @@
 <!-- VERSION-STAMP -->
 > **Version `v2.2.0`** — Last updated **2026-05-05**
 > _Methodological framing & non-overpromise guardrails_
-> Synced from [`src/lib/appVersion.ts`](./src/lib/appVersion.ts) via `npm run check:release`.
+>
+> [![release-checks](https://github.com/laeticiamng/vessel-pathway-compass/actions/workflows/release-checks.yml/badge.svg?branch=main)](https://github.com/laeticiamng/vessel-pathway-compass/actions/workflows/release-checks.yml) — `npm run check:release` verifies that `CHANGELOG.md`, `README.md` and [`src/lib/appVersion.ts`](./src/lib/appVersion.ts) agree on version + date before every publish.
 <!-- /VERSION-STAMP -->
 
 **Non-ionizing vascular workflow platform for interventional teams.**
