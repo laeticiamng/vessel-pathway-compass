@@ -42,6 +42,7 @@ const Methodology = lazy(() => import("./pages/Methodology"));
 const SAP = lazy(() => import("./pages/SAP"));
 const IncidentalFindings = lazy(() => import("./pages/IncidentalFindings"));
 const DataManagementPlan = lazy(() => import("./pages/DataManagementPlan"));
+const Changelog = lazy(() => import("./pages/Changelog"));
 const Dashboard = lazy(() => import("./pages/app/Dashboard"));
 const ProcedurePlanner = lazy(() => import("./pages/app/ProcedurePlanner"));
 const L1DecisionBoard = lazy(() => import("./pages/app/L1DecisionBoard"));
@@ -134,6 +135,8 @@ const App = () => (
           <Route path="/modules" element={<Modules />} />
           <Route path="/transparence" element={<Transparency />} />
           <Route path="/transparency" element={<Navigate to="/transparence" replace />} />
+          <Route path="/changelog" element={<Changelog />}/>
+          <Route path="/journal-evolutions" element={<Navigate to="/changelog" replace />} />
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
           {!import.meta.env.PROD && <Route path="/dev/hero-neon" element={<HeroNeonQa />} />}

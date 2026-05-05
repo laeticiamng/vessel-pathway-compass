@@ -167,7 +167,6 @@ export default function Changelog() {
       <SEOHead
         title={`${t.title} — VASCU-LINK / AquaMR Flow`}
         description={t.metaDesc}
-        canonical="/changelog"
       />
 
       <div className="container mx-auto max-w-4xl px-4 py-10 sm:py-14">
