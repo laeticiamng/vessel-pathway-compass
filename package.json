@@ -15,7 +15,8 @@
     "i18n:ci": "node scripts/i18n-ci-check.mjs",
     "i18n:audit": "node scripts/i18n-audit-report.mjs",
     "check:overpromise": "node scripts/check-non-overpromise.mjs",
-    "check:prepublish": "npm run check:overpromise && npm run i18n:ci"
+    "check:release": "node scripts/check-version-consistency.mjs",
+    "check:prepublish": "npm run check:overpromise && npm run i18n:ci && npm run check:release"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

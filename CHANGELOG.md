@@ -7,6 +7,12 @@ is positioned as a **diagnostic concordance study with a pragmatic
 non-inferiority rationale**, not as a superiority claim against hospital
 MRI / CTA / catheter angiography.
 
+### Methodology framing
+- Reaffirms **diagnostic concordance with a pragmatic non-inferiority rationale** — no superiority claim against hospital MRI / CTA / catheter angiography.
+- **Doppler-first** rule kept explicit: Duplex ultrasound remains the first-line hemodynamic examination.
+- **Safety fallback** mandatory: if AquaMR cartography is non-interpretable, the L1 board recommends standard-of-care imaging.
+- L1 scope is restricted to *See & Decide* (pre-revascularization mapping); no autonomous human revascularization.
+
 ### Added
 - **NonInferioritySection** (`src/components/landing/NonInferioritySection.tsx`) — trilingual EN/FR/DE academic block on Landing and Protocol (`compact`) with three pillars (not superior imaging, sufficient mapping, safety fallback) and explicit "do NOT use" rules.
 - **AboveHeroFramingLine** (`src/components/landing/AboveHeroFramingLine.tsx`) — short banner above the hero on `/` stating "Research prototype — diagnostic concordance study with pragmatic non-inferiority rationale" in EN/FR/DE.
@@ -22,6 +28,13 @@ MRI / CTA / catheter angiography.
 - Public pricing removed — institutional/research access only (`VITE_PUBLIC_PRICING_ENABLED=false`); regulatory disclaimer mounted globally.
 - Evidence confirmation restricted to `clinician`/`reviewer` roles with explicit unauthorized UI error.
 - AI Audit Card surfaces per-evidence confirmation history and related audit-log entries over time.
+
+### Guardrails
+- `npm run check:overpromise` — flags marketing-like superiority/replacement phrases on Landing, Protocol, landing components and i18n bundles (EN/FR/DE).
+- `npm run check:release` — verifies CHANGELOG.md, README.md and `src/lib/appVersion.ts` agree on version + date and that the latest entry follows `RELEASE_TEMPLATE.md`.
+- `npm run check:prepublish` chains overpromise + i18n + version-consistency checks.
+- Role-gated evidence confirmation (clinician/reviewer) with audit-log coverage.
+- PROBAST badge + Playwright visual regression on the Digital Twin.
 
 ### Security
 - Restricted `EXECUTE` on the SECURITY DEFINER trigger function and ensured it can not be invoked by unauthenticated users (Supabase linter warnings cleared).
