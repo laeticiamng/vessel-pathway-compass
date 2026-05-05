@@ -1,5 +1,11 @@
 # AquaMR Flow
 
+<!-- VERSION-STAMP -->
+> **Version `v2.2.0`** — Last updated **2026-05-05**
+> _Methodological framing & non-overpromise guardrails_
+> Synced from [`src/lib/appVersion.ts`](./src/lib/appVersion.ts) via `npm run check:release`.
+<!-- /VERSION-STAMP -->
+
 **Non-ionizing vascular workflow platform for interventional teams.**
 
 AquaMR Flow is a clinical software cockpit for contrast-sparing and non-ionizing vascular procedures. It combines procedure planning, multimodal imaging fusion, CI-AKI risk prevention, clinical simulation, and a research registry into a single platform built for interventional cardiologists, interventional radiologists, vascular medicine physicians, clinical researchers, and trainees.
