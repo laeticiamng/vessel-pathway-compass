@@ -2004,6 +2004,30 @@ export const fr = {
     },
   },
   pages: {
+    changelog: {
+      title: "Journal des évolutions",
+      subtitle: "Historique public des versions de VASCU-LINK / AquaMR Flow.",
+      metaDesc:
+        "Journal public des évolutions de VASCU-LINK / AquaMR Flow — cadrage méthodologique, garde-fous et sécurité par version.",
+      current: "Version actuelle",
+      searchPlaceholder: "Rechercher par version, date, fonctionnalité…",
+      empty: "Aucune version ne correspond à votre recherche.",
+      back: "Retour à l'accueil",
+      sections: {
+        methodology_framing: "Cadrage méthodologique",
+        cadrage_méthodologique: "Cadrage méthodologique",
+        added: "Ajouté",
+        ajouté: "Ajouté",
+        changed: "Modifié",
+        modifié: "Modifié",
+        guardrails: "Garde-fous",
+        "garde-fous": "Garde-fous",
+        security: "Sécurité",
+        sécurité: "Sécurité",
+        removed: "Retiré",
+        deprecated: "Déprécié",
+      },
+    },
     common: {
       backHome: "Accueil",
       contactUs: "Nous contacter",

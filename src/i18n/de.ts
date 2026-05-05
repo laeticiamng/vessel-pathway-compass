@@ -2004,6 +2004,30 @@ export const de = {
     },
   },
   pages: {
+    changelog: {
+      title: "Änderungsverlauf",
+      subtitle: "Öffentliche Versionshistorie von VASCU-LINK / AquaMR Flow.",
+      metaDesc:
+        "Öffentlicher Änderungsverlauf von VASCU-LINK / AquaMR Flow — methodischer Rahmen, Schutzmaßnahmen und Sicherheit pro Version.",
+      current: "Aktuelle Version",
+      searchPlaceholder: "Suche nach Version, Datum, Funktion…",
+      empty: "Keine Version entspricht Ihrer Suche.",
+      back: "Zurück zur Startseite",
+      sections: {
+        methodology_framing: "Methodischer Rahmen",
+        methodischer_rahmen: "Methodischer Rahmen",
+        added: "Hinzugefügt",
+        hinzugefügt: "Hinzugefügt",
+        changed: "Geändert",
+        geändert: "Geändert",
+        guardrails: "Schutzmaßnahmen",
+        schutzmaßnahmen: "Schutzmaßnahmen",
+        security: "Sicherheit",
+        sicherheit: "Sicherheit",
+        removed: "Entfernt",
+        deprecated: "Veraltet",
+      },
+    },
     common: {
       backHome: "Startseite",
       contactUs: "Kontakt",

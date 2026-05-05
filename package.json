@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predev": "node scripts/build-changelog.mjs",
+    "prebuild": "node scripts/build-changelog.mjs",
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
@@ -14,8 +16,9 @@
     "test:i18n": "vitest run src/i18n/__tests__/structures.test.ts src/i18n/__tests__/home-snapshot.test.tsx",
     "i18n:ci": "node scripts/i18n-ci-check.mjs",
     "i18n:audit": "node scripts/i18n-audit-report.mjs",
+    "changelog:build": "node scripts/build-changelog.mjs",
     "check:overpromise": "node scripts/check-non-overpromise.mjs",
-    "check:release": "node scripts/check-version-consistency.mjs",
+    "check:release": "node scripts/check-version-consistency.mjs && node scripts/build-changelog.mjs",
     "check:prepublish": "npm run check:overpromise && npm run i18n:ci && npm run check:release"
   },
   "dependencies": {
