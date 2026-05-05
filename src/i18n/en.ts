@@ -2027,6 +2027,25 @@ export const en = {
     },
   },
   pages: {
+    changelog: {
+      title: "Changelog",
+      subtitle: "Public release timeline for VASCU-LINK / AquaMR Flow.",
+      metaDesc:
+        "Public changelog for VASCU-LINK / AquaMR Flow — methodology framing, guardrails and security per release.",
+      current: "Current version",
+      searchPlaceholder: "Search by version, date, feature…",
+      empty: "No release matches your search.",
+      back: "Back to home",
+      sections: {
+        methodology_framing: "Methodology framing",
+        added: "Added",
+        changed: "Changed",
+        guardrails: "Guardrails",
+        security: "Security",
+        removed: "Removed",
+        deprecated: "Deprecated",
+      },
+    },
     common: {
       backHome: "Home",
       contactUs: "Contact us",
