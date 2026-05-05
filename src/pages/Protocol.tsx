@@ -98,6 +98,9 @@ export default function Protocol() {
         {/* Automated completeness audit (real-time, locale-aware) */}
         <ProtocolCompletenessChecklist />
 
+        {/* Methodological framing — concordance / pragmatic non-inferiority */}
+        <NonInferioritySection compact />
+
 
         <section className="grid md:grid-cols-2 gap-5 mb-12">
           <Card icon={Target} title={t("pages.protocol.objective.title")} body={t("pages.protocol.objective.body")} />
