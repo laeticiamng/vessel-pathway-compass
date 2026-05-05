@@ -201,9 +201,13 @@ src/
 
 ---
 
-## Recent Additions (v2.1 — CHUV pre-submission)
+## Recent Additions (v2.2 — Methodological framing & non-overpromise guardrails)
 
-- **Home intro video** — 30s Remotion-rendered teaser (`public/vascu-link-intro.mp4`) integrated via `src/components/landing/HomeIntroVideoSection.tsx` (EN/FR/DE).
+- **Methodological framing — concordance vs superiority** — `NonInferioritySection` (Landing + Protocol `compact`) makes explicit that L1 is a **diagnostic concordance study with a pragmatic non-inferiority rationale**, not a superiority claim against hospital MRI / CTA / catheter angiography (EN/FR/DE).
+- **Above-hero framing line** — `AboveHeroFramingLine` displays the research-prototype / non-superiority message above the home hero in EN/FR/DE so the framing is understood within the first seconds.
+- **Protocol non-superiority FAQ** — `ProtocolNonSuperiorityFAQ` (4 Q&A) on `/protocol` covering concordance vs superiority, Doppler-first rule and safety fallback (EN/FR/DE).
+- **Non-overpromise content check** — `scripts/check-non-overpromise.mjs` flags marketing-like superiority/replacement phrases (e.g. *"better than MRI"*, *"replace angiography"*) on Landing, Protocol, landing components and i18n bundles. Run via `npm run check:overpromise` (also chained in `npm run check:prepublish`).
+- **Home intro video** — 30s Remotion-rendered teaser (`public/vascu-link-intro.mp4`) integrated via `HomeIntroVideoSection` (EN/FR/DE).
 - **AI Audit Card** — versioned, source-linked evidence panel with validated/pending filter, one-click PDF export, clinician confirmation workflow + per-row history (role-gated to clinician/reviewer, audit-logged).
 - **PROBAST Badge** — methodological risk-of-bias indicator on the Digital Twin, fully localized EN/FR/DE with visual regression coverage.
 - **T12 public pages** — Protocol, Methodology, SAP, DMP, Incidental Findings, Audit Limitations, Trajectory, Why VASCU-LINK, About AquaMR with validated `ResearchProject` JSON-LD and route-matched SEO.

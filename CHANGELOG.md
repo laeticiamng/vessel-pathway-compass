@@ -1,5 +1,31 @@
 # Changelog
 
+## v2.2.0 — Methodological framing & non-overpromise guardrails (2026-05-05)
+
+Reinforces academic clarity for the CHUV submission: VASCU-LINK / AquaMR Flow
+is positioned as a **diagnostic concordance study with a pragmatic
+non-inferiority rationale**, not as a superiority claim against hospital
+MRI / CTA / catheter angiography.
+
+### Added
+- **NonInferioritySection** (`src/components/landing/NonInferioritySection.tsx`) — trilingual EN/FR/DE academic block on Landing and Protocol (`compact`) with three pillars (not superior imaging, sufficient mapping, safety fallback) and explicit "do NOT use" rules.
+- **AboveHeroFramingLine** (`src/components/landing/AboveHeroFramingLine.tsx`) — short banner above the hero on `/` stating "Research prototype — diagnostic concordance study with pragmatic non-inferiority rationale" in EN/FR/DE.
+- **ProtocolNonSuperiorityFAQ** (`src/components/landing/ProtocolNonSuperiorityFAQ.tsx`) — 4-question FAQ on `/protocol` (concordance vs superiority, why not a superiority trial, Doppler-first rule, safety fallback).
+- **Home intro video** — 30s Remotion-rendered teaser (`public/vascu-link-intro.mp4`) with `HomeIntroVideoSection` (EN/FR/DE).
+- **Non-overpromise content check** (`scripts/check-non-overpromise.mjs`) — scans Landing, Protocol, landing components and i18n bundles for marketing-like superiority/replacement phrases (EN/FR/DE), with negation- and question-aware filtering. Wired as `npm run check:overpromise` and `npm run check:prepublish`.
+- **AI Audit Card** — versioned, source-linked evidence panel; per-row clinician confirmation with history; one-click PDF export with EN/FR/DE evidence labels, versions, timestamps and source URLs; Vitest coverage in `src/test/ai-audit-pdf.test.ts`.
+- **PROBAST Badge** on Digital Twin (EN/FR/DE) with Playwright visual regression.
+- **T12 public pages** — Protocol, Methodology, SAP, DMP, Incidental Findings, Audit Limitations, Trajectory, Why VASCU-LINK, About AquaMR with validated `ResearchProject` JSON-LD.
+- Playwright e2e specs: T12 pages, footer i18n navigation, ProBAST visual regression, AI Audit PDF.
+
+### Changed
+- Public pricing removed — institutional/research access only (`VITE_PUBLIC_PRICING_ENABLED=false`); regulatory disclaimer mounted globally.
+- Evidence confirmation restricted to `clinician`/`reviewer` roles with explicit unauthorized UI error.
+- AI Audit Card surfaces per-evidence confirmation history and related audit-log entries over time.
+
+### Security
+- Restricted `EXECUTE` on the SECURITY DEFINER trigger function and ensured it can not be invoked by unauthenticated users (Supabase linter warnings cleared).
+
 ## v2.0.0 — AquaMR Flow Rebrand (2026-03-20)
 
 Complete platform rebrand from "Vascular Atlas" to **AquaMR Flow** — a non-ionizing, contrast-sparing vascular workflow platform.
