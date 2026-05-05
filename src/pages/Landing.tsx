@@ -379,6 +379,9 @@ export default function Landing() {
 
       <PlatformCompletenessSection />
 
+      {/* Methodological framing — concordance / pragmatic non-inferiority */}
+      <NonInferioritySection />
+
       {/* Below-the-fold: every section is code-split + lazy-loaded.
           A single Suspense boundary keeps the perceived flow smooth. */}
       <Suspense fallback={<SectionFallback />}>
