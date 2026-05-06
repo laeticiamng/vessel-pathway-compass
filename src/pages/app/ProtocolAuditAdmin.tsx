@@ -16,6 +16,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 import { toast } from "sonner";
 import { pseudonymizeContext } from "@/lib/protocolAuditPseudonymize";
+import { ProtocolAlertsWidget } from "@/components/admin/ProtocolAlertsWidget";
+import { ProtocolGuardConfigPanel } from "@/components/admin/ProtocolGuardConfigPanel";
 
 interface GovEvent {
   id: string;
