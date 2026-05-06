@@ -15,6 +15,7 @@ import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuth } from "@/hooks/useAuth";
 import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 import { toast } from "sonner";
+import { pseudonymizeContext } from "@/lib/protocolAuditPseudonymize";
 
 interface GovEvent {
   id: string;
