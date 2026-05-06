@@ -1793,7 +1793,7 @@ export const fr = {
       positioningStandard: "Angio-TDM / ARM / angiographie — recours standard si qualité insuffisante ou indication urgente",
       l1Title: "L1 — DIAGNOSE : validation clinique prospective",
       l1Badge: "Cœur du PhD",
-      l1Caption: "Cohorte principale CHUV / Lausanne · n ≈ 250 patients analysables",
+      l1Caption: "Cohorte principale · n ≈ 320 inclus / ≈ 250 analysables (site partenaire académique à confirmer)",
       l1Item1Title: "AquaMR 4-zéro",
       l1Item1Sub: "Cartographie sans rayons, sans contraste, sans hélium",
       l1Item2Title: "Doppler structuré + ABI/TBI",
