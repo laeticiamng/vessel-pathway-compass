@@ -105,7 +105,7 @@ const CONTENT: Record<Language, Content> = {
       primary: {
         label: "Primärer Endpunkt",
         value:
-          "Segmentale diagnostische Konkordanz AquaMR vs CT-Angiographie für Stenose ≥ 50 % (Cohens κ, Sensitivität, Spezifität).",
+          "Segmentale Konkordanz AquaMR vs Referenzbildgebung (CTA / MRA / DSA) auf 4-Klassen-Stenose-Klassifikation — quadratisch gewichtetes κ ≥ 0,65 (untere 95 %-KI-Grenze ≥ 0,50).",
       },
       population: {
         label: "Zielpopulation",
