@@ -3,6 +3,8 @@ import { ShieldCheck, Download, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
+import { useAuditLog } from "@/hooks/useAuditLog";
+import { getContentVersion } from "@/lib/contentVersions";
 import {
   auditProtocolCompleteness,
   type ProtocolCheckSeverity,
