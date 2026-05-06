@@ -18,6 +18,7 @@ import { ComplianceBadge } from "@/components/landing/ComplianceBadge";
 import { ProtocolAuditLogExporter } from "@/components/landing/ProtocolAuditLogExporter";
 import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
 import { useUserRoles } from "@/hooks/useUserRoles";
+import { useProtocolViewGuard } from "@/hooks/useProtocolGuard";
 
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
@@ -28,7 +29,13 @@ export default function Protocol() {
   const { t } = useTranslation();
   const { logQA } = useProtocolAccessAudit();
   const { isAdmin, isResearchLead } = useUserRoles();
-  const canSeeInternalAudit = isAdmin || isResearchLead;
+  // Server-side guard: the EDGE FUNCTION decides + logs every attempt.
+  // Client-side roles are only used as a hint to render skeletons fast.
+  const { granted: serverGranted, loading: guardLoading } = useProtocolViewGuard();
+  const canSeeInternalAudit = serverGranted && (isAdmin || isResearchLead);
+  // Hide entirely while we wait for the server verdict — never render
+  // audit UI optimistically based on client-only role state.
+  const showInternalAudit = !guardLoading && canSeeInternalAudit;
 
   const endpoints = (t("pages.protocol.endpoints.rows") as unknown as EndpointRow[]) ?? [];
   const comparators = (t("pages.protocol.comparators.items") as unknown as ListItem[]) ?? [];
@@ -109,10 +116,10 @@ export default function Protocol() {
         <ProtocolVersioningCard />
 
         {/* Compliance & completeness badge — restricted to internal admin / research lead */}
-        {canSeeInternalAudit && <ComplianceBadge />}
+        {showInternalAudit && <ComplianceBadge />}
 
         {/* Automated completeness audit — internal only (admin / research lead) */}
-        {canSeeInternalAudit && <ProtocolCompletenessChecklist />}
+        {showInternalAudit && <ProtocolCompletenessChecklist />}
 
         {/* Methodological framing — concordance / pragmatic non-inferiority */}
         <NonInferioritySection compact />
