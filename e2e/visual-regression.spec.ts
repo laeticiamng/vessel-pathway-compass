@@ -1,6 +1,22 @@
 import { test, expect, type Page } from "@playwright/test";
 
 /**
+ * Pin rendering environment for snapshot determinism:
+ *  - locale `en-US` so Intl.* (dates/numbers) never shifts layout
+ *  - timezone `UTC` so any rendered timestamp is stable across CI/local
+ *  - deviceScaleFactor 1 so screenshots aren't 2x on Retina dev machines
+ *  - reduced-motion to freeze CSS animations declared via media queries
+ *  - color scheme `light` to avoid OS-driven dark-mode flips
+ */
+test.use({
+  locale: "en-US",
+  timezoneId: "UTC",
+  deviceScaleFactor: 1,
+  colorScheme: "light",
+  reducedMotion: "reduce",
+});
+
+/**
  * Visual regression + DOM overlap/duplication suite.
  *
  * Two complementary mechanisms:
@@ -68,9 +84,10 @@ async function gotoStable(page: Page, path: string, lang: string) {
   await page.goto(path, { waitUntil: "networkidle" });
 
   // Force a deterministic font stack + freeze rendering so snapshots don't
-  // shift when a webfont swaps in mid-capture.
+  // shift when a webfont swaps in mid-capture. Also pin browser zoom to 1.
   await page.addStyleTag({
     content: `
+      :root { zoom: 1 !important; }
       *, *::before, *::after {
         animation: none !important;
         transition: none !important;
@@ -85,6 +102,30 @@ async function gotoStable(page: Page, path: string, lang: string) {
       html { scroll-behavior: auto !important; }
     `,
   });
+
+  // Explicit readiness gates before capture — avoid snapshotting mid
+  // DOM-reconfiguration (i18n hydration, header mount, CTA render).
+  await page.waitForSelector("header", { state: "visible", timeout: 10_000 });
+  await page.waitForFunction(
+    () => {
+      // i18n is considered ready when at least one translated label is
+      // rendered in the header (no raw "key.path" leaking through).
+      const h = document.querySelector("header");
+      if (!h) return false;
+      const txt = (h.textContent || "").trim();
+      if (txt.length === 0) return false;
+      // Reject pseudo-keys like "home.nav.protocol"
+      return !/\b\w+\.[\w.]+\b/.test(txt) || txt.length > 20;
+    },
+    { timeout: 10_000 },
+  );
+  // Wait until at least one CTA (link or button) is rendered & laid out.
+  await page.waitForFunction(() => {
+    const el = document.querySelector("header a, header button");
+    if (!el) return false;
+    const r = (el as HTMLElement).getBoundingClientRect();
+    return r.width > 0 && r.height > 0;
+  }, { timeout: 10_000 });
 
   // Wait for any pending fonts to load (or fail) so we don't capture a
   // FOUT mid-swap.
