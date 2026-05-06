@@ -2288,7 +2288,7 @@ export const fr = {
         missingLabel: "Données manquantes",
         missing: "Imputation multiple par équations chaînées (MICE), m = 20 imputations. Analyses de sensibilité incluant complete-case et tipping-point.",
         interimLabel: "Analyse intermédiaire",
-        interim: "Analyse de futilité à n=50 (règle d'O'Brien-Fleming, sans dépense d'α sur l'efficacité).",
+        interim: "Analyse de futilité à n=100 (règle d'O'Brien-Fleming, sans dépense d'α sur l'efficacité).",
       },
       safety: {
         title: "Bascule sécurité",
