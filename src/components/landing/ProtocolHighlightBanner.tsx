@@ -26,11 +26,11 @@ type Content = {
 const CONTENT: Record<Language, Content> = {
   fr: {
     badge: "Protocole de recherche · L1",
-    title: "Sujet de thèse — Concordance diagnostique AquaMR vs angio-CT en AOMI fragile",
+    title: "Sujet de thèse — Concordance diagnostique AquaMR vs imagerie de référence (CTA / MRA / DSA) en AOMI fragile",
     description:
-      "Étude prospective monocentrique évaluant la cartographie segmentaire artérielle non irradiante chez le patient fragile (insuffisance rénale, diabète, polymorbidité), en comparaison à la référence angio-CT.",
+      "Étude prospective monocentrique évaluant la cartographie segmentaire artérielle non irradiante chez le patient fragile (insuffisance rénale, diabète, polymorbidité), en comparaison à l'imagerie de référence (angio-CT, ARM ou angiographie cathéter selon indication).",
     bullets: [
-      "Endpoint primaire : κ de Cohen, sensibilité, spécificité segmentaires (sténose ≥ 50 %)",
+      "Endpoint primaire : κ pondéré quadratiquement ≥ 0,65 (IC 95 % borne inf. ≥ 0,50)",
       "Population : 320 inclus, 250 analysables — AOMI fragile",
       "Sécurité : bascule documentée vers imagerie standard si qualité insuffisante",
     ],
@@ -39,11 +39,11 @@ const CONTENT: Record<Language, Content> = {
   },
   en: {
     badge: "Research protocol · L1",
-    title: "Thesis subject — Diagnostic concordance AquaMR vs CT angiography in frail PAD",
+    title: "Thesis subject — Diagnostic concordance AquaMR vs reference imaging (CTA / MRA / DSA) in frail PAD",
     description:
-      "Prospective single-centre study evaluating non-ionising segmental arterial mapping in frail patients (renal impairment, diabetes, polymorbidity), benchmarked against CT angiography.",
+      "Prospective single-centre study evaluating non-ionising segmental arterial mapping in frail patients (renal impairment, diabetes, polymorbidity), benchmarked against reference imaging (CT angiography, MR angiography or catheter angiography per indication).",
     bullets: [
-      "Primary endpoint: Cohen's κ, segmental sensitivity & specificity (≥ 50% stenosis)",
+      "Primary endpoint: quadratically weighted κ ≥ 0.65 (95% CI lower bound ≥ 0.50)",
       "Population: 320 enrolled, 250 analysable — frail PAD",
       "Safety: documented fallback to standard imaging if quality insufficient",
     ],
@@ -53,11 +53,11 @@ const CONTENT: Record<Language, Content> = {
   de: {
     badge: "Forschungsprotokoll · L1",
     title:
-      "Dissertationsthema — Diagnostische Konkordanz AquaMR vs CT-Angiographie bei fragiler pAVK",
+      "Dissertationsthema — Diagnostische Konkordanz AquaMR vs Referenzbildgebung (CTA / MRA / DSA) bei fragiler pAVK",
     description:
-      "Prospektive monozentrische Studie zur nicht-ionisierenden segmentalen arteriellen Kartierung bei fragilen Patientinnen und Patienten (Niereninsuffizienz, Diabetes, Polymorbidität), verglichen mit der CT-Angiographie als Referenz.",
+      "Prospektive monozentrische Studie zur nicht-ionisierenden segmentalen arteriellen Kartierung bei fragilen Patientinnen und Patienten (Niereninsuffizienz, Diabetes, Polymorbidität), verglichen mit der Referenzbildgebung (CT-Angiographie, MR-Angiographie oder Katheter-Angiographie je nach Indikation).",
     bullets: [
-      "Primärer Endpunkt: Cohens κ, segmentale Sensitivität & Spezifität (Stenose ≥ 50 %)",
+      "Primärer Endpunkt: quadratisch gewichtetes κ ≥ 0,65 (untere 95 %-KI-Grenze ≥ 0,50)",
       "Population: 320 Eingeschlossene, 250 Auswertbare — fragile pAVK",
       "Sicherheit: dokumentierter Fallback auf Standardbildgebung bei unzureichender Qualität",
     ],
