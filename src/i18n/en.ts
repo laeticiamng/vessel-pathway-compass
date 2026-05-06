@@ -2456,7 +2456,7 @@ export const en = {
           items: [
             "Integrated ADR registry: report within 24 h for any serious event",
             "DSMB charter published; independent composition (3 external experts)",
-            "DSMB meetings scheduled at n=50 (futility) and n=100 (interim safety)",
+            "DSMB meetings scheduled at n=100 (futility) and n=200 (interim safety)",
             "Automatic freeze criteria: ≥ 2 related SAEs or κ drift > 0.15",
             "Swissmedic notification for serious events per ClinO regulation",
           ],
