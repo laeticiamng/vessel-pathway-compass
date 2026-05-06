@@ -26,6 +26,8 @@ interface QAItem { q: string; a: string }
 export default function Protocol() {
   const { t } = useTranslation();
   const { logQA } = useProtocolAccessAudit();
+  const { isAdmin, isResearchLead } = useUserRoles();
+  const canSeeInternalAudit = isAdmin || isResearchLead;
 
   const endpoints = (t("pages.protocol.endpoints.rows") as unknown as EndpointRow[]) ?? [];
   const comparators = (t("pages.protocol.comparators.items") as unknown as ListItem[]) ?? [];
