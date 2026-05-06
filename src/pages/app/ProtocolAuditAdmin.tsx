@@ -29,6 +29,7 @@ const PROTOCOL_ACTIONS = [
   "protocol.access.granted",
   "protocol.access.denied",
   "protocol.access.throttled",
+  "protocol.access.alert",
   "protocol.access.error",
   "protocol.export.granted",
   "protocol.viewed",
