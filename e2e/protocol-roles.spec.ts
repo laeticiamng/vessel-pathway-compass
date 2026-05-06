@@ -121,4 +121,46 @@ test.describe("Protocol guard — role-based access", () => {
     await expect(page.locator("[id='protocol-completeness-title']")).toHaveCount(0);
     await expect(page.locator("[id='protocol-audit-log-title']")).toHaveCount(0);
   });
+
+  /**
+   * Regression: even across repeated calls (simulating user pagination
+   * and page refreshes), the export endpoints must keep returning 403
+   * for non-allowed roles. We rotate request-ids each iteration so any
+   * accidental cache reuse would surface as a duplicated correlation id.
+   */
+  test("physician: export endpoints stay 403 across pagination + refresh", async () => {
+    test.skip(!ACCOUNTS.physician || !ANON, "Missing physician credentials");
+    const jwt = await getJwt(ACCOUNTS.physician!);
+    const seenRequestIds = new Set<string>();
+    const exportActions = [
+      "protocol.export.audit_log.csv",
+      "protocol.export.audit_log.pdf",
+      "protocol.export.compliance.json",
+    ];
+    for (let iter = 0; iter < 3; iter++) {
+      for (const action of exportActions) {
+        const reqId = `e2e-phys-${iter}-${action}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
+        const r = await fetch(FN_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: ANON,
+            Authorization: `Bearer ${jwt}`,
+            "x-request-id": reqId,
+            // Simulate CDN/proxy by sending cache-friendly headers; the
+            // server must still refuse to be cached.
+            "cache-control": "max-age=60",
+          },
+          body: JSON.stringify({ action }),
+        });
+        const body = await r.json();
+        expect(r.status, `iter=${iter} ${action}`).toBe(403);
+        expect(body.error).toMatch(/forbidden/i);
+        expect(r.headers.get("cache-control") ?? "").toMatch(/no-store/i);
+        // Each call must mint or echo a UNIQUE request-id (no shared cache).
+        expect(seenRequestIds.has(body.request_id)).toBe(false);
+        seenRequestIds.add(body.request_id);
+      }
+    }
+  });
 });
