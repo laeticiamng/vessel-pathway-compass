@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Target, GitCompare, BarChart3, ShieldAlert, AlertTriangle, FileCheck, Users, FlaskConical, Microscope } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
 import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
@@ -51,7 +52,18 @@ export default function Protocol() {
         description={t("pages.protocol.seoDescription") as string}
         path="/protocol"
         jsonLd={jsonLd}
+        noindex={canSeeInternalAudit}
       />
+      {/* Anti-leak: never let CDN/proxies cache pages that may contain internal audit data */}
+      {canSeeInternalAudit && (
+        <Helmet>
+          <meta httpEquiv="Cache-Control" content="no-store, no-cache, must-revalidate, private" />
+          <meta httpEquiv="Pragma" content="no-cache" />
+          <meta httpEquiv="Expires" content="0" />
+          <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+          <meta name="referrer" content="no-referrer" />
+        </Helmet>
+      )}
 
       <header className="border-b sticky top-0 z-40 bg-background/90 backdrop-blur-sm">
         <nav className="container mx-auto flex items-center justify-between h-16 px-6" aria-label={t("home.nav.simpleAria") as string}>

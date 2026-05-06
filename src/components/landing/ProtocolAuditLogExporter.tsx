@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Download, FileText, FileSpreadsheet, Lock, ScrollText } from "lucide-react";
+import { Download, FileText, FileSpreadsheet, ScrollText } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
@@ -31,7 +32,7 @@ const PROTOCOL_ACTIONS = ["protocol.viewed", "protocol.qa.viewed"];
  */
 export function ProtocolAuditLogExporter() {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const { hasRole, isLoading: rolesLoading } = useUserRoles();
   const { log: auditLog } = useAuditLog();
   const [exporting, setExporting] = useState(false);
@@ -41,6 +42,9 @@ export function ProtocolAuditLogExporter() {
   const { data: events, isFetching } = useQuery({
     queryKey: ["protocol-audit-log", user?.id],
     enabled: !!user && allowed,
+    // Anti-leak: never persist sensitive audit data in client cache
+    gcTime: 0,
+    staleTime: 0,
     queryFn: async (): Promise<GovEvent[]> => {
       const { data, error } = await supabase
         .from("governance_events" as never)
@@ -53,35 +57,23 @@ export function ProtocolAuditLogExporter() {
     },
   });
 
-  if (!user) {
+  // Loading: skeleton placeholder, no audit info
+  if (authLoading || (user && rolesLoading)) {
     return (
-      <section className="mb-10 rounded-2xl border border-dashed bg-muted/20 p-5">
-        <div className="flex items-center gap-2.5 text-muted-foreground">
-          <Lock className="h-4 w-4" aria-hidden="true" />
-          <p className="text-sm">{t("pages.protocol.auditLog.signedOut")}</p>
-        </div>
+      <section
+        aria-hidden="true"
+        className="mb-10 rounded-2xl border bg-muted/10 p-5"
+        data-testid="audit-log-skeleton"
+      >
+        <Skeleton className="h-5 w-48 mb-3" />
+        <Skeleton className="h-3 w-64" />
       </section>
     );
   }
 
-  if (rolesLoading) return null;
-
-  if (!allowed) {
-    return (
-      <section className="mb-10 rounded-2xl border border-dashed bg-muted/20 p-5">
-        <div className="flex items-start gap-2.5 text-muted-foreground">
-          <Lock className="h-4 w-4 mt-0.5" aria-hidden="true" />
-          <div>
-            <p className="text-sm font-medium text-foreground/80">
-              {t("pages.protocol.auditLog.restrictedTitle")}
-            </p>
-            <p className="text-xs mt-1 italic leading-relaxed">
-              {t("pages.protocol.auditLog.restrictedDisclaimer")}
-            </p>
-          </div>
-        </div>
-      </section>
-    );
+  // Unauthorized or anonymous: render nothing — no badge, no counter, no hint
+  if (!user || !allowed) {
+    return null;
   }
 
   const rows = events ?? [];

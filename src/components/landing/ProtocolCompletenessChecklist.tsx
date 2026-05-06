@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { CheckCircle2, AlertTriangle, XCircle, ShieldCheck } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/i18n/context";
+import { useAuth } from "@/hooks/useAuth";
+import { useUserRoles } from "@/hooks/useUserRoles";
 import {
   auditProtocolCompleteness,
   type ProtocolCheckSeverity,
@@ -16,8 +19,28 @@ import {
  */
 export function ProtocolCompletenessChecklist() {
   const { t } = useTranslation();
+  const { user, loading: authLoading } = useAuth();
+  const { isAdmin, isResearchLead, isLoading: rolesLoading } = useUserRoles();
 
   const audit = useMemo(() => auditProtocolCompleteness(t as (k: string) => unknown), [t]);
+
+  if (authLoading || (user && rolesLoading)) {
+    return (
+      <section
+        aria-hidden="true"
+        className="mb-10 rounded-2xl border bg-muted/10 p-5"
+        data-testid="completeness-skeleton"
+      >
+        <Skeleton className="h-5 w-56 mb-3" />
+        <Skeleton className="h-3 w-full max-w-md mb-2" />
+        <Skeleton className="h-3 w-3/4" />
+      </section>
+    );
+  }
+
+  if (!user || !(isAdmin || isResearchLead)) {
+    return null;
+  }
 
   const headerSeverity: ProtocolCheckSeverity =
     audit.errorCount > 0 ? "error" : audit.warnCount > 0 ? "warn" : "ok";
