@@ -247,7 +247,7 @@ serve(async (req) => {
       });
     } catch (_) { /* best-effort */ }
 
-    const r = recordDenial(opts.key);
+    const r = recordDenial(opts.key, opts.action, reqId);
     if (r.newlyBanned) {
       try {
         await svcEarly.from("governance_events").insert({
@@ -264,6 +264,48 @@ serve(async (req) => {
             window_ms: WINDOW_MS,
             ban_seconds: r.retryAfter,
             key: opts.key,
+            server_ts: new Date().toISOString(),
+          },
+        });
+      } catch (_) { /* best-effort */ }
+    }
+    if (r.burstAlert) {
+      try {
+        await svcEarly.from("governance_events").insert({
+          actor_id: opts.actorId,
+          event_category: "compliance",
+          event_action: "protocol.access.alert",
+          severity: "critical",
+          target_entity_type: "protocol",
+          context: {
+            alert_type: "burst_403",
+            request_id: reqId,
+            key: opts.key,
+            denials: r.burstAlert.count,
+            window_ms: r.burstAlert.windowMs,
+            ...extractIp(req),
+            ua: req.headers.get("user-agent") ?? null,
+            server_ts: new Date().toISOString(),
+          },
+        });
+      } catch (_) { /* best-effort */ }
+    }
+    if (r.multiActionAlert) {
+      try {
+        await svcEarly.from("governance_events").insert({
+          actor_id: opts.actorId,
+          event_category: "compliance",
+          event_action: "protocol.access.alert",
+          severity: "critical",
+          target_entity_type: "protocol",
+          context: {
+            alert_type: "multi_action_anomaly",
+            request_id: reqId,
+            key: opts.key,
+            distinct_actions: r.multiActionAlert.actions,
+            window_ms: r.multiActionAlert.windowMs,
+            ...extractIp(req),
+            ua: req.headers.get("user-agent") ?? null,
             server_ts: new Date().toISOString(),
           },
         });
