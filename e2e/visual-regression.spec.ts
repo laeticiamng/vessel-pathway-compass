@@ -1,6 +1,22 @@
 import { test, expect, type Page } from "@playwright/test";
 
 /**
+ * Pin rendering environment for snapshot determinism:
+ *  - locale `en-US` so Intl.* (dates/numbers) never shifts layout
+ *  - timezone `UTC` so any rendered timestamp is stable across CI/local
+ *  - deviceScaleFactor 1 so screenshots aren't 2x on Retina dev machines
+ *  - reduced-motion to freeze CSS animations declared via media queries
+ *  - color scheme `light` to avoid OS-driven dark-mode flips
+ */
+test.use({
+  locale: "en-US",
+  timezoneId: "UTC",
+  deviceScaleFactor: 1,
+  colorScheme: "light",
+  reducedMotion: "reduce",
+});
+
+/**
  * Visual regression + DOM overlap/duplication suite.
  *
  * Two complementary mechanisms:
