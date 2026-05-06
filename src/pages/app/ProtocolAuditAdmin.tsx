@@ -168,12 +168,20 @@ export default function ProtocolAuditAdmin() {
     const header = [
       "timestamp", "action", "severity", "actor_id", "request_id",
       "ip", "x_forwarded_for", "cf_connecting_ip", "x_real_ip",
-      "reason", "role", "ua", "pseudonymized",
+      "reason", "role", "ua",
+      // Alert-specific columns (populated for protocol.access.alert /
+      // protocol.access.throttled, empty for normal audit events).
+      "alert_type", "denials_in_window", "distinct_actions",
+      "window_ms", "ban_seconds",
+      "pseudonymized",
     ];
     const escape = (v: unknown) => `"${(v == null ? "" : String(v)).replace(/"/g, '""')}"`;
     const lines = [header.join(",")];
     for (const e of rows) {
       const ctx = pseudonymizeContext(e.context, canSeeRawNetwork);
+      const distinct = Array.isArray(ctx.distinct_actions)
+        ? (ctx.distinct_actions as unknown[]).join("|")
+        : "";
       lines.push([
         e.created_at,
         e.event_action,
@@ -187,6 +195,11 @@ export default function ProtocolAuditAdmin() {
         ctx.reason ?? "",
         ctx.role ?? "",
         ctx.ua ?? "",
+        ctx.alert_type ?? "",
+        ctx.denials ?? ctx.denials_in_window ?? "",
+        distinct,
+        ctx.window_ms ?? "",
+        ctx.ban_seconds ?? "",
         canSeeRawNetwork ? "false" : "true",
       ].map(escape).join(","));
     }
