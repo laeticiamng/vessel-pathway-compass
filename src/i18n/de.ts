@@ -1793,7 +1793,7 @@ export const de = {
       positioningStandard: "Angio-CT / MRA / Angiographie — Standard-Rückfall bei unzureichender Qualität oder dringender Indikation",
       l1Title: "L1 — DIAGNOSE: prospektive klinische Validierung",
       l1Badge: "PhD-Kern",
-      l1Caption: "Hauptkohorte CHUV / Lausanne · n ≈ 250 auswertbare Patienten",
+      l1Caption: "Hauptkohorte · n ≈ 320 eingeschlossen / ≈ 250 auswertbar (akademischer Partner-Standort zu bestätigen)",
       l1Item1Title: "AquaMR 4-Null",
       l1Item1Sub: "Kartierung ohne Strahlung, Kontrast und Helium",
       l1Item2Title: "Strukturierter Doppler + ABI/TBI",
