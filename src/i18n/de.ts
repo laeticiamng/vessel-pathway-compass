@@ -2438,7 +2438,7 @@ export const de = {
           items: [
             "Integriertes ADR-Register: Meldung innerhalb 24 h für jedes schwerwiegende Ereignis",
             "DSMB-Charta veröffentlicht; unabhängige Zusammensetzung (3 externe Experten)",
-            "DSMB-Sitzungen geplant bei n=50 (Futility) und n=100 (Interim-Sicherheit)",
+            "DSMB-Sitzungen geplant bei n=100 (Futility) und n=200 (Interim-Sicherheit)",
             "Automatische Freeze-Kriterien: ≥ 2 verbundene SAEs oder κ-Drift > 0,15",
             "Swissmedic-Meldung bei schwerwiegenden Ereignissen gemäß KlinV",
           ],
