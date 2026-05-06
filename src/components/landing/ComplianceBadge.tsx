@@ -21,7 +21,8 @@ import {
  */
 export function ComplianceBadge() {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const { isAdmin, isResearchLead, isLoading: rolesLoading } = useUserRoles();
   const { log } = useAuditLog();
 
   const audit = useMemo(
@@ -29,20 +30,28 @@ export function ComplianceBadge() {
     [t],
   );
 
-  if (!user) {
+  // Loading: render neutral skeleton (no audit info leak)
+  if (authLoading || (user && rolesLoading)) {
     return (
       <section
-        aria-labelledby="compliance-badge-title"
-        className="mb-10 rounded-2xl border border-dashed bg-muted/20 p-5"
+        aria-hidden="true"
+        className="mb-10 rounded-2xl border bg-muted/10 p-5"
+        data-testid="compliance-badge-skeleton"
       >
-        <div className="flex items-center gap-2.5 text-muted-foreground">
-          <Lock className="h-4 w-4" aria-hidden="true" />
-          <p className="text-sm">
-            {t("pages.protocol.complianceBadge.signedOut")}
-          </p>
+        <div className="flex items-center gap-3">
+          <Skeleton className="h-10 w-10 rounded-xl" />
+          <div className="space-y-2 flex-1">
+            <Skeleton className="h-4 w-40" />
+            <Skeleton className="h-3 w-24" />
+          </div>
         </div>
       </section>
     );
+  }
+
+  // Unauthorized: render NOTHING (no badge, no counters, no hint)
+  if (!user || !(isAdmin || isResearchLead)) {
+    return null;
   }
 
   const severity: ProtocolCheckSeverity =
