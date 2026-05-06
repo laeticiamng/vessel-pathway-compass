@@ -84,9 +84,20 @@ setInterval(() => {
   }
 }, 60_000);
 
+function extractIp(req: Request) {
+  const xff = req.headers.get("x-forwarded-for") ?? null;
+  const first = xff?.split(",")[0]?.trim() || null;
+  return {
+    ip: first,
+    xff,
+    cf_connecting_ip: req.headers.get("cf-connecting-ip") ?? null,
+    x_real_ip: req.headers.get("x-real-ip") ?? null,
+  };
+}
+
 function clientKey(req: Request, userId: string | null): string {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  return `${userId ?? "anon"}|${ip}`;
+  const { ip } = extractIp(req);
+  return `${userId ?? "anon"}|${ip ?? "unknown"}`;
 }
 
 function jsonResponse(
@@ -163,7 +174,7 @@ serve(async (req) => {
           reason: opts.reason,
           action: opts.action,
           request_id: reqId,
-          ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+          ...extractIp(req),
           ua: req.headers.get("user-agent") ?? null,
           server_ts: startedAt,
           ...(opts.extra ?? {}),
@@ -182,7 +193,7 @@ serve(async (req) => {
           target_entity_type: "protocol",
           context: {
             request_id: reqId,
-            ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+            ...extractIp(req),
             ua: req.headers.get("user-agent") ?? null,
             denials_in_window: r.count,
             window_ms: WINDOW_MS,
@@ -290,7 +301,7 @@ serve(async (req) => {
       action,
       role: matchedRole,
       request_id: reqId,
-      ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+      ...extractIp(req),
       ua: req.headers.get("user-agent") ?? null,
       server_ts: startedAt,
     },
