@@ -73,6 +73,7 @@ const InstitutionAdmin = lazy(() => import("./pages/app/InstitutionAdmin"));
 const ExportsAudit = lazy(() => import("./pages/app/ExportsAudit"));
 const HospitalAuditDashboard = lazy(() => import("./pages/app/HospitalAuditDashboard"));
 const ContentVersionsAdmin = lazy(() => import("./pages/app/ContentVersionsAdmin"));
+const ProtocolAuditAdmin = lazy(() => import("./pages/app/ProtocolAuditAdmin"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const VascScreen = lazy(() => import("./pages/app/VascScreen"));
 const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
@@ -195,6 +196,7 @@ const App = () => (
             <Route path="admin/hospital-audit" element={<HospitalAuditDashboard />} />
             <Route path="admin/users" element={<UsersAdmin />} />
             <Route path="admin/content-versions" element={<ContentVersionsAdmin />} />
+            <Route path="admin/protocol-audit" element={<ProtocolAuditAdmin />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 
