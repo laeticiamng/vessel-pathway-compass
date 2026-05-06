@@ -1816,7 +1816,7 @@ export const en = {
       positioningStandard: "Angio-CT / MRA / angiography — standard fallback if quality is insufficient or indication is urgent",
       l1Title: "L1 — DIAGNOSE: prospective clinical validation",
       l1Badge: "PhD core",
-      l1Caption: "Main cohort CHUV / Lausanne · n ≈ 250 analysable patients",
+      l1Caption: "Main cohort · n ≈ 320 enrolled / ≈ 250 analysable (academic partner site to be confirmed)",
       l1Item1Title: "AquaMR 4-zero",
       l1Item1Sub: "Mapping without X-rays, contrast or helium",
       l1Item2Title: "Structured Doppler + ABI/TBI",
