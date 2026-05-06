@@ -82,6 +82,7 @@ export const de = {
     exportsAudit: "Export-Audit",
     institution: "Institution",
     systemHealth: "Systemzustand",
+    hospitalAudit: "Krankenhaus-Audit",
   },
 
   command: {
