@@ -50,16 +50,38 @@ const ALLOWED_ACTIONS = new Set([
 //   1. burst_403 → ≥ BURST_403 denials within BURST_WINDOW_MS
 //   2. multi_action_anomaly → ≥ MULTI_ACTION_DISTINCT distinct actions
 //      attempted within MULTI_ACTION_WINDOW_MS by the same key
-// A separate ban (5 min) keeps blocking once MAX_DENIED is exceeded.
-const WINDOW_MS = 60_000;        // 1 min sliding window
-const MAX_DENIED = 8;            // > this many denials → throttle
-const BAN_MS = 5 * 60_000;       // 5 min ban
+// A separate ban keeps blocking once MAX_DENIED is exceeded.
+//
+// All thresholds are env-overridable for transparency / tunability.
+// Admins can fetch them via GET ?config=1 (read-only).
+function envInt(name: string, fallback: number): number {
+  const v = Deno.env.get(name);
+  if (!v) return fallback;
+  const n = Number(v);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
 
-const BURST_403 = 5;             // ≥5 denials in 30s = burst
-const BURST_WINDOW_MS = 30_000;
-const MULTI_ACTION_DISTINCT = 3; // ≥3 distinct actions in 2min = anomaly
-const MULTI_ACTION_WINDOW_MS = 120_000;
-const ALERT_COOLDOWN_MS = 5 * 60_000; // do not re-alert same key for 5 min
+const WINDOW_MS = envInt("PROTOCOL_GUARD_WINDOW_MS", 60_000);
+const MAX_DENIED = envInt("PROTOCOL_GUARD_MAX_DENIED", 8);
+const BAN_MS = envInt("PROTOCOL_GUARD_BAN_MS", 5 * 60_000);
+
+const BURST_403 = envInt("PROTOCOL_GUARD_BURST_403", 5);
+const BURST_WINDOW_MS = envInt("PROTOCOL_GUARD_BURST_WINDOW_MS", 30_000);
+const MULTI_ACTION_DISTINCT = envInt("PROTOCOL_GUARD_MULTI_ACTION_DISTINCT", 3);
+const MULTI_ACTION_WINDOW_MS = envInt("PROTOCOL_GUARD_MULTI_ACTION_WINDOW_MS", 120_000);
+const ALERT_COOLDOWN_MS = envInt("PROTOCOL_GUARD_ALERT_COOLDOWN_MS", 5 * 60_000);
+
+const SECURITY_CONFIG = {
+  window_ms: WINDOW_MS,
+  max_denied: MAX_DENIED,
+  ban_ms: BAN_MS,
+  burst_403: BURST_403,
+  burst_window_ms: BURST_WINDOW_MS,
+  multi_action_distinct: MULTI_ACTION_DISTINCT,
+  multi_action_window_ms: MULTI_ACTION_WINDOW_MS,
+  alert_cooldown_ms: ALERT_COOLDOWN_MS,
+};
+
 
 type AttemptRecord = { t: number; action: string | null; reqId: string };
 type ThrottleState = {
@@ -191,6 +213,35 @@ serve(async (req) => {
     req.headers.get("x-request-id") ??
     (crypto.randomUUID ? crypto.randomUUID() : `r-${Date.now()}-${Math.random()}`);
   const startedAt = new Date().toISOString();
+
+  // Read-only config endpoint for admin UI transparency. Requires a
+  // valid JWT for an allowed role; returns the active thresholds.
+  if (req.method === "GET") {
+    const url = new URL(req.url);
+    if (url.searchParams.get("config") !== "1") {
+      return jsonResponse(404, { error: "Not found", request_id: reqId }, reqId);
+    }
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    }
+    const SUPABASE_URL_ = Deno.env.get("SUPABASE_URL")!;
+    const ANON_ = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const SERVICE_ = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const anon_ = createClient(SUPABASE_URL_, ANON_, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: cd } = await anon_.auth.getClaims(authHeader.replace("Bearer ", ""));
+    const uid = cd?.claims?.sub as string | undefined;
+    if (!uid) return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    const svc_ = createClient(SUPABASE_URL_, SERVICE_);
+    const { data: rows } = await svc_.from("user_roles").select("role").eq("user_id", uid);
+    const roles = (rows ?? []).map((r) => r.role as string);
+    if (!roles.some((r) => ALLOWED_ROLES.has(r))) {
+      return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId);
+    }
+    return jsonResponse(200, { config: SECURITY_CONFIG, request_id: reqId }, reqId);
+  }
 
   if (req.method !== "POST") {
     return jsonResponse(405, { error: "Method not allowed", request_id: reqId }, reqId);

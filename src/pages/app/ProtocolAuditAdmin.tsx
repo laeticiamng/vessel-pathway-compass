@@ -16,6 +16,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 import { toast } from "sonner";
 import { pseudonymizeContext } from "@/lib/protocolAuditPseudonymize";
+import { ProtocolAlertsWidget } from "@/components/admin/ProtocolAlertsWidget";
+import { ProtocolGuardConfigPanel } from "@/components/admin/ProtocolGuardConfigPanel";
 
 interface GovEvent {
   id: string;
@@ -168,12 +170,20 @@ export default function ProtocolAuditAdmin() {
     const header = [
       "timestamp", "action", "severity", "actor_id", "request_id",
       "ip", "x_forwarded_for", "cf_connecting_ip", "x_real_ip",
-      "reason", "role", "ua", "pseudonymized",
+      "reason", "role", "ua",
+      // Alert-specific columns (populated for protocol.access.alert /
+      // protocol.access.throttled, empty for normal audit events).
+      "alert_type", "denials_in_window", "distinct_actions",
+      "window_ms", "ban_seconds",
+      "pseudonymized",
     ];
     const escape = (v: unknown) => `"${(v == null ? "" : String(v)).replace(/"/g, '""')}"`;
     const lines = [header.join(",")];
     for (const e of rows) {
       const ctx = pseudonymizeContext(e.context, canSeeRawNetwork);
+      const distinct = Array.isArray(ctx.distinct_actions)
+        ? (ctx.distinct_actions as unknown[]).join("|")
+        : "";
       lines.push([
         e.created_at,
         e.event_action,
@@ -187,6 +197,11 @@ export default function ProtocolAuditAdmin() {
         ctx.reason ?? "",
         ctx.role ?? "",
         ctx.ua ?? "",
+        ctx.alert_type ?? "",
+        ctx.denials ?? ctx.denials_in_window ?? "",
+        distinct,
+        ctx.window_ms ?? "",
+        ctx.ban_seconds ?? "",
         canSeeRawNetwork ? "false" : "true",
       ].map(escape).join(","));
     }
@@ -241,9 +256,24 @@ export default function ProtocolAuditAdmin() {
 
         autoTable(doc, {
           startY: 84,
-          head: [["Timestamp", "Action", "Sev.", "Actor", "Request-Id", "IP", "XFF", "Role / Reason"]],
+          head: [["Timestamp", "Action", "Sev.", "Actor", "Request-Id", "IP", "XFF", "Role / Reason", "Alert details"]],
           body: rows.map((e) => {
             const ctx = pseudonymizeContext(e.context, canSeeRawNetwork);
+            const isAlert = e.event_action === "protocol.access.alert"
+              || e.event_action === "protocol.access.throttled";
+            const distinct = Array.isArray(ctx.distinct_actions)
+              ? (ctx.distinct_actions as unknown[]).join("|")
+              : "";
+            const alertCell = isAlert
+              ? [
+                  ctx.alert_type ? `type=${ctx.alert_type}` : "",
+                  (ctx.denials ?? ctx.denials_in_window) != null
+                    ? `denials=${ctx.denials ?? ctx.denials_in_window}` : "",
+                  distinct ? `distinct=${distinct}` : "",
+                  ctx.window_ms != null ? `win=${ctx.window_ms}ms` : "",
+                  ctx.ban_seconds != null ? `ban=${ctx.ban_seconds}s` : "",
+                ].filter(Boolean).join(" · ")
+              : "";
             return [
               new Date(e.created_at).toISOString().replace("T", " ").slice(0, 19),
               e.event_action,
@@ -253,6 +283,7 @@ export default function ProtocolAuditAdmin() {
               String(ctx.ip ?? ""),
               String(ctx.xff ?? "").slice(0, 30),
               `${ctx.role ?? ""}${ctx.reason ? ` / ${ctx.reason}` : ""}`,
+              alertCell,
             ];
           }),
           styles: { fontSize: 6.5, cellPadding: 2.5 },
@@ -340,6 +371,26 @@ export default function ProtocolAuditAdmin() {
         multi-action filtering, and full IP / X-Forwarded-For correlation
         {!canSeeRawNetwork && " (network fields pseudonymized for your role)"}.
       </p>
+
+      {/* Security alerts widget + active config (transparency) */}
+      <div className="grid lg:grid-cols-3 gap-4 mb-6">
+        <div className="lg:col-span-2">
+          <ProtocolAlertsWidget
+            hours={24}
+            canSeeRawNetwork={canSeeRawNetwork}
+            onDrillDownRequestId={(rid) => {
+              setRequestIdFilter(rid);
+              setSelectedActions(["protocol.access.alert", "protocol.access.denied", "protocol.access.throttled"]);
+              setPage(0);
+            }}
+            onDrillDownActor={(aid) => {
+              setActorFilter(aid);
+              setPage(0);
+            }}
+          />
+        </div>
+        <ProtocolGuardConfigPanel />
+      </div>
 
       {/* Filters */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
