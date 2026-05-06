@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
+import { useAuditLog } from "@/hooks/useAuditLog";
 import { useTranslation } from "@/i18n/context";
 
 interface GovEvent {
