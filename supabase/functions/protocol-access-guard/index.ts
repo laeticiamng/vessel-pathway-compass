@@ -50,16 +50,38 @@ const ALLOWED_ACTIONS = new Set([
 //   1. burst_403 → ≥ BURST_403 denials within BURST_WINDOW_MS
 //   2. multi_action_anomaly → ≥ MULTI_ACTION_DISTINCT distinct actions
 //      attempted within MULTI_ACTION_WINDOW_MS by the same key
-// A separate ban (5 min) keeps blocking once MAX_DENIED is exceeded.
-const WINDOW_MS = 60_000;        // 1 min sliding window
-const MAX_DENIED = 8;            // > this many denials → throttle
-const BAN_MS = 5 * 60_000;       // 5 min ban
+// A separate ban keeps blocking once MAX_DENIED is exceeded.
+//
+// All thresholds are env-overridable for transparency / tunability.
+// Admins can fetch them via GET ?config=1 (read-only).
+function envInt(name: string, fallback: number): number {
+  const v = Deno.env.get(name);
+  if (!v) return fallback;
+  const n = Number(v);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
 
-const BURST_403 = 5;             // ≥5 denials in 30s = burst
-const BURST_WINDOW_MS = 30_000;
-const MULTI_ACTION_DISTINCT = 3; // ≥3 distinct actions in 2min = anomaly
-const MULTI_ACTION_WINDOW_MS = 120_000;
-const ALERT_COOLDOWN_MS = 5 * 60_000; // do not re-alert same key for 5 min
+const WINDOW_MS = envInt("PROTOCOL_GUARD_WINDOW_MS", 60_000);
+const MAX_DENIED = envInt("PROTOCOL_GUARD_MAX_DENIED", 8);
+const BAN_MS = envInt("PROTOCOL_GUARD_BAN_MS", 5 * 60_000);
+
+const BURST_403 = envInt("PROTOCOL_GUARD_BURST_403", 5);
+const BURST_WINDOW_MS = envInt("PROTOCOL_GUARD_BURST_WINDOW_MS", 30_000);
+const MULTI_ACTION_DISTINCT = envInt("PROTOCOL_GUARD_MULTI_ACTION_DISTINCT", 3);
+const MULTI_ACTION_WINDOW_MS = envInt("PROTOCOL_GUARD_MULTI_ACTION_WINDOW_MS", 120_000);
+const ALERT_COOLDOWN_MS = envInt("PROTOCOL_GUARD_ALERT_COOLDOWN_MS", 5 * 60_000);
+
+const SECURITY_CONFIG = {
+  window_ms: WINDOW_MS,
+  max_denied: MAX_DENIED,
+  ban_ms: BAN_MS,
+  burst_403: BURST_403,
+  burst_window_ms: BURST_WINDOW_MS,
+  multi_action_distinct: MULTI_ACTION_DISTINCT,
+  multi_action_window_ms: MULTI_ACTION_WINDOW_MS,
+  alert_cooldown_ms: ALERT_COOLDOWN_MS,
+};
+
 
 type AttemptRecord = { t: number; action: string | null; reqId: string };
 type ThrottleState = {
