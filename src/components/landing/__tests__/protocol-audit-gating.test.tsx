@@ -165,7 +165,7 @@ describe("Protocol audit components — RBAC gating (defense-in-depth)", () => {
 
     it("renders ComplianceBadge with score", () => {
       wrap(<ComplianceBadge />);
-      expect(screen.getByText(/100/)).toBeTruthy();
+      expect(screen.getAllByText(/100/)[0]).toBeTruthy();
     });
 
     it("renders audit log exporter with export controls", () => {
@@ -192,7 +192,7 @@ describe("Protocol audit components — RBAC gating (defense-in-depth)", () => {
 
     it("renders ComplianceBadge", () => {
       wrap(<ComplianceBadge />);
-      expect(screen.getByText(/100/)).toBeTruthy();
+      expect(screen.getAllByText(/100/)[0]).toBeTruthy();
     });
 
     it("renders audit log exporter", () => {
