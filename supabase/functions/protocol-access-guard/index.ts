@@ -123,6 +123,26 @@ serve(async (req) => {
   const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
   const ANON = Deno.env.get("SUPABASE_ANON_KEY")!;
   const SERVICE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  const svcEarly = createClient(SUPABASE_URL, SERVICE);
+
+  // Pre-auth throttle key (anon|ip). Refined post-auth with userId.
+  const preKey = clientKey(req, null);
+  const preBan = isBanned(preKey);
+  if (preBan.banned) {
+    return new Response(
+      JSON.stringify({ error: "Too many denied attempts", request_id: reqId, retry_after: preBan.retryAfter }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders, ...noStore,
+          "Content-Type": "application/json",
+          "X-Request-Id": reqId,
+          "Retry-After": String(preBan.retryAfter),
+        },
+      },
+    );
+  }
+
 
   // Require Bearer JWT — never allow anonymous calls to the guard.
   const authHeader = req.headers.get("Authorization");
