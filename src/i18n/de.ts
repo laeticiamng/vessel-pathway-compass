@@ -2362,7 +2362,7 @@ export const de = {
           },
           {
             q: "Wie sieht der statistische Hauptplan und die Begründung der Stichprobengröße aus?",
-            a: "Primärer Endpunkt: linear gewichtetes κ für die segmentale Stenose-Klassifikation (4 Klassen), Ziel κ ≥ 0,75 (untere Grenze 95 %-KI ≥ 0,60). n = 144 einzuschließende Patienten (120 auswertbar); α = 0,05 zweiseitig, Power = 0,90, Donner-&-Eliasziw-Methode mit Intra-Patienten-Cluster-Adjustierung (GEE). Hauptanalyse Per-Protocol, ITT in Sensitivität mit multipler Imputation (5 Imputationen, FCS). Futility-Analyse bei n=50 (O'Brien-Fleming, kein α-Verbrauch)."
+            a: "Primärer Endpunkt: quadratisch gewichtetes κ für die segmentale Stenose-Klassifikation (4 Klassen), Ziel κ ≥ 0,65 (untere Grenze 95 %-KI ≥ 0,50). n ≈ 320 einzuschließende Patienten (≈ 250 auswertbar); α = 0,05 zweiseitig, Power = 0,90, Donner-&-Eliasziw-Methode mit Intra-Patienten-Cluster-Adjustierung (GEE). Fehlende Daten durch multiple Imputation mit verketteten Gleichungen (MICE, m = 20), mit Complete-Case- und Tipping-Point-Sensitivitätsanalysen. Futility-Analyse bei n=100 (O'Brien-Fleming, kein α-Verbrauch)."
           },
           {
             q: "Welche Nachvollziehbarkeit bieten Sie bei Audits oder Prüfungen durch eine benannte Stelle?",
