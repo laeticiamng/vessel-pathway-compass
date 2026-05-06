@@ -214,6 +214,35 @@ serve(async (req) => {
     (crypto.randomUUID ? crypto.randomUUID() : `r-${Date.now()}-${Math.random()}`);
   const startedAt = new Date().toISOString();
 
+  // Read-only config endpoint for admin UI transparency. Requires a
+  // valid JWT for an allowed role; returns the active thresholds.
+  if (req.method === "GET") {
+    const url = new URL(req.url);
+    if (url.searchParams.get("config") !== "1") {
+      return jsonResponse(404, { error: "Not found", request_id: reqId }, reqId);
+    }
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) {
+      return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    }
+    const SUPABASE_URL_ = Deno.env.get("SUPABASE_URL")!;
+    const ANON_ = Deno.env.get("SUPABASE_ANON_KEY")!;
+    const SERVICE_ = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const anon_ = createClient(SUPABASE_URL_, ANON_, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: cd } = await anon_.auth.getClaims(authHeader.replace("Bearer ", ""));
+    const uid = cd?.claims?.sub as string | undefined;
+    if (!uid) return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    const svc_ = createClient(SUPABASE_URL_, SERVICE_);
+    const { data: rows } = await svc_.from("user_roles").select("role").eq("user_id", uid);
+    const roles = (rows ?? []).map((r) => r.role as string);
+    if (!roles.some((r) => ALLOWED_ROLES.has(r))) {
+      return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId);
+    }
+    return jsonResponse(200, { config: SECURITY_CONFIG, request_id: reqId }, reqId);
+  }
+
   if (req.method !== "POST") {
     return jsonResponse(405, { error: "Method not allowed", request_id: reqId }, reqId);
   }
