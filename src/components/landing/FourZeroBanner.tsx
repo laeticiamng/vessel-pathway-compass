@@ -36,7 +36,7 @@ export function FourZeroBanner() {
     <aside
       role="note"
       aria-label={copy.eyebrow}
-      className="sticky top-16 z-40 w-full text-white shadow-md"
+      className="relative z-30 w-full text-white shadow-md"
       style={{ background: "linear-gradient(90deg, #0F4C81 0%, #0B3A66 100%)" }}
     >
       <div className="container mx-auto px-6 py-2 flex items-center justify-center gap-x-3 gap-y-1 text-center flex-wrap">
