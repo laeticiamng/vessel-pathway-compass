@@ -26,8 +26,8 @@ interface GuardResult {
 export async function callProtocolAccessGuard(
   action: GuardAction,
 ): Promise<GuardResult> {
+  const requestId = globalThis.crypto?.randomUUID?.() ?? `r-${Date.now()}`;
   try {
-    const requestId = (globalThis.crypto?.randomUUID?.() ?? `r-${Date.now()}`);
     const { data, error } = await supabase.functions.invoke(
       "protocol-access-guard",
       {
@@ -36,12 +36,36 @@ export async function callProtocolAccessGuard(
       },
     );
 
-    // supabase-js v2 surfaces non-2xx as `error` with FunctionsHttpError.
     if (error) {
-      // Extract status when possible
-      const status = (error as unknown as { context?: { status?: number } })
-        .context?.status ?? 500;
-      return { ok: false, status, requestId, error: String(error.message ?? error) };
+      // supabase-js v2: error.context is the underlying Response object.
+      // Try to extract the server X-Request-Id and parsed status/body so
+      // the UI can show a correlatable toast.
+      const ctx = (error as unknown as { context?: Response }).context;
+      let status = 500;
+      let serverReqId: string | undefined;
+      let serverError: string | undefined;
+      if (ctx && typeof ctx === "object" && "status" in ctx) {
+        status = (ctx as Response).status ?? 500;
+        try {
+          serverReqId =
+            (ctx as Response).headers?.get?.("x-request-id") ?? undefined;
+        } catch (_) { /* ignore */ }
+        try {
+          // Clone before reading — the body may have been consumed.
+          const cloned = (ctx as Response).clone?.();
+          if (cloned) {
+            const body = await cloned.json().catch(() => null);
+            serverReqId = serverReqId ?? (body?.request_id as string | undefined);
+            serverError = body?.error as string | undefined;
+          }
+        } catch (_) { /* ignore */ }
+      }
+      return {
+        ok: false,
+        status,
+        requestId: serverReqId ?? requestId,
+        error: serverError ?? String(error.message ?? error),
+      };
     }
 
     return {
@@ -51,7 +75,7 @@ export async function callProtocolAccessGuard(
       role: data?.role as string | undefined,
     };
   } catch (e) {
-    return { ok: false, status: 500, error: String((e as Error)?.message ?? e) };
+    return { ok: false, status: 500, requestId, error: String((e as Error)?.message ?? e) };
   }
 }
 

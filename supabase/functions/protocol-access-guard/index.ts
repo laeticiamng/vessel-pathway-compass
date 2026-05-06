@@ -43,6 +43,52 @@ const ALLOWED_ACTIONS = new Set([
   "protocol.export.audit_log.pdf",
 ]);
 
+// ── Brute-force / abuse throttling ───────────────────────────────────
+// Per-key sliding window: tracks denied attempts (401/403/400). When a
+// key crosses MAX_DENIED in WINDOW_MS, subsequent calls return 429
+// until BAN_MS elapses. Each ban transition is logged as a
+// `protocol.access.throttled` governance_event for auditability.
+const WINDOW_MS = 60_000;        // 1 min sliding window
+const MAX_DENIED = 8;            // > this many denials → throttle
+const BAN_MS = 5 * 60_000;       // 5 min ban
+type ThrottleState = { denials: number[]; bannedUntil: number; lastLoggedBanAt: number };
+const throttle = new Map<string, ThrottleState>();
+
+function getState(key: string): ThrottleState {
+  let s = throttle.get(key);
+  if (!s) { s = { denials: [], bannedUntil: 0, lastLoggedBanAt: 0 }; throttle.set(key, s); }
+  return s;
+}
+function isBanned(key: string): { banned: boolean; retryAfter: number } {
+  const s = getState(key);
+  const now = Date.now();
+  if (s.bannedUntil > now) return { banned: true, retryAfter: Math.ceil((s.bannedUntil - now) / 1000) };
+  return { banned: false, retryAfter: 0 };
+}
+function recordDenial(key: string): { newlyBanned: boolean; retryAfter: number; count: number } {
+  const s = getState(key);
+  const now = Date.now();
+  s.denials = s.denials.filter((t) => now - t < WINDOW_MS);
+  s.denials.push(now);
+  if (s.denials.length > MAX_DENIED && s.bannedUntil <= now) {
+    s.bannedUntil = now + BAN_MS;
+    return { newlyBanned: true, retryAfter: Math.ceil(BAN_MS / 1000), count: s.denials.length };
+  }
+  return { newlyBanned: false, retryAfter: 0, count: s.denials.length };
+}
+// Periodic GC of expired entries
+setInterval(() => {
+  const now = Date.now();
+  for (const [k, v] of throttle) {
+    if (v.bannedUntil < now && v.denials.every((t) => now - t > WINDOW_MS)) throttle.delete(k);
+  }
+}, 60_000);
+
+function clientKey(req: Request, userId: string | null): string {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  return `${userId ?? "anon"}|${ip}`;
+}
+
 function jsonResponse(
   status: number,
   body: Record<string, unknown>,
@@ -77,47 +123,97 @@ serve(async (req) => {
   const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
   const ANON = Deno.env.get("SUPABASE_ANON_KEY")!;
   const SERVICE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+  const svcEarly = createClient(SUPABASE_URL, SERVICE);
 
-  // Require Bearer JWT — never allow anonymous calls to the guard.
-  const authHeader = req.headers.get("Authorization");
-  if (!authHeader?.startsWith("Bearer ")) {
-    // Tamper-proof denial log even without a user (actor_id NULL).
+  // Pre-auth throttle key (anon|ip). Refined post-auth with userId.
+  const preKey = clientKey(req, null);
+  const preBan = isBanned(preKey);
+  if (preBan.banned) {
+    return new Response(
+      JSON.stringify({ error: "Too many denied attempts", request_id: reqId, retry_after: preBan.retryAfter }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders, ...noStore,
+          "Content-Type": "application/json",
+          "X-Request-Id": reqId,
+          "Retry-After": String(preBan.retryAfter),
+        },
+      },
+    );
+  }
+
+  // Helper: tamper-proof denial log + throttle counter; emits a
+  // `protocol.access.throttled` event the first time a key is banned.
+  async function logDenial(opts: {
+    actorId: string | null;
+    reason: string;
+    action: string | null;
+    extra?: Record<string, unknown>;
+    key: string;
+  }) {
     try {
-      const svc = createClient(SUPABASE_URL, SERVICE);
-      await svc.from("governance_events").insert({
+      await svcEarly.from("governance_events").insert({
+        actor_id: opts.actorId,
         event_category: "compliance",
         event_action: "protocol.access.denied",
         severity: "warn",
         target_entity_type: "protocol",
         context: {
-          reason: "missing_jwt",
+          reason: opts.reason,
+          action: opts.action,
           request_id: reqId,
           ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
           ua: req.headers.get("user-agent") ?? null,
           server_ts: startedAt,
+          ...(opts.extra ?? {}),
         },
       });
     } catch (_) { /* best-effort */ }
+
+    const r = recordDenial(opts.key);
+    if (r.newlyBanned) {
+      try {
+        await svcEarly.from("governance_events").insert({
+          actor_id: opts.actorId,
+          event_category: "compliance",
+          event_action: "protocol.access.throttled",
+          severity: "critical",
+          target_entity_type: "protocol",
+          context: {
+            request_id: reqId,
+            ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+            ua: req.headers.get("user-agent") ?? null,
+            denials_in_window: r.count,
+            window_ms: WINDOW_MS,
+            ban_seconds: r.retryAfter,
+            key: opts.key,
+            server_ts: new Date().toISOString(),
+          },
+        });
+      } catch (_) { /* best-effort */ }
+    }
+  }
+
+  const authHeader = req.headers.get("Authorization");
+  if (!authHeader?.startsWith("Bearer ")) {
+    await logDenial({ actorId: null, reason: "missing_jwt", action: null, key: preKey });
     return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
   }
 
-  // Parse + validate body
   let action = "";
   try {
     const body = await req.json();
     action = String(body?.action ?? "");
   } catch {
+    await logDenial({ actorId: null, reason: "invalid_json", action: null, key: preKey });
     return jsonResponse(400, { error: "Invalid JSON body", request_id: reqId }, reqId);
   }
   if (!ALLOWED_ACTIONS.has(action)) {
-    return jsonResponse(
-      400,
-      { error: "Unsupported action", request_id: reqId },
-      reqId,
-    );
+    await logDenial({ actorId: null, reason: "unsupported_action", action, key: preKey });
+    return jsonResponse(400, { error: "Unsupported action", request_id: reqId }, reqId);
   }
 
-  // Verify JWT via anon client → claims.sub
   const anon = createClient(SUPABASE_URL, ANON, {
     global: { headers: { Authorization: authHeader } },
   });
@@ -125,27 +221,31 @@ serve(async (req) => {
   const { data: claimsData, error: claimsErr } = await anon.auth.getClaims(token);
   const userId = claimsData?.claims?.sub as string | undefined;
 
-  const svc = createClient(SUPABASE_URL, SERVICE);
+  const svc = svcEarly;
 
   if (claimsErr || !userId) {
-    await svc.from("governance_events").insert({
-      event_category: "compliance",
-      event_action: "protocol.access.denied",
-      severity: "warn",
-      target_entity_type: "protocol",
-      context: {
-        reason: "invalid_jwt",
-        action,
-        request_id: reqId,
-        ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
-        ua: req.headers.get("user-agent") ?? null,
-        server_ts: startedAt,
-      },
-    });
+    await logDenial({ actorId: null, reason: "invalid_jwt", action, key: preKey });
     return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
   }
 
-  // Authoritative role check via service-role read.
+  // Refine throttle key with userId now that we have it.
+  const userKey = clientKey(req, userId);
+  const userBan = isBanned(userKey);
+  if (userBan.banned) {
+    return new Response(
+      JSON.stringify({ error: "Too many denied attempts", request_id: reqId, retry_after: userBan.retryAfter }),
+      {
+        status: 429,
+        headers: {
+          ...corsHeaders, ...noStore,
+          "Content-Type": "application/json",
+          "X-Request-Id": reqId,
+          "Retry-After": String(userBan.retryAfter),
+        },
+      },
+    );
+  }
+
   const { data: roleRows, error: roleErr } = await svc
     .from("user_roles")
     .select("role")
@@ -158,12 +258,7 @@ serve(async (req) => {
       event_action: "protocol.access.error",
       severity: "error",
       target_entity_type: "protocol",
-      context: {
-        reason: "role_lookup_failed",
-        action,
-        request_id: reqId,
-        server_ts: startedAt,
-      },
+      context: { reason: "role_lookup_failed", action, request_id: reqId, server_ts: startedAt },
     });
     return jsonResponse(500, { error: "Internal error", request_id: reqId }, reqId);
   }
@@ -172,22 +267,12 @@ serve(async (req) => {
   const matchedRole = userRoles.find((r) => ALLOWED_ROLES.has(r));
 
   if (!matchedRole) {
-    // 403 — authenticated but role not allowed
-    await svc.from("governance_events").insert({
-      actor_id: userId,
-      event_category: "compliance",
-      event_action: "protocol.access.denied",
-      severity: "warn",
-      target_entity_type: "protocol",
-      context: {
-        reason: "role_forbidden",
-        action,
-        roles: userRoles,
-        request_id: reqId,
-        ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
-        ua: req.headers.get("user-agent") ?? null,
-        server_ts: startedAt,
-      },
+    await logDenial({
+      actorId: userId,
+      reason: "role_forbidden",
+      action,
+      extra: { roles: userRoles },
+      key: userKey,
     });
     return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId);
   }
