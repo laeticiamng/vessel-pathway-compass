@@ -2362,7 +2362,7 @@ export const fr = {
           },
           {
             q: "Quel est le plan statistique principal et la justification de la taille d'échantillon ?",
-            a: "Endpoint principal : κ pondéré linéairement sur la classification segmentaire de la sténose (4 classes), cible κ ≥ 0,75 (borne inférieure IC 95 % ≥ 0,60). n = 144 patients à inclure (120 évaluables) ; α = 0,05 bilatéral, puissance = 0,90, méthode de Donner & Eliasziw avec ajustement clusters intra-patient (GEE). Analyse principale Per-Protocol, ITT en sensibilité avec imputation multiple (5 imputations, FCS). Analyse de futilité prévue à n=50 (O'Brien-Fleming, sans dépense d'α)."
+            a: "Endpoint principal : κ pondéré quadratiquement sur la classification segmentaire de la sténose (4 classes), cible κ ≥ 0,65 (borne inférieure IC 95 % ≥ 0,50). n ≈ 320 patients à inclure (≈ 250 évaluables) ; α = 0,05 bilatéral, puissance = 0,90, méthode de Donner & Eliasziw avec ajustement clusters intra-patient (GEE). Données manquantes traitées par imputation multiple par équations chaînées (MICE, m = 20), avec analyses de sensibilité complete-case et tipping-point. Analyse de futilité prévue à n=100 (O'Brien-Fleming, sans dépense d'α)."
           },
           {
             q: "Quelle traçabilité offrez-vous en cas d'audit ou de revue par un organisme notifié ?",
