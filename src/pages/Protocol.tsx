@@ -99,8 +99,8 @@ export default function Protocol() {
         {/* Compliance & completeness badge — authenticated users only, exportable for audit */}
         <ComplianceBadge />
 
-        {/* Automated completeness audit (real-time, locale-aware) */}
-        <ProtocolCompletenessChecklist />
+        {/* Automated completeness audit — internal only (admin / research lead) */}
+        {canSeeInternalAudit && <ProtocolCompletenessChecklist />}
 
         {/* Methodological framing — concordance / pragmatic non-inferiority */}
         <NonInferioritySection compact />
