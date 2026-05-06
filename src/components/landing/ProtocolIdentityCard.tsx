@@ -69,7 +69,7 @@ const CONTENT: Record<Language, Content> = {
       primary: {
         label: "Primary endpoint",
         value:
-          "Segmental diagnostic concordance AquaMR vs CT angiography for ≥ 50% stenosis (Cohen's κ, sensitivity, specificity).",
+          "Segmental concordance AquaMR vs reference imaging (CTA / MRA / DSA) on 4-class stenosis grading — quadratically weighted κ ≥ 0.65 (95% CI lower bound ≥ 0.50).",
       },
       population: {
         label: "Target population",
