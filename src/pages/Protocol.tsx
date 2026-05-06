@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft, Target, GitCompare, BarChart3, ShieldAlert, AlertTriangle, FileCheck, Users, FlaskConical, Microscope } from "lucide-react";
 import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { SEOHead } from "@/components/SEOHead";
+import { Helmet } from "react-helmet-async";
 import { useTranslation } from "@/i18n/context";
 import { motion } from "framer-motion";
 import { ProtocolIdentityCard } from "@/components/landing/ProtocolIdentityCard";
