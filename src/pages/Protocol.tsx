@@ -96,8 +96,8 @@ export default function Protocol() {
         {/* Versioning, status and editorial history (publicly visible) */}
         <ProtocolVersioningCard />
 
-        {/* Compliance & completeness badge — authenticated users only, exportable for audit */}
-        <ComplianceBadge />
+        {/* Compliance & completeness badge — restricted to internal admin / research lead */}
+        {canSeeInternalAudit && <ComplianceBadge />}
 
         {/* Automated completeness audit — internal only (admin / research lead) */}
         {canSeeInternalAudit && <ProtocolCompletenessChecklist />}
