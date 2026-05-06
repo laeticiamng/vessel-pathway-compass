@@ -370,6 +370,26 @@ export default function ProtocolAuditAdmin() {
         {!canSeeRawNetwork && " (network fields pseudonymized for your role)"}.
       </p>
 
+      {/* Security alerts widget + active config (transparency) */}
+      <div className="grid lg:grid-cols-3 gap-4 mb-6">
+        <div className="lg:col-span-2">
+          <ProtocolAlertsWidget
+            hours={24}
+            canSeeRawNetwork={canSeeRawNetwork}
+            onDrillDownRequestId={(rid) => {
+              setRequestIdFilter(rid);
+              setSelectedActions(["protocol.access.alert", "protocol.access.denied", "protocol.access.throttled"]);
+              setPage(0);
+            }}
+            onDrillDownActor={(aid) => {
+              setActorFilter(aid);
+              setPage(0);
+            }}
+          />
+        </div>
+        <ProtocolGuardConfigPanel />
+      </div>
+
       {/* Filters */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
         <div>
