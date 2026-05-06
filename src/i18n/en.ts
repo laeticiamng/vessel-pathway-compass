@@ -84,6 +84,7 @@ export const en = {
     exportsAudit: "Exports Audit",
     institution: "Institution",
     systemHealth: "System Health",
+    hospitalAudit: "Hospital Audit",
   },
 
   // Command palette
