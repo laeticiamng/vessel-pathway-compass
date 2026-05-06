@@ -1,6 +1,9 @@
 import { useMemo } from "react";
 import { CheckCircle2, AlertTriangle, XCircle, ShieldCheck } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/i18n/context";
+import { useAuth } from "@/hooks/useAuth";
+import { useUserRoles } from "@/hooks/useUserRoles";
 import {
   auditProtocolCompleteness,
   type ProtocolCheckSeverity,
