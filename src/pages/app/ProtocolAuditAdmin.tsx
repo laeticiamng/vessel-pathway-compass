@@ -51,9 +51,6 @@ const PAGE_SIZES = [50, 100, 250, 500];
 const EXPORT_PAGE_SIZE = 1000;
 const EXPORT_HARD_CAP = 50_000;
 
-import { pseudonymizeContext } from "@/lib/protocolAuditPseudonymize";
-
-
 type ExportFormat = "csv" | "pdf";
 
 export default function ProtocolAuditAdmin() {
