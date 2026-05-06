@@ -84,9 +84,20 @@ setInterval(() => {
   }
 }, 60_000);
 
+function extractIp(req: Request) {
+  const xff = req.headers.get("x-forwarded-for") ?? null;
+  const first = xff?.split(",")[0]?.trim() || null;
+  return {
+    ip: first,
+    xff,
+    cf_connecting_ip: req.headers.get("cf-connecting-ip") ?? null,
+    x_real_ip: req.headers.get("x-real-ip") ?? null,
+  };
+}
+
 function clientKey(req: Request, userId: string | null): string {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
-  return `${userId ?? "anon"}|${ip}`;
+  const { ip } = extractIp(req);
+  return `${userId ?? "anon"}|${ip ?? "unknown"}`;
 }
 
 function jsonResponse(
