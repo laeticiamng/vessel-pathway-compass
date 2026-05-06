@@ -1661,7 +1661,7 @@ export const en = {
   // Legal
   legal: {
     tabs: { terms: "Terms of Service", privacy: "Privacy Policy", notice: "Legal Notice" },
-    contact: "For any questions, contact us at: contact@emotionscare.com",
+    contact: "For any questions, contact us at: m.laeticia@hotmail.fr",
     terms: {
       title: "Terms of Service",
       lastUpdated: "Last updated: March 2026",
@@ -1698,7 +1698,7 @@ export const en = {
       title: "Legal Notice",
       lastUpdated: "Last updated: March 2026",
       sections: [
-        { heading: "Publisher", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, France\nContact: contact@emotionscare.com" },
+        { heading: "Publisher", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, France\nContact: m.laeticia@hotmail.fr" },
         { heading: "Founder's professional qualifications", body: "Dr Laëticia Moto-Ngane, MD (Switzerland)\nGLN number: 7601009569944\nRegistration: MedReg — Healthcare Professions Platform (Swiss Confederation)\nPublicly verifiable at https://www.healthregister.ch" },
         { heading: "Hosting", body: "The Platform is hosted on cloud infrastructure in the European Union." },
         { heading: "Medical Disclaimer", body: "AquaMR Flow is NOT a medical device. It is a clinical decision support tool intended for use by qualified healthcare professionals only. All AI-generated content requires review by a licensed clinician." },
@@ -1721,7 +1721,7 @@ export const en = {
         { q: "How is patient data protected?", a: "All patient data is pseudonymized. We use row-level security, encryption at rest and in transit, and maintain comprehensive audit trails." },
         { q: "Can I export my data?", a: "Yes. You can export patient data, measurements, and reports in CSV and PDF formats from the relevant sections." },
         { q: "What happens during the academic validation phase?", a: "During the validation phase, module access is supervised by the research protocol, with no billing. Post-validation access terms will be communicated before any change." },
-        { q: "How do I delete my account?", a: "Contact contact@emotionscare.com to request account deletion. Your data will be removed within 30 days per our retention policy." },
+        { q: "How do I delete my account?", a: "Contact m.laeticia@hotmail.fr to request account deletion. Your data will be removed within 30 days per our retention policy." },
       ],
     },
     links: { terms: "Terms of Service", privacy: "Privacy Policy" },

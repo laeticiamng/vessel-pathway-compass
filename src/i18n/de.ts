@@ -1640,7 +1640,7 @@ export const de = {
 
   legal: {
     tabs: { terms: "AGB", privacy: "Datenschutz", notice: "Impressum" },
-    contact: "Bei Fragen kontaktieren Sie uns: contact@emotionscare.com",
+    contact: "Bei Fragen kontaktieren Sie uns: m.laeticia@hotmail.fr",
     terms: {
       title: "Allgemeine Geschäftsbedingungen",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
@@ -1677,7 +1677,7 @@ export const de = {
       title: "Impressum",
       lastUpdated: "Zuletzt aktualisiert: März 2026",
       sections: [
-        { heading: "Herausgeber", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, Frankreich\nKontakt: contact@emotionscare.com" },
+        { heading: "Herausgeber", body: "EMOTIONSCARE SASU\nSIREN: 944 505 445\n80000 Amiens, Frankreich\nKontakt: m.laeticia@hotmail.fr" },
         { heading: "Berufliche Qualifikationen der Gründerin", body: "Dr. med. Laëticia Moto-Ngane, Ärztin (CH)\nGLN-Nummer: 7601009569944\nRegistrierung: MedReg — Plattform der Gesundheitsberufe (Schweizerische Eidgenossenschaft)\nÖffentlich überprüfbar unter https://www.healthregister.ch" },
         { heading: "Hosting", body: "Die Plattform wird in der Europäischen Union gehostet." },
         { heading: "Medizinischer Hinweis", body: "AquaMR Flow ist KEIN Medizinprodukt." },
@@ -1699,7 +1699,7 @@ export const de = {
         { q: "Wie werden Patientendaten geschützt?", a: "Alle Daten sind pseudonymisiert mit Row-Level Security und Verschlüsselung." },
         { q: "Kann ich meine Daten exportieren?", a: "Ja, in CSV- und PDF-Formaten." },
         { q: "Was passiert während der akademischen Validierungsphase?", a: "Während der Validierungsphase erfolgt der Modulzugang im Rahmen des Forschungsprotokolls ohne Abrechnung. Die Bedingungen nach der Validierung werden vor jeder Änderung kommuniziert." },
-        { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie contact@emotionscare.com. Löschung innerhalb von 30 Tagen." },
+        { q: "Wie lösche ich mein Konto?", a: "Kontaktieren Sie m.laeticia@hotmail.fr. Löschung innerhalb von 30 Tagen." },
       ],
     },
     links: { terms: "AGB", privacy: "Datenschutzrichtlinie" },

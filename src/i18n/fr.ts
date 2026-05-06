@@ -1640,7 +1640,7 @@ export const fr = {
 
   legal: {
     tabs: { terms: "CGU", privacy: "Confidentialité", notice: "Mentions légales" },
-    contact: "Pour toute question, contactez-nous : contact@emotionscare.com",
+    contact: "Pour toute question, contactez-nous : m.laeticia@hotmail.fr",
     terms: {
       title: "Conditions Générales d'Utilisation",
       lastUpdated: "Dernière mise à jour : mars 2026",
@@ -1677,7 +1677,7 @@ export const fr = {
       title: "Mentions Légales",
       lastUpdated: "Dernière mise à jour : mars 2026",
       sections: [
-        { heading: "Éditeur", body: "EMOTIONSCARE SASU\nSIREN : 944 505 445\n80000 Amiens, France\nContact : contact@emotionscare.com" },
+        { heading: "Éditeur", body: "EMOTIONSCARE SASU\nSIREN : 944 505 445\n80000 Amiens, France\nContact : m.laeticia@hotmail.fr" },
         { heading: "Qualifications professionnelles de la fondatrice", body: "Dre Laëticia Moto-Ngane, médecin (CH)\nNuméro GLN : 7601009569944\nInscription : MedReg — Plateforme des professions de santé (Confédération suisse)\nVérifiable publiquement sur https://www.healthregister.ch" },
         { heading: "Hébergement", body: "La Plateforme est hébergée sur une infrastructure cloud dans l'Union Européenne." },
         { heading: "Avertissement médical", body: "AquaMR Flow N'EST PAS un dispositif médical. C'est un outil d'aide à la décision clinique destiné aux professionnels de santé qualifiés." },
@@ -1699,7 +1699,7 @@ export const fr = {
         { q: "Comment les données patients sont-elles protégées ?", a: "Toutes les données sont pseudonymisées. Nous utilisons la sécurité au niveau des lignes, le chiffrement et des journaux d'audit complets." },
         { q: "Puis-je exporter mes données ?", a: "Oui. Vous pouvez exporter les données patients, mesures et rapports en CSV et PDF." },
         { q: "Que se passe-t-il pendant la phase de validation académique ?", a: "Pendant la phase de validation, l'accès aux modules est encadré par le protocole de recherche, sans facturation. Les modalités d'accès post-validation seront communiquées avant tout changement." },
-        { q: "Comment supprimer mon compte ?", a: "Contactez contact@emotionscare.com. Vos données seront supprimées sous 30 jours." },
+        { q: "Comment supprimer mon compte ?", a: "Contactez m.laeticia@hotmail.fr. Vos données seront supprimées sous 30 jours." },
       ],
     },
     links: { terms: "Conditions générales", privacy: "Politique de confidentialité" },
