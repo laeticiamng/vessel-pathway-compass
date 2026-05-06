@@ -209,7 +209,20 @@ export function ProtocolAuditLogExporter() {
         );
       }
 
-      doc.save(`vasculink-protocol-audit-${stamp()}.pdf`);
+      const filename = `vasculink-protocol-audit-${stamp()}.pdf`;
+      doc.save(filename);
+      void auditLog({
+        category: "compliance",
+        action: "protocol.audit_log.exported",
+        severity: "info",
+        targetEntityType: "protocol_audit_log",
+        context: {
+          format: "pdf",
+          filename,
+          row_count: rows.length,
+          exported_at: new Date().toISOString(),
+        },
+      });
     } finally {
       setExporting(false);
     }
