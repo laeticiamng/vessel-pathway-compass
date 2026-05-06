@@ -1367,10 +1367,10 @@ export const de = {
       title: "Strukturierte klinische Validierung",
       subtitle: "VASCU-LINK ist mehr als eine technologische Vision: Die L1-Linie (Diagnose) wird durch ein prospektives Forschungsprotokoll mit vordefinierten Endpunkten, Vergleichsgrößen und Go/No-Go-Regeln geregelt.",
       cards: [
-        { title: "Primärer Endpunkt", desc: "Segmentale Übereinstimmung (gewichtetes κ) ≥ 0,75 vs. Referenzbildgebung (CTA / MRA / DSA), untere 95 %-KI-Grenze ≥ 0,60." },
+        { title: "Primärer Endpunkt", desc: "Segmentale Übereinstimmung (quadratisch gewichtetes κ) ≥ 0,65 vs. Referenzbildgebung (CTA / MRA / DSA), untere 95 %-KI-Grenze ≥ 0,50." },
         { title: "Explizite Vergleichsgrößen", desc: "CT-Angiographie, MR-Angiographie und digitale Subtraktionsangiographie (DSA) je nach Indikation, plus Standard-Duplexsonographie für inkrementellen Mehrwert." },
         { title: "Sicherheits-Fallback", desc: "Obligatorische Rückkehr zur Referenzbildgebung bei unzureichender Aufnahmequalität, komplexer Anatomie oder interventioneller Indikation." },
-        { title: "Go / No-Go-Regeln", desc: "Vordefiniert a priori: Go (κ ≥ 0,75), Neubewertung (0,60–0,75), No-Go (< 0,60). Zwischenanalyse zur Futilität bei n=50." },
+        { title: "Go / No-Go-Regeln", desc: "Vordefiniert a priori: Go (κ ≥ 0,65), Neubewertung (0,50–0,65), No-Go (< 0,50). Zwischenanalyse zur Futilität bei n=100." },
       ],
       scopeStatement: "L1 validiert Sehen, Kartieren und Entscheiden beim Menschen. L2 (Guide) bleibt in Simulation und Phantom. L3 (Treat) bleibt streng präklinisch. Keine humane Revaskularisation in der Doktorarbeit.",
       ctaProtocol: "Vollständiges Protokoll lesen",
