@@ -2515,7 +2515,7 @@ export const en = {
               ],
             },
             {
-              claim: "Primary endpoint: linearly weighted κ on segmental classification (4 classes), target κ ≥ 0.75.",
+              claim: "Primary endpoint: quadratically weighted κ on segmental classification (4 classes), target κ ≥ 0.65.",
               refs: [
                 { citationKey: "Cohen-1968", document: "Cohen J. — Weighted kappa (Psychological Bulletin, 1968)", url: null },
                 { citationKey: "Donner-Eliasziw-1992", document: "Donner & Eliasziw — Sample size for κ statistics (Stat Med, 1992)", url: null },
