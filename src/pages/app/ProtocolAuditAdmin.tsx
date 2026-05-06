@@ -254,9 +254,24 @@ export default function ProtocolAuditAdmin() {
 
         autoTable(doc, {
           startY: 84,
-          head: [["Timestamp", "Action", "Sev.", "Actor", "Request-Id", "IP", "XFF", "Role / Reason"]],
+          head: [["Timestamp", "Action", "Sev.", "Actor", "Request-Id", "IP", "XFF", "Role / Reason", "Alert details"]],
           body: rows.map((e) => {
             const ctx = pseudonymizeContext(e.context, canSeeRawNetwork);
+            const isAlert = e.event_action === "protocol.access.alert"
+              || e.event_action === "protocol.access.throttled";
+            const distinct = Array.isArray(ctx.distinct_actions)
+              ? (ctx.distinct_actions as unknown[]).join("|")
+              : "";
+            const alertCell = isAlert
+              ? [
+                  ctx.alert_type ? `type=${ctx.alert_type}` : "",
+                  (ctx.denials ?? ctx.denials_in_window) != null
+                    ? `denials=${ctx.denials ?? ctx.denials_in_window}` : "",
+                  distinct ? `distinct=${distinct}` : "",
+                  ctx.window_ms != null ? `win=${ctx.window_ms}ms` : "",
+                  ctx.ban_seconds != null ? `ban=${ctx.ban_seconds}s` : "",
+                ].filter(Boolean).join(" · ")
+              : "";
             return [
               new Date(e.created_at).toISOString().replace("T", " ").slice(0, 19),
               e.event_action,
@@ -266,6 +281,7 @@ export default function ProtocolAuditAdmin() {
               String(ctx.ip ?? ""),
               String(ctx.xff ?? "").slice(0, 30),
               `${ctx.role ?? ""}${ctx.reason ? ` / ${ctx.reason}` : ""}`,
+              alertCell,
             ];
           }),
           styles: { fontSize: 6.5, cellPadding: 2.5 },
