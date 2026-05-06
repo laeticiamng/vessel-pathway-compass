@@ -8,6 +8,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { useTranslation } from "@/i18n/context";
+import { callProtocolAccessGuard } from "@/hooks/useProtocolGuard";
+import { toast } from "@/hooks/use-toast";
 
 interface GovEvent {
   id: string;
@@ -80,7 +82,17 @@ export function ProtocolAuditLogExporter() {
   const totalViews = rows.filter((r) => r.event_action === "protocol.viewed").length;
   const totalQA = rows.filter((r) => r.event_action === "protocol.qa.viewed").length;
 
-  const downloadCSV = () => {
+  const downloadCSV = async () => {
+    // Server-side guard — refuses with 403 if role no longer matches.
+    const verdict = await callProtocolAccessGuard("protocol.export.audit_log.csv");
+    if (!verdict.ok) {
+      toast({
+        title: "Forbidden",
+        description: `Export refused (${verdict.status}). Request-Id: ${verdict.requestId ?? "n/a"}`,
+        variant: "destructive",
+      });
+      return;
+    }
     const header = [
       "timestamp",
       "action",
@@ -133,6 +145,15 @@ export function ProtocolAuditLogExporter() {
   };
 
   const downloadPDF = async () => {
+    const verdict = await callProtocolAccessGuard("protocol.export.audit_log.pdf");
+    if (!verdict.ok) {
+      toast({
+        title: "Forbidden",
+        description: `Export refused (${verdict.status}). Request-Id: ${verdict.requestId ?? "n/a"}`,
+        variant: "destructive",
+      });
+      return;
+    }
     setExporting(true);
     try {
       const jsPDFmod = await import("jspdf");
