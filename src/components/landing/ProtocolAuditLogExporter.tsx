@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
+import { useAuditLog } from "@/hooks/useAuditLog";
 import { useTranslation } from "@/i18n/context";
 
 interface GovEvent {
@@ -32,6 +33,7 @@ export function ProtocolAuditLogExporter() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { hasRole, isLoading: rolesLoading } = useUserRoles();
+  const { log: auditLog } = useAuditLog();
   const [exporting, setExporting] = useState(false);
 
   const allowed = hasRole(["admin", "super_admin", "hospital_admin", "research_lead"]);
@@ -121,8 +123,21 @@ export function ProtocolAuditLogExporter() {
           .join(","),
       );
     }
+    const filename = `vasculink-protocol-audit-${stamp()}.csv`;
     const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8" });
-    triggerDownload(blob, `vasculink-protocol-audit-${stamp()}.csv`);
+    triggerDownload(blob, filename);
+    void auditLog({
+      category: "compliance",
+      action: "protocol.audit_log.exported",
+      severity: "info",
+      targetEntityType: "protocol_audit_log",
+      context: {
+        format: "csv",
+        filename,
+        row_count: rows.length,
+        exported_at: new Date().toISOString(),
+      },
+    });
   };
 
   const downloadPDF = async () => {
@@ -194,7 +209,20 @@ export function ProtocolAuditLogExporter() {
         );
       }
 
-      doc.save(`vasculink-protocol-audit-${stamp()}.pdf`);
+      const filename = `vasculink-protocol-audit-${stamp()}.pdf`;
+      doc.save(filename);
+      void auditLog({
+        category: "compliance",
+        action: "protocol.audit_log.exported",
+        severity: "info",
+        targetEntityType: "protocol_audit_log",
+        context: {
+          format: "pdf",
+          filename,
+          row_count: rows.length,
+          exported_at: new Date().toISOString(),
+        },
+      });
     } finally {
       setExporting(false);
     }
