@@ -1,6 +1,6 @@
 # i18n Audit Report
 
-_Generated: 2026-05-06T15:23:11.832Z_
+_Generated: 2026-05-06T15:24:18.681Z_
 
 Three views for one purpose: **(1)** find translation keys called from the codebase but missing/empty in a locale, **(2)** detect dictionary keys never used in code (orphans) so we can prune, **(3)** flag remaining hardcoded strings on **public pages** (after filtering brand tokens, native language names, clinical instruments and lines already wrapped in `t()`).
 
@@ -10,29 +10,23 @@ Three views for one purpose: **(1)** find translation keys called from the codeb
 |---|---:|
 | Translation keys referenced from code | 1538 |
 | Dynamic key prefixes detected | 49 |
-| Keys missing in FR | 1 |
-| Keys missing in EN | 1 |
-| Keys missing in DE | 1 |
+| Keys missing in FR | 0 |
+| Keys missing in EN | 0 |
+| Keys missing in DE | 0 |
 | Orphan keys (defined, unused) | 98 |
 | Public pages with hardcoded candidates | 1 (1 findings) |
 
 ## Missing keys — FR
 
-| Key | Reason | Used in |
-|---|---|---|
-| `sidebar.hospitalAudit` | absent | src/components/layout/AppSidebar.tsx |
+_None ✅_
 
 ## Missing keys — EN
 
-| Key | Reason | Used in |
-|---|---|---|
-| `sidebar.hospitalAudit` | absent | src/components/layout/AppSidebar.tsx |
+_None ✅_
 
 ## Missing keys — DE
 
-| Key | Reason | Used in |
-|---|---|---|
-| `sidebar.hospitalAudit` | absent | src/components/layout/AppSidebar.tsx |
+_None ✅_
 
 ## Orphan keys (defined in FR dictionary but never referenced)
 
