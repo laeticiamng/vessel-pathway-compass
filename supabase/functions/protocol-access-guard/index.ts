@@ -240,6 +240,51 @@ serve(async (req) => {
     if (!roles.some((r) => ALLOWED_ROLES.has(r))) {
       return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId);
     }
+
+    // Tamper-proof audit trail of threshold changes:
+    // Compute a stable hash of the active config and snapshot it the
+    // first time we observe a new value. Only admins (full access) write
+    // to the history; research_lead reads SECURITY_CONFIG but does not
+    // create snapshots (RLS on the table prevents reads anyway).
+    const isFullAdmin = roles.includes("admin") || roles.includes("super_admin");
+    if (isFullAdmin) {
+      try {
+        const configString = JSON.stringify(SECURITY_CONFIG);
+        const enc = new TextEncoder().encode(configString);
+        const hashBuf = await crypto.subtle.digest("SHA-256", enc);
+        const configHash = Array.from(new Uint8Array(hashBuf))
+          .map((b) => b.toString(16).padStart(2, "0")).join("");
+
+        const { data: latest } = await svc_
+          .from("protocol_security_config_history")
+          .select("config_hash, current_config")
+          .order("changed_at", { ascending: false })
+          .limit(1);
+        const last = (latest ?? [])[0] as { config_hash?: string; current_config?: Record<string, unknown> } | undefined;
+
+        if (!last || last.config_hash !== configHash) {
+          const previous = last?.current_config ?? null;
+          const diff: Record<string, { from: unknown; to: unknown }> = {};
+          if (previous) {
+            for (const k of Object.keys(SECURITY_CONFIG)) {
+              const a = (previous as Record<string, unknown>)[k];
+              const b = (SECURITY_CONFIG as Record<string, unknown>)[k];
+              if (a !== b) diff[k] = { from: a, to: b };
+            }
+          }
+          await svc_.from("protocol_security_config_history").insert({
+            observed_by: uid,
+            request_id: reqId,
+            config_hash: configHash,
+            previous_config: previous,
+            current_config: SECURITY_CONFIG,
+            diff,
+            source: "edge_env",
+          });
+        }
+      } catch (_) { /* best-effort */ }
+    }
+
     return jsonResponse(200, { config: SECURITY_CONFIG, request_id: reqId }, reqId);
   }
 
