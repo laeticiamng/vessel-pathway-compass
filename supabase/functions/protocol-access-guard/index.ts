@@ -174,7 +174,7 @@ serve(async (req) => {
           reason: opts.reason,
           action: opts.action,
           request_id: reqId,
-          ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+          ...extractIp(req),
           ua: req.headers.get("user-agent") ?? null,
           server_ts: startedAt,
           ...(opts.extra ?? {}),
