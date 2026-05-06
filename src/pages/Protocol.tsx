@@ -16,6 +16,7 @@ import { ComplianceAnnexesSection } from "@/components/landing/ComplianceAnnexes
 import { ComplianceBadge } from "@/components/landing/ComplianceBadge";
 import { ProtocolAuditLogExporter } from "@/components/landing/ProtocolAuditLogExporter";
 import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
+import { useUserRoles } from "@/hooks/useUserRoles";
 
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
