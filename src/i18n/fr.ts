@@ -2497,7 +2497,7 @@ export const fr = {
               ],
             },
             {
-              claim: "Endpoint principal : κ pondéré linéairement sur la classification segmentaire (4 classes), cible κ ≥ 0,75.",
+              claim: "Endpoint principal : κ pondéré quadratiquement sur la classification segmentaire (4 classes), cible κ ≥ 0,65.",
               refs: [
                 { citationKey: "Cohen-1968", document: "Cohen J. — Weighted kappa (Psychological Bulletin, 1968)", url: null },
                 { citationKey: "Donner-Eliasziw-1992", document: "Donner & Eliasziw — Sample size for κ statistics (Stat Med, 1992)", url: null },
