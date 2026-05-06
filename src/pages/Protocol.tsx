@@ -116,10 +116,10 @@ export default function Protocol() {
         <ProtocolVersioningCard />
 
         {/* Compliance & completeness badge — restricted to internal admin / research lead */}
-        {canSeeInternalAudit && <ComplianceBadge />}
+        {showInternalAudit && <ComplianceBadge />}
 
         {/* Automated completeness audit — internal only (admin / research lead) */}
-        {canSeeInternalAudit && <ProtocolCompletenessChecklist />}
+        {showInternalAudit && <ProtocolCompletenessChecklist />}
 
         {/* Methodological framing — concordance / pragmatic non-inferiority */}
         <NonInferioritySection compact />
