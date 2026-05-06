@@ -7,6 +7,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { getContentVersion } from "@/lib/contentVersions";
+import { callProtocolAccessGuard } from "@/hooks/useProtocolGuard";
+import { toast } from "@/hooks/use-toast";
 import {
   auditProtocolCompleteness,
   type ProtocolCheckSeverity,
@@ -78,7 +80,18 @@ export function ComplianceBadge() {
         ? "bg-amber-500"
         : "bg-destructive";
 
-  const handleExport = () => {
+  const handleExport = async () => {
+    const verdict = await callProtocolAccessGuard(
+      "protocol.export.compliance.json",
+    );
+    if (!verdict.ok) {
+      toast({
+        title: "Forbidden",
+        description: `Export refused (${verdict.status}). Request-Id: ${verdict.requestId ?? "n/a"}`,
+        variant: "destructive",
+      });
+      return;
+    }
     const generatedAt = new Date().toISOString();
     const protocolVersion = getContentVersion("protocol")?.version ?? null;
     const payload = {
