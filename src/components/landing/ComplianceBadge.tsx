@@ -1,8 +1,10 @@
 import { useMemo } from "react";
-import { ShieldCheck, Download, Lock } from "lucide-react";
+import { ShieldCheck, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useTranslation } from "@/i18n/context";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { getContentVersion } from "@/lib/contentVersions";
 import {
