@@ -1388,8 +1388,8 @@ export const en = {
       subtitle: "VASCU-LINK is more than a technological vision: the L1 (Diagnose) line is governed by a prospective research protocol with pre-specified endpoints, comparators and Go/No-Go rules.",
       cards: [
         { title: "Primary endpoint", desc: "Segmental concordance (quadratically weighted κ) ≥ 0.65 vs reference imaging (CTA / MRA / DSA), 95 % CI lower bound ≥ 0.50." },
-        { title: "Comparator", desc: "Per-patient pre-specified reference (CTA, MRA or DSA), paired-reading, blinded." },
-        { title: "Population", desc: "Frail symptomatic PAD — n ≈ 320 enrolled, ≈ 250 analysable." },
+        { title: "Explicit comparators", desc: "CT angiography, MR angiography and digital subtraction angiography (DSA) per indication, plus standard Doppler ultrasound for added value." },
+        { title: "Safety fallback", desc: "Mandatory return to reference imaging if acquisition quality is insufficient, anatomy complex, or interventional indication." },
         { title: "Go / No-Go rules", desc: "Pre-specified a priori: Go (κ ≥ 0.65), Reassessment (0.50–0.65), No-Go (< 0.50). Interim futility analysis at n=100." },
       ],
       scopeStatement: "L1 validates seeing, mapping and deciding in humans. L2 (Guide) remains in simulation and phantom. L3 (Treat) remains strictly preclinical. No human revascularization within the thesis.",
