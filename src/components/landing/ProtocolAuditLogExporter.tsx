@@ -33,6 +33,7 @@ export function ProtocolAuditLogExporter() {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { hasRole, isLoading: rolesLoading } = useUserRoles();
+  const { log: auditLog } = useAuditLog();
   const [exporting, setExporting] = useState(false);
 
   const allowed = hasRole(["admin", "super_admin", "hospital_admin", "research_lead"]);
