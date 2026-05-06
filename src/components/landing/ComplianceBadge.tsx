@@ -8,7 +8,7 @@ import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { getContentVersion } from "@/lib/contentVersions";
 import { callProtocolAccessGuard } from "@/hooks/useProtocolGuard";
-import { toast } from "@/hooks/use-toast";
+import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 import {
   auditProtocolCompleteness,
   type ProtocolCheckSeverity,
@@ -85,10 +85,11 @@ export function ComplianceBadge() {
       "protocol.export.compliance.json",
     );
     if (!verdict.ok) {
-      toast({
-        title: "Forbidden",
-        description: `Export refused (${verdict.status}). Request-Id: ${verdict.requestId ?? "n/a"}`,
-        variant: "destructive",
+      showGuardDenialToast({
+        status: verdict.status,
+        requestId: verdict.requestId,
+        error: verdict.error,
+        action: "protocol.export.compliance.json",
       });
       return;
     }

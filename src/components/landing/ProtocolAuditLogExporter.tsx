@@ -9,7 +9,7 @@ import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { useTranslation } from "@/i18n/context";
 import { callProtocolAccessGuard } from "@/hooks/useProtocolGuard";
-import { toast } from "@/hooks/use-toast";
+import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 
 interface GovEvent {
   id: string;
@@ -86,10 +86,11 @@ export function ProtocolAuditLogExporter() {
     // Server-side guard — refuses with 403 if role no longer matches.
     const verdict = await callProtocolAccessGuard("protocol.export.audit_log.csv");
     if (!verdict.ok) {
-      toast({
-        title: "Forbidden",
-        description: `Export refused (${verdict.status}). Request-Id: ${verdict.requestId ?? "n/a"}`,
-        variant: "destructive",
+      showGuardDenialToast({
+        status: verdict.status,
+        requestId: verdict.requestId,
+        error: verdict.error,
+        action: "protocol.export.audit_log.csv",
       });
       return;
     }
@@ -147,10 +148,11 @@ export function ProtocolAuditLogExporter() {
   const downloadPDF = async () => {
     const verdict = await callProtocolAccessGuard("protocol.export.audit_log.pdf");
     if (!verdict.ok) {
-      toast({
-        title: "Forbidden",
-        description: `Export refused (${verdict.status}). Request-Id: ${verdict.requestId ?? "n/a"}`,
-        variant: "destructive",
+      showGuardDenialToast({
+        status: verdict.status,
+        requestId: verdict.requestId,
+        error: verdict.error,
+        action: "protocol.export.audit_log.pdf",
       });
       return;
     }
