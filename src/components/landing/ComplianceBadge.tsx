@@ -20,6 +20,7 @@ import {
 export function ComplianceBadge() {
   const { t } = useTranslation();
   const { user } = useAuth();
+  const { log } = useAuditLog();
 
   const audit = useMemo(
     () => auditProtocolCompleteness(t as (k: string) => unknown),
