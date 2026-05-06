@@ -1387,10 +1387,10 @@ export const en = {
       title: "Structured clinical validation",
       subtitle: "VASCU-LINK is more than a technological vision: the L1 (Diagnose) line is governed by a prospective research protocol with pre-specified endpoints, comparators and Go/No-Go rules.",
       cards: [
-        { title: "Primary endpoint", desc: "Segmental concordance (weighted κ) ≥ 0.75 vs reference imaging (CTA / MRA / DSA), 95 % CI lower bound ≥ 0.60." },
-        { title: "Explicit comparators", desc: "CT angiography, MR angiography and digital subtraction angiography (DSA) per indication, plus standard duplex ultrasound for incremental value." },
-        { title: "Safety fallback", desc: "Mandatory return to reference imaging in case of insufficient acquisition quality, complex anatomy or interventional indication." },
-        { title: "Go / No-Go rules", desc: "Pre-specified a priori: Go (κ ≥ 0.75), Reassessment (0.60–0.75), No-Go (< 0.60). Interim futility analysis at n=50." },
+        { title: "Primary endpoint", desc: "Segmental concordance (quadratically weighted κ) ≥ 0.65 vs reference imaging (CTA / MRA / DSA), 95 % CI lower bound ≥ 0.50." },
+        { title: "Explicit comparators", desc: "CT angiography, MR angiography and digital subtraction angiography (DSA) per indication, plus standard Doppler ultrasound for added value." },
+        { title: "Safety fallback", desc: "Mandatory return to reference imaging if acquisition quality is insufficient, anatomy complex, or interventional indication." },
+        { title: "Go / No-Go rules", desc: "Pre-specified a priori: Go (κ ≥ 0.65), Reassessment (0.50–0.65), No-Go (< 0.50). Interim futility analysis at n=100." },
       ],
       scopeStatement: "L1 validates seeing, mapping and deciding in humans. L2 (Guide) remains in simulation and phantom. L3 (Treat) remains strictly preclinical. No human revascularization within the thesis.",
       ctaProtocol: "Read the full protocol",
@@ -1816,7 +1816,7 @@ export const en = {
       positioningStandard: "Angio-CT / MRA / angiography — standard fallback if quality is insufficient or indication is urgent",
       l1Title: "L1 — DIAGNOSE: prospective clinical validation",
       l1Badge: "PhD core",
-      l1Caption: "Main cohort CHUV / Lausanne · n ≈ 250 analysable patients",
+      l1Caption: "Main cohort · n ≈ 320 enrolled / ≈ 250 analysable (academic partner site to be confirmed)",
       l1Item1Title: "AquaMR 4-zero",
       l1Item1Sub: "Mapping without X-rays, contrast or helium",
       l1Item2Title: "Structured Doppler + ABI/TBI",
@@ -2283,13 +2283,13 @@ export const en = {
         title: "Endpoints",
         subtitle: "Single primary endpoint, hierarchical secondaries, uncorrected exploratory.",
         primaryLabel: "Primary endpoint",
-        primary: "Segmental concordance (linearly weighted Cohen's κ) between VASCU-LINK and reference imaging on stenosis-severity classification across 4 classes.",
-        primaryTarget: "Target: κ ≥ 0.75 (95 % CI lower bound ≥ 0.60).",
+        primary: "Segmental concordance (quadratically weighted Cohen's κ) between VASCU-LINK and reference imaging (CTA / MRA / DSA) on stenosis-severity classification across 4 classes.",
+        primaryTarget: "Target: κ ≥ 0.65 (95 % CI lower bound ≥ 0.50).",
         rows: [
           { metric: "Segmental sensitivity (stenosis ≥ 50 %)", target: "≥ 85 %" },
           { metric: "Segmental specificity", target: "≥ 80 %" },
-          { metric: "Decisional concordance (3 therapeutic classes)", target: "κ ≥ 0.70" },
-          { metric: "Inter-operator reproducibility (n=30)", target: "κ ≥ 0.80" },
+          { metric: "Decisional concordance (3 therapeutic classes)", target: "κ ≥ 0.60" },
+          { metric: "Inter-operator reproducibility (n=30)", target: "κ ≥ 0.70" },
           { metric: "Iodinated contrast avoidance", target: "Descriptive 95 % CI" },
           { metric: "Radiation avoidance", target: "Descriptive 95 % CI" },
           { metric: "Acquisition time", target: "≤ 25 min" },
@@ -2300,11 +2300,11 @@ export const en = {
         title: "Statistical plan",
         subtitle: "Operational summary. Detailed plan (SAP) in separate document.",
         sampleLabel: "Sample size",
-        sample: "n = 144 patients to enroll (120 evaluable); two-sided α = 0.05, power = 0.90, expected κ = 0.80, minimum acceptable κ = 0.60. Donner & Eliasziw method with intra-patient cluster adjustment (GEE).",
+        sample: "n ≈ 320 patients to enrol (≈ 250 analysable); two-sided α = 0.05, power = 0.90, expected κ = 0.75, minimum acceptable κ = 0.50. Donner & Eliasziw method with intra-patient cluster adjustment (GEE).",
         testsLabel: "Primary tests",
-        tests: "Linearly weighted κ, 95 % CI by bootstrap (10,000 replicates). Sensitivity/specificity with Wilson 95 % CI. Decisional concordance: quadratically weighted κ.",
+        tests: "Quadratically weighted κ, 95 % CI by bootstrap (10,000 replicates). Sensitivity/specificity with Wilson 95 % CI.",
         missingLabel: "Missing data",
-        missing: "Primary analysis on complete data (Per-Protocol). Sensitivity analysis with multiple imputation (5 imputations, FCS) on the ITT population.",
+        missing: "Multiple imputation by chained equations (MICE), m = 20 imputations. Sensitivity analyses including complete-case and tipping-point.",
         interimLabel: "Interim analysis",
         interim: "Futility analysis at n=50 (O'Brien-Fleming rule, no α spending on efficacy).",
       },
@@ -2380,7 +2380,7 @@ export const en = {
           },
           {
             q: "What is the main statistical plan and the sample-size justification?",
-            a: "Primary endpoint: linearly weighted κ on segmental stenosis classification (4 classes), target κ ≥ 0.75 (lower bound 95% CI ≥ 0.60). n = 144 patients to enrol (120 evaluable); α = 0.05 two-sided, power = 0.90, Donner & Eliasziw method with intra-patient cluster adjustment (GEE). Primary analysis Per-Protocol, ITT in sensitivity with multiple imputation (5 imputations, FCS). Futility analysis planned at n=50 (O'Brien-Fleming, no α spending on efficacy)."
+            a: "Primary endpoint: quadratically weighted κ on segmental stenosis classification (4 classes), target κ ≥ 0.65 (lower bound 95% CI ≥ 0.50). n ≈ 320 patients to enrol (≈ 250 evaluable); α = 0.05 two-sided, power = 0.90, Donner & Eliasziw method with intra-patient cluster adjustment (GEE). Missing data handled by multiple imputation by chained equations (MICE, m = 20), with complete-case and tipping-point sensitivity analyses. Futility analysis planned at n=100 (O'Brien-Fleming, no α spending on efficacy)."
           },
           {
             q: "What traceability do you offer in case of audit or notified-body review?",
@@ -2456,7 +2456,7 @@ export const en = {
           items: [
             "Integrated ADR registry: report within 24 h for any serious event",
             "DSMB charter published; independent composition (3 external experts)",
-            "DSMB meetings scheduled at n=50 (futility) and n=100 (interim safety)",
+            "DSMB meetings scheduled at n=100 (futility) and n=200 (interim safety)",
             "Automatic freeze criteria: ≥ 2 related SAEs or κ drift > 0.15",
             "Swissmedic notification for serious events per ClinO regulation",
           ],
@@ -2515,7 +2515,7 @@ export const en = {
               ],
             },
             {
-              claim: "Primary endpoint: linearly weighted κ on segmental classification (4 classes), target κ ≥ 0.75.",
+              claim: "Primary endpoint: quadratically weighted κ on segmental classification (4 classes), target κ ≥ 0.65.",
               refs: [
                 { citationKey: "Cohen-1968", document: "Cohen J. — Weighted kappa (Psychological Bulletin, 1968)", url: null },
                 { citationKey: "Donner-Eliasziw-1992", document: "Donner & Eliasziw — Sample size for κ statistics (Stat Med, 1992)", url: null },

@@ -33,7 +33,7 @@ const CONTENT: Record<Language, Content> = {
       primary: {
         label: "Objectif primaire",
         value:
-          "Concordance diagnostique segmentaire AquaMR vs angio-CT pour sténose ≥ 50 % (κ de Cohen, sensibilité, spécificité).",
+          "Concordance segmentaire AquaMR vs imagerie de référence (CTA / MRA / DSA) sur classification de la sténose en 4 classes — κ pondéré quadratiquement ≥ 0,65 (IC 95 % borne inf. ≥ 0,50).",
       },
       population: {
         label: "Population cible",
@@ -69,7 +69,7 @@ const CONTENT: Record<Language, Content> = {
       primary: {
         label: "Primary endpoint",
         value:
-          "Segmental diagnostic concordance AquaMR vs CT angiography for ≥ 50% stenosis (Cohen's κ, sensitivity, specificity).",
+          "Segmental concordance AquaMR vs reference imaging (CTA / MRA / DSA) on 4-class stenosis grading — quadratically weighted κ ≥ 0.65 (95% CI lower bound ≥ 0.50).",
       },
       population: {
         label: "Target population",
@@ -105,7 +105,7 @@ const CONTENT: Record<Language, Content> = {
       primary: {
         label: "Primärer Endpunkt",
         value:
-          "Segmentale diagnostische Konkordanz AquaMR vs CT-Angiographie für Stenose ≥ 50 % (Cohens κ, Sensitivität, Spezifität).",
+          "Segmentale Konkordanz AquaMR vs Referenzbildgebung (CTA / MRA / DSA) auf 4-Klassen-Stenose-Klassifikation — quadratisch gewichtetes κ ≥ 0,65 (untere 95 %-KI-Grenze ≥ 0,50).",
       },
       population: {
         label: "Zielpopulation",
