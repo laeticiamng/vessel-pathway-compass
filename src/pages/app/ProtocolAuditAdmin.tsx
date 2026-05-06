@@ -1,8 +1,8 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ShieldCheck, Search, Download, Lock, ArrowLeft, ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import { ShieldCheck, Search, Download, Lock, ArrowLeft, ChevronLeft, ChevronRight, Eye, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -14,6 +14,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuth } from "@/hooks/useAuth";
 import { showGuardDenialToast } from "@/lib/protocolGuardToast";
+import { toast } from "sonner";
 
 interface GovEvent {
   id: string;
@@ -45,11 +46,44 @@ const TIME_RANGES = [
 ];
 
 const PAGE_SIZES = [50, 100, 250, 500];
+const EXPORT_PAGE_SIZE = 1000;
+const EXPORT_HARD_CAP = 50_000;
+
+/**
+ * Pseudonymizes sensitive network metadata (IP / UA / forwarded headers)
+ * for roles that have audit-read access but are NOT full admins.
+ * Auditability is preserved by keeping a stable hash-prefix so the same
+ * source can still be correlated across events without revealing PII.
+ */
+function maskValue(v: unknown): string {
+  const s = v == null ? "" : String(v);
+  if (!s) return "";
+  // Stable, non-reversible-ish prefix — purely for correlation, not security.
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
+  return `‹masked:${(h >>> 0).toString(36).slice(0, 6)}›`;
+}
+
+function pseudonymizeContext(
+  ctx: Record<string, unknown> | null,
+  canSeeRaw: boolean,
+): Record<string, unknown> {
+  const c = { ...(ctx ?? {}) };
+  if (canSeeRaw) return c;
+  for (const k of ["ip", "xff", "cf_connecting_ip", "x_real_ip", "ua"]) {
+    if (k in c && c[k] != null && c[k] !== "") c[k] = maskValue(c[k]);
+  }
+  return c;
+}
+
+type ExportFormat = "csv" | "pdf";
 
 export default function ProtocolAuditAdmin() {
   const { user, loading: authLoading } = useAuth();
   const { isAdmin, isResearchLead, isLoading: rolesLoading } = useUserRoles();
   const allowed = isAdmin || isResearchLead;
+  // Only full admins can see raw IP/UA. Research leads see pseudonymized values.
+  const canSeeRawNetwork = isAdmin;
 
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
   const [requestIdFilter, setRequestIdFilter] = useState("");
@@ -58,6 +92,7 @@ export default function ProtocolAuditAdmin() {
   const [page, setPage] = useState(0);
   const [pageSize, setPageSize] = useState(100);
   const [detailEvent, setDetailEvent] = useState<GovEvent | null>(null);
+  const [exporting, setExporting] = useState<ExportFormat | null>(null);
 
   const range = TIME_RANGES.find((r) => r.value === rangeKey) ?? TIME_RANGES[1];
   const sinceISO = useMemo(
@@ -69,12 +104,44 @@ export default function ProtocolAuditAdmin() {
     ? selectedActions
     : (PROTOCOL_ACTIONS as unknown as string[]);
 
+  const trimmedRequestId = requestIdFilter.trim();
+  const trimmedActor = actorFilter.trim();
+
   // Reset page when filters change
-  const filtersKey = JSON.stringify({ effectiveActions, sinceISO, actorFilter, pageSize });
-  useMemo(() => { setPage(0); return null; }, [filtersKey]);
+  useEffect(() => {
+    setPage(0);
+  }, [JSON.stringify(effectiveActions), sinceISO, trimmedActor, trimmedRequestId, pageSize]);
+
+  /**
+   * Builds the base query with all active filters. Used both for the
+   * paginated table view and for full-result CSV/PDF exports so that
+   * the exported data ALWAYS matches what the admin is looking at.
+   */
+  const buildBaseQuery = () => {
+    let q = supabase
+      .from("governance_events" as never)
+      .select("id, created_at, event_action, severity, actor_id, context", { count: "exact" })
+      .eq("target_entity_type", "protocol")
+      .in("event_action", effectiveActions)
+      .order("created_at", { ascending: false });
+
+    if (sinceISO) q = q.gte("created_at", sinceISO);
+    if (trimmedActor) q = q.eq("actor_id", trimmedActor);
+    // Server-side filter on context.request_id (uses functional index).
+    if (trimmedRequestId) q = q.ilike("context->>request_id", `%${trimmedRequestId}%`);
+    return q;
+  };
 
   const { data, isFetching } = useQuery({
-    queryKey: ["protocol-audit-admin", effectiveActions, sinceISO, actorFilter, page, pageSize],
+    queryKey: [
+      "protocol-audit-admin",
+      effectiveActions,
+      sinceISO,
+      trimmedActor,
+      trimmedRequestId,
+      page,
+      pageSize,
+    ],
     enabled: !!user && allowed,
     gcTime: 0,
     staleTime: 0,
@@ -82,18 +149,7 @@ export default function ProtocolAuditAdmin() {
     queryFn: async (): Promise<{ events: GovEvent[]; count: number }> => {
       const from = page * pageSize;
       const to = from + pageSize - 1;
-      let q = supabase
-        .from("governance_events" as never)
-        .select("id, created_at, event_action, severity, actor_id, context", { count: "exact" })
-        .eq("target_entity_type", "protocol")
-        .in("event_action", effectiveActions)
-        .order("created_at", { ascending: false })
-        .range(from, to);
-
-      if (sinceISO) q = q.gte("created_at", sinceISO);
-      if (actorFilter.trim()) q = q.eq("actor_id", actorFilter.trim());
-
-      const { data, error, count } = await q;
+      const { data, error, count } = await buildBaseQuery().range(from, to);
       if (error) throw error;
       return {
         events: (data as unknown as GovEvent[]) ?? [],
@@ -106,32 +162,43 @@ export default function ProtocolAuditAdmin() {
   const totalCount = data?.count ?? 0;
   const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
 
-  // Client-side request-id filter (lives inside context jsonb).
-  const filtered = useMemo(() => {
-    const rid = requestIdFilter.trim().toLowerCase();
-    if (!rid) return events;
-    return events.filter((e) => {
-      const ctx = (e.context ?? {}) as Record<string, unknown>;
-      return String(ctx.request_id ?? "").toLowerCase().includes(rid);
-    });
-  }, [events, requestIdFilter]);
-
   const toggleAction = (a: string) => {
     setSelectedActions((prev) =>
       prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a],
     );
   };
 
-  const exportCsv = () => {
-    if (!allowed) {
-      showGuardDenialToast({ status: 403, action: "protocol.export.audit_log.csv" });
-      return;
+  /**
+   * Fetches the full filtered result set by walking server-side pages
+   * (same filters as the on-screen view). Caps at EXPORT_HARD_CAP rows
+   * to avoid runaway exports.
+   */
+  async function fetchAllForExport(): Promise<GovEvent[]> {
+    const out: GovEvent[] = [];
+    let offset = 0;
+    const cap = Math.min(totalCount || EXPORT_HARD_CAP, EXPORT_HARD_CAP);
+    while (offset < cap) {
+      const to = Math.min(offset + EXPORT_PAGE_SIZE, cap) - 1;
+      const { data, error } = await buildBaseQuery().range(offset, to);
+      if (error) throw error;
+      const batch = (data as unknown as GovEvent[]) ?? [];
+      out.push(...batch);
+      if (batch.length < EXPORT_PAGE_SIZE) break;
+      offset += EXPORT_PAGE_SIZE;
     }
-    const header = ["timestamp", "action", "severity", "actor_id", "request_id", "ip", "x_forwarded_for", "cf_connecting_ip", "x_real_ip", "reason", "role", "ua"];
+    return out;
+  }
+
+  function buildCsv(rows: GovEvent[]): string {
+    const header = [
+      "timestamp", "action", "severity", "actor_id", "request_id",
+      "ip", "x_forwarded_for", "cf_connecting_ip", "x_real_ip",
+      "reason", "role", "ua", "pseudonymized",
+    ];
     const escape = (v: unknown) => `"${(v == null ? "" : String(v)).replace(/"/g, '""')}"`;
     const lines = [header.join(",")];
-    for (const e of filtered) {
-      const ctx = (e.context ?? {}) as Record<string, unknown>;
+    for (const e of rows) {
+      const ctx = pseudonymizeContext(e.context, canSeeRawNetwork);
       lines.push([
         e.created_at,
         e.event_action,
@@ -145,15 +212,99 @@ export default function ProtocolAuditAdmin() {
         ctx.reason ?? "",
         ctx.role ?? "",
         ctx.ua ?? "",
+        canSeeRawNetwork ? "false" : "true",
       ].map(escape).join(","));
     }
-    const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8" });
+    return "\uFEFF" + lines.join("\n");
+  }
+
+  function filtersBanner(): string {
+    return [
+      `Actions: ${selectedActions.length === 0 ? "(all protocol)" : selectedActions.join(", ")}`,
+      `Time range: ${range.label}${sinceISO ? ` (since ${sinceISO})` : ""}`,
+      trimmedActor ? `Actor: ${trimmedActor}` : null,
+      trimmedRequestId ? `Request-Id contains: ${trimmedRequestId}` : null,
+      `Pseudonymized network fields: ${canSeeRawNetwork ? "no" : "yes"}`,
+    ].filter(Boolean).join(" · ");
+  }
+
+  function triggerDownload(blob: Blob, filename: string) {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `protocol-audit-admin-${new Date().toISOString().replace(/[:.]/g, "-")}.csv`;
+    a.download = filename;
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  }
+
+  const handleExport = async (format: ExportFormat) => {
+    if (!allowed) {
+      showGuardDenialToast({ status: 403, action: `protocol.export.audit_log.${format}` });
+      return;
+    }
+    setExporting(format);
+    try {
+      const rows = await fetchAllForExport();
+      const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+
+      if (format === "csv") {
+        const blob = new Blob([buildCsv(rows)], { type: "text/csv;charset=utf-8" });
+        triggerDownload(blob, `protocol-audit-${stamp}.csv`);
+      } else {
+        const jsPDFmod = await import("jspdf");
+        const autoTableMod = await import("jspdf-autotable");
+        const jsPDF = jsPDFmod.default;
+        const autoTable = autoTableMod.default;
+
+        const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
+        doc.setFontSize(13);
+        doc.text("Protocol Audit Console — Export", 40, 36);
+        doc.setFontSize(8); doc.setTextColor(120);
+        doc.text(`Generated: ${new Date().toLocaleString()} · ${rows.length} events`, 40, 50);
+        doc.text(`Filters → ${filtersBanner()}`, 40, 62, { maxWidth: 760 });
+        doc.setTextColor(0);
+
+        autoTable(doc, {
+          startY: 84,
+          head: [["Timestamp", "Action", "Sev.", "Actor", "Request-Id", "IP", "XFF", "Role / Reason"]],
+          body: rows.map((e) => {
+            const ctx = pseudonymizeContext(e.context, canSeeRawNetwork);
+            return [
+              new Date(e.created_at).toISOString().replace("T", " ").slice(0, 19),
+              e.event_action,
+              e.severity,
+              (e.actor_id ?? "").slice(0, 8),
+              String(ctx.request_id ?? "").slice(0, 18),
+              String(ctx.ip ?? ""),
+              String(ctx.xff ?? "").slice(0, 30),
+              `${ctx.role ?? ""}${ctx.reason ? ` / ${ctx.reason}` : ""}`,
+            ];
+          }),
+          styles: { fontSize: 6.5, cellPadding: 2.5 },
+          headStyles: { fillColor: [41, 65, 99] },
+        });
+
+        const pageCount = (doc as unknown as { internal: { getNumberOfPages(): number } }).internal.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+          doc.setPage(i);
+          doc.setFontSize(6.5); doc.setTextColor(120);
+          doc.text(
+            canSeeRawNetwork
+              ? "Confidential — full network metadata included."
+              : "Confidential — IP / UA pseudonymized for this role.",
+            40, doc.internal.pageSize.getHeight() - 18,
+          );
+          doc.text(`${i} / ${pageCount}`, doc.internal.pageSize.getWidth() - 60, doc.internal.pageSize.getHeight() - 18);
+        }
+        doc.save(`protocol-audit-${stamp}.pdf`);
+      }
+      toast.success(`${rows.length} events exported (${format.toUpperCase()})`);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : "Unknown error";
+      toast.error(`Export failed: ${msg}`);
+    } finally {
+      setExporting(null);
+    }
   };
 
   if (authLoading || (user && rolesLoading)) {
@@ -211,7 +362,8 @@ export default function ProtocolAuditAdmin() {
 
       <p className="text-sm text-muted-foreground mb-6 max-w-3xl">
         Browse tamper-proof governance events for <code>/protocol</code>. Server-side pagination,
-        multi-action filtering, and full IP / X-Forwarded-For correlation.
+        multi-action filtering, and full IP / X-Forwarded-For correlation
+        {!canSeeRawNetwork && " (network fields pseudonymized for your role)"}.
       </p>
 
       {/* Filters */}
@@ -290,8 +442,7 @@ export default function ProtocolAuditAdmin() {
           <span>
             {isFetching ? "Loading…" : (
               <>
-                <strong className="text-foreground">{totalCount.toLocaleString()}</strong> total event(s)
-                {requestIdFilter && ` · ${filtered.length} on this page after request-id filter`}
+                <strong className="text-foreground">{totalCount.toLocaleString()}</strong> total event(s) match filters
               </>
             )}
           </span>
@@ -313,9 +464,13 @@ export default function ProtocolAuditAdmin() {
           <Button size="sm" variant="ghost" onClick={() => setPage((p) => p + 1)} disabled={page + 1 >= totalPages || isFetching}>
             <ChevronRight className="h-3.5 w-3.5" />
           </Button>
-          <Button size="sm" variant="outline" onClick={exportCsv} disabled={filtered.length === 0}>
-            <Download className="h-3.5 w-3.5 mr-1.5" />
-            Export page CSV
+          <Button size="sm" variant="outline" onClick={() => handleExport("csv")} disabled={totalCount === 0 || exporting !== null}>
+            {exporting === "csv" ? <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" /> : <Download className="h-3.5 w-3.5 mr-1.5" />}
+            Export CSV ({totalCount.toLocaleString()})
+          </Button>
+          <Button size="sm" onClick={() => handleExport("pdf")} disabled={totalCount === 0 || exporting !== null}>
+            {exporting === "pdf" ? <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" /> : <FileText className="h-3.5 w-3.5 mr-1.5" />}
+            Export PDF
           </Button>
         </div>
       </div>
@@ -330,14 +485,14 @@ export default function ProtocolAuditAdmin() {
                 <th className="p-2.5 font-semibold">Severity</th>
                 <th className="p-2.5 font-semibold">Actor</th>
                 <th className="p-2.5 font-semibold">Request-Id</th>
-                <th className="p-2.5 font-semibold">IP</th>
-                <th className="p-2.5 font-semibold">X-Forwarded-For</th>
+                <th className="p-2.5 font-semibold">IP{!canSeeRawNetwork && " *"}</th>
+                <th className="p-2.5 font-semibold">X-Forwarded-For{!canSeeRawNetwork && " *"}</th>
                 <th className="p-2.5 font-semibold w-10"></th>
               </tr>
             </thead>
             <tbody>
-              {filtered.map((e) => {
-                const ctx = (e.context ?? {}) as Record<string, unknown>;
+              {events.map((e) => {
+                const ctx = pseudonymizeContext(e.context, canSeeRawNetwork);
                 return (
                   <tr key={e.id} className="border-t hover:bg-muted/20">
                     <td className="p-2.5 font-mono whitespace-nowrap">
@@ -369,7 +524,7 @@ export default function ProtocolAuditAdmin() {
                   </tr>
                 );
               })}
-              {!isFetching && filtered.length === 0 && (
+              {!isFetching && events.length === 0 && (
                 <tr>
                   <td colSpan={8} className="p-6 text-center text-muted-foreground text-sm">
                     No events match the current filters.
@@ -379,6 +534,11 @@ export default function ProtocolAuditAdmin() {
             </tbody>
           </table>
         </div>
+        {!canSeeRawNetwork && (
+          <p className="px-3 py-2 text-[10px] text-muted-foreground border-t bg-muted/20">
+            * Network metadata (IP, XFF, user-agent) pseudonymized for your role. Full admins see raw values.
+          </p>
+        )}
       </div>
 
       <Dialog open={!!detailEvent} onOpenChange={(o) => !o && setDetailEvent(null)}>
@@ -387,6 +547,7 @@ export default function ProtocolAuditAdmin() {
             <DialogTitle className="font-mono text-sm">{detailEvent?.event_action}</DialogTitle>
             <DialogDescription className="text-xs">
               {detailEvent && new Date(detailEvent.created_at).toISOString()} · severity: {detailEvent?.severity}
+              {!canSeeRawNetwork && " · network fields pseudonymized"}
             </DialogDescription>
           </DialogHeader>
           {detailEvent && (
@@ -402,10 +563,12 @@ export default function ProtocolAuditAdmin() {
                 </div>
               </div>
               <div>
-                <div className="text-xs text-muted-foreground mb-1">Full context (JSON)</div>
+                <div className="text-xs text-muted-foreground mb-1">
+                  Full context (JSON){!canSeeRawNetwork && " — pseudonymized"}
+                </div>
                 <ScrollArea className="h-[50vh] rounded-md border bg-muted/30">
                   <pre className="text-[11px] font-mono p-3 whitespace-pre-wrap break-all">
-{JSON.stringify(detailEvent.context ?? {}, null, 2)}
+{JSON.stringify(pseudonymizeContext(detailEvent.context, canSeeRawNetwork), null, 2)}
                   </pre>
                 </ScrollArea>
               </div>
@@ -413,7 +576,9 @@ export default function ProtocolAuditAdmin() {
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => navigator.clipboard?.writeText(JSON.stringify(detailEvent.context ?? {}, null, 2))}
+                  onClick={() => navigator.clipboard?.writeText(
+                    JSON.stringify(pseudonymizeContext(detailEvent.context, canSeeRawNetwork), null, 2),
+                  )}
                 >
                   Copy JSON
                 </Button>
