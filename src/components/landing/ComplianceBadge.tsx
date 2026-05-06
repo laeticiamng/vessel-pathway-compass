@@ -68,10 +68,13 @@ export function ComplianceBadge() {
         : "bg-destructive";
 
   const handleExport = () => {
+    const generatedAt = new Date().toISOString();
+    const protocolVersion = getContentVersion("protocol")?.version ?? null;
     const payload = {
       kind: "protocol.compliance.snapshot",
-      generatedAt: new Date().toISOString(),
+      generatedAt,
       generatedBy: { id: user.id, email: user.email ?? null },
+      protocolVersion,
       score: audit.score,
       status: severity,
       counts: {
@@ -91,13 +94,30 @@ export function ComplianceBadge() {
     });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    const stamp = generatedAt.replace(/[:.]/g, "-");
+    const filename = `vasculink-compliance-${stamp}.json`;
     a.href = url;
-    a.download = `vasculink-compliance-${stamp}.json`;
+    a.download = filename;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+
+    // Audit trail — record the export with timestamp + actor.
+    void log({
+      category: "compliance",
+      action: "protocol.compliance.exported",
+      severity: "info",
+      targetEntityType: "protocol",
+      context: {
+        format: "json",
+        filename,
+        score: audit.score,
+        status: severity,
+        protocol_version: protocolVersion,
+        exported_at: generatedAt,
+      },
+    });
   };
 
   return (
