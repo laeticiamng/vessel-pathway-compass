@@ -496,7 +496,7 @@ const CONTENT: Record<Language, Content> = {
   },
 };
 
-const SUPPORT_EMAIL = "contact@emotionscare.com";
+const SUPPORT_EMAIL = "m.laeticia@hotmail.fr";
 
 export default function Transparency() {
   const { language, t } = useTranslation();

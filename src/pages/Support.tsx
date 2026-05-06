@@ -95,8 +95,8 @@ export default function Support() {
               <div>
                 <h3 className="font-semibold mb-1">{t("support.email.title")}</h3>
                 <p className="text-sm text-muted-foreground">{t("support.email.desc")}</p>
-                <a href="mailto:contact@emotionscare.com" className="text-sm text-primary hover:underline mt-2 inline-block">
-                  contact@emotionscare.com
+                <a href="mailto:m.laeticia@hotmail.fr" className="text-sm text-primary hover:underline mt-2 inline-block">
+                  m.laeticia@hotmail.fr
                 </a>
               </div>
             </CardContent>
