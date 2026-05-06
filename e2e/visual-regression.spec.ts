@@ -34,11 +34,15 @@ const LANGS = ["en", "fr", "de"] as const;
 const THEMES: readonly Theme[] = ["light", "dark"] as const;
 
 const BREAKPOINTS = [
+  // Smallest realistic mobile (older Android, Galaxy Fold outer)
+  { name: "mobile-xxs", width: 280,  height: 653 },
   { name: "mobile-xs",  width: 320,  height: 568 },
   { name: "mobile",     width: 390,  height: 844 },
   { name: "tablet",     width: 834,  height: 1112 },
   { name: "desktop",    width: 1366, height: 768 },
   { name: "desktop-xl", width: 1920, height: 1080 },
+  // QHD / large external monitors used by clinicians
+  { name: "desktop-2k", width: 2560, height: 1440 },
 ] as const;
 
 /**
