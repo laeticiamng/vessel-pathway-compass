@@ -123,8 +123,21 @@ export function ProtocolAuditLogExporter() {
           .join(","),
       );
     }
+    const filename = `vasculink-protocol-audit-${stamp()}.csv`;
     const blob = new Blob(["\uFEFF" + lines.join("\n")], { type: "text/csv;charset=utf-8" });
-    triggerDownload(blob, `vasculink-protocol-audit-${stamp()}.csv`);
+    triggerDownload(blob, filename);
+    void auditLog({
+      category: "compliance",
+      action: "protocol.audit_log.exported",
+      severity: "info",
+      targetEntityType: "protocol_audit_log",
+      context: {
+        format: "csv",
+        filename,
+        row_count: rows.length,
+        exported_at: new Date().toISOString(),
+      },
+    });
   };
 
   const downloadPDF = async () => {
