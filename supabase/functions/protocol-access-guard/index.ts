@@ -43,6 +43,52 @@ const ALLOWED_ACTIONS = new Set([
   "protocol.export.audit_log.pdf",
 ]);
 
+// ── Brute-force / abuse throttling ───────────────────────────────────
+// Per-key sliding window: tracks denied attempts (401/403/400). When a
+// key crosses MAX_DENIED in WINDOW_MS, subsequent calls return 429
+// until BAN_MS elapses. Each ban transition is logged as a
+// `protocol.access.throttled` governance_event for auditability.
+const WINDOW_MS = 60_000;        // 1 min sliding window
+const MAX_DENIED = 8;            // > this many denials → throttle
+const BAN_MS = 5 * 60_000;       // 5 min ban
+type ThrottleState = { denials: number[]; bannedUntil: number; lastLoggedBanAt: number };
+const throttle = new Map<string, ThrottleState>();
+
+function getState(key: string): ThrottleState {
+  let s = throttle.get(key);
+  if (!s) { s = { denials: [], bannedUntil: 0, lastLoggedBanAt: 0 }; throttle.set(key, s); }
+  return s;
+}
+function isBanned(key: string): { banned: boolean; retryAfter: number } {
+  const s = getState(key);
+  const now = Date.now();
+  if (s.bannedUntil > now) return { banned: true, retryAfter: Math.ceil((s.bannedUntil - now) / 1000) };
+  return { banned: false, retryAfter: 0 };
+}
+function recordDenial(key: string): { newlyBanned: boolean; retryAfter: number; count: number } {
+  const s = getState(key);
+  const now = Date.now();
+  s.denials = s.denials.filter((t) => now - t < WINDOW_MS);
+  s.denials.push(now);
+  if (s.denials.length > MAX_DENIED && s.bannedUntil <= now) {
+    s.bannedUntil = now + BAN_MS;
+    return { newlyBanned: true, retryAfter: Math.ceil(BAN_MS / 1000), count: s.denials.length };
+  }
+  return { newlyBanned: false, retryAfter: 0, count: s.denials.length };
+}
+// Periodic GC of expired entries
+setInterval(() => {
+  const now = Date.now();
+  for (const [k, v] of throttle) {
+    if (v.bannedUntil < now && v.denials.every((t) => now - t > WINDOW_MS)) throttle.delete(k);
+  }
+}, 60_000);
+
+function clientKey(req: Request, userId: string | null): string {
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  return `${userId ?? "anon"}|${ip}`;
+}
+
 function jsonResponse(
   status: number,
   body: Record<string, unknown>,
