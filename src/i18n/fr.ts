@@ -1367,10 +1367,10 @@ export const fr = {
       title: "Validation clinique structurée",
       subtitle: "VASCU-LINK n'est pas qu'une vision technologique : la ligne L1 (Diagnose) fait l'objet d'un protocole de recherche prospectif avec endpoints, comparateurs et règles Go/No-Go pré-spécifiés.",
       cards: [
-        { title: "Endpoint principal", desc: "Concordance segmentaire (κ pondéré) ≥ 0,75 vs imagerie de référence (CTA / MRA / DSA), borne inférieure IC 95 % ≥ 0,60." },
+        { title: "Endpoint principal", desc: "Concordance segmentaire (κ pondéré quadratiquement) ≥ 0,65 vs imagerie de référence (CTA / MRA / DSA), borne inférieure IC 95 % ≥ 0,50." },
         { title: "Comparateurs explicites", desc: "Angio-CT, Angio-RM et angiographie soustraite (DSA) selon indication, plus échographie-Doppler standard pour valeur ajoutée." },
         { title: "Bascule sécurité", desc: "Retour obligatoire à l'imagerie de référence en cas de qualité d'acquisition insuffisante, anatomie complexe ou indication interventionnelle." },
-        { title: "Règles Go / No-Go", desc: "Critères pré-spécifiés a priori : Go (κ ≥ 0,75), Réévaluation (0,60–0,75), No-Go (< 0,60). Analyse intermédiaire de futilité à n=50." },
+        { title: "Règles Go / No-Go", desc: "Critères pré-spécifiés a priori : Go (κ ≥ 0,65), Réévaluation (0,50–0,65), No-Go (< 0,50). Analyse intermédiaire de futilité à n=100." },
       ],
       scopeStatement: "L1 valide voir, cartographier et décider chez l'humain. L2 (Guide) reste en simulation et fantôme. L3 (Treat) reste strictement préclinique. Aucune revascularisation humaine dans la thèse.",
       ctaProtocol: "Lire le protocole complet",
