@@ -34,11 +34,15 @@ const LANGS = ["en", "fr", "de"] as const;
 const THEMES: readonly Theme[] = ["light", "dark"] as const;
 
 const BREAKPOINTS = [
+  // Smallest realistic mobile (older Android, Galaxy Fold outer)
+  { name: "mobile-xxs", width: 280,  height: 653 },
   { name: "mobile-xs",  width: 320,  height: 568 },
   { name: "mobile",     width: 390,  height: 844 },
   { name: "tablet",     width: 834,  height: 1112 },
   { name: "desktop",    width: 1366, height: 768 },
   { name: "desktop-xl", width: 1920, height: 1080 },
+  // QHD / large external monitors used by clinicians
+  { name: "desktop-2k", width: 2560, height: 1440 },
 ] as const;
 
 /**
@@ -346,6 +350,88 @@ test.describe("DOM overlap & duplicate detection", () => {
             overlaps,
             `Above-hero blocks overlap on / (${lang}/${bp.name}/${theme}): ${JSON.stringify(overlaps)}`,
           ).toEqual([]);
+        });
+      }
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+   * Pinpointed regression: FourZeroBanner (top institutional banner with
+   * "Research protocol · L1" / "Protocole de recherche · L1" / "Forschungs-
+   * protokoll · L1") must NEVER cover any neighbouring section. We locate
+   * it by aria-label probe (matches all 3 locales), then compare its rect
+   * against every other top-of-page block and fail with a precise message
+   * naming the covered neighbour.
+   * ------------------------------------------------------------------- */
+  for (const theme of THEMES) {
+    for (const bp of BREAKPOINTS) {
+      for (const lang of LANGS) {
+        test(`FourZeroBanner does not cover neighbour · ${lang} · ${bp.name} · ${theme}`, async ({ page }) => {
+          await page.setViewportSize({ width: bp.width, height: bp.height });
+          await page.emulateMedia({ colorScheme: theme });
+          await gotoStable(page, "/", lang, theme);
+
+          const report = await page.evaluate(() => {
+            const banner = Array.from(
+              document.querySelectorAll<HTMLElement>('aside[role="note"][aria-label]'),
+            ).find((el) => /·\s*L1/i.test(el.getAttribute("aria-label") || ""));
+            if (!banner) return { found: false as const };
+
+            const br = banner.getBoundingClientRect();
+            const neighbours = Array.from(
+              document.querySelectorAll<HTMLElement>(
+                'header, aside[role="note"], div[role="note"], main > section',
+              ),
+            ).filter((el) => {
+              if (el === banner) return false;
+              if (banner.contains(el) || el.contains(banner)) return false;
+              const r = el.getBoundingClientRect();
+              return r.width > 0 && r.height > 0 && r.top < window.innerHeight * 1.5;
+            });
+
+            const collisions: Array<{
+              neighbour: string;
+              dy: number;
+              dx: number;
+              bannerRect: { top: number; bottom: number };
+              neighbourRect: { top: number; bottom: number };
+              bannerZ: string;
+              neighbourZ: string;
+            }> = [];
+
+            for (const n of neighbours) {
+              const nr = n.getBoundingClientRect();
+              const dx = Math.min(br.right, nr.right) - Math.max(br.left, nr.left);
+              const dy = Math.min(br.bottom, nr.bottom) - Math.max(br.top, nr.top);
+              if (dx > 1 && dy > 1) {
+                collisions.push({
+                  neighbour:
+                    (n.getAttribute("aria-label") ||
+                      n.id ||
+                      n.tagName.toLowerCase()).slice(0, 60),
+                  dy: Math.round(dy),
+                  dx: Math.round(dx),
+                  bannerRect: { top: Math.round(br.top), bottom: Math.round(br.bottom) },
+                  neighbourRect: { top: Math.round(nr.top), bottom: Math.round(nr.bottom) },
+                  bannerZ: getComputedStyle(banner).zIndex,
+                  neighbourZ: getComputedStyle(n).zIndex,
+                });
+              }
+            }
+            return { found: true as const, collisions };
+          });
+
+          expect(report.found, "FourZeroBanner not rendered on landing").toBe(true);
+          if (report.found) {
+            expect(
+              report.collisions,
+              `FourZeroBanner covers neighbour(s) at ${bp.name}/${lang}/${theme}: ${JSON.stringify(
+                report.collisions,
+                null,
+                2,
+              )}`,
+            ).toEqual([]);
+          }
         });
       }
     }
