@@ -43,15 +43,33 @@ const ALLOWED_ACTIONS = new Set([
   "protocol.export.audit_log.pdf",
 ]);
 
-// ── Brute-force / abuse throttling ───────────────────────────────────
-// Per-key sliding window: tracks denied attempts (401/403/400). When a
-// key crosses MAX_DENIED in WINDOW_MS, subsequent calls return 429
-// until BAN_MS elapses. Each ban transition is logged as a
-// `protocol.access.throttled` governance_event for auditability.
+// ── Brute-force / abuse throttling + anomaly detection ──────────────
+// Per-key sliding window of denied attempts. Two anomaly signals are
+// emitted to governance_events as `protocol.access.alert` (severity
+// `critical`):
+//   1. burst_403 → ≥ BURST_403 denials within BURST_WINDOW_MS
+//   2. multi_action_anomaly → ≥ MULTI_ACTION_DISTINCT distinct actions
+//      attempted within MULTI_ACTION_WINDOW_MS by the same key
+// A separate ban (5 min) keeps blocking once MAX_DENIED is exceeded.
 const WINDOW_MS = 60_000;        // 1 min sliding window
 const MAX_DENIED = 8;            // > this many denials → throttle
 const BAN_MS = 5 * 60_000;       // 5 min ban
-type ThrottleState = { denials: number[]; bannedUntil: number; lastLoggedBanAt: number };
+
+const BURST_403 = 5;             // ≥5 denials in 30s = burst
+const BURST_WINDOW_MS = 30_000;
+const MULTI_ACTION_DISTINCT = 3; // ≥3 distinct actions in 2min = anomaly
+const MULTI_ACTION_WINDOW_MS = 120_000;
+const ALERT_COOLDOWN_MS = 5 * 60_000; // do not re-alert same key for 5 min
+
+type AttemptRecord = { t: number; action: string | null; reqId: string };
+type ThrottleState = {
+  denials: number[];
+  attempts: AttemptRecord[];
+  bannedUntil: number;
+  lastLoggedBanAt: number;
+  lastBurstAlertAt: number;
+  lastMultiActionAlertAt: number;
+};
 const throttle = new Map<string, ThrottleState>();
 
 function getState(key: string): ThrottleState {
