@@ -2380,7 +2380,7 @@ export const en = {
           },
           {
             q: "What is the main statistical plan and the sample-size justification?",
-            a: "Primary endpoint: linearly weighted κ on segmental stenosis classification (4 classes), target κ ≥ 0.75 (lower bound 95% CI ≥ 0.60). n = 144 patients to enrol (120 evaluable); α = 0.05 two-sided, power = 0.90, Donner & Eliasziw method with intra-patient cluster adjustment (GEE). Primary analysis Per-Protocol, ITT in sensitivity with multiple imputation (5 imputations, FCS). Futility analysis planned at n=50 (O'Brien-Fleming, no α spending on efficacy)."
+            a: "Primary endpoint: quadratically weighted κ on segmental stenosis classification (4 classes), target κ ≥ 0.65 (lower bound 95% CI ≥ 0.50). n ≈ 320 patients to enrol (≈ 250 evaluable); α = 0.05 two-sided, power = 0.90, Donner & Eliasziw method with intra-patient cluster adjustment (GEE). Missing data handled by multiple imputation by chained equations (MICE, m = 20), with complete-case and tipping-point sensitivity analyses. Futility analysis planned at n=100 (O'Brien-Fleming, no α spending on efficacy)."
           },
           {
             q: "What traceability do you offer in case of audit or notified-body review?",
