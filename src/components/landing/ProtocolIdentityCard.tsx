@@ -33,7 +33,7 @@ const CONTENT: Record<Language, Content> = {
       primary: {
         label: "Objectif primaire",
         value:
-          "Concordance diagnostique segmentaire AquaMR vs angio-CT pour sténose ≥ 50 % (κ de Cohen, sensibilité, spécificité).",
+          "Concordance segmentaire AquaMR vs imagerie de référence (CTA / MRA / DSA) sur classification de la sténose en 4 classes — κ pondéré quadratiquement ≥ 0,65 (IC 95 % borne inf. ≥ 0,50).",
       },
       population: {
         label: "Population cible",
