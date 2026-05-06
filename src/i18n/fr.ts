@@ -2438,7 +2438,7 @@ export const fr = {
           items: [
             "Registre ADR intégré : déclaration en moins de 24 h pour tout événement grave",
             "Charte DSMB publiée ; composition indépendante (3 experts externes)",
-            "Réunions DSMB programmées à n=50 (futilité) et n=100 (sécurité intermédiaire)",
+            "Réunions DSMB programmées à n=100 (futilité) et n=200 (sécurité intermédiaire)",
             "Critères de freeze automatique : ≥ 2 SAE liés ou dérive κ > 0,15",
             "Notification swissmedic en cas d'événement grave conformément à l'OClin",
           ],
