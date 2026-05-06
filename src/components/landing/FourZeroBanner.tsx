@@ -6,19 +6,19 @@ const COPY: Record<Language, { eyebrow: string; message: string; cta: string }> 
   en: {
     eyebrow: "Research protocol · L1",
     message:
-      "Prospective study — diagnostic concordance AquaMR vs CT angiography in frail PAD",
+      "Prospective study — diagnostic concordance AquaMR vs reference imaging (CTA / MRA / DSA) in frail PAD",
     cta: "Read the protocol",
   },
   fr: {
     eyebrow: "Protocole de recherche · L1",
     message:
-      "Étude prospective — concordance diagnostique AquaMR vs angio-CT en AOMI fragile",
+      "Étude prospective — concordance diagnostique AquaMR vs imagerie de référence (CTA / MRA / DSA) en AOMI fragile",
     cta: "Lire le protocole",
   },
   de: {
     eyebrow: "Forschungsprotokoll · L1",
     message:
-      "Prospektive Studie — diagnostische Konkordanz AquaMR vs CT-Angiographie bei fragiler pAVK",
+      "Prospektive Studie — diagnostische Konkordanz AquaMR vs Referenzbildgebung (CTA / MRA / DSA) bei fragiler pAVK",
     cta: "Protokoll lesen",
   },
 };
