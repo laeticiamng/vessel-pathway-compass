@@ -16,6 +16,7 @@ import { ComplianceAnnexesSection } from "@/components/landing/ComplianceAnnexes
 import { ComplianceBadge } from "@/components/landing/ComplianceBadge";
 import { ProtocolAuditLogExporter } from "@/components/landing/ProtocolAuditLogExporter";
 import { useProtocolAccessAudit } from "@/hooks/useProtocolAccessAudit";
+import { useUserRoles } from "@/hooks/useUserRoles";
 
 type ListItem = { title: string; desc: string };
 type EndpointRow = { metric: string; target: string };
@@ -25,6 +26,8 @@ interface QAItem { q: string; a: string }
 export default function Protocol() {
   const { t } = useTranslation();
   const { logQA } = useProtocolAccessAudit();
+  const { isAdmin, isResearchLead } = useUserRoles();
+  const canSeeInternalAudit = isAdmin || isResearchLead;
 
   const endpoints = (t("pages.protocol.endpoints.rows") as unknown as EndpointRow[]) ?? [];
   const comparators = (t("pages.protocol.comparators.items") as unknown as ListItem[]) ?? [];
@@ -93,11 +96,11 @@ export default function Protocol() {
         {/* Versioning, status and editorial history (publicly visible) */}
         <ProtocolVersioningCard />
 
-        {/* Compliance & completeness badge — authenticated users only, exportable for audit */}
-        <ComplianceBadge />
+        {/* Compliance & completeness badge — restricted to internal admin / research lead */}
+        {canSeeInternalAudit && <ComplianceBadge />}
 
-        {/* Automated completeness audit (real-time, locale-aware) */}
-        <ProtocolCompletenessChecklist />
+        {/* Automated completeness audit — internal only (admin / research lead) */}
+        {canSeeInternalAudit && <ProtocolCompletenessChecklist />}
 
         {/* Methodological framing — concordance / pragmatic non-inferiority */}
         <NonInferioritySection compact />
