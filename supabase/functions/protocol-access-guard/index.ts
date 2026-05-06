@@ -193,7 +193,7 @@ serve(async (req) => {
           target_entity_type: "protocol",
           context: {
             request_id: reqId,
-            ip: req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null,
+            ...extractIp(req),
             ua: req.headers.get("user-agent") ?? null,
             denials_in_window: r.count,
             window_ms: WINDOW_MS,
