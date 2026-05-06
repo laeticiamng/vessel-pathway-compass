@@ -15,6 +15,7 @@ import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuth } from "@/hooks/useAuth";
 import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 import { toast } from "sonner";
+import { pseudonymizeContext } from "@/lib/protocolAuditPseudonymize";
 
 interface GovEvent {
   id: string;
@@ -29,6 +30,7 @@ const PROTOCOL_ACTIONS = [
   "protocol.access.granted",
   "protocol.access.denied",
   "protocol.access.throttled",
+  "protocol.access.alert",
   "protocol.access.error",
   "protocol.export.granted",
   "protocol.viewed",
@@ -48,33 +50,6 @@ const TIME_RANGES = [
 const PAGE_SIZES = [50, 100, 250, 500];
 const EXPORT_PAGE_SIZE = 1000;
 const EXPORT_HARD_CAP = 50_000;
-
-/**
- * Pseudonymizes sensitive network metadata (IP / UA / forwarded headers)
- * for roles that have audit-read access but are NOT full admins.
- * Auditability is preserved by keeping a stable hash-prefix so the same
- * source can still be correlated across events without revealing PII.
- */
-function maskValue(v: unknown): string {
-  const s = v == null ? "" : String(v);
-  if (!s) return "";
-  // Stable, non-reversible-ish prefix — purely for correlation, not security.
-  let h = 0;
-  for (let i = 0; i < s.length; i++) h = ((h << 5) - h + s.charCodeAt(i)) | 0;
-  return `‹masked:${(h >>> 0).toString(36).slice(0, 6)}›`;
-}
-
-function pseudonymizeContext(
-  ctx: Record<string, unknown> | null,
-  canSeeRaw: boolean,
-): Record<string, unknown> {
-  const c = { ...(ctx ?? {}) };
-  if (canSeeRaw) return c;
-  for (const k of ["ip", "xff", "cf_connecting_ip", "x_real_ip", "ua"]) {
-    if (k in c && c[k] != null && c[k] !== "") c[k] = maskValue(c[k]);
-  }
-  return c;
-}
 
 type ExportFormat = "csv" | "pdf";
 

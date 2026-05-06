@@ -43,20 +43,44 @@ const ALLOWED_ACTIONS = new Set([
   "protocol.export.audit_log.pdf",
 ]);
 
-// ── Brute-force / abuse throttling ───────────────────────────────────
-// Per-key sliding window: tracks denied attempts (401/403/400). When a
-// key crosses MAX_DENIED in WINDOW_MS, subsequent calls return 429
-// until BAN_MS elapses. Each ban transition is logged as a
-// `protocol.access.throttled` governance_event for auditability.
+// ── Brute-force / abuse throttling + anomaly detection ──────────────
+// Per-key sliding window of denied attempts. Two anomaly signals are
+// emitted to governance_events as `protocol.access.alert` (severity
+// `critical`):
+//   1. burst_403 → ≥ BURST_403 denials within BURST_WINDOW_MS
+//   2. multi_action_anomaly → ≥ MULTI_ACTION_DISTINCT distinct actions
+//      attempted within MULTI_ACTION_WINDOW_MS by the same key
+// A separate ban (5 min) keeps blocking once MAX_DENIED is exceeded.
 const WINDOW_MS = 60_000;        // 1 min sliding window
 const MAX_DENIED = 8;            // > this many denials → throttle
 const BAN_MS = 5 * 60_000;       // 5 min ban
-type ThrottleState = { denials: number[]; bannedUntil: number; lastLoggedBanAt: number };
+
+const BURST_403 = 5;             // ≥5 denials in 30s = burst
+const BURST_WINDOW_MS = 30_000;
+const MULTI_ACTION_DISTINCT = 3; // ≥3 distinct actions in 2min = anomaly
+const MULTI_ACTION_WINDOW_MS = 120_000;
+const ALERT_COOLDOWN_MS = 5 * 60_000; // do not re-alert same key for 5 min
+
+type AttemptRecord = { t: number; action: string | null; reqId: string };
+type ThrottleState = {
+  denials: number[];
+  attempts: AttemptRecord[];
+  bannedUntil: number;
+  lastLoggedBanAt: number;
+  lastBurstAlertAt: number;
+  lastMultiActionAlertAt: number;
+};
 const throttle = new Map<string, ThrottleState>();
 
 function getState(key: string): ThrottleState {
   let s = throttle.get(key);
-  if (!s) { s = { denials: [], bannedUntil: 0, lastLoggedBanAt: 0 }; throttle.set(key, s); }
+  if (!s) {
+    s = {
+      denials: [], attempts: [], bannedUntil: 0,
+      lastLoggedBanAt: 0, lastBurstAlertAt: 0, lastMultiActionAlertAt: 0,
+    };
+    throttle.set(key, s);
+  }
   return s;
 }
 function isBanned(key: string): { banned: boolean; retryAfter: number } {
@@ -65,22 +89,63 @@ function isBanned(key: string): { banned: boolean; retryAfter: number } {
   if (s.bannedUntil > now) return { banned: true, retryAfter: Math.ceil((s.bannedUntil - now) / 1000) };
   return { banned: false, retryAfter: 0 };
 }
-function recordDenial(key: string): { newlyBanned: boolean; retryAfter: number; count: number } {
+function recordDenial(
+  key: string,
+  action: string | null,
+  reqId: string,
+): {
+  newlyBanned: boolean; retryAfter: number; count: number;
+  burstAlert: { count: number; windowMs: number } | null;
+  multiActionAlert: { actions: string[]; windowMs: number } | null;
+} {
   const s = getState(key);
   const now = Date.now();
   s.denials = s.denials.filter((t) => now - t < WINDOW_MS);
   s.denials.push(now);
+  s.attempts = s.attempts.filter((a) => now - a.t < MULTI_ACTION_WINDOW_MS);
+  s.attempts.push({ t: now, action, reqId });
+
+  let newlyBanned = false;
+  let retryAfter = 0;
   if (s.denials.length > MAX_DENIED && s.bannedUntil <= now) {
     s.bannedUntil = now + BAN_MS;
-    return { newlyBanned: true, retryAfter: Math.ceil(BAN_MS / 1000), count: s.denials.length };
+    newlyBanned = true;
+    retryAfter = Math.ceil(BAN_MS / 1000);
   }
-  return { newlyBanned: false, retryAfter: 0, count: s.denials.length };
+
+  // Burst-403 detection (within tighter window).
+  let burstAlert: { count: number; windowMs: number } | null = null;
+  const burstCount = s.denials.filter((t) => now - t < BURST_WINDOW_MS).length;
+  if (burstCount >= BURST_403 && now - s.lastBurstAlertAt > ALERT_COOLDOWN_MS) {
+    s.lastBurstAlertAt = now;
+    burstAlert = { count: burstCount, windowMs: BURST_WINDOW_MS };
+  }
+
+  // Multi-action anomaly: same key probing many distinct actions.
+  let multiActionAlert: { actions: string[]; windowMs: number } | null = null;
+  const distinct = Array.from(new Set(
+    s.attempts.filter((a) => a.action).map((a) => a.action as string),
+  ));
+  if (distinct.length >= MULTI_ACTION_DISTINCT
+      && now - s.lastMultiActionAlertAt > ALERT_COOLDOWN_MS) {
+    s.lastMultiActionAlertAt = now;
+    multiActionAlert = { actions: distinct, windowMs: MULTI_ACTION_WINDOW_MS };
+  }
+
+  return {
+    newlyBanned, retryAfter, count: s.denials.length,
+    burstAlert, multiActionAlert,
+  };
 }
 // Periodic GC of expired entries
 setInterval(() => {
   const now = Date.now();
   for (const [k, v] of throttle) {
-    if (v.bannedUntil < now && v.denials.every((t) => now - t > WINDOW_MS)) throttle.delete(k);
+    if (v.bannedUntil < now
+        && v.denials.every((t) => now - t > WINDOW_MS)
+        && v.attempts.every((a) => now - a.t > MULTI_ACTION_WINDOW_MS)) {
+      throttle.delete(k);
+    }
   }
 }, 60_000);
 
@@ -182,7 +247,7 @@ serve(async (req) => {
       });
     } catch (_) { /* best-effort */ }
 
-    const r = recordDenial(opts.key);
+    const r = recordDenial(opts.key, opts.action, reqId);
     if (r.newlyBanned) {
       try {
         await svcEarly.from("governance_events").insert({
@@ -199,6 +264,48 @@ serve(async (req) => {
             window_ms: WINDOW_MS,
             ban_seconds: r.retryAfter,
             key: opts.key,
+            server_ts: new Date().toISOString(),
+          },
+        });
+      } catch (_) { /* best-effort */ }
+    }
+    if (r.burstAlert) {
+      try {
+        await svcEarly.from("governance_events").insert({
+          actor_id: opts.actorId,
+          event_category: "compliance",
+          event_action: "protocol.access.alert",
+          severity: "critical",
+          target_entity_type: "protocol",
+          context: {
+            alert_type: "burst_403",
+            request_id: reqId,
+            key: opts.key,
+            denials: r.burstAlert.count,
+            window_ms: r.burstAlert.windowMs,
+            ...extractIp(req),
+            ua: req.headers.get("user-agent") ?? null,
+            server_ts: new Date().toISOString(),
+          },
+        });
+      } catch (_) { /* best-effort */ }
+    }
+    if (r.multiActionAlert) {
+      try {
+        await svcEarly.from("governance_events").insert({
+          actor_id: opts.actorId,
+          event_category: "compliance",
+          event_action: "protocol.access.alert",
+          severity: "critical",
+          target_entity_type: "protocol",
+          context: {
+            alert_type: "multi_action_anomaly",
+            request_id: reqId,
+            key: opts.key,
+            distinct_actions: r.multiActionAlert.actions,
+            window_ms: r.multiActionAlert.windowMs,
+            ...extractIp(req),
+            ua: req.headers.get("user-agent") ?? null,
             server_ts: new Date().toISOString(),
           },
         });
