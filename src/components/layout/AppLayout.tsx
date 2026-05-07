@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { Search, Moon, Sun, Globe } from "lucide-react";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
 import { HighContrastToggle } from "@/components/HighContrastToggle";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useTranslation, Language } from "@/i18n/context";
+import { setI18nReporterRole } from "@/i18n/missReporter";
+import { useUserRoles, type AppRole } from "@/hooks/useUserRoles";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -23,10 +25,21 @@ const languages: { code: Language; label: string; flag: string }[] = [
   { code: "de", label: "Deutsch", flag: "🇩🇪" },
 ];
 
+const ROLE_PRIORITY: AppRole[] = [
+  "super_admin", "admin", "hospital_admin", "research_lead",
+  "expert_reviewer", "physician", "trainee", "user",
+];
+
 export function AppLayout() {
   const [commandOpen, setCommandOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const { t, language, setLanguage } = useTranslation();
+  const { roles } = useUserRoles();
+
+  useEffect(() => {
+    const top = ROLE_PRIORITY.find((r) => roles.includes(r)) ?? null;
+    setI18nReporterRole(top);
+  }, [roles]);
 
   return (
     <SidebarProvider>
