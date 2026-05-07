@@ -29,11 +29,15 @@ export default function Changelog() {
 
   const releases: Release[] = data.locales[language] ?? data.locales.en ?? [];
   const sectionLabel = (title: string): string => {
-    // Fall back to the source heading if a translation key isn't defined.
-    const key = `pages.changelog.sections.${title
+    // Normalize: strip diacritics so "Sécurité" / "Schutzmaßnahmen" → ascii slug.
+    const slug = title
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/ß/g, "ss")
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "_")
-      .replace(/^_|_$/g, "")}`;
+      .replace(/^_|_$/g, "");
+    const key = `pages.changelog.sections.${slug}`;
     const tr = t(key);
     return tr === key ? title : tr;
   };

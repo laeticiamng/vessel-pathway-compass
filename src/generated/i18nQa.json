@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-05-07T20:49:28.409Z",
+  "totals": {
+    "usedKeys": 1516,
+    "missing": {
+      "en": 0,
+      "fr": 0,
+      "de": 0
+    },
+    "changelogSectionIssues": 0
+  },
+  "missingByLocale": {
+    "en": [],
+    "fr": [],
+    "de": []
+  },
+  "changelog": {
+    "sections": [
+      {
+        "slug": "methodology_framing",
+        "titles": {
+          "en": "Methodology framing"
+        },
+        "key": "pages.changelog.sections.methodology_framing",
+        "missing": []
+      },
+      {
+        "slug": "added",
+        "titles": {
+          "en": "Added"
+        },
+        "key": "pages.changelog.sections.added",
+        "missing": []
+      },
+      {
+        "slug": "changed",
+        "titles": {
+          "en": "Changed"
+        },
+        "key": "pages.changelog.sections.changed",
+        "missing": []
+      },
+      {
+        "slug": "guardrails",
+        "titles": {
+          "en": "Guardrails"
+        },
+        "key": "pages.changelog.sections.guardrails",
+        "missing": []
+      },
+      {
+        "slug": "security",
+        "titles": {
+          "en": "Security"
+        },
+        "key": "pages.changelog.sections.security",
+        "missing": []
+      },
+      {
+        "slug": "removed",
+        "titles": {
+          "en": "Removed"
+        },
+        "key": "pages.changelog.sections.removed",
+        "missing": []
+      },
+      {
+        "slug": "cadrage_methodologique",
+        "titles": {
+          "fr": "Cadrage méthodologique"
+        },
+        "key": "pages.changelog.sections.cadrage_methodologique",
+        "missing": []
+      },
+      {
+        "slug": "ajoute",
+        "titles": {
+          "fr": "Ajouté"
+        },
+        "key": "pages.changelog.sections.ajoute",
+        "missing": []
+      },
+      {
+        "slug": "modifie",
+        "titles": {
+          "fr": "Modifié"
+        },
+        "key": "pages.changelog.sections.modifie",
+        "missing": []
+      },
+      {
+        "slug": "garde_fous",
+        "titles": {
+          "fr": "Garde-fous"
+        },
+        "key": "pages.changelog.sections.garde_fous",
+        "missing": []
+      },
+      {
+        "slug": "securite",
+        "titles": {
+          "fr": "Sécurité"
+        },
+        "key": "pages.changelog.sections.securite",
+        "missing": []
+      },
+      {
+        "slug": "methodischer_rahmen",
+        "titles": {
+          "de": "Methodischer Rahmen"
+        },
+        "key": "pages.changelog.sections.methodischer_rahmen",
+        "missing": []
+      },
+      {
+        "slug": "hinzugefugt",
+        "titles": {
+          "de": "Hinzugefügt"
+        },
+        "key": "pages.changelog.sections.hinzugefugt",
+        "missing": []
+      },
+      {
+        "slug": "geandert",
+        "titles": {
+          "de": "Geändert"
+        },
+        "key": "pages.changelog.sections.geandert",
+        "missing": []
+      },
+      {
+        "slug": "schutzmassnahmen",
+        "titles": {
+          "de": "Schutzmaßnahmen"
+        },
+        "key": "pages.changelog.sections.schutzmassnahmen",
+        "missing": []
+      },
+      {
+        "slug": "sicherheit",
+        "titles": {
+          "de": "Sicherheit"
+        },
+        "key": "pages.changelog.sections.sicherheit",
+        "missing": []
+      }
+    ],
+    "issues": []
+  }
+}
