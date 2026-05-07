@@ -101,16 +101,26 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = useCallback(
     ((key: string, expected?: Expected): unknown => {
-      const raw = getRawNestedValue(dictionaries[language], key);
+      let raw = getRawNestedValue(dictionaries[language], key);
+      let usedFallback = false;
 
-      // 1) Missing entirely
+      // 1) Missing entirely → fall back to EN (and log)
       if (raw === undefined || raw === null) {
         recordMiss({ locale: language, key, reason: "missing", expected, actual: "undefined" });
-        if (expected) return emptyForExpected(expected);
-        return key; // legacy string fallback
+        if (language !== "en") {
+          const enRaw = getRawNestedValue(dictionaries.en, key);
+          if (enRaw !== undefined && enRaw !== null) {
+            raw = enRaw;
+            usedFallback = true;
+          }
+        }
+        if (raw === undefined || raw === null) {
+          if (expected) return emptyForExpected(expected);
+          return key; // last-resort legacy fallback
+        }
       }
 
-      // 2) No expectation given → preserve historical behaviour (return as-is, typed as string by overload)
+      // 2) No expectation → return as-is (string overload)
       if (!expected) {
         return raw;
       }
@@ -118,6 +128,21 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       // 3) Shape contract enforced
       if (matchesExpected(raw, expected)) {
         return raw;
+      }
+
+      // Shape mismatch in current locale → try EN as a structural fallback
+      if (!usedFallback && language !== "en") {
+        const enRaw = getRawNestedValue(dictionaries.en, key);
+        if (matchesExpected(enRaw, expected)) {
+          recordMiss({
+            locale: language,
+            key,
+            reason: "shape-mismatch",
+            expected,
+            actual: Array.isArray(raw) ? "array" : typeof raw,
+          });
+          return enRaw;
+        }
       }
 
       const actualType = Array.isArray(raw) ? "array" : typeof raw;
