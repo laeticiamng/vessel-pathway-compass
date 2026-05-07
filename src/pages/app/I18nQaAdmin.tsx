@@ -14,7 +14,12 @@ import { SEOHead } from "@/components/SEOHead";
 import { Languages, AlertTriangle, FileSearch, ExternalLink, Download } from "lucide-react";
 import qaReport from "@/generated/i18nQa.json";
 
-type MissingEntry = { key: string; files: string[]; routes: string[] };
+type MissingEntry = {
+  key: string;
+  files: string[];
+  routes: string[];
+  fileRoutes?: Record<string, string[]>;
+};
 type ChangelogIssue = {
   slug: string;
   key: string;
@@ -27,8 +32,10 @@ type Report = {
     usedKeys: number;
     missing: Record<string, number>;
     changelogSectionIssues: number;
+    pagesIndexed?: number;
   };
   missingByLocale: Record<"en" | "fr" | "de", MissingEntry[]>;
+  fileRoutes?: Record<string, string[]>;
   changelog: { sections: unknown[]; issues: ChangelogIssue[] };
 };
 
