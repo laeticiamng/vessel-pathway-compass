@@ -2027,6 +2027,12 @@ export const de = {
         sicherheit: "Sicherheit",
         removed: "Entfernt",
         deprecated: "Veraltet",
+        // FR-source keys (when changelog entries are authored in FR)
+        cadrage_méthodologique: "Methodischer Rahmen",
+        ajouté: "Hinzugefügt",
+        modifié: "Geändert",
+        "garde-fous": "Schutzmaßnahmen",
+        sécurité: "Sicherheit",
       },
     },
     common: {
