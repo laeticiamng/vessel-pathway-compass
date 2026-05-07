@@ -18,6 +18,8 @@ import { toast } from "sonner";
 import { pseudonymizeContext } from "@/lib/protocolAuditPseudonymize";
 import { ProtocolAlertsWidget } from "@/components/admin/ProtocolAlertsWidget";
 import { ProtocolGuardConfigPanel } from "@/components/admin/ProtocolGuardConfigPanel";
+import { ProtocolSecurityConfigHistoryPanel } from "@/components/admin/ProtocolSecurityConfigHistoryPanel";
+import { ProtocolAuditSavedViews, type SavedView, type SavedViewFilters } from "@/components/admin/ProtocolAuditSavedViews";
 
 interface GovEvent {
   id: string;
