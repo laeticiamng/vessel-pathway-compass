@@ -101,6 +101,9 @@ function fileToRoute(file) {
 // ---- Changelog audit -------------------------------------------------------
 function slugify(title) {
   return title
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ß/g, "ss")
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "_")
     .replace(/^_|_$/g, "");
