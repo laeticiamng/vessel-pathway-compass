@@ -77,12 +77,12 @@ export function ProtocolAuditSavedViews({ currentFilters, onApply }: Props) {
     try {
       const { error } = await supabase
         .from("protocol_audit_saved_views" as never)
-        .insert({
+        .insert([{
           owner_id: user.id,
           name: name.trim(),
           filters: currentFilters as unknown as Record<string, unknown>,
           is_shared: shared,
-        });
+        }] as never);
       if (error) throw error;
       toast.success(`Saved view "${name.trim()}" created`);
       setOpen(false); setName(""); setShared(false);
