@@ -86,6 +86,36 @@ export default function I18nQaAdmin() {
     URL.revokeObjectURL(url);
   };
 
+  const csvEscape = (v: string) => {
+    if (/[",\n\r]/.test(v)) return `"${v.replace(/"/g, '""')}"`;
+    return v;
+  };
+  const downloadCsv = () => {
+    const rows: string[] = [
+      ["locale", "key", "en_fallback", "routes", "files"].join(","),
+    ];
+    for (const loc of LOCALES) {
+      for (const e of REPORT.missingByLocale[loc]) {
+        rows.push(
+          [
+            loc,
+            e.key,
+            e.enFallback ?? "",
+            e.routes.join(" | "),
+            e.files.join(" | "),
+          ].map(csvEscape).join(","),
+        );
+      }
+    }
+    const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `missing-translations-${REPORT.generatedAt}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   if (isLoading) {
     return (
       <div className="container mx-auto p-6 space-y-4">
