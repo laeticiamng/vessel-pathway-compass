@@ -2045,17 +2045,17 @@ export const en = {
         security: "Security",
         removed: "Removed",
         deprecated: "Deprecated",
-        // FR-source keys (from generated changelog when an entry was authored in FR)
-        cadrage_méthodologique: "Methodology framing",
-        ajouté: "Added",
-        modifié: "Changed",
-        "garde-fous": "Guardrails",
-        sécurité: "Security",
-        // DE-source keys (from generated changelog when an entry was authored in DE)
+        // FR-source slugs (ascii, accents stripped)
+        cadrage_methodologique: "Methodology framing",
+        ajoute: "Added",
+        modifie: "Changed",
+        garde_fous: "Guardrails",
+        securite: "Security",
+        // DE-source slugs (ascii, accents/ß stripped)
         methodischer_rahmen: "Methodology framing",
-        hinzugefügt: "Added",
-        geändert: "Changed",
-        schutzmaßnahmen: "Guardrails",
+        hinzugefugt: "Added",
+        geandert: "Changed",
+        schutzmassnahmen: "Guardrails",
         sicherheit: "Security",
       },
     },
