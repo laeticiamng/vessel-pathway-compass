@@ -19,6 +19,7 @@ type MissingEntry = {
   files: string[];
   routes: string[];
   fileRoutes?: Record<string, string[]>;
+  enFallback?: string | null;
 };
 type ChangelogIssue = {
   slug: string;
