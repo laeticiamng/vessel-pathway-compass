@@ -139,51 +139,43 @@ function extractRoutesFromApp(graph) {
     if (r) compMap.set(m[1], r);
   }
 
-  // Walk routes, tracking nested path prefixes via a simple stack-based parse.
+  // Per-line scan. App.tsx convention: nested Routes live under a parent
+  // <Route path="/app">…</Route> block; we therefore default the prefix to
+  // "/app" whenever we encounter a relative path.
   const fileToRoutes = new Map();
   const lines = src.split("\n");
-  const stack = [""]; // path prefixes
-  const reRoute = /<Route\s+([^>]*?)(\/?)>/;
+  let prefix = "";
   for (const line of lines) {
-    const closeMatch = line.match(/<\/Route>/);
-    const openMatch = line.match(reRoute);
-    if (openMatch) {
-      const attrs = openMatch[1];
-      const pathAttr = attrs.match(/path=["']([^"']+)["']/);
-      const indexAttr = /\bindex\b/.test(attrs);
-      const elementMatch = attrs.match(/element=\{<\s*(\w+)/);
-      const selfClosing = openMatch[2] === "/" || /\/\s*>$/.test(line);
-
-      const parent = stack[stack.length - 1];
-      let current;
-      if (indexAttr) current = parent || "/";
-      else if (pathAttr) {
-        const p = pathAttr[1];
-        if (p.startsWith("/")) current = p;
-        else current = parent.replace(/\/$/, "") + "/" + p;
-      } else current = parent;
-
-      if (elementMatch) {
-        const compName = elementMatch[1];
-        // Walk the rest of the attrs for nested element components too (rare)
-        const f = compMap.get(compName);
-        if (f) {
-          if (!fileToRoutes.has(f)) fileToRoutes.set(f, new Set());
-          fileToRoutes.get(f).add(current);
-        }
-        // Also detect inner-wrapped page like <ContentGate><Dashboard/></ContentGate>
-        const inner = line.match(/<\s*(\w+)\s*\/?>(?:<\/\1>)?\s*<\/\w+>/);
-        if (inner) {
-          const f2 = compMap.get(inner[1]);
-          if (f2) {
-            if (!fileToRoutes.has(f2)) fileToRoutes.set(f2, new Set());
-            fileToRoutes.get(f2).add(current);
-          }
-        }
-      }
-      if (!selfClosing) stack.push(current);
+    if (/<Route\s+path=["']\/app["']/.test(line)) prefix = "/app";
+    if (/<\/Route>/.test(line) && /element=\{<(ProtectedRoute|PublicAppRoute)/.test(line)) {
+      // closing of /app block
+      prefix = "";
     }
-    if (closeMatch) stack.pop();
+    const routeMatch = line.match(/<Route\b([^>]*)>/);
+    if (!routeMatch) continue;
+    const attrs = routeMatch[1];
+    const pathAttr = attrs.match(/path=["']([^"']+)["']/);
+    const isIndex = /\bindex\b/.test(attrs);
+
+    let route;
+    if (isIndex) route = prefix || "/";
+    else if (pathAttr) {
+      const p = pathAttr[1];
+      route = p.startsWith("/") ? p : (prefix.replace(/\/$/, "") + "/" + p);
+    } else continue;
+
+    // Find every component referenced in element={ ... } on this line.
+    const elemBlock = attrs.match(/element=\{([^}]*(?:\{[^}]*\}[^}]*)*)\}/);
+    const compNames = new Set();
+    if (elemBlock) {
+      for (const m of elemBlock[1].matchAll(/<\s*(\w+)/g)) compNames.add(m[1]);
+    }
+    for (const name of compNames) {
+      const f = compMap.get(name);
+      if (!f) continue;
+      if (!fileToRoutes.has(f)) fileToRoutes.set(f, new Set());
+      fileToRoutes.get(f).add(route);
+    }
   }
 
   return fileToRoutes;
