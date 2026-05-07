@@ -3,6 +3,7 @@ import { en } from "./en";
 import { fr } from "./fr";
 import { de } from "./de";
 import { matchesExpected, emptyForExpected } from "./schema";
+import { reportI18nMiss } from "./missReporter";
 
 export type Language = "en" | "fr" | "de";
 
