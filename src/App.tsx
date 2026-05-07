@@ -74,6 +74,7 @@ const ExportsAudit = lazy(() => import("./pages/app/ExportsAudit"));
 const HospitalAuditDashboard = lazy(() => import("./pages/app/HospitalAuditDashboard"));
 const ContentVersionsAdmin = lazy(() => import("./pages/app/ContentVersionsAdmin"));
 const ProtocolAuditAdmin = lazy(() => import("./pages/app/ProtocolAuditAdmin"));
+const I18nQaAdmin = lazy(() => import("./pages/app/I18nQaAdmin"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const VascScreen = lazy(() => import("./pages/app/VascScreen"));
 const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
