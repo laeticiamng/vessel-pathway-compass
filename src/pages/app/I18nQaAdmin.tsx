@@ -199,16 +199,41 @@ export default function I18nQaAdmin() {
                               <Badge variant="outline" className="text-xs">No direct route</Badge>
                             )}
                           </div>
-                          <details className="text-xs text-muted-foreground">
+                          <details className="text-xs text-muted-foreground" open>
                             <summary className="cursor-pointer">
-                              Files ({entry.files.length})
+                              Files & screens ({entry.files.length})
                             </summary>
-                            <ul className="mt-1 pl-4 list-disc">
-                              {entry.files.map((f) => (
-                                <li key={f}>
-                                  <code>{f}</code>
-                                </li>
-                              ))}
+                            <ul className="mt-2 space-y-2 pl-1">
+                              {entry.files.map((f) => {
+                                const fr = entry.fileRoutes?.[f] ?? [];
+                                return (
+                                  <li key={f} className="border-l-2 border-muted pl-2">
+                                    <code className="block break-all">{f}</code>
+                                    <div className="mt-1 flex flex-wrap gap-1">
+                                      {fr.length === 0 ? (
+                                        <Badge variant="outline" className="text-[10px]">
+                                          Not mounted on any route
+                                        </Badge>
+                                      ) : (
+                                        fr.map((r) => (
+                                          <Button
+                                            key={r}
+                                            size="sm"
+                                            variant="secondary"
+                                            asChild
+                                            className="h-6 text-[11px] px-2"
+                                          >
+                                            <Link to={r}>
+                                              <ExternalLink className="h-3 w-3 mr-1" />
+                                              {r}
+                                            </Link>
+                                          </Button>
+                                        ))
+                                      )}
+                                    </div>
+                                  </li>
+                                );
+                              })}
                             </ul>
                           </details>
                         </li>
