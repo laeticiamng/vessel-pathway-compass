@@ -143,9 +143,14 @@ export default function I18nQaAdmin() {
             </p>
           </div>
         </div>
-        <Button variant="outline" size="sm" onClick={downloadJson}>
-          <Download className="h-4 w-4 mr-2" /> Export JSON
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" size="sm" onClick={downloadCsv}>
+            <Download className="h-4 w-4 mr-2" /> Export missing CSV
+          </Button>
+          <Button variant="outline" size="sm" onClick={downloadJson}>
+            <Download className="h-4 w-4 mr-2" /> Export JSON
+          </Button>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
