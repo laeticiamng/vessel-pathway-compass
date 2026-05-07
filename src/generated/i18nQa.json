@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-07T20:49:28.409Z",
+  "generatedAt": "2026-05-07T21:07:00.498Z",
   "totals": {
     "usedKeys": 1516,
     "missing": {
@@ -7,13 +7,15 @@
       "fr": 0,
       "de": 0
     },
-    "changelogSectionIssues": 0
+    "changelogSectionIssues": 0,
+    "pagesIndexed": 0
   },
   "missingByLocale": {
     "en": [],
     "fr": [],
     "de": []
   },
+  "fileRoutes": {},
   "changelog": {
     "sections": [
       {
