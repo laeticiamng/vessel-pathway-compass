@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-07T21:07:00.498Z",
+  "generatedAt": "2026-05-07T21:07:45.277Z",
   "totals": {
     "usedKeys": 1516,
     "missing": {
@@ -8,14 +8,1455 @@
       "de": 0
     },
     "changelogSectionIssues": 0,
-    "pagesIndexed": 0
+    "pagesIndexed": 68
   },
   "missingByLocale": {
     "en": [],
     "fr": [],
     "de": []
   },
-  "fileRoutes": {},
+  "fileRoutes": {
+    "src/components/AIAuditCard.tsx": [
+      "/app/fusion-viewer"
+    ],
+    "src/components/ComplianceBanner.tsx": [
+      "/"
+    ],
+    "src/components/MedRegBadge.tsx": [
+      "/"
+    ],
+    "src/components/ProbastBadge.tsx": [
+      "/app/digital-twin"
+    ],
+    "src/components/RegulatoryDisclaimer.tsx": [
+      "/",
+      "/about-aquamr",
+      "/access",
+      "/audit-limitations",
+      "/auth",
+      "/data-management-plan",
+      "/incidental-findings",
+      "/methodology",
+      "/sap",
+      "/trajectory",
+      "/why"
+    ],
+    "src/components/ResearchPreviewBadge.tsx": [
+      "/about-aquamr",
+      "/app/fusion-viewer",
+      "/app/simulation"
+    ],
+    "src/components/SEOHead.tsx": [
+      "/",
+      "/*",
+      "/about",
+      "/about-aquamr",
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/compliance-history",
+      "/app/governance/dpia",
+      "/app/governance/exports",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen",
+      "/app/vascscreen/abi",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/audit-limitations",
+      "/auth",
+      "/changelog",
+      "/checkout/cancel",
+      "/checkout/success",
+      "/contact",
+      "/data-management-plan",
+      "/faq",
+      "/incidental-findings",
+      "/legal",
+      "/legal/:section",
+      "/methodology",
+      "/modules",
+      "/protocol",
+      "/sap",
+      "/securite-confidentialite",
+      "/support",
+      "/trajectory",
+      "/transparence",
+      "/why"
+    ],
+    "src/components/SubscriptionSettingsCard.tsx": [
+      "/app/settings"
+    ],
+    "src/components/UsageLimitBanner.tsx": [
+      "/app/patients",
+      "/app/procedure-planner"
+    ],
+    "src/components/a11y/WCAGBadge.tsx": [
+      "/app/admin/web-vitals"
+    ],
+    "src/components/admin/ProtocolAlertsWidget.tsx": [
+      "/app/admin/protocol-audit"
+    ],
+    "src/components/admin/ProtocolAuditSavedViews.tsx": [
+      "/app/admin/protocol-audit"
+    ],
+    "src/components/admin/ProtocolGuardConfigPanel.tsx": [
+      "/app/admin/protocol-audit"
+    ],
+    "src/components/admin/ProtocolSecurityConfigHistoryPanel.tsx": [
+      "/app/admin/protocol-audit"
+    ],
+    "src/components/admin/SLAWidget.tsx": [
+      "/app/admin/system-health"
+    ],
+    "src/components/analytics/InstitutionComparison.tsx": [
+      "/app/analytics"
+    ],
+    "src/components/audit/AuditLimitationsPdfButton.tsx": [
+      "/audit-limitations"
+    ],
+    "src/components/audit/ChangelogExportButton.tsx": [
+      "/audit-limitations"
+    ],
+    "src/components/audit/ContentVersionBadge.tsx": [
+      "/audit-limitations",
+      "/faq"
+    ],
+    "src/components/audit/VersionDiffView.tsx": [
+      "/app/admin/content-versions"
+    ],
+    "src/components/branding/AquaMRLogo.tsx": [
+      "/",
+      "/about",
+      "/about-aquamr",
+      "/access",
+      "/audit-limitations",
+      "/auth",
+      "/checkout/success",
+      "/contact",
+      "/data-management-plan",
+      "/faq",
+      "/incidental-findings",
+      "/legal",
+      "/legal/:section",
+      "/methodology",
+      "/modules",
+      "/onboarding",
+      "/protocol",
+      "/reset-password",
+      "/sap",
+      "/securite-confidentialite",
+      "/support",
+      "/trajectory",
+      "/transparence",
+      "/why"
+    ],
+    "src/components/branding/aquaIcons.ts": [
+      "/app"
+    ],
+    "src/components/dashboard/OnboardingChecklist.tsx": [
+      "/app"
+    ],
+    "src/components/dashboard/PatientRiskDistribution.tsx": [
+      "/app"
+    ],
+    "src/components/dev/HeroNeonMetricsPanel.tsx": [
+      "/dev/hero-neon"
+    ],
+    "src/components/digital-twin/SegmentDetail.tsx": [
+      "/app/digital-twin"
+    ],
+    "src/components/digital-twin/VascularMap.tsx": [
+      "/app/digital-twin"
+    ],
+    "src/components/education/CourseDetail.tsx": [
+      "/app/education"
+    ],
+    "src/components/governance/AnomalyPanel.tsx": [
+      "/app/governance"
+    ],
+    "src/components/governance/CompliancePackButton.tsx": [
+      "/app/governance/compliance"
+    ],
+    "src/components/governance/ComplianceTrendChart.tsx": [
+      "/app/governance/compliance",
+      "/app/governance/compliance-history"
+    ],
+    "src/components/governance/FreezeAccountButton.tsx": [
+      "/app/admin/users"
+    ],
+    "src/components/governance/IECTechnicalFileButton.tsx": [
+      "/app/governance/iec62304"
+    ],
+    "src/components/governance/ProcessingRegisterButton.tsx": [
+      "/app/governance"
+    ],
+    "src/components/governance/RgpdExportButton.tsx": [
+      "/app/settings"
+    ],
+    "src/components/governance/RgpdRequestCard.tsx": [
+      "/app/settings"
+    ],
+    "src/components/governance/SignoffPanel.tsx": [
+      "/app/ci-aki-engine",
+      "/app/patients/:id"
+    ],
+    "src/components/governance/UnfreezeAccountButton.tsx": [
+      "/app/admin/users"
+    ],
+    "src/components/l1/AquaMRFindingsPanel.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/l1/C4iAssessmentPanel.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/l1/DecisionComparisonPanel.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/l1/HemodynamicsPanel.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/l1/L1ExportActions.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/l1/L1SummaryCard.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/l1/PatientContextCard.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/landing/AboveHeroFramingLine.tsx": [
+      "/"
+    ],
+    "src/components/landing/AntiOverpromiseSection.tsx": [
+      "/protocol",
+      "/transparence"
+    ],
+    "src/components/landing/ComplianceAnnexesSection.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ComplianceBadge.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ComplianceLimitsFAQ.tsx": [
+      "/audit-limitations"
+    ],
+    "src/components/landing/FourZeroBanner.tsx": [
+      "/"
+    ],
+    "src/components/landing/HomeIntroVideoSection.tsx": [
+      "/"
+    ],
+    "src/components/landing/NonInferioritySection.tsx": [
+      "/",
+      "/protocol"
+    ],
+    "src/components/landing/PlatformCompletenessSection.tsx": [
+      "/"
+    ],
+    "src/components/landing/ProtocolAuditLogExporter.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ProtocolCompletenessChecklist.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ProtocolHighlightBanner.tsx": [
+      "/"
+    ],
+    "src/components/landing/ProtocolIdentityCard.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ProtocolNonSuperiorityFAQ.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ProtocolQASection.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ProtocolVersioningCard.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/ReferencesLibrary.tsx": [
+      "/protocol"
+    ],
+    "src/components/landing/jsonLd.ts": [
+      "/"
+    ],
+    "src/components/neon/NeonKpi.tsx": [
+      "/app"
+    ],
+    "src/components/neon/NeonModuleTile.tsx": [
+      "/app"
+    ],
+    "src/components/neon/NeonPageHeader.tsx": [
+      "/app"
+    ],
+    "src/components/network/ForumThreadDetail.tsx": [
+      "/app/network"
+    ],
+    "src/components/network/VoteButtons.tsx": [
+      "/app/network"
+    ],
+    "src/components/patient/CaseReplayDialog.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/CaseRevisionsTimeline.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/FHIRBadge.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/MeasurementTrendChart.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/NewCaseDialog.tsx": [
+      "/app/patients"
+    ],
+    "src/components/patient/PatientCases.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/PatientDialogs.tsx": [
+      "/app/patients",
+      "/app/patients/:id"
+    ],
+    "src/components/patient/PatientFilters.tsx": [
+      "/app/patients"
+    ],
+    "src/components/patient/PatientHeader.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/PatientMeasurements.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/PatientTimeline.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/patient/PatientTrash.tsx": [
+      "/app/patients"
+    ],
+    "src/components/patient/PatientsTable.tsx": [
+      "/app/patients"
+    ],
+    "src/components/patient/RiskFactorsEditor.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/research/ResearchExportButton.tsx": [
+      "/app/research"
+    ],
+    "src/components/simulation/SimulationRunner.tsx": [
+      "/app/simulation"
+    ],
+    "src/components/ui/accordion.tsx": [
+      "/audit-limitations",
+      "/faq",
+      "/support"
+    ],
+    "src/components/ui/alert-dialog.tsx": [
+      "/app/admin/users",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/simulation"
+    ],
+    "src/components/ui/alert.tsx": [
+      "/app/admin/web-vitals",
+      "/app/governance/compliance",
+      "/app/simulation"
+    ],
+    "src/components/ui/avatar.tsx": [
+      "/app/settings"
+    ],
+    "src/components/ui/badge.tsx": [
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/compliance-history",
+      "/app/governance/dpia",
+      "/app/governance/exports",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen",
+      "/app/vascscreen/abi",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/changelog",
+      "/modules"
+    ],
+    "src/components/ui/button.tsx": [
+      "/",
+      "/*",
+      "/about-aquamr",
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/protocol-audit",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/compliance-history",
+      "/app/governance/dpia",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen",
+      "/app/vascscreen/abi",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/audit-limitations",
+      "/auth",
+      "/checkout/cancel",
+      "/checkout/success",
+      "/contact",
+      "/data-management-plan",
+      "/dev/hero-neon",
+      "/faq",
+      "/incidental-findings",
+      "/legal",
+      "/legal/:section",
+      "/methodology",
+      "/modules",
+      "/onboarding",
+      "/protocol",
+      "/reset-password",
+      "/sap",
+      "/securite-confidentialite",
+      "/support",
+      "/transparence"
+    ],
+    "src/components/ui/calendar.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/ui/card.tsx": [
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/compliance-history",
+      "/app/governance/dpia",
+      "/app/governance/exports",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen",
+      "/app/vascscreen/abi",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/auth",
+      "/checkout/cancel",
+      "/checkout/success",
+      "/contact",
+      "/dev/hero-neon",
+      "/onboarding",
+      "/reset-password",
+      "/support"
+    ],
+    "src/components/ui/chart.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/components/ui/checkbox.tsx": [
+      "/app/admin/protocol-audit",
+      "/app/patients/:id",
+      "/auth"
+    ],
+    "src/components/ui/collapsible.tsx": [
+      "/app/patients",
+      "/audit-limitations",
+      "/faq"
+    ],
+    "src/components/ui/dialog.tsx": [
+      "/app/admin/protocol-audit",
+      "/app/admin/system-health",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/governance/dpia",
+      "/app/governance/policies",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/research",
+      "/app/simulation",
+      "/app/vascscreen/study"
+    ],
+    "src/components/ui/dropdown-menu.tsx": [
+      "/",
+      "/access",
+      "/audit-limitations",
+      "/auth",
+      "/legal",
+      "/legal/:section",
+      "/support"
+    ],
+    "src/components/ui/input.tsx": [
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/protocol-audit",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/ci-aki-engine",
+      "/app/education",
+      "/app/governance/audit-search",
+      "/app/governance/dpia",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen/abi",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/study",
+      "/auth",
+      "/changelog",
+      "/contact",
+      "/onboarding",
+      "/reset-password",
+      "/support"
+    ],
+    "src/components/ui/label.tsx": [
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/institution",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/governance/audit-search",
+      "/app/governance/dpia",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/research",
+      "/app/settings",
+      "/app/vascscreen/abi",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/auth",
+      "/contact",
+      "/dev/hero-neon",
+      "/onboarding",
+      "/reset-password",
+      "/support"
+    ],
+    "src/components/ui/neon-gradient-text.tsx": [
+      "/",
+      "/dev/hero-neon"
+    ],
+    "src/components/ui/popover.tsx": [
+      "/app/admin/protocol-audit",
+      "/app/patients/:id"
+    ],
+    "src/components/ui/progress.tsx": [
+      "/app/education",
+      "/app/governance/compliance",
+      "/app/simulation",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/patient-entry",
+      "/onboarding"
+    ],
+    "src/components/ui/radio-group.tsx": [
+      "/onboarding"
+    ],
+    "src/components/ui/scroll-area.tsx": [
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/protocol-audit",
+      "/app/governance",
+      "/app/governance/audit-search"
+    ],
+    "src/components/ui/select.tsx": [
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/institution",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/governance/audit-search",
+      "/app/governance/dpia",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/study",
+      "/onboarding"
+    ],
+    "src/components/ui/separator.tsx": [
+      "/app/network",
+      "/auth"
+    ],
+    "src/components/ui/sheet.tsx": [
+      "/"
+    ],
+    "src/components/ui/skeleton.tsx": [
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/i18n-qa",
+      "/app/admin/protocol-audit",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/registry",
+      "/app/simulation",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/study",
+      "/protocol"
+    ],
+    "src/components/ui/slider.tsx": [
+      "/dev/hero-neon"
+    ],
+    "src/components/ui/switch.tsx": [
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/l1-decision-board",
+      "/app/procedure-planner",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/dev/hero-neon"
+    ],
+    "src/components/ui/table.tsx": [
+      "/app",
+      "/app/procedure-planner",
+      "/app/vascscreen/study"
+    ],
+    "src/components/ui/tabs.tsx": [
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/digital-twin",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/iec62304",
+      "/app/network",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/simulation",
+      "/app/vascscreen/study"
+    ],
+    "src/components/ui/textarea.tsx": [
+      "/app/admin/content-versions",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/ci-aki-engine",
+      "/app/education",
+      "/app/governance/dpia",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/contact",
+      "/support"
+    ],
+    "src/components/ui/theme-toggle.tsx": [
+      "/"
+    ],
+    "src/components/ui/toast.tsx": [
+      "/access",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/settings",
+      "/auth",
+      "/reset-password"
+    ],
+    "src/components/ui/tooltip.tsx": [
+      "/about-aquamr",
+      "/app/fusion-viewer",
+      "/app/patients/:id",
+      "/app/simulation"
+    ],
+    "src/components/vascscreen/ABIGuide.tsx": [
+      "/app/vascscreen/abi"
+    ],
+    "src/components/vascscreen/ABIInterpreter.tsx": [
+      "/app/vascscreen/abi"
+    ],
+    "src/components/vascscreen/ESC2024Criteria.tsx": [
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/patient-entry"
+    ],
+    "src/components/vascscreen/PatientFlowChart.tsx": [
+      "/app/vascscreen",
+      "/app/vascscreen/assessment"
+    ],
+    "src/components/vascscreen/PatientRiskForm.tsx": [
+      "/app/vascscreen/patient-entry"
+    ],
+    "src/components/vascscreen/ReferralPDF.tsx": [
+      "/app/vascscreen/results"
+    ],
+    "src/components/vascscreen/ReferralReport.tsx": [
+      "/app/vascscreen/results"
+    ],
+    "src/components/vascscreen/RiskScoreCalculator.tsx": [
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/patient-entry"
+    ],
+    "src/components/vascscreen/ScreeningRecommendation.tsx": [
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/patient-entry"
+    ],
+    "src/components/vascscreen/ScreeningStats.tsx": [
+      "/app/vascscreen/dashboard"
+    ],
+    "src/components/vascscreen/ScreeningTimeline.tsx": [
+      "/app/vascscreen/abi",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results"
+    ],
+    "src/components/vascscreen/StudyCohortManager.tsx": [
+      "/app/vascscreen/study"
+    ],
+    "src/components/vascscreen/StudyConsentForm.tsx": [
+      "/app/vascscreen/study"
+    ],
+    "src/components/vascscreen/StudyExport.tsx": [
+      "/app/vascscreen/study"
+    ],
+    "src/components/vasculink/ADRRegistry.tsx": [
+      "/app/governance/iec62304"
+    ],
+    "src/components/vasculink/ADRTimeline.tsx": [
+      "/app/research"
+    ],
+    "src/components/vasculink/AngiographicFunctionTrajectory.tsx": [
+      "/app",
+      "/app/l1-decision-board"
+    ],
+    "src/components/vasculink/AuditDataExportButton.tsx": [
+      "/app/research"
+    ],
+    "src/components/vasculink/AuditPackButton.tsx": [
+      "/app/research"
+    ],
+    "src/components/vasculink/DSMBCharter.tsx": [
+      "/app/research"
+    ],
+    "src/components/vasculink/DSMBExportButton.tsx": [
+      "/app/research"
+    ],
+    "src/components/vasculink/FourZeroPillars.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/components/vasculink/LCAQALYFramework.tsx": [
+      "/app/research"
+    ],
+    "src/components/vasculink/ModalityPositioningMatrix.tsx": [
+      "/app",
+      "/app/procedure-planner"
+    ],
+    "src/components/vasculink/PowerCalculation.tsx": [
+      "/app/research"
+    ],
+    "src/components/vasculink/ScientificSafetyBox.tsx": [
+      "/app",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/l1-decision-board",
+      "/app/research"
+    ],
+    "src/components/vasculink/TenCommandments.tsx": [
+      "/app/education"
+    ],
+    "src/components/vasculink/ThesisMilestones.tsx": [
+      "/app/governance/iec62304"
+    ],
+    "src/hooks/use-toast.ts": [
+      "/access",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/settings",
+      "/auth",
+      "/reset-password"
+    ],
+    "src/hooks/useAuditLog.ts": [
+      "/app/admin/hospital-audit",
+      "/app/ci-aki-engine",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/research",
+      "/app/settings",
+      "/protocol"
+    ],
+    "src/hooks/useAuth.tsx": [
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/protocol-audit",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/dpia",
+      "/app/governance/exports",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/auth",
+      "/checkout/success",
+      "/onboarding",
+      "/protocol"
+    ],
+    "src/hooks/useExportManifest.ts": [
+      "/app/admin/hospital-audit",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/iec62304",
+      "/app/research"
+    ],
+    "src/hooks/useHighContrast.tsx": [
+      "/dev/hero-neon"
+    ],
+    "src/hooks/usePatientData.ts": [
+      "/app/patients/:id"
+    ],
+    "src/hooks/useProtocolAccessAudit.ts": [
+      "/protocol"
+    ],
+    "src/hooks/useProtocolGuard.ts": [
+      "/app/admin/protocol-audit",
+      "/protocol"
+    ],
+    "src/hooks/useSubscription.ts": [
+      "/access",
+      "/app/patients",
+      "/app/procedure-planner",
+      "/app/settings",
+      "/checkout/success"
+    ],
+    "src/hooks/useUserRoles.ts": [
+      "/app/admin/protocol-audit",
+      "/app/fusion-viewer",
+      "/protocol"
+    ],
+    "src/integrations/lovable/index.ts": [
+      "/auth"
+    ],
+    "src/integrations/supabase/client.ts": [
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/protocol-audit",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/compliance-history",
+      "/app/governance/dpia",
+      "/app/governance/exports",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/auth",
+      "/checkout/success",
+      "/contact",
+      "/onboarding",
+      "/protocol",
+      "/reset-password",
+      "/support"
+    ],
+    "src/integrations/supabase/types.ts": [
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/protocol-audit",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/compliance-history",
+      "/app/governance/dpia",
+      "/app/governance/exports",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/auth",
+      "/checkout/success",
+      "/contact",
+      "/onboarding",
+      "/protocol",
+      "/reset-password",
+      "/support"
+    ],
+    "src/lib/annexAccess.ts": [
+      "/protocol"
+    ],
+    "src/lib/appVersion.ts": [
+      "/changelog"
+    ],
+    "src/lib/contentVersions.ts": [
+      "/app/admin/content-versions",
+      "/audit-limitations",
+      "/faq",
+      "/protocol"
+    ],
+    "src/lib/contentVersionsStore.ts": [
+      "/app/admin/content-versions"
+    ],
+    "src/lib/featureFlags.ts": [
+      "/access"
+    ],
+    "src/lib/heroNeonMetrics.ts": [
+      "/",
+      "/dev/hero-neon"
+    ],
+    "src/lib/l1/decision.ts": [
+      "/app/l1-decision-board"
+    ],
+    "src/lib/l1/export.ts": [
+      "/app/l1-decision-board"
+    ],
+    "src/lib/l1/schemas.ts": [
+      "/app/l1-decision-board"
+    ],
+    "src/lib/l1/types.ts": [
+      "/app/l1-decision-board"
+    ],
+    "src/lib/protocolAuditPseudonymize.ts": [
+      "/app/admin/protocol-audit"
+    ],
+    "src/lib/protocolCompleteness.ts": [
+      "/protocol"
+    ],
+    "src/lib/protocolGuardToast.ts": [
+      "/app/admin/protocol-audit",
+      "/protocol"
+    ],
+    "src/lib/seo/schemas.ts": [
+      "/",
+      "/about",
+      "/audit-limitations",
+      "/faq",
+      "/transparence"
+    ],
+    "src/lib/sha256.ts": [
+      "/app/admin/hospital-audit",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/iec62304",
+      "/app/research"
+    ],
+    "src/lib/simulation/scoring.ts": [
+      "/app/simulation"
+    ],
+    "src/lib/utils.ts": [
+      "/",
+      "/*",
+      "/about",
+      "/about-aquamr",
+      "/access",
+      "/app",
+      "/app/admin",
+      "/app/admin/content-versions",
+      "/app/admin/hospital-audit",
+      "/app/admin/i18n-qa",
+      "/app/admin/institution",
+      "/app/admin/protocol-audit",
+      "/app/admin/system-health",
+      "/app/admin/users",
+      "/app/admin/web-vitals",
+      "/app/analytics",
+      "/app/ci-aki-engine",
+      "/app/digital-twin",
+      "/app/education",
+      "/app/fusion-viewer",
+      "/app/governance",
+      "/app/governance/audit-search",
+      "/app/governance/compliance",
+      "/app/governance/compliance-history",
+      "/app/governance/dpia",
+      "/app/governance/exports",
+      "/app/governance/iec62304",
+      "/app/governance/policies",
+      "/app/l1-decision-board",
+      "/app/logbook",
+      "/app/network",
+      "/app/patients",
+      "/app/patients/:id",
+      "/app/procedure-planner",
+      "/app/registry",
+      "/app/research",
+      "/app/settings",
+      "/app/simulation",
+      "/app/vascscreen",
+      "/app/vascscreen/abi",
+      "/app/vascscreen/analytics",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/dashboard",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results",
+      "/app/vascscreen/study",
+      "/audit-limitations",
+      "/auth",
+      "/changelog",
+      "/checkout/cancel",
+      "/checkout/success",
+      "/contact",
+      "/data-management-plan",
+      "/dev/hero-neon",
+      "/faq",
+      "/incidental-findings",
+      "/legal",
+      "/legal/:section",
+      "/methodology",
+      "/modules",
+      "/onboarding",
+      "/protocol",
+      "/reset-password",
+      "/sap",
+      "/securite-confidentialite",
+      "/support",
+      "/trajectory",
+      "/transparence",
+      "/why"
+    ],
+    "src/lib/validation.ts": [
+      "/app/patients"
+    ],
+    "src/lib/vascscreen/esc2024-criteria.ts": [
+      "/app/vascscreen/abi",
+      "/app/vascscreen/assessment",
+      "/app/vascscreen/patient-entry",
+      "/app/vascscreen/results"
+    ],
+    "src/lib/vasculink/adr-data.ts": [
+      "/app/governance/iec62304",
+      "/app/research"
+    ],
+    "src/lib/vasculink/pdf-builders.ts": [
+      "/app/research"
+    ],
+    "src/pages/About.tsx": [
+      "/about"
+    ],
+    "src/pages/AboutAquaMR.tsx": [
+      "/about-aquamr"
+    ],
+    "src/pages/AuditLimitations.tsx": [
+      "/audit-limitations"
+    ],
+    "src/pages/Auth.tsx": [
+      "/auth"
+    ],
+    "src/pages/Changelog.tsx": [
+      "/changelog"
+    ],
+    "src/pages/CheckoutCancel.tsx": [
+      "/checkout/cancel"
+    ],
+    "src/pages/CheckoutSuccess.tsx": [
+      "/checkout/success"
+    ],
+    "src/pages/Contact.tsx": [
+      "/contact"
+    ],
+    "src/pages/DataManagementPlan.tsx": [
+      "/data-management-plan"
+    ],
+    "src/pages/FAQ.tsx": [
+      "/faq"
+    ],
+    "src/pages/IncidentalFindings.tsx": [
+      "/incidental-findings"
+    ],
+    "src/pages/Landing.tsx": [
+      "/"
+    ],
+    "src/pages/Legal.tsx": [
+      "/legal",
+      "/legal/:section"
+    ],
+    "src/pages/Methodology.tsx": [
+      "/methodology"
+    ],
+    "src/pages/Modules.tsx": [
+      "/modules"
+    ],
+    "src/pages/NotFound.tsx": [
+      "/*"
+    ],
+    "src/pages/Onboarding.tsx": [
+      "/onboarding"
+    ],
+    "src/pages/Pricing.tsx": [
+      "/access"
+    ],
+    "src/pages/Protocol.tsx": [
+      "/protocol"
+    ],
+    "src/pages/ResetPassword.tsx": [
+      "/reset-password"
+    ],
+    "src/pages/SAP.tsx": [
+      "/sap"
+    ],
+    "src/pages/SecurityPrivacy.tsx": [
+      "/securite-confidentialite"
+    ],
+    "src/pages/Support.tsx": [
+      "/support"
+    ],
+    "src/pages/Trajectory.tsx": [
+      "/trajectory"
+    ],
+    "src/pages/Transparency.tsx": [
+      "/transparence"
+    ],
+    "src/pages/WhyVascuLink.tsx": [
+      "/why"
+    ],
+    "src/pages/app/Admin.tsx": [
+      "/app/admin"
+    ],
+    "src/pages/app/Analytics.tsx": [
+      "/app/analytics"
+    ],
+    "src/pages/app/AuditSearch.tsx": [
+      "/app/governance/audit-search"
+    ],
+    "src/pages/app/CIAKIEngine.tsx": [
+      "/app/ci-aki-engine"
+    ],
+    "src/pages/app/ComplianceHistory.tsx": [
+      "/app/governance/compliance-history"
+    ],
+    "src/pages/app/ComplianceScore.tsx": [
+      "/app/governance/compliance"
+    ],
+    "src/pages/app/ContentVersionsAdmin.tsx": [
+      "/app/admin/content-versions"
+    ],
+    "src/pages/app/Dashboard.tsx": [
+      "/app"
+    ],
+    "src/pages/app/DigitalTwin.tsx": [
+      "/app/digital-twin"
+    ],
+    "src/pages/app/Dpia.tsx": [
+      "/app/governance/dpia"
+    ],
+    "src/pages/app/Education.tsx": [
+      "/app/education"
+    ],
+    "src/pages/app/ExportsAudit.tsx": [
+      "/app/governance/exports"
+    ],
+    "src/pages/app/FusionViewer.tsx": [
+      "/app/fusion-viewer"
+    ],
+    "src/pages/app/Governance.tsx": [
+      "/app/governance"
+    ],
+    "src/pages/app/HospitalAuditDashboard.tsx": [
+      "/app/admin/hospital-audit"
+    ],
+    "src/pages/app/I18nQaAdmin.tsx": [
+      "/app/admin/i18n-qa"
+    ],
+    "src/pages/app/IEC62304.tsx": [
+      "/app/governance/iec62304"
+    ],
+    "src/pages/app/InstitutionAdmin.tsx": [
+      "/app/admin/institution"
+    ],
+    "src/pages/app/L1DecisionBoard.tsx": [
+      "/app/l1-decision-board"
+    ],
+    "src/pages/app/LifecyclePolicies.tsx": [
+      "/app/governance/policies"
+    ],
+    "src/pages/app/Logbook.tsx": [
+      "/app/logbook"
+    ],
+    "src/pages/app/Network.tsx": [
+      "/app/network"
+    ],
+    "src/pages/app/PatientDetail.tsx": [
+      "/app/patients/:id"
+    ],
+    "src/pages/app/Patients.tsx": [
+      "/app/patients"
+    ],
+    "src/pages/app/ProcedurePlanner.tsx": [
+      "/app/procedure-planner"
+    ],
+    "src/pages/app/ProtocolAuditAdmin.tsx": [
+      "/app/admin/protocol-audit"
+    ],
+    "src/pages/app/Registry.tsx": [
+      "/app/registry"
+    ],
+    "src/pages/app/Research.tsx": [
+      "/app/research"
+    ],
+    "src/pages/app/Settings.tsx": [
+      "/app/settings"
+    ],
+    "src/pages/app/Simulation.tsx": [
+      "/app/simulation"
+    ],
+    "src/pages/app/SystemHealth.tsx": [
+      "/app/admin/system-health"
+    ],
+    "src/pages/app/UsersAdmin.tsx": [
+      "/app/admin/users"
+    ],
+    "src/pages/app/VascScreen.tsx": [
+      "/app/vascscreen"
+    ],
+    "src/pages/app/VascScreenABI.tsx": [
+      "/app/vascscreen/abi"
+    ],
+    "src/pages/app/VascScreenAnalytics.tsx": [
+      "/app/vascscreen/analytics"
+    ],
+    "src/pages/app/VascScreenAssessment.tsx": [
+      "/app/vascscreen/assessment"
+    ],
+    "src/pages/app/VascScreenDashboard.tsx": [
+      "/app/vascscreen/dashboard"
+    ],
+    "src/pages/app/VascScreenPatientEntry.tsx": [
+      "/app/vascscreen/patient-entry"
+    ],
+    "src/pages/app/VascScreenResults.tsx": [
+      "/app/vascscreen/results"
+    ],
+    "src/pages/app/VascScreenStudy.tsx": [
+      "/app/vascscreen/study"
+    ],
+    "src/pages/app/WebVitalsAdmin.tsx": [
+      "/app/admin/web-vitals"
+    ],
+    "src/pages/dev/HeroNeonQa.tsx": [
+      "/dev/hero-neon"
+    ]
+  },
   "changelog": {
     "sections": [
       {
