@@ -2045,6 +2045,18 @@ export const en = {
         security: "Security",
         removed: "Removed",
         deprecated: "Deprecated",
+        // FR-source keys (from generated changelog when an entry was authored in FR)
+        cadrage_méthodologique: "Methodology framing",
+        ajouté: "Added",
+        modifié: "Changed",
+        "garde-fous": "Guardrails",
+        sécurité: "Security",
+        // DE-source keys (from generated changelog when an entry was authored in DE)
+        methodischer_rahmen: "Methodology framing",
+        hinzugefügt: "Added",
+        geändert: "Changed",
+        schutzmaßnahmen: "Guardrails",
+        sicherheit: "Security",
       },
     },
     common: {
