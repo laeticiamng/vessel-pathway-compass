@@ -24,3 +24,5 @@ jobs:
         run: node scripts/build-changelog.mjs
       - name: Run i18n strict check
         run: node scripts/i18n-strict-check.mjs
+      - name: Run i18n ICU / plural parity check
+        run: node scripts/i18n-icu-check.mjs

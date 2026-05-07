@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "predev": "node scripts/build-changelog.mjs && node scripts/i18n-qa-report.mjs",
-    "prebuild": "node scripts/build-changelog.mjs && node scripts/i18n-strict-check.mjs",
+    "prebuild": "node scripts/build-changelog.mjs && node scripts/i18n-strict-check.mjs && node scripts/i18n-icu-check.mjs",
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
@@ -16,6 +16,7 @@
     "test:i18n": "vitest run src/i18n/__tests__/structures.test.ts src/i18n/__tests__/home-snapshot.test.tsx",
     "i18n:ci": "node scripts/i18n-ci-check.mjs",
     "i18n:strict": "node scripts/i18n-strict-check.mjs",
+    "i18n:icu": "node scripts/i18n-icu-check.mjs",
     "i18n:qa": "node scripts/i18n-qa-report.mjs",
     "i18n:audit": "node scripts/i18n-audit-report.mjs",
     "changelog:build": "node scripts/build-changelog.mjs",

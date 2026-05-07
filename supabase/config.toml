@@ -38,3 +38,7 @@ verify_jwt = false
 # Validates JWT in code via getClaims() and checks role server-side.
 verify_jwt = true
 
+[functions.i18n-record-miss]
+# Validates JWT in code; rejects anonymous callers.
+verify_jwt = true
+

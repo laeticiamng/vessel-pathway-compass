@@ -272,11 +272,13 @@ async function main() {
           perFile[f] = rs;
           for (const r of rs) routes.add(r);
         }
+        const enFallback = flat.en[key];
         perLocale[loc].push({
           key,
           files,
           routes: [...routes].sort(),
           fileRoutes: perFile,
+          enFallback: typeof enFallback === "string" ? enFallback : null,
         });
       }
     }

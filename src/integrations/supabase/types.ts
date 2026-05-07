@@ -867,6 +867,48 @@ export type Database = {
         }
         Relationships: []
       }
+      i18n_missing_keys: {
+        Row: {
+          app_version: string | null
+          bucket_day: string
+          first_seen_at: string
+          id: string
+          key: string
+          last_seen_at: string
+          locale: string
+          occurrences: number
+          reason: string
+          role: string | null
+          route: string | null
+        }
+        Insert: {
+          app_version?: string | null
+          bucket_day?: string
+          first_seen_at?: string
+          id?: string
+          key: string
+          last_seen_at?: string
+          locale: string
+          occurrences?: number
+          reason?: string
+          role?: string | null
+          route?: string | null
+        }
+        Update: {
+          app_version?: string | null
+          bucket_day?: string
+          first_seen_at?: string
+          id?: string
+          key?: string
+          last_seen_at?: string
+          locale?: string
+          occurrences?: number
+          reason?: string
+          role?: string | null
+          route?: string | null
+        }
+        Relationships: []
+      }
       imaging_summaries: {
         Row: {
           case_id: string

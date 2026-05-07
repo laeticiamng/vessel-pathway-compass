@@ -3,6 +3,7 @@ import { en } from "./en";
 import { fr } from "./fr";
 import { de } from "./de";
 import { matchesExpected, emptyForExpected } from "./schema";
+import { reportI18nMiss } from "./missReporter";
 
 export type Language = "en" | "fr" | "de";
 
@@ -78,6 +79,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [misses, setMisses] = useState<I18nMissResult[]>([]);
 
   const recordMiss = useCallback((m: I18nMissResult) => {
+    // Always ship to telemetry in prod (the reporter no-ops in dev).
+    reportI18nMiss({ locale: m.locale, key: m.key, reason: m.reason });
     if (isProd) return; // do not pay the React state cost in production
     setMisses((prev) => {
       const next = [...prev, m];
