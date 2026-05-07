@@ -140,22 +140,17 @@ function extractRoutesFromApp(graph) {
   }
 
   // Per-line scan. App.tsx convention: nested Routes live under a parent
-  // <Route path="/app">…</Route> block; we therefore default the prefix to
-  // "/app" whenever we encounter a relative path.
+  // <Route path="/app">…</Route> block. Track the active prefix.
   const fileToRoutes = new Map();
   const lines = src.split("\n");
   let prefix = "";
   for (const line of lines) {
     if (/<Route\s+path=["']\/app["']/.test(line)) prefix = "/app";
-    if (/<\/Route>/.test(line) && /element=\{<(ProtectedRoute|PublicAppRoute)/.test(line)) {
-      // closing of /app block
-      prefix = "";
-    }
-    const routeMatch = line.match(/<Route\b([^>]*)>/);
-    if (!routeMatch) continue;
-    const attrs = routeMatch[1];
-    const pathAttr = attrs.match(/path=["']([^"']+)["']/);
-    const isIndex = /\bindex\b/.test(attrs);
+    if (/<\/Route>/.test(line)) prefix = "";
+
+    if (!/<Route\b/.test(line)) continue;
+    const pathAttr = line.match(/path=["']([^"']+)["']/);
+    const isIndex = /\bindex\b/.test(line);
 
     let route;
     if (isIndex) route = prefix || "/";
@@ -164,13 +159,12 @@ function extractRoutesFromApp(graph) {
       route = p.startsWith("/") ? p : (prefix.replace(/\/$/, "") + "/" + p);
     } else continue;
 
-    // Find every component referenced in element={ ... } on this line.
-    const elemBlock = attrs.match(/element=\{([^}]*(?:\{[^}]*\}[^}]*)*)\}/);
-    const compNames = new Set();
-    if (elemBlock) {
-      for (const m of elemBlock[1].matchAll(/<\s*(\w+)/g)) compNames.add(m[1]);
-    }
-    for (const name of compNames) {
+    // Capture every JSX component name that appears AFTER `element=` on this line.
+    const elemIdx = line.indexOf("element=");
+    if (elemIdx < 0) continue;
+    const tail = line.slice(elemIdx);
+    for (const m of tail.matchAll(/<\s*(\w+)/g)) {
+      const name = m[1];
       const f = compMap.get(name);
       if (!f) continue;
       if (!fileToRoutes.has(f)) fileToRoutes.set(f, new Set());
