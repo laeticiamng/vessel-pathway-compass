@@ -1340,6 +1340,75 @@ export type Database = {
           },
         ]
       }
+      protocol_audit_saved_views: {
+        Row: {
+          created_at: string
+          description: string | null
+          filters: Json
+          id: string
+          is_shared: boolean
+          name: string
+          owner_id: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          filters?: Json
+          id?: string
+          is_shared?: boolean
+          name: string
+          owner_id: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          filters?: Json
+          id?: string
+          is_shared?: boolean
+          name?: string
+          owner_id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      protocol_security_config_history: {
+        Row: {
+          changed_at: string
+          config_hash: string
+          current_config: Json
+          diff: Json
+          id: string
+          observed_by: string | null
+          previous_config: Json | null
+          request_id: string | null
+          source: string
+        }
+        Insert: {
+          changed_at?: string
+          config_hash: string
+          current_config: Json
+          diff?: Json
+          id?: string
+          observed_by?: string | null
+          previous_config?: Json | null
+          request_id?: string | null
+          source?: string
+        }
+        Update: {
+          changed_at?: string
+          config_hash?: string
+          current_config?: Json
+          diff?: Json
+          id?: string
+          observed_by?: string | null
+          previous_config?: Json | null
+          request_id?: string | null
+          source?: string
+        }
+        Relationships: []
+      }
       quiz_attempts: {
         Row: {
           answers: Json | null

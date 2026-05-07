@@ -18,6 +18,8 @@ import { toast } from "sonner";
 import { pseudonymizeContext } from "@/lib/protocolAuditPseudonymize";
 import { ProtocolAlertsWidget } from "@/components/admin/ProtocolAlertsWidget";
 import { ProtocolGuardConfigPanel } from "@/components/admin/ProtocolGuardConfigPanel";
+import { ProtocolSecurityConfigHistoryPanel } from "@/components/admin/ProtocolSecurityConfigHistoryPanel";
+import { ProtocolAuditSavedViews, type SavedView, type SavedViewFilters } from "@/components/admin/ProtocolAuditSavedViews";
 
 interface GovEvent {
   id: string;
@@ -372,12 +374,36 @@ export default function ProtocolAuditAdmin() {
         {!canSeeRawNetwork && " (network fields pseudonymized for your role)"}.
       </p>
 
+      {/* Saved views (filters + scope + pagination — exports reflect them) */}
+      <div className="mb-4">
+        <ProtocolAuditSavedViews
+          currentFilters={{
+            selectedActions,
+            rangeKey,
+            actorFilter: trimmedActor,
+            requestIdFilter: trimmedRequestId,
+            pageSize,
+          }}
+          onApply={(v: SavedView) => {
+            const f: SavedViewFilters = v.filters;
+            setSelectedActions(Array.isArray(f.selectedActions) ? f.selectedActions : []);
+            setRangeKey(typeof f.rangeKey === "string" ? f.rangeKey : "24h");
+            setActorFilter(f.actorFilter ?? "");
+            setRequestIdFilter(f.requestIdFilter ?? "");
+            setPageSize(typeof f.pageSize === "number" ? f.pageSize : 100);
+            setPage(0);
+            toast.success(`Applied saved view "${v.name}"`);
+          }}
+        />
+      </div>
+
       {/* Security alerts widget + active config (transparency) */}
       <div className="grid lg:grid-cols-3 gap-4 mb-6">
         <div className="lg:col-span-2">
           <ProtocolAlertsWidget
             hours={24}
             canSeeRawNetwork={canSeeRawNetwork}
+            canDrillDown={allowed}
             onDrillDownRequestId={(rid) => {
               setRequestIdFilter(rid);
               setSelectedActions(["protocol.access.alert", "protocol.access.denied", "protocol.access.throttled"]);
@@ -391,6 +417,13 @@ export default function ProtocolAuditAdmin() {
         </div>
         <ProtocolGuardConfigPanel />
       </div>
+
+      {/* Threshold change history (admin / super_admin only by RLS) */}
+      {isAdmin && (
+        <div className="mb-6">
+          <ProtocolSecurityConfigHistoryPanel />
+        </div>
+      )}
 
       {/* Filters */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
