@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predev": "node scripts/build-changelog.mjs",
-    "prebuild": "node scripts/build-changelog.mjs",
+    "predev": "node scripts/build-changelog.mjs && node scripts/i18n-qa-report.mjs",
+    "prebuild": "node scripts/build-changelog.mjs && node scripts/i18n-strict-check.mjs",
     "dev": "vite",
     "build": "vite build",
     "build:dev": "vite build --mode development",
