@@ -28,6 +28,7 @@ import { ComplianceBanner } from "@/components/ComplianceBanner";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 // JSON-LD: pure data module, no React component side-effects
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
+import { headerClasses } from "@/lib/breakpoints";
 import { organizationJsonLd, founderPersonJsonLd, breadcrumbJsonLd } from "@/lib/seo/schemas";
 
 
@@ -216,7 +217,7 @@ export default function Landing() {
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="lg:hidden" aria-label={t("home.nav.openMenu") as string}>
+              <Button variant="ghost" size="icon" className={headerClasses.mobileTrigger} aria-label={t("home.nav.openMenu") as string}>
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
