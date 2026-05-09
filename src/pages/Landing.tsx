@@ -166,19 +166,19 @@ export default function Landing() {
       />
       <header>
       <nav className="fixed top-0 w-full z-50 glass-strong" aria-label={t("home.nav.mainAria")}>
-        <div className="container mx-auto flex items-center justify-between h-16 px-6">
-          <Link to="/" className="flex items-center gap-2.5 min-w-0">
+        <div className="container mx-auto flex items-center justify-between gap-3 h-16 px-6 min-w-0">
+          <Link to="/" className={headerClasses.brandLink}>
             <AquaMRLogo variant="badge" />
-            <span className="flex flex-col leading-none min-w-0">
-              <span className="text-xl font-bold tracking-tight whitespace-nowrap">
+            <span className={headerClasses.brandStack}>
+              <span className={headerClasses.brandWordmark}>
                 {t("branding.programName")}
               </span>
-              <span className="hidden xl:inline text-[10px] font-medium tracking-[0.18em] text-muted-foreground/80 mt-0.5 whitespace-nowrap">
+              <span className={headerClasses.brandSubtitle}>
                 {t("branding.platformName")}
               </span>
             </span>
           </Link>
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8 whitespace-nowrap">
+          <div className={`${headerClasses.desktopNav} shrink-0`}>
             <Link to="/protocol" className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
               {t("home.footerNav.protocol")}
             </Link>
