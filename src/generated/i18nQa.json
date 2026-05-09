@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-09T09:51:56.696Z",
+  "generatedAt": "2026-05-09T11:26:36.355Z",
   "totals": {
     "usedKeys": 1516,
     "missing": {
@@ -1107,6 +1107,9 @@
     ],
     "src/lib/appVersion.ts": [
       "/changelog"
+    ],
+    "src/lib/breakpoints.ts": [
+      "/"
     ],
     "src/lib/contentVersions.ts": [
       "/app/admin/content-versions",
