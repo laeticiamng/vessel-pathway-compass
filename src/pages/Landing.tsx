@@ -216,7 +216,7 @@ export default function Landing() {
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label={t("home.nav.openMenu") as string}>
+              <Button variant="ghost" size="icon" className="lg:hidden" aria-label={t("home.nav.openMenu") as string}>
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
