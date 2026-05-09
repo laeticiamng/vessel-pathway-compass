@@ -167,18 +167,18 @@ export default function Landing() {
       <header>
       <nav className="fixed top-0 w-full z-50 glass-strong" aria-label={t("home.nav.mainAria")}>
         <div className="container mx-auto flex items-center justify-between h-16 px-6">
-          <Link to="/" className="flex items-center gap-2.5">
+          <Link to="/" className="flex items-center gap-2.5 min-w-0">
             <AquaMRLogo variant="badge" />
-            <span className="flex flex-col leading-none">
-              <span className="text-xl font-bold tracking-tight">
+            <span className="flex flex-col leading-none min-w-0">
+              <span className="text-xl font-bold tracking-tight whitespace-nowrap">
                 {t("branding.programName")}
               </span>
-              <span className="hidden sm:inline text-[10px] font-medium tracking-[0.18em] text-muted-foreground/80 mt-0.5">
+              <span className="hidden xl:inline text-[10px] font-medium tracking-[0.18em] text-muted-foreground/80 mt-0.5 whitespace-nowrap">
                 {t("branding.platformName")}
               </span>
             </span>
           </Link>
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-8 whitespace-nowrap">
             <Link to="/protocol" className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
               {t("home.footerNav.protocol")}
             </Link>
@@ -216,7 +216,7 @@ export default function Landing() {
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label={t("home.nav.openMenu") as string}>
+              <Button variant="ghost" size="icon" className="lg:hidden" aria-label={t("home.nav.openMenu") as string}>
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
