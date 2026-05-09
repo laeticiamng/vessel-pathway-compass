@@ -1,0 +1,61 @@
+name: landing-responsive
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  responsive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install
+        run: npm ci || npm install
+      - name: Install Playwright (chromium)
+        run: npx playwright install --with-deps chromium
+      - name: Build app
+        run: npm run build
+      - name: Start preview
+        run: |
+          npx vite preview --port 8080 --strictPort &
+          for i in $(seq 1 30); do
+            curl -sf http://localhost:8080 > /dev/null && break || sleep 2
+          done
+      - name: Run landing responsive suite
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:8080
+        run: |
+          npx playwright test \
+            e2e/landing-responsive.spec.ts \
+            e2e/global-header-responsive.spec.ts \
+            --project=chromium \
+            --reporter=list,html
+      - name: Upload HTML report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-responsive-report
+          path: playwright-report
+          retention-days: 14
+      - name: Upload failure traces & screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-responsive-failures
+          path: |
+            test-results/
+          retention-days: 14
+      - name: Summary
+        if: always()
+        run: |
+          echo "### Landing responsive suite" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "✅ Header switches at the right breakpoints, no hero overlap, no clipped CTAs." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "❌ Responsive regression — see uploaded HTML report and traces." >> "$GITHUB_STEP_SUMMARY"
+          fi
