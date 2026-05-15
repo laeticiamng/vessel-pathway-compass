@@ -28,7 +28,7 @@ const COPY: Record<Language, {
     metadataTitle: "Metadata & repository",
     metadata: [
       { label: "Zenodo DOI", value: "10.5281/zenodo.placeholder", href: "https://zenodo.org/" },
-      { label: "Persistent identifier", value: "ORCID + ROR (CHUV / UNIL)" },
+      { label: "Persistent identifier", value: "ORCID + ROR (Lausanne)" },
       { label: "Metadata standard", value: "DataCite 4.5 + DICOM-SR for imaging" },
     ],
     codeTitle: "Code & AI weights",
@@ -62,7 +62,7 @@ const COPY: Record<Language, {
     metadataTitle: "Métadonnées & dépôt",
     metadata: [
       { label: "DOI Zenodo", value: "10.5281/zenodo.placeholder", href: "https://zenodo.org/" },
-      { label: "Identifiant persistant", value: "ORCID + ROR (CHUV / UNIL)" },
+      { label: "Identifiant persistant", value: "ORCID + ROR (Lausanne)" },
       { label: "Standard métadonnées", value: "DataCite 4.5 + DICOM-SR pour l'imagerie" },
     ],
     codeTitle: "Code & poids IA",
@@ -96,7 +96,7 @@ const COPY: Record<Language, {
     metadataTitle: "Metadaten & Repository",
     metadata: [
       { label: "Zenodo-DOI", value: "10.5281/zenodo.placeholder", href: "https://zenodo.org/" },
-      { label: "Persistenter Identifier", value: "ORCID + ROR (CHUV / UNIL)" },
+      { label: "Persistenter Identifier", value: "ORCID + ROR (Lausanne)" },
       { label: "Metadaten-Standard", value: "DataCite 4.5 + DICOM-SR für Bildgebung" },
     ],
     codeTitle: "Code & KI-Gewichte",

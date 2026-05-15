@@ -98,7 +98,7 @@ export default function About() {
               Academic context
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Academic validation in progress with CHUV / Lausanne (doctoral phase). The platform
+              Academic validation in progress with Lausanne (doctoral phase). The platform
               is decision support, not a CE-marked or FDA-cleared device.
             </p>
           </article>

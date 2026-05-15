@@ -42,7 +42,7 @@ const COPY: Record<Language, {
     s2Body: "Five biases pre-specified in the SAP, with mitigation strategy and reference.",
     biasCols: { type: "Bias type", risk: "Risk", mitigation: "Mitigation strategy", reference: "Reference" },
     biases: [
-      { type: "Spectrum bias", risk: "Cohort skewed toward typical AOMI presentations", mitigation: "Standardised inclusion across CHUV referral channels; report Table 1 by subgroup", reference: "Begg & Greenes 1983" },
+      { type: "Spectrum bias", risk: "Cohort skewed toward typical AOMI presentations", mitigation: "Standardised inclusion across academic referral channels; report Table 1 by subgroup", reference: "Begg & Greenes 1983" },
       { type: "Verification bias", risk: "Reference standard performed only in subset", mitigation: "Begg-Greenes correction; pre-specified verification rule", reference: "STARD-AI 2025" },
       { type: "Measurement bias", risk: "Reader variability on AquaMR images", mitigation: "Two independent readers, κ calibration, adjudication", reference: "Cohen 1968" },
       { type: "AI hallucination", risk: "AI reconstruction introduces non-physical features", mitigation: "3% random audit re-read without AI; DSMB flag if diagnosis changes", reference: "TRIPOD+AI 2024" },
@@ -106,7 +106,7 @@ const COPY: Record<Language, {
     s2Body: "Cinq biais pré-spécifiés dans le SAP, avec stratégie de mitigation et référence.",
     biasCols: { type: "Type de biais", risk: "Risque", mitigation: "Stratégie de mitigation", reference: "Référence" },
     biases: [
-      { type: "Biais de spectre", risk: "Cohorte biaisée vers les présentations AOMI typiques", mitigation: "Inclusion standardisée multi-canaux CHUV ; Table 1 par sous-groupe", reference: "Begg & Greenes 1983" },
+      { type: "Biais de spectre", risk: "Cohorte biaisée vers les présentations AOMI typiques", mitigation: "Inclusion standardisée multi-canaux académiques ; Table 1 par sous-groupe", reference: "Begg & Greenes 1983" },
       { type: "Biais de vérification", risk: "Référence non réalisée chez tous les patients", mitigation: "Correction Begg-Greenes ; règle de vérification pré-spécifiée", reference: "STARD-AI 2025" },
       { type: "Biais de mesure", risk: "Variabilité inter-lecteur sur images AquaMR", mitigation: "Deux lecteurs indépendants, calibration κ, adjudication", reference: "Cohen 1968" },
       { type: "Hallucination IA", risk: "La reconstruction IA introduit des éléments non physiques", mitigation: "Re-lecture aléatoire 3 % sans IA ; flag DSMB si le diagnostic change", reference: "TRIPOD+AI 2024" },
@@ -170,7 +170,7 @@ const COPY: Record<Language, {
     s2Body: "Fünf vorab spezifizierte Bias-Typen mit Mitigationsstrategie und Referenz.",
     biasCols: { type: "Bias-Typ", risk: "Risiko", mitigation: "Mitigationsstrategie", reference: "Referenz" },
     biases: [
-      { type: "Spektrum-Bias", risk: "Kohorte zu typischen PAVK-Präsentationen verzerrt", mitigation: "Standardisierte Einschluss-Kanäle CHUV; Tabelle 1 nach Subgruppe", reference: "Begg & Greenes 1983" },
+      { type: "Spektrum-Bias", risk: "Kohorte zu typischen PAVK-Präsentationen verzerrt", mitigation: "Standardisierte akademische Einschluss-Kanäle; Tabelle 1 nach Subgruppe", reference: "Begg & Greenes 1983" },
       { type: "Verifikations-Bias", risk: "Referenzstandard nur in Teilkohorte", mitigation: "Begg-Greenes-Korrektur; vorab spezifizierte Verifikationsregel", reference: "STARD-AI 2025" },
       { type: "Mess-Bias", risk: "Inter-Reader-Variabilität auf AquaMR-Bildern", mitigation: "Zwei unabhängige Reader, κ-Kalibrierung, Adjudikation", reference: "Cohen 1968" },
       { type: "KI-Halluzination", risk: "KI-Rekonstruktion erzeugt nicht-physische Merkmale", mitigation: "3 % Zufalls-Re-Read ohne KI; DSMB-Flag bei Diagnoseänderung", reference: "TRIPOD+AI 2024" },

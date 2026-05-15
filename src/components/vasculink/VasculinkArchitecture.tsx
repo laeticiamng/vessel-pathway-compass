@@ -14,7 +14,7 @@ import {
 import { useTranslation } from "@/i18n/context";
 
 /**
- * VASCU-LINK — Schéma CHUV-ready.
+ * VASCU-LINK — Schéma scientifique.
  * Reconstruire la fonction angiographique en 4-zéro :
  * Cartographier · Décider · Guider en simulation · Préparer le préclinique.
  *

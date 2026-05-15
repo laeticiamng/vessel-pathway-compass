@@ -1,7 +1,7 @@
 # VASCU-LINK · AquaMR Flow Platform
 
 > Research-grade clinical workflow platform for non-ionizing, contrast-sparing
-> vascular and interventional medicine. Doctoral program (CHUV / Lausanne)
+> vascular and interventional medicine. Doctoral program (Lausanne)
 > built on the AquaMR Flow Platform.
 
 ## What it is (one sentence)

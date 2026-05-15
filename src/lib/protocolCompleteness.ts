@@ -7,7 +7,7 @@
  * rows, the safety section must list explicit triggers, etc.).
  *
  * The audit is deterministic and runs client-side so jury reviewers
- * (CHUV / scientific committee) can verify in real time that no
+ * (scientific committee) can verify in real time that no
  * mandatory section silently disappeared between two locales or two
  * editorial versions.
  */
