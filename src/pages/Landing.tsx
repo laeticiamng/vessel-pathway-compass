@@ -601,6 +601,8 @@ export default function Landing() {
                 <Link to="/protocol" className="hover:text-foreground transition-colors font-semibold text-foreground">{t("home.footerNav.protocol")}</Link>
                 <a href="#platform-complete" className="hover:text-foreground transition-colors">{t("home.footerNav.features")}</a>
                 <Link to="/why" className="hover:text-foreground transition-colors">{t("landing.nav.why")}</Link>
+                <Link to="/visual-chain" className="hover:text-foreground transition-colors">Visual Chain</Link>
+                <Link to="/rsvp" className="hover:text-foreground transition-colors">RSVP</Link>
                 <Link to="/trajectory" className="hover:text-foreground transition-colors">{t("landing.nav.trajectory")}</Link>
                 <Link to="/methodology" className="hover:text-foreground transition-colors">Methodology</Link>
                 <Link to="/sap" className="hover:text-foreground transition-colors">SAP</Link>
