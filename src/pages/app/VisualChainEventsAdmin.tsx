@@ -67,7 +67,7 @@ export default function VisualChainEventsAdmin() {
     enabled: !!isAdmin,
   });
 
-  const applyFilters = (q: ReturnType<typeof supabase.from<"governance_events">> extends infer _ ? any : never) => q;
+  
   const baseQuery = () => {
     let q = supabase
       .from("governance_events")
