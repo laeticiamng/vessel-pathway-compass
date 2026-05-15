@@ -241,6 +241,8 @@ export default function VisualChain() {
             </ul>
           </section>
 
+          <VisualChainEngine />
+
           <p className="mt-12 text-center text-base font-medium text-foreground/90 italic">
             {c.signature}
           </p>
