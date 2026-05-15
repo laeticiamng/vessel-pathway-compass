@@ -778,6 +778,18 @@
     color: hsl(var(--contrast-cyan)) !important;
   }
 
+  /* Manual override (e.g. from the /dev/sculptural-header QA toggle) — disables
+     all transitions/animations within the scoped container regardless of OS. */
+  .force-reduced-motion,
+  .force-reduced-motion *,
+  .force-reduced-motion *::before,
+  .force-reduced-motion *::after {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+  }
 
 
 

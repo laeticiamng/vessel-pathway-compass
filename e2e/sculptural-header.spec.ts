@@ -200,6 +200,94 @@ test.describe("Sculptural header", () => {
         (el) => getComputedStyle(el as HTMLElement).boxShadow,
       );
       expect(shadow && shadow !== "none").toBeTruthy();
+  });
+
+  test("Breadcrumbs expose nav semantics: aria-label + ordered list + nav role", async ({ page }) => {
+    await page.goto("/app/settings");
+    await page.waitForLoadState("networkidle");
+    const crumbs = page.locator("[data-sculptural-breadcrumbs]").first();
+    await expect(crumbs).toBeVisible();
+    await expect(crumbs).toHaveAttribute("aria-label", /breadcrumb/i);
+    // <nav><ol> structure
+    expect(await crumbs.evaluate((el) => el.tagName.toLowerCase())).toBe("nav");
+    await expect(crumbs.locator("ol")).toHaveCount(1);
+    await expect(crumbs.locator("ol > li").first()).toBeVisible();
+  });
+
+  test("Mobile menu exposes nav role and accessible name", async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const page = await context.newPage();
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    const trigger = page.getByRole("button", { name: /menu/i }).first();
+    await expect(trigger).toHaveAttribute("aria-label", /.+/);
+    await trigger.click();
+    const sheet = page.locator("[data-sculptural-mobile-menu]");
+    await expect(sheet).toBeVisible();
+    // Radix Sheet renders role="dialog"
+    expect(await sheet.evaluate((el) => el.getAttribute("role"))).toBe("dialog");
+    await context.close();
+  });
+
+  test("Skip-to-content link: focusable from header, moves focus to #main-content", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    // Tab from the very top of the document — the skip link should be the
+    // first keyboard stop and become visible (not sr-only) when focused.
+    await page.keyboard.press("Tab");
+    const skip = page.locator("[data-skip-link]").first();
+    await expect(skip).toBeFocused();
+    await expect(skip).toHaveAttribute("href", "#main-content");
+    const visible = await skip.evaluate((el) => {
+      const r = el.getBoundingClientRect();
+      return r.width > 1 && r.height > 1;
+    });
+    expect(visible).toBe(true);
+
+    // Activating it focuses the <main id="main-content">.
+    await page.keyboard.press("Enter");
+    const focusedId = await page.evaluate(() => document.activeElement?.id ?? "");
+    expect(focusedId).toBe("main-content");
+  });
+
+  test("/dev/sculptural-header reduce-motion toggle disables underline + magnetic transforms", async ({ page }) => {
+    await page.goto("/dev/sculptural-header");
+    await page.waitForLoadState("networkidle");
+
+    const region = page.locator("[data-qa-demo-region]");
+    await expect(region).toBeVisible();
+    await expect(region).toHaveAttribute("data-force-reduced-motion", "false");
+
+    // Default: underline transition has a non-zero duration.
+    const linkBefore = region.locator("[data-sculptural-link]").first();
+    const durBefore = await linkBefore
+      .locator("span[aria-hidden]")
+      .evaluate((el) => getComputedStyle(el as HTMLElement).transitionDuration);
+    expect(durBefore).not.toMatch(/^0s/);
+
+    // Flip the toggle.
+    await page.locator('[data-testid="force-reduce-switch"]').click();
+    await expect(region).toHaveAttribute("data-force-reduced-motion", "true");
+
+    // Underline transition collapsed to 0s by .force-reduced-motion override.
+    const durAfter = await linkBefore
+      .locator("span[aria-hidden]")
+      .evaluate((el) => getComputedStyle(el as HTMLElement).transitionDuration);
+    expect(durAfter).toMatch(/^0s/);
+
+    // Magnetic logo: simulate hover, transform must remain identity.
+    const magnet = page.locator("[data-qa-magnetic-target]").first();
+    const box = await magnet.boundingBox();
+    if (box) {
+      await page.mouse.move(box.x + box.width * 0.9, box.y + box.height * 0.9);
+      await page.waitForTimeout(150);
+      const wrapper = magnet.locator("xpath=..");
+      const transform = await wrapper.evaluate(
+        (el) => getComputedStyle(el as HTMLElement).transform,
+      );
+      // Identity matrix or 'none'.
+      expect(["none", "matrix(1, 0, 0, 1, 0, 0)"]).toContain(transform);
     }
   });
 });

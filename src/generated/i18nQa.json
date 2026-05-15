@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-15T18:13:25.804Z",
+  "generatedAt": "2026-05-15T19:33:53.911Z",
   "totals": {
     "usedKeys": 1516,
     "missing": {
@@ -8,7 +8,7 @@
       "de": 0
     },
     "changelogSectionIssues": 0,
-    "pagesIndexed": 68
+    "pagesIndexed": 69
   },
   "missingByLocale": {
     "en": [],
@@ -371,6 +371,34 @@
     "src/components/research/ResearchExportButton.tsx": [
       "/app/research"
     ],
+    "src/components/sculpture/EngravedText.tsx": [
+      "/",
+      "/dev/sculptural-header"
+    ],
+    "src/components/sculpture/MaterialSurface.tsx": [
+      "/",
+      "/dev/sculptural-header"
+    ],
+    "src/components/sculpture/RevealOnScroll.tsx": [
+      "/",
+      "/dev/sculptural-header"
+    ],
+    "src/components/sculpture/Sculptural.tsx": [
+      "/",
+      "/dev/sculptural-header"
+    ],
+    "src/components/sculpture/SculpturalBreadcrumbs.tsx": [
+      "/",
+      "/dev/sculptural-header"
+    ],
+    "src/components/sculpture/SculpturalLink.tsx": [
+      "/",
+      "/dev/sculptural-header"
+    ],
+    "src/components/sculpture/index.ts": [
+      "/",
+      "/dev/sculptural-header"
+    ],
     "src/components/simulation/SimulationRunner.tsx": [
       "/app/simulation"
     ],
@@ -486,6 +514,7 @@
       "/contact",
       "/data-management-plan",
       "/dev/hero-neon",
+      "/dev/sculptural-header",
       "/faq",
       "/incidental-findings",
       "/legal",
@@ -709,7 +738,8 @@
       "/auth"
     ],
     "src/components/ui/sheet.tsx": [
-      "/"
+      "/",
+      "/dev/sculptural-header"
     ],
     "src/components/ui/skeleton.tsx": [
       "/app",
@@ -978,8 +1008,15 @@
       "/app/governance/iec62304",
       "/app/research"
     ],
+    "src/hooks/useGlassScroll.ts": [
+      "/"
+    ],
     "src/hooks/useHighContrast.tsx": [
       "/dev/hero-neon"
+    ],
+    "src/hooks/useMagneticHover.ts": [
+      "/",
+      "/dev/sculptural-header"
     ],
     "src/hooks/usePatientData.ts": [
       "/app/patients/:id"
@@ -1149,6 +1186,14 @@
       "/app/admin/protocol-audit",
       "/protocol"
     ],
+    "src/lib/sculpture/tokens.ts": [
+      "/",
+      "/dev/sculptural-header"
+    ],
+    "src/lib/sculpture/variants.ts": [
+      "/",
+      "/dev/sculptural-header"
+    ],
     "src/lib/seo/schemas.ts": [
       "/",
       "/about",
@@ -1222,6 +1267,7 @@
       "/contact",
       "/data-management-plan",
       "/dev/hero-neon",
+      "/dev/sculptural-header",
       "/faq",
       "/incidental-findings",
       "/legal",
@@ -1458,6 +1504,9 @@
     ],
     "src/pages/dev/HeroNeonQa.tsx": [
       "/dev/hero-neon"
+    ],
+    "src/pages/dev/SculpturalHeaderQa.tsx": [
+      "/dev/sculptural-header"
     ]
   },
   "changelog": {

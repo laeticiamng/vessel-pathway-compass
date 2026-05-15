@@ -166,7 +166,7 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-background">
       {/* Skip to content – accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg">
+      <a href="#main-content" data-skip-link className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background">
         {t("landing.footer.skipToContent")}
       </a>
       <SEOHead
@@ -322,7 +322,7 @@ export default function Landing() {
       <ComplianceBanner />
       <AboveHeroFramingLine />
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1} className="focus:outline-none">
       {/* Hero */}
       <section className="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
         <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />

@@ -64,6 +64,13 @@ export function AppLayout() {
       <div className="min-h-screen flex w-full">
         <AppSidebar />
         <div className="flex-1 flex flex-col min-w-0">
+          <a
+            href="#main-content"
+            data-skip-link
+            className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+          >
+            {t("landing.footer.skipToContent")}
+          </a>
           <header
             className={cn(
               "h-14 flex items-center justify-between border-b px-3 sm:px-4 sticky top-0 z-30",
@@ -141,7 +148,7 @@ export function AppLayout() {
               <SculpturalBreadcrumbs crumbs={breadcrumbs} />
             </div>
           )}
-          <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto neon-bg">
+          <main id="main-content" tabIndex={-1} className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto neon-bg focus:outline-none">
             <Outlet />
           </main>
           <RegulatoryDisclaimer />
