@@ -393,6 +393,42 @@ export function RsvpEngine({ initialLevel = "L2" as Level }: { initialLevel?: Le
             })()}
           </div>
         </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-4">
+          <div>
+            <Label htmlFor="rsvp-from" className="text-xs">From</Label>
+            <input id="rsvp-from" type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)}
+              className="mt-1 w-full h-9 rounded-md border border-input bg-background px-2 text-sm" />
+          </div>
+          <div>
+            <Label htmlFor="rsvp-to" className="text-xs">To</Label>
+            <input id="rsvp-to" type="date" value={toDate} onChange={(e) => setToDate(e.target.value)}
+              className="mt-1 w-full h-9 rounded-md border border-input bg-background px-2 text-sm" />
+          </div>
+          <div>
+            <Label className="text-xs">Recommended</Label>
+            <Select value={filterRecommended} onValueChange={setFilterRecommended}>
+              <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Any</SelectItem>
+                <SelectItem value="L1">L1</SelectItem>
+                <SelectItem value="L2">L2</SelectItem>
+                <SelectItem value="L3">L3</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label className="text-xs">Requested</Label>
+            <Select value={filterRequested} onValueChange={setFilterRequested}>
+              <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Any</SelectItem>
+                <SelectItem value="L1">L1</SelectItem>
+                <SelectItem value="L2">L2</SelectItem>
+                <SelectItem value="L3">L3</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
         {items.length === 0 && !historyLoading && (
           <p className="mt-4 text-sm text-muted-foreground">{c.empty}</p>
         )}
