@@ -3075,7 +3075,7 @@ export const fr = {
   // ============= Power calculation =============
   power: {
     title: "Calcul de puissance · cohorte principale prospective (interactif)",
-    description: "Test de non-infériorité unilatéral d'une proportion unique (approximation normale). Ajustez les paramètres pour recalculer le n analysable requis et l'inclusion cible.",
+    description: "Test de non-infériorité à une queue sur une proportion unique (approximation normale). Ajustez les paramètres pour recalculer le n analysable requis et l'inclusion cible.",
     pi0: "π₀ (attendu)",
     delta: "δ (marge)",
     alpha: "α (bilatéral)",
