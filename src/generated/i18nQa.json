@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-15T19:33:53.911Z",
+  "generatedAt": "2026-05-15T22:48:55.754Z",
   "totals": {
-    "usedKeys": 1516,
+    "usedKeys": 1538,
     "missing": {
       "en": 0,
       "fr": 0,
       "de": 0
     },
     "changelogSectionIssues": 0,
-    "pagesIndexed": 69
+    "pagesIndexed": 71
   },
   "missingByLocale": {
     "en": [],
@@ -22,8 +22,14 @@
     "src/components/ComplianceBanner.tsx": [
       "/"
     ],
+    "src/components/LowResourceModeToggle.tsx": [
+      "/"
+    ],
     "src/components/MedRegBadge.tsx": [
       "/"
+    ],
+    "src/components/MedicalDisclaimerStrong.tsx": [
+      "/visual-chain"
     ],
     "src/components/ProbastBadge.tsx": [
       "/app/digital-twin"
@@ -106,11 +112,13 @@
       "/methodology",
       "/modules",
       "/protocol",
+      "/rsvp",
       "/sap",
       "/securite-confidentialite",
       "/support",
       "/trajectory",
       "/transparence",
+      "/visual-chain",
       "/why"
     ],
     "src/components/SubscriptionSettingsCard.tsx": [
@@ -416,7 +424,8 @@
     "src/components/ui/alert.tsx": [
       "/app/admin/web-vitals",
       "/app/governance/compliance",
-      "/app/simulation"
+      "/app/simulation",
+      "/visual-chain"
     ],
     "src/components/ui/avatar.tsx": [
       "/app/settings"
@@ -527,7 +536,8 @@
       "/sap",
       "/securite-confidentialite",
       "/support",
-      "/transparence"
+      "/transparence",
+      "/visual-chain"
     ],
     "src/components/ui/calendar.tsx": [
       "/app/patients/:id"
@@ -589,7 +599,8 @@
     "src/components/ui/checkbox.tsx": [
       "/app/admin/protocol-audit",
       "/app/patients/:id",
-      "/auth"
+      "/auth",
+      "/visual-chain"
     ],
     "src/components/ui/collapsible.tsx": [
       "/app/patients",
@@ -609,7 +620,8 @@
       "/app/patients/:id",
       "/app/research",
       "/app/simulation",
-      "/app/vascscreen/study"
+      "/app/vascscreen/study",
+      "/visual-chain"
     ],
     "src/components/ui/dropdown-menu.tsx": [
       "/",
@@ -775,7 +787,8 @@
       "/app/vascscreen/patient-entry",
       "/app/vascscreen/results",
       "/app/vascscreen/study",
-      "/dev/hero-neon"
+      "/dev/hero-neon",
+      "/dev/sculptural-header"
     ],
     "src/components/ui/table.tsx": [
       "/app",
@@ -1000,6 +1013,9 @@
       "/onboarding",
       "/protocol"
     ],
+    "src/hooks/useDisclaimerAcceptance.ts": [
+      "/visual-chain"
+    ],
     "src/hooks/useExportManifest.ts": [
       "/app/admin/hospital-audit",
       "/app/governance",
@@ -1013,6 +1029,10 @@
     ],
     "src/hooks/useHighContrast.tsx": [
       "/dev/hero-neon"
+    ],
+    "src/hooks/useLowResourceMode.ts": [
+      "/",
+      "/rsvp"
     ],
     "src/hooks/useMagneticHover.ts": [
       "/",
@@ -1282,6 +1302,7 @@
       "/support",
       "/trajectory",
       "/transparence",
+      "/visual-chain",
       "/why"
     ],
     "src/lib/validation.ts": [
@@ -1361,6 +1382,9 @@
     "src/pages/ResetPassword.tsx": [
       "/reset-password"
     ],
+    "src/pages/Rsvp.tsx": [
+      "/rsvp"
+    ],
     "src/pages/SAP.tsx": [
       "/sap"
     ],
@@ -1375,6 +1399,9 @@
     ],
     "src/pages/Transparency.tsx": [
       "/transparence"
+    ],
+    "src/pages/VisualChain.tsx": [
+      "/visual-chain"
     ],
     "src/pages/WhyVascuLink.tsx": [
       "/why"
