@@ -5,12 +5,16 @@
 import type { Variants } from "framer-motion";
 import { EASE, DURATION } from "./tokens";
 
+// Convert tuple to mutable array for framer-motion's Easing type.
+const ease = (t: readonly number[]): [number, number, number, number] =>
+  [t[0], t[1], t[2], t[3]] as [number, number, number, number];
+
 export const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: DURATION.medium, ease: EASE.signature as unknown as number[] },
+    transition: { duration: DURATION.medium, ease: ease(EASE.signature) },
   },
 };
 
@@ -19,7 +23,7 @@ export const maskReveal: Variants = {
   visible: {
     clipPath: "inset(0 0% 0 0)",
     opacity: 1,
-    transition: { duration: DURATION.reveal, ease: EASE.signature as unknown as number[] },
+    transition: { duration: DURATION.reveal, ease: ease(EASE.signature) },
   },
 };
 
@@ -27,7 +31,7 @@ export const slideMask: Variants = {
   hidden: { y: "110%" },
   visible: {
     y: "0%",
-    transition: { duration: DURATION.long, ease: EASE.velvet as unknown as number[] },
+    transition: { duration: DURATION.long, ease: ease(EASE.velvet) },
   },
 };
 
@@ -36,7 +40,7 @@ export const scaleIn: Variants = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: DURATION.medium, ease: EASE.signature as unknown as number[] },
+    transition: { duration: DURATION.medium, ease: ease(EASE.signature) },
   },
 };
 
