@@ -20,6 +20,7 @@ import { AquaMRLogo } from "@/components/branding/AquaMRLogo";
 import { MedRegBadge } from "@/components/MedRegBadge";
 import { NeonGradientText } from "@/components/ui/neon-gradient-text";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { LowResourceModeToggle } from "@/components/LowResourceModeToggle";
 import { FourZeroBanner } from "@/components/landing/FourZeroBanner";
 import { HomeIntroVideoSection } from "@/components/landing/HomeIntroVideoSection";
 import { NonInferioritySection } from "@/components/landing/NonInferioritySection";
@@ -236,6 +237,7 @@ export default function Landing() {
               </DropdownMenuContent>
             </DropdownMenu>
             <ThemeToggle />
+            <LowResourceModeToggle />
           </div>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
@@ -307,6 +309,10 @@ export default function Landing() {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-muted-foreground">{t("topBar.toggleTheme")}</span>
                   <ThemeToggle />
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-muted-foreground">{t("lowResourceMode.label")}</span>
+                  <LowResourceModeToggle />
                 </div>
                 <Button asChild variant="outline" className="mt-2" onClick={() => setMobileOpen(false)}>
                   <Link to="/protocol">{t("home.footerNav.protocol")}</Link>
