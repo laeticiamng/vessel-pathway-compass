@@ -19,7 +19,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 import { useGlassScroll } from "@/hooks/useGlassScroll";
-import { Sculptural } from "@/components/sculpture";
+import { Sculptural, SculpturalBreadcrumbs, type BreadcrumbCrumb } from "@/components/sculpture";
+import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const languages: { code: Language; label: string; flag: string }[] = [
