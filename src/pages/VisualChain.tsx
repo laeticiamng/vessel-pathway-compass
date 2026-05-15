@@ -3,6 +3,7 @@ import { ArrowLeft, Layers, Microscope, Activity, GraduationCap } from "lucide-r
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation, type Language } from "@/i18n/context";
 import { MedicalDisclaimerStrong } from "@/components/MedicalDisclaimerStrong";
+import { VisualChainEngine } from "@/components/visual-chain/VisualChainEngine";
 
 /* ============================================================================
  * /visual-chain — v8.3
