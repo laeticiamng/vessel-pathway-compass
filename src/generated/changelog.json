@@ -1,7 +1,51 @@
 {
-  "generatedAt": "2026-05-15T19:33:53.584Z",
+  "generatedAt": "2026-05-15T22:48:55.493Z",
   "locales": {
     "en": [
+      {
+        "version": "2.3.0",
+        "codename": "v8.3 Visual Chain · RSVP · OMS-compatible",
+        "date": "2026-05-15",
+        "summary": "Reframes the platform around the explicit distinction between the **mechanical revascularization gesture** (catheter, balloon, stent — manual, unchanged) and the **visual chain** (pre-procedure mapping today, in vision intra-procedural guidance) that VASCU-LINK proposes to progressively address with a 4-zero approach (no ionizing radiation, no injected contrast, no helium, radically reduced cost). Adds the `/visual-chain`, `/rsvp`, `/cds/*` and `/global-health` surfaces, the v8.3 strong medical disclaimer, and a low-resource mode toggle that propagates to clinical decision support modules.",
+        "sections": [
+          {
+            "title": "Methodology framing",
+            "items": [
+              "Adds the explicit gesture-vs-visual-chain distinction across new public",
+              "L1 (pre-revascularization mapping) remains the only clinically scoped layer;",
+              "Resource-Stratified Vascular Pathway (RSVP) makes Doppler-first and"
+            ]
+          },
+          {
+            "title": "Added",
+            "items": [
+              "MedicalDisclaimerStrong (v8.3) — banner + first-session acceptance modal",
+              "useLowResourceMode hook + global header toggle persisted under",
+              "Bumps appVersion.ts to v2.3.0 (codename \"v8.3 — Visual Chain · RSVP ·"
+            ]
+          },
+          {
+            "title": "Changed",
+            "items": [
+              "Public meta description rewritten around the visual-chain framing while"
+            ]
+          },
+          {
+            "title": "Guardrails",
+            "items": [
+              "npm run check:release continues to enforce CHANGELOG / README /",
+              "npm run check:overpromise continues to scan Landing / Protocol / landing",
+              "The new disclaimer requires explicit first-session acceptance before any"
+            ]
+          },
+          {
+            "title": "Security",
+            "items": [
+              "_none_ (no schema or auth change in this slice — Supabase migration for"
+            ]
+          }
+        ]
+      },
       {
         "version": "2.2.0",
         "codename": "Methodological framing & non-overpromise guardrails",
