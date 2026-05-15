@@ -4,6 +4,7 @@ import { SEOHead } from "@/components/SEOHead";
 import { useTranslation, type Language } from "@/i18n/context";
 import { MedicalDisclaimerStrong } from "@/components/MedicalDisclaimerStrong";
 import { VisualChainEngine } from "@/components/visual-chain/VisualChainEngine";
+import { VisualChainAudit } from "@/components/visual-chain/VisualChainAudit";
 
 /* ============================================================================
  * /visual-chain — v8.3
@@ -242,6 +243,7 @@ export default function VisualChain() {
           </section>
 
           <VisualChainEngine />
+          <VisualChainAudit />
 
           <p className="mt-12 text-center text-base font-medium text-foreground/90 italic">
             {c.signature}
