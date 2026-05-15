@@ -96,7 +96,7 @@ const COPY: Record<Language, Copy> = {
 };
 
 export default function Rsvp() {
-  const { lang } = useTranslation();
+  const { language: lang } = useTranslation();
   const c = COPY[lang];
   const { enabled: lowResource } = useLowResourceMode();
   const [level, setLevel] = useState<Level>(lowResource ? 1 : 2);
@@ -109,7 +109,7 @@ export default function Rsvp() {
 
   return (
     <>
-      <SEOHead title={c.pageTitle} description={c.pageDesc} canonical="/rsvp" />
+      <SEOHead title={c.pageTitle} description={c.pageDesc} path="/rsvp" />
       <main className="min-h-screen bg-background text-foreground">
         <div className="container mx-auto max-w-4xl px-4 py-10">
           <Link

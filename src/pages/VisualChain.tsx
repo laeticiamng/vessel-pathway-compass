@@ -138,12 +138,12 @@ const COPY: Record<Language, Copy> = {
 };
 
 export default function VisualChain() {
-  const { lang } = useTranslation();
+  const { language: lang } = useTranslation();
   const c = COPY[lang];
 
   return (
     <>
-      <SEOHead title={c.pageTitle} description={c.pageDesc} canonical="/visual-chain" />
+      <SEOHead title={c.pageTitle} description={c.pageDesc} path="/visual-chain" />
       <main className="min-h-screen bg-background text-foreground">
         <div className="container mx-auto max-w-5xl px-4 py-10">
           <Link
