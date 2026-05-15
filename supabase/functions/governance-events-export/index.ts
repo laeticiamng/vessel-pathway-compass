@@ -187,6 +187,18 @@ async function fetchAllPages(
   return out;
 }
 
+async function isCancelled(
+  admin: ReturnType<typeof createClient>,
+  jobId: string,
+): Promise<boolean> {
+  const { data } = await admin
+    .from("governance_export_jobs")
+    .select("status")
+    .eq("id", jobId)
+    .maybeSingle();
+  return data?.status === "cancelled";
+}
+
 async function processJob(
   jobId: string,
   userId: string,
@@ -200,13 +212,29 @@ async function processJob(
   const args = rpcArgs(userId, filters);
 
   try {
+    if (await isCancelled(admin, jobId)) return;
     await admin.from("governance_export_jobs")
       .update({ status: "running", rows_total: total }).eq("id", jobId);
 
-    const rows = await fetchAllPages(admin, args, MAX_ROWS, async (n) => {
+    const rows: Row[] = [];
+    let offset = 0;
+    while (rows.length < MAX_ROWS) {
+      if (await isCancelled(admin, jobId)) return;
+      const limit = Math.min(PAGE_SIZE, MAX_ROWS - rows.length);
+      const { data, error } = await admin.rpc(
+        "governance_events_for_user",
+        { ...args, _limit: limit, _offset: offset },
+      );
+      if (error) throw error;
+      const batch = (data ?? []) as Row[];
+      rows.push(...batch);
       await admin.from("governance_export_jobs")
-        .update({ rows_processed: n }).eq("id", jobId);
-    });
+        .update({ rows_processed: rows.length }).eq("id", jobId);
+      if (batch.length < limit) break;
+      offset += batch.length;
+    }
+
+    if (await isCancelled(admin, jobId)) return;
 
     const path = `${userId}/${jobId}.${format}`;
     const body: Uint8Array | string = format === "csv"
