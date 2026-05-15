@@ -22,8 +22,8 @@ export const Scene1Title: React.FC = () => {
       </div>
       <div style={{ marginTop: 60, height: 2, width: wRule, background: `linear-gradient(90deg, ${COLORS.cyan}, transparent)`, opacity: oRule }} />
       <div style={{ marginTop: 28, fontSize: 32, maxWidth: 1100, lineHeight: 1.3, opacity: oTag }}>
-        Reconstructing angiographic function in <strong style={{ color: COLORS.cyan }}>4-zero</strong>:
-        0 mSv · 0 contrast · 0 helium.
+        v8.3 — Visual Chain · RSVP · OMS-compatible. <strong style={{ color: COLORS.cyan }}>4-zero</strong>:
+        0 radiation · 0 iodine · 0 gadolinium · 0 superiority claim.
       </div>
     </AbsoluteFill>
   );
