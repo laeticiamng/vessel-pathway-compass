@@ -83,6 +83,8 @@ export const fr = {
     institution: "Institution",
     systemHealth: "Santé système",
     hospitalAudit: "Audit hôpital",
+    visualChain: "Chaîne visuelle",
+    rsvp: "RSVP",
   },
 
   command: {

@@ -2027,6 +2027,56 @@ export type Database = {
         }
         Relationships: []
       }
+      visual_chain_assessments: {
+        Row: {
+          case_id: string | null
+          created_at: string
+          created_by: string
+          current_layer: string
+          id: string
+          inputs: Json
+          institution_id: string | null
+          rationale: string | null
+          recommended_layer: string
+          score: Json
+          updated_at: string
+        }
+        Insert: {
+          case_id?: string | null
+          created_at?: string
+          created_by: string
+          current_layer: string
+          id?: string
+          inputs?: Json
+          institution_id?: string | null
+          rationale?: string | null
+          recommended_layer: string
+          score?: Json
+          updated_at?: string
+        }
+        Update: {
+          case_id?: string | null
+          created_at?: string
+          created_by?: string
+          current_layer?: string
+          id?: string
+          inputs?: Json
+          institution_id?: string | null
+          rationale?: string | null
+          recommended_layer?: string
+          score?: Json
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visual_chain_assessments_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       web_vitals: {
         Row: {
           app_version: string | null
@@ -2096,6 +2146,10 @@ export type Database = {
         Returns: undefined
       }
       compliance_score: { Args: never; Returns: Json }
+      compute_visual_chain_recommendation: {
+        Args: { _inputs: Json }
+        Returns: Json
+      }
       count_pending_signoffs: { Args: { _user_id: string }; Returns: number }
       create_notification: {
         Args: {

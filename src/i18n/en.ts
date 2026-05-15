@@ -85,6 +85,8 @@ export const en = {
     institution: "Institution",
     systemHealth: "System Health",
     hospitalAudit: "Hospital Audit",
+    visualChain: "Visual Chain",
+    rsvp: "RSVP",
   },
 
   // Command palette
