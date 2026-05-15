@@ -18,6 +18,7 @@ import { PublicAppRoute } from "./components/PublicAppRoute";
 import { ContentGate } from "./components/ContentGate";
 import { CookieConsent } from "./components/CookieConsent";
 import { ErrorBoundary } from "./components/ErrorBoundary";
+import { LenisProvider } from "@/lib/lenis";
 
 // Lazy-loaded routes
 const Pricing = lazy(() => import("./pages/Pricing"));
@@ -107,6 +108,7 @@ const App = () => (
         <Toaster />
         <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <LenisProvider>
         <CookieConsent />
         {!import.meta.env.PROD && <I18nMissOverlay />}
         <Suspense fallback={<LazyFallback />}>
@@ -205,6 +207,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
         </Suspense>
+        </LenisProvider>
       </BrowserRouter>
         </AuthProvider>
       </TooltipProvider>
