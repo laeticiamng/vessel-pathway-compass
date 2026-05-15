@@ -1,11 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
-import { History, Loader2, RefreshCw } from "lucide-react";
+import { History, Loader2, RefreshCw, FileDown, FileText } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation, type Language } from "@/i18n/context";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
+import { downloadCsv, downloadPdf, type AuditExportRow } from "@/lib/auditExport";
 
 /* ============================================================================
  * VisualChainAudit — P1
@@ -32,6 +33,10 @@ type Copy = {
   recommended: string;
   current: string;
   rationale: string;
+  exportCsv: string;
+  exportPdf: string;
+  pdfTitle: string;
+  csvHeaders: { timestamp: string; recommended: string; current: string; rationale: string };
 };
 
 const COPY: Record<Language, Copy> = {
