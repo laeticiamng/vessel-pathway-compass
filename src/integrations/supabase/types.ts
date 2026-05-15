@@ -867,6 +867,48 @@ export type Database = {
         }
         Relationships: []
       }
+      governance_export_jobs: {
+        Row: {
+          created_at: string
+          download_path: string | null
+          error: string | null
+          filters: Json
+          format: string
+          id: string
+          rows_processed: number
+          rows_total: number | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          download_path?: string | null
+          error?: string | null
+          filters?: Json
+          format: string
+          id?: string
+          rows_processed?: number
+          rows_total?: number | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          download_path?: string | null
+          error?: string | null
+          filters?: Json
+          format?: string
+          id?: string
+          rows_processed?: number
+          rows_total?: number | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       i18n_missing_keys: {
         Row: {
           app_version: string | null
@@ -2237,6 +2279,50 @@ export type Database = {
         }[]
       }
       get_quiz_for_learner: { Args: { _quiz_id: string }; Returns: Json }
+      governance_events_count_for_user: {
+        Args: {
+          _category?: string
+          _current?: string
+          _from?: string
+          _institution?: string
+          _recommended?: string
+          _to?: string
+          _user: string
+        }
+        Returns: number
+      }
+      governance_events_for_user: {
+        Args: {
+          _category?: string
+          _current?: string
+          _from?: string
+          _institution?: string
+          _limit?: number
+          _offset?: number
+          _recommended?: string
+          _to?: string
+          _user: string
+        }
+        Returns: {
+          actor_id: string | null
+          context: Json | null
+          created_at: string
+          event_action: string
+          event_category: string
+          id: string
+          institution_id: string | null
+          severity: string
+          target_entity_id: string | null
+          target_entity_type: string | null
+          target_user_id: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "governance_events"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
