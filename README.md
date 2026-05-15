@@ -1,8 +1,8 @@
 # AquaMR Flow
 
 <!-- VERSION-STAMP -->
-> **Version `v2.2.0`** — Last updated **2026-05-05**
-> _Methodological framing & non-overpromise guardrails_
+> **Version `v2.3.0`** — Last updated **2026-05-15**
+> _v8.3 — Visual Chain · RSVP · OMS-compatible_
 >
 > [![release-checks](https://github.com/laeticiamng/vessel-pathway-compass/actions/workflows/release-checks.yml/badge.svg?branch=main)](https://github.com/laeticiamng/vessel-pathway-compass/actions/workflows/release-checks.yml) — `npm run check:release` verifies that `CHANGELOG.md`, `README.md` and [`src/lib/appVersion.ts`](./src/lib/appVersion.ts) agree on version + date before every publish.
 <!-- /VERSION-STAMP -->
