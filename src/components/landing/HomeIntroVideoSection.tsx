@@ -5,19 +5,19 @@ const COPY: Record<Language, { eyebrow: string; title: string; lead: string; cap
   en: {
     eyebrow: "Programme overview",
     title: "Watch the VASCU-LINK study in 30 seconds",
-    lead: "A short visual brief on the doctoral programme: the clinical gap, the 4-zero approach, the AquaMR Flow Platform, and the L1 → L3 trajectory at CHUV / UNIL.",
+    lead: "A short visual brief on the doctoral programme: the clinical gap, the 4-zero approach, the AquaMR Flow Platform, and the L1 → L3 trajectory at Lausanne.",
     caption: "Silent motion brief · 30 s · 1080p — long-form 3-min version available on request.",
   },
   fr: {
     eyebrow: "Présentation du programme",
     title: "Découvrir l'étude VASCU-LINK en 30 secondes",
-    lead: "Une présentation visuelle courte du programme doctoral : le besoin clinique, l'approche 4-zéro, la plateforme AquaMR Flow et la trajectoire L1 → L3 au CHUV / UNIL.",
+    lead: "Une présentation visuelle courte du programme doctoral : le besoin clinique, l'approche 4-zéro, la plateforme AquaMR Flow et la trajectoire L1 → L3 au Lausanne.",
     caption: "Brief animé sans son · 30 s · 1080p — version longue 3 min disponible sur demande.",
   },
   de: {
     eyebrow: "Programmübersicht",
     title: "Die VASCU-LINK-Studie in 30 Sekunden",
-    lead: "Ein kurzer visueller Überblick über das Doktorandenprogramm: die klinische Lücke, der 4-Null-Ansatz, die AquaMR Flow Platform und der Verlauf L1 → L3 am CHUV / UNIL.",
+    lead: "Ein kurzer visueller Überblick über das Doktorandenprogramm: die klinische Lücke, der 4-Null-Ansatz, die AquaMR Flow Platform und der Verlauf L1 → L3 am Lausanne.",
     caption: "Stiller Motion-Brief · 30 s · 1080p — 3-Minuten-Langfassung auf Anfrage erhältlich.",
   },
 };

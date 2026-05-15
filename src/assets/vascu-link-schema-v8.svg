@@ -35,7 +35,7 @@
   <!-- ========== L1 DIAGNOSE ========== -->
   <rect x="40" y="148" width="1520" height="200" fill="url(#gDiag)" stroke="#1F8A70" stroke-width="2.5" rx="10"/>
   <text x="60" y="178" font-size="19" font-weight="bold" fill="#1F8A70">L1 — DIAGNOSE</text>
-  <text x="60" y="200" font-size="12" fill="#555">Cercle 1 — Noyau PhD obligatoire · Cohorte prospective CHUV/Lausanne (n ≈ 250 analysables, 320 inclus, dropout 25–30 %)</text>
+  <text x="60" y="200" font-size="12" fill="#555">Cercle 1 — Noyau PhD obligatoire · Cohorte prospective Lausanne (n ≈ 250 analysables, 320 inclus, dropout 25–30 %)</text>
 
   <g font-size="12" fill="#1F8A70" text-anchor="middle">
     <rect x="70" y="218" width="350" height="58" fill="#fff" stroke="#1F8A70" stroke-width="1.4" rx="6"/>
@@ -209,6 +209,6 @@
 
   <!-- Footer -->
   <text x="800" y="1190" text-anchor="middle" font-size="11" fill="#555">5 jalons Go/No-Go : J1 (M9) BoM &amp; signal RMN · J2 (M21) contraste flux/statique · J3 (M36) concordance + sous-groupes · J4 (M42) ponction fantôme · J5 (M48) PoC L3 + pré-soumission</text>
-  <text x="800" y="1212" text-anchor="middle" font-size="11" font-style="italic" fill="#0F4C81">Candidate Dr Laëticia Motongane (GLN 7601009569944) · Direction proposée Pr Lucia Mazzolai · CHUV/Lausanne · Avril 2026</text>
+  <text x="800" y="1212" text-anchor="middle" font-size="11" font-style="italic" fill="#0F4C81">Candidate Dr Laëticia Motongane (GLN 7601009569944) · Direction proposée Pr Lucia Mazzolai · Lausanne · Avril 2026</text>
   <text x="800" y="1240" text-anchor="middle" font-size="10" fill="#888">VASCU-LINK schema v8 — proof-grade · ce diagramme expose comment le projet prouve, pas seulement comment il fonctionne</text>
 </svg>

@@ -41,7 +41,7 @@ const COPY: Record<Language, {
     table: {
       headers: ["Stage", "Status", "Function tested"],
       rows: [
-        { id: "l1", stage: "L1 — See & Decide", status: "Clinical validation in progress (CHUV / Lausanne, n ≈ 250)", fn: "Map · Decide", tone: "active" },
+        { id: "l1", stage: "L1 — See & Decide", status: "Clinical validation in progress (Lausanne, n ≈ 250)", fn: "Map · Decide", tone: "active" },
         { id: "l2", stage: "L2 — Simulate & Guide", status: "Research preview (phantom / simulated)", fn: "Simulate · Guide", tone: "preview" },
         { id: "l3", stage: "L3 — Preclinical Intervention", status: "Preclinical only (animal / cadaver)", fn: "Interventional feasibility", tone: "preclinical" },
         { id: "post", stage: "Post-PhD — Selected Revascularisation", status: "Long-term horizon", fn: "Selected elective revascularisation, ambulatory vascular center, hospital backup", tone: "horizon" },
@@ -67,7 +67,7 @@ const COPY: Record<Language, {
     table: {
       headers: ["Étape", "Statut", "Fonction testée"],
       rows: [
-        { id: "l1", stage: "L1 — Voir & Décider", status: "Validation clinique en cours (CHUV / Lausanne, n ≈ 250)", fn: "Cartographier · Décider", tone: "active" },
+        { id: "l1", stage: "L1 — Voir & Décider", status: "Validation clinique en cours (Lausanne, n ≈ 250)", fn: "Cartographier · Décider", tone: "active" },
         { id: "l2", stage: "L2 — Simuler & Guider", status: "Aperçu recherche (fantôme / simulation)", fn: "Simuler · Guider", tone: "preview" },
         { id: "l3", stage: "L3 — Intervention préclinique", status: "Préclinique uniquement (animal / cadavre)", fn: "Faisabilité interventionnelle", tone: "preclinical" },
         { id: "post", stage: "Post-PhD — Revascularisation sélective", status: "Horizon long terme", fn: "Revascularisation élective sélectionnée, centre vasculaire ambulatoire, recours hospitalier", tone: "horizon" },
@@ -93,7 +93,7 @@ const COPY: Record<Language, {
     table: {
       headers: ["Stufe", "Status", "Getestete Funktion"],
       rows: [
-        { id: "l1", stage: "L1 — Sehen & Entscheiden", status: "Klinische Validierung läuft (CHUV / Lausanne, n ≈ 250)", fn: "Kartieren · Entscheiden", tone: "active" },
+        { id: "l1", stage: "L1 — Sehen & Entscheiden", status: "Klinische Validierung läuft (Lausanne, n ≈ 250)", fn: "Kartieren · Entscheiden", tone: "active" },
         { id: "l2", stage: "L2 — Simulieren & Führen", status: "Forschungs-Preview (Phantom / Simulation)", fn: "Simulieren · Führen", tone: "preview" },
         { id: "l3", stage: "L3 — Präklinische Intervention", status: "Nur präklinisch (Tier / Kadaver)", fn: "Interventionelle Machbarkeit", tone: "preclinical" },
         { id: "post", stage: "Post-PhD — Selektive Revaskularisierung", status: "Langfristiger Horizont", fn: "Ausgewählte elektive Revaskularisierung, ambulantes Gefäßzentrum, Klinik-Backup", tone: "horizon" },

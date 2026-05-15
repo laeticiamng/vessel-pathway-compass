@@ -5,7 +5,7 @@ import { useTranslation, type Language } from "@/i18n/context";
  * Protocol Identity Card
  *
  * Quick "5-second read" summary of the L1 protocol — placed at the top of
- * the Protocol page so a thesis jury / CHUV reviewer immediately sees the
+ * the Protocol page so a thesis jury / scientific reviewer immediately sees the
  * 6 doctorally-defensible elements: primary endpoint, population,
  * comparators, secondary outcomes, safety fallback, regulatory status.
  * ========================================================================== */

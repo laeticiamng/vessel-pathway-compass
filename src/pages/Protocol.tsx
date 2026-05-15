@@ -109,7 +109,7 @@ export default function Protocol() {
           </p>
         </motion.section>
 
-        {/* Protocol identity — 5-second read summary for jury / CHUV */}
+        {/* Protocol identity — 5-second read summary for jury / scientific reviewer */}
         <ProtocolIdentityCard />
 
         {/* Versioning, status and editorial history (publicly visible) */}

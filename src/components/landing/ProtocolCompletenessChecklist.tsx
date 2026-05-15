@@ -15,7 +15,7 @@ import {
  * Reads the live i18n dictionary and verifies that the 8 mandatory
  * sections (objective, population, design, comparators, endpoints, stats,
  * safety, limits, disclaimers) are present and non-trivial. Designed so
- * a CHUV reviewer can verify chain-of-evidence at a glance.
+ * a scientific reviewer can verify chain-of-evidence at a glance.
  */
 export function ProtocolCompletenessChecklist() {
   const { t } = useTranslation();
