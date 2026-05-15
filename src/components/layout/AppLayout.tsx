@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Search, Moon, Sun, Globe } from "lucide-react";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
 import { HighContrastToggle } from "@/components/HighContrastToggle";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { useTranslation, Language } from "@/i18n/context";
 import { setI18nReporterRole } from "@/i18n/missReporter";
@@ -19,7 +19,8 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 import { useGlassScroll } from "@/hooks/useGlassScroll";
-import { Sculptural } from "@/components/sculpture";
+import { Sculptural, SculpturalBreadcrumbs, type BreadcrumbCrumb } from "@/components/sculpture";
+import { useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const languages: { code: Language; label: string; flag: string }[] = [
@@ -39,6 +40,19 @@ export function AppLayout() {
   const { t, language, setLanguage } = useTranslation();
   const { roles } = useUserRoles();
   const headerScrolled = useGlassScroll(8);
+  const location = useLocation();
+  const breadcrumbs = useMemo<BreadcrumbCrumb[]>(() => {
+    const segs = location.pathname.split("/").filter(Boolean);
+    if (segs.length === 0) return [];
+    let acc = "";
+    return segs.map((seg, i) => {
+      acc += `/${seg}`;
+      const label = decodeURIComponent(seg)
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (m) => m.toUpperCase());
+      return i === segs.length - 1 ? { label } : { label, to: acc };
+    });
+  }, [location.pathname]);
 
   useEffect(() => {
     const top = ROLE_PRIORITY.find((r) => roles.includes(r)) ?? null;
@@ -122,6 +136,11 @@ export function AppLayout() {
               <NotificationBell />
             </div>
           </header>
+          {breadcrumbs.length > 0 && (
+            <div className="px-3 sm:px-4 py-2 border-b border-border/40 bg-background/40 backdrop-blur-sm">
+              <SculpturalBreadcrumbs crumbs={breadcrumbs} />
+            </div>
+          )}
           <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto neon-bg">
             <Outlet />
           </main>
