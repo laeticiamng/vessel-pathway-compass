@@ -136,6 +136,11 @@ export function AppLayout() {
               <NotificationBell />
             </div>
           </header>
+          {breadcrumbs.length > 0 && (
+            <div className="px-3 sm:px-4 py-2 border-b border-border/40 bg-background/40 backdrop-blur-sm">
+              <SculpturalBreadcrumbs crumbs={breadcrumbs} />
+            </div>
+          )}
           <main className="flex-1 p-3 sm:p-4 md:p-6 overflow-auto neon-bg">
             <Outlet />
           </main>
