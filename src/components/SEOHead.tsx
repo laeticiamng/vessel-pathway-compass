@@ -40,17 +40,19 @@ function clamp(text: string, max: number): string {
 export function SEOHead({
   title,
   description,
-  path = "/",
+  path,
+  canonical,
   noindex = false,
   jsonLd,
   image,
   imageAlt,
   type = "website",
 }: SEOHeadProps) {
-  const fullTitle = path === "/" ? title : `${title} | ${BRAND_SUFFIX}`;
+  const resolvedPath = path ?? canonical ?? "/";
+  const fullTitle = resolvedPath === "/" ? title : `${title} | ${BRAND_SUFFIX}`;
   const safeTitle = clamp(fullTitle, 60);
   const safeDescription = clamp(description, 160);
-  const canonicalUrl = `${BASE_URL}${path}`;
+  const canonicalUrl = `${BASE_URL}${resolvedPath}`;
 
   // Resolve image to an absolute URL when a relative path is provided
   const resolvedImage = !image
