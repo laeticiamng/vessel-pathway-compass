@@ -243,26 +243,51 @@ export default function Landing() {
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72">
-              <div className="flex flex-col gap-6 mt-8">
-                <Link to="/protocol" className="text-sm font-semibold text-primary hover:text-primary/80 transition-colors" onClick={() => setMobileOpen(false)}>
+            <SheetContent
+              side="right"
+              className={cn(
+                "w-72 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+                headerScrolled ? "glass-strong" : "bg-background/90 backdrop-blur-md",
+              )}
+              data-sculptural-mobile-menu
+              data-scrolled={headerScrolled}
+            >
+              <Sculptural strength={3} className="inline-flex">
+                <Link
+                  to="/"
+                  className="inline-flex items-center gap-2 mt-2 no-underline"
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <AquaMRLogo variant="badge" />
+                  <span className="flex flex-col leading-tight">
+                    <span className="text-sm font-semibold text-foreground">
+                      {t("branding.programName")}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {t("branding.platformName")}
+                    </span>
+                  </span>
+                </Link>
+              </Sculptural>
+              <div className="flex flex-col gap-5 mt-8">
+                <SculpturalLink to="/protocol" tone="primary" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("home.footerNav.protocol")}
-                </Link>
-                <a href="#platform-complete" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                </SculpturalLink>
+                <SculpturalLink href="#platform-complete" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.explore")}
-                </a>
-                <Link to="/why" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                </SculpturalLink>
+                <SculpturalLink to="/why" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.why")}
-                </Link>
-                <Link to="/trajectory" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                </SculpturalLink>
+                <SculpturalLink to="/trajectory" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.trajectory")}
-                </Link>
-                <Link to="/about-aquamr" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                </SculpturalLink>
+                <SculpturalLink to="/about-aquamr" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.aboutAquaMR")}
-                </Link>
-                <Link to="/auth" className="text-sm font-medium hover:text-primary transition-colors" onClick={() => setMobileOpen(false)}>
+                </SculpturalLink>
+                <SculpturalLink to="/auth" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.signIn")}
-                </Link>
+                </SculpturalLink>
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-muted-foreground" />
                   <div className="flex gap-1">
