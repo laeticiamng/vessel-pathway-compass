@@ -287,6 +287,12 @@ export default function Landing() {
                 <SculpturalLink to="/why" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.why")}
                 </SculpturalLink>
+                <SculpturalLink to="/visual-chain" size="lg" onClick={() => setMobileOpen(false)}>
+                  Visual Chain
+                </SculpturalLink>
+                <SculpturalLink to="/rsvp" size="lg" onClick={() => setMobileOpen(false)}>
+                  RSVP
+                </SculpturalLink>
                 <SculpturalLink to="/trajectory" size="lg" onClick={() => setMobileOpen(false)}>
                   {t("landing.nav.trajectory")}
                 </SculpturalLink>
