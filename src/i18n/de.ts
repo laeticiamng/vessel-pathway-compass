@@ -3150,4 +3150,50 @@ export const de = {
       why: "Warum VASCU-LINK",
     },
   },
+
+  // v8.3 — Verstärkter medizinischer Hinweis (CDS-Oberflächen)
+  medicalDisclaimerStrong: {
+    title: "Medizinischer Hinweis · VASCU-LINK v8.3",
+    intro:
+      "Dies ist ein Forschungsprototyp eines klinischen Entscheidungsunterstützungssystems (CDSS) in der Gefäßmedizin.",
+    points: {
+      notDevice:
+        "Kein Medizinprodukt — nicht zertifiziert nach MDR / FDA / Swissmedic.",
+      notReplacement: "Ersetzt das klinische Urteil nicht.",
+      notImaging:
+        "Ersetzt die Bildgebung nicht, wenn sie verfügbar und indiziert ist.",
+      notGesture:
+        "Führt oder leitet die mechanische Revaskularisation nicht.",
+      decisionSupport:
+        "Ergebnisse sind Entscheidungsunterstützung, keine Diagnosen.",
+      researchOnly: "Nur für Forschungs- und Lehrzwecke.",
+      consultLocal:
+        "Konsultieren Sie stets Ihre lokalen Protokolle und Ihr klinisches Team.",
+    },
+    architecture:
+      "Architektur ausgelegt auf Konformität mit MDR / IEC 62304 / ISO 14971. Derzeit nicht zertifiziert.",
+    gestureNote:
+      "Die mechanische Revaskularisation (Katheter, Ballon, Stent) ist ein manueller Eingriff Ihres qualifizierten Gefäßteams und wird durch dieses Werkzeug nicht verändert. Was wir schrittweise abdecken möchten, ist die visuelle Komponente (präoperative Kartierung und perspektivisch intraoperative Führung) mit einem 4-Zero-Ansatz.",
+    qualification:
+      "Die Nutzung dieses Werkzeugs setzt voraus, dass Sie eine qualifizierte medizinische Fachkraft sind, die innerhalb Ihres Tätigkeitsbereichs handelt.",
+    acceptCheckbox: "Ich habe diesen Hinweis gelesen und akzeptiere ihn.",
+    acceptButton: "Akzeptieren und fortfahren",
+    declineButton: "Ablehnen",
+    declinedNotice:
+      "Sie haben den medizinischen Hinweis abgelehnt. Klinische Entscheidungsunterstützungsmodule sind nicht verfügbar.",
+    bannerTitle: "Forschungs-CDSS · kein Medizinprodukt",
+    bannerLink: "Vollständigen Hinweis lesen",
+  },
+
+  // v8.3 — Modus für ressourcenarme Umgebungen
+  lowResourceMode: {
+    label: "Modus für ressourcenarme Umgebungen",
+    descriptionShort:
+      "Setzt den RSVP standardmäßig auf Stufe 1 (keine erweiterte Bildgebung).",
+    descriptionLong:
+      "Wenn aktiviert, stellen sich die klinischen Entscheidungsunterstützungsmodule und der ressourcenstratifizierte Gefäßpfad standardmäßig auf Stufe 1 ein — keine erweiterte Bildgebung verfügbar. Nützlich in ressourcenarmen Umgebungen oder zum Üben einer Entscheidung, wenn nur Doppler und klinische Untersuchung zugänglich sind.",
+    on: "An",
+    off: "Aus",
+    toggleAriaLabel: "Modus für ressourcenarme Umgebungen umschalten",
+  },
 };

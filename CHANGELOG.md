@@ -1,5 +1,53 @@
 # Changelog
 
+## v2.3.0 — v8.3 Visual Chain · RSVP · OMS-compatible (2026-05-15)
+
+Reframes the platform around the explicit distinction between the **mechanical
+revascularization gesture** (catheter, balloon, stent — manual, unchanged) and
+the **visual chain** (pre-procedure mapping today, in vision intra-procedural
+guidance) that VASCU-LINK proposes to progressively address with a 4-zero
+approach (no ionizing radiation, no injected contrast, no helium, radically
+reduced cost). Adds the `/visual-chain`, `/rsvp`, `/cds/*` and `/global-health`
+surfaces, the v8.3 strong medical disclaimer, and a low-resource mode toggle
+that propagates to clinical decision support modules.
+
+### Methodology framing
+- Adds the explicit gesture-vs-visual-chain distinction across new public
+  surfaces, in line with the diagnostic concordance / pragmatic
+  non-inferiority rationale (no superiority claim against hospital MRI / CTA /
+  catheter angiography).
+- L1 (pre-revascularization mapping) remains the only clinically scoped layer;
+  L2 (intra-procedural guidance) and L3 (preclinical interventional) are
+  explicitly tagged as research preview / preclinical only with no human
+  application.
+- Resource-Stratified Vascular Pathway (RSVP) makes Doppler-first and
+  imaging-availability constraints first-class on every CDS module.
+
+### Added
+- `MedicalDisclaimerStrong` (v8.3) — banner + first-session acceptance modal
+  gated by `vlink_disclaimer_accepted_v83` (hook `useDisclaimerAcceptance`).
+- `useLowResourceMode` hook + global header toggle persisted under
+  `vlink_low_resource_mode`, propagated to CDS and RSVP modules.
+- Bumps `appVersion.ts` to v2.3.0 (codename "v8.3 — Visual Chain · RSVP ·
+  OMS-compatible") and updates the meta-description to reflect the visual-
+  chain framing.
+
+### Changed
+- Public meta description rewritten around the visual-chain framing while
+  keeping the research-prototype / non-medical-device disclaimer.
+
+### Guardrails
+- `npm run check:release` continues to enforce CHANGELOG / README /
+  appVersion.ts coherence.
+- `npm run check:overpromise` continues to scan Landing / Protocol / landing
+  components / i18n bundles for superiority and replacement claims.
+- The new disclaimer requires explicit first-session acceptance before any
+  CDS surface is interactive.
+
+### Security
+- _none_ (no schema or auth change in this slice — Supabase migration for
+  `clinical_decisions_log` lands with the CDS phase).
+
 ## v2.2.0 — Methodological framing & non-overpromise guardrails (2026-05-05)
 
 Reinforces academic clarity for the CHUV submission: VASCU-LINK / AquaMR Flow

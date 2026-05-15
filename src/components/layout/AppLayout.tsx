@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Search, Moon, Sun, Globe } from "lucide-react";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
 import { HighContrastToggle } from "@/components/HighContrastToggle";
+import { LowResourceModeToggle } from "@/components/LowResourceModeToggle";
 import { useState, useEffect, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { useTranslation, Language } from "@/i18n/context";
@@ -140,6 +141,7 @@ export function AppLayout() {
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-transform dark:rotate-0 dark:scale-100" />
               </Button>
               <HighContrastToggle />
+              <LowResourceModeToggle />
               <NotificationBell />
             </div>
           </header>
