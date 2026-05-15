@@ -18,6 +18,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
+import { useGlassScroll } from "@/hooks/useGlassScroll";
+import { Sculptural } from "@/components/sculpture";
+import { cn } from "@/lib/utils";
 
 const languages: { code: Language; label: string; flag: string }[] = [
   { code: "en", label: "English", flag: "🇬🇧" },
@@ -35,6 +38,7 @@ export function AppLayout() {
   const { theme, setTheme } = useTheme();
   const { t, language, setLanguage } = useTranslation();
   const { roles } = useUserRoles();
+  const headerScrolled = useGlassScroll(8);
 
   useEffect(() => {
     const top = ROLE_PRIORITY.find((r) => roles.includes(r)) ?? null;
@@ -46,9 +50,21 @@ export function AppLayout() {
       <div className="min-h-screen flex w-full">
         <AppSidebar />
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="h-14 flex items-center justify-between border-b px-3 sm:px-4 glass-strong sticky top-0 z-30">
+          <header
+            className={cn(
+              "h-14 flex items-center justify-between border-b px-3 sm:px-4 sticky top-0 z-30",
+              "transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+              headerScrolled
+                ? "glass-strong border-border/60 shadow-[0_4px_16px_hsl(var(--foreground)/0.05)]"
+                : "bg-background/60 backdrop-blur-md border-transparent",
+            )}
+            data-sculptural-header
+            data-scrolled={headerScrolled}
+          >
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <SidebarTrigger />
+              <Sculptural strength={2}>
+                <SidebarTrigger />
+              </Sculptural>
               <Button
                 variant="outline"
                 size="sm"
