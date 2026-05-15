@@ -86,6 +86,7 @@ const VascScreenDashboard = lazy(() => import("./pages/app/VascScreenDashboard")
 const VascScreenAnalytics = lazy(() => import("./pages/app/VascScreenAnalytics"));
 const VascScreenStudy = lazy(() => import("./pages/app/VascScreenStudy"));
 const HeroNeonQa = lazy(() => import("./pages/dev/HeroNeonQa"));
+const SculpturalHeaderQa = lazy(() => import("./pages/dev/SculpturalHeaderQa"));
 
 const queryClient = new QueryClient();
 
@@ -144,6 +145,7 @@ const App = () => (
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/cancel" element={<CheckoutCancel />} />
           {!import.meta.env.PROD && <Route path="/dev/hero-neon" element={<HeroNeonQa />} />}
+          {!import.meta.env.PROD && <Route path="/dev/sculptural-header" element={<SculpturalHeaderQa />} />}
 
           {/* Semi-public: visible with content gate */}
           <Route path="/app" element={<PublicAppRoute />}>
