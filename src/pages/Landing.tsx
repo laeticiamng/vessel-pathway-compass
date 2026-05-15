@@ -91,6 +91,12 @@ const FourZeroPillars = lazy(() =>
 const ProximityMedicineCard = lazy(() =>
   import("@/components/vasculink/ProximityMedicineCard").then((m) => ({ default: m.ProximityMedicineCard }))
 );
+const MaterialsScroll = lazy(() =>
+  import("@/components/landing/MaterialsScroll").then((m) => ({ default: m.MaterialsScroll }))
+);
+const EngineeringExploded = lazy(() =>
+  import("@/components/landing/EngineeringExploded").then((m) => ({ default: m.EngineeringExploded }))
+);
 
 // Lightweight skeleton placeholder rendered while a lazy section loads.
 const SectionFallback = () => (
@@ -378,6 +384,12 @@ export default function Landing() {
       <ProtocolHighlightBanner />
 
       <PlatformCompletenessSection />
+
+      {/* Sculptural narrative — materials parchment + engineering exploded view */}
+      <Suspense fallback={<SectionFallback />}>
+        <MaterialsScroll />
+        <EngineeringExploded />
+      </Suspense>
 
       {/* Methodological framing — concordance / pragmatic non-inferiority */}
       <NonInferioritySection />
