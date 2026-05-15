@@ -26,7 +26,7 @@ await renderMedia({
   composition,
   serveUrl: bundled,
   codec: "h264",
-  outputLocation: "/dev-server/public/vascu-link-intro.mp4",
+  outputLocation: "/mnt/documents/vascu-link-intro.mp4",
   puppeteerInstance: browser,
   muted: true,
   concurrency: 1,
