@@ -30,6 +30,9 @@ import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
 import { homeFaqJsonLd, complianceFaqJsonLd } from "@/components/landing/jsonLd";
 import { headerClasses } from "@/lib/breakpoints";
 import { organizationJsonLd, founderPersonJsonLd, breadcrumbJsonLd } from "@/lib/seo/schemas";
+import { Sculptural, SculpturalLink } from "@/components/sculpture";
+import { useGlassScroll } from "@/hooks/useGlassScroll";
+import { cn } from "@/lib/utils";
 
 
 /* -------------------------------------------------------------------------
@@ -113,6 +116,7 @@ export default function Landing() {
   const { t, language, setLanguage } = useTranslation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const headerScrolled = useGlassScroll(12);
   const langLabels: Record<Language, string> = { en: "EN", fr: "FR", de: "DE" };
 
   useEffect(() => {
@@ -172,38 +176,50 @@ export default function Landing() {
         jsonLd={structuredData}
       />
       <header>
-      <nav className="fixed top-0 w-full z-50 glass-strong" aria-label={t("home.nav.mainAria")}>
+      <nav
+        className={cn(
+          "fixed top-0 w-full z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]",
+          headerScrolled
+            ? "glass-strong border-b border-border/50 shadow-[0_8px_24px_hsl(var(--foreground)/0.06)]"
+            : "bg-background/40 backdrop-blur-md border-b border-transparent",
+        )}
+        aria-label={t("home.nav.mainAria")}
+        data-sculptural-header
+        data-scrolled={headerScrolled}
+      >
         <div className="container mx-auto flex items-center justify-between gap-3 h-16 px-6 min-w-0">
-          <Link to="/" className={headerClasses.brandLink}>
-            <AquaMRLogo variant="badge" />
-            <span className={headerClasses.brandStack}>
-              <span className={headerClasses.brandWordmark}>
-                {t("branding.programName")}
+          <Sculptural strength={3} className={headerClasses.brandLink}>
+            <Link to="/" className={cn(headerClasses.brandLink, "no-underline")}>
+              <AquaMRLogo variant="badge" />
+              <span className={headerClasses.brandStack}>
+                <span className={headerClasses.brandWordmark}>
+                  {t("branding.programName")}
+                </span>
+                <span className={headerClasses.brandSubtitle}>
+                  {t("branding.platformName")}
+                </span>
               </span>
-              <span className={headerClasses.brandSubtitle}>
-                {t("branding.platformName")}
-              </span>
-            </span>
-          </Link>
+            </Link>
+          </Sculptural>
           <div className={`${headerClasses.desktopNav} shrink-0`}>
-            <Link to="/protocol" className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
+            <SculpturalLink to="/protocol" tone="primary">
               {t("home.footerNav.protocol")}
-            </Link>
-            <a href="#platform-complete" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </SculpturalLink>
+            <SculpturalLink href="#platform-complete">
               {t("landing.nav.explore")}
-            </a>
-            <Link to="/why" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </SculpturalLink>
+            <SculpturalLink to="/why">
               {t("landing.nav.why")}
-            </Link>
-            <Link to="/trajectory" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </SculpturalLink>
+            <SculpturalLink to="/trajectory">
               {t("landing.nav.trajectory")}
-            </Link>
-            <Link to="/about-aquamr" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </SculpturalLink>
+            <SculpturalLink to="/about-aquamr">
               {t("landing.nav.aboutAquaMR")}
-            </Link>
-            <Link to="/auth" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+            </SculpturalLink>
+            <SculpturalLink to="/auth">
               {t("landing.nav.signIn")}
-            </Link>
+            </SculpturalLink>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="gap-1.5">
