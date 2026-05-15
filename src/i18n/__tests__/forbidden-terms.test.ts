@@ -24,6 +24,19 @@ const I18N_DIR = resolve(__dirname, "..");
 const TEMPLATE_DIRS = [resolve(ROOT, "public")];
 const TEMPLATE_EXTENSIONS = new Set([".html", ".htm", ".md", ".txt", ".svg"]);
 
+// Source roots that feed PDF / CSV exports. Any forbidden term reachable from
+// these files would leak into a downloaded artefact regardless of which filter
+// the user applies in the UI.
+const EXPORT_SOURCE_DIRS = [
+  resolve(ROOT, "src/lib"),
+  resolve(ROOT, "src/data"),
+  resolve(ROOT, "src/generated"),
+  resolve(ROOT, "src/components"),
+  resolve(ROOT, "src/pages"),
+  resolve(ROOT, "supabase/functions"),
+];
+const EXPORT_SOURCE_EXTENSIONS = new Set([".ts", ".tsx", ".json", ".md", ".txt"]);
+
 // Word-boundary, case-insensitive. "Unilatéral" handled separately to keep
 // the message specific.
 const FORBIDDEN = [
@@ -76,6 +89,17 @@ describe("forbidden terms guard", () => {
   it("public templates must not contain CHUV / UNIL / unilatéral", () => {
     const files = TEMPLATE_DIRS.flatMap((dir) =>
       listFiles(dir, (p) => TEMPLATE_EXTENSIONS.has(extname(p))),
+    );
+    const hits = scan(files);
+    expect(hits, hits.join("\n")).toEqual([]);
+  });
+
+  it("PDF/CSV export sources must not embed CHUV / UNIL / unilatéral", () => {
+    // Defensive scan: every string reachable from a PDF or CSV builder is
+    // checked, so no filter combination can leak the forbidden terms into a
+    // downloaded artefact.
+    const files = EXPORT_SOURCE_DIRS.flatMap((dir) =>
+      listFiles(dir, (p) => EXPORT_SOURCE_EXTENSIONS.has(extname(p))),
     );
     const hits = scan(files);
     expect(hits, hits.join("\n")).toEqual([]);
