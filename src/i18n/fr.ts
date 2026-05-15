@@ -3149,4 +3149,49 @@ export const fr = {
       why: "Pourquoi VASCU-LINK",
     },
   },
+
+  // v8.3 — Avertissement médical renforcé (surfaces CDS)
+  medicalDisclaimerStrong: {
+    title: "Avertissement médical · VASCU-LINK v8.3",
+    intro:
+      "Ceci est un prototype de recherche pour un système d'aide à la décision clinique (CDSS) en pathologie vasculaire.",
+    points: {
+      notDevice:
+        "N'est pas un dispositif médical — non certifié MDR / FDA / Swissmedic.",
+      notReplacement: "Ne remplace pas le jugement clinique.",
+      notImaging:
+        "Ne remplace pas l'imagerie lorsqu'elle est disponible et indiquée.",
+      notGesture:
+        "N'effectue ni ne guide le geste mécanique de revascularisation.",
+      decisionSupport:
+        "Les sorties sont une aide à la décision, et non un diagnostic.",
+      researchOnly: "Réservé à un usage de recherche et d'enseignement.",
+      consultLocal:
+        "Toujours consulter vos protocoles locaux et votre équipe clinique.",
+    },
+    architecture:
+      "Architecture conçue pour viser la conformité MDR / IEC 62304 / ISO 14971. Non certifiée à ce stade.",
+    gestureNote:
+      "Le geste mécanique de revascularisation (cathéter, ballon, stent) est une intervention manuelle réalisée par votre équipe vasculaire qualifiée et n'est pas modifié par cet outil. Ce que nous proposons de couvrir progressivement, c'est la composante visuelle (cartographie pré-procédure et, en perspective, guidage peropératoire) avec une approche 4-zéro.",
+    qualification:
+      "L'utilisation de cet outil implique que vous êtes un professionnel de santé qualifié agissant dans votre champ de pratique.",
+    acceptCheckbox: "J'ai lu et j'accepte cet avertissement.",
+    acceptButton: "Accepter et continuer",
+    declineButton: "Refuser",
+    declinedNotice:
+      "Vous avez refusé l'avertissement médical. Les modules d'aide à la décision clinique ne sont pas accessibles.",
+    bannerTitle: "CDSS de recherche · pas un dispositif médical",
+    bannerLink: "Lire l'avertissement complet",
+  },
+
+  // v8.3 — Mode faibles ressources
+  lowResourceMode: {
+    label: "Mode faibles ressources",
+    descriptionShort: "Force le RSVP au Niveau 1 (pas d'imagerie avancée).",
+    descriptionLong:
+      "Lorsqu'il est activé, les modules d'aide à la décision et la trajectoire vasculaire stratifiée par ressources se positionnent par défaut au Niveau 1 — sans imagerie avancée. Utile en contexte à ressources limitées ou pour répéter une décision quand seuls le Doppler et l'examen clinique sont accessibles.",
+    on: "Activé",
+    off: "Désactivé",
+    toggleAriaLabel: "Activer ou désactiver le mode faibles ressources",
+  },
 };

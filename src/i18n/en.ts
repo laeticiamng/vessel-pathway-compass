@@ -3186,4 +3186,45 @@ export const en = {
       why: "Why VASCU-LINK",
     },
   },
+
+  // v8.3 — Strong medical disclaimer (CDS surfaces)
+  medicalDisclaimerStrong: {
+    title: "Medical disclaimer · VASCU-LINK v8.3",
+    intro:
+      "This is a research prototype for a clinical decision support system (CDSS) in vascular care.",
+    points: {
+      notDevice: "Not a medical device — not certified MDR / FDA / Swissmedic.",
+      notReplacement: "Does not replace clinical judgement.",
+      notImaging: "Does not replace imaging when available and indicated.",
+      notGesture:
+        "Does not perform or guide the mechanical gesture of revascularization.",
+      decisionSupport: "Outputs are decision support, not diagnoses.",
+      researchOnly: "For research and educational use only.",
+      consultLocal: "Always consult your local protocols and your clinical team.",
+    },
+    architecture:
+      "Architecture designed to target MDR / IEC 62304 / ISO 14971 compliance. Not certified at this stage.",
+    gestureNote:
+      "The mechanical gesture of revascularization (catheter, balloon, stent) is a manual intervention performed by your qualified vascular team and is unchanged by this tool. What we propose to address progressively is the visual component (pre-procedure mapping and, in vision, intra-procedural guidance) with a 4-zero approach.",
+    qualification:
+      "Use of this tool implies acceptance that you are a qualified healthcare professional acting within your scope of practice.",
+    acceptCheckbox: "I have read and accept this disclaimer.",
+    acceptButton: "Accept and continue",
+    declineButton: "Decline",
+    declinedNotice:
+      "You have declined the medical disclaimer. Clinical decision support modules are not available.",
+    bannerTitle: "Research CDSS · not a medical device",
+    bannerLink: "Read the full disclaimer",
+  },
+
+  // v8.3 — Low-resource mode toggle
+  lowResourceMode: {
+    label: "Low-resource mode",
+    descriptionShort: "Defaults to RSVP Level 1 (no advanced imaging).",
+    descriptionLong:
+      "When enabled, clinical decision support modules and the Resource-Stratified Vascular Pathway default to Level 1 — no advanced imaging available. Useful in resource-limited settings or for rehearsing decisions when only Doppler and clinical examination are accessible.",
+    on: "On",
+    off: "Off",
+    toggleAriaLabel: "Toggle low-resource mode",
+  },
 };
