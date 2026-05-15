@@ -212,6 +212,12 @@ export default function Landing() {
             <SculpturalLink to="/why">
               {t("landing.nav.why")}
             </SculpturalLink>
+            <SculpturalLink to="/visual-chain">
+              Visual Chain
+            </SculpturalLink>
+            <SculpturalLink to="/rsvp">
+              RSVP
+            </SculpturalLink>
             <SculpturalLink to="/trajectory">
               {t("landing.nav.trajectory")}
             </SculpturalLink>
