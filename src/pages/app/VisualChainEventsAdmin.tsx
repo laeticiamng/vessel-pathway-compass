@@ -17,15 +17,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronLeft, ChevronRight, Shield, FileDown, FileText } from "lucide-react";
-import { downloadCsv, downloadPdf, type AuditExportRow } from "@/lib/auditExport";
+import { ChevronLeft, ChevronRight, Shield, FileDown, FileText, Loader2 } from "lucide-react";
 import { GovernanceEventDetail, type GovernanceEvent } from "@/components/governance/GovernanceEventDetail";
+import { ExportJobsPanel } from "@/components/governance/ExportJobsPanel";
 import { toast } from "sonner";
 
 const PAGE_SIZE = 25;
+const SYNC_THRESHOLD = 1000;
 
 type Institution = { id: string; name: string };
 type CategoryFilter = "all" | "visual_chain" | "rsvp";
+type LayerFilter = "any" | "L1" | "L2" | "L3" | "Post-PhD";
 
 export default function VisualChainEventsAdmin() {
   const { user } = useAuth();
@@ -48,13 +50,16 @@ export default function VisualChainEventsAdmin() {
 
   const [category, setCategory] = useState<CategoryFilter>("all");
   const [institution, setInstitution] = useState<string>("all");
+  const [recommended, setRecommended] = useState<LayerFilter>("any");
+  const [current, setCurrent] = useState<LayerFilter>("any");
   const [from, setFrom] = useState<string>("");
   const [to, setTo] = useState<string>("");
   const [page, setPage] = useState(0);
+  const [exporting, setExporting] = useState(false);
   const [selected, setSelected] = useState<GovernanceEvent | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
-  useEffect(() => { setPage(0); }, [category, institution, from, to]);
+  useEffect(() => { setPage(0); }, [category, institution, from, to, recommended, current]);
 
   const { data: institutions } = useQuery({
     queryKey: ["institutions-for-events"],
@@ -67,12 +72,12 @@ export default function VisualChainEventsAdmin() {
     enabled: !!isAdmin,
   });
 
-  
   const baseQuery = () => {
     let q = supabase
       .from("governance_events")
       .select("*", { count: "exact" })
-      .order("created_at", { ascending: false });
+      .order("created_at", { ascending: false })
+      .order("id", { ascending: false }); // deterministic tiebreaker
     if (category === "all") q = q.in("event_category", ["visual_chain", "rsvp"]);
     else q = q.eq("event_category", category);
     if (institution !== "all") q = q.eq("institution_id", institution);
@@ -81,12 +86,22 @@ export default function VisualChainEventsAdmin() {
       const d = new Date(to); d.setHours(23, 59, 59, 999);
       q = q.lte("created_at", d.toISOString());
     }
+    if (recommended !== "any") {
+      q = q.or(
+        `context->>recommended_layer.eq.${recommended},context->>recommended_level.eq.${recommended}`,
+      );
+    }
+    if (current !== "any") {
+      q = q.or(
+        `context->>current_layer.eq.${current},context->>requested_level.eq.${current}`,
+      );
+    }
     return q;
   };
 
   const queryKey = useMemo(
-    () => ["governance-events", category, institution, from, to, page],
-    [category, institution, from, to, page],
+    () => ["governance-events", category, institution, from, to, recommended, current, page],
+    [category, institution, from, to, recommended, current, page],
   );
 
   const { data, isLoading } = useQuery({
@@ -115,53 +130,63 @@ export default function VisualChainEventsAdmin() {
   const totalPages = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
   const rows = data?.rows ?? [];
 
-  const toExportRows = (events: GovernanceEvent[]): AuditExportRow[] =>
-    events.map((e) => ({
-      created_at: new Date(e.created_at).toISOString(),
-      recommended:
-        (e.context as Record<string, string> | null)?.recommended_layer ??
-        (e.context as Record<string, string> | null)?.recommended_level ?? "",
-      current:
-        (e.context as Record<string, string> | null)?.current_layer ??
-        (e.context as Record<string, string> | null)?.requested_level ?? "",
-      rationale: `${e.event_category}/${e.event_action} · ${e.severity}`,
-      extra: {
-        actor: e.actor_id ?? "",
-        institution: e.institution_id ?? "",
-        target: e.target_entity_id ?? "",
-      },
-    }));
+  const buildFilters = () => ({
+    category,
+    institution_id: institution === "all" ? null : institution,
+    from: from ? new Date(from).toISOString() : null,
+    to: to ? (() => { const d = new Date(to); d.setHours(23,59,59,999); return d.toISOString(); })() : null,
+    recommended: recommended === "any" ? null : recommended,
+    current: current === "any" ? null : current,
+  });
 
-  const csvHeaders = {
-    timestamp: "Timestamp", recommended: "Recommended",
-    current: "Current/Requested", rationale: "Action",
-  };
-
-  const fetchAllMatching = async () => {
-    const { data: all, error } = await baseQuery().range(0, 9999);
-    if (error) {
-      toast.error("Export failed", { description: error.message });
-      return null;
+  const runExport = async (format: "csv" | "pdf") => {
+    setExporting(true);
+    try {
+      const { data: session } = await supabase.auth.getSession();
+      const token = session.session?.access_token;
+      if (!token) {
+        toast.error("Session expired");
+        return;
+      }
+      const total = data?.count ?? 0;
+      const useAsync = total > SYNC_THRESHOLD;
+      const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/governance-events-export`;
+      const res = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        },
+        body: JSON.stringify({
+          format,
+          mode: useAsync ? "async" : "sync",
+          filters: buildFilters(),
+        }),
+      });
+      if (!res.ok) {
+        const txt = await res.text();
+        toast.error("Export failed", { description: txt.slice(0, 200) });
+        return;
+      }
+      if (useAsync) {
+        await res.json();
+        toast.success("Export queued", {
+          description: "You can keep working — it will appear below when ready.",
+        });
+      } else {
+        const blob = await res.blob();
+        const total = res.headers.get("X-Total-Rows") ?? "?";
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `governance-events-${Date.now()}.${format}`;
+        link.click();
+        URL.revokeObjectURL(link.href);
+        toast.success(`Exported ${total} events to ${format.toUpperCase()}`);
+      }
+    } finally {
+      setExporting(false);
     }
-    return (all ?? []) as GovernanceEvent[];
-  };
-
-  const exportCsv = async () => {
-    const all = await fetchAllMatching();
-    if (!all) return;
-    downloadCsv(`governance-events-${Date.now()}.csv`, toExportRows(all), csvHeaders);
-    toast.success(`Exported ${all.length} events to CSV`);
-  };
-  const exportPdf = async () => {
-    const all = await fetchAllMatching();
-    if (!all) return;
-    downloadPdf(
-      `governance-events-${Date.now()}.pdf`,
-      "Governance events — Visual Chain & RSVP",
-      toExportRows(all),
-      csvHeaders,
-    );
-    toast.success(`Exported ${all.length} events to PDF`);
   };
 
   return (
@@ -182,13 +207,13 @@ export default function VisualChainEventsAdmin() {
         <Card>
           <CardHeader><CardTitle className="text-base">Filters</CardTitle></CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
               <div>
                 <Label>Category</Label>
                 <Select value={category} onValueChange={(v) => setCategory(v as CategoryFilter)}>
                   <SelectTrigger className="mt-1.5"><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All (visual_chain + rsvp)</SelectItem>
+                    <SelectItem value="all">All</SelectItem>
                     <SelectItem value="visual_chain">visual_chain</SelectItem>
                     <SelectItem value="rsvp">rsvp</SelectItem>
                   </SelectContent>
@@ -207,6 +232,32 @@ export default function VisualChainEventsAdmin() {
                 </Select>
               </div>
               <div>
+                <Label>Recommended</Label>
+                <Select value={recommended} onValueChange={(v) => setRecommended(v as LayerFilter)}>
+                  <SelectTrigger className="mt-1.5"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="any">Any</SelectItem>
+                    <SelectItem value="L1">L1</SelectItem>
+                    <SelectItem value="L2">L2</SelectItem>
+                    <SelectItem value="L3">L3</SelectItem>
+                    <SelectItem value="Post-PhD">Post-PhD</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label>Current/Requested</Label>
+                <Select value={current} onValueChange={(v) => setCurrent(v as LayerFilter)}>
+                  <SelectTrigger className="mt-1.5"><SelectValue /></SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="any">Any</SelectItem>
+                    <SelectItem value="L1">L1</SelectItem>
+                    <SelectItem value="L2">L2</SelectItem>
+                    <SelectItem value="L3">L3</SelectItem>
+                    <SelectItem value="Post-PhD">Post-PhD</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
                 <Label htmlFor="from">From</Label>
                 <Input id="from" type="date" value={from} onChange={(e) => setFrom(e.target.value)} className="mt-1.5" />
               </div>
@@ -219,18 +270,25 @@ export default function VisualChainEventsAdmin() {
               <p className="text-sm text-muted-foreground">
                 {data?.count ?? 0} event{(data?.count ?? 0) > 1 ? "s" : ""} matching ·
                 page {page + 1}{totalPages ? ` / ${totalPages}` : ""}
+                {(data?.count ?? 0) > SYNC_THRESHOLD && (
+                  <> · <span className="text-foreground">large export will run in background</span></>
+                )}
               </p>
               <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm" disabled={(data?.count ?? 0) === 0} onClick={exportCsv}>
-                  <FileDown className="h-4 w-4" /><span className="ml-2">Export all matching (CSV)</span>
+                <Button variant="outline" size="sm" disabled={(data?.count ?? 0) === 0 || exporting} onClick={() => runExport("csv")}>
+                  {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileDown className="h-4 w-4" />}
+                  <span className="ml-2">Export all matching (CSV)</span>
                 </Button>
-                <Button variant="outline" size="sm" disabled={(data?.count ?? 0) === 0} onClick={exportPdf}>
-                  <FileText className="h-4 w-4" /><span className="ml-2">Export all matching (PDF)</span>
+                <Button variant="outline" size="sm" disabled={(data?.count ?? 0) === 0 || exporting} onClick={() => runExport("pdf")}>
+                  {exporting ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileText className="h-4 w-4" />}
+                  <span className="ml-2">Export all matching (PDF)</span>
                 </Button>
               </div>
             </div>
           </CardContent>
         </Card>
+
+        <ExportJobsPanel />
 
         <Card className="mt-6">
           <CardContent className="pt-6">
