@@ -5,18 +5,27 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Download, Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
+import {
+  Download,
+  Loader2,
+  AlertCircle,
+  CheckCircle2,
+  X,
+  RotateCcw,
+  Ban,
+} from "lucide-react";
 import { toast } from "sonner";
 
 export type ExportJob = {
   id: string;
   user_id: string;
   format: "csv" | "pdf";
-  status: "queued" | "running" | "done" | "failed";
+  status: "queued" | "running" | "done" | "failed" | "cancelled";
   rows_total: number | null;
   rows_processed: number;
   download_path: string | null;
   error: string | null;
+  filters: Record<string, unknown> | null;
   created_at: string;
 };
 
@@ -25,6 +34,7 @@ const ACTIVE: ExportJob["status"][] = ["queued", "running"];
 export function ExportJobsPanel() {
   const { user } = useAuth();
   const [jobs, setJobs] = useState<ExportJob[]>([]);
+  const [busy, setBusy] = useState<string | null>(null);
 
   useEffect(() => {
     if (!user) return;
@@ -43,11 +53,19 @@ export function ExportJobsPanel() {
       .channel(`gov-export-jobs-${user.id}`)
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "governance_export_jobs", filter: `user_id=eq.${user.id}` },
+        {
+          event: "*",
+          schema: "public",
+          table: "governance_export_jobs",
+          filter: `user_id=eq.${user.id}`,
+        },
         () => { void load(); },
       )
       .subscribe();
-    return () => { cancelled = true; void supabase.removeChannel(channel); };
+    return () => {
+      cancelled = true;
+      void supabase.removeChannel(channel);
+    };
   }, [user]);
 
   const download = async (job: ExportJob) => {
@@ -62,7 +80,45 @@ export function ExportJobsPanel() {
     window.open(data.signedUrl, "_blank", "noopener,noreferrer");
   };
 
-  const visible = jobs.filter((j) => ACTIVE.includes(j.status) || (Date.now() - new Date(j.created_at).getTime()) < 1000 * 60 * 60);
+  const cancel = async (job: ExportJob) => {
+    setBusy(job.id);
+    try {
+      const { error } = await supabase.rpc("cancel_export_job", { _job_id: job.id });
+      if (error) throw error;
+      toast.success("Export cancelled");
+    } catch (e) {
+      toast.error("Could not cancel export", {
+        description: e instanceof Error ? e.message : String(e),
+      });
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const retry = async (job: ExportJob) => {
+    setBusy(job.id);
+    try {
+      const filters = (job.filters ?? {}) as Record<string, unknown>;
+      const { error } = await supabase.functions.invoke(
+        "governance-events-export",
+        { body: { format: job.format, mode: "async", filters } },
+      );
+      if (error) throw error;
+      toast.success("Export re-queued");
+    } catch (e) {
+      toast.error("Could not retry export", {
+        description: e instanceof Error ? e.message : String(e),
+      });
+    } finally {
+      setBusy(null);
+    }
+  };
+
+  const visible = jobs.filter(
+    (j) =>
+      ACTIVE.includes(j.status) ||
+      Date.now() - new Date(j.created_at).getTime() < 1000 * 60 * 60,
+  );
   if (visible.length === 0) return null;
 
   return (
@@ -73,13 +129,18 @@ export function ExportJobsPanel() {
       <CardContent className="space-y-3">
         {visible.map((j) => {
           const total = j.rows_total ?? 0;
-          const pct = total > 0 ? Math.min(100, Math.round((j.rows_processed / total) * 100)) : 0;
+          const pct = total > 0
+            ? Math.min(100, Math.round((j.rows_processed / total) * 100))
+            : 0;
+          const isBusy = busy === j.id;
           return (
             <div key={j.id} className="border border-border rounded-md p-3">
               <div className="flex items-center justify-between gap-3 flex-wrap">
                 <div className="flex items-center gap-2 text-sm">
                   <Badge variant="outline">{j.format.toUpperCase()}</Badge>
-                  {j.status === "queued" && <span className="text-muted-foreground">Queued…</span>}
+                  {j.status === "queued" && (
+                    <span className="text-muted-foreground">Queued…</span>
+                  )}
                   {j.status === "running" && (
                     <span className="flex items-center gap-1 text-muted-foreground">
                       <Loader2 className="h-3.5 w-3.5 animate-spin" /> Processing
@@ -95,20 +156,50 @@ export function ExportJobsPanel() {
                       <AlertCircle className="h-3.5 w-3.5" /> Failed
                     </span>
                   )}
+                  {j.status === "cancelled" && (
+                    <span className="flex items-center gap-1 text-muted-foreground">
+                      <Ban className="h-3.5 w-3.5" /> Cancelled
+                    </span>
+                  )}
                   <span className="text-muted-foreground">
                     {j.rows_processed}{total ? ` / ${total}` : ""} rows
                   </span>
                 </div>
-                {j.status === "done" && (
-                  <Button size="sm" variant="outline" onClick={() => download(j)}>
-                    <Download className="h-4 w-4" /><span className="ml-2">Download</span>
-                  </Button>
-                )}
+                <div className="flex items-center gap-2">
+                  {(j.status === "queued" || j.status === "running") && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      disabled={isBusy}
+                      onClick={() => cancel(j)}
+                    >
+                      <X className="h-4 w-4" />
+                      <span className="ml-2">Cancel</span>
+                    </Button>
+                  )}
+                  {(j.status === "failed" || j.status === "cancelled") && (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      disabled={isBusy}
+                      onClick={() => retry(j)}
+                    >
+                      <RotateCcw className="h-4 w-4" />
+                      <span className="ml-2">Retry</span>
+                    </Button>
+                  )}
+                  {j.status === "done" && (
+                    <Button size="sm" variant="outline" onClick={() => download(j)}>
+                      <Download className="h-4 w-4" />
+                      <span className="ml-2">Download</span>
+                    </Button>
+                  )}
+                </div>
               </div>
               {(j.status === "running" || j.status === "queued") && (
                 <Progress value={pct} className="mt-2 h-1.5" />
               )}
-              {j.error && (
+              {j.error && j.status !== "cancelled" && (
                 <p className="mt-2 text-xs text-destructive">{j.error}</p>
               )}
             </div>
