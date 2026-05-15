@@ -76,6 +76,7 @@ const HospitalAuditDashboard = lazy(() => import("./pages/app/HospitalAuditDashb
 const ContentVersionsAdmin = lazy(() => import("./pages/app/ContentVersionsAdmin"));
 const ProtocolAuditAdmin = lazy(() => import("./pages/app/ProtocolAuditAdmin"));
 const I18nQaAdmin = lazy(() => import("./pages/app/I18nQaAdmin"));
+const VisualChainEventsAdmin = lazy(() => import("./pages/app/VisualChainEventsAdmin"));
 const Settings = lazy(() => import("./pages/app/Settings"));
 const VascScreen = lazy(() => import("./pages/app/VascScreen"));
 const VascScreenPatientEntry = lazy(() => import("./pages/app/VascScreenPatientEntry"));
@@ -207,6 +208,7 @@ const App = () => (
             <Route path="admin/content-versions" element={<ContentVersionsAdmin />} />
             <Route path="admin/protocol-audit" element={<ProtocolAuditAdmin />} />
             <Route path="admin/i18n-qa" element={<I18nQaAdmin />} />
+            <Route path="admin/visual-chain-events" element={<VisualChainEventsAdmin />} />
             <Route path="settings" element={<Settings />} />
           </Route>
 

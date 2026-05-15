@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Loader2, Sparkles, Lock, History, RefreshCw } from "lucide-react";
+import { Loader2, Sparkles, Lock, History, RefreshCw, FileDown, FileText } from "lucide-react";
+import { downloadCsv, downloadPdf, type AuditExportRow } from "@/lib/auditExport";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation, type Language } from "@/i18n/context";
@@ -337,15 +338,48 @@ export function RsvpEngine({ initialLevel = "L2" as Level }: { initialLevel?: Le
         className="mt-8 rounded-xl border border-border bg-card/40 p-6"
         aria-label="rsvp-history"
       >
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
           <div className="flex items-center gap-3">
             <History className="h-5 w-5 text-primary" aria-hidden />
             <h2 className="text-xl font-semibold">{c.history}</h2>
           </div>
-          <Button variant="outline" size="sm" onClick={() => void loadHistory()} disabled={historyLoading}>
-            {historyLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
-            <span className="ml-2">{c.refresh}</span>
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" size="sm" onClick={() => void loadHistory()} disabled={historyLoading}>
+              {historyLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
+              <span className="ml-2">{c.refresh}</span>
+            </Button>
+            {(() => {
+              const csvHeaders = {
+                timestamp: language === "fr" ? "Horodatage" : language === "de" ? "Zeitstempel" : "Timestamp",
+                recommended: language === "fr" ? "Niveau recommandé" : language === "de" ? "Empfohlene Stufe" : "Recommended level",
+                current: language === "fr" ? "Niveau demandé" : language === "de" ? "Angeforderte Stufe" : "Requested level",
+                rationale: c.rationale,
+              };
+              const rows: AuditExportRow[] = items.map((it) => ({
+                created_at: new Date(it.created_at).toISOString(),
+                recommended: it.recommended_level,
+                current: it.requested_level,
+                rationale: it.rationale ?? "",
+                extra: {
+                  cost: it.bands?.cost ?? "",
+                  delay: it.bands?.delay ?? "",
+                  lmic: it.bands?.lmic ?? "",
+                },
+              }));
+              return (
+                <>
+                  <Button variant="outline" size="sm" disabled={items.length === 0}
+                    onClick={() => downloadCsv(`rsvp-history-${Date.now()}.csv`, rows, csvHeaders)}>
+                    <FileDown className="h-4 w-4" /><span className="ml-2">CSV</span>
+                  </Button>
+                  <Button variant="outline" size="sm" disabled={items.length === 0}
+                    onClick={() => downloadPdf(`rsvp-history-${Date.now()}.pdf`, "RSVP — Stratification history", rows, csvHeaders)}>
+                    <FileText className="h-4 w-4" /><span className="ml-2">PDF</span>
+                  </Button>
+                </>
+              );
+            })()}
+          </div>
         </div>
         {items.length === 0 && !historyLoading && (
           <p className="mt-4 text-sm text-muted-foreground">{c.empty}</p>

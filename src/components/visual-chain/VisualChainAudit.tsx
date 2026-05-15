@@ -1,11 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
-import { History, Loader2, RefreshCw } from "lucide-react";
+import { History, Loader2, RefreshCw, FileDown, FileText } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useTranslation, type Language } from "@/i18n/context";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
+import { downloadCsv, downloadPdf, type AuditExportRow } from "@/lib/auditExport";
 
 /* ============================================================================
  * VisualChainAudit — P1
@@ -32,6 +33,10 @@ type Copy = {
   recommended: string;
   current: string;
   rationale: string;
+  exportCsv: string;
+  exportPdf: string;
+  pdfTitle: string;
+  csvHeaders: { timestamp: string; recommended: string; current: string; rationale: string };
 };
 
 const COPY: Record<Language, Copy> = {
@@ -44,6 +49,10 @@ const COPY: Record<Language, Copy> = {
     recommended: "Recommended",
     current: "Current",
     rationale: "Rationale",
+    exportCsv: "Export CSV",
+    exportPdf: "Export PDF",
+    pdfTitle: "Visual Chain — Assessment history",
+    csvHeaders: { timestamp: "Timestamp", recommended: "Recommended layer", current: "Current layer", rationale: "Rationale" },
   },
   fr: {
     title: "Historique des évaluations",
@@ -54,6 +63,10 @@ const COPY: Record<Language, Copy> = {
     recommended: "Recommandée",
     current: "Actuelle",
     rationale: "Justification",
+    exportCsv: "Export CSV",
+    exportPdf: "Export PDF",
+    pdfTitle: "Chaîne visuelle — Historique des évaluations",
+    csvHeaders: { timestamp: "Horodatage", recommended: "Couche recommandée", current: "Couche actuelle", rationale: "Justification" },
   },
   de: {
     title: "Bewertungsverlauf",
@@ -64,6 +77,10 @@ const COPY: Record<Language, Copy> = {
     recommended: "Empfohlen",
     current: "Aktuell",
     rationale: "Begründung",
+    exportCsv: "CSV exportieren",
+    exportPdf: "PDF exportieren",
+    pdfTitle: "Visuelle Kette — Bewertungsverlauf",
+    csvHeaders: { timestamp: "Zeitstempel", recommended: "Empfohlene Schicht", current: "Aktuelle Schicht", rationale: "Begründung" },
   },
 };
 
@@ -104,15 +121,51 @@ export function VisualChainAudit({ refreshKey = 0 }: { refreshKey?: number }) {
       className="mt-8 rounded-xl border border-border bg-card/40 p-6"
       aria-label="visual-chain-audit"
     >
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between gap-3 flex-wrap">
         <div className="flex items-center gap-3">
           <History className="h-5 w-5 text-primary" aria-hidden />
           <h2 className="text-xl font-semibold">{c.title}</h2>
         </div>
-        <Button variant="outline" size="sm" onClick={() => void load()} disabled={loading}>
-          {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
-          <span className="ml-2">{c.refresh}</span>
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" onClick={() => void load()} disabled={loading}>
+            {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
+            <span className="ml-2">{c.refresh}</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={items.length === 0}
+            onClick={() => {
+              const rows: AuditExportRow[] = items.map((a) => ({
+                created_at: new Date(a.created_at).toISOString(),
+                recommended: a.recommended_layer,
+                current: a.current_layer,
+                rationale: a.rationale ?? "",
+              }));
+              downloadCsv(`visual-chain-audit-${Date.now()}.csv`, rows, c.csvHeaders);
+            }}
+          >
+            <FileDown className="h-4 w-4" />
+            <span className="ml-2">{c.exportCsv}</span>
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            disabled={items.length === 0}
+            onClick={() => {
+              const rows: AuditExportRow[] = items.map((a) => ({
+                created_at: new Date(a.created_at).toISOString(),
+                recommended: a.recommended_layer,
+                current: a.current_layer,
+                rationale: a.rationale ?? "",
+              }));
+              downloadPdf(`visual-chain-audit-${Date.now()}.pdf`, c.pdfTitle, rows, c.csvHeaders);
+            }}
+          >
+            <FileText className="h-4 w-4" />
+            <span className="ml-2">{c.exportPdf}</span>
+          </Button>
+        </div>
       </div>
 
       {items.length === 0 && !loading && (
