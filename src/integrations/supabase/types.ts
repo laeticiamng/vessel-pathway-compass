@@ -2244,6 +2244,7 @@ export type Database = {
         }
         Returns: undefined
       }
+      cancel_export_job: { Args: { _job_id: string }; Returns: Json }
       compliance_score: { Args: never; Returns: Json }
       compute_rsvp_recommendation: { Args: { _inputs: Json }; Returns: Json }
       compute_visual_chain_recommendation: {
