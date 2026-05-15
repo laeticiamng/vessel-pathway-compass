@@ -1,9 +1,12 @@
 import { Helmet } from "react-helmet-async";
 
-interface SEOHeadProps {
+export interface SEOHeadProps {
   title: string;
   description: string;
+  /** Route path (e.g. "/rsvp"). Preferred over `canonical`. */
   path?: string;
+  /** Alias of `path` — kept for backwards compatibility. */
+  canonical?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown>;
   /** Override the default OG image (must be 1200x630, absolute URL or /-prefixed path) */
@@ -37,17 +40,19 @@ function clamp(text: string, max: number): string {
 export function SEOHead({
   title,
   description,
-  path = "/",
+  path,
+  canonical,
   noindex = false,
   jsonLd,
   image,
   imageAlt,
   type = "website",
 }: SEOHeadProps) {
-  const fullTitle = path === "/" ? title : `${title} | ${BRAND_SUFFIX}`;
+  const resolvedPath = path ?? canonical ?? "/";
+  const fullTitle = resolvedPath === "/" ? title : `${title} | ${BRAND_SUFFIX}`;
   const safeTitle = clamp(fullTitle, 60);
   const safeDescription = clamp(description, 160);
-  const canonicalUrl = `${BASE_URL}${path}`;
+  const canonicalUrl = `${BASE_URL}${resolvedPath}`;
 
   // Resolve image to an absolute URL when a relative path is provided
   const resolvedImage = !image
