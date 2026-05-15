@@ -1593,6 +1593,63 @@ export type Database = {
         }
         Relationships: []
       }
+      rsvp_stratifications: {
+        Row: {
+          bands: Json
+          case_id: string | null
+          created_at: string
+          created_by: string
+          id: string
+          inputs: Json
+          institution_id: string | null
+          rationale: string | null
+          recommended_level: string
+          requested_level: string
+          updated_at: string
+        }
+        Insert: {
+          bands?: Json
+          case_id?: string | null
+          created_at?: string
+          created_by: string
+          id?: string
+          inputs?: Json
+          institution_id?: string | null
+          rationale?: string | null
+          recommended_level: string
+          requested_level: string
+          updated_at?: string
+        }
+        Update: {
+          bands?: Json
+          case_id?: string | null
+          created_at?: string
+          created_by?: string
+          id?: string
+          inputs?: Json
+          institution_id?: string | null
+          rationale?: string | null
+          recommended_level?: string
+          requested_level?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rsvp_stratifications_case_id_fkey"
+            columns: ["case_id"]
+            isOneToOne: false
+            referencedRelation: "cases"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "rsvp_stratifications_institution_id_fkey"
+            columns: ["institution_id"]
+            isOneToOne: false
+            referencedRelation: "institutions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rubrics: {
         Row: {
           created_at: string
@@ -2146,6 +2203,7 @@ export type Database = {
         Returns: undefined
       }
       compliance_score: { Args: never; Returns: Json }
+      compute_rsvp_recommendation: { Args: { _inputs: Json }; Returns: Json }
       compute_visual_chain_recommendation: {
         Args: { _inputs: Json }
         Returns: Json
