@@ -167,16 +167,28 @@ export function RsvpEngine({ initialLevel = "L2" as Level }: { initialLevel?: Le
   const [result, setResult] = useState<Recommendation | null>(null);
   const [items, setItems] = useState<Strat[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [filterRecommended, setFilterRecommended] = useState<string>("all");
+  const [filterRequested, setFilterRequested] = useState<string>("all");
 
   const loadHistory = useCallback(async () => {
     if (!session) return;
     setHistoryLoading(true);
     try {
-      const { data, error } = await supabase
+      let q = supabase
         .from("rsvp_stratifications")
         .select("id, requested_level, recommended_level, rationale, bands, created_at")
         .order("created_at", { ascending: false })
-        .limit(20);
+        .limit(200);
+      if (fromDate) q = q.gte("created_at", new Date(fromDate).toISOString());
+      if (toDate) {
+        const d = new Date(toDate); d.setHours(23, 59, 59, 999);
+        q = q.lte("created_at", d.toISOString());
+      }
+      if (filterRecommended !== "all") q = q.eq("recommended_level", filterRecommended as Level);
+      if (filterRequested !== "all") q = q.eq("requested_level", filterRequested as Level);
+      const { data, error } = await q;
       if (error) throw error;
       setItems((data ?? []) as Strat[]);
     } catch (err) {
@@ -186,7 +198,7 @@ export function RsvpEngine({ initialLevel = "L2" as Level }: { initialLevel?: Le
     } finally {
       setHistoryLoading(false);
     }
-  }, [session, c.errorTitle]);
+  }, [session, c.errorTitle, fromDate, toDate, filterRecommended, filterRequested]);
 
   useEffect(() => {
     void loadHistory();
