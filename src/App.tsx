@@ -87,6 +87,8 @@ const VascScreenAnalytics = lazy(() => import("./pages/app/VascScreenAnalytics")
 const VascScreenStudy = lazy(() => import("./pages/app/VascScreenStudy"));
 const HeroNeonQa = lazy(() => import("./pages/dev/HeroNeonQa"));
 const SculpturalHeaderQa = lazy(() => import("./pages/dev/SculpturalHeaderQa"));
+const VisualChain = lazy(() => import("./pages/VisualChain"));
+const Rsvp = lazy(() => import("./pages/Rsvp"));
 
 const queryClient = new QueryClient();
 
@@ -119,6 +121,8 @@ const App = () => (
           <Route path="/pricing" element={<Navigate to="/access" replace />} />
           <Route path="/access" element={<Pricing />} />
           <Route path="/why" element={<WhyVascuLink />} />
+          <Route path="/visual-chain" element={<VisualChain />} />
+          <Route path="/rsvp" element={<Rsvp />} />
           <Route path="/trajectory" element={<Trajectory />} />
           <Route path="/audit-limitations" element={<AuditLimitations />} />
           <Route path="/about" element={<About />} />
