@@ -42,3 +42,7 @@ verify_jwt = true
 # Validates JWT in code; rejects anonymous callers.
 verify_jwt = true
 
+
+[functions.visual-chain-engine]
+# P1 Visual Chain Engine — validates JWT in code via getClaims() and checks role server-side.
+verify_jwt = true
