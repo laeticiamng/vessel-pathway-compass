@@ -49,6 +49,10 @@ const COPY: Record<Language, Copy> = {
     recommended: "Recommended",
     current: "Current",
     rationale: "Rationale",
+    exportCsv: "Export CSV",
+    exportPdf: "Export PDF",
+    pdfTitle: "Visual Chain — Assessment history",
+    csvHeaders: { timestamp: "Timestamp", recommended: "Recommended layer", current: "Current layer", rationale: "Rationale" },
   },
   fr: {
     title: "Historique des évaluations",
@@ -59,6 +63,10 @@ const COPY: Record<Language, Copy> = {
     recommended: "Recommandée",
     current: "Actuelle",
     rationale: "Justification",
+    exportCsv: "Export CSV",
+    exportPdf: "Export PDF",
+    pdfTitle: "Chaîne visuelle — Historique des évaluations",
+    csvHeaders: { timestamp: "Horodatage", recommended: "Couche recommandée", current: "Couche actuelle", rationale: "Justification" },
   },
   de: {
     title: "Bewertungsverlauf",
@@ -69,6 +77,10 @@ const COPY: Record<Language, Copy> = {
     recommended: "Empfohlen",
     current: "Aktuell",
     rationale: "Begründung",
+    exportCsv: "CSV exportieren",
+    exportPdf: "PDF exportieren",
+    pdfTitle: "Visuelle Kette — Bewertungsverlauf",
+    csvHeaders: { timestamp: "Zeitstempel", recommended: "Empfohlene Schicht", current: "Aktuelle Schicht", rationale: "Begründung" },
   },
 };
 
