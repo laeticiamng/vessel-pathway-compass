@@ -93,3 +93,98 @@ Deno.test({
     assertEquals(res.status, 401);
   },
 });
+
+Deno.test({
+  name: "governance-events-export: sync and async produce identical CSV (same filters, same sort)",
+  ignore: !ENABLED,
+  async fn() {
+    const userClient = createClient(SUPABASE_URL, SUPABASE_ANON);
+    const { data: signIn, error: signErr } = await userClient.auth.signInWithPassword({
+      email: ADMIN_EMAIL!, password: ADMIN_PASSWORD!,
+    });
+    if (signErr || !signIn.session) throw new Error(`Sign-in failed: ${signErr?.message}`);
+    const token = signIn.session.access_token;
+    const userId = signIn.user!.id;
+    const admin = createClient(SUPABASE_URL, SERVICE_KEY);
+
+    const marker = `parity-${crypto.randomUUID()}`;
+    // Seed 12 matching events with explicit, distinct created_at so sort is deterministic.
+    const seeded: string[] = [];
+    const base = Date.now();
+    for (let i = 0; i < 12; i++) {
+      const ts = new Date(base - i * 1000).toISOString();
+      const { data, error } = await admin.from("governance_events").insert({
+        actor_id: userId,
+        event_category: "visual_chain",
+        event_action: "assessment.created",
+        severity: "info",
+        created_at: ts,
+        context: { recommended_layer: "L2", current_layer: "L1", parity_marker: marker, idx: i },
+      }).select("id").single();
+      if (error) throw error;
+      seeded.push(data.id);
+    }
+
+    const callExport = async (mode: "sync" | "async") => {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/governance-events-export`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+          apikey: SUPABASE_ANON,
+        },
+        body: JSON.stringify({
+          format: "csv",
+          mode,
+          filters: { category: "visual_chain", recommended: "L2", current: "L1" },
+        }),
+      });
+      if (mode === "sync") {
+        assertEquals(res.status, 200);
+        return await res.text();
+      }
+      assertEquals(res.status, 202);
+      const { job_id } = await res.json();
+      // Poll job until done (max 30s)
+      let path: string | null = null;
+      for (let i = 0; i < 30; i++) {
+        await new Promise((r) => setTimeout(r, 1000));
+        const { data } = await admin.from("governance_export_jobs")
+          .select("status,download_path,error").eq("id", job_id).single();
+        if (data?.status === "done") { path = data.download_path; break; }
+        if (data?.status === "failed") throw new Error(`async failed: ${data.error}`);
+      }
+      if (!path) throw new Error("async export did not complete in time");
+      const dl = await admin.storage.from("governance-exports").download(path);
+      if (dl.error || !dl.data) throw new Error(`download failed: ${dl.error?.message}`);
+      return await dl.data.text();
+    };
+
+    try {
+      // Filter to just our seeded rows for a deterministic comparison
+      const syncCsv = await callExport("sync");
+      const asyncCsv = await callExport("async");
+
+      const filterToMarker = (csv: string) => {
+        const lines = csv.split("\n");
+        const header = lines[0];
+        const body = lines.slice(1).filter((l) => seeded.some((id) => l.includes(id)));
+        return [header, ...body].join("\n");
+      };
+      const syncSubset = filterToMarker(syncCsv);
+      const asyncSubset = filterToMarker(asyncCsv);
+
+      assertEquals(asyncSubset, syncSubset,
+        "Sync and async exports must contain identical rows in the same order");
+
+      // Verify the order respects created_at DESC (idx 0 newest first)
+      const idxOrder = syncSubset.split("\n").slice(1)
+        .map((l) => seeded.indexOf(seeded.find((id) => l.includes(id))!))
+        .filter((n) => n >= 0);
+      assertEquals(idxOrder, [...idxOrder].sort((a, b) => a - b),
+        "Rows must be returned in created_at DESC order");
+    } finally {
+      await admin.from("governance_events").delete().in("id", seeded);
+    }
+  },
+});
