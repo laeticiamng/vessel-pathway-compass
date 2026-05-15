@@ -93,4 +93,15 @@ describe("forbidden terms guard", () => {
     const hits = scan(files);
     expect(hits, hits.join("\n")).toEqual([]);
   });
+
+  it("PDF/CSV export sources must not embed CHUV / UNIL / unilatéral", () => {
+    // Defensive scan: every string reachable from a PDF or CSV builder is
+    // checked, so no filter combination can leak the forbidden terms into a
+    // downloaded artefact.
+    const files = EXPORT_SOURCE_DIRS.flatMap((dir) =>
+      listFiles(dir, (p) => EXPORT_SOURCE_EXTENSIONS.has(extname(p))),
+    );
+    const hits = scan(files);
+    expect(hits, hits.join("\n")).toEqual([]);
+  });
 });
