@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { useTranslation } from "@/i18n/context";
-import { EASE } from "@/lib/sculpture/tokens";
 import { cn } from "@/lib/utils";
 
 /**
@@ -172,7 +171,6 @@ export function MaterialsScroll() {
       <div className="container mx-auto px-6 max-w-5xl">
         <motion.div
           style={{ opacity: headingOpacity }}
-          transition={{ duration: 0.5, ease: EASE.signature as unknown as number[] }}
           className="mb-16 max-w-2xl"
         >
           <p className="text-xs font-mono uppercase tracking-[0.28em] text-primary mb-4">
