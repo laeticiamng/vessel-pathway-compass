@@ -167,16 +167,28 @@ export function RsvpEngine({ initialLevel = "L2" as Level }: { initialLevel?: Le
   const [result, setResult] = useState<Recommendation | null>(null);
   const [items, setItems] = useState<Strat[]>([]);
   const [historyLoading, setHistoryLoading] = useState(false);
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [filterRecommended, setFilterRecommended] = useState<string>("all");
+  const [filterRequested, setFilterRequested] = useState<string>("all");
 
   const loadHistory = useCallback(async () => {
     if (!session) return;
     setHistoryLoading(true);
     try {
-      const { data, error } = await supabase
+      let q = supabase
         .from("rsvp_stratifications")
         .select("id, requested_level, recommended_level, rationale, bands, created_at")
         .order("created_at", { ascending: false })
-        .limit(20);
+        .limit(200);
+      if (fromDate) q = q.gte("created_at", new Date(fromDate).toISOString());
+      if (toDate) {
+        const d = new Date(toDate); d.setHours(23, 59, 59, 999);
+        q = q.lte("created_at", d.toISOString());
+      }
+      if (filterRecommended !== "all") q = q.eq("recommended_level", filterRecommended as Level);
+      if (filterRequested !== "all") q = q.eq("requested_level", filterRequested as Level);
+      const { data, error } = await q;
       if (error) throw error;
       setItems((data ?? []) as Strat[]);
     } catch (err) {
@@ -186,7 +198,7 @@ export function RsvpEngine({ initialLevel = "L2" as Level }: { initialLevel?: Le
     } finally {
       setHistoryLoading(false);
     }
-  }, [session, c.errorTitle]);
+  }, [session, c.errorTitle, fromDate, toDate, filterRecommended, filterRequested]);
 
   useEffect(() => {
     void loadHistory();
@@ -379,6 +391,42 @@ export function RsvpEngine({ initialLevel = "L2" as Level }: { initialLevel?: Le
                 </>
               );
             })()}
+          </div>
+        </div>
+        <div className="mt-4 grid gap-3 sm:grid-cols-4">
+          <div>
+            <Label htmlFor="rsvp-from" className="text-xs">From</Label>
+            <input id="rsvp-from" type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)}
+              className="mt-1 w-full h-9 rounded-md border border-input bg-background px-2 text-sm" />
+          </div>
+          <div>
+            <Label htmlFor="rsvp-to" className="text-xs">To</Label>
+            <input id="rsvp-to" type="date" value={toDate} onChange={(e) => setToDate(e.target.value)}
+              className="mt-1 w-full h-9 rounded-md border border-input bg-background px-2 text-sm" />
+          </div>
+          <div>
+            <Label className="text-xs">Recommended</Label>
+            <Select value={filterRecommended} onValueChange={setFilterRecommended}>
+              <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Any</SelectItem>
+                <SelectItem value="L1">L1</SelectItem>
+                <SelectItem value="L2">L2</SelectItem>
+                <SelectItem value="L3">L3</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div>
+            <Label className="text-xs">Requested</Label>
+            <Select value={filterRequested} onValueChange={setFilterRequested}>
+              <SelectTrigger className="mt-1"><SelectValue /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Any</SelectItem>
+                <SelectItem value="L1">L1</SelectItem>
+                <SelectItem value="L2">L2</SelectItem>
+                <SelectItem value="L3">L3</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
         {items.length === 0 && !historyLoading && (

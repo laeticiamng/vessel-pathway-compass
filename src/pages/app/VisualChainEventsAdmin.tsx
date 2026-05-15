@@ -17,33 +17,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronLeft, ChevronRight, Shield, FileDown } from "lucide-react";
-import { downloadCsv, type AuditExportRow } from "@/lib/auditExport";
-
-/* ============================================================================
- * /app/admin/visual-chain-events
- * Admin view for governance_events with category in (visual_chain, rsvp).
- * Filterable by institution + date range, paginated (25 per page).
- * Read access controlled by RLS (admin / super_admin / hospital_admin).
- * ========================================================================== */
+import { ChevronLeft, ChevronRight, Shield, FileDown, FileText } from "lucide-react";
+import { downloadCsv, downloadPdf, type AuditExportRow } from "@/lib/auditExport";
+import { GovernanceEventDetail, type GovernanceEvent } from "@/components/governance/GovernanceEventDetail";
+import { toast } from "sonner";
 
 const PAGE_SIZE = 25;
 
-type Event = {
-  id: string;
-  event_category: string;
-  event_action: string;
-  severity: string;
-  actor_id: string | null;
-  institution_id: string | null;
-  target_entity_type: string | null;
-  target_entity_id: string | null;
-  context: Record<string, unknown> | null;
-  created_at: string;
-};
-
 type Institution = { id: string; name: string };
-
 type CategoryFilter = "all" | "visual_chain" | "rsvp";
 
 export default function VisualChainEventsAdmin() {
@@ -53,9 +34,7 @@ export default function VisualChainEventsAdmin() {
     queryKey: ["my-roles", user?.id],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user!.id);
+        .from("user_roles").select("role").eq("user_id", user!.id);
       if (error) throw error;
       return data.map((r) => r.role as string);
     },
@@ -72,24 +51,38 @@ export default function VisualChainEventsAdmin() {
   const [from, setFrom] = useState<string>("");
   const [to, setTo] = useState<string>("");
   const [page, setPage] = useState(0);
+  const [selected, setSelected] = useState<GovernanceEvent | null>(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
-  // Reset pagination when filters change
-  useEffect(() => {
-    setPage(0);
-  }, [category, institution, from, to]);
+  useEffect(() => { setPage(0); }, [category, institution, from, to]);
 
   const { data: institutions } = useQuery({
     queryKey: ["institutions-for-events"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("institutions")
-        .select("id, name")
-        .order("name", { ascending: true });
+        .from("institutions").select("id, name").order("name", { ascending: true });
       if (error) throw error;
       return (data ?? []) as Institution[];
     },
     enabled: !!isAdmin,
   });
+
+  
+  const baseQuery = () => {
+    let q = supabase
+      .from("governance_events")
+      .select("*", { count: "exact" })
+      .order("created_at", { ascending: false });
+    if (category === "all") q = q.in("event_category", ["visual_chain", "rsvp"]);
+    else q = q.eq("event_category", category);
+    if (institution !== "all") q = q.eq("institution_id", institution);
+    if (from) q = q.gte("created_at", new Date(from).toISOString());
+    if (to) {
+      const d = new Date(to); d.setHours(23, 59, 59, 999);
+      q = q.lte("created_at", d.toISOString());
+    }
+    return q;
+  };
 
   const queryKey = useMemo(
     () => ["governance-events", category, institution, from, to, page],
@@ -99,29 +92,11 @@ export default function VisualChainEventsAdmin() {
   const { data, isLoading } = useQuery({
     queryKey,
     queryFn: async () => {
-      let q = supabase
-        .from("governance_events")
-        .select("*", { count: "exact" })
-        .order("created_at", { ascending: false });
-
-      if (category === "all") {
-        q = q.in("event_category", ["visual_chain", "rsvp"]);
-      } else {
-        q = q.eq("event_category", category);
-      }
-      if (institution !== "all") q = q.eq("institution_id", institution);
-      if (from) q = q.gte("created_at", new Date(from).toISOString());
-      if (to) {
-        const toDate = new Date(to);
-        toDate.setHours(23, 59, 59, 999);
-        q = q.lte("created_at", toDate.toISOString());
-      }
-
       const fromIdx = page * PAGE_SIZE;
       const toIdx = fromIdx + PAGE_SIZE - 1;
-      const { data: rows, count, error } = await q.range(fromIdx, toIdx);
+      const { data: rows, count, error } = await baseQuery().range(fromIdx, toIdx);
       if (error) throw error;
-      return { rows: (rows ?? []) as Event[], count: count ?? 0 };
+      return { rows: (rows ?? []) as GovernanceEvent[], count: count ?? 0 };
     },
     enabled: !!isAdmin,
   });
@@ -140,19 +115,54 @@ export default function VisualChainEventsAdmin() {
   const totalPages = data?.count ? Math.ceil(data.count / PAGE_SIZE) : 0;
   const rows = data?.rows ?? [];
 
-  const exportRows: AuditExportRow[] = rows.map((e) => ({
-    created_at: new Date(e.created_at).toISOString(),
-    recommended:
-      (e.context as Record<string, string> | null)?.recommended_layer ??
-      (e.context as Record<string, string> | null)?.recommended_level ??
-      "",
-    current:
-      (e.context as Record<string, string> | null)?.current_layer ??
-      (e.context as Record<string, string> | null)?.requested_level ??
-      "",
-    rationale: `${e.event_category}/${e.event_action} · ${e.severity}`,
-    extra: { actor: e.actor_id ?? "", institution: e.institution_id ?? "" },
-  }));
+  const toExportRows = (events: GovernanceEvent[]): AuditExportRow[] =>
+    events.map((e) => ({
+      created_at: new Date(e.created_at).toISOString(),
+      recommended:
+        (e.context as Record<string, string> | null)?.recommended_layer ??
+        (e.context as Record<string, string> | null)?.recommended_level ?? "",
+      current:
+        (e.context as Record<string, string> | null)?.current_layer ??
+        (e.context as Record<string, string> | null)?.requested_level ?? "",
+      rationale: `${e.event_category}/${e.event_action} · ${e.severity}`,
+      extra: {
+        actor: e.actor_id ?? "",
+        institution: e.institution_id ?? "",
+        target: e.target_entity_id ?? "",
+      },
+    }));
+
+  const csvHeaders = {
+    timestamp: "Timestamp", recommended: "Recommended",
+    current: "Current/Requested", rationale: "Action",
+  };
+
+  const fetchAllMatching = async () => {
+    const { data: all, error } = await baseQuery().range(0, 9999);
+    if (error) {
+      toast.error("Export failed", { description: error.message });
+      return null;
+    }
+    return (all ?? []) as GovernanceEvent[];
+  };
+
+  const exportCsv = async () => {
+    const all = await fetchAllMatching();
+    if (!all) return;
+    downloadCsv(`governance-events-${Date.now()}.csv`, toExportRows(all), csvHeaders);
+    toast.success(`Exported ${all.length} events to CSV`);
+  };
+  const exportPdf = async () => {
+    const all = await fetchAllMatching();
+    if (!all) return;
+    downloadPdf(
+      `governance-events-${Date.now()}.pdf`,
+      "Governance events — Visual Chain & RSVP",
+      toExportRows(all),
+      csvHeaders,
+    );
+    toast.success(`Exported ${all.length} events to PDF`);
+  };
 
   return (
     <>
@@ -170,17 +180,13 @@ export default function VisualChainEventsAdmin() {
         </div>
 
         <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Filters</CardTitle>
-          </CardHeader>
+          <CardHeader><CardTitle className="text-base">Filters</CardTitle></CardHeader>
           <CardContent>
             <div className="grid gap-4 md:grid-cols-4">
               <div>
                 <Label>Category</Label>
                 <Select value={category} onValueChange={(v) => setCategory(v as CategoryFilter)}>
-                  <SelectTrigger className="mt-1.5">
-                    <SelectValue />
-                  </SelectTrigger>
+                  <SelectTrigger className="mt-1.5"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All (visual_chain + rsvp)</SelectItem>
                     <SelectItem value="visual_chain">visual_chain</SelectItem>
@@ -191,15 +197,11 @@ export default function VisualChainEventsAdmin() {
               <div>
                 <Label>Institution</Label>
                 <Select value={institution} onValueChange={setInstitution}>
-                  <SelectTrigger className="mt-1.5">
-                    <SelectValue />
-                  </SelectTrigger>
+                  <SelectTrigger className="mt-1.5"><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">All institutions</SelectItem>
                     {(institutions ?? []).map((i) => (
-                      <SelectItem key={i.id} value={i.id}>
-                        {i.name}
-                      </SelectItem>
+                      <SelectItem key={i.id} value={i.id}>{i.name}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -218,26 +220,14 @@ export default function VisualChainEventsAdmin() {
                 {data?.count ?? 0} event{(data?.count ?? 0) > 1 ? "s" : ""} matching ·
                 page {page + 1}{totalPages ? ` / ${totalPages}` : ""}
               </p>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={rows.length === 0}
-                onClick={() =>
-                  downloadCsv(
-                    `governance-events-${Date.now()}.csv`,
-                    exportRows,
-                    {
-                      timestamp: "Timestamp",
-                      recommended: "Recommended",
-                      current: "Current/Requested",
-                      rationale: "Action",
-                    },
-                  )
-                }
-              >
-                <FileDown className="h-4 w-4" />
-                <span className="ml-2">Export current page (CSV)</span>
-              </Button>
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm" disabled={(data?.count ?? 0) === 0} onClick={exportCsv}>
+                  <FileDown className="h-4 w-4" /><span className="ml-2">Export all matching (CSV)</span>
+                </Button>
+                <Button variant="outline" size="sm" disabled={(data?.count ?? 0) === 0} onClick={exportPdf}>
+                  <FileText className="h-4 w-4" /><span className="ml-2">Export all matching (PDF)</span>
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
@@ -262,44 +252,33 @@ export default function VisualChainEventsAdmin() {
                       <th className="py-2 pr-4 font-medium">Action</th>
                       <th className="py-2 pr-4 font-medium">Severity</th>
                       <th className="py-2 pr-4 font-medium">Entity</th>
-                      <th className="py-2 pr-4 font-medium">Context</th>
                     </tr>
                   </thead>
                   <tbody>
                     {rows.map((e) => (
-                      <tr key={e.id} className="border-b border-border/50 align-top">
+                      <tr
+                        key={e.id}
+                        className="border-b border-border/50 align-top cursor-pointer hover:bg-muted/40 transition-colors"
+                        onClick={() => { setSelected(e); setDrawerOpen(true); }}
+                      >
                         <td className="py-2 pr-4 whitespace-nowrap text-muted-foreground">
                           {new Date(e.created_at).toLocaleString()}
                         </td>
-                        <td className="py-2 pr-4">
-                          <Badge variant="outline">{e.event_category}</Badge>
-                        </td>
+                        <td className="py-2 pr-4"><Badge variant="outline">{e.event_category}</Badge></td>
                         <td className="py-2 pr-4 font-mono text-xs">{e.event_action}</td>
                         <td className="py-2 pr-4">
-                          <Badge
-                            variant={
-                              e.severity === "critical" || e.severity === "error"
-                                ? "destructive"
-                                : e.severity === "warn"
-                                  ? "default"
-                                  : "secondary"
-                            }
-                          >
-                            {e.severity}
-                          </Badge>
+                          <Badge variant={
+                            e.severity === "critical" || e.severity === "error" ? "destructive"
+                              : e.severity === "warn" ? "default" : "secondary"
+                          }>{e.severity}</Badge>
                         </td>
                         <td className="py-2 pr-4 text-xs">
                           {e.target_entity_type ?? "—"}
-                          {e.target_entity_id ? (
+                          {e.target_entity_id && (
                             <div className="font-mono text-muted-foreground">
                               {e.target_entity_id.slice(0, 8)}…
                             </div>
-                          ) : null}
-                        </td>
-                        <td className="py-2 pr-4 text-xs">
-                          <pre className="max-w-md whitespace-pre-wrap text-muted-foreground">
-                            {e.context ? JSON.stringify(e.context, null, 0) : "—"}
-                          </pre>
+                          )}
                         </td>
                       </tr>
                     ))}
@@ -310,29 +289,21 @@ export default function VisualChainEventsAdmin() {
 
             {totalPages > 1 && (
               <div className="mt-4 flex items-center justify-end gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={page === 0}
-                  onClick={() => setPage((p) => Math.max(0, p - 1))}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                  <span className="ml-1">Previous</span>
+                <Button variant="outline" size="sm" disabled={page === 0}
+                  onClick={() => setPage((p) => Math.max(0, p - 1))}>
+                  <ChevronLeft className="h-4 w-4" /><span className="ml-1">Previous</span>
                 </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  disabled={page >= totalPages - 1}
-                  onClick={() => setPage((p) => p + 1)}
-                >
-                  <span className="mr-1">Next</span>
-                  <ChevronRight className="h-4 w-4" />
+                <Button variant="outline" size="sm" disabled={page >= totalPages - 1}
+                  onClick={() => setPage((p) => p + 1)}>
+                  <span className="mr-1">Next</span><ChevronRight className="h-4 w-4" />
                 </Button>
               </div>
             )}
           </CardContent>
         </Card>
       </div>
+
+      <GovernanceEventDetail event={selected} open={drawerOpen} onOpenChange={setDrawerOpen} />
     </>
   );
 }
