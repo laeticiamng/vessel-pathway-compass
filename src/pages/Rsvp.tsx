@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { SEOHead } from "@/components/SEOHead";
 import { useTranslation, type Language } from "@/i18n/context";
 import { useLowResourceMode } from "@/hooks/useLowResourceMode";
+import { RsvpEngine } from "@/components/rsvp/RsvpEngine";
 
 /* ============================================================================
  * /rsvp — Resource-Stratified Visual Plan (v8.3)
@@ -196,6 +197,8 @@ export default function Rsvp() {
               </div>
             </dl>
           </section>
+
+          <RsvpEngine initialLevel={(`L${level}` as "L1" | "L2" | "L3")} />
         </div>
       </main>
     </>
