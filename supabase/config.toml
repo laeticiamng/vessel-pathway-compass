@@ -50,3 +50,7 @@ verify_jwt = true
 [functions.rsvp-engine]
 # P2 RSVP Engine — validates JWT in code via getClaims() and checks role server-side.
 verify_jwt = true
+
+[functions.governance-events-export]
+# Server-side CSV/PDF export — validates JWT in code and enforces admin role.
+verify_jwt = true
