@@ -1,9 +1,12 @@
 import { Helmet } from "react-helmet-async";
 
-interface SEOHeadProps {
+export interface SEOHeadProps {
   title: string;
   description: string;
+  /** Route path (e.g. "/rsvp"). Preferred over `canonical`. */
   path?: string;
+  /** Alias of `path` — kept for backwards compatibility. */
+  canonical?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown>;
   /** Override the default OG image (must be 1200x630, absolute URL or /-prefixed path) */
