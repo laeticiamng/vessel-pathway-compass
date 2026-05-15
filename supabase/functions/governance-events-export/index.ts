@@ -303,8 +303,9 @@ Deno.serve(async (req) => {
   const { format, mode, filters } = parsed.data;
   const args = rpcArgs(userId, filters);
 
-  // Count first (uses the same predicates as the rows query)
-  const { data: countRaw, error: countErr } = await userClient.rpc(
+  // Count first (uses the same predicates as the rows query).
+  // The helper is service-role only — call via the admin client.
+  const { data: countRaw, error: countErr } = await admin.rpc(
     "governance_events_count_for_user",
     {
       _user: userId,
