@@ -141,9 +141,27 @@ export default function VisualChain() {
   const { language: lang } = useTranslation();
   const c = COPY[lang];
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: c.pageTitle,
+    description: c.pageDesc,
+    url: `https://aquamr-flow.com/visual-chain`,
+    inLanguage: lang,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "VASCU-LINK · AquaMR Flow",
+      url: "https://aquamr-flow.com",
+    },
+    about: {
+      "@type": "MedicalProcedure",
+      name: "VASCU-LINK Visual Chain (L1/L2/L3/Post-PhD)",
+    },
+  };
+
   return (
     <>
-      <SEOHead title={c.pageTitle} description={c.pageDesc} path="/visual-chain" />
+      <SEOHead title={c.pageTitle} description={c.pageDesc} path="/visual-chain" jsonLd={jsonLd} />
       <main className="min-h-screen bg-background text-foreground">
         <div className="container mx-auto max-w-5xl px-4 py-10">
           <Link

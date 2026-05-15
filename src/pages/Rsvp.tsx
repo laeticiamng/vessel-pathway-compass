@@ -107,9 +107,27 @@ export default function Rsvp() {
 
   const active = c.levels.find((l) => l.level === level)!;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: c.pageTitle,
+    description: c.pageDesc,
+    url: "https://aquamr-flow.com/rsvp",
+    inLanguage: lang,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "VASCU-LINK · AquaMR Flow",
+      url: "https://aquamr-flow.com",
+    },
+    about: {
+      "@type": "MedicalProcedure",
+      name: "Resource-Stratified Visual Plan (RSVP) — L1/L2/L3",
+    },
+  };
+
   return (
     <>
-      <SEOHead title={c.pageTitle} description={c.pageDesc} path="/rsvp" />
+      <SEOHead title={c.pageTitle} description={c.pageDesc} path="/rsvp" jsonLd={jsonLd} />
       <main className="min-h-screen bg-background text-foreground">
         <div className="container mx-auto max-w-4xl px-4 py-10">
           <Link
