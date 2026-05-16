@@ -30,6 +30,8 @@ export function DemoStepShell({
   basePath = "/demo/aomi-fragile",
   caseLabel = "Mme R., 82 ans — AOMI fragile, contraste contre-indiqué",
   libraryHref,
+  nextCaseHref,
+  nextCaseLabel,
 }: DemoStepShellProps) {
   const navigate = useNavigate();
   const [search] = useSearchParams();
