@@ -15,11 +15,11 @@ import { SEOHead } from "@/components/SEOHead";
 type Field = "0.55T" | "1.5T" | "3T" | "7T";
 type Sequence = "QISS" | "TWIST" | "T1-VIBE" | "TOF" | "T2-SPACE";
 
-const FIELDS: { value: Field; b0: number; snrFactor: number }[] = [
-  { value: "0.55T", b0: 0.55, snrFactor: 0.37 },
-  { value: "1.5T", b0: 1.5, snrFactor: 1.0 },
-  { value: "3T", b0: 3.0, snrFactor: 2.0 },
-  { value: "7T", b0: 7.0, snrFactor: 4.67 },
+const FIELDS: { value: Field; b0: number; mT: number; snrFactor: number }[] = [
+  { value: "0.55T", b0: 0.55, mT: 550, snrFactor: 0.37 },
+  { value: "1.5T", b0: 1.5, mT: 1500, snrFactor: 1.0 },
+  { value: "3T", b0: 3.0, mT: 3000, snrFactor: 2.0 },
+  { value: "7T", b0: 7.0, mT: 7000, snrFactor: 4.67 },
 ];
 
 const SEQUENCES: { value: Sequence; baseTime: number; baseSnr: number; ref: string }[] = [
@@ -54,7 +54,7 @@ export default function SimulationLab() {
     if (!session) return;
     supabase
       .from("mri_simulations")
-      .select("id,name,field_strength,sequence_type,created_at")
+      .select("id,name,field_strength_mt,sequence_type,created_at")
       .order("created_at", { ascending: false })
       .limit(10)
       .then(({ data }) => setHistory(data ?? []));
@@ -73,9 +73,9 @@ export default function SimulationLab() {
     const { error } = await supabase.from("mri_simulations").insert({
       user_id: session.user.id,
       name: name.trim(),
-      field_strength: field,
+      field_strength_mt: fieldCfg.mT,
       sequence_type: sequence,
-      parameters: { matrix, nex },
+      parameters: { matrix, nex, field },
       results: metrics,
     });
     setSaving(false);
@@ -220,7 +220,7 @@ export default function SimulationLab() {
                 {history.map((h) => (
                   <li key={h.id} className="flex items-center justify-between py-2 text-sm">
                     <span>{h.name}</span>
-                    <span className="text-muted-foreground">{h.field_strength} · {h.sequence_type}</span>
+                    <span className="text-muted-foreground">{h.field_strength_mt} mT · {h.sequence_type}</span>
                   </li>
                 ))}
               </ul>

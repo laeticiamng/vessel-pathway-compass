@@ -74,8 +74,7 @@ export default function HardwareDesigner() {
       user_id: session.user.id,
       name: projectName.trim(),
       modules: totals.modules,
-      total_cost: totals.cost,
-      total_weight_kg: totals.weight,
+      total_cost_eur: { eur: totals.cost, weight_kg: totals.weight } as any,
       eco_score: totals.eco,
     });
     error ? toast.error(error.message) : toast.success("Project saved");
