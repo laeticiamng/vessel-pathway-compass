@@ -6,8 +6,9 @@
 
 @layer base {
   :root {
-    /* Standardized fixed/sticky header height — used by spacers and sticky banners */
-    --header-h: 4rem;
+    /* Standardized fixed/sticky header height — used by spacers and sticky banners.
+       Adds iOS safe-area inset so notched devices never clip the first banner. */
+    --header-h: calc(4rem + env(safe-area-inset-top, 0px));
 
     /* Pearled blue-white background — premium clinical light mode */
     --background: 210 40% 98%;
