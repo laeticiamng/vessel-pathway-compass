@@ -34,7 +34,7 @@ export default function ClinicalCases() {
     <>
       <SEOHead
         title="Bibliothèque de cas cliniques · VASCU-LINK"
-        description="3 cas fictifs contrastés (L1 fragile, L2 standard, L3 multidisciplinaire) pour comprendre comment VASCU-LINK arbitre triage, imagerie, digital twin, décision et suivi."
+        description="6 cas fictifs contrastés (L1 fragile, L2 standard / urgent, L3 multi-étagé, CLTI, FMD) pour comprendre comment VASCU-LINK arbitre triage, imagerie, digital twin, décision et suivi longitudinal."
       />
       <main className="min-h-screen bg-background">
         {/* Header banner */}
@@ -54,12 +54,13 @@ export default function ClinicalCases() {
               Clinical Case Library
             </p>
             <h1 className="mt-2 text-3xl sm:text-4xl font-semibold tracking-tight">
-              3 cas, 3 niveaux de décision
+              {CLINICAL_CASES.length} cas cliniques, 3 niveaux d'arbitrage
             </h1>
             <p className="mt-3 text-base text-muted-foreground leading-relaxed">
               Chaque cas suit le même parcours en 7 étapes — triage, imagerie, digital twin,
               arbitrage L1/L2/L3, plan opératoire, PROMs et suivi longitudinal M1 → M12 — pour
-              montrer comment VASCU-LINK structure la décision selon la complexité.
+              montrer comment VASCU-LINK structure la décision selon la complexité. À la fin de
+              chaque démo, vous pouvez enchaîner directement sur le cas suivant.
             </p>
           </div>
 
