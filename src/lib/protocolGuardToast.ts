@@ -1,4 +1,12 @@
 import { toast } from "sonner";
+import { getGuardToastConfig } from "@/lib/protocolGuardToastConfig";
+
+export {
+  configureGuardToast,
+  getGuardToastConfig,
+  __resetGuardToastConfig,
+  type GuardToastConfig,
+} from "@/lib/protocolGuardToastConfig";
 
 interface DenialOpts {
   status: number;
