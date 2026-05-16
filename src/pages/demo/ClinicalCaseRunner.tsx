@@ -2,7 +2,7 @@ import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import { SEOHead } from "@/components/SEOHead";
 import { DemoStepShell } from "@/components/demo/DemoStepShell";
 import { DEMO_STEPS, type DemoStepId } from "@/demo/aomiFragileCase";
-import { getClinicalCase } from "@/demo/clinicalCases";
+import { getClinicalCase, getNextClinicalCase } from "@/demo/clinicalCases";
 import { TriagePanel } from "@/components/demo/panels/TriagePanel";
 import { ImagingPanel } from "@/components/demo/panels/ImagingPanel";
 import { TwinPanel } from "@/components/demo/panels/TwinPanel";
