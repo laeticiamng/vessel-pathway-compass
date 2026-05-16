@@ -281,7 +281,7 @@ serve(async (req) => {
     const { data: rows } = await svc_.from("user_roles").select("role").eq("user_id", uid);
     const roles = (rows ?? []).map((r) => r.role as string);
     if (!roles.some((r) => ALLOWED_ROLES.has(r))) {
-      return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId);
+      return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId, { action, reason: "role_forbidden" });
     }
 
     // Tamper-proof audit trail of threshold changes:
@@ -456,7 +456,7 @@ serve(async (req) => {
   const authHeader = req.headers.get("Authorization");
   if (!authHeader?.startsWith("Bearer ")) {
     await logDenial({ actorId: null, reason: "missing_jwt", action: null, key: preKey });
-    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId, { reason: "missing_jwt" });
   }
 
   let action = "";
@@ -465,11 +465,11 @@ serve(async (req) => {
     action = String(body?.action ?? "");
   } catch {
     await logDenial({ actorId: null, reason: "invalid_json", action: null, key: preKey });
-    return jsonResponse(400, { error: "Invalid JSON body", request_id: reqId }, reqId);
+    return jsonResponse(400, { error: "Invalid JSON body", request_id: reqId }, reqId, { reason: "invalid_json" });
   }
   if (!ALLOWED_ACTIONS.has(action)) {
     await logDenial({ actorId: null, reason: "unsupported_action", action, key: preKey });
-    return jsonResponse(400, { error: "Unsupported action", request_id: reqId }, reqId);
+    return jsonResponse(400, { error: "Unsupported action", request_id: reqId }, reqId, { action, reason: "unsupported_action" });
   }
 
   const anon = createClient(SUPABASE_URL, ANON, {
@@ -483,7 +483,7 @@ serve(async (req) => {
 
   if (claimsErr || !userId) {
     await logDenial({ actorId: null, reason: "invalid_jwt", action, key: preKey });
-    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId, { action, reason: "invalid_jwt" });
   }
 
   // Refine throttle key with userId now that we have it.
@@ -519,7 +519,7 @@ serve(async (req) => {
       target_entity_type: "protocol",
       context: { reason: "role_lookup_failed", action, request_id: reqId, server_ts: startedAt },
     });
-    return jsonResponse(500, { error: "Internal error", request_id: reqId }, reqId);
+    return jsonResponse(500, { error: "Internal error", request_id: reqId }, reqId, { action, reason: "role_lookup_failed" });
   }
 
   const userRoles = (roleRows ?? []).map((r) => r.role as string);
