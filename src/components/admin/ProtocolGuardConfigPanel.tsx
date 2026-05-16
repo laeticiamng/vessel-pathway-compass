@@ -118,7 +118,13 @@ export function ProtocolGuardConfigPanel() {
           <Loader2 className="h-3 w-3 animate-spin" /> Loading…
         </div>
       )}
-      {err && <p className="text-xs text-destructive">Failed to load config: {err}</p>}
+      {err && (
+        <GuardErrorInline
+          message={`Failed to load config: ${err}`}
+          requestId={errRequestId}
+          action="guard.config.read"
+        />
+      )}
       {cfg && (
         <dl className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
           <Row label="Sliding window" v={fmt(cfg.window_ms)} />
