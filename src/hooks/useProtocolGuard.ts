@@ -28,52 +28,47 @@ export async function callProtocolAccessGuard(
   action: GuardAction,
 ): Promise<GuardResult> {
   const requestId = globalThis.crypto?.randomUUID?.() ?? `r-${Date.now()}`;
-  try {
-    const { data, error } = await supabase.functions.invoke(
-      "protocol-access-guard",
-      {
-        body: { action },
-        headers: { "x-request-id": requestId },
-      },
-    );
 
-    if (error) {
-      // supabase-js v2: error.context is the underlying Response object.
-      // Try to extract the server X-Request-Id and parsed status/body so
-      // the UI can show a correlatable toast.
-      const ctx = (error as unknown as { context?: Response }).context;
-      let status = 500;
-      let serverReqId: string | undefined;
-      let serverError: string | undefined;
-      if (ctx && typeof ctx === "object" && "status" in ctx) {
-        status = (ctx as Response).status ?? 500;
-        try {
-          serverReqId =
-            (ctx as Response).headers?.get?.("x-request-id") ?? undefined;
-        } catch (_) { /* ignore */ }
-        try {
-          // Clone before reading — the body may have been consumed.
-          const cloned = (ctx as Response).clone?.();
-          if (cloned) {
-            const body = await cloned.json().catch(() => null);
-            serverReqId = serverReqId ?? (body?.request_id as string | undefined);
-            serverError = body?.error as string | undefined;
-          }
-        } catch (_) { /* ignore */ }
-      }
+  // Use fetch directly instead of supabase.functions.invoke:
+  // invoke() logs non-2xx responses to console.error, which Lovable's
+  // dev runtime-error overlay catches and turns into a "blank screen"
+  // panic — but a 403 from this guard is an EXPECTED verdict, not a bug.
+  try {
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData.session?.access_token;
+    if (!accessToken) {
+      return { ok: false, status: 401, requestId, error: "Not authenticated" };
+    }
+
+    const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/protocol-access-guard`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+        apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        "x-request-id": requestId,
+      },
+      body: JSON.stringify({ action }),
+    });
+
+    const serverReqId = res.headers.get("x-request-id") ?? undefined;
+    const body = await res.json().catch(() => null);
+
+    if (!res.ok) {
       return {
         ok: false,
-        status,
-        requestId: serverReqId ?? requestId,
-        error: serverError ?? String(error.message ?? error),
+        status: res.status,
+        requestId: serverReqId ?? (body?.request_id as string | undefined) ?? requestId,
+        error: (body?.error as string | undefined) ?? `HTTP ${res.status}`,
       };
     }
 
     return {
-      ok: !!data?.ok,
+      ok: !!body?.ok,
       status: 200,
-      requestId: (data?.request_id as string) ?? requestId,
-      role: data?.role as string | undefined,
+      requestId: serverReqId ?? (body?.request_id as string | undefined) ?? requestId,
+      role: body?.role as string | undefined,
     };
   } catch (e) {
     return { ok: false, status: 500, requestId, error: String((e as Error)?.message ?? e) };
