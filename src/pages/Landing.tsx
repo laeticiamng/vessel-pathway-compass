@@ -336,8 +336,8 @@ export default function Landing() {
       </nav>
       </header>
 
-      {/* Spacer for fixed header (h-16) so top banners are not clipped */}
-      <div aria-hidden="true" className="h-16" />
+      {/* Standard spacer matching fixed header height (--header-h) — keeps top banners under the header on every page */}
+      <div aria-hidden="true" style={{ height: 'var(--header-h)' }} />
       <FourZeroBanner />
       <ComplianceBanner />
       <AboveHeroFramingLine />
