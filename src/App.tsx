@@ -102,6 +102,8 @@ const Collab = lazy(() => import("./pages/app/Collab"));
 
 // Guided clinical demo (public, no auth, no Supabase)
 const AomiFragileDemo = lazy(() => import("./pages/demo/AomiFragileDemo"));
+const ClinicalCases = lazy(() => import("./pages/demo/ClinicalCases"));
+const ClinicalCaseRunner = lazy(() => import("./pages/demo/ClinicalCaseRunner"));
 const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
 
 const queryClient = new QueryClient();
