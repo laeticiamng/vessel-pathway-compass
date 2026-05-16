@@ -146,6 +146,10 @@ export function AppLayout() {
               <NotificationBell />
             </div>
           </header>
+          {/* Research preview disclaimer — rendered full-width here so it sits flush under the sticky header on every R&D page (no padding card, no overlap on scroll) */}
+          {(location.pathname.startsWith("/app/research") || location.pathname.startsWith("/app/collab")) && (
+            <ResearchPreviewBanner />
+          )}
           {breadcrumbs.length > 0 && (
             <div className="px-3 sm:px-4 py-2 border-b border-border/40 bg-background/40 backdrop-blur-sm">
               <SculpturalBreadcrumbs crumbs={breadcrumbs} />
