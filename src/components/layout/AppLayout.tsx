@@ -148,6 +148,7 @@ export function AppLayout() {
               <NotificationBell />
             </div>
           </header>
+          <LowResourceModeBanner />
           {/* Research preview disclaimer — rendered full-width here so it sits flush under the sticky header on every R&D page (no padding card, no overlap on scroll) */}
           {(location.pathname.startsWith("/app/research") || location.pathname.startsWith("/app/collab")) && (
             <ResearchPreviewBanner />
