@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Settings2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useUserRoles } from "@/hooks/useUserRoles";
 
 /**
  * Read-only display of the active protocol-access-guard security
@@ -21,11 +22,21 @@ function fmt(ms: number) {
 }
 
 export function ProtocolGuardConfigPanel() {
+  const { hasRole, isLoading: rolesLoading } = useUserRoles();
+  const allowed = hasRole(["admin", "super_admin", "research_lead"]);
   const [cfg, setCfg] = useState<Cfg | null>(null);
   const [err, setErr] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (rolesLoading) return;
+    // Client-side fast-path: server allowlist is {admin, super_admin,
+    // research_lead}. Anyone else would get a guaranteed 403 — skip the
+    // call entirely to avoid console noise / runtime-error overlays.
+    if (!allowed) {
+      setLoading(false);
+      return;
+    }
     let cancel = false;
     (async () => {
       try {
@@ -50,7 +61,11 @@ export function ProtocolGuardConfigPanel() {
       }
     })();
     return () => { cancel = true; };
-  }, []);
+  }, [rolesLoading, allowed]);
+
+  // Hide entirely for non-admins — server already denies and this avoids
+  // leaking even the section header to unauthorized viewers.
+  if (!rolesLoading && !allowed) return null;
 
   return (
     <section
