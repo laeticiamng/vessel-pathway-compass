@@ -3,6 +3,7 @@ import { Settings2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
+import { guardLog } from "@/lib/guardLogger";
 
 /**
  * Read-only display of the active protocol-access-guard security
