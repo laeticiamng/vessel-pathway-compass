@@ -81,6 +81,7 @@ export function AppLayout() {
                 ? "glass-strong border-border/60 shadow-[0_4px_16px_hsl(var(--foreground)/0.05)]"
                 : "bg-background/60 backdrop-blur-md border-transparent",
             )}
+            style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
             data-sculptural-header
             data-scrolled={headerScrolled}
           >
