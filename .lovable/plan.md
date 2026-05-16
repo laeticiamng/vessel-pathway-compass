@@ -1,140 +1,65 @@
-# Plan — Démo Lot 2 + 7 priorités stratégiques
+# Plan — Research Evidence : page de crédibilité scientifique unifiée
 
-Articulation décidée : on **termine d'abord le Lot 2 de la démo AOMI** (branchement des vrais écrans), puis on enchaîne les 7 priorités dans l'ordre, avec un niveau d'agressivité **modéré (3/5)** sur P5-P7 (refactoring ciblé, pas de refonte du design system).
+## Constat
 
----
+Le projet a déjà 5 pages liées à la rigueur scientifique, mais éparses :
+- `/methodology` (378 l.) — méthode statistique
+- `/transparence` (747 l.) — transparence globale
+- `/audit-limitations` (273 l.) — limites d'audit
+- `/protocol` (309 l.) — protocole L1
+- `/sap` (144 l.) — Statistical Analysis Plan
 
-## Lot 2 — Démo AOMI : brancher les vrais écrans (PRIORITÉ IMMÉDIATE)
+Aucune ne couvre **explicitement** ce que demande l'utilisateur : un **hub "Research Evidence"** qui rassemble en un coup d'œil hypothèses, limites, statut expérimental, niveau de validation, références, simulé-vs-réel, prospectif.
 
-Objectif : remplacer les `VisualPlaceholder` de `/demo/aomi-fragile` par les vrais composants applicatifs alimentés en `demoData`.
+## Proposition
 
-**Écrans à brancher (6 étapes) :**
-1. **Triage** → `VascScreenResults` en mode démo (props `demoData`, pas d'appel Supabase)
-2. **AquaMR** → `FusionViewer` avec dataset DICOM mocké (image statique + overlay sténoses)
-3. **Digital Twin** → `DigitalTwin` 18 segments alimenté par `AOMI_FRAGILE_CASE.segments`
-4. **L1 Decision** → `L1DecisionBoard` avec recommandation pré-calculée
-5. **Plan procédure** → `ProcedurePlanner` en lecture seule
-6. **PROMs M3/M6** → vue `Registry` filtrée sur le cas
+Créer une **nouvelle page `/research-evidence`** qui sert de **dashboard de crédibilité scientifique** — pas un duplicata, mais un **index synthétique** avec liens profonds vers les pages détaillées existantes.
 
-**Contrat technique :**
-- Chaque composant accepte une prop optionnelle `demoData?: DemoCase` ; si présente, court-circuite tous les `useQuery`/`supabase.from(...)`.
-- Bandeau DEMO sticky maintenu.
-- Navigation clavier ←/→ conservée.
-- Aucun écrit DB, aucun appel edge function.
+### Structure de la page (7 sections, dans l'ordre demandé)
 
-**Critères d'acceptation Lot 2 :**
-- Les 6 écrans s'affichent avec données Mme R. réalistes
-- Parcours en ≤ 2 min
-- Zéro requête réseau vers Supabase pendant la démo (vérifié via network panel)
+1. **Hypothèses** — Liste structurée des hypothèses cliniques et techniques du projet (chaîne visuelle v8.3, AquaMR sans iode, Digital Twin 18 segments, raisonnement L1).
+2. **Limites** — Limites connues : taille d'échantillon, biais de sélection, généralisabilité, dépendance aux questionnaires en anglais, etc. → lien vers `/audit-limitations`.
+3. **Statut expérimental** — Bandeau clair "Free Open Beta · Not a medical device · No CE/FDA clearance" + tableau du statut de chaque module (clinique en routine / pilote / R&D / prospectif).
+4. **Niveau de validation** — Échelle TRL adaptée (TRL 1-9) appliquée à chaque module phare avec justification courte. Référence aux paramètres officiels de l'étude L1 (sample size, primary endpoint, MICE m=20, DSMB triggers).
+5. **Références** — Bibliographie ciblée : VascuQoL-6, CIVIQ-14, CFS, Mehran score, Rutherford, guidelines ESVS/SVS. Citation format Vancouver, liens DOI/PMID quand disponibles.
+6. **Simulé vs Réel** — Tableau explicite par module : ce qui est mesuré sur patients réels, ce qui est simulé/synthétique, ce qui est démo pédagogique (ex. cas Mme R.).
+7. **Prospectif** — Roadmap scientifique : ce qui sera évalué dans l'étude L1, calendrier, jalons DSMB, publications attendues.
 
----
+### Architecture technique
 
-## P1 — Clarifier le produit en 1 phrase
+- **1 nouveau fichier** : `src/pages/ResearchEvidence.tsx` (~ 400-500 lignes, structuré en sous-sections au sein du même fichier — pas d'éparpillement).
+- **1 route ajoutée** dans `src/App.tsx` : `/research-evidence` (public, lazy-loaded).
+- **Aucune modif** des pages existantes (`/methodology`, `/transparency`, etc.) — uniquement des liens entrants depuis la nouvelle page.
+- **Source unique de vérité** : réutilise la mémoire `mem://study/l1-clinical-parameters` pour les nombres officiels (sample size, primary endpoint, MICE m=20, DSMB triggers). Tous les paramètres L1 hardcodés dans des constantes en haut de fichier avec commentaire « source of truth: L1 clinical parameters memory ».
+- **SEO** : `SEOHead` avec title "Research Evidence — Niveau de validation et limites · VASCU-LINK".
+- **i18n** : clés sous `researchEvidence.*` (EN/FR/DE), mais conformité mémoire core : les questionnaires cités (VascuQoL-6, CIVIQ-14) restent en anglais.
+- **Lien depuis le footer** sous "Science" + lien depuis la bannière DEMO (`DemoStepShell`) pour fermer la boucle « pourquoi croire à cette démo ».
 
-Je proposerai **3 formulations** dans le composant Landing hero, et tu choisiras :
+### Composants internes (au sein du fichier)
 
-- **A (raisonnement)** : « VASCU-LINK — le copilote de raisonnement vasculaire, du dépistage au suivi post-revascularisation. »
-- **B (workflow)** : « VASCU-LINK — un workflow vasculaire unifié, de l'imagerie sans contraste aux PROMs longitudinaux. »
-- **C (rupture techno)** : « VASCU-LINK — imagerie sans contraste + jumeau numérique vasculaire 18 segments, pour décider sans iode. »
+- `<EvidenceSection title icon>` — wrapper sémantique pour les 7 sections.
+- `<StatusBadge level="clinical|pilot|rd|prospective">` — pastille colorée.
+- `<TRLChip value={1..9}>` — niveau de maturité technologique.
+- `<RefItem authors year title journal doi>` — entrée bibliographique.
 
-Livrable : ask_questions visual_choice avec les 3 hero rendus, puis remplacement du H1 actuel.
+### Critères d'acceptation
 
----
+- Page accessible publiquement à `/research-evidence` en 1 clic depuis footer + bannière DEMO.
+- Les 7 sections sont présentes, distinctes, dans l'ordre demandé.
+- Chaque module phare a un statut explicite (clinique / pilote / R&D / prospectif) **et** un TRL.
+- Le tableau « simulé vs réel » couvre au minimum : VascScreen, AquaMR, Digital Twin, L1 Board, PROMs, démo AOMI.
+- Aucune revendication de supériorité vs MRI/MRA/CTA/angiographie (règle v8.3).
+- Bannière "Free Open Beta · Not a medical device" visible above the fold.
+- Tous les nombres L1 (sample size, primary endpoint, etc.) cohérents avec la mémoire `mem://study/l1-clinical-parameters`.
 
-## P2 — Bibliothèque de cas cliniques (proposition)
+## Hors scope
 
-**5 cas** couvrant la matrice clinique de l'app :
+- Pas de refonte de `/methodology`, `/transparency`, `/audit-limitations`, `/protocol`, `/sap` (cette page **renvoie** vers elles, ne les remplace pas).
+- Pas de nouvelle table Supabase, pas d'edge function.
+- Pas de design system refait (réutilise les tokens HSL et composants shadcn existants).
+- Pas de modification de la nav principale (uniquement footer + bannière DEMO).
+- Pas de changement du protocole L1 lui-même (juste affichage des paramètres existants).
 
-| # | Cas | Module phare | Pourquoi |
-|---|-----|--------------|----------|
-| 1 | **Mme R., 82 ans — AOMI fragile, CI iode** | AquaMR + L1 | Déjà fait (démo de référence) |
-| 2 | **M. T., 68 ans — Suivi post-revasc fémoro-poplité M6** | Digital Twin + PROMs (VascuQoL-6) | Démontre la chaîne longitudinale |
-| 3 | **Mme L., 55 ans — Dépistage AOMI en MT (IPS limite)** | VascScreen + triage L1 | Démontre l'amont / médecine de ville |
-| 4 | **Mme D., 47 ans — IVC C4, indication chirurgicale ?** | CIVIQ-14 + Digital Twin veineux | Démontre le versant veineux existant |
-| 5 | **M. K., 71 ans — Pied diabétique à risque, plaie débutante** | VascScreen + risk assessment dynamique | Comorbidité la plus fréquente |
+## Livrable
 
-Chaque cas = 1 fiche standardisée : contexte, données d'entrée, raisonnement L1/L2, décision, outcomes M3/M6.
-
-Architecture : `src/demo/cases/{caseId}.ts` + index `/demo` listant les 5 cas. Réutilise `DemoStepShell`.
-
----
-
-## P3 — Preuve d'impact workflow
-
-Ajout d'un **panneau "Impact workflow"** sur chaque cas et sur la Landing :
-- Temps gagné (estimation : X min vs Y min standard)
-- Examens évités (ex : 1 angio-CT iodée évitée → -Z g iode, -W kg CO₂ via Green Radiology déjà en place)
-- Étapes automatisées (compteur)
-
-Données : constantes par cas dans `src/demo/cases/*.ts`, agrégat affiché sur `/demo` index.
-
----
-
-## P4 — Simplifier l'architecture UX
-
-Audit + regroupement modéré (niveau 3) :
-- **Nav principale réduite à 5 entrées** : Démo · Patients · Imagerie · Décision · Suivi
-- Tout ce qui est R&D / Innovation Lab / Hardware Designer / Sequence Builder / Simulation Lab → regroupés sous un seul item **« Recherche »** (sous-menu)
-- Marquage `BETA` cohérent sur les modules non cliniques
-- Aucun module supprimé, juste déplacé
-
-Livrable : refonte de `AppLayout` sidebar + breadcrumb cohérent.
-
----
-
-## P5 — Cohérence visuelle (niveau 3)
-
-- Audit des tokens HSL utilisés vs codés en dur → migration des écarts vers `index.css`
-- Uniformisation des bannières "RESEARCH PROTOCOL" / "DEMO" / "BETA" via un seul composant `<ContextBanner variant="..." />`
-- Espacements et radius harmonisés sur cards, tables, panels (3 tailles : sm/md/lg)
-- Pas de refonte du design system, pas de changement de palette
-
----
-
-## P6 — Réduire les gadgets (niveau 3)
-
-- Audit des pages peu utilisées (analytics si dispo, sinon heuristique)
-- Modules candidats à masquer derrière feature flag `?lab=1` : Hardware Designer, Sequence Builder, Simulation Lab, AIRecon (à confirmer après audit)
-- Aucune suppression de code, juste hiding conditionnel dans la nav
-
----
-
-## P7 — Transparence scientifique
-
-- Section **« Science & Méthode »** sur la Landing
-- Reprendre les paramètres officiels de l'étude L1 (mem://study/l1-clinical-parameters)
-- Bandeau « Free Open Beta » consolidé (mem rule existante)
-- Page `/method` dédiée : protocole L1, sample size, primary endpoint, comparator, MICE m=20, DSMB triggers, positionnement v8.3 (chaîne visuelle uniquement)
-- Lien depuis footer + depuis chaque cas clinique
-
----
-
-## Séquencement et livraison
-
-```
-Lot 2 (démo branchée)     → 1 message
-P1 (phrase produit)        → 1 message (visual_choice + impl)
-P2 (4 cas restants)        → 2-3 messages (2 cas / message)
-P3 (impact workflow)       → 1 message
-P4 (nav simplifiée)        → 1 message
-P5 (cohérence visuelle)    → 1-2 messages
-P6 (gadgets cachés)        → 1 message (après audit)
-P7 (transparence)          → 1 message
-```
-
-**Hors scope global :**
-- Pas de nouvelles tables Supabase
-- Pas de nouveaux modules cliniques
-- Pas de refonte du design system
-- Pas de suppression de code existant
-- Pas de revendication de supériorité vs MRI/MRA/CTA (règle v8.3)
-
----
-
-## Détails techniques
-
-- **Démo data** : extension de `src/demo/aomiFragileCase.ts` vers `src/demo/cases/index.ts` regroupant les 5 cas (`satisfies DemoCase`).
-- **Composants demo-ready** : ajout systématique d'une prop optionnelle `demoData?: DemoCase` aux pages cibles (`DigitalTwin`, `FusionViewer`, `L1DecisionBoard`, `ProcedurePlanner`, `VascScreenResults`, `Registry`). Si présente, hooks Supabase court-circuités via early-return de données mockées.
-- **i18n** : clés `demo.cases.{caseId}.*`, `landing.tagline.{a|b|c}`, `nav.research` (regroupement P4).
-- **Feature flag P6** : lecture de `URLSearchParams.get('lab') === '1'` dans `AppLayout` ; persistance optionnelle en `localStorage`.
-- **Pas de migration DB**, pas de nouvel edge function.
+Un seul message implémentant la page complète + la route + les 2 liens entrants (footer, DemoStepShell).
