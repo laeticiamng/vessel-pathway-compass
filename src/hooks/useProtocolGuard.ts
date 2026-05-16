@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
 import { guardLog } from "@/lib/guardLogger";
+import { showGuardDenialToast, isExpectedDenial } from "@/lib/protocolGuardToast";
 
 export type GuardAction =
   | "protocol.view"
@@ -26,10 +27,33 @@ interface GuardResult {
  * of truth for /protocol authorization and writes a tamper-proof
  * governance_events row for every attempt.
  */
+export interface CallProtocolAccessGuardOptions {
+  /**
+   * When true, expected denials (401 / 403 / 429) automatically surface
+   * a deduplicated `sonner` toast carrying the server `x-request-id`.
+   * Leave undefined/false for silent gates (e.g. the view guard, which
+   * just hides the panel).
+   */
+  notifyOnDenied?: boolean;
+}
+
 export async function callProtocolAccessGuard(
   action: GuardAction,
+  opts: CallProtocolAccessGuardOptions = {},
 ): Promise<GuardResult> {
   const requestId = newGuardRequestId();
+
+  const maybeNotify = (result: GuardResult) => {
+    if (!opts.notifyOnDenied) return;
+    if (result.ok) return;
+    if (!isExpectedDenial(result.status)) return;
+    showGuardDenialToast({
+      action,
+      status: result.status,
+      requestId: result.requestId,
+      error: result.error,
+    });
+  };
 
   // Use fetch directly instead of supabase.functions.invoke:
   // invoke() logs non-2xx responses to console.error, which Lovable's
@@ -45,7 +69,14 @@ export async function callProtocolAccessGuard(
         requestId,
         message: "no session — guard call skipped",
       });
-      return { ok: false, status: 401, requestId, error: "Not authenticated" };
+      const result: GuardResult = {
+        ok: false,
+        status: 401,
+        requestId,
+        error: "Not authenticated",
+      };
+      maybeNotify(result);
+      return result;
     }
 
     const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/protocol-access-guard`;
@@ -71,13 +102,15 @@ export async function callProtocolAccessGuard(
       message: parsed.ok ? "granted" : (parsed.error ?? "denied"),
       context: parsed.data?.role ? { role: parsed.data.role } : undefined,
     });
-    return {
+    const result: GuardResult = {
       ok: parsed.ok,
       status: parsed.status,
       requestId: parsed.requestId,
       role: parsed.data?.role,
       error: parsed.error,
     };
+    maybeNotify(result);
+    return result;
   } catch (e) {
     const message = String((e as Error)?.message ?? e);
     guardLog.warn({
