@@ -70,7 +70,7 @@ export const AOMI_FRAGILE_CASE: DemoCase = Object.freeze({
   patient: {
     initials: "R.M.",
     age: 82,
-    sex: "F",
+    sex: "F" as const,
     frailty: 5,
     egfr: 32,
     ckdStage: "CKD 3b",
