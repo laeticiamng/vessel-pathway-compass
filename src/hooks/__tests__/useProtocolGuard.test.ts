@@ -38,16 +38,34 @@ function mockFetchResponse(init: {
 
 describe("callProtocolAccessGuard", () => {
   const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+  const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+  const infoSpy = vi.spyOn(console, "info").mockImplementation(() => {});
+  const debugSpy = vi.spyOn(console, "debug").mockImplementation(() => {});
 
   beforeEach(() => {
     vi.restoreAllMocks();
     errorSpy.mockClear();
+    warnSpy.mockClear();
+    infoSpy.mockClear();
+    debugSpy.mockClear();
     vi.stubGlobal("fetch", vi.fn());
   });
 
   afterEach(() => {
     vi.unstubAllGlobals();
   });
+
+  /**
+   * Pull every `[protocol-guard]` payload routed to a given spy and
+   * return the `requestId` field of each entry. Lets us assert that the
+   * same correlation id flows through every log emitted during a call.
+   */
+  function requestIdsFrom(spy: ReturnType<typeof vi.spyOn>): Array<string | undefined> {
+    return spy.mock.calls
+      .filter((args) => args[0] === "[protocol-guard]")
+      .map((args) => (args[2] as { requestId?: string } | undefined)?.requestId);
+  }
+
 
   it("returns 401 when there is no session (no fetch issued)", async () => {
     mockSession(null);
