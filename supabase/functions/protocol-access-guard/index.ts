@@ -191,7 +191,16 @@ function jsonResponse(
   status: number,
   body: Record<string, unknown>,
   reqId: string,
+  logCtx: { action?: string | null; reason?: string } = {},
 ) {
+  // Auto-emit the structured verdict line. Every terminal response goes
+  // through this helper, so a single touch-point guarantees the
+  // request-id is logged for EVERY verdict (granted, denied, throttled,
+  // error) without each call site having to remember.
+  logVerdict(status, reqId, logCtx.action ?? null, {
+    reason: logCtx.reason,
+    error: body.error,
+  });
   return new Response(JSON.stringify(body), {
     status,
     headers: {
@@ -202,6 +211,7 @@ function jsonResponse(
     },
   });
 }
+
 
 /**
  * Structured stdout log for every terminal verdict.
