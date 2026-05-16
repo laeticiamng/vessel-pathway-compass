@@ -124,13 +124,14 @@ describe("guardLogger remote sink", () => {
     });
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    const [url, init] = fetchMock.mock.calls[0];
+    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
     expect(url).toBe("https://example.com/ingest");
     expect(init.method).toBe("POST");
     expect(init.keepalive).toBe(true);
-    expect(init.headers["Content-Type"]).toBe("application/json");
-    expect(init.headers["x-api-key"]).toBe("k");
-    const body = JSON.parse(init.body);
+    const headers = init.headers as Record<string, string>;
+    expect(headers["Content-Type"]).toBe("application/json");
+    expect(headers["x-api-key"]).toBe("k");
+    const body = JSON.parse(init.body as string);
     expect(body).toMatchObject({
       level: "warn",
       action: "protocol.view",
