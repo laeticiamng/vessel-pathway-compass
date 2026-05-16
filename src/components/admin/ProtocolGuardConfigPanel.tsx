@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
 import { guardLog } from "@/lib/guardLogger";
+import { GuardErrorInline } from "@/components/admin/GuardErrorInline";
 
 /**
  * Read-only display of the active protocol-access-guard security
@@ -28,6 +29,7 @@ export function ProtocolGuardConfigPanel() {
   const allowed = hasRole(["admin", "super_admin", "research_lead"]);
   const [cfg, setCfg] = useState<Cfg | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [errRequestId, setErrRequestId] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -71,6 +73,7 @@ export function ProtocolGuardConfigPanel() {
           message: parsed.ok ? "config fetched" : (parsed.error ?? "denied"),
         });
         if (!parsed.ok || !parsed.data) {
+          if (!cancel) setErrRequestId(parsed.requestId);
           throw new Error(parsed.error ?? `HTTP ${parsed.status}`);
         }
         if (!cancel) setCfg(parsed.data.config);
@@ -82,7 +85,10 @@ export function ProtocolGuardConfigPanel() {
           requestId,
           message: `transport failure: ${message}`,
         });
-        if (!cancel) setErr(message);
+        if (!cancel) {
+          setErr(message);
+          setErrRequestId((prev) => prev ?? requestId);
+        }
       } finally {
         if (!cancel) setLoading(false);
       }
@@ -112,7 +118,13 @@ export function ProtocolGuardConfigPanel() {
           <Loader2 className="h-3 w-3 animate-spin" /> Loading…
         </div>
       )}
-      {err && <p className="text-xs text-destructive">Failed to load config: {err}</p>}
+      {err && (
+        <GuardErrorInline
+          message={`Failed to load config: ${err}`}
+          requestId={errRequestId}
+          action="guard.config.read"
+        />
+      )}
       {cfg && (
         <dl className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
           <Row label="Sliding window" v={fmt(cfg.window_ms)} />
