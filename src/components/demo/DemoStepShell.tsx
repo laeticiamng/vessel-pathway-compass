@@ -67,14 +67,22 @@ export function DemoStepShell({ stepId, visual, narrative, headline }: DemoStepS
               · Mme R., 82 ans — AOMI fragile, contraste contre-indiqué
             </span>
           </div>
-          <Link
-            to="/"
-            aria-label="Quitter la démo"
-            className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-amber-900 dark:text-amber-200 hover:bg-amber-500/20"
-          >
-            <X className="h-3.5 w-3.5" />
-            <span className="hidden sm:inline">Quitter</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link
+              to="/research-evidence"
+              className="hidden sm:inline-flex items-center rounded-md border border-amber-500/40 px-2 py-1 text-[11px] font-medium text-amber-900 dark:text-amber-200 hover:bg-amber-500/20"
+            >
+              Research evidence
+            </Link>
+            <Link
+              to="/"
+              aria-label="Quitter la démo"
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-amber-900 dark:text-amber-200 hover:bg-amber-500/20"
+            >
+              <X className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Quitter</span>
+            </Link>
+          </div>
         </div>
       </div>
 
