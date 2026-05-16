@@ -328,7 +328,7 @@ serve(async (req) => {
       } catch (_) { /* best-effort */ }
     }
 
-    return jsonResponse(200, { config: SECURITY_CONFIG, request_id: reqId }, reqId);
+    return jsonResponse(200, { config: SECURITY_CONFIG, request_id: reqId }, reqId, { action: "guard.config.read", reason: "granted" });
   }
 
   if (req.method !== "POST") {
