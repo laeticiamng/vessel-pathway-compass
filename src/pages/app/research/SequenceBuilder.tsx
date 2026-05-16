@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { ResearchPreviewBanner } from "@/components/ResearchPreviewBanner";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -114,7 +113,6 @@ export default function SequenceBuilder() {
   return (
     <>
       <SEOHead title="Sequence Builder — VASCU-LINK" description="Versioned MRI sequence builder." />
-      <ResearchPreviewBanner />
       <div className="container mx-auto max-w-7xl space-y-6 p-6">
         <header className="space-y-2">
           <div className="flex items-center gap-3">

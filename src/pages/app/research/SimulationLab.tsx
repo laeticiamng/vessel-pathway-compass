@@ -1,5 +1,4 @@
 import { useState, useMemo, useEffect } from "react";
-import { ResearchPreviewBanner } from "@/components/ResearchPreviewBanner";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -111,7 +110,6 @@ export default function SimulationLab() {
   return (
     <>
       <SEOHead title="MRI Simulation Lab — VASCU-LINK" description="Research-only MRI sequence simulator." />
-      <ResearchPreviewBanner />
       <div className="container mx-auto max-w-7xl space-y-6 p-6">
         <header className="space-y-2">
           <div className="flex items-center gap-3">
