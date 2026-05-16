@@ -234,6 +234,25 @@ export function AppSidebar() {
           </SidebarGroup>
         )}
 
+        {/* V9 — R&D */}
+        <SidebarGroup>
+          <SidebarGroupLabel>R&D</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {[...researchItems, ...knowledgeItems, ...collabItems].map((item) => (
+                <SidebarMenuItem key={item.url}>
+                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                    <NavLink to={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      {!collapsed && <span>{item.title}</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
         {/* Administration */}
         {adminItems.length > 0 && (
           <SidebarGroup>
