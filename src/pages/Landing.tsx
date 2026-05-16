@@ -188,7 +188,10 @@ export default function Landing() {
         data-sculptural-header
         data-scrolled={headerScrolled}
       >
-        <div className="container mx-auto flex items-center justify-between gap-3 h-16 px-6 min-w-0">
+        <div
+          className="container mx-auto flex items-center justify-between gap-3 h-16 px-6 min-w-0"
+          style={{ paddingTop: 'env(safe-area-inset-top, 0px)' }}
+        >
           <Sculptural strength={3} className={headerClasses.brandLink}>
             <Link to="/" className={cn(headerClasses.brandLink, "no-underline")}>
               <AquaMRLogo variant="badge" />
