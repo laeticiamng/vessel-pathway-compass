@@ -8,16 +8,19 @@ import {
   ChevronDown,
   ClipboardList,
   Compass,
+  Cpu,
   FlaskConical,
   FileText,
   Globe,
   HeartPulse,
   Image,
+  Layers,
   LayoutDashboard,
   LineChart,
   Settings,
   ShieldCheck,
   Stethoscope,
+  Users,
   LogOut,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
@@ -94,6 +97,22 @@ export function AppSidebar() {
       { title: t("sidebar.network") || "Network", url: "/app/network", icon: Globe },
       { title: t("sidebar.logbook") || "Logbook", url: "/app/logbook", icon: ClipboardList },
     ] : []),
+  ];
+
+  // V9 — R&D research preview
+  const researchItems = [
+    { title: "Simulation Lab", url: "/app/research/simulation-lab", icon: FlaskConical },
+    { title: "Hardware Designer", url: "/app/research/hardware-designer", icon: Cpu },
+    { title: "AI Reconstruction", url: "/app/research/ai-recon", icon: Brain },
+    { title: "Sequence Builder", url: "/app/research/sequence-builder", icon: Layers },
+  ];
+
+  const knowledgeItems = [
+    { title: "Knowledge Hub", url: "/app/knowledge", icon: BookOpen },
+  ];
+
+  const collabItems = [
+    { title: "Collaboration", url: "/app/collab", icon: Users },
   ];
 
   const adminItems = [
@@ -214,6 +233,25 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
         )}
+
+        {/* V9 — R&D */}
+        <SidebarGroup>
+          <SidebarGroupLabel>R&D</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              {[...researchItems, ...knowledgeItems, ...collabItems].map((item) => (
+                <SidebarMenuItem key={item.url}>
+                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
+                    <NavLink to={item.url}>
+                      <item.icon className="h-4 w-4" />
+                      {!collapsed && <span>{item.title}</span>}
+                    </NavLink>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
 
         {/* Administration */}
         {adminItems.length > 0 && (
