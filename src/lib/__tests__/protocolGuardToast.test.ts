@@ -92,4 +92,46 @@ describe("showGuardDenialToast — dedup contract", () => {
 
     expect(dismissMock).not.toHaveBeenCalled();
   });
+
+  // -------------------------------------------------------------------
+  // Audit-log deep link affordance
+  // -------------------------------------------------------------------
+
+  it("auditLogUrlForRequestId encodes the id and points to the admin route", () => {
+    expect(auditLogUrlForRequestId("abc 123")).toBe(
+      "/app/admin/protocol-audit?request_id=abc%20123",
+    );
+  });
+
+  it("attaches a 'View in audit log' link when a requestId is present", () => {
+    const openSpy = vi.spyOn(window, "open").mockImplementation(() => null);
+
+    showGuardDenialToast({
+      action: "protocol.view",
+      status: 403,
+      requestId: "srv-req-42",
+    });
+
+    const opts = errorMock.mock.calls[0][1] as {
+      cancel?: { label: string; onClick: () => void };
+    };
+    expect(opts.cancel).toBeDefined();
+    expect(opts.cancel!.label).toBe("View in audit log");
+
+    opts.cancel!.onClick();
+    expect(openSpy).toHaveBeenCalledWith(
+      "/app/admin/protocol-audit?request_id=srv-req-42",
+      "_blank",
+      "noopener,noreferrer",
+    );
+
+    openSpy.mockRestore();
+  });
+
+  it("omits the audit-log link when no requestId is available", () => {
+    showGuardDenialToast({ action: "protocol.view", status: 401 });
+    const opts = errorMock.mock.calls[0][1] as { cancel?: unknown };
+    // Nothing to deep-link to → no secondary affordance.
+    expect(opts.cancel).toBeUndefined();
+  });
 });
