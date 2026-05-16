@@ -44,7 +44,7 @@ describe("protocolGuardAnalytics", () => {
     });
 
     expect(rpcMock).toHaveBeenCalledTimes(1);
-    const [fnName, args] = rpcMock.mock.calls[0] as [string, Record<string, unknown>];
+    const [fnName, args] = rpcMock.mock.calls[0] as unknown as [string, Record<string, unknown>];
     expect(fnName).toBe("log_governance_event");
     expect(args._category).toBe("ui");
     expect(args._action).toBe("guard_toast.impression");
@@ -61,7 +61,7 @@ describe("protocolGuardAnalytics", () => {
       action: "protocol.view",
       status: 500,
     });
-    const ctx = (rpcMock.mock.calls[0][1] as Record<string, unknown>)
+    const ctx = ((rpcMock.mock.calls[0] as unknown as [string, Record<string, unknown>])[1])
       ._context as Record<string, unknown>;
     expect(ctx.is_expected_denial).toBe(false);
     expect(ctx.request_id).toBeNull();
@@ -112,7 +112,7 @@ describe("protocolGuardAnalytics", () => {
       (c) => (c[1] as { _action: string })._action === "guard_toast.impression",
     );
     expect(impressionCalls).toHaveLength(1);
-    const ctx = (impressionCalls[0][1] as Record<string, unknown>)._context as Record<string, unknown>;
+    const ctx = ((impressionCalls[0] as unknown as [string, Record<string, unknown>])[1])._context as Record<string, unknown>;
     expect(ctx.request_id).toBe("imp-1");
     expect(ctx.status).toBe(403);
   });
@@ -135,7 +135,7 @@ describe("protocolGuardAnalytics", () => {
     opts.action.onClick();
 
     expect(rpcMock).toHaveBeenCalledTimes(1);
-    const args = rpcMock.mock.calls[0][1] as Record<string, unknown>;
+    const args = (rpcMock.mock.calls[0] as unknown as [string, Record<string, unknown>])[1];
     expect(args._action).toBe("guard_toast.copy_request_id");
     const ctx = args._context as Record<string, unknown>;
     expect(ctx.request_id).toBe("copy-1");
@@ -160,7 +160,7 @@ describe("protocolGuardAnalytics", () => {
     opts.cancel.onClick();
 
     expect(rpcMock).toHaveBeenCalledTimes(1);
-    const args = rpcMock.mock.calls[0][1] as Record<string, unknown>;
+    const args = (rpcMock.mock.calls[0] as unknown as [string, Record<string, unknown>])[1];
     expect(args._action).toBe("guard_toast.view_audit_clicked");
     const ctx = args._context as Record<string, unknown>;
     expect(ctx.status).toBe(429);
