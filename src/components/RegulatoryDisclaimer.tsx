@@ -3,19 +3,19 @@ import { useTranslation, type Language } from "@/i18n/context";
 
 const COPY: Record<Language, { line1: string; line2: string; line3: string }> = {
   en: {
-    line1: "VASCU-LINK / AquaMR Flow — Research software in academic validation.",
-    line2: "Architecture designed to target MDR / RGPD / IEC 62304 / ISO 14971 — not certified at this stage.",
-    line3: "Not for clinical use outside approved research protocols.",
+    line1: "VASCU-LINK · Vessel Pathway Compass — Research prototype · Not a CE-marked medical device · Not for clinical use.",
+    line2: "Doctoral research project (PhD candidate Dr Laëticia Motongane). Doctoral L1 validation runs on certified Philips Ingenia 3T MRI at Hôpital de Moutier (Réseau de l'Arc, Switzerland). AquaMR low-field hardware is a post-PhD R&D horizon — not built during the thesis.",
+    line3: "Compliance frameworks referenced: IEC 60601-1 · IEC 60601-2-33 · IEC 62304 · IEC 62366-1 · IEC 81001-5-1 · ISO 14971 · ISO 13485 · MDR EU 2017/745 · SPIRIT-AI · STARD-AI · TRIPOD+AI · PROBAST · KDIGO 2012.",
   },
   fr: {
-    line1: "VASCU-LINK / AquaMR Flow — Logiciel de recherche en cours de validation académique.",
-    line2: "Architecture conçue pour viser MDR / RGPD / IEC 62304 / ISO 14971 — non certifiée à ce stade.",
-    line3: "Pas d'usage clinique en dehors des protocoles de recherche approuvés.",
+    line1: "VASCU-LINK · Vessel Pathway Compass — Prototype de recherche · Non un dispositif médical CE-marqué · Pas d'usage clinique.",
+    line2: "Projet de recherche doctorale (doctorante Dr Laëticia Motongane). La validation doctorale L1 se déroule sur IRM 3T Philips Ingenia certifiée à l'Hôpital de Moutier (Réseau de l'Arc, Suisse). Le matériel bas champ AquaMR est un horizon de R&D post-PhD — non construit pendant la thèse.",
+    line3: "Référentiels de conformité visés : IEC 60601-1 · IEC 60601-2-33 · IEC 62304 · IEC 62366-1 · IEC 81001-5-1 · ISO 14971 · ISO 13485 · MDR EU 2017/745 · SPIRIT-AI · STARD-AI · TRIPOD+AI · PROBAST · KDIGO 2012.",
   },
   de: {
-    line1: "VASCU-LINK / AquaMR Flow — Forschungssoftware in akademischer Validierung.",
-    line2: "Architektur ausgelegt auf MDR / DSGVO / IEC 62304 / ISO 14971 — derzeit nicht zertifiziert.",
-    line3: "Keine klinische Anwendung außerhalb genehmigter Forschungsprotokolle.",
+    line1: "VASCU-LINK · Vessel Pathway Compass — Forschungsprototyp · Kein CE-zertifiziertes Medizinprodukt · Keine klinische Anwendung.",
+    line2: "Doktorforschungsprojekt (Doktorandin Dr. Laëticia Motongane). Die Doktorvalidierung L1 läuft auf zertifiziertem Philips Ingenia 3T MRT am Spital Moutier (Réseau de l'Arc, Schweiz). Die AquaMR-Niederfeld-Hardware ist ein Post-PhD-F&E-Horizont — nicht während der Thesis gebaut.",
+    line3: "Referenzierte Konformitätsrahmen: IEC 60601-1 · IEC 60601-2-33 · IEC 62304 · IEC 62366-1 · IEC 81001-5-1 · ISO 14971 · ISO 13485 · MDR EU 2017/745 · SPIRIT-AI · STARD-AI · TRIPOD+AI · PROBAST · KDIGO 2012.",
   },
 };
 

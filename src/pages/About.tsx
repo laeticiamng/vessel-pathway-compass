@@ -30,9 +30,9 @@ export default function About() {
       { name: "About", path: "/about" },
     ]),
     medicalWebPageJsonLd({
-      name: "About — VASCU-LINK · AquaMR Flow",
+      name: "About — VASCU-LINK · Vessel Pathway Compass",
       description:
-        "Who builds VASCU-LINK, the academic context, and the verifiable identifiers behind the team.",
+        "Who builds VASCU-LINK, the clinical site (Hôpital de Moutier, Réseau de l'Arc), the project hierarchy (doctoral software platform vs post-PhD AquaMR hardware horizon), and the verifiable identifiers behind the team.",
       path: "/about",
     }),
   ]);
@@ -40,8 +40,8 @@ export default function About() {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="About — VASCU-LINK · AquaMR Flow"
-        description="The team, mission and verifiable identifiers behind the VASCU-LINK research prototype and the AquaMR Flow platform."
+        title="About — VASCU-LINK · Vessel Pathway Compass"
+        description="The team, mission, clinical site (Hôpital de Moutier — Réseau de l'Arc) and verifiable identifiers behind the VASCU-LINK research prototype (Vessel Pathway Compass platform; AquaMR low-field hardware is a post-PhD R&D horizon)."
         path="/about"
         jsonLd={jsonLd}
       />
@@ -50,7 +50,7 @@ export default function About() {
         <nav className="container mx-auto flex items-center justify-between h-16 px-6" aria-label="Top navigation">
           <Link to="/" className="flex items-center gap-2.5">
             <AquaMRLogo variant="badge" />
-            <span className="text-xl font-bold tracking-tight">AquaMR Flow</span>
+            <span className="text-xl font-bold tracking-tight">Vessel Pathway Compass</span>
           </Link>
           <Link
             to="/"
@@ -74,9 +74,13 @@ export default function About() {
             A research prototype, transparently built.
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-            VASCU-LINK is the program; AquaMR Flow is the web platform that ships it. We publish
-            who we are, where we operate, and the verifiable identifiers behind the team — so any
-            clinician, IRB or partner can confirm the posture in one place.
+            VASCU-LINK is the doctoral research program; Vessel Pathway Compass is the
+            web platform that carries it. The L1 clinical validation runs on the certified
+            Philips Ingenia 3T MRI at Hôpital de Moutier (Réseau de l'Arc, Switzerland). The
+            AquaMR low-field hardware is a post-PhD R&amp;D horizon — not built during the
+            thesis. We publish who we are, where we operate, and the verifiable identifiers
+            behind the team — so any clinician, IRB or partner can confirm the posture in
+            one place.
           </p>
         </div>
 
@@ -88,20 +92,58 @@ export default function About() {
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Reduce contrast and ionizing radiation in vascular pathways by combining non-ionizing
-              imaging (AquaMR Flow), explicit decision support, and rigorous traceability.
+              imaging on certified MRI hardware, explicit decision support (Vessel Pathway
+              Compass), and rigorous traceability — the 4-zero approach.
             </p>
           </article>
 
           <article className="rounded-2xl border border-border bg-card/60 p-6">
             <h2 className="flex items-center gap-2 text-lg font-semibold mb-3">
               <Building2 className="h-5 w-5 text-primary" aria-hidden="true" />
-              Academic context
+              Clinical site
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Academic validation in progress with Lausanne (doctoral phase). The platform
-              is decision support, not a CE-marked or FDA-cleared device.
+              Doctoral L1 validation at <strong>Hôpital de Moutier</strong> (Réseau de l'Arc,
+              Swiss Medical Network) on the certified <strong>Philips Ingenia 3T MRI</strong>,
+              with nephrology + on-site dialysis. The platform is decision support — not a
+              CE-marked or FDA-cleared device.
             </p>
           </article>
+        </section>
+
+        <section
+          aria-labelledby="hierarchy"
+          className="rounded-2xl border border-border bg-card/60 p-6 mb-10"
+        >
+          <h2 id="hierarchy" className="text-lg font-semibold mb-4">
+            Project hierarchy — strict separation
+          </h2>
+          <div className="grid gap-4 md:grid-cols-2">
+            <div className="rounded-xl border border-primary/30 bg-primary/5 p-4">
+              <h3 className="text-sm font-semibold mb-2 text-primary">
+                Doctoral program (L1 / L2 / L3 · 2027-2031)
+              </h3>
+              <ul className="text-xs text-muted-foreground leading-relaxed space-y-1 list-disc list-inside">
+                <li><strong>L1</strong> — Clinical validation of the 4-zero decision chain on certified Philips Ingenia 3T MRI, Hôpital de Moutier.</li>
+                <li><strong>L2</strong> — Intra-procedural guidance feasibility in simulation (phantom).</li>
+                <li><strong>L3</strong> — Strictly preclinical interventional proof-of-concept (animal / cadaver).</li>
+              </ul>
+            </div>
+            <div className="rounded-xl border border-border bg-muted/30 p-4">
+              <h3 className="text-sm font-semibold mb-2">
+                Hardware program — post-PhD (R&amp;D horizon, outside the thesis)
+              </h3>
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                <strong>AquaMR</strong> — permanent Halbach low-field MRI. Open-source
+                references: OSI²ONE Utrecht · MRI4ALL · Mbarara Uganda · O'Reilly 2021
+                (PMID 34907181). Human passage conditioned on full IEC / MDR validation.
+              </p>
+            </div>
+          </div>
+          <p className="mt-4 text-xs text-muted-foreground/80 italic">
+            The thesis does not build the AquaMR scanner. It validates a 4-zero decision
+            chain on certified existing hardware.
+          </p>
         </section>
 
         <section
