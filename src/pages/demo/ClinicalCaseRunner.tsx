@@ -2,7 +2,7 @@ import { Navigate, useParams, useSearchParams } from "react-router-dom";
 import { SEOHead } from "@/components/SEOHead";
 import { DemoStepShell } from "@/components/demo/DemoStepShell";
 import { DEMO_STEPS, type DemoStepId } from "@/demo/aomiFragileCase";
-import { getClinicalCase } from "@/demo/clinicalCases";
+import { getClinicalCase, getNextClinicalCase } from "@/demo/clinicalCases";
 import { TriagePanel } from "@/components/demo/panels/TriagePanel";
 import { ImagingPanel } from "@/components/demo/panels/ImagingPanel";
 import { TwinPanel } from "@/components/demo/panels/TwinPanel";
@@ -130,6 +130,13 @@ export default function ClinicalCaseRunner() {
   const stepParam = search.get("step");
   const stepId: DemoStepId = isStepId(stepParam) ? stepParam : "triage";
   const step = renderStep(c, stepId);
+  const nextCase = getNextClinicalCase(c.id);
+  const nextCaseHref = nextCase && nextCase.id !== c.id
+    ? `/demo/clinical-cases/${nextCase.id}?step=triage`
+    : undefined;
+  const nextCaseLabel = nextCase && nextCase.id !== c.id
+    ? nextCase.label.split("—")[0].trim()
+    : undefined;
 
   return (
     <>
@@ -145,6 +152,8 @@ export default function ClinicalCaseRunner() {
         basePath={`/demo/clinical-cases/${c.id}`}
         caseLabel={c.label}
         libraryHref="/demo/clinical-cases"
+        nextCaseHref={nextCaseHref}
+        nextCaseLabel={nextCaseLabel}
       />
     </>
   );
