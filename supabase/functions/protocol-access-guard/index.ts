@@ -565,5 +565,6 @@ serve(async (req) => {
       server_ts: startedAt,
     },
     reqId,
+    { action, reason: "granted" },
   );
 });
