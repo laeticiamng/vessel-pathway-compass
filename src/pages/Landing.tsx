@@ -611,6 +611,7 @@ export default function Landing() {
                 <Link to="/trajectory" className="hover:text-foreground transition-colors">{t("landing.nav.trajectory")}</Link>
                 <Link to="/methodology" className="hover:text-foreground transition-colors">Methodology</Link>
                 <Link to="/sap" className="hover:text-foreground transition-colors">SAP</Link>
+                <Link to="/research-evidence" className="hover:text-foreground transition-colors font-semibold text-foreground">Research Evidence</Link>
                 <Link to="/data-management-plan" className="hover:text-foreground transition-colors">DMP (FAIR)</Link>
                 <Link to="/incidental-findings" className="hover:text-foreground transition-colors">Incidental findings</Link>
                 <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
