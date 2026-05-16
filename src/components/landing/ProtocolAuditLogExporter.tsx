@@ -84,16 +84,13 @@ export function ProtocolAuditLogExporter() {
 
   const downloadCSV = async () => {
     // Server-side guard — refuses with 403 if role no longer matches.
-    const verdict = await callProtocolAccessGuard("protocol.export.audit_log.csv");
-    if (!verdict.ok) {
-      showGuardDenialToast({
-        status: verdict.status,
-        requestId: verdict.requestId,
-        error: verdict.error,
-        action: "protocol.export.audit_log.csv",
-      });
-      return;
-    }
+    // `notifyOnDenied` routes the verdict through the centralized
+    // controlled toast so we never trip the runtime-error overlay.
+    const verdict = await callProtocolAccessGuard(
+      "protocol.export.audit_log.csv",
+      { notifyOnDenied: true },
+    );
+    if (!verdict.ok) return;
     const header = [
       "timestamp",
       "action",
