@@ -1965,6 +1965,47 @@ export type Database = {
         }
         Relationships: []
       }
+      research_audit_logs: {
+        Row: {
+          action: string
+          actor_id: string | null
+          context: Json
+          created_at: string
+          entity_id: string | null
+          entity_type: string
+          id: string
+          project_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id?: string | null
+          context?: Json
+          created_at?: string
+          entity_id?: string | null
+          entity_type: string
+          id?: string
+          project_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string | null
+          context?: Json
+          created_at?: string
+          entity_id?: string | null
+          entity_type?: string
+          id?: string
+          project_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "research_audit_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "hardware_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       rgpd_requests: {
         Row: {
           created_at: string
@@ -2795,6 +2836,16 @@ export type Database = {
           _target_entity_id?: string
           _target_entity_type?: string
           _target_user?: string
+        }
+        Returns: string
+      }
+      log_research_event: {
+        Args: {
+          _action: string
+          _context?: Json
+          _entity_id?: string
+          _entity_type: string
+          _project_id: string
         }
         Returns: string
       }
