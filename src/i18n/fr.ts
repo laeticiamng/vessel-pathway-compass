@@ -1,14 +1,15 @@
 export const fr = {
-  // Hiérarchie de marque : programme → plateforme → dispositif
-  // VASCU-LINK est le programme doctoral ; AquaMR Flow est la plateforme SaaS
-  // qui le porte ; AquaMR est le dispositif d'imagerie bas champ intégré.
+  // Hiérarchie v8.3 : programme doctoral → plateforme logicielle · horizon matériel
+  // VASCU-LINK est le programme doctoral. La validation L1 se déroule sur l'IRM
+  // 3T Philips Ingenia certifiée à l'Hôpital de Moutier (Réseau de l'Arc, Suisse).
+  // AquaMR est un horizon de R&D bas champ post-PhD, HORS thèse.
   branding: {
     programName: "VASCU-LINK",
-    platformName: "AquaMR Flow Platform",
-    deviceName: "AquaMR",
-    tagline: "Reconstruire la fonction angiographique en 4-zéro",
+    platformName: "Vessel Pathway Compass",
+    deviceName: "AquaMR (horizon R&D bas champ post-PhD)",
+    tagline: "Support à la décision vasculaire 4-zéro — validé sur IRM 3T certifiée",
     footerExplain:
-      "VASCU-LINK est le programme doctoral porté par AquaMR Flow, plateforme clinique non irradiante intégrant le dispositif d'imagerie AquaMR.",
+      "VASCU-LINK est un programme de recherche doctorale. La validation doctorale L1 se déroule sur l'IRM 3T Philips Ingenia certifiée à l'Hôpital de Moutier (Réseau de l'Arc, Suisse). Le programme matériel bas champ AquaMR est un horizon de R&D post-PhD — pas un dispositif construit pendant la thèse.",
   },
 
   common: {

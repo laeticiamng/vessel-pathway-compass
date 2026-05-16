@@ -1,14 +1,15 @@
 export const de = {
-  // Markenhierarchie: Programm → Plattform → Gerät
-  // VASCU-LINK ist das Doktoratsprogramm; AquaMR Flow ist die SaaS-Plattform,
-  // die es trägt; AquaMR ist das integrierte Niederfeld-Bildgebungsgerät.
+  // Hierarchie v8.3: Doktoratsprogramm → Softwareplattform · Hardware-Horizont
+  // VASCU-LINK ist das Doktoratsprogramm. Die L1-Validierung läuft auf dem
+  // zertifizierten Philips Ingenia 3T MRT am Spital Moutier (Réseau de l'Arc, CH).
+  // AquaMR ist ein Post-PhD-F&E-Horizont — KEIN während der Thesis gebautes Gerät.
   branding: {
     programName: "VASCU-LINK",
-    platformName: "AquaMR Flow Platform",
-    deviceName: "AquaMR",
-    tagline: "Angiographische Funktion in der 4-Null-Kette rekonstruieren",
+    platformName: "Vessel Pathway Compass",
+    deviceName: "AquaMR (Post-PhD-Niederfeld-F&E-Horizont)",
+    tagline: "4-Null Gefäß-Entscheidungsunterstützung — validiert am zertifizierten 3T MRT",
     footerExplain:
-      "VASCU-LINK ist das Doktoratsprogramm der nicht-ionisierenden klinischen AquaMR Flow-Plattform, die das AquaMR-Niederfeld-Bildgebungsgerät integriert.",
+      "VASCU-LINK ist ein Doktorforschungsprogramm. Die Doktorvalidierung L1 läuft auf dem zertifizierten Philips Ingenia 3T MRT am Spital Moutier (Réseau de l'Arc, Schweiz). Das AquaMR-Niederfeld-Hardwareprogramm ist ein Post-PhD-F&E-Horizont — kein während der Thesis gebautes Gerät.",
   },
 
   common: {
