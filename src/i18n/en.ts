@@ -3221,12 +3221,15 @@ export const en = {
 
   // v8.3 — Low-resource mode toggle
   lowResourceMode: {
-    label: "Low-resource mode",
-    descriptionShort: "Defaults to RSVP Level 1 (no advanced imaging).",
+    label: "Low financial-resource mode",
+    descriptionShort:
+      "Adapts recommendations to settings with limited financial resources (RSVP Level 1, no costly advanced imaging).",
     descriptionLong:
-      "When enabled, clinical decision support modules and the Resource-Stratified Vascular Pathway default to Level 1 — no advanced imaging available. Useful in resource-limited settings or for rehearsing decisions when only Doppler and clinical examination are accessible.",
+      "When enabled, clinical decision support modules and the Resource-Stratified Vascular Pathway default to Level 1 — no advanced imaging available. Designed for centres and patients with limited financial resources (restricted insurance coverage, limited access to advanced platforms): favors Doppler and clinical examination, flags high-cost options and surfaces lower-cost alternatives.",
     on: "On",
     off: "Off",
-    toggleAriaLabel: "Toggle low-resource mode",
+    toggleAriaLabel: "Toggle low financial-resource mode",
+    banner:
+      "Low financial-resource mode is active — recommendations prioritize low-cost options.",
   },
 };
