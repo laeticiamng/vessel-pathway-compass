@@ -1,6 +1,4 @@
-import { AOMI_FRAGILE_CASE as CASE } from "@/demo/aomiFragileCase";
-
-const AFFECTED = new Set(CASE.twin.affectedSegments);
+import { AOMI_FRAGILE_CASE, type DemoCase } from "@/demo/aomiFragileCase";
 
 interface Seg {
   id: string;
@@ -11,7 +9,6 @@ interface Seg {
   h: number;
 }
 
-// Schematic 18-segment overview (anatomically suggestive, not anatomically exact — DEMO).
 const SEGMENTS: Seg[] = [
   { id: "AORTA", label: "Aorte", x: 175, y: 20, w: 50, h: 60 },
   { id: "IL_COM_R", label: "Iliaque commune D", x: 130, y: 80, w: 40, h: 30 },
@@ -33,13 +30,14 @@ const SEGMENTS: Seg[] = [
   { id: "PEDAL_L", label: "Pédieuse L", x: 262, y: 335, w: 22, h: 18 },
 ];
 
-function segFill(id: string) {
-  if (!AFFECTED.has(id)) return "hsl(var(--muted))";
-  if (CASE.twin.stenosisPct >= 70) return "hsl(var(--destructive))";
-  return "hsl(35 95% 55%)";
-}
+export function TwinPanel({ case: c = AOMI_FRAGILE_CASE }: { case?: DemoCase } = {}) {
+  const affected = new Set(c.twin.affectedSegments);
+  const segFill = (id: string) => {
+    if (!affected.has(id)) return "hsl(var(--muted))";
+    if (c.twin.stenosisPct >= 70) return "hsl(var(--destructive))";
+    return "hsl(35 95% 55%)";
+  };
 
-export function TwinPanel() {
   return (
     <div className="p-6 grid md:grid-cols-[1fr_220px] gap-6 h-full">
       <div className="rounded-lg bg-gradient-to-b from-background to-muted/40 border border-border/60 flex items-center justify-center">
@@ -53,11 +51,11 @@ export function TwinPanel() {
                 height={s.h}
                 rx="6"
                 fill={segFill(s.id)}
-                stroke={AFFECTED.has(s.id) ? "hsl(var(--destructive))" : "hsl(var(--border))"}
-                strokeWidth={AFFECTED.has(s.id) ? 2 : 1}
-                opacity={AFFECTED.has(s.id) ? 0.95 : 0.6}
+                stroke={affected.has(s.id) ? "hsl(var(--destructive))" : "hsl(var(--border))"}
+                strokeWidth={affected.has(s.id) ? 2 : 1}
+                opacity={affected.has(s.id) ? 0.95 : 0.6}
               />
-              {AFFECTED.has(s.id) && (
+              {affected.has(s.id) && (
                 <text
                   x={s.x + s.w / 2}
                   y={s.y + s.h / 2 + 3}
@@ -66,7 +64,7 @@ export function TwinPanel() {
                   fill="hsl(var(--destructive-foreground))"
                   fontFamily="ui-monospace"
                 >
-                  {CASE.twin.stenosisPct}%
+                  {c.twin.stenosisPct}%
                 </text>
               )}
             </g>
@@ -80,25 +78,21 @@ export function TwinPanel() {
       <div className="space-y-3">
         <div>
           <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Lésion dominante</p>
-          <p className="mt-1 text-sm font-semibold">{CASE.twin.dominantLesion}</p>
+          <p className="mt-1 text-sm font-semibold">{c.twin.dominantLesion}</p>
           <p className="text-xs text-destructive font-semibold tabular-nums">
-            Sténose {CASE.twin.stenosisPct}%
+            Sténose {c.twin.stenosisPct}%
           </p>
         </div>
         <div>
           <p className="text-[10px] uppercase tracking-wider text-muted-foreground">Segments touchés</p>
           <ul className="mt-1 text-xs space-y-1">
-            {CASE.twin.affectedSegments.map((s) => (
+            {c.twin.affectedSegments.map((s) => (
               <li key={s} className="flex items-center gap-2">
                 <span className="h-2 w-2 rounded-full bg-destructive" />
                 <span className="font-mono">{s}</span>
               </li>
             ))}
           </ul>
-        </div>
-        <div className="rounded border border-border/60 p-3 text-[11px] text-muted-foreground">
-          Distalité conservée bilatéralement (tibiales perméables). Revascularisation
-          endovasculaire faisable.
         </div>
       </div>
     </div>
