@@ -19,6 +19,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { RegulatoryDisclaimer } from "@/components/RegulatoryDisclaimer";
+import { ResearchPreviewBanner } from "@/components/ResearchPreviewBanner";
 import { useGlassScroll } from "@/hooks/useGlassScroll";
 import { Sculptural, SculpturalBreadcrumbs, type BreadcrumbCrumb } from "@/components/sculpture";
 import { useLocation } from "react-router-dom";
