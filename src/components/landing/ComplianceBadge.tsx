@@ -8,7 +8,6 @@ import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { getContentVersion } from "@/lib/contentVersions";
 import { callProtocolAccessGuard } from "@/hooks/useProtocolGuard";
-import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 import {
   auditProtocolCompleteness,
   type ProtocolCheckSeverity,
