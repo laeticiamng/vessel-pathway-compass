@@ -101,6 +101,7 @@ export function AppSidebar() {
 
   // V9 — R&D research preview
   const researchItems = [
+    { title: "R&D Dashboard", url: "/app/research/dashboard", icon: LayoutDashboard },
     { title: "Simulation Lab", url: "/app/research/simulation-lab", icon: FlaskConical },
     { title: "Hardware Designer", url: "/app/research/hardware-designer", icon: Cpu },
     { title: "AI Reconstruction", url: "/app/research/ai-recon", icon: Brain },
