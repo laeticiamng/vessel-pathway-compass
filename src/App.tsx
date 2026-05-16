@@ -91,6 +91,14 @@ const SculpturalHeaderQa = lazy(() => import("./pages/dev/SculpturalHeaderQa"));
 const VisualChain = lazy(() => import("./pages/VisualChain"));
 const Rsvp = lazy(() => import("./pages/Rsvp"));
 
+// V9 — R&D, Knowledge, Collaboration
+const SimulationLab = lazy(() => import("./pages/app/research/SimulationLab"));
+const HardwareDesigner = lazy(() => import("./pages/app/research/HardwareDesigner"));
+const AIRecon = lazy(() => import("./pages/app/research/AIRecon"));
+const SequenceBuilder = lazy(() => import("./pages/app/research/SequenceBuilder"));
+const Knowledge = lazy(() => import("./pages/app/Knowledge"));
+const Collab = lazy(() => import("./pages/app/Collab"));
+
 const queryClient = new QueryClient();
 
 function LazyFallback() {
@@ -173,6 +181,14 @@ const App = () => (
             <Route path="vascscreen/dashboard" element={<ContentGate><VascScreenDashboard /></ContentGate>} />
             <Route path="vascscreen/analytics" element={<ContentGate><VascScreenAnalytics /></ContentGate>} />
             <Route path="vascscreen/study" element={<ContentGate><VascScreenStudy /></ContentGate>} />
+
+            {/* V9 — Research preview & knowledge (semi-public) */}
+            <Route path="research/simulation-lab" element={<ContentGate><SimulationLab /></ContentGate>} />
+            <Route path="research/hardware-designer" element={<ContentGate><HardwareDesigner /></ContentGate>} />
+            <Route path="research/ai-recon" element={<ContentGate><AIRecon /></ContentGate>} />
+            <Route path="research/sequence-builder" element={<ContentGate><SequenceBuilder /></ContentGate>} />
+            <Route path="knowledge" element={<ContentGate><Knowledge /></ContentGate>} />
+            <Route path="collab" element={<ContentGate><Collab /></ContentGate>} />
           </Route>
 
           {/* Legacy redirects */}
