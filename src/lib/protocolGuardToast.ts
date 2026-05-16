@@ -71,6 +71,12 @@ const lastIdByAction = new Map<string, string>();
  *    correlate the click with a `governance_events` row.
  */
 export function showGuardDenialToast(opts: DenialOpts) {
+  const cfg = getGuardToastConfig();
+  // Master kill-switch — environments that route guard verdicts through
+  // a different surface (e.g. e2e test runners, embedded views) can
+  // disable the toast entirely without touching call sites.
+  if (!cfg.enabled) return;
+
   const reqId = opts.requestId ?? "n/a";
   const httpLabel = labelForStatus(opts.status);
   const nextId = guardToastId(opts.action, opts.status);
@@ -84,12 +90,14 @@ export function showGuardDenialToast(opts: DenialOpts) {
   }
   lastIdByAction.set(opts.action, nextId);
 
+  // Raw server error strings can leak internals — suppress them when
+  // the active config asks for a terse description.
+  const detailLine = cfg.showErrorDetails && opts.error ? `\n${opts.error}` : "";
+
   toast.error(`Access blocked — ${httpLabel}`, {
     id: nextId,
-    description:
-      `Action: ${opts.action}\nRequest-Id: ${reqId}` +
-      (opts.error ? `\n${opts.error}` : ""),
-    duration: 12_000,
+    description: `Action: ${opts.action}\nRequest-Id: ${reqId}${detailLine}`,
+    duration: cfg.duration,
     onDismiss: () => {
       // Free the slot once sonner unmounts the toast, otherwise a future
       // verdict for the same action would try to dismiss a stale id.
