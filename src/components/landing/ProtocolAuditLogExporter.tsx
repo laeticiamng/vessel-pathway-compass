@@ -9,7 +9,6 @@ import { useUserRoles } from "@/hooks/useUserRoles";
 import { useAuditLog } from "@/hooks/useAuditLog";
 import { useTranslation } from "@/i18n/context";
 import { callProtocolAccessGuard } from "@/hooks/useProtocolGuard";
-import { showGuardDenialToast } from "@/lib/protocolGuardToast";
 
 interface GovEvent {
   id: string;
