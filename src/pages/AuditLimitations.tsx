@@ -39,7 +39,7 @@ const CONTENT: Record<Language, Content> = {
     back: "Back to home",
     title: "Audit & Limitations",
     intro:
-      "VASCU-LINK is a research prototype in academic validation at Lausanne. This page lists exactly what the platform does, what it deliberately does not claim, and how traceability is enforced — so any reviewer, IRB or partner institution can verify the posture in one place.",
+      "VASCU-LINK is a research prototype in academic validation at Hôpital de Moutier (Réseau de l'Arc, Switzerland), on the certified Philips Ingenia 3T MRI. This page lists exactly what the platform does, what it deliberately does not claim, and how traceability is enforced — so any reviewer, IRB or partner institution can verify the posture in one place.",
     doesTitle: "What the platform does",
     does: [
       "Reconstructs targeted angiography-like functions from non-ionizing imaging (AquaMR Flow).",
@@ -77,7 +77,7 @@ const CONTENT: Record<Language, Content> = {
     back: "Retour à l'accueil",
     title: "Audit & Limites",
     intro:
-      "VASCU-LINK est un prototype de recherche en validation académique au Lausanne. Cette page liste précisément ce que la plateforme fait, ce qu'elle ne revendique volontairement pas, et comment la traçabilité est assurée — afin que tout relecteur, comité d'éthique ou institution partenaire puisse vérifier la posture en un seul endroit.",
+      "VASCU-LINK est un prototype de recherche en validation académique à l'Hôpital de Moutier (Réseau de l'Arc, Suisse), sur l'IRM 3T Philips Ingenia certifiée. Cette page liste précisément ce que la plateforme fait, ce qu'elle ne revendique volontairement pas, et comment la traçabilité est assurée — afin que tout relecteur, comité d'éthique ou institution partenaire puisse vérifier la posture en un seul endroit.",
     doesTitle: "Ce que la plateforme fait",
     does: [
       "Reconstruit certaines fonctions angiographiques ciblées à partir d'imagerie non ionisante (AquaMR Flow).",
@@ -115,7 +115,7 @@ const CONTENT: Record<Language, Content> = {
     back: "Zurück zur Startseite",
     title: "Audit & Grenzen",
     intro:
-      "VASCU-LINK ist ein Forschungsprototyp in akademischer Validierung am Lausanne. Diese Seite listet genau auf, was die Plattform tut, was sie bewusst nicht beansprucht und wie Nachvollziehbarkeit gewährleistet wird — damit jede prüfende Stelle, Ethikkommission oder Partnerinstitution die Position an einem Ort verifizieren kann.",
+      "VASCU-LINK ist ein Forschungsprototyp in akademischer Validierung am Spital Moutier (Réseau de l'Arc, Schweiz), auf dem zertifizierten Philips Ingenia 3T MRT. Diese Seite listet genau auf, was die Plattform tut, was sie bewusst nicht beansprucht und wie Nachvollziehbarkeit gewährleistet wird — damit jede prüfende Stelle, Ethikkommission oder Partnerinstitution die Position an einem Ort verifizieren kann.",
     doesTitle: "Was die Plattform tut",
     does: [
       "Rekonstruiert bestimmte angiographische Funktionen aus nicht-ionisierender Bildgebung (AquaMR Flow).",
