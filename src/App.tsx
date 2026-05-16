@@ -100,6 +100,9 @@ const ResearchDashboard = lazy(() => import("./pages/app/research/Dashboard"));
 const Knowledge = lazy(() => import("./pages/app/Knowledge"));
 const Collab = lazy(() => import("./pages/app/Collab"));
 
+// Guided clinical demo (public, no auth, no Supabase)
+const AomiFragileDemo = lazy(() => import("./pages/demo/AomiFragileDemo"));
+
 const queryClient = new QueryClient();
 
 function LazyFallback() {
