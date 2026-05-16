@@ -191,7 +191,16 @@ function jsonResponse(
   status: number,
   body: Record<string, unknown>,
   reqId: string,
+  logCtx: { action?: string | null; reason?: string } = {},
 ) {
+  // Auto-emit the structured verdict line. Every terminal response goes
+  // through this helper, so a single touch-point guarantees the
+  // request-id is logged for EVERY verdict (granted, denied, throttled,
+  // error) without each call site having to remember.
+  logVerdict(status, reqId, logCtx.action ?? null, {
+    reason: logCtx.reason,
+    error: body.error,
+  });
   return new Response(JSON.stringify(body), {
     status,
     headers: {
@@ -202,6 +211,40 @@ function jsonResponse(
     },
   });
 }
+
+
+/**
+ * Structured stdout log for every terminal verdict.
+ *
+ * Output is a single-line JSON document carrying `request_id`, which
+ * matches the `X-Request-Id` header returned to the client AND the
+ * `context.request_id` written to `governance_events`. That is the
+ * end-to-end correlation contract: the same id flows
+ *   client fetch headers → server log line → audit row → response header
+ *
+ * Severity mapping mirrors the client-side guardLogger:
+ *  - 2xx              → console.log
+ *  - 401/403/429      → console.warn (expected denial — never .error)
+ *  - 5xx / unexpected → console.error
+ */
+function logVerdict(
+  status: number,
+  reqId: string,
+  action: string | null,
+  extra: Record<string, unknown> = {},
+) {
+  const payload = JSON.stringify({
+    tag: "protocol-access-guard",
+    request_id: reqId,
+    status,
+    action,
+    ...extra,
+  });
+  if (status >= 500) console.error(payload);
+  else if (status >= 400) console.warn(payload);
+  else console.log(payload);
+}
+
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -238,7 +281,7 @@ serve(async (req) => {
     const { data: rows } = await svc_.from("user_roles").select("role").eq("user_id", uid);
     const roles = (rows ?? []).map((r) => r.role as string);
     if (!roles.some((r) => ALLOWED_ROLES.has(r))) {
-      return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId);
+      return jsonResponse(403, { error: "Forbidden", request_id: reqId }, reqId, { action, reason: "role_forbidden" });
     }
 
     // Tamper-proof audit trail of threshold changes:
@@ -285,7 +328,7 @@ serve(async (req) => {
       } catch (_) { /* best-effort */ }
     }
 
-    return jsonResponse(200, { config: SECURITY_CONFIG, request_id: reqId }, reqId);
+    return jsonResponse(200, { config: SECURITY_CONFIG, request_id: reqId }, reqId, { action: "guard.config.read", reason: "granted" });
   }
 
   if (req.method !== "POST") {
@@ -301,6 +344,7 @@ serve(async (req) => {
   const preKey = clientKey(req, null);
   const preBan = isBanned(preKey);
   if (preBan.banned) {
+    logVerdict(429, reqId, null, { reason: "pre_auth_banned", retry_after: preBan.retryAfter });
     return new Response(
       JSON.stringify({ error: "Too many denied attempts", request_id: reqId, retry_after: preBan.retryAfter }),
       {
@@ -412,7 +456,7 @@ serve(async (req) => {
   const authHeader = req.headers.get("Authorization");
   if (!authHeader?.startsWith("Bearer ")) {
     await logDenial({ actorId: null, reason: "missing_jwt", action: null, key: preKey });
-    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId, { reason: "missing_jwt" });
   }
 
   let action = "";
@@ -421,11 +465,11 @@ serve(async (req) => {
     action = String(body?.action ?? "");
   } catch {
     await logDenial({ actorId: null, reason: "invalid_json", action: null, key: preKey });
-    return jsonResponse(400, { error: "Invalid JSON body", request_id: reqId }, reqId);
+    return jsonResponse(400, { error: "Invalid JSON body", request_id: reqId }, reqId, { reason: "invalid_json" });
   }
   if (!ALLOWED_ACTIONS.has(action)) {
     await logDenial({ actorId: null, reason: "unsupported_action", action, key: preKey });
-    return jsonResponse(400, { error: "Unsupported action", request_id: reqId }, reqId);
+    return jsonResponse(400, { error: "Unsupported action", request_id: reqId }, reqId, { action, reason: "unsupported_action" });
   }
 
   const anon = createClient(SUPABASE_URL, ANON, {
@@ -439,13 +483,14 @@ serve(async (req) => {
 
   if (claimsErr || !userId) {
     await logDenial({ actorId: null, reason: "invalid_jwt", action, key: preKey });
-    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId);
+    return jsonResponse(401, { error: "Unauthorized", request_id: reqId }, reqId, { action, reason: "invalid_jwt" });
   }
 
   // Refine throttle key with userId now that we have it.
   const userKey = clientKey(req, userId);
   const userBan = isBanned(userKey);
   if (userBan.banned) {
+    logVerdict(429, reqId, action, { reason: "user_banned", user_id: userId, retry_after: userBan.retryAfter });
     return new Response(
       JSON.stringify({ error: "Too many denied attempts", request_id: reqId, retry_after: userBan.retryAfter }),
       {
@@ -474,7 +519,7 @@ serve(async (req) => {
       target_entity_type: "protocol",
       context: { reason: "role_lookup_failed", action, request_id: reqId, server_ts: startedAt },
     });
-    return jsonResponse(500, { error: "Internal error", request_id: reqId }, reqId);
+    return jsonResponse(500, { error: "Internal error", request_id: reqId }, reqId, { action, reason: "role_lookup_failed" });
   }
 
   const userRoles = (roleRows ?? []).map((r) => r.role as string);
@@ -520,5 +565,6 @@ serve(async (req) => {
       server_ts: startedAt,
     },
     reqId,
+    { action, reason: "granted" },
   );
 });
