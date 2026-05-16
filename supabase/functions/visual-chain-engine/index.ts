@@ -58,28 +58,39 @@ Deno.serve(async (req) => {
   const adminClient = createClient(supabaseUrl, supabaseService);
 
   const token = authHeader.replace("Bearer ", "");
-  const { data: claimsData, error: claimsError } =
-    await userClient.auth.getClaims(token);
-  if (claimsError || !claimsData?.claims) {
+  const { data: userData, error: userError } =
+    await userClient.auth.getUser(token);
+  if (userError || !userData?.user) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
       status: 401,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
-  const userId = claimsData.claims.sub as string;
+  const userId = userData.user.id;
 
   // Role check
-  const { data: roles, error: rolesError } = await adminClient
-    .from("user_roles")
-    .select("role")
-    .eq("user_id", userId);
-  if (rolesError) {
+  const [{ data: roles, error: rolesError }, { data: profile, error: profileError }] = await Promise.all([
+    adminClient
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", userId),
+    adminClient
+      .from("profiles")
+      .select("role")
+      .eq("user_id", userId)
+      .maybeSingle(),
+  ]);
+  if (rolesError || profileError) {
     return new Response(JSON.stringify({ error: "Role lookup failed" }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   }
-  const hasRole = (roles ?? []).some((r) => ALLOWED_ROLES.has(r.role));
+  const effectiveRoles = new Set([
+    ...(roles ?? []).map((r) => r.role),
+    ...(profile?.role ? [profile.role] : []),
+  ]);
+  const hasRole = Array.from(effectiveRoles).some((role) => ALLOWED_ROLES.has(role));
   if (!hasRole) {
     return new Response(JSON.stringify({ error: "Forbidden" }), {
       status: 403,
