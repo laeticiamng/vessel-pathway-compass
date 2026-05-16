@@ -124,7 +124,7 @@ describe("guardLogger remote sink", () => {
     });
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    const [url, init] = fetchMock.mock.calls[0] as [string, RequestInit];
+    const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
     expect(url).toBe("https://example.com/ingest");
     expect(init.method).toBe("POST");
     expect(init.keepalive).toBe(true);
