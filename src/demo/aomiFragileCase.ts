@@ -119,7 +119,7 @@ export const AOMI_FRAGILE_CASE = Object.freeze({
     m3: 18,
     m6: 22,
   },
-});
+} satisfies DemoCase);
 
 export const DEMO_STEPS: readonly { id: DemoStepId; index: number; titleKey: string }[] =
   Object.freeze([
