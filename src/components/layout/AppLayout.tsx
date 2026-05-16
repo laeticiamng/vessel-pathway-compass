@@ -7,6 +7,7 @@ import { Search, Moon, Sun, Globe } from "lucide-react";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
 import { HighContrastToggle } from "@/components/HighContrastToggle";
 import { LowResourceModeToggle } from "@/components/LowResourceModeToggle";
+import { LowResourceModeBanner } from "@/components/LowResourceModeBanner";
 import { useState, useEffect, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { useTranslation, Language } from "@/i18n/context";
