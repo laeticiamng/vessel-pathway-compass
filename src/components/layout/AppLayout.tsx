@@ -62,7 +62,7 @@ export function AppLayout() {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full">
+      <div className="min-h-screen flex w-full" data-app-layout style={{ ['--header-h' as any]: '3.5rem' }}>
         <AppSidebar />
         <div className="flex-1 flex flex-col min-w-0">
           <a
