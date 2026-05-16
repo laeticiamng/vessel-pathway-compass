@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
+import { guardLog } from "@/lib/guardLogger";
 
 export type GuardAction =
   | "protocol.view"
@@ -38,6 +39,12 @@ export async function callProtocolAccessGuard(
     const { data: sessionData } = await supabase.auth.getSession();
     const accessToken = sessionData.session?.access_token;
     if (!accessToken) {
+      guardLog.info({
+        action,
+        status: 401,
+        requestId,
+        message: "no session — guard call skipped",
+      });
       return { ok: false, status: 401, requestId, error: "Not authenticated" };
     }
 
@@ -57,6 +64,13 @@ export async function callProtocolAccessGuard(
       res,
       requestId,
     );
+    guardLog.auto({
+      action,
+      status: parsed.status,
+      requestId: parsed.requestId,
+      message: parsed.ok ? "granted" : (parsed.error ?? "denied"),
+      context: parsed.data?.role ? { role: parsed.data.role } : undefined,
+    });
     return {
       ok: parsed.ok,
       status: parsed.status,
@@ -65,7 +79,14 @@ export async function callProtocolAccessGuard(
       error: parsed.error,
     };
   } catch (e) {
-    return { ok: false, status: 500, requestId, error: String((e as Error)?.message ?? e) };
+    const message = String((e as Error)?.message ?? e);
+    guardLog.warn({
+      action,
+      status: 0,
+      requestId,
+      message: `network/transport failure: ${message}`,
+    });
+    return { ok: false, status: 500, requestId, error: message };
   }
 }
 

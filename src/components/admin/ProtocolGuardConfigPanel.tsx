@@ -3,6 +3,7 @@ import { Settings2, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
+import { guardLog } from "@/lib/guardLogger";
 
 /**
  * Read-only display of the active protocol-access-guard security
@@ -40,11 +41,19 @@ export function ProtocolGuardConfigPanel() {
     }
     let cancel = false;
     (async () => {
+      const requestId = newGuardRequestId();
       try {
         const { data: sess } = await supabase.auth.getSession();
         const token = sess.session?.access_token;
-        if (!token) throw new Error("Not authenticated");
-        const requestId = newGuardRequestId();
+        if (!token) {
+          guardLog.info({
+            action: "guard.config.read",
+            status: 401,
+            requestId,
+            message: "no session",
+          });
+          throw new Error("Not authenticated");
+        }
         const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/protocol-access-guard?config=1`;
         const r = await fetch(url, {
           method: "GET",
@@ -55,12 +64,25 @@ export function ProtocolGuardConfigPanel() {
           },
         });
         const parsed = await parseGuardResponse<{ config: Cfg }>(r, requestId);
+        guardLog.auto({
+          action: "guard.config.read",
+          status: parsed.status,
+          requestId: parsed.requestId,
+          message: parsed.ok ? "config fetched" : (parsed.error ?? "denied"),
+        });
         if (!parsed.ok || !parsed.data) {
           throw new Error(parsed.error ?? `HTTP ${parsed.status}`);
         }
         if (!cancel) setCfg(parsed.data.config);
       } catch (e) {
-        if (!cancel) setErr(e instanceof Error ? e.message : "Unknown error");
+        const message = e instanceof Error ? e.message : "Unknown error";
+        guardLog.warn({
+          action: "guard.config.read",
+          status: 0,
+          requestId,
+          message: `transport failure: ${message}`,
+        });
+        if (!cancel) setErr(message);
       } finally {
         if (!cancel) setLoading(false);
       }
