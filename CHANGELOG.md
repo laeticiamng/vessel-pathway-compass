@@ -50,7 +50,7 @@ that propagates to clinical decision support modules.
 
 ## v2.2.0 — Methodological framing & non-overpromise guardrails (2026-05-05)
 
-Reinforces academic clarity for the CHUV submission: VASCU-LINK / AquaMR Flow
+Reinforces academic clarity for the academic submission: VASCU-LINK / AquaMR Flow
 is positioned as a **diagnostic concordance study with a pragmatic
 non-inferiority rationale**, not as a superiority claim against hospital
 MRI / CTA / catheter angiography.

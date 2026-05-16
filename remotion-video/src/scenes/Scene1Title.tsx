@@ -12,7 +12,7 @@ export const Scene1Title: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: COLORS.bgDeep, fontFamily: FONT, color: COLORS.ink, padding: 140, justifyContent: "center" }}>
       <div style={{ position: "absolute", top: 80, left: 140, fontSize: 18, letterSpacing: 6, color: COLORS.cyan, opacity: oSub, textTransform: "uppercase" }}>
-        Doctoral research programme · CHUV / UNIL · Lausanne
+        Doctoral research programme · Lausanne
       </div>
       <div style={{ fontSize: 200, fontWeight: 800, letterSpacing: -6, lineHeight: 1, transform: `translateY(${(1 - sLogo) * 40}px)`, opacity: sLogo }}>
         VASCU-LINK

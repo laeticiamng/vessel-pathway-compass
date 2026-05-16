@@ -2,7 +2,7 @@
 
 ## v2.2.0 — Methodischer Rahmen & Anti-Überversprechen-Schutz (2026-05-05)
 
-Stärkt die akademische Klarheit für die CHUV-Einreichung: VASCU-LINK / AquaMR Flow wird als diagnostische Konkordanzstudie mit pragmatischer Nicht-Unterlegenheits-Rationale positioniert, nicht als Überlegenheitsanspruch gegenüber MRT / CTA / Katheter-Angiographie im Krankenhaus.
+Stärkt die akademische Klarheit für die akademische Einreichung: VASCU-LINK / AquaMR Flow wird als diagnostische Konkordanzstudie mit pragmatischer Nicht-Unterlegenheits-Rationale positioniert, nicht als Überlegenheitsanspruch gegenüber MRT / CTA / Katheter-Angiographie im Krankenhaus.
 
 ### Methodischer Rahmen
 - Diagnostische Konkordanz mit pragmatischer Nicht-Unterlegenheits-Rationale — kein Überlegenheitsanspruch gegenüber Krankenhaus-MRT / CTA / Katheter-Angiographie.
