@@ -203,6 +203,39 @@ function jsonResponse(
   });
 }
 
+/**
+ * Structured stdout log for every terminal verdict.
+ *
+ * Output is a single-line JSON document carrying `request_id`, which
+ * matches the `X-Request-Id` header returned to the client AND the
+ * `context.request_id` written to `governance_events`. That is the
+ * end-to-end correlation contract: the same id flows
+ *   client fetch headers → server log line → audit row → response header
+ *
+ * Severity mapping mirrors the client-side guardLogger:
+ *  - 2xx              → console.log
+ *  - 401/403/429      → console.warn (expected denial — never .error)
+ *  - 5xx / unexpected → console.error
+ */
+function logVerdict(
+  status: number,
+  reqId: string,
+  action: string | null,
+  extra: Record<string, unknown> = {},
+) {
+  const payload = JSON.stringify({
+    tag: "protocol-access-guard",
+    request_id: reqId,
+    status,
+    action,
+    ...extra,
+  });
+  if (status >= 500) console.error(payload);
+  else if (status >= 400) console.warn(payload);
+  else console.log(payload);
+}
+
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: { ...corsHeaders, ...noStore } });
