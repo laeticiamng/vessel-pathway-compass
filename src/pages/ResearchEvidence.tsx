@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { SEOHead } from "@/components/SEOHead";
 import { POWER_DEFAULTS, DSMB_TRIGGERS } from "@/lib/vasculink/adr-data";
+import { MODEL_REGISTRY, PIPELINE_ORDER } from "@/lib/aiRecon/modelRegistry";
 import { cn } from "@/lib/utils";
 
 /**
@@ -122,6 +123,15 @@ const MODULE_STATUS: { module: string; level: StatusLevel; trl: number; note: st
   { module: "Procedure Planner", level: "pilot", trl: 5, note: "Templates structurés ; pas d'aide automatisée au geste." },
   { module: "PROMs longitudinaux (VascuQoL-6, CIVIQ-14)", level: "clinical", trl: 7, note: "Questionnaires validés en anglais, utilisés en routine de recherche." },
   { module: "Démo AOMI guidée (Mme R.)", level: "prospective", trl: 3, note: "Démonstration pédagogique sur données fictives. Aucun patient réel." },
+  ...PIPELINE_ORDER.map((id) => {
+    const m = MODEL_REGISTRY[id];
+    return {
+      module: `AI Reconstruction · ${m.name}`,
+      level: "rd" as StatusLevel,
+      trl: m.trl,
+      note: `${m.currentStatus}. Weights: ${m.provenance.weightsOrigin.toLowerCase()}.`,
+    };
+  }),
 ];
 
 const LIMITS = [
@@ -140,6 +150,7 @@ const REAL_VS_SIMULATED: { module: string; real: string; sim: string }[] = [
   { module: "L1 Decision Board", real: "Décisions tracées par utilisateurs authentifiés (RLS, audit).", sim: "Décision pré-calculée pour la démo." },
   { module: "PROMs", real: "Réponses patients réelles, stockage RLS + filtrage server-side par case_id.", sim: "Scores baseline → M3 → M6 fictifs pour Mme R." },
   { module: "Métriques de performance", real: "Aucune publication clinique à ce jour.", sim: "Estimations de workflow (temps gagné, examens évités) à valider prospectivement." },
+  { module: "AI Reconstruction Lab", real: "Aucune inférence GPU en production — aucun poids de modèle chargé.", sim: "Sortie 100 % simulée côté client. Baseline zero-filled IFFT obligatoire affichée à côté de toute métrique IA." },
 ];
 
 const REFERENCES = [
