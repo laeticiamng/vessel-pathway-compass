@@ -1,14 +1,14 @@
 {
-  "generatedAt": "2026-05-15T22:56:16.175Z",
+  "generatedAt": "2026-05-16T08:38:30.131Z",
   "totals": {
-    "usedKeys": 1538,
+    "usedKeys": 1541,
     "missing": {
       "en": 0,
       "fr": 0,
       "de": 0
     },
     "changelogSectionIssues": 0,
-    "pagesIndexed": 71
+    "pagesIndexed": 83
   },
   "missingByLocale": {
     "en": [],
@@ -66,9 +66,11 @@
       "/app/admin/institution",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/fusion-viewer",
@@ -80,6 +82,7 @@
       "/app/governance/exports",
       "/app/governance/iec62304",
       "/app/governance/policies",
+      "/app/knowledge",
       "/app/l1-decision-board",
       "/app/logbook",
       "/app/network",
@@ -88,6 +91,11 @@
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen",
@@ -105,6 +113,8 @@
       "/checkout/success",
       "/contact",
       "/data-management-plan",
+      "/demo/clinical-cases",
+      "/demo/clinical-cases/:caseId",
       "/faq",
       "/incidental-findings",
       "/legal",
@@ -112,6 +122,7 @@
       "/methodology",
       "/modules",
       "/protocol",
+      "/research-evidence",
       "/rsvp",
       "/sap",
       "/securite-confidentialite",
@@ -130,6 +141,9 @@
     ],
     "src/components/a11y/WCAGBadge.tsx": [
       "/app/admin/web-vitals"
+    ],
+    "src/components/admin/GuardErrorInline.tsx": [
+      "/app/admin/protocol-audit"
     ],
     "src/components/admin/ProtocolAlertsWidget.tsx": [
       "/app/admin/protocol-audit"
@@ -197,6 +211,30 @@
     "src/components/dashboard/PatientRiskDistribution.tsx": [
       "/app"
     ],
+    "src/components/demo/DemoStepShell.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/components/demo/panels/DecisionPanel.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/components/demo/panels/FollowUpPanel.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/components/demo/panels/ImagingPanel.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/components/demo/panels/PlanPanel.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/components/demo/panels/PromsPanel.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/components/demo/panels/TriagePanel.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/components/demo/panels/TwinPanel.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
     "src/components/dev/HeroNeonMetricsPanel.tsx": [
       "/dev/hero-neon"
     ],
@@ -219,8 +257,14 @@
       "/app/governance/compliance",
       "/app/governance/compliance-history"
     ],
+    "src/components/governance/ExportJobsPanel.tsx": [
+      "/app/admin/visual-chain-events"
+    ],
     "src/components/governance/FreezeAccountButton.tsx": [
       "/app/admin/users"
+    ],
+    "src/components/governance/GovernanceEventDetail.tsx": [
+      "/app/admin/visual-chain-events"
     ],
     "src/components/governance/IECTechnicalFileButton.tsx": [
       "/app/governance/iec62304"
@@ -376,8 +420,17 @@
     "src/components/patient/RiskFactorsEditor.tsx": [
       "/app/patients/:id"
     ],
+    "src/components/research/ModelCard.tsx": [
+      "/app/research/ai-recon"
+    ],
+    "src/components/research/ProjectCollabPanel.tsx": [
+      "/app/research/hardware-designer"
+    ],
     "src/components/research/ResearchExportButton.tsx": [
       "/app/research"
+    ],
+    "src/components/rsvp/RsvpEngine.tsx": [
+      "/rsvp"
     ],
     "src/components/sculpture/EngravedText.tsx": [
       "/",
@@ -424,6 +477,8 @@
     "src/components/ui/alert.tsx": [
       "/app/admin/web-vitals",
       "/app/governance/compliance",
+      "/app/research/ai-recon",
+      "/app/research/hardware-designer",
       "/app/simulation",
       "/visual-chain"
     ],
@@ -440,9 +495,11 @@
       "/app/admin/institution",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/fusion-viewer",
@@ -454,6 +511,7 @@
       "/app/governance/exports",
       "/app/governance/iec62304",
       "/app/governance/policies",
+      "/app/knowledge",
       "/app/l1-decision-board",
       "/app/logbook",
       "/app/network",
@@ -462,6 +520,11 @@
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen",
@@ -472,7 +535,9 @@
       "/app/vascscreen/results",
       "/app/vascscreen/study",
       "/changelog",
-      "/modules"
+      "/modules",
+      "/rsvp",
+      "/visual-chain"
     ],
     "src/components/ui/button.tsx": [
       "/",
@@ -488,8 +553,10 @@
       "/app/admin/protocol-audit",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/education",
       "/app/fusion-viewer",
       "/app/governance",
@@ -506,6 +573,10 @@
       "/app/patients/:id",
       "/app/procedure-planner",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen",
@@ -522,6 +593,7 @@
       "/checkout/success",
       "/contact",
       "/data-management-plan",
+      "/demo/clinical-cases/:caseId",
       "/dev/hero-neon",
       "/dev/sculptural-header",
       "/faq",
@@ -533,6 +605,7 @@
       "/onboarding",
       "/protocol",
       "/reset-password",
+      "/rsvp",
       "/sap",
       "/securite-confidentialite",
       "/support",
@@ -552,9 +625,11 @@
       "/app/admin/institution",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/fusion-viewer",
@@ -566,6 +641,7 @@
       "/app/governance/exports",
       "/app/governance/iec62304",
       "/app/governance/policies",
+      "/app/knowledge",
       "/app/l1-decision-board",
       "/app/logbook",
       "/app/network",
@@ -574,6 +650,11 @@
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen",
@@ -599,11 +680,14 @@
     "src/components/ui/checkbox.tsx": [
       "/app/admin/protocol-audit",
       "/app/patients/:id",
+      "/app/research/hardware-designer",
       "/auth",
+      "/rsvp",
       "/visual-chain"
     ],
     "src/components/ui/collapsible.tsx": [
       "/app/patients",
+      "/app/research/ai-recon",
       "/audit-limitations",
       "/faq"
     ],
@@ -640,7 +724,9 @@
       "/app/admin/protocol-audit",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/education",
       "/app/governance/audit-search",
       "/app/governance/dpia",
@@ -652,6 +738,9 @@
       "/app/patients/:id",
       "/app/procedure-planner",
       "/app/research",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen/abi",
@@ -662,7 +751,8 @@
       "/contact",
       "/onboarding",
       "/reset-password",
-      "/support"
+      "/support",
+      "/visual-chain"
     ],
     "src/components/ui/label.tsx": [
       "/app/admin/content-versions",
@@ -670,7 +760,9 @@
       "/app/admin/institution",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/governance/audit-search",
@@ -681,6 +773,8 @@
       "/app/patients/:id",
       "/app/procedure-planner",
       "/app/research",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/vascscreen/abi",
       "/app/vascscreen/patient-entry",
@@ -691,7 +785,9 @@
       "/dev/hero-neon",
       "/onboarding",
       "/reset-password",
-      "/support"
+      "/rsvp",
+      "/support",
+      "/visual-chain"
     ],
     "src/components/ui/neon-gradient-text.tsx": [
       "/",
@@ -702,8 +798,10 @@
       "/app/patients/:id"
     ],
     "src/components/ui/progress.tsx": [
+      "/app/admin/visual-chain-events",
       "/app/education",
       "/app/governance/compliance",
+      "/app/research/ai-recon",
       "/app/simulation",
       "/app/vascscreen/assessment",
       "/app/vascscreen/patient-entry",
@@ -716,8 +814,10 @@
       "/app/admin/hospital-audit",
       "/app/admin/i18n-qa",
       "/app/admin/protocol-audit",
+      "/app/admin/visual-chain-events",
       "/app/governance",
-      "/app/governance/audit-search"
+      "/app/governance/audit-search",
+      "/app/research/dashboard"
     ],
     "src/components/ui/select.tsx": [
       "/app/admin",
@@ -726,6 +826,7 @@
       "/app/admin/institution",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/analytics",
       "/app/ci-aki-engine",
       "/app/digital-twin",
@@ -739,11 +840,18 @@
       "/app/patients",
       "/app/patients/:id",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen/patient-entry",
       "/app/vascscreen/study",
-      "/onboarding"
+      "/onboarding",
+      "/rsvp",
+      "/visual-chain"
     ],
     "src/components/ui/separator.tsx": [
       "/app/network",
@@ -751,6 +859,7 @@
     ],
     "src/components/ui/sheet.tsx": [
       "/",
+      "/app/admin/visual-chain-events",
       "/dev/sculptural-header"
     ],
     "src/components/ui/skeleton.tsx": [
@@ -759,6 +868,7 @@
       "/app/admin/content-versions",
       "/app/admin/i18n-qa",
       "/app/admin/protocol-audit",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/digital-twin",
@@ -800,15 +910,19 @@
       "/app/admin/content-versions",
       "/app/admin/hospital-audit",
       "/app/admin/i18n-qa",
+      "/app/collab",
       "/app/digital-twin",
       "/app/fusion-viewer",
       "/app/governance",
       "/app/governance/iec62304",
+      "/app/knowledge",
       "/app/network",
       "/app/patients/:id",
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
       "/app/simulation",
       "/app/vascscreen/study"
     ],
@@ -817,6 +931,7 @@
       "/app/admin/system-health",
       "/app/admin/users",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/education",
       "/app/governance/dpia",
       "/app/governance/policies",
@@ -826,6 +941,7 @@
       "/app/patients/:id",
       "/app/procedure-planner",
       "/app/research",
+      "/app/research/hardware-designer",
       "/app/settings",
       "/app/simulation",
       "/contact",
@@ -947,6 +1063,20 @@
     "src/components/vasculink/ThesisMilestones.tsx": [
       "/app/governance/iec62304"
     ],
+    "src/components/visual-chain/VisualChainAudit.tsx": [
+      "/visual-chain"
+    ],
+    "src/components/visual-chain/VisualChainEngine.tsx": [
+      "/visual-chain"
+    ],
+    "src/demo/aomiFragileCase.ts": [
+      "/demo/clinical-cases",
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/demo/clinicalCases.ts": [
+      "/demo/clinical-cases",
+      "/demo/clinical-cases/:caseId"
+    ],
     "src/hooks/use-toast.ts": [
       "/access",
       "/app/network",
@@ -981,9 +1111,11 @@
       "/app/admin/protocol-audit",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/fusion-viewer",
@@ -1001,6 +1133,11 @@
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen/analytics",
@@ -1011,7 +1148,9 @@
       "/auth",
       "/checkout/success",
       "/onboarding",
-      "/protocol"
+      "/protocol",
+      "/rsvp",
+      "/visual-chain"
     ],
     "src/hooks/useDisclaimerAcceptance.ts": [
       "/visual-chain"
@@ -1045,7 +1184,6 @@
       "/protocol"
     ],
     "src/hooks/useProtocolGuard.ts": [
-      "/app/admin/protocol-audit",
       "/protocol"
     ],
     "src/hooks/useSubscription.ts": [
@@ -1074,9 +1212,11 @@
       "/app/admin/protocol-audit",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/fusion-viewer",
@@ -1096,6 +1236,11 @@
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen/analytics",
@@ -1109,7 +1254,9 @@
       "/onboarding",
       "/protocol",
       "/reset-password",
-      "/support"
+      "/rsvp",
+      "/support",
+      "/visual-chain"
     ],
     "src/integrations/supabase/types.ts": [
       "/access",
@@ -1122,9 +1269,11 @@
       "/app/admin/protocol-audit",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/fusion-viewer",
@@ -1144,6 +1293,11 @@
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen/analytics",
@@ -1157,13 +1311,23 @@
       "/onboarding",
       "/protocol",
       "/reset-password",
-      "/support"
+      "/rsvp",
+      "/support",
+      "/visual-chain"
+    ],
+    "src/lib/aiRecon/modelRegistry.ts": [
+      "/app/research/ai-recon",
+      "/research-evidence"
     ],
     "src/lib/annexAccess.ts": [
       "/protocol"
     ],
     "src/lib/appVersion.ts": [
       "/changelog"
+    ],
+    "src/lib/auditExport.ts": [
+      "/rsvp",
+      "/visual-chain"
     ],
     "src/lib/breakpoints.ts": [
       "/"
@@ -1179,6 +1343,10 @@
     ],
     "src/lib/featureFlags.ts": [
       "/access"
+    ],
+    "src/lib/guardLogger.ts": [
+      "/app/admin/protocol-audit",
+      "/protocol"
     ],
     "src/lib/heroNeonMetrics.ts": [
       "/",
@@ -1202,7 +1370,19 @@
     "src/lib/protocolCompleteness.ts": [
       "/protocol"
     ],
+    "src/lib/protocolGuard.ts": [
+      "/app/admin/protocol-audit",
+      "/protocol"
+    ],
+    "src/lib/protocolGuardAnalytics.ts": [
+      "/app/admin/protocol-audit",
+      "/protocol"
+    ],
     "src/lib/protocolGuardToast.ts": [
+      "/app/admin/protocol-audit",
+      "/protocol"
+    ],
+    "src/lib/protocolGuardToastConfig.ts": [
       "/app/admin/protocol-audit",
       "/protocol"
     ],
@@ -1247,9 +1427,11 @@
       "/app/admin/protocol-audit",
       "/app/admin/system-health",
       "/app/admin/users",
+      "/app/admin/visual-chain-events",
       "/app/admin/web-vitals",
       "/app/analytics",
       "/app/ci-aki-engine",
+      "/app/collab",
       "/app/digital-twin",
       "/app/education",
       "/app/fusion-viewer",
@@ -1261,6 +1443,7 @@
       "/app/governance/exports",
       "/app/governance/iec62304",
       "/app/governance/policies",
+      "/app/knowledge",
       "/app/l1-decision-board",
       "/app/logbook",
       "/app/network",
@@ -1269,6 +1452,11 @@
       "/app/procedure-planner",
       "/app/registry",
       "/app/research",
+      "/app/research/ai-recon",
+      "/app/research/dashboard",
+      "/app/research/hardware-designer",
+      "/app/research/sequence-builder",
+      "/app/research/simulation-lab",
       "/app/settings",
       "/app/simulation",
       "/app/vascscreen",
@@ -1286,6 +1474,8 @@
       "/checkout/success",
       "/contact",
       "/data-management-plan",
+      "/demo/clinical-cases",
+      "/demo/clinical-cases/:caseId",
       "/dev/hero-neon",
       "/dev/sculptural-header",
       "/faq",
@@ -1296,7 +1486,9 @@
       "/modules",
       "/onboarding",
       "/protocol",
+      "/research-evidence",
       "/reset-password",
+      "/rsvp",
       "/sap",
       "/securite-confidentialite",
       "/support",
@@ -1316,7 +1508,8 @@
     ],
     "src/lib/vasculink/adr-data.ts": [
       "/app/governance/iec62304",
-      "/app/research"
+      "/app/research",
+      "/research-evidence"
     ],
     "src/lib/vasculink/pdf-builders.ts": [
       "/app/research"
@@ -1379,6 +1572,9 @@
     "src/pages/Protocol.tsx": [
       "/protocol"
     ],
+    "src/pages/ResearchEvidence.tsx": [
+      "/research-evidence"
+    ],
     "src/pages/ResetPassword.tsx": [
       "/reset-password"
     ],
@@ -1417,6 +1613,9 @@
     ],
     "src/pages/app/CIAKIEngine.tsx": [
       "/app/ci-aki-engine"
+    ],
+    "src/pages/app/Collab.tsx": [
+      "/app/collab"
     ],
     "src/pages/app/ComplianceHistory.tsx": [
       "/app/governance/compliance-history"
@@ -1459,6 +1658,9 @@
     ],
     "src/pages/app/InstitutionAdmin.tsx": [
       "/app/admin/institution"
+    ],
+    "src/pages/app/Knowledge.tsx": [
+      "/app/knowledge"
     ],
     "src/pages/app/L1DecisionBoard.tsx": [
       "/app/l1-decision-board"
@@ -1526,8 +1728,35 @@
     "src/pages/app/VascScreenStudy.tsx": [
       "/app/vascscreen/study"
     ],
+    "src/pages/app/VisualChainEventsAdmin.tsx": [
+      "/app/admin/visual-chain-events"
+    ],
     "src/pages/app/WebVitalsAdmin.tsx": [
       "/app/admin/web-vitals"
+    ],
+    "src/pages/app/research/AIRecon.tsx": [
+      "/app/research/ai-recon"
+    ],
+    "src/pages/app/research/Dashboard.tsx": [
+      "/app/research/dashboard"
+    ],
+    "src/pages/app/research/HardwareDesigner.tsx": [
+      "/app/research/hardware-designer"
+    ],
+    "src/pages/app/research/SequenceBuilder.tsx": [
+      "/app/research/sequence-builder"
+    ],
+    "src/pages/app/research/SimulationLab.tsx": [
+      "/app/research/simulation-lab"
+    ],
+    "src/pages/demo/AomiFragileDemo.tsx": [
+      "/demo/aomi-fragile"
+    ],
+    "src/pages/demo/ClinicalCaseRunner.tsx": [
+      "/demo/clinical-cases/:caseId"
+    ],
+    "src/pages/demo/ClinicalCases.tsx": [
+      "/demo/clinical-cases"
     ],
     "src/pages/dev/HeroNeonQa.tsx": [
       "/dev/hero-neon"
