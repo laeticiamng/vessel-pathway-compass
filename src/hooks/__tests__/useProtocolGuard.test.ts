@@ -43,7 +43,10 @@ describe("callProtocolAccessGuard", () => {
   const debugSpy = vi.spyOn(console, "debug").mockImplementation(() => {});
 
   beforeEach(() => {
-    vi.restoreAllMocks();
+    // NOTE: do NOT use vi.restoreAllMocks() here — it would restore the
+    // console spies installed at describe() scope and silently break the
+    // level-mapping assertions below.
+    vi.clearAllMocks();
     errorSpy.mockClear();
     warnSpy.mockClear();
     infoSpy.mockClear();
