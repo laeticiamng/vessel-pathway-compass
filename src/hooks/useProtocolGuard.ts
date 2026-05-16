@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
 import { guardLog } from "@/lib/guardLogger";
+import { showGuardDenialToast, isExpectedDenial } from "@/lib/protocolGuardToast";
 
 export type GuardAction =
   | "protocol.view"
