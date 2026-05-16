@@ -44,12 +44,7 @@ function renderStep(stepId: DemoStepId) {
     case "imaging":
       return {
         headline: "AquaMR — sans iode, sans radiation",
-        visual: (
-          <VisualPlaceholder
-            label="FusionViewer · séquence AquaMR"
-            hint="Le FusionViewer affichera la séquence MR de Mme R., avec la mention explicite que CTA/DSA sont contre-indiqués."
-          />
-        ),
+        visual: <ImagingPanel />,
         narrative: (
           <>
             <p>
@@ -64,12 +59,7 @@ function renderStep(stepId: DemoStepId) {
     case "twin":
       return {
         headline: `Sténose ${CASE.twin.stenosisPct}% — ${CASE.twin.dominantLesion}`,
-        visual: (
-          <VisualPlaceholder
-            label="Digital Twin · 18 segments"
-            hint={`La carte SVG colorera les segments ${CASE.twin.affectedSegments.join(", ")} selon la sévérité de la lésion.`}
-          />
-        ),
+        visual: <TwinPanel />,
         narrative: (
           <>
             <p>
@@ -82,12 +72,7 @@ function renderStep(stepId: DemoStepId) {
     case "decision":
       return {
         headline: `Décision ${CASE.decision.committeeLevel} — ${CASE.decision.chosenPath}`,
-        visual: (
-          <VisualPlaceholder
-            label="L1 Decision Board"
-            hint="Le board L1 affichera le raisonnement structuré : indication, alternatives écartées et justification."
-          />
-        ),
+        visual: <DecisionPanel />,
         narrative: (
           <>
             <p>
@@ -106,12 +91,7 @@ function renderStep(stepId: DemoStepId) {
     case "plan":
       return {
         headline: `${CASE.plan.procedure} · ${CASE.plan.expectedDurationMin} min`,
-        visual: (
-          <VisualPlaceholder
-            label="Procedure Planner"
-            hint="Le planner détaillera voie d'abord, matériel, anesthésie et timeline opératoire."
-          />
-        ),
+        visual: <PlanPanel />,
         narrative: (
           <>
             <p>
@@ -127,12 +107,7 @@ function renderStep(stepId: DemoStepId) {
     case "proms":
       return {
         headline: `${CASE.proms.tool} : ${CASE.proms.baseline} → ${CASE.proms.m6} à M6`,
-        visual: (
-          <VisualPlaceholder
-            label="Registry · VascuQoL-6"
-            hint="La courbe PROMs affichera l'évolution baseline → M3 → M6 sur la patiente du cas."
-          />
-        ),
+        visual: <PromsPanel />,
         narrative: (
           <>
             <p>
