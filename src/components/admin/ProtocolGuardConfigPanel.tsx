@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
 import { guardLog } from "@/lib/guardLogger";
+import { GuardErrorInline } from "@/components/admin/GuardErrorInline";
 
 /**
  * Read-only display of the active protocol-access-guard security
