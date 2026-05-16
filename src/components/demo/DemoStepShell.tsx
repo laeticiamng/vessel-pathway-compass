@@ -16,6 +16,10 @@ interface DemoStepShellProps {
   caseLabel?: string;
   /** Optional "back to library" link (e.g. /demo/clinical-cases). */
   libraryHref?: string;
+  /** Optional next-case link shown on the final step to chain demos. */
+  nextCaseHref?: string;
+  /** Optional next-case label (for the "Cas suivant : …" button). */
+  nextCaseLabel?: string;
 }
 
 export function DemoStepShell({
