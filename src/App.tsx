@@ -135,6 +135,8 @@ const App = () => (
           {/* Public */}
           <Route path="/" element={<Landing />} />
           <Route path="/demo/aomi-fragile" element={<AomiFragileDemo />} />
+          <Route path="/demo/clinical-cases" element={<ClinicalCases />} />
+          <Route path="/demo/clinical-cases/:caseId" element={<ClinicalCaseRunner />} />
           <Route path="/research-evidence" element={<ResearchEvidence />} />
           <Route path="/pricing" element={<Navigate to="/access" replace />} />
           <Route path="/access" element={<Pricing />} />
