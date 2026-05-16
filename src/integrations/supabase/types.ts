@@ -825,6 +825,48 @@ export type Database = {
           },
         ]
       }
+      funding_applications: {
+        Row: {
+          amount_eur: number | null
+          created_at: string
+          deadline: string | null
+          decision_date: string | null
+          funder: string
+          id: string
+          notes: string | null
+          programme: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount_eur?: number | null
+          created_at?: string
+          deadline?: string | null
+          decision_date?: string | null
+          funder: string
+          id?: string
+          notes?: string | null
+          programme?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount_eur?: number | null
+          created_at?: string
+          deadline?: string | null
+          decision_date?: string | null
+          funder?: string
+          id?: string
+          notes?: string | null
+          programme?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       governance_events: {
         Row: {
           actor_id: string | null
@@ -904,6 +946,45 @@ export type Database = {
           rows_processed?: number
           rows_total?: number | null
           status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      hardware_projects: {
+        Row: {
+          created_at: string
+          eco_score: number
+          id: string
+          modules: Json
+          name: string
+          preset: string
+          status: string
+          total_cost_eur: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          eco_score?: number
+          id?: string
+          modules?: Json
+          name: string
+          preset?: string
+          status?: string
+          total_cost_eur?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          eco_score?: number
+          id?: string
+          modules?: Json
+          name?: string
+          preset?: string
+          status?: string
+          total_cost_eur?: Json
           updated_at?: string
           user_id?: string
         }
@@ -1063,6 +1144,54 @@ export type Database = {
         }
         Relationships: []
       }
+      knowledge_resources: {
+        Row: {
+          abstract: string | null
+          added_at: string
+          added_by: string | null
+          authors: string | null
+          doi: string | null
+          id: string
+          is_published: boolean
+          pmid: string | null
+          tags: string[]
+          title: string
+          type: string
+          updated_at: string
+          url: string | null
+        }
+        Insert: {
+          abstract?: string | null
+          added_at?: string
+          added_by?: string | null
+          authors?: string | null
+          doi?: string | null
+          id?: string
+          is_published?: boolean
+          pmid?: string | null
+          tags?: string[]
+          title: string
+          type: string
+          updated_at?: string
+          url?: string | null
+        }
+        Update: {
+          abstract?: string | null
+          added_at?: string
+          added_by?: string | null
+          authors?: string | null
+          doi?: string | null
+          id?: string
+          is_published?: boolean
+          pmid?: string | null
+          tags?: string[]
+          title?: string
+          type?: string
+          updated_at?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
       logbook_entries: {
         Row: {
           created_at: string
@@ -1216,6 +1345,45 @@ export type Database = {
           },
         ]
       }
+      mri_simulations: {
+        Row: {
+          created_at: string
+          estimated_snr_gain: number | null
+          field_strength_mt: number
+          id: string
+          name: string | null
+          parameters: Json
+          results: Json | null
+          sequence_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          estimated_snr_gain?: number | null
+          field_strength_mt: number
+          id?: string
+          name?: string | null
+          parameters?: Json
+          results?: Json | null
+          sequence_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          estimated_snr_gain?: number | null
+          field_strength_mt?: number
+          id?: string
+          name?: string | null
+          parameters?: Json
+          results?: Json | null
+          sequence_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       notifications: {
         Row: {
           body: string | null
@@ -1299,6 +1467,48 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      partnerships: {
+        Row: {
+          created_at: string
+          id: string
+          last_contact_date: string | null
+          notes: string | null
+          partner_email: string | null
+          partner_institution: string | null
+          partner_name: string
+          status: string
+          tags: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_contact_date?: string | null
+          notes?: string | null
+          partner_email?: string | null
+          partner_institution?: string | null
+          partner_name: string
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_contact_date?: string | null
+          notes?: string | null
+          partner_email?: string | null
+          partner_institution?: string | null
+          partner_name?: string
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
       }
       patients: {
         Row: {
