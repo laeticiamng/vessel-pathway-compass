@@ -1,5 +1,6 @@
-import { Copy, ShieldAlert, Check } from "lucide-react";
+import { Copy, ShieldAlert, Check, ExternalLink } from "lucide-react";
 import { useState } from "react";
+import { auditLogUrlForRequestId } from "@/lib/protocolGuardToast";
 
 interface GuardErrorInlineProps {
   /** Short human-facing error message (e.g. "Forbidden", "HTTP 500"). */
