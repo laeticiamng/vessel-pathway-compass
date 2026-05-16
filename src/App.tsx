@@ -100,6 +100,9 @@ const ResearchDashboard = lazy(() => import("./pages/app/research/Dashboard"));
 const Knowledge = lazy(() => import("./pages/app/Knowledge"));
 const Collab = lazy(() => import("./pages/app/Collab"));
 
+// Guided clinical demo (public, no auth, no Supabase)
+const AomiFragileDemo = lazy(() => import("./pages/demo/AomiFragileDemo"));
+
 const queryClient = new QueryClient();
 
 function LazyFallback() {
@@ -128,6 +131,7 @@ const App = () => (
         <Routes>
           {/* Public */}
           <Route path="/" element={<Landing />} />
+          <Route path="/demo/aomi-fragile" element={<AomiFragileDemo />} />
           <Route path="/pricing" element={<Navigate to="/access" replace />} />
           <Route path="/access" element={<Pricing />} />
           <Route path="/why" element={<WhyVascuLink />} />
