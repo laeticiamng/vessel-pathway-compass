@@ -274,7 +274,7 @@ export const en = {
       pageTitle: "Institutional Access — VASCU-LINK",
       pageDescription: "VASCU-LINK is in academic validation. Reach out for institutional access, clinical partnerships or pilot evaluations — no commercial plan during prospective validation.",
       title: "Institutional Access — Research Phase",
-      body: "VASCU-LINK is undergoing academic validation at Lausanne. For institutional access, a clinical partnership or a pilot evaluation, please contact the team.",
+      body: "VASCU-LINK is undergoing academic validation at Hôpital de Moutier (Réseau de l'Arc, Switzerland), on the certified Philips Ingenia 3T MRI. For institutional access, a clinical partnership or a pilot evaluation, please contact the team.",
       cta: "Contact for institutional access",
       disclaimer: "No public commercial plan during the prospective validation phase.",
     },

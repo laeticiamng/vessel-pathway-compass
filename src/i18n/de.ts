@@ -268,7 +268,7 @@ export const de = {
       pageTitle: "Institutioneller Zugang — VASCU-LINK",
       pageDescription: "VASCU-LINK befindet sich in der akademischen Validierung. Kontaktieren Sie das Team für institutionellen Zugang, klinische Partnerschaften oder Pilotbewertungen — kein kommerzieller Plan während der prospektiven Validierung.",
       title: "Institutional Access — Research Phase",
-      body: "VASCU-LINK befindet sich in der akademischen Validierungsphase am Lausanne. Für institutionellen Zugang, klinische Partnerschaft oder Pilotbewertung kontaktieren Sie bitte das Team.",
+      body: "VASCU-LINK befindet sich in der akademischen Validierungsphase am Spital Moutier (Réseau de l'Arc, Schweiz), auf dem zertifizierten Philips Ingenia 3T MRT. Für institutionellen Zugang, klinische Partnerschaft oder Pilotbewertung kontaktieren Sie bitte das Team.",
       cta: "Contact for institutional access",
       disclaimer: "Kein öffentlicher kommerzieller Plan während der prospektiven Validierungsphase.",
     },

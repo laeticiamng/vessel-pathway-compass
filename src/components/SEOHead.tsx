@@ -19,12 +19,12 @@ export interface SEOHeadProps {
 const BASE_URL = "https://aquamr-flow.com";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/og-image.jpg`;
 const DEFAULT_OG_ALT =
-  "VASCU-LINK — AquaMR Flow Platform: non-ionizing, contrast-sparing vascular clinical workflow.";
-const TWITTER_HANDLE = "@aquamrflow";
-// Site brand suffix appended to non-home page titles. Uses VASCU-LINK so the
-// program name (recognizable on academic/clinical channels) leads.
+  "VASCU-LINK · Vessel Pathway Compass — 4-zero vascular decision support, doctoral L1 validation on certified 3T MRI (Hôpital de Moutier, Réseau de l'Arc, Switzerland).";
+const TWITTER_HANDLE = "@vasculink";
+// Site brand suffix appended to non-home page titles. VASCU-LINK leads as the
+// program name; Vessel Pathway Compass is the software platform.
 const BRAND_SUFFIX = "VASCU-LINK";
-const SITE_NAME = "VASCU-LINK · AquaMR Flow";
+const SITE_NAME = "VASCU-LINK · Vessel Pathway Compass";
 
 /**
  * Truncate to a safe length for OG/Twitter previews.
