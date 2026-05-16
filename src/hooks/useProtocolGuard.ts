@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
+import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
 
 export type GuardAction =
   | "protocol.view"
@@ -27,7 +28,7 @@ interface GuardResult {
 export async function callProtocolAccessGuard(
   action: GuardAction,
 ): Promise<GuardResult> {
-  const requestId = globalThis.crypto?.randomUUID?.() ?? `r-${Date.now()}`;
+  const requestId = newGuardRequestId();
 
   // Use fetch directly instead of supabase.functions.invoke:
   // invoke() logs non-2xx responses to console.error, which Lovable's
@@ -52,23 +53,16 @@ export async function callProtocolAccessGuard(
       body: JSON.stringify({ action }),
     });
 
-    const serverReqId = res.headers.get("x-request-id") ?? undefined;
-    const body = await res.json().catch(() => null);
-
-    if (!res.ok) {
-      return {
-        ok: false,
-        status: res.status,
-        requestId: serverReqId ?? (body?.request_id as string | undefined) ?? requestId,
-        error: (body?.error as string | undefined) ?? `HTTP ${res.status}`,
-      };
-    }
-
+    const parsed = await parseGuardResponse<{ ok?: boolean; role?: string }>(
+      res,
+      requestId,
+    );
     return {
-      ok: !!body?.ok,
-      status: 200,
-      requestId: serverReqId ?? (body?.request_id as string | undefined) ?? requestId,
-      role: body?.role as string | undefined,
+      ok: parsed.ok,
+      status: parsed.status,
+      requestId: parsed.requestId,
+      role: parsed.data?.role,
+      error: parsed.error,
     };
   } catch (e) {
     return { ok: false, status: 500, requestId, error: String((e as Error)?.message ?? e) };
