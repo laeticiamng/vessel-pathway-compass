@@ -64,7 +64,7 @@ export interface DemoCase {
   };
 }
 
-export const AOMI_FRAGILE_CASE: DemoCase = Object.freeze({
+export const AOMI_FRAGILE_CASE = Object.freeze({
   id: "demo-aomi-fragile-mme-r",
   label: "Mme R., 82 ans — AOMI fragile, contraste contre-indiqué",
   patient: {
