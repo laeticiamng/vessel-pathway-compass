@@ -3,6 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
 import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
+import { guardLog } from "@/lib/guardLogger";
 
 export type GuardAction =
   | "protocol.view"
