@@ -336,6 +336,8 @@ export default function Landing() {
       </nav>
       </header>
 
+      {/* Spacer for fixed header (h-16) so top banners are not clipped */}
+      <div aria-hidden="true" className="h-16" />
       <FourZeroBanner />
       <ComplianceBanner />
       <AboveHeroFramingLine />
