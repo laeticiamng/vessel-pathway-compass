@@ -15,7 +15,7 @@ export const Scene6Closing: React.FC = () => {
         A non-ionizing<br/>vascular workflow.
       </div>
       <div style={{ fontSize: 32, color: COLORS.inkDim, marginTop: 40, opacity: oSub, maxWidth: 1300, lineHeight: 1.4 }}>
-        Built with clinicians at CHUV / UNIL — Lausanne.
+        Built with clinicians in Lausanne.
       </div>
       <div style={{ position: "absolute", bottom: 80, fontSize: 18, color: COLORS.inkDim, opacity: oDis, maxWidth: 1500, lineHeight: 1.5, textAlign: "center" }}>
         Research software in academic validation. Architecture designed to target MDR / GDPR / IEC 62304 / ISO 14971 — not certified at this stage.<br/>

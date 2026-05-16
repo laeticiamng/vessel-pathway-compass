@@ -2,7 +2,7 @@
 
 ## v2.2.0 — Cadrage méthodologique et garde-fous anti-survente (2026-05-05)
 
-Renforce la clarté académique pour la soumission CHUV : VASCU-LINK / AquaMR Flow est positionné comme une étude de concordance diagnostique avec rationnel pragmatique de non-infériorité, et non comme une revendication de supériorité face à l'IRM / angio-CT / artériographie hospitalière.
+Renforce la clarté académique pour la soumission académique : VASCU-LINK / AquaMR Flow est positionné comme une étude de concordance diagnostique avec rationnel pragmatique de non-infériorité, et non comme une revendication de supériorité face à l'IRM / angio-CT / artériographie hospitalière.
 
 ### Cadrage méthodologique
 - Concordance diagnostique avec rationnel pragmatique de non-infériorité — aucune revendication de supériorité face à l'IRM / angio-CT / artériographie hospitalière.
