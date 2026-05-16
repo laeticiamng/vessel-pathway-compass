@@ -83,16 +83,9 @@ export function ComplianceBadge() {
   const handleExport = async () => {
     const verdict = await callProtocolAccessGuard(
       "protocol.export.compliance.json",
+      { notifyOnDenied: true },
     );
-    if (!verdict.ok) {
-      showGuardDenialToast({
-        status: verdict.status,
-        requestId: verdict.requestId,
-        error: verdict.error,
-        action: "protocol.export.compliance.json",
-      });
-      return;
-    }
+    if (!verdict.ok) return;
     const generatedAt = new Date().toISOString();
     const protocolVersion = getContentVersion("protocol")?.version ?? null;
     const payload = {
