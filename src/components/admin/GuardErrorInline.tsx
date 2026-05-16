@@ -80,6 +80,18 @@ export function GuardErrorInline({
                 )}
               </button>
             )}
+            {requestId && (
+              <a
+                href={auditLogUrlForRequestId(requestId)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-testid="guard-error-audit-link"
+                className="inline-flex items-center gap-1 rounded px-1 py-0.5 hover:bg-destructive/10 focus:outline-none focus:ring-1 focus:ring-destructive"
+              >
+                <ExternalLink className="h-3 w-3" aria-hidden />
+                view audit
+              </a>
+            )}
           </div>
           <p className="text-[10px] opacity-70">
             Quote this id when reporting the issue — it links to the
