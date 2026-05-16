@@ -44,17 +44,21 @@ export function ProtocolGuardConfigPanel() {
         const { data: sess } = await supabase.auth.getSession();
         const token = sess.session?.access_token;
         if (!token) throw new Error("Not authenticated");
+        const requestId = newGuardRequestId();
         const url = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/protocol-access-guard?config=1`;
         const r = await fetch(url, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
             apikey: import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY ?? "",
+            "x-request-id": requestId,
           },
         });
-        const body = await r.json();
-        if (!r.ok) throw new Error(body?.error ?? `HTTP ${r.status}`);
-        if (!cancel) setCfg(body.config as Cfg);
+        const parsed = await parseGuardResponse<{ config: Cfg }>(r, requestId);
+        if (!parsed.ok || !parsed.data) {
+          throw new Error(parsed.error ?? `HTTP ${parsed.status}`);
+        }
+        if (!cancel) setCfg(parsed.data.config);
       } catch (e) {
         if (!cancel) setErr(e instanceof Error ? e.message : "Unknown error");
       } finally {
