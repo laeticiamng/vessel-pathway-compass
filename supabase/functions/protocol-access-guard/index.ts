@@ -490,6 +490,7 @@ serve(async (req) => {
   const userKey = clientKey(req, userId);
   const userBan = isBanned(userKey);
   if (userBan.banned) {
+    logVerdict(429, reqId, action, { reason: "user_banned", user_id: userId, retry_after: userBan.retryAfter });
     return new Response(
       JSON.stringify({ error: "Too many denied attempts", request_id: reqId, retry_after: userBan.retryAfter }),
       {
