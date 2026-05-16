@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ResearchPreviewBanner } from "@/components/ResearchPreviewBanner";
 import { ProjectCollabPanel } from "@/components/research/ProjectCollabPanel";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -196,7 +195,6 @@ export default function HardwareDesigner() {
     return (
       <>
         <SEOHead title="Hardware Designer — VASCU-LINK" description="Open-source low-field MRI BoM designer." />
-        <ResearchPreviewBanner />
         <div className="container mx-auto max-w-7xl space-y-6 p-6">
           <header className="flex items-center justify-between">
             <div>
@@ -230,7 +228,6 @@ export default function HardwareDesigner() {
   return (
     <>
       <SEOHead title="Hardware Designer — VASCU-LINK" description="Open-source low-field MRI BoM designer." />
-      <ResearchPreviewBanner />
       <div className="container mx-auto max-w-7xl space-y-6 p-6">
         <header className="flex items-center justify-between">
           <Button variant="ghost" onClick={() => setView("list")}><ArrowLeft className="mr-1 h-4 w-4" />Back</Button>

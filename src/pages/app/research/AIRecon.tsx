@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { ResearchPreviewBanner } from "@/components/ResearchPreviewBanner";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -120,7 +119,6 @@ export default function AIRecon() {
   return (
     <>
       <SEOHead title="AI Reconstruction — VASCU-LINK" description="Upload k-space/DICOM and run AI reconstruction pipelines." />
-      <ResearchPreviewBanner />
       <div className="container mx-auto max-w-7xl space-y-6 p-6">
         <header className="space-y-2">
           <div className="flex items-center gap-3">

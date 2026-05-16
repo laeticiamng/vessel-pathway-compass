@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from "react";
-import { ResearchPreviewBanner } from "@/components/ResearchPreviewBanner";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -95,7 +94,6 @@ export default function ResearchDashboard() {
   return (
     <div className="space-y-6 p-4 md:p-6">
       <SEOHead title="R&D Dashboard — VASCU-LINK" description="Suivi des invitations, rôles et jobs IA par projet de recherche." />
-      <ResearchPreviewBanner />
 
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
         <div>
