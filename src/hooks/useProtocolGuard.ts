@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useUserRoles } from "@/hooks/useUserRoles";
 
 export type GuardAction =
   | "protocol.view"
@@ -89,14 +90,24 @@ export async function callProtocolAccessGuard(
  */
 export function useProtocolViewGuard() {
   const { user, loading: authLoading } = useAuth();
+  const { isAdmin, isResearchLead, isLoading: rolesLoading } = useUserRoles();
   const [verdict, setVerdict] = useState<"loading" | "granted" | "denied">(
     "loading",
   );
   const [requestId, setRequestId] = useState<string | undefined>();
 
   useEffect(() => {
-    if (authLoading) return;
+    if (authLoading || rolesLoading) return;
     if (!user) {
+      setVerdict("denied");
+      return;
+    }
+    // Client-side fast-path: if the user clearly lacks any allowlisted
+    // role, skip the edge call entirely. The server guard remains the
+    // source of truth for users who DO have a candidate role; this just
+    // avoids a guaranteed 403 (and the console noise / runtime-error
+    // overlay it triggers in dev) for every non-admin visitor.
+    if (!isAdmin && !isResearchLead) {
       setVerdict("denied");
       return;
     }
@@ -109,7 +120,7 @@ export function useProtocolViewGuard() {
     return () => {
       cancelled = true;
     };
-  }, [user, authLoading]);
+  }, [user, authLoading, rolesLoading, isAdmin, isResearchLead]);
 
   return {
     verdict,
