@@ -130,6 +130,13 @@ export default function ClinicalCaseRunner() {
   const stepParam = search.get("step");
   const stepId: DemoStepId = isStepId(stepParam) ? stepParam : "triage";
   const step = renderStep(c, stepId);
+  const nextCase = getNextClinicalCase(c.id);
+  const nextCaseHref = nextCase && nextCase.id !== c.id
+    ? `/demo/clinical-cases/${nextCase.id}?step=triage`
+    : undefined;
+  const nextCaseLabel = nextCase && nextCase.id !== c.id
+    ? nextCase.label.split("—")[0].trim()
+    : undefined;
 
   return (
     <>
@@ -145,6 +152,8 @@ export default function ClinicalCaseRunner() {
         basePath={`/demo/clinical-cases/${c.id}`}
         caseLabel={c.label}
         libraryHref="/demo/clinical-cases"
+        nextCaseHref={nextCaseHref}
+        nextCaseLabel={nextCaseLabel}
       />
     </>
   );
