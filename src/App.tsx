@@ -96,6 +96,7 @@ const SimulationLab = lazy(() => import("./pages/app/research/SimulationLab"));
 const HardwareDesigner = lazy(() => import("./pages/app/research/HardwareDesigner"));
 const AIRecon = lazy(() => import("./pages/app/research/AIRecon"));
 const SequenceBuilder = lazy(() => import("./pages/app/research/SequenceBuilder"));
+const ResearchDashboard = lazy(() => import("./pages/app/research/Dashboard"));
 const Knowledge = lazy(() => import("./pages/app/Knowledge"));
 const Collab = lazy(() => import("./pages/app/Collab"));
 
@@ -183,6 +184,7 @@ const App = () => (
             <Route path="vascscreen/study" element={<ContentGate><VascScreenStudy /></ContentGate>} />
 
             {/* V9 — Research preview & knowledge (semi-public) */}
+            <Route path="research/dashboard" element={<ContentGate><ResearchDashboard /></ContentGate>} />
             <Route path="research/simulation-lab" element={<ContentGate><SimulationLab /></ContentGate>} />
             <Route path="research/hardware-designer" element={<ContentGate><HardwareDesigner /></ContentGate>} />
             <Route path="research/ai-recon" element={<ContentGate><AIRecon /></ContentGate>} />
