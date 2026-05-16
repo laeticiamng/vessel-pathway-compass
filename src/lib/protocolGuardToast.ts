@@ -114,6 +114,11 @@ export function showGuardDenialToast(opts: DenialOpts) {
     action: {
       label: "Copy Request-Id",
       onClick: () => {
+        recordGuardToastEvent("guard_toast.copy_request_id", {
+          action: opts.action,
+          status: opts.status,
+          requestId: opts.requestId,
+        });
         try {
           void navigator.clipboard?.writeText(reqId);
         } catch {
@@ -129,6 +134,11 @@ export function showGuardDenialToast(opts: DenialOpts) {
       ? {
           label: "View in audit log",
           onClick: () => {
+            recordGuardToastEvent("guard_toast.view_audit_clicked", {
+              action: opts.action,
+              status: opts.status,
+              requestId: opts.requestId,
+            });
             try {
               const url = auditLogUrlForRequestId(opts.requestId!);
               window.open(url, "_blank", "noopener,noreferrer");
@@ -138,6 +148,14 @@ export function showGuardDenialToast(opts: DenialOpts) {
           },
         }
       : undefined,
+  });
+
+  // Impression analytics fire AFTER the render call so a failing analytic
+  // can never prevent the toast from appearing.
+  recordGuardToastEvent("guard_toast.impression", {
+    action: opts.action,
+    status: opts.status,
+    requestId: opts.requestId,
   });
 }
 
