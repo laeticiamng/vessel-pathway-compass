@@ -3188,12 +3188,15 @@ export const fr = {
 
   // v8.3 — Mode faibles ressources
   lowResourceMode: {
-    label: "Mode faibles ressources",
-    descriptionShort: "Force le RSVP au Niveau 1 (pas d'imagerie avancée).",
+    label: "Mode faibles ressources financières",
+    descriptionShort:
+      "Adapte les recommandations aux contextes à ressources financières limitées (RSVP Niveau 1, pas d'imagerie avancée coûteuse).",
     descriptionLong:
-      "Lorsqu'il est activé, les modules d'aide à la décision et la trajectoire vasculaire stratifiée par ressources se positionnent par défaut au Niveau 1 — sans imagerie avancée. Utile en contexte à ressources limitées ou pour répéter une décision quand seuls le Doppler et l'examen clinique sont accessibles.",
+      "Lorsqu'il est activé, les modules d'aide à la décision et la trajectoire vasculaire stratifiée par ressources se positionnent par défaut au Niveau 1 — sans imagerie avancée. Conçu pour les centres et patients aux ressources financières limitées (assurance restreinte, accès au plateau technique réduit) : privilégie le Doppler et l'examen clinique, signale les options à coût élevé et propose des alternatives sobres.",
     on: "Activé",
     off: "Désactivé",
-    toggleAriaLabel: "Activer ou désactiver le mode faibles ressources",
+    toggleAriaLabel: "Activer ou désactiver le mode faibles ressources financières",
+    banner:
+      "Mode faibles ressources financières activé — les recommandations privilégient les options à faible coût.",
   },
 };

@@ -3189,13 +3189,15 @@ export const de = {
 
   // v8.3 — Modus für ressourcenarme Umgebungen
   lowResourceMode: {
-    label: "Modus für ressourcenarme Umgebungen",
+    label: "Modus für begrenzte finanzielle Ressourcen",
     descriptionShort:
-      "Setzt den RSVP standardmäßig auf Stufe 1 (keine erweiterte Bildgebung).",
+      "Passt Empfehlungen an finanziell eingeschränkte Kontexte an (RSVP Stufe 1, keine teure erweiterte Bildgebung).",
     descriptionLong:
-      "Wenn aktiviert, stellen sich die klinischen Entscheidungsunterstützungsmodule und der ressourcenstratifizierte Gefäßpfad standardmäßig auf Stufe 1 ein — keine erweiterte Bildgebung verfügbar. Nützlich in ressourcenarmen Umgebungen oder zum Üben einer Entscheidung, wenn nur Doppler und klinische Untersuchung zugänglich sind.",
+      "Wenn aktiviert, stellen sich die klinischen Entscheidungsunterstützungsmodule und der ressourcenstratifizierte Gefäßpfad standardmäßig auf Stufe 1 ein — keine erweiterte Bildgebung verfügbar. Konzipiert für Zentren und Patientinnen/Patienten mit begrenzten finanziellen Ressourcen (eingeschränkter Versicherungsschutz, eingeschränkter Zugang zu Hochleistungstechnik): bevorzugt Doppler und klinische Untersuchung, kennzeichnet teure Optionen und schlägt kostengünstige Alternativen vor.",
     on: "An",
     off: "Aus",
-    toggleAriaLabel: "Modus für ressourcenarme Umgebungen umschalten",
+    toggleAriaLabel: "Modus für begrenzte finanzielle Ressourcen umschalten",
+    banner:
+      "Modus für begrenzte finanzielle Ressourcen aktiv — Empfehlungen bevorzugen kostengünstige Optionen.",
   },
 };

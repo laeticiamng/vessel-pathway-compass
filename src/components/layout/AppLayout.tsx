@@ -7,6 +7,7 @@ import { Search, Moon, Sun, Globe } from "lucide-react";
 import { NotificationBell } from "@/components/notifications/NotificationBell";
 import { HighContrastToggle } from "@/components/HighContrastToggle";
 import { LowResourceModeToggle } from "@/components/LowResourceModeToggle";
+import { LowResourceModeBanner } from "@/components/LowResourceModeBanner";
 import { useState, useEffect, useMemo } from "react";
 import { useTheme } from "next-themes";
 import { useTranslation, Language } from "@/i18n/context";
@@ -147,6 +148,7 @@ export function AppLayout() {
               <NotificationBell />
             </div>
           </header>
+          <LowResourceModeBanner />
           {/* Research preview disclaimer — rendered full-width here so it sits flush under the sticky header on every R&D page (no padding card, no overlap on scroll) */}
           {(location.pathname.startsWith("/app/research") || location.pathname.startsWith("/app/collab")) && (
             <ResearchPreviewBanner />
