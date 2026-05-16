@@ -3,7 +3,7 @@ import { AOMI_FRAGILE_CASE, type DemoCase } from "./aomiFragileCase";
 /**
  * Cas claudicant standard — exemple "courant" d'arbitrage L2 endo vs médical.
  */
-const M_D_CLAUDICANT: DemoCase = Object.freeze({
+const M_D_CLAUDICANT = Object.freeze({
   id: "m-d-claudicant",
   label: "M. D., 64 ans — claudication invalidante",
   shortPitch:
@@ -11,7 +11,7 @@ const M_D_CLAUDICANT: DemoCase = Object.freeze({
   patient: {
     initials: "D.M.",
     age: 64,
-    sex: "M",
+    sex: "M" as const,
     frailty: 3,
     egfr: 78,
     ckdStage: "Normal",
@@ -25,7 +25,7 @@ const M_D_CLAUDICANT: DemoCase = Object.freeze({
   ],
   riskFactors: {
     diabetes: true,
-    smoking: "active",
+    smoking: "active" as const,
     hypertension: true,
     dyslipidemia: true,
     ckd: false,
@@ -36,7 +36,7 @@ const M_D_CLAUDICANT: DemoCase = Object.freeze({
   doppler: {
     abiRight: 0.95,
     abiLeft: 0.62,
-    waveform: "biphasique",
+    waveform: "biphasique" as const,
     peakSystolicVelocityCmS: 280,
     notes: "Onde biphasique post-sténotique fémorale superficielle G, ratio PSV ~ 2.5.",
   },
@@ -44,13 +44,13 @@ const M_D_CLAUDICANT: DemoCase = Object.freeze({
     abiRight: 0.95,
     abiLeft: 0.62,
     walkingDistanceMeters: 200,
-    ciAkiRisk: "low",
+    ciAkiRisk: "low" as const,
     ciAkiNote: "eGFR 78, pas d'allergie iode → contraste autorisé sans précaution particulière.",
   },
   triageJustification:
     "L2 — RCP courte : indication discutée entre optimisation médicale supervisée (BAT) et angioplastie. Profil intermédiaire (Rutherford 3, comorbidités contrôlées), pas de complexité technique majeure.",
   imaging: {
-    modality: "CTA",
+    modality: "CTA" as const,
     contraindicatedAlternatives: [],
     sequenceSeconds: 90,
     findings:
@@ -69,7 +69,7 @@ const M_D_CLAUDICANT: DemoCase = Object.freeze({
       "Poursuite BAT seul (refusé : 3 mois sans amélioration)",
       "Pontage fémoro-poplité (refusé : lésion courte, geste disproportionné)",
     ],
-    committeeLevel: "L2",
+    committeeLevel: "L2" as const,
   },
   plan: {
     procedure: "Angioplastie fémorale superficielle G + DCB",
@@ -78,23 +78,23 @@ const M_D_CLAUDICANT: DemoCase = Object.freeze({
     expectedDurationMin: 50,
   },
   proms: {
-    tool: "VascuQoL-6",
+    tool: "VascuQoL-6" as const,
     baseline: 14,
     m3: 20,
     m6: 22,
   },
   longitudinalFollowUp: [
-    { milestone: "M1", event: "Reprise marche sans gêne sur 500 m, sevrage tabagique entamé", vascuQoL6: 18, walkingDistanceMeters: 500, reintervention: false },
-    { milestone: "M3", event: "Reprise activité professionnelle complète", vascuQoL6: 20, walkingDistanceMeters: 800, reintervention: false },
-    { milestone: "M6", event: "Marche illimitée, sevrage tabac maintenu", vascuQoL6: 22, walkingDistanceMeters: 1200, reintervention: false },
-    { milestone: "M12", event: "Perméabilité primaire DCB conservée, IPS G 0.91", vascuQoL6: 22, walkingDistanceMeters: 1200, reintervention: false },
+    { milestone: "M1" as const, event: "Reprise marche sans gêne sur 500 m, sevrage tabagique entamé", vascuQoL6: 18, walkingDistanceMeters: 500, reintervention: false },
+    { milestone: "M3" as const, event: "Reprise activité professionnelle complète", vascuQoL6: 20, walkingDistanceMeters: 800, reintervention: false },
+    { milestone: "M6" as const, event: "Marche illimitée, sevrage tabac maintenu", vascuQoL6: 22, walkingDistanceMeters: 1200, reintervention: false },
+    { milestone: "M12" as const, event: "Perméabilité primaire DCB conservée, IPS G 0.91", vascuQoL6: 22, walkingDistanceMeters: 1200, reintervention: false },
   ],
-});
+} satisfies DemoCase);
 
 /**
  * Cas multi-étagé complexe — décision L3 multidisciplinaire.
  */
-const M_B_MULTIETAGE: DemoCase = Object.freeze({
+const M_B_MULTIETAGE = Object.freeze({
   id: "m-b-multietage",
   label: "M. B., 71 ans — lésions multi-étagées aorto-fémorales",
   shortPitch:
@@ -102,7 +102,7 @@ const M_B_MULTIETAGE: DemoCase = Object.freeze({
   patient: {
     initials: "B.J.",
     age: 71,
-    sex: "M",
+    sex: "M" as const,
     frailty: 4,
     egfr: 58,
     ckdStage: "CKD 3a",
@@ -116,7 +116,7 @@ const M_B_MULTIETAGE: DemoCase = Object.freeze({
   ],
   riskFactors: {
     diabetes: true,
-    smoking: "former",
+    smoking: "former" as const,
     hypertension: true,
     dyslipidemia: true,
     ckd: true,
@@ -127,7 +127,7 @@ const M_B_MULTIETAGE: DemoCase = Object.freeze({
   doppler: {
     abiRight: 0.38,
     abiLeft: 0.55,
-    waveform: "monophasique",
+    waveform: "monophasique" as const,
     peakSystolicVelocityCmS: 420,
     notes: "Flux monophasique bilatéral, ratio PSV > 4 en fémoral D, suspicion lésion proximale iliaque.",
   },
@@ -135,14 +135,14 @@ const M_B_MULTIETAGE: DemoCase = Object.freeze({
     abiRight: 0.38,
     abiLeft: 0.55,
     walkingDistanceMeters: 80,
-    ciAkiRisk: "moderate",
+    ciAkiRisk: "moderate" as const,
     ciAkiNote:
       "eGFR 58, pas d'allergie iode. Hydratation pré/post-contraste recommandée, volume iode minimisé.",
   },
   triageJustification:
     "L3 — RCP multidisciplinaire obligatoire : lésions multi-étagées bilatérales, ATCD coronarien, plusieurs stratégies hybrides envisageables. Arbitrage chirurgien vasculaire + radiologue interventionnel + cardiologue.",
   imaging: {
-    modality: "DSA",
+    modality: "DSA" as const,
     contraindicatedAlternatives: [],
     sequenceSeconds: 180,
     findings:
@@ -162,7 +162,7 @@ const M_B_MULTIETAGE: DemoCase = Object.freeze({
       "Endo isolé sans traiter l'iliaque (refusé : inflow insuffisant)",
       "Geste bilatéral en une session (refusé : volume contraste + durée anesthésie)",
     ],
-    committeeLevel: "L3",
+    committeeLevel: "L3" as const,
   },
   plan: {
     procedure: "Stent iliaque commune D + angioplastie fémorale superficielle D",
@@ -171,18 +171,18 @@ const M_B_MULTIETAGE: DemoCase = Object.freeze({
     expectedDurationMin: 120,
   },
   proms: {
-    tool: "VascuQoL-6",
+    tool: "VascuQoL-6" as const,
     baseline: 9,
     m3: 14,
     m6: 18,
   },
   longitudinalFollowUp: [
-    { milestone: "M1", event: "Disparition douleur de repos D, périmètre 250 m", vascuQoL6: 12, walkingDistanceMeters: 250, reintervention: false },
-    { milestone: "M3", event: "2ᵉ temps : angioplastie fémorale G programmée", vascuQoL6: 14, walkingDistanceMeters: 300, reintervention: true },
-    { milestone: "M6", event: "Périmètre 600 m bilatéral, reprise activités modérées", vascuQoL6: 18, walkingDistanceMeters: 600, reintervention: false },
-    { milestone: "M12", event: "Stent iliaque perméable, IPS D 0.85 / G 0.82", vascuQoL6: 18, walkingDistanceMeters: 700, reintervention: false },
+    { milestone: "M1" as const, event: "Disparition douleur de repos D, périmètre 250 m", vascuQoL6: 12, walkingDistanceMeters: 250, reintervention: false },
+    { milestone: "M3" as const, event: "2ᵉ temps : angioplastie fémorale G programmée", vascuQoL6: 14, walkingDistanceMeters: 300, reintervention: true },
+    { milestone: "M6" as const, event: "Périmètre 600 m bilatéral, reprise activités modérées", vascuQoL6: 18, walkingDistanceMeters: 600, reintervention: false },
+    { milestone: "M12" as const, event: "Stent iliaque perméable, IPS D 0.85 / G 0.82", vascuQoL6: 18, walkingDistanceMeters: 700, reintervention: false },
   ],
-});
+} satisfies DemoCase);
 
 export const CLINICAL_CASES: readonly DemoCase[] = Object.freeze([
   AOMI_FRAGILE_CASE,
