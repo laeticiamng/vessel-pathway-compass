@@ -132,8 +132,9 @@ export default function Landing() {
   );
 
   // JSON-LD: minimal, non-risky structured data (WebPage + SoftwareApplication + FAQPage)
-  // Brand hierarchy is encoded explicitly: VASCU-LINK is the program name,
-  // AquaMR Flow Platform is the SaaS that ships it.
+  // Brand hierarchy v8.3: VASCU-LINK = doctoral program; Vessel Pathway Compass = software
+  // platform; the L1 validation runs on a certified Philips Ingenia 3T MRI at Hôpital de
+  // Moutier (Réseau de l'Arc, Switzerland). AquaMR low-field hardware is a post-PhD R&D horizon.
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -141,20 +142,20 @@ export default function Landing() {
         "@type": "WebPage",
         "@id": "https://aquamr-flow.com/#webpage",
         url: "https://aquamr-flow.com/",
-        name: "VASCU-LINK — AquaMR Flow · Workflow vasculaire non ionisant",
+        name: "VASCU-LINK · Vessel Pathway Compass — 4-Zero Vascular Decision Support",
         description:
-          "VASCU-LINK reconstruit la fonction angiographique en 4-zéro (0 mSv, 0 contraste, 0 hélium). Plateforme AquaMR Flow pour la cartographie pré-revascularisation, la décision clinique et le guidage préclinique.",
+          "Plateforme de support à la décision clinique vasculaire — recherche doctorale. Reconstruire la fonction angiographique en 4-zéro (0 mSv, 0 contraste injecté, 0 hélium, matériel sobre). La validation L1 se déroule sur IRM 3T Philips Ingenia certifiée à l'Hôpital de Moutier (Réseau de l'Arc, Suisse). Le matériel bas champ AquaMR est un horizon de R&D post-PhD.",
         inLanguage: "fr",
       },
       {
         "@type": "SoftwareApplication",
-        name: "VASCU-LINK (AquaMR Flow Platform)",
-        alternateName: ["AquaMR Flow", "VASCU-LINK"],
+        name: "Vessel Pathway Compass (VASCU-LINK)",
+        alternateName: ["Vessel Pathway Compass", "VASCU-LINK"],
         applicationCategory: "HealthApplication",
         operatingSystem: "Web",
         url: "https://aquamr-flow.com",
         description:
-          "VASCU-LINK reconstruit la fonction angiographique en 4-zéro : 0 mSv, 0 contraste, 0 hélium. Plateforme AquaMR Flow pour la cartographie pré-revascularisation, la décision clinique et le guidage préclinique. Intègre le dispositif d'imagerie bas champ AquaMR.",
+          "Vessel Pathway Compass est la plateforme logicielle de support à la décision clinique du programme doctoral VASCU-LINK. La validation L1 se déroule sur IRM 3T Philips Ingenia certifiée à l'Hôpital de Moutier (Réseau de l'Arc, Suisse). Approche 4-zéro : 0 mSv, 0 contraste injecté, 0 hélium, matériel sobre. Le matériel bas champ AquaMR est un horizon de R&D post-PhD (références open source : OSI²ONE, MRI4ALL, Mbarara, O'Reilly 2021 — PMID 34907181), pas un dispositif construit pendant la thèse.",
       },
       organizationJsonLd,
       founderPersonJsonLd,
