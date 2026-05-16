@@ -1,109 +1,104 @@
 ## Objectif
 
-Transformer la démo unique "Mme R." en un véritable **mode Clinical Case** : une bibliothèque de 3 cas fictifs contrastés, chacun exposant patient, symptômes, Doppler, facteurs de risque, arbitrage L1/L2/L3, justification et suivi longitudinal. Réutilise l'infrastructure démo existante (panels, `DemoStepShell`) — aucune logique métier nouvelle, uniquement données + routing + 2 écrans.
+Rendre l'**AI Reconstruction Lab** (`/app/research/ai-recon`) scientifiquement honnête : remplacer l'apparence "IA magique" par une transparence explicite sur limites, baseline, datasets, provenance des modèles et nature simulée des métriques.
 
-## Pourquoi
+## Diagnostic actuel
 
-Aujourd'hui un seul cas → on voit un système. Avec 3 cas contrastés (L1 fragile, L2 intermédiaire, L3 complexe) → on comprend instantanément **à quoi sert la plateforme** et **comment elle arbitre**.
+`src/pages/app/research/AIRecon.tsx` :
+- 4 pipelines listés (Compressed Sensing, U-Net, MoDL, Diffusion) avec 1 référence chacun.
+- `simulateProcessing()` génère des métriques aléatoires (`Math.random()`) : SNR gain, acceleration, runtime — **rien n'est calculé**.
+- Un seul bandeau ambre "simulation mode" en haut, vite invisible une fois scrollé.
+- Aucune baseline, aucun dataset, aucune carte modèle, aucune limite méthodologique affichée.
+
+Risque : un utilisateur peut citer "SNR +5,8 dB en MoDL" comme un résultat de la plateforme alors que c'est `Math.random()`.
 
 ## Livrables
 
-### 1. Données — 3 cas contrastés (fictifs)
+### 1. Constantes scientifiques — `src/lib/aiRecon/modelRegistry.ts` (nouveau)
 
-Nouveau fichier `src/demo/clinicalCases.ts` exportant `CLINICAL_CASES`, basé sur le type `DemoCase` existant **étendu** avec :
+Source unique de vérité, typée, par pipeline :
 
-- `symptoms: string[]` (claudication, douleur de repos, ulcère…)
-- `doppler: { abiRight, abiLeft, tbiRight?, tbiLeft?, waveform: "triphasique"|"biphasique"|"monophasique"|"absent", peakSystolicVelocityCmS?, notes }`
-- `riskFactors: { diabetes, smoking, hypertension, dyslipidemia, ckd, priorMI, priorStroke, antiplatelet }`
-- `longitudinalFollowUp: { m1, m3, m6, m12 }` avec pour chaque jalon : événement clinique, VascuQoL-6, distance de marche, ré-intervention oui/non
-- `triageJustification: string` (texte court expliquant pourquoi L1/L2/L3)
+- `id`, `name`, `family` (classical | supervised-DL | unrolled | generative)
+- `provenance` : `paperRef` (Vancouver), `codeRef` (GitHub URL ou "Reimplemented in-house"), `weightsOrigin` ("Pretrained author weights" | "Trained in-house" | "Not loaded — placeholder"), `license`
+- `trainingData` : `dataset` (fastMRI / NYU knee, IXI, HCP, "Synthetic only"…), `nSubjects`, `bodyRegion`, `fieldStrength`, `acquisitionType`
+- `validationData` : `dataset`, `nSubjects`, `metricsReported` (PSNR / SSIM / NRMSE…)
+- `publishedMetrics` : array of `{ metric, value, conditions }` recopiés des papiers (avec citation)
+- `domainShift` : texte court — pourquoi les résultats publiés ne s'appliquent pas tels quels au domaine vasculaire MRA
+- `limitations` : array de 3-5 limites courtes (ex : "Pas entraîné sur peripheral run-off", "Hallucinations possibles à acceleration > 6×")
+- `currentStatus` : "Simulated output only — no GPU backend" | "Inference active"
+- `trl` (1-9)
 
-Les 3 cas :
+3 pipelines factuellement existants + 1 placeholder honnêtement marqué.
 
-| ID | Profil | Niveau | Modalité | Particularité pédagogique |
-|---|---|---|---|---|
-| `mme-r-aomi-fragile` | F 82 ans, CKD 3b, allergie iode, ulcère | **L1** | AquaMR | Reprend Mme R. — contraste contre-indiqué |
-| `m-d-claudicant` | H 64 ans, diabétique, tabagique actif, claudication 200 m | **L2** | CTA standard | Cas "courant" — arbitrage médical vs endovasculaire |
-| `m-b-multietage` | H 71 ans, lésions multi-étagées aorto-iliaques + fémoro-poplitées | **L3** | DSA + planification hybride | Décision multidisciplinaire complexe |
+### 2. Baseline obligatoire dans chaque job
 
-Données 100% fictives, marquées DEMO, aucune persistance.
+Étendre l'objet `results` produit par `simulateProcessing` :
 
-### 2. Page index — `/demo/clinical-cases`
+```ts
+{
+  status: "simulated",                  // explicite
+  baseline: {
+    method: "Zero-filled IFFT",         // baseline standard
+    psnr_db: <calculated or N/A>,
+    ssim: <calculated or N/A>
+  },
+  ai_output: {
+    psnr_db, ssim, nrmse,               // toujours marquées "simulated"
+  },
+  delta_vs_baseline: { ... },           // pour éviter de citer un absolu sans référence
+  acquisition_assumptions: { acceleration_factor, undersampling_mask, coil_count },
+  not_clinically_valid: true,
+  generated_by: "client-side stub v1"
+}
+```
 
-Nouveau `src/pages/demo/ClinicalCases.tsx` (~120 lignes) :
+Ces valeurs restent stub côté front (pas de GPU), mais structurées comme des vraies métriques avec **baseline obligatoire** : on ne peut plus afficher un chiffre sans son point de comparaison.
 
-- Hero court : titre, sous-titre, bandeau **"Cas fictifs — usage pédagogique uniquement — Free Open Beta"**
-- Grille 3 cartes (une par cas) avec :
-  - Initiales + âge + sexe + niveau L1/L2/L3 (badge couleur)
-  - 1 phrase de pitch clinique
-  - 3 facteurs de risque dominants (chips)
-  - Modalité imagerie retenue
-  - CTA "Ouvrir le cas →"
-- Lien retour Landing / Research evidence
+### 3. Refonte de l'UI AIRecon
 
-### 3. Runner générique — `/demo/clinical-cases/:caseId`
+`src/pages/app/research/AIRecon.tsx` réorganisé en 3 zones, sans changer le flux d'upload :
 
-Nouveau `src/pages/demo/ClinicalCaseRunner.tsx` (~80 lignes) — généralisation de `AomiFragileDemo.tsx` :
+- **Bandeau persistant non-dismissible** en tête : "Research preview · Simulated output · Not for clinical use · TRL 3-4". Reste visible sticky pendant le scroll.
+- **Onglets** (`Tabs` shadcn) sur la zone pipeline :
+  - **Run** (actuel) — upload + launch
+  - **Model card** — pour le pipeline sélectionné : provenance, training data, validation data, métriques publiées, limites, domain shift, statut, TRL. Lit `modelRegistry`.
+  - **Methodology** — explication baseline (zero-filled IFFT), métriques (PSNR/SSIM/NRMSE définies), conditions de comparaison loyale.
+- **Job result card** repensée :
+  - Tableau 2 colonnes **Baseline vs AI** (jamais un seul chiffre isolé)
+  - Chaque métrique flagged `simulated` avec icône ℹ︎
+  - Section "Assumptions" repliée par défaut (acceleration, mask, coil count)
+  - Lien "Model card" en bas pour rappeler la provenance
+  - Bandeau "Ces résultats ne doivent pas être cités hors contexte recherche"
 
-- Lit `caseId` via `useParams`, résout via `getClinicalCase(caseId)`
-- Si introuvable → redirect vers `/demo/clinical-cases`
-- Réutilise **tel quel** `DemoStepShell` + les 6 panels existants (`TriagePanel`, `ImagingPanel`, `TwinPanel`, `DecisionPanel`, `PlanPanel`, `PromsPanel`) en leur passant `caseData` au lieu de la constante figée
-- Ajoute une **7ᵉ étape `followup`** alimentée par `longitudinalFollowUp` (timeline M1→M12 simple, SVG horizontal + cards)
+### 4. Composant réutilisable — `src/components/research/ModelCard.tsx`
 
-### 4. Adaptations panels existants
+Carte structurée avec sections normalisées (Provenance / Training / Validation / Published metrics / Limitations / Domain shift / Status / TRL). Réutilisable depuis Research Evidence.
 
-Les 6 panels actuels importent `AOMI_FRAGILE_CASE` directement. Refactor minimal :
+### 5. Intégration Research Evidence
 
-- Chaque panel accepte une prop `case: DemoCase` (au lieu d'importer la constante)
-- `AomiFragileDemo.tsx` continue de fonctionner (passe `AOMI_FRAGILE_CASE`) → **rétrocompatible**, l'URL `/demo/aomi-fragile` reste valide
-- `TriagePanel` enrichi : affiche `symptoms`, `doppler.waveform`, chips `riskFactors` (champs optionnels — fallback silencieux pour Mme R. tant que pas remplis)
-- `DecisionPanel` enrichi : encart "Justification du niveau L1/L2/L3" lisant `triageJustification`
+Dans `src/pages/ResearchEvidence.tsx` :
+- Section **3. Statut expérimental** : ajouter une ligne par pipeline IA (4 lignes) lisant `modelRegistry` — TRL réel et statut "Simulated output".
+- Section **6. Simulé vs Réel** : ajouter ligne "AI Reconstruction Lab : sortie 100% simulée côté client, pas de GPU, baseline zero-filled IFFT obligatoire."
 
-### 5. Nouveau panel — `FollowUpPanel.tsx`
+### 6. Hors périmètre
 
-`src/components/demo/panels/FollowUpPanel.tsx` (~150 lignes) :
-
-- Timeline horizontale M1 / M3 / M6 / M12
-- Pour chaque jalon : badge événement, VascuQoL-6 (delta vs baseline), distance de marche, flag ré-intervention
-- Graphique sparkline VascuQoL-6 (SVG inline, pas de lib)
-- Bandeau honnêteté scientifique : "Données simulées, prospectives à 12 mois"
-
-### 6. Routing + intégrations
-
-- `src/App.tsx` : ajout routes lazy publiques
-  - `/demo/clinical-cases` → `ClinicalCases`
-  - `/demo/clinical-cases/:caseId` → `ClinicalCaseRunner`
-  - `/demo/aomi-fragile` conservée (alias historique)
-- `Landing.tsx` footer (section Product) : remplacer le lien "Démo AOMI" par **"Bibliothèque de cas cliniques"** pointant `/demo/clinical-cases`
-- `ResearchEvidence.tsx` : dans section "Simulé vs Réel", lien "Parcourir les 3 cas pédagogiques →"
-- `DemoStepShell` banner : bouton retour "← Tous les cas" quand on est dans un runner
-
-## Hors périmètre
-
-- Aucun nouveau cas réel, aucune table Supabase, aucune edge function
-- Pas de comparateur de cas, pas de quiz, pas de scoring utilisateur
-- Pas de modification du design system, pas de nouveaux tokens
-- Pas de traduction i18n des nouveaux libellés en DE (FR + EN suffit pour cette itération — la 3ᵉ langue suivra si validé)
-- Pas de changement aux questionnaires cliniques (VascuQoL-6 reste EN)
+- Pas de vrai backend GPU, pas d'edge function de reconstruction.
+- Pas de modification du schéma `ai_recon_jobs` (les nouveaux champs vivent dans la colonne `results` JSON déjà présente).
+- Pas de connexion à fastMRI / dataset externes.
+- Pas de changement design system, pas de nouveaux tokens.
+- I18n : libellés FR seulement (cohérent avec la page actuelle).
 
 ## Détails techniques
 
 ```text
 src/
-├── demo/
-│   ├── aomiFragileCase.ts          (conservé, type DemoCase étendu)
-│   └── clinicalCases.ts            (nouveau — registre + 3 cas)
-├── pages/demo/
-│   ├── AomiFragileDemo.tsx         (refactor : passe case en prop)
-│   ├── ClinicalCases.tsx           (nouveau — index)
-│   └── ClinicalCaseRunner.tsx      (nouveau — runner générique)
-└── components/demo/panels/
-    ├── TriagePanel.tsx             (accepte prop case, enrichi)
-    ├── DecisionPanel.tsx           (accepte prop case, enrichi)
-    ├── {Imaging,Twin,Plan,Proms}Panel.tsx (accepte prop case)
-    └── FollowUpPanel.tsx           (nouveau)
+├── lib/aiRecon/
+│   └── modelRegistry.ts            (nouveau — source de vérité 4 modèles)
+├── components/research/
+│   └── ModelCard.tsx               (nouveau — carte standardisée)
+└── pages/
+    ├── app/research/AIRecon.tsx    (refonte UI : tabs Run / Model card / Methodology + résultats avec baseline)
+    └── ResearchEvidence.tsx        (lignes IA ajoutées dans TRL table + simulé/réel)
 ```
 
-`DemoStepId` devient `"triage"|"imaging"|"twin"|"decision"|"plan"|"proms"|"followup"`.
-
-Compatibilité v8.3 : tous les cas respectent la règle "chaîne visuelle uniquement", aucune revendication de supériorité diagnostique vs MRI/CTA/DSA. Bandeau "Not a medical device · No CE/FDA" présent sur index et runner.
+Compatibilité v8.3 : aucune revendication de supériorité diagnostique vs MRI/CTA/DSA. Chaque métrique simulée est explicitement marquée. La baseline (zero-filled IFFT) est imposée pour éviter le "chiffre absolu sortant de nulle part".
