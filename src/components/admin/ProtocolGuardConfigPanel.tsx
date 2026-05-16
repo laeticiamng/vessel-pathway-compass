@@ -73,6 +73,7 @@ export function ProtocolGuardConfigPanel() {
           message: parsed.ok ? "config fetched" : (parsed.error ?? "denied"),
         });
         if (!parsed.ok || !parsed.data) {
+          if (!cancel) setErrRequestId(parsed.requestId);
           throw new Error(parsed.error ?? `HTTP ${parsed.status}`);
         }
         if (!cancel) setCfg(parsed.data.config);
@@ -84,7 +85,10 @@ export function ProtocolGuardConfigPanel() {
           requestId,
           message: `transport failure: ${message}`,
         });
-        if (!cancel) setErr(message);
+        if (!cancel) {
+          setErr(message);
+          setErrRequestId((prev) => prev ?? requestId);
+        }
       } finally {
         if (!cancel) setLoading(false);
       }
