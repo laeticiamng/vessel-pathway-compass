@@ -1,5 +1,6 @@
 import { toast } from "sonner";
 import { getGuardToastConfig } from "@/lib/protocolGuardToastConfig";
+import { recordGuardToastEvent } from "@/lib/protocolGuardAnalytics";
 
 export {
   configureGuardToast,
