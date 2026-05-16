@@ -29,6 +29,7 @@ export function ProtocolGuardConfigPanel() {
   const allowed = hasRole(["admin", "super_admin", "research_lead"]);
   const [cfg, setCfg] = useState<Cfg | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [errRequestId, setErrRequestId] = useState<string | undefined>();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
