@@ -6,7 +6,9 @@ vi.mock("sonner", () => ({
   toast: { error: vi.fn(), dismiss: vi.fn() },
 }));
 
-const rpcMock = vi.fn(() => ({ then: (cb: (r: { error: null }) => void) => cb({ error: null }) }));
+const rpcMock: ReturnType<typeof vi.fn> = vi.fn((..._args: unknown[]) => ({
+  then: (cb: (r: { error: unknown }) => void) => cb({ error: null }),
+}));
 vi.mock("@/integrations/supabase/client", () => ({
   supabase: { rpc: rpcMock },
 }));
