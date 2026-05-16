@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ShieldCheck, Search, Download, Lock, ArrowLeft, ChevronLeft, ChevronRight, Eye, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
