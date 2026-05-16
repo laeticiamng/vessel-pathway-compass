@@ -1,26 +1,32 @@
 import { useEffect, type ReactNode } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ChevronLeft, ChevronRight, FlaskConical, X } from "lucide-react";
+import { ArrowLeft, ChevronLeft, ChevronRight, FlaskConical, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DEMO_STEPS, type DemoStepId } from "@/demo/aomiFragileCase";
 import { cn } from "@/lib/utils";
 
 interface DemoStepShellProps {
-  /** Current step id — used to compute progress + nav. */
   stepId: DemoStepId;
-  /** Left panel: real app visual (or placeholder during Lot 1). */
   visual: ReactNode;
-  /** Right panel: short clinical narrative + "why this step". */
   narrative: ReactNode;
-  /** Optional: short clinical headline rendered above the narrative. */
   headline?: string;
+  /** Base URL for step navigation. Default: /demo/aomi-fragile */
+  basePath?: string;
+  /** Optional banner label override (defaults to Mme R.). */
+  caseLabel?: string;
+  /** Optional "back to library" link (e.g. /demo/clinical-cases). */
+  libraryHref?: string;
 }
 
-/**
- * Layout commun à toutes les étapes de /demo/aomi-fragile.
- * Sticky DEMO banner + barre de progression + nav clavier ←/→ + bouton Quit.
- */
-export function DemoStepShell({ stepId, visual, narrative, headline }: DemoStepShellProps) {
+export function DemoStepShell({
+  stepId,
+  visual,
+  narrative,
+  headline,
+  basePath = "/demo/aomi-fragile",
+  caseLabel = "Mme R., 82 ans — AOMI fragile, contraste contre-indiqué",
+  libraryHref,
+}: DemoStepShellProps) {
   const navigate = useNavigate();
   const [search] = useSearchParams();
   const intro = search.get("intro");
@@ -33,16 +39,15 @@ export function DemoStepShell({ stepId, visual, narrative, headline }: DemoStepS
   const buildHref = (id: DemoStepId) => {
     const params = new URLSearchParams(search);
     params.set("step", id);
-    return `/demo/aomi-fragile?${params.toString()}`;
+    return `${basePath}?${params.toString()}`;
   };
 
-  // Keyboard navigation ← / →
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key === "ArrowRight" && next) navigate(buildHref(next.id));
       if (e.key === "ArrowLeft" && prev) navigate(buildHref(prev.id));
-      if (e.key === "Escape") navigate("/");
+      if (e.key === "Escape") navigate(libraryHref ?? "/");
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -51,7 +56,6 @@ export function DemoStepShell({ stepId, visual, narrative, headline }: DemoStepS
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
-      {/* DEMO banner — sticky, full-width, distinct from ResearchPreviewBanner */}
       <div
         role="alert"
         aria-label="Demo mode — fictional data"
@@ -64,10 +68,19 @@ export function DemoStepShell({ stepId, visual, narrative, headline }: DemoStepS
               DEMO — Données fictives, à but pédagogique
             </span>
             <span className="hidden sm:inline text-amber-800/80 dark:text-amber-200/70 truncate">
-              · Mme R., 82 ans — AOMI fragile, contraste contre-indiqué
+              · {caseLabel}
             </span>
           </div>
           <div className="flex items-center gap-2">
+            {libraryHref && (
+              <Link
+                to={libraryHref}
+                className="hidden sm:inline-flex items-center gap-1 rounded-md border border-amber-500/40 px-2 py-1 text-[11px] font-medium text-amber-900 dark:text-amber-200 hover:bg-amber-500/20"
+              >
+                <ArrowLeft className="h-3 w-3" />
+                Tous les cas
+              </Link>
+            )}
             <Link
               to="/research-evidence"
               className="hidden sm:inline-flex items-center rounded-md border border-amber-500/40 px-2 py-1 text-[11px] font-medium text-amber-900 dark:text-amber-200 hover:bg-amber-500/20"

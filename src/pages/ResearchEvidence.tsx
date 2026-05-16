@@ -404,10 +404,10 @@ export default function ResearchEvidence() {
               </table>
             </div>
             <p className="text-xs text-muted-foreground">
-              La démo guidée (cas Mme R.) est intégralement fictive — voir{" "}
-              <Link to="/demo/aomi-fragile" className="underline hover:text-foreground">
-                /demo/aomi-fragile
-              </Link>.
+              Les cas pédagogiques (Mme R., M. D., M. B.) sont intégralement fictifs —{" "}
+              <Link to="/demo/clinical-cases" className="underline hover:text-foreground">
+                parcourir les 3 cas cliniques →
+              </Link>
             </p>
           </EvidenceSection>
 

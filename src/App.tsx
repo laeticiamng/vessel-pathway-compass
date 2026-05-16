@@ -102,6 +102,8 @@ const Collab = lazy(() => import("./pages/app/Collab"));
 
 // Guided clinical demo (public, no auth, no Supabase)
 const AomiFragileDemo = lazy(() => import("./pages/demo/AomiFragileDemo"));
+const ClinicalCases = lazy(() => import("./pages/demo/ClinicalCases"));
+const ClinicalCaseRunner = lazy(() => import("./pages/demo/ClinicalCaseRunner"));
 const ResearchEvidence = lazy(() => import("./pages/ResearchEvidence"));
 
 const queryClient = new QueryClient();
@@ -133,6 +135,8 @@ const App = () => (
           {/* Public */}
           <Route path="/" element={<Landing />} />
           <Route path="/demo/aomi-fragile" element={<AomiFragileDemo />} />
+          <Route path="/demo/clinical-cases" element={<ClinicalCases />} />
+          <Route path="/demo/clinical-cases/:caseId" element={<ClinicalCaseRunner />} />
           <Route path="/research-evidence" element={<ResearchEvidence />} />
           <Route path="/pricing" element={<Navigate to="/access" replace />} />
           <Route path="/access" element={<Pricing />} />
