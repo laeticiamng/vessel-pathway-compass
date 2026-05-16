@@ -143,16 +143,11 @@ export function ProtocolAuditLogExporter() {
   };
 
   const downloadPDF = async () => {
-    const verdict = await callProtocolAccessGuard("protocol.export.audit_log.pdf");
-    if (!verdict.ok) {
-      showGuardDenialToast({
-        status: verdict.status,
-        requestId: verdict.requestId,
-        error: verdict.error,
-        action: "protocol.export.audit_log.pdf",
-      });
-      return;
-    }
+    const verdict = await callProtocolAccessGuard(
+      "protocol.export.audit_log.pdf",
+      { notifyOnDenied: true },
+    );
+    if (!verdict.ok) return;
     setExporting(true);
     try {
       const jsPDFmod = await import("jspdf");
