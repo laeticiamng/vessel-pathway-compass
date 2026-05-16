@@ -24,7 +24,9 @@
     "check:release": "node scripts/check-version-consistency.mjs && node scripts/build-changelog.mjs",
     "test:visual": "playwright test e2e/visual-regression.spec.ts --project=chromium",
     "test:visual:update": "playwright test e2e/visual-regression.spec.ts --project=chromium --update-snapshots",
-    "check:prepublish": "npm run check:overpromise && npm run i18n:ci && npm run check:release"
+    "check:prepublish": "npm run check:overpromise && npm run i18n:ci && npm run check:release",
+    "test:banners": "playwright test e2e/banner-header-no-clip.spec.ts --project=chromium",
+    "test:banners:update": "playwright test e2e/banner-header-no-clip.spec.ts --project=chromium --update-snapshots"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
