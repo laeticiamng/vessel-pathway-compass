@@ -176,12 +176,27 @@ export function DemoStepShell({
                 Suivant
                 <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
+            ) : nextCaseHref ? (
+              <Button
+                size="sm"
+                onClick={() => navigate(nextCaseHref)}
+                aria-label={nextCaseLabel ? `Cas suivant : ${nextCaseLabel}` : "Cas suivant"}
+              >
+                Cas suivant
+                <ChevronRight className="h-4 w-4 ml-1" />
+              </Button>
             ) : (
               <Button size="sm" onClick={() => navigate("/")} aria-label="Terminer la démo">
                 Terminer
               </Button>
             )}
           </div>
+
+          {nextCaseHref && !next && nextCaseLabel && (
+            <p className="text-[11px] text-muted-foreground text-center -mt-1">
+              Prochain : <span className="text-foreground font-medium">{nextCaseLabel}</span>
+            </p>
+          )}
 
           <p className="text-[10px] text-muted-foreground text-center">
             Astuce : utilisez ← / → au clavier pour naviguer.
