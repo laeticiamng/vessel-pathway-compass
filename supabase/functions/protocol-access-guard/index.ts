@@ -344,6 +344,7 @@ serve(async (req) => {
   const preKey = clientKey(req, null);
   const preBan = isBanned(preKey);
   if (preBan.banned) {
+    logVerdict(429, reqId, null, { reason: "pre_auth_banned", retry_after: preBan.retryAfter });
     return new Response(
       JSON.stringify({ error: "Too many denied attempts", request_id: reqId, retry_after: preBan.retryAfter }),
       {
