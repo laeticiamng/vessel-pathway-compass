@@ -1,14 +1,15 @@
 export const de = {
-  // Markenhierarchie: Programm → Plattform → Gerät
-  // VASCU-LINK ist das Doktoratsprogramm; AquaMR Flow ist die SaaS-Plattform,
-  // die es trägt; AquaMR ist das integrierte Niederfeld-Bildgebungsgerät.
+  // Hierarchie v8.3: Doktoratsprogramm → Softwareplattform · Hardware-Horizont
+  // VASCU-LINK ist das Doktoratsprogramm. Die L1-Validierung läuft auf dem
+  // zertifizierten Philips Ingenia 3T MRT am Spital Moutier (Réseau de l'Arc, CH).
+  // AquaMR ist ein Post-PhD-F&E-Horizont — KEIN während der Thesis gebautes Gerät.
   branding: {
     programName: "VASCU-LINK",
-    platformName: "AquaMR Flow Platform",
-    deviceName: "AquaMR",
-    tagline: "Angiographische Funktion in der 4-Null-Kette rekonstruieren",
+    platformName: "Vessel Pathway Compass",
+    deviceName: "AquaMR (Post-PhD-Niederfeld-F&E-Horizont)",
+    tagline: "4-Null Gefäß-Entscheidungsunterstützung — validiert am zertifizierten 3T MRT",
     footerExplain:
-      "VASCU-LINK ist das Doktoratsprogramm der nicht-ionisierenden klinischen AquaMR Flow-Plattform, die das AquaMR-Niederfeld-Bildgebungsgerät integriert.",
+      "VASCU-LINK ist ein Doktorforschungsprogramm. Die Doktorvalidierung L1 läuft auf dem zertifizierten Philips Ingenia 3T MRT am Spital Moutier (Réseau de l'Arc, Schweiz). Das AquaMR-Niederfeld-Hardwareprogramm ist ein Post-PhD-F&E-Horizont — kein während der Thesis gebautes Gerät.",
   },
 
   common: {
@@ -267,7 +268,7 @@ export const de = {
       pageTitle: "Institutioneller Zugang — VASCU-LINK",
       pageDescription: "VASCU-LINK befindet sich in der akademischen Validierung. Kontaktieren Sie das Team für institutionellen Zugang, klinische Partnerschaften oder Pilotbewertungen — kein kommerzieller Plan während der prospektiven Validierung.",
       title: "Institutional Access — Research Phase",
-      body: "VASCU-LINK befindet sich in der akademischen Validierungsphase am Lausanne. Für institutionellen Zugang, klinische Partnerschaft oder Pilotbewertung kontaktieren Sie bitte das Team.",
+      body: "VASCU-LINK befindet sich in der akademischen Validierungsphase am Spital Moutier (Réseau de l'Arc, Schweiz), auf dem zertifizierten Philips Ingenia 3T MRT. Für institutionellen Zugang, klinische Partnerschaft oder Pilotbewertung kontaktieren Sie bitte das Team.",
       cta: "Contact for institutional access",
       disclaimer: "Kein öffentlicher kommerzieller Plan während der prospektiven Validierungsphase.",
     },
@@ -1233,24 +1234,24 @@ export const de = {
 
   home: {
     seo: {
-      title: "VASCU-LINK — AquaMR Flow · Nicht-ionisierender Workflow",
-      description: "VASCU-LINK rekonstruiert die angiographische Funktion in 4-Null (0 mSv, 0 KM, 0 Helium). AquaMR Flow-Plattform für wohnortnahe Gefäßmedizin.",
+      title: "VASCU-LINK · Vessel Pathway Compass — 4-Null Gefäß-Entscheidungsunterstützung",
+      description: "Klinische Entscheidungsunterstützungs-Plattform für Gefäßmedizin — Doktorforschung. L1-Validierung am zertifizierten Philips Ingenia 3T MRT, Spital Moutier (Réseau de l'Arc, Schweiz). AquaMR-Niederfeld-Hardware ist ein Post-PhD-F&E-Horizont. Forschungsprototyp, kein CE-zertifiziertes Medizinprodukt.",
     },
     nav: { mainAria: "Hauptnavigation", simpleAria: "Navigation", openMenu: "Menü öffnen" },
     misc: { scrollTop: "Zurück nach oben" },
     hero: {
-      betaBadge: "Doktorales Forschungsprogramm · Akademische Validierungsphase",
-      title1: "VASCU-LINK",
-      title2: "Die Plattform für Gefäß-Workflows ohne Strahlung und Kontrastmittel",
-      subtitle: "Eine Web-Plattform für Gefäßteams: Eingriffe planen, Bildgebung fusionieren, Nierenrisiko antizipieren und Ergebnisse verfolgen — ohne Röntgen, ohne Jodkontrast.",
-      translationalAmbition: "Eine mit Klinikerinnen und Klinikern gebaute Forschungsplattform. Ziel: Kartierung, Entscheidung, Planung, Führung und Behandlung schrittweise in einer nicht-ionisierenden Kette rekonstruieren.",
-      ctaPrimary: "Forschungsprotokoll lesen",
-      ctaSecondary: "Wissenschaftliche Architektur ansehen",
-      perkNoCard: "Angemeldete prospektive Studie",
-      perkBetaAccess: "10 klinische Module gesperrt (L1)",
-      perkGdpr: "DSGVO / nDSG — pseudonymisierte Daten",
-      disclaimer: "Forschungsprototyp, kein zertifiziertes Medizinprodukt. Jede klinische Entscheidung muss von qualifiziertem ärztlichem Personal bestätigt werden.",
-      dashboardAlt: "AquaMR Flow Klinik-Dashboard mit Patientenstatistiken, Risikoverteilung und Modulübersicht",
+      betaBadge: "Doktorales Forschungsprogramm · L1-Validierung am zertifizierten 3T MRT",
+      title1: "VASCU-LINK · Vessel Pathway Compass",
+      title2: "Klinische Entscheidungsunterstützungs-Plattform für Gefäßmedizin — Doktorforschung",
+      subtitle: "Wiederaufbau der angiographischen Funktion in 4-Null: 0 mSv · 0 injiziertes Kontrastmittel · 0 Helium · genügsame Hardware · recycelte/biobasierte Materialien. Die L1-Validierung läuft auf dem zertifizierten Philips Ingenia 3T MRT am Spital Moutier (Réseau de l'Arc, Schweiz).",
+      translationalAmbition: "Das AquaMR-Niederfeld-Hardwareprogramm ist ein Post-PhD-F&E-Horizont, referenziert über veröffentlichte Open-Source-Designs (OSI²ONE, MRI4ALL, Mbarara, O'Reilly 2021 — PMID 34907181). Die Thesis baut das AquaMR-Gerät NICHT — sie validiert eine 4-Null-Entscheidungskette auf zertifizierter, vorhandener Hardware.",
+      ctaPrimary: "L1-Forschungsprotokoll lesen",
+      ctaSecondary: "Klinischen Standort und Architektur ansehen",
+      perkNoCard: "Validierung am zertifizierten 3T MRT — Spital Moutier",
+      perkBetaAccess: "Réseau de l'Arc · Nephrologie + Dialyse vor Ort",
+      perkGdpr: "DSGVO / nDSG — pseudonymisierte Forschungsdaten",
+      disclaimer: "Forschungsprototyp · kein CE-zertifiziertes Medizinprodukt · keine klinische Anwendung außerhalb genehmigter Forschungsprotokolle. Jede klinische Entscheidung muss von qualifiziertem ärztlichem Personal bestätigt werden.",
+      dashboardAlt: "Vessel Pathway Compass Klinik-Dashboard mit Patientenstatistiken, Risikoverteilung und Modulübersicht",
     },
     completeness: {
       badge: "Plattform ausgeliefert",

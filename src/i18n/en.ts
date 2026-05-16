@@ -1,14 +1,15 @@
 export const en = {
-  // Brand hierarchy: program → platform → device
-  // VASCU-LINK is the doctoral program; AquaMR Flow is the SaaS platform that
-  // carries it; AquaMR is the low-field imaging device sitting inside.
+  // Brand hierarchy (v8.3): doctoral program → software platform · hardware horizon
+  // VASCU-LINK is the doctoral program. The L1 validation runs on the certified
+  // Philips Ingenia 3T MRI at Hôpital de Moutier (Réseau de l'Arc, Switzerland).
+  // AquaMR is a post-PhD low-field R&D horizon, NOT part of the thesis hardware.
   branding: {
     programName: "VASCU-LINK",
-    platformName: "AquaMR Flow Platform",
-    deviceName: "AquaMR",
-    tagline: "Rebuilding angiographic function with the 4-zero protocol",
+    platformName: "Vessel Pathway Compass",
+    deviceName: "AquaMR (post-PhD low-field R&D horizon)",
+    tagline: "4-zero vascular decision support — validated on certified 3T MRI",
     footerExplain:
-      "VASCU-LINK is the doctoral program built on AquaMR Flow — a non-ionizing clinical platform integrating the AquaMR low-field imaging device.",
+      "VASCU-LINK is a doctoral research program. The doctoral L1 validation runs on the certified Philips Ingenia 3T MRI at Hôpital de Moutier (Réseau de l'Arc, Switzerland). AquaMR low-field hardware is a post-PhD R&D horizon — not a device built during the thesis.",
   },
 
   // Common
@@ -273,7 +274,7 @@ export const en = {
       pageTitle: "Institutional Access — VASCU-LINK",
       pageDescription: "VASCU-LINK is in academic validation. Reach out for institutional access, clinical partnerships or pilot evaluations — no commercial plan during prospective validation.",
       title: "Institutional Access — Research Phase",
-      body: "VASCU-LINK is undergoing academic validation at Lausanne. For institutional access, a clinical partnership or a pilot evaluation, please contact the team.",
+      body: "VASCU-LINK is undergoing academic validation at Hôpital de Moutier (Réseau de l'Arc, Switzerland), on the certified Philips Ingenia 3T MRI. For institutional access, a clinical partnership or a pilot evaluation, please contact the team.",
       cta: "Contact for institutional access",
       disclaimer: "No public commercial plan during the prospective validation phase.",
     },
@@ -1253,24 +1254,24 @@ export const en = {
 
   home: {
     seo: {
-      title: "VASCU-LINK — AquaMR Flow · Non-Ionizing Vascular Workflow",
-      description: "VASCU-LINK rebuilds angiographic function in 4-zero (0 mSv, 0 contrast, 0 helium). AquaMR Flow platform for proximity vascular medicine.",
+      title: "VASCU-LINK · Vessel Pathway Compass — 4-Zero Vascular Decision Support",
+      description: "Research clinical decision support platform for vascular care. Doctoral L1 validation on certified Philips Ingenia 3T MRI at Hôpital de Moutier (Réseau de l'Arc, Switzerland). AquaMR low-field hardware is a post-PhD R&D horizon. Research prototype, not a CE-marked medical device.",
     },
     nav: { mainAria: "Main navigation", simpleAria: "Navigation", openMenu: "Open menu" },
     misc: { scrollTop: "Scroll back to top" },
     hero: {
-      betaBadge: "Doctoral research programme · Academic validation phase",
-      title1: "VASCU-LINK",
-      title2: "The vascular workflow platform without radiation or contrast injection",
-      subtitle: "One web platform for vascular teams to plan procedures, fuse imaging, anticipate kidney risk and track outcomes — without X-rays, without iodinated contrast.",
-      translationalAmbition: "A research platform built with clinicians. Goal: progressively reconstruct mapping, decision, planning, guidance and treatment in a non-ionizing chain.",
-      ctaPrimary: "Read the research protocol",
-      ctaSecondary: "See the scientific architecture",
-      perkNoCard: "Declared prospective study",
-      perkBetaAccess: "10 clinical modules locked (L1)",
-      perkGdpr: "GDPR / nFADP — pseudonymised data",
-      disclaimer: "Research prototype, not a certified medical device. Every clinical decision must be confirmed by a qualified clinician.",
-      dashboardAlt: "AquaMR Flow clinical dashboard showing patient statistics, risk distribution and module overview",
+      betaBadge: "Doctoral research programme · L1 clinical validation on certified 3T MRI",
+      title1: "VASCU-LINK · Vessel Pathway Compass",
+      title2: "Clinical decision support platform for vascular care — doctoral research",
+      subtitle: "Rebuilding angiographic function in 4-zero: 0 mSv · 0 injected contrast · 0 helium · sober hardware · recycled/biosourced materials. Doctoral L1 validation runs on the certified Philips Ingenia 3T MRI at Hôpital de Moutier (Réseau de l'Arc, Switzerland).",
+      translationalAmbition: "The AquaMR low-field hardware program is a post-PhD R&D horizon, referenced through published open-source designs (OSI²ONE, MRI4ALL, Mbarara, O'Reilly 2021 — PMID 34907181). The thesis does NOT build the AquaMR scanner — it validates a 4-zero decision chain on certified existing hardware.",
+      ctaPrimary: "Read the L1 research protocol",
+      ctaSecondary: "See the clinical site & architecture",
+      perkNoCard: "Validation on certified 3T MRI — Hôpital de Moutier",
+      perkBetaAccess: "Réseau de l'Arc · nephrology + dialysis on-site",
+      perkGdpr: "GDPR / nFADP — pseudonymised research data",
+      disclaimer: "Research prototype · Not a CE-marked medical device · Not for clinical use outside approved research protocols. Every clinical decision must be confirmed by a qualified clinician.",
+      dashboardAlt: "Vessel Pathway Compass clinical dashboard showing patient statistics, risk distribution and module overview",
     },
     completeness: {
       badge: "Platform shipped",
@@ -2957,7 +2958,7 @@ export const en = {
       abiResult: "ABI Result with Interpretation",
       managementRecommendation: "Management Recommendation",
       referringPhysician: "Referring Physician",
-      generatedBy: "Generated by VascScreen — AquaMR Flow Platform",
+      generatedBy: "Generated by VascScreen — Vessel Pathway Compass (VASCU-LINK)",
     },
     // ADR Registry (Architecture Decision Records)
     adr: {
