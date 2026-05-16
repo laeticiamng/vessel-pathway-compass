@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ShieldCheck, Search, Download, Lock, ArrowLeft, ChevronLeft, ChevronRight, Eye, FileText, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -64,8 +64,26 @@ export default function ProtocolAuditAdmin() {
   // Only full admins can see raw IP/UA. Research leads see pseudonymized values.
   const canSeeRawNetwork = isAdmin;
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedActions, setSelectedActions] = useState<string[]>([]);
-  const [requestIdFilter, setRequestIdFilter] = useState("");
+  // Allow deep-links from guard toasts / error blocks:
+  //   /app/admin/protocol-audit?request_id=<x-request-id>
+  // pre-fills the Request-Id filter so the admin lands on the relevant row.
+  const [requestIdFilter, setRequestIdFilter] = useState(
+    () => searchParams.get("request_id") ?? "",
+  );
+
+  // Keep state ↔ URL in sync so the deep-link survives reloads / sharing.
+  useEffect(() => {
+    const current = searchParams.get("request_id") ?? "";
+    const next = requestIdFilter.trim();
+    if (current === next) return;
+    const params = new URLSearchParams(searchParams);
+    if (next) params.set("request_id", next);
+    else params.delete("request_id");
+    setSearchParams(params, { replace: true });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [requestIdFilter]);
   const [actorFilter, setActorFilter] = useState("");
   const [rangeKey, setRangeKey] = useState("24h");
   const [page, setPage] = useState(0);

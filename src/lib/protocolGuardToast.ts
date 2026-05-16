@@ -104,7 +104,33 @@ export function showGuardDenialToast(opts: DenialOpts) {
         }
       },
     },
+    // Secondary affordance: open the audit log already filtered by this
+    // request-id so an admin can pivot from "I just hit a wall" to "here
+    // is the corresponding governance_events row" in one click.
+    // Suppressed when we have no real id to filter on.
+    cancel: opts.requestId
+      ? {
+          label: "View in audit log",
+          onClick: () => {
+            try {
+              const url = auditLogUrlForRequestId(opts.requestId!);
+              window.open(url, "_blank", "noopener,noreferrer");
+            } catch {
+              /* navigation unavailable — silent */
+            }
+          },
+        }
+      : undefined,
   });
+}
+
+/**
+ * Build the in-app URL that deep-links the protocol audit admin to the
+ * row(s) matching a given `x-request-id`. Exported so the inline error
+ * block and other surfaces can reuse the exact same contract.
+ */
+export function auditLogUrlForRequestId(requestId: string): string {
+  return `/app/admin/protocol-audit?request_id=${encodeURIComponent(requestId)}`;
 }
 
 /**
