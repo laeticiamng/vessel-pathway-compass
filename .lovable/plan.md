@@ -1,65 +1,109 @@
-# Plan — Research Evidence : page de crédibilité scientifique unifiée
+## Objectif
 
-## Constat
+Transformer la démo unique "Mme R." en un véritable **mode Clinical Case** : une bibliothèque de 3 cas fictifs contrastés, chacun exposant patient, symptômes, Doppler, facteurs de risque, arbitrage L1/L2/L3, justification et suivi longitudinal. Réutilise l'infrastructure démo existante (panels, `DemoStepShell`) — aucune logique métier nouvelle, uniquement données + routing + 2 écrans.
 
-Le projet a déjà 5 pages liées à la rigueur scientifique, mais éparses :
-- `/methodology` (378 l.) — méthode statistique
-- `/transparence` (747 l.) — transparence globale
-- `/audit-limitations` (273 l.) — limites d'audit
-- `/protocol` (309 l.) — protocole L1
-- `/sap` (144 l.) — Statistical Analysis Plan
+## Pourquoi
 
-Aucune ne couvre **explicitement** ce que demande l'utilisateur : un **hub "Research Evidence"** qui rassemble en un coup d'œil hypothèses, limites, statut expérimental, niveau de validation, références, simulé-vs-réel, prospectif.
+Aujourd'hui un seul cas → on voit un système. Avec 3 cas contrastés (L1 fragile, L2 intermédiaire, L3 complexe) → on comprend instantanément **à quoi sert la plateforme** et **comment elle arbitre**.
 
-## Proposition
+## Livrables
 
-Créer une **nouvelle page `/research-evidence`** qui sert de **dashboard de crédibilité scientifique** — pas un duplicata, mais un **index synthétique** avec liens profonds vers les pages détaillées existantes.
+### 1. Données — 3 cas contrastés (fictifs)
 
-### Structure de la page (7 sections, dans l'ordre demandé)
+Nouveau fichier `src/demo/clinicalCases.ts` exportant `CLINICAL_CASES`, basé sur le type `DemoCase` existant **étendu** avec :
 
-1. **Hypothèses** — Liste structurée des hypothèses cliniques et techniques du projet (chaîne visuelle v8.3, AquaMR sans iode, Digital Twin 18 segments, raisonnement L1).
-2. **Limites** — Limites connues : taille d'échantillon, biais de sélection, généralisabilité, dépendance aux questionnaires en anglais, etc. → lien vers `/audit-limitations`.
-3. **Statut expérimental** — Bandeau clair "Free Open Beta · Not a medical device · No CE/FDA clearance" + tableau du statut de chaque module (clinique en routine / pilote / R&D / prospectif).
-4. **Niveau de validation** — Échelle TRL adaptée (TRL 1-9) appliquée à chaque module phare avec justification courte. Référence aux paramètres officiels de l'étude L1 (sample size, primary endpoint, MICE m=20, DSMB triggers).
-5. **Références** — Bibliographie ciblée : VascuQoL-6, CIVIQ-14, CFS, Mehran score, Rutherford, guidelines ESVS/SVS. Citation format Vancouver, liens DOI/PMID quand disponibles.
-6. **Simulé vs Réel** — Tableau explicite par module : ce qui est mesuré sur patients réels, ce qui est simulé/synthétique, ce qui est démo pédagogique (ex. cas Mme R.).
-7. **Prospectif** — Roadmap scientifique : ce qui sera évalué dans l'étude L1, calendrier, jalons DSMB, publications attendues.
+- `symptoms: string[]` (claudication, douleur de repos, ulcère…)
+- `doppler: { abiRight, abiLeft, tbiRight?, tbiLeft?, waveform: "triphasique"|"biphasique"|"monophasique"|"absent", peakSystolicVelocityCmS?, notes }`
+- `riskFactors: { diabetes, smoking, hypertension, dyslipidemia, ckd, priorMI, priorStroke, antiplatelet }`
+- `longitudinalFollowUp: { m1, m3, m6, m12 }` avec pour chaque jalon : événement clinique, VascuQoL-6, distance de marche, ré-intervention oui/non
+- `triageJustification: string` (texte court expliquant pourquoi L1/L2/L3)
 
-### Architecture technique
+Les 3 cas :
 
-- **1 nouveau fichier** : `src/pages/ResearchEvidence.tsx` (~ 400-500 lignes, structuré en sous-sections au sein du même fichier — pas d'éparpillement).
-- **1 route ajoutée** dans `src/App.tsx` : `/research-evidence` (public, lazy-loaded).
-- **Aucune modif** des pages existantes (`/methodology`, `/transparency`, etc.) — uniquement des liens entrants depuis la nouvelle page.
-- **Source unique de vérité** : réutilise la mémoire `mem://study/l1-clinical-parameters` pour les nombres officiels (sample size, primary endpoint, MICE m=20, DSMB triggers). Tous les paramètres L1 hardcodés dans des constantes en haut de fichier avec commentaire « source of truth: L1 clinical parameters memory ».
-- **SEO** : `SEOHead` avec title "Research Evidence — Niveau de validation et limites · VASCU-LINK".
-- **i18n** : clés sous `researchEvidence.*` (EN/FR/DE), mais conformité mémoire core : les questionnaires cités (VascuQoL-6, CIVIQ-14) restent en anglais.
-- **Lien depuis le footer** sous "Science" + lien depuis la bannière DEMO (`DemoStepShell`) pour fermer la boucle « pourquoi croire à cette démo ».
+| ID | Profil | Niveau | Modalité | Particularité pédagogique |
+|---|---|---|---|---|
+| `mme-r-aomi-fragile` | F 82 ans, CKD 3b, allergie iode, ulcère | **L1** | AquaMR | Reprend Mme R. — contraste contre-indiqué |
+| `m-d-claudicant` | H 64 ans, diabétique, tabagique actif, claudication 200 m | **L2** | CTA standard | Cas "courant" — arbitrage médical vs endovasculaire |
+| `m-b-multietage` | H 71 ans, lésions multi-étagées aorto-iliaques + fémoro-poplitées | **L3** | DSA + planification hybride | Décision multidisciplinaire complexe |
 
-### Composants internes (au sein du fichier)
+Données 100% fictives, marquées DEMO, aucune persistance.
 
-- `<EvidenceSection title icon>` — wrapper sémantique pour les 7 sections.
-- `<StatusBadge level="clinical|pilot|rd|prospective">` — pastille colorée.
-- `<TRLChip value={1..9}>` — niveau de maturité technologique.
-- `<RefItem authors year title journal doi>` — entrée bibliographique.
+### 2. Page index — `/demo/clinical-cases`
 
-### Critères d'acceptation
+Nouveau `src/pages/demo/ClinicalCases.tsx` (~120 lignes) :
 
-- Page accessible publiquement à `/research-evidence` en 1 clic depuis footer + bannière DEMO.
-- Les 7 sections sont présentes, distinctes, dans l'ordre demandé.
-- Chaque module phare a un statut explicite (clinique / pilote / R&D / prospectif) **et** un TRL.
-- Le tableau « simulé vs réel » couvre au minimum : VascScreen, AquaMR, Digital Twin, L1 Board, PROMs, démo AOMI.
-- Aucune revendication de supériorité vs MRI/MRA/CTA/angiographie (règle v8.3).
-- Bannière "Free Open Beta · Not a medical device" visible above the fold.
-- Tous les nombres L1 (sample size, primary endpoint, etc.) cohérents avec la mémoire `mem://study/l1-clinical-parameters`.
+- Hero court : titre, sous-titre, bandeau **"Cas fictifs — usage pédagogique uniquement — Free Open Beta"**
+- Grille 3 cartes (une par cas) avec :
+  - Initiales + âge + sexe + niveau L1/L2/L3 (badge couleur)
+  - 1 phrase de pitch clinique
+  - 3 facteurs de risque dominants (chips)
+  - Modalité imagerie retenue
+  - CTA "Ouvrir le cas →"
+- Lien retour Landing / Research evidence
 
-## Hors scope
+### 3. Runner générique — `/demo/clinical-cases/:caseId`
 
-- Pas de refonte de `/methodology`, `/transparency`, `/audit-limitations`, `/protocol`, `/sap` (cette page **renvoie** vers elles, ne les remplace pas).
-- Pas de nouvelle table Supabase, pas d'edge function.
-- Pas de design system refait (réutilise les tokens HSL et composants shadcn existants).
-- Pas de modification de la nav principale (uniquement footer + bannière DEMO).
-- Pas de changement du protocole L1 lui-même (juste affichage des paramètres existants).
+Nouveau `src/pages/demo/ClinicalCaseRunner.tsx` (~80 lignes) — généralisation de `AomiFragileDemo.tsx` :
 
-## Livrable
+- Lit `caseId` via `useParams`, résout via `getClinicalCase(caseId)`
+- Si introuvable → redirect vers `/demo/clinical-cases`
+- Réutilise **tel quel** `DemoStepShell` + les 6 panels existants (`TriagePanel`, `ImagingPanel`, `TwinPanel`, `DecisionPanel`, `PlanPanel`, `PromsPanel`) en leur passant `caseData` au lieu de la constante figée
+- Ajoute une **7ᵉ étape `followup`** alimentée par `longitudinalFollowUp` (timeline M1→M12 simple, SVG horizontal + cards)
 
-Un seul message implémentant la page complète + la route + les 2 liens entrants (footer, DemoStepShell).
+### 4. Adaptations panels existants
+
+Les 6 panels actuels importent `AOMI_FRAGILE_CASE` directement. Refactor minimal :
+
+- Chaque panel accepte une prop `case: DemoCase` (au lieu d'importer la constante)
+- `AomiFragileDemo.tsx` continue de fonctionner (passe `AOMI_FRAGILE_CASE`) → **rétrocompatible**, l'URL `/demo/aomi-fragile` reste valide
+- `TriagePanel` enrichi : affiche `symptoms`, `doppler.waveform`, chips `riskFactors` (champs optionnels — fallback silencieux pour Mme R. tant que pas remplis)
+- `DecisionPanel` enrichi : encart "Justification du niveau L1/L2/L3" lisant `triageJustification`
+
+### 5. Nouveau panel — `FollowUpPanel.tsx`
+
+`src/components/demo/panels/FollowUpPanel.tsx` (~150 lignes) :
+
+- Timeline horizontale M1 / M3 / M6 / M12
+- Pour chaque jalon : badge événement, VascuQoL-6 (delta vs baseline), distance de marche, flag ré-intervention
+- Graphique sparkline VascuQoL-6 (SVG inline, pas de lib)
+- Bandeau honnêteté scientifique : "Données simulées, prospectives à 12 mois"
+
+### 6. Routing + intégrations
+
+- `src/App.tsx` : ajout routes lazy publiques
+  - `/demo/clinical-cases` → `ClinicalCases`
+  - `/demo/clinical-cases/:caseId` → `ClinicalCaseRunner`
+  - `/demo/aomi-fragile` conservée (alias historique)
+- `Landing.tsx` footer (section Product) : remplacer le lien "Démo AOMI" par **"Bibliothèque de cas cliniques"** pointant `/demo/clinical-cases`
+- `ResearchEvidence.tsx` : dans section "Simulé vs Réel", lien "Parcourir les 3 cas pédagogiques →"
+- `DemoStepShell` banner : bouton retour "← Tous les cas" quand on est dans un runner
+
+## Hors périmètre
+
+- Aucun nouveau cas réel, aucune table Supabase, aucune edge function
+- Pas de comparateur de cas, pas de quiz, pas de scoring utilisateur
+- Pas de modification du design system, pas de nouveaux tokens
+- Pas de traduction i18n des nouveaux libellés en DE (FR + EN suffit pour cette itération — la 3ᵉ langue suivra si validé)
+- Pas de changement aux questionnaires cliniques (VascuQoL-6 reste EN)
+
+## Détails techniques
+
+```text
+src/
+├── demo/
+│   ├── aomiFragileCase.ts          (conservé, type DemoCase étendu)
+│   └── clinicalCases.ts            (nouveau — registre + 3 cas)
+├── pages/demo/
+│   ├── AomiFragileDemo.tsx         (refactor : passe case en prop)
+│   ├── ClinicalCases.tsx           (nouveau — index)
+│   └── ClinicalCaseRunner.tsx      (nouveau — runner générique)
+└── components/demo/panels/
+    ├── TriagePanel.tsx             (accepte prop case, enrichi)
+    ├── DecisionPanel.tsx           (accepte prop case, enrichi)
+    ├── {Imaging,Twin,Plan,Proms}Panel.tsx (accepte prop case)
+    └── FollowUpPanel.tsx           (nouveau)
+```
+
+`DemoStepId` devient `"triage"|"imaging"|"twin"|"decision"|"plan"|"proms"|"followup"`.
+
+Compatibilité v8.3 : tous les cas respectent la règle "chaîne visuelle uniquement", aucune revendication de supériorité diagnostique vs MRI/CTA/DSA. Bandeau "Not a medical device · No CE/FDA" présent sur index et runner.
