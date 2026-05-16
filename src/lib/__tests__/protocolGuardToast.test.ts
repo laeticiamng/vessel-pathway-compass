@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import {
   showGuardDenialToast,
   guardToastId,
+  auditLogUrlForRequestId,
   __resetGuardToastDedup,
 } from "@/lib/protocolGuardToast";
 
