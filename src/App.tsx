@@ -131,6 +131,7 @@ const App = () => (
         <Routes>
           {/* Public */}
           <Route path="/" element={<Landing />} />
+          <Route path="/demo/aomi-fragile" element={<AomiFragileDemo />} />
           <Route path="/pricing" element={<Navigate to="/access" replace />} />
           <Route path="/access" element={<Pricing />} />
           <Route path="/why" element={<WhyVascuLink />} />
