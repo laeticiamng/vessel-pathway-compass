@@ -2,13 +2,18 @@ import { useSearchParams } from "react-router-dom";
 import { SEOHead } from "@/components/SEOHead";
 import { DemoStepShell } from "@/components/demo/DemoStepShell";
 import { AOMI_FRAGILE_CASE, DEMO_STEPS, type DemoStepId } from "@/demo/aomiFragileCase";
+import { TriagePanel } from "@/components/demo/panels/TriagePanel";
+import { ImagingPanel } from "@/components/demo/panels/ImagingPanel";
+import { TwinPanel } from "@/components/demo/panels/TwinPanel";
+import { DecisionPanel } from "@/components/demo/panels/DecisionPanel";
+import { PlanPanel } from "@/components/demo/panels/PlanPanel";
+import { PromsPanel } from "@/components/demo/panels/PromsPanel";
 
 /**
  * Guided 2-minute demo — "Mme R., 82 ans" AOMI fragile / contraste contre-indiqué.
  *
- * Lot 1 (current): walkable skeleton with frozen case data, progress bar, keyboard nav.
- * Each step renders a placeholder visual + a narrative pulled from the frozen case.
- * Lot 2 will replace each VisualPlaceholder with the real app component in demoData mode.
+ * Lot 2: each step renders a self-contained demo panel fed by AOMI_FRAGILE_CASE.
+ * Zero Supabase calls, zero side effects — purely presentational.
  */
 
 const STEP_IDS = new Set(DEMO_STEPS.map((s) => s.id));
@@ -19,29 +24,12 @@ function isStepId(value: string | null): value is DemoStepId {
 
 const CASE = AOMI_FRAGILE_CASE;
 
-function VisualPlaceholder({ label, hint }: { label: string; hint: string }) {
-  return (
-    <div className="h-full min-h-[420px] w-full flex flex-col items-center justify-center text-center p-8 bg-gradient-to-br from-muted/40 to-muted/10">
-      <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-semibold">
-        Lot 2 — Branchement du visuel
-      </p>
-      <p className="mt-3 text-2xl font-semibold tracking-tight">{label}</p>
-      <p className="mt-2 text-sm text-muted-foreground max-w-md">{hint}</p>
-    </div>
-  );
-}
-
 function renderStep(stepId: DemoStepId) {
   switch (stepId) {
     case "triage":
       return {
         headline: "IPS 0,42 droite · Frailty 5 · eGFR 32",
-        visual: (
-          <VisualPlaceholder
-            label="Triage VascScreen"
-            hint="L'écran VascScreen / résultat ABI affichera l'IPS, le score de fragilité et le score CI-AKI calculés sur les données du cas."
-          />
-        ),
+        visual: <TriagePanel />,
         narrative: (
           <>
             <p>
@@ -56,12 +44,7 @@ function renderStep(stepId: DemoStepId) {
     case "imaging":
       return {
         headline: "AquaMR — sans iode, sans radiation",
-        visual: (
-          <VisualPlaceholder
-            label="FusionViewer · séquence AquaMR"
-            hint="Le FusionViewer affichera la séquence MR de Mme R., avec la mention explicite que CTA/DSA sont contre-indiqués."
-          />
-        ),
+        visual: <ImagingPanel />,
         narrative: (
           <>
             <p>
@@ -76,12 +59,7 @@ function renderStep(stepId: DemoStepId) {
     case "twin":
       return {
         headline: `Sténose ${CASE.twin.stenosisPct}% — ${CASE.twin.dominantLesion}`,
-        visual: (
-          <VisualPlaceholder
-            label="Digital Twin · 18 segments"
-            hint={`La carte SVG colorera les segments ${CASE.twin.affectedSegments.join(", ")} selon la sévérité de la lésion.`}
-          />
-        ),
+        visual: <TwinPanel />,
         narrative: (
           <>
             <p>
@@ -94,12 +72,7 @@ function renderStep(stepId: DemoStepId) {
     case "decision":
       return {
         headline: `Décision ${CASE.decision.committeeLevel} — ${CASE.decision.chosenPath}`,
-        visual: (
-          <VisualPlaceholder
-            label="L1 Decision Board"
-            hint="Le board L1 affichera le raisonnement structuré : indication, alternatives écartées et justification."
-          />
-        ),
+        visual: <DecisionPanel />,
         narrative: (
           <>
             <p>
@@ -118,12 +91,7 @@ function renderStep(stepId: DemoStepId) {
     case "plan":
       return {
         headline: `${CASE.plan.procedure} · ${CASE.plan.expectedDurationMin} min`,
-        visual: (
-          <VisualPlaceholder
-            label="Procedure Planner"
-            hint="Le planner détaillera voie d'abord, matériel, anesthésie et timeline opératoire."
-          />
-        ),
+        visual: <PlanPanel />,
         narrative: (
           <>
             <p>
@@ -139,12 +107,7 @@ function renderStep(stepId: DemoStepId) {
     case "proms":
       return {
         headline: `${CASE.proms.tool} : ${CASE.proms.baseline} → ${CASE.proms.m6} à M6`,
-        visual: (
-          <VisualPlaceholder
-            label="Registry · VascuQoL-6"
-            hint="La courbe PROMs affichera l'évolution baseline → M3 → M6 sur la patiente du cas."
-          />
-        ),
+        visual: <PromsPanel />,
         narrative: (
           <>
             <p>
