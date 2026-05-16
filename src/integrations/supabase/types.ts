@@ -80,6 +80,57 @@ export type Database = {
         }
         Relationships: []
       }
+      ai_recon_jobs: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          error: string | null
+          id: string
+          input_path: string | null
+          input_type: string | null
+          parameters: Json
+          pipeline: string
+          progress: number
+          results: Json | null
+          started_at: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          input_path?: string | null
+          input_type?: string | null
+          parameters?: Json
+          pipeline: string
+          progress?: number
+          results?: Json | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          error?: string | null
+          id?: string
+          input_path?: string | null
+          input_type?: string | null
+          parameters?: Json
+          pipeline?: string
+          progress?: number
+          results?: Json | null
+          started_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       audit_logs: {
         Row: {
           action: string
@@ -1596,6 +1647,117 @@ export type Database = {
         }
         Relationships: []
       }
+      project_invitations: {
+        Row: {
+          created_at: string
+          id: string
+          invited_by: string
+          invited_email: string
+          invited_role: string
+          project_id: string
+          responded_at: string | null
+          status: string
+          token: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          invited_by: string
+          invited_email: string
+          invited_role?: string
+          project_id: string
+          responded_at?: string | null
+          status?: string
+          token?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          invited_by?: string
+          invited_email?: string
+          invited_role?: string
+          project_id?: string
+          responded_at?: string | null
+          status?: string
+          token?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_invitations_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "hardware_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_members: {
+        Row: {
+          added_by: string | null
+          created_at: string
+          id: string
+          project_id: string
+          project_role: string
+          user_id: string
+        }
+        Insert: {
+          added_by?: string | null
+          created_at?: string
+          id?: string
+          project_id: string
+          project_role?: string
+          user_id: string
+        }
+        Update: {
+          added_by?: string | null
+          created_at?: string
+          id?: string
+          project_id?: string
+          project_role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_members_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "hardware_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_messages: {
+        Row: {
+          author_id: string
+          body: string
+          created_at: string
+          id: string
+          project_id: string
+        }
+        Insert: {
+          author_id: string
+          body: string
+          created_at?: string
+          id?: string
+          project_id: string
+        }
+        Update: {
+          author_id?: string
+          body?: string
+          created_at?: string
+          id?: string
+          project_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_messages_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "hardware_projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       proms: {
         Row: {
           case_id: string
@@ -1933,6 +2095,53 @@ export type Database = {
             columns: ["simulation_id"]
             isOneToOne: false
             referencedRelation: "simulations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sequence_designs: {
+        Row: {
+          blocks: Json
+          created_at: string
+          id: string
+          name: string
+          notes: string | null
+          project_id: string | null
+          seq_text: string | null
+          updated_at: string
+          user_id: string
+          version: number
+        }
+        Insert: {
+          blocks?: Json
+          created_at?: string
+          id?: string
+          name: string
+          notes?: string | null
+          project_id?: string | null
+          seq_text?: string | null
+          updated_at?: string
+          user_id: string
+          version?: number
+        }
+        Update: {
+          blocks?: Json
+          created_at?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          project_id?: string | null
+          seq_text?: string | null
+          updated_at?: string
+          user_id?: string
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sequence_designs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "hardware_projects"
             referencedColumns: ["id"]
           },
         ]
@@ -2542,6 +2751,10 @@ export type Database = {
         Returns: boolean
       }
       institution_health: { Args: { _institution_id: string }; Returns: Json }
+      is_project_member: {
+        Args: { _project_id: string; _user_id: string }
+        Returns: boolean
+      }
       list_quizzes_for_module: {
         Args: { _module_id: string }
         Returns: {
@@ -2583,6 +2796,10 @@ export type Database = {
           _target_entity_type?: string
           _target_user?: string
         }
+        Returns: string
+      }
+      project_role_of: {
+        Args: { _project_id: string; _user_id: string }
         Returns: string
       }
       reactivate_user_account: {
