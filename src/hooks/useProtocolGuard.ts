@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserRoles } from "@/hooks/useUserRoles";
+import { parseGuardResponse, newGuardRequestId } from "@/lib/protocolGuard";
 
 export type GuardAction =
   | "protocol.view"
