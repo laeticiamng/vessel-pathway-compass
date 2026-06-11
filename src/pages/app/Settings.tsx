@@ -169,13 +169,11 @@ export default function Settings() {
 
   const [displayName, setDisplayName] = useState("");
   const [institution, setInstitution] = useState("");
-  const [role, setRole] = useState("");
 
   useEffect(() => {
     if (profile) {
       setDisplayName(profile.display_name ?? "");
       setInstitution(profile.institution ?? "");
-      setRole(profile.role ?? "");
     }
   }, [profile]);
 
@@ -187,7 +185,6 @@ export default function Settings() {
         .update({
           display_name: displayName,
           institution,
-          role,
         })
         .eq("user_id", user.id);
       if (error) throw error;
@@ -208,8 +205,8 @@ export default function Settings() {
   const hasChanges =
     profile &&
     (displayName !== (profile.display_name ?? "") ||
-      institution !== (profile.institution ?? "") ||
-      role !== (profile.role ?? ""));
+      institution !== (profile.institution ?? ""));
+
 
   return (
     <>
