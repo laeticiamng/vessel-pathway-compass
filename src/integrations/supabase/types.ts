@@ -1616,7 +1616,6 @@ export type Database = {
           id: string
           institution: string | null
           onboarding_completed: boolean
-          role: string | null
           specialty: string | null
           updated_at: string
           user_id: string
@@ -1628,7 +1627,6 @@ export type Database = {
           id?: string
           institution?: string | null
           onboarding_completed?: boolean
-          role?: string | null
           specialty?: string | null
           updated_at?: string
           user_id: string
@@ -1640,7 +1638,6 @@ export type Database = {
           id?: string
           institution?: string | null
           onboarding_completed?: boolean
-          role?: string | null
           specialty?: string | null
           updated_at?: string
           user_id?: string
