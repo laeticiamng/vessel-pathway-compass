@@ -169,13 +169,11 @@ export default function Settings() {
 
   const [displayName, setDisplayName] = useState("");
   const [institution, setInstitution] = useState("");
-  const [role, setRole] = useState("");
 
   useEffect(() => {
     if (profile) {
       setDisplayName(profile.display_name ?? "");
       setInstitution(profile.institution ?? "");
-      setRole(profile.role ?? "");
     }
   }, [profile]);
 
@@ -187,7 +185,6 @@ export default function Settings() {
         .update({
           display_name: displayName,
           institution,
-          role,
         })
         .eq("user_id", user.id);
       if (error) throw error;
@@ -208,8 +205,8 @@ export default function Settings() {
   const hasChanges =
     profile &&
     (displayName !== (profile.display_name ?? "") ||
-      institution !== (profile.institution ?? "") ||
-      role !== (profile.role ?? ""));
+      institution !== (profile.institution ?? ""));
+
 
   return (
     <>
@@ -238,19 +235,8 @@ export default function Settings() {
                 <Label>{t("settings.profile.displayName")}</Label>
                 <Input value={displayName} onChange={(e) => setDisplayName(e.target.value)} placeholder={t("settings.profile.displayNamePlaceholder")} />
               </div>
-              <div className="space-y-2">
-                <Label>{t("settings.profile.role")}</Label>
-                <Select value={role} onValueChange={setRole}>
-                  <SelectTrigger>
-                    <SelectValue placeholder={t("settings.profile.rolePlaceholder")} />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {(["physician", "trainee", "expert_reviewer", "hospital_admin", "research_lead"] as const).map((r) => (
-                      <SelectItem key={r} value={r}>{t(`onboarding.roles.${r}`)}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+
+
               <div className="space-y-2">
                 <Label>{t("settings.profile.institution")}</Label>
                 <Input value={institution} onChange={(e) => setInstitution(e.target.value)} placeholder={t("settings.institution.namePlaceholder")} />

@@ -131,7 +131,7 @@ export default function Admin() {
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                       <div className="min-w-0">
                         <p className="font-semibold">{profile.display_name || "—"}</p>
-                        <p className="text-sm text-muted-foreground">{profile.institution || "—"} · {profile.specialty || profile.role || "—"}</p>
+                        <p className="text-sm text-muted-foreground">{profile.institution || "—"} · {profile.specialty || "—"}</p>
                         <div className="flex flex-wrap gap-1.5 mt-2">
                           {roles.map((r) => (
                             <Badge key={r} variant="secondary" className="text-xs capitalize">{r.replace(/_/g, " ")}</Badge>

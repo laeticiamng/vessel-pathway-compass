@@ -23,16 +23,27 @@ export function useProtocolAccessAudit() {
   const { log } = useAuditLog();
   const loggedView = useRef(false);
 
-  // Read profile.role + (best-effort) institution to enrich audit context.
+  // Read user role from user_roles + (best-effort) specialty/institution from profiles.
   const { data: profile } = useQuery({
     queryKey: ["profile-role", user?.id],
     queryFn: async () => {
-      const { data } = await supabase
-        .from("profiles")
-        .select("role, specialty, institution")
-        .eq("user_id", user!.id)
-        .maybeSingle();
-      return data;
+      const [{ data: prof }, { data: roleRows }] = await Promise.all([
+        supabase
+          .from("profiles")
+          .select("specialty, institution")
+          .eq("user_id", user!.id)
+          .maybeSingle(),
+        supabase
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", user!.id),
+      ]);
+      const role = (roleRows ?? [])[0]?.role ?? null;
+      return {
+        role,
+        specialty: prof?.specialty ?? null,
+        institution: prof?.institution ?? null,
+      };
     },
     enabled: !!user,
     staleTime: 5 * 60 * 1000,
@@ -78,3 +89,4 @@ export function useProtocolAccessAudit() {
 
   return { logQA, role: profile?.role ?? null, isAuthenticated: !!user };
 }
+
