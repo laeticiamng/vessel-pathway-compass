@@ -121,7 +121,7 @@ const MODULE_STATUS: { module: string; level: StatusLevel; trl: number; note: st
   { module: "Digital Twin 18 segments", level: "pilot", trl: 5, note: "Représentation pédagogique et planning ; non diagnostique." },
   { module: "L1 Decision Board", level: "pilot", trl: 6, note: "Aide à la décision documentée ; n'engage pas la responsabilité du clinicien." },
   { module: "Procedure Planner", level: "pilot", trl: 5, note: "Templates structurés ; pas d'aide automatisée au geste." },
-  { module: "PROMs longitudinaux (VascuQoL-6, CIVIQ-14)", level: "clinical", trl: 7, note: "Questionnaires validés en anglais, utilisés en routine de recherche." },
+  { module: "PROMs longitudinaux (WIQ, VascuQol-6, 6-MWT)", level: "clinical", trl: 7, note: "Versions linguistiquement validées FR / DE / EN, administrées dans la langue du patient ; version documentée par patient." },
   { module: "Démo AOMI guidée (Mme R.)", level: "prospective", trl: 3, note: "Démonstration pédagogique sur données fictives. Aucun patient réel." },
   ...PIPELINE_ORDER.map((id) => {
     const m = MODEL_REGISTRY[id];
@@ -138,7 +138,7 @@ const LIMITS = [
   "Étude pivot L1 non terminée — aucun résultat clinique publié à ce jour.",
   "Échantillon cible : n ≈ " + POWER_DEFAULTS.nEnrolment + " (analysable ≈ " + POWER_DEFAULTS.nAnalysable + ") sur centre unique au démarrage — généralisabilité limitée.",
   "Comparateur AquaMR vs Doppler + angio-CT ou MRA — pas de comparaison directe à l'angiographie de référence (DSA).",
-  "PROMs uniquement disponibles en anglais (VascuQoL-6, CIVIQ-14) — biais linguistique potentiel chez les patients non anglophones.",
+  "PROMs administrés en versions FR / DE / EN linguistiquement validées (WIQ, VascuQol-6, 6-MWT) ; l'invariance de mesure inter-langues n'est pas formellement testée et la version est documentée par patient.",
   "AI reconstruction : risque d'hallucination contrôlé par re-lecture aléatoire 3 % sans IA (cf. TRIPOD+AI 2024) ; pas de garantie d'exhaustivité.",
   "Pas d'évaluation de l'impact patient-pertinent à long terme (> 12 mois) au stade actuel.",
 ];
