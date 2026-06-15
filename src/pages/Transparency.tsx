@@ -119,7 +119,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "Multilingue EN / FR / DE",
           desc:
-            "Interface entièrement localisée. Les questionnaires cliniques validés (VascuQoL-6, CIVIQ-14) restent en anglais conformément à leurs versions de référence.",
+            "Interface entièrement localisée. Les questionnaires cliniques (WIQ, VascuQol-6, 6-MWT) sont administrés dans la langue du patient à l'aide de versions linguistiquement validées FR / DE / EN ; la version utilisée est documentée par patient.",
         },
         {
           title: "Suivi de performance en production",
@@ -261,7 +261,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "Multilingual EN / FR / DE",
           desc:
-            "Fully localised UI. Validated clinical questionnaires (VascuQoL-6, CIVIQ-14) remain in English to match their reference versions.",
+            "Fully localised UI. Clinical questionnaires (WIQ, VascuQol-6, 6-MWT) are administered in the patient's language using linguistically validated FR / DE / EN versions; the version used is documented per patient.",
         },
         {
           title: "Production performance monitoring",
@@ -402,7 +402,7 @@ const CONTENT: Record<Language, Content> = {
         {
           title: "Mehrsprachig EN / FR / DE",
           desc:
-            "Vollständig lokalisierte Oberfläche. Validierte klinische Fragebögen (VascuQoL-6, CIVIQ-14) bleiben gemäss ihrer Referenzversionen auf Englisch.",
+            "Vollständig lokalisierte Oberfläche. Klinische Fragebögen (WIQ, VascuQol-6, 6-MWT) werden in der Sprache des Patienten mit linguistisch validierten FR / DE / EN-Versionen erhoben; die verwendete Version wird pro Patient dokumentiert.",
         },
         {
           title: "Performance-Überwachung in Produktion",
