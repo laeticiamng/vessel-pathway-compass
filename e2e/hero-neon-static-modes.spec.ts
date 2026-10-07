@@ -33,7 +33,9 @@ async function gotoStatic(page: Page, opts: { dark?: boolean; hc?: boolean }) {
 }
 
 test.describe("hero-neon — reduced-motion static render", () => {
-  test.use({ reducedMotion: "reduce" });
+  // « reducedMotion » n'est pas une option de test.use (ignorée en silence) :
+  // elle se passe via contextOptions.
+  test.use({ contextOptions: { reducedMotion: "reduce" } });
 
   test("hero-neon halo is removed (filter:none) in dark+reduced-motion", async ({
     page,

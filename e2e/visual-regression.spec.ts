@@ -76,7 +76,10 @@ const I18N_PROBES: Record<(typeof LANGS)[number], string[]> = {
 };
 
 async function setLanguage(page: Page, lang: string) {
-  await page.evaluate((l) => {
+  // addInitScript : appelé avant le premier goto, un page.evaluate tourne sur
+  // about:blank où localStorage lève (exception avalée) → langue jamais
+  // appliquée, les cas fr/de testaient l'anglais.
+  await page.addInitScript((l) => {
     try {
       localStorage.setItem("aquamr-flow-lang", l);
       localStorage.setItem("aquamr-language", l);
@@ -190,7 +193,8 @@ test.describe("visual snapshots", () => {
     locale: "en-US",
     timezoneId: "UTC",
     deviceScaleFactor: 1,
-    reducedMotion: "reduce",
+    // via contextOptions : « reducedMotion » direct est ignoré par test.use
+    contextOptions: { reducedMotion: "reduce" },
   });
 
   for (const theme of THEMES) {
@@ -221,7 +225,8 @@ test.describe("DOM overlap & duplicate detection", () => {
     locale: "en-US",
     timezoneId: "UTC",
     deviceScaleFactor: 1,
-    reducedMotion: "reduce",
+    // via contextOptions : « reducedMotion » direct est ignoré par test.use
+    contextOptions: { reducedMotion: "reduce" },
   });
 
   for (const theme of THEMES) {
@@ -456,7 +461,8 @@ test.describe("no clipped banner text", () => {
     locale: "en-US",
     timezoneId: "UTC",
     deviceScaleFactor: 1,
-    reducedMotion: "reduce",
+    // via contextOptions : « reducedMotion » direct est ignoré par test.use
+    contextOptions: { reducedMotion: "reduce" },
   });
 
   for (const theme of THEMES) {

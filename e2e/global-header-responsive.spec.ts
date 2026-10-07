@@ -41,8 +41,10 @@ const VIEWPORTS = [
   { name: "mobile", w: 390, h: 844, expect: "burger" as const },
   { name: "tablet", w: 834, h: 1112, expect: "burger" as const },
   { name: "lg-minus-1", w: LG - 1, h: 768, expect: "burger" as const },
-  { name: "lg", w: LG, h: 768, expect: "inline" as const },
-  { name: "xl-minus-1", w: XL - 1, h: 768, expect: "inline" as const },
+  // Nav inline à partir de xl (1280) depuis la correction du wordmark écrasé
+  // (src/lib/breakpoints.ts) : lg et xl-1 affichent le burger.
+  { name: "lg", w: LG, h: 768, expect: "burger" as const },
+  { name: "xl-minus-1", w: XL - 1, h: 768, expect: "burger" as const },
   { name: "xl", w: XL, h: 800, expect: "inline" as const },
   { name: "desktop", w: 1366, h: 768, expect: "inline" as const },
   { name: "desktop-xl", w: 1920, h: 1080, expect: "inline" as const },
@@ -133,7 +135,7 @@ test.describe("global header — multi-page responsive switch", () => {
                 'button[aria-label*="enu" i]',
               );
               const inlineNav = header.querySelector<HTMLElement>(
-                "div.hidden.lg\\:flex",
+                "div.hidden.xl\\:flex",
               );
               const visible = (el: HTMLElement | null) => {
                 if (!el) return false;

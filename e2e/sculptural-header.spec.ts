@@ -200,6 +200,7 @@ test.describe("Sculptural header", () => {
         (el) => getComputedStyle(el as HTMLElement).boxShadow,
       );
       expect(shadow && shadow !== "none").toBeTruthy();
+    }
   });
 
   test("Breadcrumbs expose nav semantics: aria-label + ordered list + nav role", async ({ page }) => {

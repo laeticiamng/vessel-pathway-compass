@@ -96,7 +96,9 @@ test.describe("hero-neon — accessibility", () => {
 });
 
 test.describe("hero-neon — reduced motion", () => {
-  test.use({ reducedMotion: "reduce" });
+  // « reducedMotion » n'est pas une option de test.use (ignorée en silence) :
+  // elle se passe via contextOptions.
+  test.use({ contextOptions: { reducedMotion: "reduce" } });
 
   test("halo paused during scroll", async ({ page }) => {
     await page.goto("/");
@@ -117,12 +119,11 @@ test.describe("hero-neon — fallback (no -webkit-text-stroke)", () => {
   }) => {
     await page.addInitScript(() => {
       const orig = CSS.supports.bind(CSS);
-      // @ts-expect-error override for testing
+      // Surcharge de test : CSS.supports accepte (property, value) ou (condition).
       CSS.supports = (...args: unknown[]) => {
         const joined = args.join(" ");
         if (joined.includes("text-stroke")) return false;
-        // @ts-expect-error spread
-        return orig(...args);
+        return (orig as (...a: unknown[]) => boolean)(...args);
       };
     });
     await page.goto("/");
