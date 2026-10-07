@@ -33,8 +33,8 @@ function read(rel: string): string {
 }
 
 describe("Content versioning registry", () => {
-  it("registers audit-limitations and faq with semantic versions + ISO dates", () => {
-    for (const id of ["audit-limitations", "faq"] as const) {
+  it("registers protocol, audit-limitations and faq with semantic versions + ISO dates", () => {
+    for (const id of ["protocol", "audit-limitations", "faq"] as const) {
       const meta = getContentVersion(id);
       expect(meta, `${id} content version`).toBeDefined();
       expect(meta!.version).toMatch(/^\d+\.\d+\.\d+$/);
@@ -51,9 +51,12 @@ describe("Content versioning registry", () => {
     }
   });
 
-  it("exposes both registry entries via CONTENT_VERSIONS", () => {
+  // L'entrée « protocol » a été ajoutée le 2026-05-04 (commit 0d9d8f0) et est
+  // consommée par ComplianceBadge, ProtocolVersioningCard et
+  // useProtocolAccessAudit : la liste attendue est mise à jour en conséquence.
+  it("exposes all registry entries via CONTENT_VERSIONS", () => {
     expect(Object.keys(CONTENT_VERSIONS).sort()).toEqual(
-      ["audit-limitations", "faq"].sort(),
+      ["protocol", "audit-limitations", "faq"].sort(),
     );
   });
 });

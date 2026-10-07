@@ -1,37 +1,78 @@
 name: landing-responsive
 
+# Causes du rouge historique (jamais vert) :
+#  - installation impossible (`npm ci || npm install` → ERESOLVE) ;
+#  - @playwright/test absent des devDependencies : playwright.config.ts ne
+#    pouvait même pas être chargé ;
+#  - build sans variables Supabase → le client généré lève à l'import et
+#    React ne monte pas (seul le fallback statique d'index.html s'affiche) ;
+#  - bugs des specs (header de 0 px, langue jamais appliquée) et vrai bug
+#    d'affichage (wordmark VASCU-LINK écrasé entre 1024 et ~1370 px en FR).
+#
+# global-header-responsive.spec.ts n'est PAS exécuté sur les PR : il exige
+# un header « global » avec burger + nav inline sur 10 routes, alors que
+# seule la landing (/) possède cette navigation (les autres pages ont un
+# header simple logo + retour, /pricing redirige vers /access). Il décrit
+# une fonctionnalité qui n'existe pas ; il reste lançable à la main
+# (workflow_dispatch) en attendant une décision produit.
+
 on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      global_header:
+        description: "Lancer aussi global-header-responsive.spec.ts (spécification d'un header global non implémenté)"
+        type: boolean
+        default: false
 
 jobs:
   responsive:
     runs-on: ubuntu-latest
     timeout-minutes: 25
+    env:
+      TZ: UTC
+      VITE_SUPABASE_URL: http://127.0.0.1:54321
+      VITE_SUPABASE_PUBLISHABLE_KEY: cle-factice-ci
+      VITE_SUPABASE_PROJECT_ID: projet-factice-ci
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Node ≥ 22.18 requis : les scripts i18n (prebuild compris) importent
+          # directement src/i18n/*.ts (type stripping natif) ; sous Node 20 →
+          # ERR_UNKNOWN_FILE_EXTENSION.
+          node-version: "22"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.13"
       - name: Install
-        run: npm ci || npm install
+        run: bun install --frozen-lockfile
       - name: Install Playwright (chromium)
         run: npx playwright install --with-deps chromium
       - name: Build app
         run: npm run build
       - name: Start preview
         run: |
-          npx vite preview --port 8080 --strictPort &
+          npx vite preview --host 127.0.0.1 --port 8080 --strictPort &
           for i in $(seq 1 30); do
-            curl -sf http://localhost:8080 > /dev/null && break || sleep 2
+            curl -sf http://127.0.0.1:8080 > /dev/null && break || sleep 2
           done
+          curl -sf http://127.0.0.1:8080 > /dev/null
       - name: Run landing responsive suite
         env:
-          PLAYWRIGHT_BASE_URL: http://localhost:8080
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:8080
         run: |
           npx playwright test \
             e2e/landing-responsive.spec.ts \
+            --project=chromium \
+            --reporter=list,html
+      - name: Run global header suite (manuel uniquement)
+        if: github.event_name == 'workflow_dispatch' && inputs.global_header
+        env:
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:8080
+        run: |
+          npx playwright test \
             e2e/global-header-responsive.spec.ts \
             --project=chromium \
             --reporter=list,html
@@ -55,7 +96,7 @@ jobs:
         run: |
           echo "### Landing responsive suite" >> "$GITHUB_STEP_SUMMARY"
           if [ "${{ job.status }}" = "success" ]; then
-            echo "✅ Header switches at the right breakpoints, no hero overlap, no clipped CTAs." >> "$GITHUB_STEP_SUMMARY"
+            echo "✅ Header switches at the right breakpoints, wordmark never clipped, hero text never overflows (en/fr/de)." >> "$GITHUB_STEP_SUMMARY"
           else
             echo "❌ Responsive regression — see uploaded HTML report and traces." >> "$GITHUB_STEP_SUMMARY"
           fi

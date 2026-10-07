@@ -5,8 +5,10 @@ and the burger menu across the breakpoints, zoom levels, and orientations we off
 support. Run it before every release **after** the automated visual-regression suite is green.
 
 > Tailwind breakpoints (default): `sm 640 · md 768 · lg 1024 · xl 1280 · 2xl 1536`.
-> The header switches between **burger menu** and **inline nav** at `lg` (1024px).
-> The "AquaMR Flow Platform" subtitle only appears at `xl` (1280px) and above.
+> The header switches between **burger menu** and **inline nav** at `xl` (1280px).
+> The "AquaMR Flow Platform" subtitle only appears at `2xl` (1536px) and above.
+> (Bascule déplacée de `lg` à `xl` : à 1024 px la nav inline FR mesurait ~1090 px
+> et réduisait le wordmark VASCU-LINK à 0 px.)
 
 ## 1. Viewport sizes (portrait, 100% zoom, light + dark)
 
@@ -21,8 +23,9 @@ For each width, open `/` and verify the header layout, then open the burger / in
 | Tablet portrait   | 768 × 1024     | Burger        | No                |
 | Tablet (iPad Air) | 820 × 1180     | Burger        | No                |
 | Tablet large      | 834 × 1194     | Burger        | No                |
-| Laptop small      | 1024 × 768     | Inline nav    | No                |
-| Laptop            | 1366 × 768     | Inline nav    | Yes (≥1280)       |
+| Laptop small      | 1024 × 768     | Burger        | No                |
+| Laptop            | 1366 × 768     | Inline nav    | No                |
+| Laptop large      | 1536 × 864     | Inline nav    | Yes (≥1536)       |
 | Desktop FHD       | 1920 × 1080    | Inline nav    | Yes               |
 | Desktop QHD       | 2560 × 1440    | Inline nav    | Yes               |
 
@@ -30,7 +33,7 @@ For each row check:
 
 - [ ] No horizontal scrollbar on `<html>` or `<body>`.
 - [ ] `VASCU-LINK` renders on a **single line** (no wrap, no clipping).
-- [ ] Subtitle (`AquaMR Flow Platform`) is hidden below `xl` and never overlaps the nav.
+- [ ] Subtitle (`AquaMR Flow Platform`) is hidden below `2xl` and never overlaps the nav.
 - [ ] Logo + brand text + nav/burger fit inside the 16-tall (`h-16`) header.
 - [ ] Hero CTA buttons are not covered by the fixed nav, the FourZeroBanner, or the framing line.
 - [ ] No two header items overlap (≥ 4 px tolerance).
@@ -52,9 +55,9 @@ At `1366 × 768`, set the browser zoom and re-verify the header:
 
 | Zoom | Expected behaviour                                                 |
 | ---- | ------------------------------------------------------------------ |
-| 80%  | Inline nav, subtitle visible, no overlap.                          |
-| 100% | Inline nav, subtitle visible, no overlap.                          |
-| 125% | Inline nav, may collapse to burger if effective width < 1024 CSS px. Either state must be clean. |
+| 80%  | Inline nav, subtitle visible (effective width ≈ 1708 px), no overlap. |
+| 100% | Inline nav, no subtitle, no overlap.                               |
+| 125% | Burger (effective width ≈ 1093 px < 1280 CSS px).                  |
 | 150% | Burger expected (effective width ≈ 910 px). VASCU-LINK still single-line. |
 | 175% | Burger. No header overflow, no horizontal scroll.                  |
 | 200% | Burger. Hero CTAs still reachable. WCAG 1.4.10 reflow respected.   |
@@ -67,7 +70,7 @@ At `1366 × 768`, set the browser zoom and re-verify the header:
 Repeat steps 1–3 with `EN`, `FR`, `DE` (the three longest-label locales differ). Verify:
 
 - [ ] No raw i18n keys (e.g. `landing.nav.why`) leak into the header at any size.
-- [ ] German labels (longest) do not push the burger off-screen at 1024 px.
+- [ ] French / German labels (longest) never truncate VASCU-LINK at 1280 px.
 
 ## 5. Menu / burger interactions
 

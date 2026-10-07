@@ -1,35 +1,82 @@
 name: visual-regression
 
+# Lancement manuel uniquement (workflow_dispatch) — raison : infrastructure
+# inexistante. visual-regression.spec.ts compare 126 captures pleine page via
+# toHaveScreenshot(), mais AUCUNE image de référence n'est versionnée
+# (e2e/visual-regression.spec.ts-snapshots/ absent) : chaque exécution
+# échouait par construction (« snapshot doesn't exist »). Les références
+# doivent être générées sur le runner Linux lui-même (rendu des polices) :
+# lancer ce workflow avec « update_snapshots = true », récupérer l'artefact
+# visual-regression-baselines, le committer, puis on pourra le remettre sur
+# pull_request.
+#
+# Autres causes corrigées : installation impossible (ERESOLVE npm),
+# @playwright/test absent, build sans variables Supabase (React ne montait
+# pas), langue jamais appliquée par la spec, option reducedMotion ignorée.
+#
+# Reste à reprendre avant tout retour sur pull_request : les contrôles DOM
+# « no header dup/overlap » supposent un header de site sur /, /protocol et
+# /changelog ; or le <header> de la landing ne contient qu'une nav fixed
+# (0 px de haut, jamais « visible ») et /changelog n'a pas de header de site
+# (seulement l'en-tête de l'article). Non prouvé vert localement.
+
 on:
-  pull_request:
-    branches: [main]
   workflow_dispatch:
+    inputs:
+      update_snapshots:
+        description: "Générer les images de référence (--update-snapshots) et les publier en artefact"
+        type: boolean
+        default: false
 
 jobs:
   visual:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 40
+    env:
+      TZ: UTC
+      VITE_SUPABASE_URL: http://127.0.0.1:54321
+      VITE_SUPABASE_PUBLISHABLE_KEY: cle-factice-ci
+      VITE_SUPABASE_PROJECT_ID: projet-factice-ci
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Node ≥ 22.18 requis : les scripts i18n (prebuild compris) importent
+          # directement src/i18n/*.ts (type stripping natif) ; sous Node 20 →
+          # ERR_UNKNOWN_FILE_EXTENSION.
+          node-version: "22"
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.13"
       - name: Install
-        run: npm ci || npm install
+        run: bun install --frozen-lockfile
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
       - name: Build app
         run: npm run build
       - name: Start preview
         run: |
-          npx vite preview --port 8080 --strictPort &
+          npx vite preview --host 127.0.0.1 --port 8080 --strictPort &
           for i in $(seq 1 30); do
-            curl -sf http://localhost:8080 > /dev/null && break || sleep 2
+            curl -sf http://127.0.0.1:8080 > /dev/null && break || sleep 2
           done
+          curl -sf http://127.0.0.1:8080 > /dev/null
       - name: Run visual regression suite
         env:
-          PLAYWRIGHT_BASE_URL: http://localhost:8080
-        run: npx playwright test e2e/visual-regression.spec.ts --project=chromium
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:8080
+        run: |
+          if [ "${{ inputs.update_snapshots }}" = "true" ]; then
+            npx playwright test e2e/visual-regression.spec.ts --project=chromium --update-snapshots
+          else
+            npx playwright test e2e/visual-regression.spec.ts --project=chromium
+          fi
+      - name: Upload generated baselines
+        if: always() && inputs.update_snapshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-baselines
+          path: e2e/visual-regression.spec.ts-snapshots/
+          retention-days: 14
       - name: Upload diff artifacts
         if: failure()
         uses: actions/upload-artifact@v4

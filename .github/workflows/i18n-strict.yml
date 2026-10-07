@@ -19,7 +19,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Node ≥ 22.18 requis : les scripts i18n (prebuild compris) importent
+          # directement src/i18n/*.ts (type stripping natif) ; sous Node 20 →
+          # ERR_UNKNOWN_FILE_EXTENSION.
+          node-version: "22"
       - name: Build changelog (input for strict check)
         run: node scripts/build-changelog.mjs
       - name: Run i18n strict check
