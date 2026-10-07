@@ -15,9 +15,14 @@ describe("ModalityPositioningMatrix", () => {
     renderWithI18n();
     expect(screen.getByText("Doppler")).toBeInTheDocument();
     expect(screen.getByText("VASCU-LINK L1")).toBeInTheDocument();
-    // Default language may be EN/FR/DE — match any of the three angiography headers
+    // Default language may be EN/FR/DE — match any of the three angiography headers.
+    // On cible l'en-tête de colonne (match exact) : le titre de la carte
+    // « Doppler vs VASCU-LINK L1 vs conventional angiography » contient aussi
+    // le libellé, ce qui rendait getByText ambigu.
     expect(
-      screen.getByText(/Conventional angiography|Angiographie conventionnelle|Konventionelle Angiographie/i),
+      screen.getByRole("columnheader", {
+        name: /^(Conventional angiography|Angiographie conventionnelle|Konventionelle Angiographie)$/i,
+      }),
     ).toBeInTheDocument();
   });
 

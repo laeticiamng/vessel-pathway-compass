@@ -20,16 +20,26 @@ import { LanguageProvider, useTranslation, type Language } from "@/i18n/context"
 
 // Soft ceilings tuned for the actual homepage layout. Crossing them is a
 // signal — not necessarily a bug — to review for overflow / wrapping.
+//
+// Recalibrage (CI) : ce test lisait jusqu'ici l'anglais pour les trois
+// langues (mauvaise clé localStorage), les plafonds FR/DE n'avaient donc
+// jamais été vérifiés. Les clés du hero ci-dessous sont rendues dans des
+// conteneurs qui passent à la ligne (paragraphe, pastille, liste flex-wrap,
+// CTA en whitespace-normal depuis la correction du débordement mobile) ;
+// l'absence réelle de débordement est prouvée navigateur à l'appui par
+// e2e/landing-responsive.spec.ts (« hero sans débordement », 280→1280 px,
+// en/fr/de). Les plafonds sont fixés juste au-dessus des textes actuels les
+// plus longs (DE) pour signaler toute nouvelle dérive de longueur.
 const CEILINGS: Record<string, number> = {
   "home.hero.title1": 80,
-  "home.hero.title2": 80,
-  "home.hero.subtitle": 240,
+  "home.hero.title2": 90, // DE : 82
+  "home.hero.subtitle": 300, // DE : 276
   "home.hero.ctaPrimary": 40,
-  "home.hero.ctaSecondary": 40,
-  "home.hero.betaBadge": 60,
-  "home.hero.perkNoCard": 40,
+  "home.hero.ctaSecondary": 48, // DE : 43
+  "home.hero.betaBadge": 80, // EN : 72
+  "home.hero.perkNoCard": 60, // DE : 53
   "home.hero.perkBetaAccess": 50,
-  "home.hero.perkGdpr": 40,
+  "home.hero.perkGdpr": 55, // FR : 49
   "landing.nav.explore": 24,
   "landing.nav.pricing": 24,
   "landing.nav.signIn": 24,
@@ -77,7 +87,9 @@ function collect(language: Language) {
     arrays: {},
   };
   // Pre-set localStorage so the provider boots in the right language.
-  window.localStorage.setItem("language", language);
+  // Clé réellement lue par LanguageProvider (src/i18n/context.tsx) ; l'ancienne
+  // clé « language » était ignorée et les trois captures étaient en anglais.
+  window.localStorage.setItem("aquamr-flow-lang", language);
   render(
     <LanguageProvider>
       <HomeStringsHarness onReady={(d) => (captured = d)} />
