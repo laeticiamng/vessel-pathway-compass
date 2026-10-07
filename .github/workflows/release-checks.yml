@@ -13,7 +13,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Node ≥ 22.18 requis : les scripts i18n (prebuild compris) importent
+          # directement src/i18n/*.ts (type stripping natif) ; sous Node 20 →
+          # ERR_UNKNOWN_FILE_EXTENSION.
+          node-version: "22"
       # `npm ci || npm install` échouait des deux côtés (ERESOLVE, lockfile npm
       # désynchronisé) : installation figée depuis bun.lock.
       - uses: oven-sh/setup-bun@v2
