@@ -375,7 +375,7 @@ export default function Landing() {
               <span className="mx-2 text-on-hero-soft" aria-hidden="true">·</span>
               <span>{t("branding.platformName")}</span>
             </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-5 tracking-tight max-w-4xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-on-hero leading-[1.1] mb-5 tracking-tight max-w-4xl mx-auto break-words">
               {t("home.hero.title2")}
             </h1>
             <p className="text-base md:text-lg text-on-hero max-w-2xl mx-auto mb-4 leading-relaxed">
@@ -384,11 +384,14 @@ export default function Landing() {
             <p className="text-sm md:text-base text-on-hero-soft max-w-2xl mx-auto mb-10 italic leading-relaxed">
               {t("home.hero.translationalAmbition")}
             </p>
+            {/* Les CTA peuvent passer sur deux lignes sur mobile : avec
+                whitespace-nowrap (défaut du Button), les libellés FR/DE
+                (~40 caractères) débordaient de l'écran dès 390 px. */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
                 asChild
                 size="lg"
-                className="text-base px-8 h-12 shadow-lg shadow-primary/25 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="text-base px-8 h-auto min-h-12 py-3 max-w-full whitespace-normal text-center shadow-lg shadow-primary/25 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <Link to="/protocol" aria-label={t("home.hero.ctaPrimary") as string}>
                   {t("home.hero.ctaPrimary")}
@@ -399,7 +402,7 @@ export default function Landing() {
                 asChild
                 variant="outline"
                 size="lg"
-                className="text-base px-8 h-12 border-2 border-white bg-white/10 text-white hover:bg-white/20 backdrop-blur-md font-semibold focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="text-base px-8 h-auto min-h-12 py-3 max-w-full whitespace-normal text-center border-2 border-white bg-white/10 text-white hover:bg-white/20 backdrop-blur-md font-semibold focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <a href="#comment-ca-marche" aria-label={t("home.hero.ctaSecondary") as string}>
                   {t("home.hero.ctaSecondary")}
